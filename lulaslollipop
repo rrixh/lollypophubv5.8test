@@ -35,7 +35,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V5.8","BloodTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW:", "updates here", {"last updated: SEP 25, 2023", "Version: 5.8", "teleport to dz skript(in More)", "R6 pose gui(in Fun)"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW:", "updates here", {"last updated: SEP 25, 2023", "Version: 5.8", "teleport to dz skript(in 'More' tab)", "R6 pose gui", "v5.6 added if some skripts dont work", "xheru is a dum ass"}, function(currentOption)
     print(currentOption)
 end)
 
@@ -95,6 +95,12 @@ function()-- kokushibo notifier
 loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
 end)
 
+SkriptsSection:NewButton("LOLLYPOP HUB V5.6", "use if some skripts dont work in the latest version",
+function()
+    --lollypophub v5.6
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LOLLYPOP-HUB-v56-8124",true))()
+end)
+
 
 local SkriptsSection = Skripts:NewSection("Skripts")
 
@@ -122,10 +128,17 @@ SkriptsSection:NewButton("Aimbot(R6 only)", "simple aimbot skript by me", functi
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
 end)
 
-SkriptsSection:NewButton("Aimbot 2", "aimbot", function()
+SkriptsSection:NewButton("R6 pose gui", "pose", function()
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+Library:Notification({
+    Text = "hope this shit still work",
+    Duration = 4
+})
     
-    -- aimbot print 
-loadstring(game:HttpGet("https://pastebin.com/raw/i9QLTtbD"))()
+    --r6 posegui
+loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
 end)
 
 -- superhuman
@@ -491,7 +504,7 @@ while true do
     wait(1)
     for i, player in ipairs(game.Players:GetChildren()) do
     local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+hglocal Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=891621366"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=891633237"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=891667138"
@@ -920,13 +933,6 @@ end)
 FunSection:NewButton("Krawl", "simple krawl gui", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt'))()
 end)
-
-FunSection:NewButton("R6 pose gui", "pose", function()
-    --r6 pose
-loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
-end)
-
-
 
 local FunSection = Fun:NewSection("Message Fun")
 
