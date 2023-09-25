@@ -291,8 +291,8 @@ function()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-    Text = "NIGGAMODE! jk godmode",
-    Duration = 5
+    Text = "use Z to toggle on/off",
+    Duration = 7
 })
     --gmoblist
 loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N"))()
