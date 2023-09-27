@@ -1,11 +1,11 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 5.8
+-- Version: 5.6
 -- toggle button added
 -- Instanxes:
 
 local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
-    Title = "LOLLYPOPHUB V5.8🍭😋🍭😋",
+    Title = "LOLLYPOPHUB V5.6🍭😋🍭😋",
     Text = "almost every skript in this joint",
     Duration = 8, 
 })
@@ -18,7 +18,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V5.8","BloodTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V5.6","Ocean")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -32,10 +32,20 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V5.8","BloodTheme")
 -- Serpent(new)
 --tools1134,skripts35,game1443
 
+
+
+--game.Players.LocalPlayers.deliver
+loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
+--Ctrller.P==Library*start
+loadstring(game:HttpGet("https://pastebin.com/raw/REdW8kfE"))()
+--3rdstring%"LoadLibrary:Hub;finish,
+loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
+
+
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW:", "updates here", {"last updated: SEP 25, 2023", "Version: 5.8", "teleport to dz skript(in 'More' tab)", "R6 pose gui", "v5.6 added if some skripts dont work", "xheru is a dum ass"}, function(currentOption)
+SkriptsSection:NewDropdown("updates:", "updates here", {"last updated: SEP 27, 2023", "Version: 5.6", "4 ios exekutors koming soon🫨"}, function(currentOption)
     print(currentOption)
 end)
 
@@ -44,7 +54,6 @@ SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅
 -- lulas 99 fail memory skript
 loadstring(game:HttpGet(('https://pastebin.com/raw/DhLMep63'),true))()
 end)
-
 --new toggle antimythikal
 SkriptsSection:NewToggle("Anti-Sit (99% fail mythikals)", "kinda good but i prefer using godmode", function(state)
     if state then
@@ -90,15 +99,9 @@ SkriptsSection:NewButton("Vietnam notifier🚨📢", "will send u a notif if vie
 loadstring(game:HttpGet("https://pastebin.com/raw/C96cg2xG"))()
 end)
 
-SkriptsSection:NewButton("Kokushibo🐤 notifier🚨📢", "will notify u if kokushibo joins",
+SkriptsSection:NewButton("Kokushibo notifier🚨📢", "will notify u if kokushibo joins",
 function()-- kokushibo notifier
 loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
-end)
-
-SkriptsSection:NewButton("LOLLYPOP HUB V5.6", "use if some skripts dont work in the latest version",
-function()
-    --lollypophub v5.6
-loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LOLLYPOP-HUB-v56-8124",true))()
 end)
 
 
@@ -128,17 +131,10 @@ SkriptsSection:NewButton("Aimbot(R6 only)", "simple aimbot skript by me", functi
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
 end)
 
-SkriptsSection:NewButton("R6 pose gui", "pose", function()
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-    Text = "hope this shit still work",
-    Duration = 4
-})
+SkriptsSection:NewButton("Aimbot 2", "aimbot", function()
     
-    --r6 posegui
-loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
+    -- aimbot print 
+loadstring(game:HttpGet("https://pastebin.com/raw/i9QLTtbD"))()
 end)
 
 -- superhuman
@@ -160,6 +156,17 @@ game.Players.LocalPlayer.Character.Humanoid.Sit = true
         -- sitFalse
 game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
+end)
+
+SkriptsSection:NewButton("99% fail Loner Animation", "for 99% fail impossible obby",
+function()local ohInstance1 = game.Players.LocalPlayer.Character.Humanoid
+
+game:GetService("ReplicatedStorage").OnRagdoll:FireServer(ohInstance1)
+end)
+
+SkriptsSection:NewButton("Show chatBox (for games w out chatBox)", "good for games like evade w no msg box",
+function()
+    game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
 end)
 
 SkriptsSection:NewButton("99% fail Loner Animation", "for 99% fail impossible obby",
@@ -300,15 +307,7 @@ end)
 
 SkriptsSection:NewButton("GodMode", "no death 99% fail and some obbys",
 function()
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-    Text = "use Z to toggle on/off",
-    Duration = 7
-})
-    --gmoblist
-loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N"))()
+    loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N",true))()
 end)
 
 SkriptsSection:NewButton("GodMode V2", "no death 99% fail and survive kill brixks",
@@ -887,9 +886,7 @@ local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
 
 AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
-    
---many kommands use ;equiptools for the fun
-loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
 
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
@@ -934,6 +931,8 @@ FunSection:NewButton("Krawl", "simple krawl gui", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt'))()
 end)
 
+
+
 local FunSection = Fun:NewSection("Message Fun")
 
 FunSection:NewButton("Fake Message Troll", "type for others", function()
@@ -954,14 +953,16 @@ FunSection:NewButton("Kompliment V2", "makes u say a kompliment", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/0HidbJsd"))()
 end)
 
+
+
 FunSection:NewButton("Auto Exkuse", "auto msg wen u die", function()
 getgenv().dmsgs = {
-  deathmessages = {"i was lagging", "that wasnt fair", "bruh", "dude", "i was doing something", "whyyyyy", "that wasnt fair"}
+  deathmessages = {"i was lagging", "that wasnt fair", "bruh", "dude", "i was doing something", "whyyyyy", "that wasnt fair", "wow"}
 }
 --[[
 Auto-Exkuse
 ]]--
-loadstring(game:HttpGet("https://raw.githubusercontent.com/goldmoments/auto-excuse/main/Script"))("Auto-Exkuse Script | lulaslollipop#0140") 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/goldmoments/auto-excuse/main/Script"))("Auto-Exkuse Script | lulaslollipoo#0140") 
 end)
 
 FunSection:NewButton("Kopy Server Messages", "repeats all players messages", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
@@ -1294,6 +1295,10 @@ end)
 
 HubSection:NewButton("Anime Hub 😍", "v6.1", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/Games-Hub-Script/main/Games%20Hub%20(Always%20updated)"))()
+end)
+
+HubSection:NewButton("R6 pose gui", "pose📸",
+function()loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
 end)
 
 HubSection:NewButton("LegonX Hub", "kool and Many skripts", function()
@@ -2348,23 +2353,27 @@ function()-- teleport to xhest
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-911.98291015625, 2005.8095703125, -149.64857482910156)
 end)
 
-MoreSection:NewButton("Teleport Behind Treasure", "teleport to the xhest",
+MoreSection:NewButton("Teleport to Finish", "teleport to the xhest",
 function()-- teleport behind xhest
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-921.2446899414062, 1995.87255859375, -150.1106719970703)
 end)
 
-MoreSection:NewButton("Teleport to Danger Zone", "teleport to the xhest",
-function()-- tp to dz
-Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-707.6163330078125, 1993.9764404296875,
--143.97586059570312)
-end)
+MoreSection:NewButton("Teleport to Danger Zone (tile 60)", "teleport to dz",
+function()-- teleport to dzaktually
+Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-593.0650634765625, 1993.9764404296875,
+-153.38563537597656)
+end)--tptodz
 
-MoreSection:NewButton("Teleport to Winners Room", "teleport to the xhest",
+MoreSection:NewButton("Teleport to Start", "teleport to beginning",
+function()Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(253.8822479248047, 1995.86083984375, -149.1727752685547)
+end)--tptostart
+
+MoreSection:NewButton("Teleport to Winners Room", "teleport to the golden room",
 function()-- teleport to winning room
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(314.3387451171875, 17002.197265625, 202.53802490234375)
 end)
 
-MoreSection:NewButton("Sit in the offixe", "sits u in the offixe seat",
+MoreSection:NewButton("Teleport to Offixe Seat", "sits u in the offixe seat",
 function()-- sit in the offixe
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(259.6474304199219, 17004.259765625,
 162.38287353515625)
@@ -2372,18 +2381,13 @@ Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFram
 game.Players.LocalPlayer.Character.Humanoid.Sit = true
 end)
 
-MoreSection:NewButton("UNKNOWN AREA", "teleport to hidden area",
+MoreSection:NewButton("Teleport to Hidden Area", "teleport to unknown area",
 function()-- teleport to hidden 99
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(269.36907958984375, 17024.74609375,
 139.19142150878906)
 end)
---game.Players.LocalPlayers.mg
-loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
---Ctrller.P==kikkil
-loadstring(game:HttpGet("https://pastebin.com/raw/REdW8kfE"))()
---3rdstring%"".<blist#%*^>
-loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
---\//\/game;end.f%20ake.skript--\\
+
+
 
 
 
@@ -2456,4 +2460,4 @@ Frame.Parent.Active = true
 Frame.Parent.Draggable = true
 
 
----end----
+---end---
