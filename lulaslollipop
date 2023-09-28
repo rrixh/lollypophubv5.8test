@@ -7,7 +7,7 @@ local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
     Title = "LOLLYPOPHUB V5.6🍭😋🍭😋",
     Text = "almost every skript in this joint",
-    Duration = 8, 
+    Duration = 8
 })
 
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
