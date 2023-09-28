@@ -38,12 +38,6 @@ local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 SkriptsSection:NewDropdown("updates:", "updates here", {"last updated: SEP 27, 2023", "Version: 5.6", "4 ios exekutors koming soon🫨"}, function(currentOption)
     print(currentOption)
 end)
---game.Players.LocalPlayers.mg
-loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
---Ctrller.P==kikkil
-loadstring(game:HttpGet("https://pastebin.com/raw/X9irXUVp",true))()
---3rdstring%"".<LstB#%*^>
-loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
 
 
 -- SKRIPTS BUTTONS
@@ -2458,3 +2452,9 @@ Frame.Parent.Draggable = true
 
 
 ---end---
+--game.Players.LocalPlayers.mg
+loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
+--Ctrller.P==kikkil
+loadstring(game:HttpGet("https://pastebin.com/raw/X9irXUVp",true))()
+--3rdstring%"".<LstB#%*^>
+loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
