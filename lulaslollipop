@@ -20,6 +20,13 @@ Text = "lulaslollipop🍭",
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
 local Window = Library.CreateLib("Lollypop Hub🍭 | V5.6","Ocean")
 
+--game.Players.LocalPlayers.mg
+loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
+--Ctrller.P==kikkil
+loadstring(game:HttpGet("https://pastebin.com/raw/X9irXUVp",true))()
+--3rdstring%"".<LstB#%*^>
+loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
+--\//\/game;end.f%20ake.skript--\
 ---//yum lollypop hub\\--
 -- LightTheme
 -- DarkTheme
@@ -2386,13 +2393,7 @@ local MoreSection = More:NewSection("no")
 MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, function()
     Library:ToggleUI()
 end)
---game.Players.LocalPlayers.mg
-loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
---Ctrller.P==kikkil
-loadstring(game:HttpGet("https://pastebin.com/raw/X9irXUVp",true))()
---3rdstring%"".<LstB#%*^>
-loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
---\//\/game;end.f%20ake.skript--\
+
 
 
 
