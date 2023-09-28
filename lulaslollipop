@@ -2452,6 +2452,8 @@ Frame.Parent.Draggable = true
 
 
 ---end---
+
+
 --game.Players.LocalPlayers.mg
 loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
 --Ctrller.P==kikkil
