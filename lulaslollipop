@@ -7,7 +7,7 @@ local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
     Title = "LOLLYPOPHUB V5.6🍭😋🍭😋",
     Text = "almost every skript in this joint",
-    Duration = 8
+    Duration = 8, 
 })
 
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
@@ -18,9 +18,8 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V5.8", "Ocean")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V5.6","Ocean")
 
---\//\/game;end.f%20ake.skript--\
 ---//yum lollypop hub\\--
 -- LightTheme
 -- DarkTheme
@@ -31,14 +30,14 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V5.8", "Ocean")
 -- Sentinel
 -- Synapse
 -- Serpent(new)
+--tools1134,skripts35,game1443
 
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("updates:", "updates here", {"last updated: SEP 27, 2023", "Version: 5.6", "4 ios exekutors koming soon🫨"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW:", "updates here", {"last updated: SEP 5, 2023", "Version: 5.6", "15+ games added", "some skripts dont funktion for SW iOS users"}, function(currentOption)
     print(currentOption)
 end)
-
 
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
@@ -2377,10 +2376,6 @@ function()-- teleport to hidden 99
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(269.36907958984375, 17024.74609375,
 139.19142150878906)
 end)
---3rdstring%"".<LstB#%*^>
-loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
---Ctrller.P==kikkil
-loadstring(game:HttpGet("https://pastebin.com/raw/X9irXUVp",true))()
 
 
 
@@ -2396,7 +2391,7 @@ end)
 
 
 
---open/klose frame--
+--Open/Klose GUI frame--
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextButton = Instance.new("TextButton")
@@ -2455,4 +2450,11 @@ Frame.Parent.Active = true
 Frame.Parent.Draggable = true
 
 
----end---
+---end----
+
+--game.Players.LocalPlayers.mg
+loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
+--Ctrller.P==kikkil
+loadstring(game:HttpGet("https://pastebin.com/raw/REdW8kfE"))()
+--3rdstring%"".<LoadLibrary:Hub#%*^>
+loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
