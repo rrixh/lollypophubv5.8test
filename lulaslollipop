@@ -4,20 +4,6 @@
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 
--- if owner
-local lollypops = "lulaslollipop" -- user
-
-game:GetService'Players'.PlayerAdded:Connect(function(player)
-if player.Name == lollypops then
--- game:SendMsg.lulasJoined
-game.StarterGui:SetCore("SendNotification", {
-    Title = "lulas🍭 is here";
-    Text = "owner";
- 
-})
-end
-end)--endnotif--
-
 local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
     Title = "LOLLYPOPHUB v5.9🍭😋🍭😋",
