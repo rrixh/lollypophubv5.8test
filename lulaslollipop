@@ -2,6 +2,8 @@
 -- Version: 5.8
 -- toggle button added
 -- Instanxes:
+loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
+
 
 local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
@@ -2376,8 +2378,7 @@ function()-- teleport to hidden 99
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(269.36907958984375, 17024.74609375,
 139.19142150878906)
 end)
---[Open:Library]
-loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
+
 
 
 
