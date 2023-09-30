@@ -1472,8 +1472,12 @@ HubSection:NewButton("Ultimate Trolling Gui V3", "utg old", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Blukez/Scripts/main/UTG%20V3%20RAW"))() 
 end)
 
-HubSection:NewButton("Psy Hub", "Op and have executor i think", function()
+HubSection:NewButton("Psy Hub", "Op and has an exekutor i think", function()
 loadstring(game:GetObjects("rbxassetid://3014051754")[1].Source)()
+end)
+
+HubSection:NewButton("Gamehub V4", "request by emil", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Game-Hub/main/loader"))()
 end)
 
 
