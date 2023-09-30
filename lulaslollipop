@@ -129,9 +129,21 @@ loadstring(game:HttpGet("https://pastebin.com/raw/i9QLTtbD"))()
 end)
 
 SkriptsSection:NewButton("Xherussii Avatar", "rainbow", function()
-    
-    -- rainbowAvatar 
-loadstring(game:HttpGet("https://pastebin.com/raw/N0zwarJD",true))()
+    for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+    if v:IsA("MeshPart") then
+        v.Material = "ForceField"
+        spawn(function()
+            while wait() do
+                for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                    if v:IsA("MeshPart") then
+                        v.Color = Color3.fromHSV(tick()%5/5,1,1)
+                        wait()
+                    end
+                end 
+            end
+        end)
+    end
+end --endrainbowxheru
 end)
 
 -- superhuman
