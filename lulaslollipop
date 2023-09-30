@@ -1498,7 +1498,7 @@ HubSection:NewButton("OrangeX Hub V5", "request by emil", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ImJosh66/Ab2rW/main/ORANGEX%20V5%20RELEASED%20ORANGEX%20ON%20TOP%20.txt"))()
 end)
 
-HubSection:NewButton("OrangeX Hub V5", "request by emil", function()
+HubSection:NewButton("Multi-Skripter Hub V3", "request by emil", function()
 --[[
 multi skripter hubv3
 ]]
