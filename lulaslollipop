@@ -1523,11 +1523,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Multi-S
 end)
 
 HubSection:NewButton("British Hub V15", "request by emil", function()
---britishhub v15
+    --britishhub v15
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RedCoat8102/Britishhub/main/Protected_7002515694901812.lua.txt", true))()
 end)
 
-HubSection:NewButton("British Hub V15", "request by emil", function()
+HubSection:NewButton("Thunder Hub", "request by emil", function()
     --thunderhub
 loadstring(game:HttpGet('https://pastebin.com/raw/DFjY4nMy'))()
 end)
