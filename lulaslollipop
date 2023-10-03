@@ -1,12 +1,12 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 5.9
+-- Version: 6
 -- toggle button added
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 
 local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
-    Title = "LOLLYPOPHUB v5.9🍭😋🍭😋",
+    Title = "LOLLYPOPHUB V6🍭😋🍭😋",
     Text = "almost every skript in this joint",
     Duration = 8
 })
@@ -19,7 +19,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V5.9","GrapeTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6","GrapeTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -36,7 +36,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V5.9","GrapeTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("UPDATE:","updates here", {"last updated: SEP 30, 2023", "Version: 5.9", "5+ hubs added(request by emil)", "keybind generators fixed", "if xheru==gay then ban"}, function(currentOption)
+SkriptsSection:NewDropdown("10/03/2023:","updates here", {"last updated: 10/03/2023", "Version: 6", "5+ hubs & rc7 exekutor", "request by emil", "if xheru==gay then ban"}, function(currentOption)
     print(currentOption)
 end)
 
@@ -444,14 +444,24 @@ local SkriptsSection = Skripts:NewSection("Exekutors")
 SkriptsSection:NewButton("Arkeus X Exekutor", "android exekutor works for ios",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))()
 end)
-
 SkriptsSection:NewButton("KRNL Exekutor", "an exekutor",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))()
 end)
-
 SkriptsSection:NewButton("Neptune Exekutor", "an exekutor",
 function()-- neptune exe
 loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))()
+end)
+SkriptsSection:NewButton("Rc7 exekutor(old)", "request by emil", function()
+--[[
+Rc7 exe gui old
+]]
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Project-RC7-6752"))() 
+end)
+SkriptsSection:NewButton("Rc7 exekutor(new)", "request by emil", function()
+--[[
+Rc7 exe gui new
+]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7"))() 
 end)
 
 local SkriptsSection = Skripts:NewSection("R15 Animation")
@@ -879,17 +889,20 @@ local AdminSection = Admin:NewSection("Admin Kommands")
 AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
-
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
 end)
-
 AdminSection:NewButton("Reviz Admin", "default prefix ; say ;cmds", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RqaZUrBZ"))()
 end)
-
 AdminSection:NewButton("Nameless Admin", "type ;cmds", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+end)
+AdminSection:NewButton("Iv Admin v3", "admin kommands", function()
+--[[
+Iv admin v3
+]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BloodyBurns/Hex/main/Iv%20Admin%20v3.lua"))() 
 end)
 
 local AdminSection = Admin:NewSection("Troll Admin")
@@ -897,7 +910,6 @@ local AdminSection = Admin:NewSection("Troll Admin")
 AdminSection:NewButton("Annoying Admin", "type .cmds and then /console to see kmd list", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/TheMightySource/FE-Annoying-Admin/main/Main.lua'),true))()
 end)
-
 AdminSection:NewButton("Simple Admin", "type .cmds, say (.set prefix ;) to set ; instead of .", function()loadstring(game:HttpGet('https://pastebin.com/raw/3hDQcTaD'))()
 end)
 
@@ -910,18 +922,14 @@ local FunSection = Fun:NewSection("Animations")
 FunSection:NewButton("Lolly Animations", "work r15 and r6", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/yeerma/1/main/the_greatest_script_ever_made'))()
 end)
-
 FunSection:NewButton("Energyze Animations", "work r15 and r6", function()loadstring(game:HttpGet(('https://pastebin.com/raw/1p6xnBNf'),true))()
 end)
-
 FunSection:NewButton("Be A Helikopter", "human xhoppa", function()-- laydown spin/helikopter
 loadstring(game:HttpGet("https://pastebin.com/raw/XP8yfVbk"))()
 end)
-
 FunSection:NewButton("Krawl", "simple krawl gui", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt'))()
 end)
-
 
 
 local FunSection = Fun:NewSection("Message Fun")
@@ -935,17 +943,12 @@ FunSection:NewButton("Spell Out Any Kurseword (use L tool given)", "use L tool t
 loadstring(game:HttpGet("https://pastebin.com/raw/xinPiBSU"))()
     loadstring(game:HttpGet("https://pastebin.com/raw/QzxqjgSf"))()
 end)
-
 FunSection:NewButton("Kompliment Random Player", "push to kompliment a random player", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/0n4YDguK"))()
 end)
-
 FunSection:NewButton("Kompliment V2", "makes u say a kompliment", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/0HidbJsd"))()
 end)
-
-
-
 FunSection:NewButton("Auto Exkuse", "auto msg wen u die", function()
 getgenv().dmsgs = {
   deathmessages = {"i was lagging", "that wasnt fair", "bruh", "dude", "i was doing something", "whyyyyy", "that wasnt fair", "wow"}
@@ -955,7 +958,6 @@ Auto-Exkuse
 ]]--
 loadstring(game:HttpGet("https://raw.githubusercontent.com/goldmoments/auto-excuse/main/Script"))("Auto-Exkuse Script | lulaslollipoo#0140") 
 end)
-
 FunSection:NewButton("Kopy Server Messages", "repeats all players messages", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
 local ChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
 local OnMessageEvent = ChatEvents:WaitForChild("OnMessageDoneFiltering")
@@ -1508,22 +1510,45 @@ HubSection:NewButton("British Hub V15", "request by emil", function()
     --britishhub v15
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RedCoat8102/Britishhub/main/Protected_7002515694901812.lua.txt", true))()
 end)
-
 HubSection:NewButton("Thunder Hub", "request by emil", function()
     --thunderhub
 loadstring(game:HttpGet('https://pastebin.com/raw/DFjY4nMy'))()
 end)
+HubSection:NewButton("Davi hub v2.2", "request by emil", function()
+--[[
+	davi hub2.2
+]]
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Davicoderliner/davigui/main/davi.lua'))()
+end)
+HubSection:NewButton("Ultimate troll hub 2.2 (new version)", "request by emil", function()
+--[[
+	ultimate troll hub 2.2
+]]
+loadstring(game:HttpGet('https://raw.githubusercontent.com/AkilExploitz/AkilBlox14-s-Script-Hub-v1.1/main/Utg%202.2%20startup'))()
+end)
+HubSection:NewButton("AuratusX", "request by emil", function()
+--[[
+AuratusX
+]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RealMrQuacks/AuratusX/master/Load"))() 
+end)
+HubSection:NewButton("Bido skins v1.8 (new)", "request by emil", function()
+--[[
+Bido skins 1.8 new version
+]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BidoSkinsYT/BidoSkinsYT/main/Bido%20Skins%20V1.8"))()
+end)
 
 
 
-    
--- game skripts
+-- games
 local Games = Window:NewTab("Games")
 local GamesSection = Games:NewSection("Games")
 
+GamesSection:NewLabel("[Find The Markers]")
 GamesSection:NewButton("Find The Markers", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
 end)
-
+GamesSection:NewLabel("[50/50 Pixk A Door]")
 GamesSection:NewButton("50/50 Pixk A Door", "reveals all doors in lime green", function()getgenv().Door = true
 
 while wait() do
@@ -1644,7 +1669,7 @@ local GamesSection = Games:NewSection("[Adopt Me]")
 GamesSection:NewButton("Fly Ride Pets", "fly ability for all pets", function()loadstring(game:HttpGet(('https://raw.githubusercontent.com/rblxscriptsnet/scripts/main/adoptmegui1'),true))()
 end)
 
-local GamesSection = Games:NewSection("Strongman Simulator")
+local GamesSection = Games:NewSection("[Strongman Simulator]")
 GamesSection:NewButton("Strongman Simulator Autofarm GUI", "gui",
 function()-- strongman simulator 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ProjectLightningDev/Project-Lightning-Loader/main/Loader.Lua"))()
@@ -1663,6 +1688,13 @@ for i,b in pairs (v.Backpack:GetChildren()) do
 b.Parent = game.Players.LocalPlayer.Backpack
 end
 end
+end)
+
+GamesSection:NewButton("Juanko Prison Life Admin Hub", "request by emil", function()
+--[[
+	Juanko prison life admin hub only games prison life
+]]
+loadstring(game:HttpGet("https://pastebin.com/raw/0Jyaa9aQ"))()
 end)
 
 local GamesSection = Games:NewSection("[Flee The Faxility]")
