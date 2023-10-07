@@ -959,6 +959,9 @@ end)
 FunSection:NewButton("Krawl", "simple krawl gui", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt'))()
 end)
+FunSection:NewButton("R6 pose gui", "pose📸",
+function()loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
+end)
 
 
 local FunSection = Fun:NewSection("Message Fun")
@@ -1317,10 +1320,6 @@ end)
 
 HubSection:NewButton("Anime Hub 😍", "v6.1", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/Games-Hub-Script/main/Games%20Hub%20(Always%20updated)"))()
-end)
-
-HubSection:NewButton("R6 pose gui", "pose📸",
-function()loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
 end)
 
 HubSection:NewButton("LegonX Hub", "kool and Many skripts", function()
