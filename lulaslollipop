@@ -1580,8 +1580,6 @@ Bido skins 1.8 new version
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BidoSkinsYT/BidoSkinsYT/main/Bido%20Skins%20V1.8"))()
 end)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RealMrQuacks/AuratusX/master/Load"))() 
-end)
 HubSection:NewButton("Haxker 66666 Hub", "o:", function()
 --[[
 Haxker_666 hub
