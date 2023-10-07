@@ -1570,11 +1570,11 @@ Bido skins 1.8 new version
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BidoSkinsYT/BidoSkinsYT/main/Bido%20Skins%20V1.8"))()
 end)
-HubSection:NewButton("Haxker 66666 Hub", "o:", function()
+HubSection:NewButton("Haxker 6666666 Hub (fixed)", "o:", function()
 --[[
-Haxker_666 hub
+Haxker_666 hub fixed
 ]]
-loadstring(game:HttpGet('https://raw.githubusercontent.com/FreeRobloxScripts1/Haxker_6666666-Hub/main/Script-Hub/Version-2.7.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/FreeRobloxScripts1/Haxker_6666666-Hub/main/Script-Hub/Version-2.7/Fixed.lua'))()
 end)
 HubSection:NewButton("Ghub ui v7", "good hub", function()
 --[[
