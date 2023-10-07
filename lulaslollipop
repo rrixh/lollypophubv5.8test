@@ -232,7 +232,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/Kq7cPe3C"))()
 end)
 SkriptsSection:NewButton("Fly GUI V3", "fly for mobile",
 function()-- v3 fly
-loadstring(game:HttpGet("https://pastecode.dev/raw/w59LiHeq8j/fly%20script%20scarlet"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/mobileflygui/main/v3_lulaslollipop",true))()
 end)
 SkriptsSection:NewButton("Mobile Fly GUI B&W", "modded",
 function()loadstring(game:HttpGet("https://pastebin.com/raw/TeNifRrX"))()
