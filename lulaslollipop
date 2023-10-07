@@ -266,11 +266,7 @@ SkriptsSection:NewButton("Mobile Keyboard", "its a mobile keyboard",
 function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
 end)
-SkriptsSection:NewButton("Better Keyboard", "big keyboard gui",
-function()-- bettter keyboard 
-loadstring(game:HttpGet(('https://pastefy.app/Te4dwSw2/raw'),true))()
-end)
-SkriptsSection:NewButton("Better Keyboard 2", "keyboard gui",
+SkriptsSection:NewButton("Better Keyboard", "keyboard gui",
 function()-- bettter keyboard 
 loadstring(game:HttpGet("https://pastebin.com/raw/X8keCiWA",true))()
 end)
@@ -288,12 +284,11 @@ end)
     {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"},
     {"Ctrl", "Win", "Alt", "Space", "Alt", "Menu", "Ctrl"}
 ]]
-
+SkriptsSection:NewLabel("Keybind Gens")
 SkriptsSection:NewButton("KEYBIND GENERATOR", "keyboard letters generator (useful)",
 function()
     loadstring(game:HttpGet(('https://pastefy.app/Ujm4HWxh/raw'),true))()
 end)
-SkriptsSection:NewLabel("Keybind Gens")
 SkriptsSection:NewButton("KEYBIND GENERATOR V2", "keyboard letters generator (useful)",
 function()
     -- keybind generator v2
@@ -459,10 +454,6 @@ function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/
 end)
 SkriptsSection:NewButton("KRNL Exekutor", "an exekutor",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))()
-end)
-SkriptsSection:NewButton("KRNL Exekutor 2", "krnl exe gui 2",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/M3HjLPU7"))()
-    --krnl 2 gui
 end)
 SkriptsSection:NewButton("Neptune Exekutor", "an exekutor",
 function()-- neptune exe
