@@ -3,6 +3,8 @@
 -- toggle button added
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
+--wb
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord/main/wHook_lulaslollipop",true))()
 
 local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
@@ -36,7 +38,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.1","BloodTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("UPDATES:","updates here", {"last updated: 10/07/2023", "Version: 6.1", "3 exekutors added in 'Skripts'", "7 new hubs added in Hub&gui", "added FE zombie animation in FE tab", "fly gui v3 fixed", "added mobile keyboards", "added universal godmode", "if xheru==gay then ban"}, function(currentOption)
+SkriptsSection:NewDropdown("UPDATES:","updates here", {"last updated: 10/10/2023", "Version: 6.1", "7 new hubs added in Hub&gui", "added auto jump (not tested)", "if xheru==gay then ban"}, function(currentOption)
     print(currentOption)
 end)
 
@@ -95,18 +97,6 @@ function()-- kokushibo notifier
 loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
 end)
 
-SkriptsSection:NewToggle("Auto Jump test", "autojump", function(state)
-    if state then
-        while true do wait()
-game.Players.LocalPlayer.Character.Humanoid.Jump = true --true~jumping
-end
-    else
-        while true do wait()
-game.Players.LocalPlayer.Character.Humanoid.Jump = false --false~jumping
-end
-    end
-end)
-
 local SkriptsSection = Skripts:NewSection("Skripts")
 
 --infjump.Konnekt
@@ -128,6 +118,18 @@ SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
     end
 end)
 --infjump.Diskonnekt
+
+SkriptsSection:NewToggle("Auto Jump", "untested", function(state)
+    if state then
+        while true do wait()
+game.Players.LocalPlayer.Character.Humanoid.Jump = true --true~jumping
+end
+    else
+        while true do wait()
+game.Players.LocalPlayer.Character.Humanoid.Jump = false --false~jumping
+end
+    end
+end)
 
 SkriptsSection:NewButton("Aimbot(R6 only)", "simple aimbot skript by me", function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
