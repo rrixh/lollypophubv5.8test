@@ -3,8 +3,6 @@
 -- toggle button added
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
---wb
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord/main/wHook_lulaslollipop",true))()
 
 local CoreGui = game:GetService("StarterGui") -- Variable of StarterGui
 CoreGui:SetCore("SendNotification", {
@@ -97,16 +95,16 @@ function()-- kokushibo notifier
 loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
 end)
 
-SkriptsSection:NewToggle("Auto Jump", "sit/unsit", function(state)
+SkriptsSection:NewToggle("Auto Jump test", "autojump", function(state)
     if state then
-        -- autojump=true
-while true do wait()
-game.Players.LocalPlayer.Character.Humanoid.Jump = true
+        while true do wait()
+game.Players.LocalPlayer.Character.Humanoid.Jump = true --true~jumping
 end
     else
-        -- autojump=false
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+        while true do wait()
+game.Players.LocalPlayer.Character.Humanoid.Jump = false --false~jumping
 end
+    end
 end)
 
 local SkriptsSection = Skripts:NewSection("Skripts")
