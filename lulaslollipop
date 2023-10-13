@@ -1,6 +1,6 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 6.2
--- toggle button added
+-- Version: 6.3
+-- emojis added in Fun
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 
@@ -8,7 +8,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V6.2🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V6.3🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -27,7 +27,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V6.2","Ocean")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6.3","Ocean")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.2","Ocean")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/12/2023", "Version: 6.2", "4 new hubs added", "rate my avatar skript(Games)", "bladeball skripts(Games)", "NEW BLOXFRUITS skripts(Games)", "mystery skript added(Skripts)", "lyrik bot(Fun)", "added emojis(More) -xherusea"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/12/2023", "Version: 6.3", "added Diskord Emojis(Fun)", "lyrik bot(Fun)", "added emojis(More) -xherusea"}, function(currentOption)
     print(currentOption)
 end)
 
@@ -1007,7 +1007,9 @@ local FunSection = Fun:NewSection("Message Fun")
 FunSection:NewButton("Fake Message Troll", "type for others", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/MBpnp3yS'))()
 end)
-
+FunSection:NewButton("Diskord Emojis (example: :rofl:)", "diskord emojis", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
+end)
 FunSection:NewButton("Spell Out Any Kurseword (use L tool given)", "use L tool to open/klose gui", function()
 -- spell out kurse word
 loadstring(game:HttpGet("https://pastebin.com/raw/xinPiBSU"))()
