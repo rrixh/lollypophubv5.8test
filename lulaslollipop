@@ -138,7 +138,12 @@ SkriptsSection:NewToggle("Infinite jump 2", "use if original doesnt work", funct
         InfiniteJumpEnabled = false
     end
 end)
-
+SkriptsSection:NewToggle("Anti-Fall (for obbys)", "untested", function(state)
+    if state then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script", true))()
+    else
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script", false))()
+end)
 
 SkriptsSection:NewToggle("Auto Jump", "untested", function(state)
     if state then
