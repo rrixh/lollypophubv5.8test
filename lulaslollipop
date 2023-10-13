@@ -125,14 +125,6 @@ SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
     end
 end)
 --infjump.Diskonnekt
-SkriptsSection:NewButton("Destroy gui", "bye", function()
-    for i,v in pairs(game.CoreGui:GetDescendants()) do
-     if v.Name == "Frame" then
-      v:Destroy()
-     end
-    end
-end)
-
 SkriptsSection:NewToggle("Infinite jump 2", "use if original doesnt work", function(state)
     if state then
         local InfiniteJumpEnabled = true
@@ -2414,8 +2406,23 @@ end)
 
 
 -- Home.TabMy.Skrpts
-
 local Home = Window:NewTab("Home")
+
+HomeSection:NewButton("Destroy toggle", "bye", function()
+    for i,v in pairs(game.CoreGui:GetDescendants()) do
+     if v.Name == "Frame" then
+      v:Destroy()
+     end
+    end
+end)
+HomeSection:NewButton("Destroy Lollypop Hub", "bye", function()
+    for i,v in pairs(game.CoreGui:GetDescendants()) do
+     if v.Name == "ScreenGui" then
+      v:Destroy()
+     end
+    end
+end)
+
 local HomeSection = Home:NewSection("Home")
 
 HomeSection:NewButton("🔎 Skript", "look up any skript", function()
