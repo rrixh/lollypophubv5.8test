@@ -2415,13 +2415,6 @@ HomeSection:NewButton("Destroy toggle", "bye", function()
      end
     end
 end)
-HomeSection:NewButton("Destroy Lollypop Hub", "bye", function()
-    for i,v in pairs(game.CoreGui:GetDescendants()) do
-     if v.Name == "ScreenGui" then
-      v:Destroy()
-     end
-    end
-end)
 
 local HomeSection = Home:NewSection("Home")
 
