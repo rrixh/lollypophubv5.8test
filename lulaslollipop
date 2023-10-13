@@ -152,6 +152,12 @@ end
     end
 end)
 
+SkriptsSection:NewButton("Anti-Fall (for obbys)", "it will tp u to the previous area before u fell",
+function()
+    -- anti fall
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
+end)
+
 SkriptsSection:NewButton("Aimbot(R6 only)", "simple aimbot skript by me", function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
 end)
@@ -223,6 +229,10 @@ for _, v in pairs(game:GetService("Workspace"):GetDescendants()) do
         end
     end
 end	
+end)
+
+SkriptsSection:NewButton("less lag 2", "less rendering", function()
+  loadstring(game:HttpGet("https://pastebin.com/raw/nHKkMHpN",true))()
 end)
 
 SkriptsSection:NewButton("ANTI-AFK", "afk limit bypass", function()
@@ -1345,9 +1355,9 @@ HubSection:NewButton("99% fail impossible obby teleport gui", "small tp gui by m
 loadstring(game:HttpGet("https://pastebin.com/raw/HQY7LiGn"))()
 end)
 
-HubSection:NewButton("Lollypop Hub V5.2", "the previous hub", function()
--- LOLLYPOPHUBV5.2
-loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Lollypop-Hub-V-6770"))() 
+HubSection:NewButton("Universal OP Shiftloxk gui", "shiftloxk ", function()
+-- shiftloxk gui op
+    loadstring(game:HttpGet("https://scriptblox.com/raw/Baseplate-Universal-Script-Permanent-Shift-Lock-6924"))()
 end)
 
 HubSection:NewButton("Keybind Tools GUI (unfinished)", "simple keybind gui", function()
@@ -1746,6 +1756,7 @@ end)
 GamesSection:NewButton("Da Hood GUI 1", "DA HOOD is kinda good", function()
    loadstring(game:HttpGet('https://pastebin.com/raw/ZCiS8jSd'))()
 end)
+
 GamesSection:NewButton("DaHood GUI 2", "New GUI", function()
    loadstring(game:HttpGet(("https://raw.githubusercontent.com/SoftVortex/.../main/....."),true))()
 end)
@@ -1773,12 +1784,22 @@ end)
 GamesSection:NewButton("DaHood Gui 7(New)", "gai", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/UntitledhoodGui"))()
 end)
+GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
+end)
 
 local GamesSection = Games:NewSection("[Pankake Empire Tykoon]")
 GamesSection:NewButton("Pankake Empire Tower", "yum🥞🥞🥞", function()
 -- pankake tora
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0pancake", true))()
 end)
+
+--XHAOS GAME
+GamesSection:NewLabel("[Chaos]")
+GamesSection:NewButton("KILL PLAYER FROM FAR V2", "selekt a player and put kill", function()--xhaos kill
+    loadstring(game:HttpGet("https://pastebin.com/raw/W9SYMbiw"))()
+end)
+
 
 GamesSection:NewLabel("[Blade Ball]")
 
@@ -1917,6 +1938,11 @@ end)
 
 GamesSection:NewButton("Kopy >OP MM2 GUI 2< 🔑", "key: mTAgLLFQJazwRWGh",
 function()setclipboard("mTAgLLFQJazwRWGh")
+end)
+
+GamesSection:NewButton("Symphony Hub (OP!)", "op asf",
+function()
+    local a,b,c,d=loadstring,request or http_request or (http and http.request) or (syn and syn.request),assert,"https://itsjidy.github.io/SymphonyHub/Loader.html"c(a and b, "your exekutor is not supported")a(b({Url=d,Method="GET"}).Body)()
 end)
 
 local GamesSection = Games:NewSection("[FREE ADMIN]")
