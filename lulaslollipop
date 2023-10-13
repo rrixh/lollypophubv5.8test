@@ -1,6 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 6.2
--- toggle button added
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 
