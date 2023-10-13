@@ -125,6 +125,13 @@ SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
     end
 end)
 --infjump.Diskonnekt
+SkriptsSection:NewButton("Destroy gui", "bye", function()
+    for i,v in pairs(game.CoreGui:GetDescendants()) do
+     if v.Name == "Frame" then
+      v:Destroy()
+     end
+    end
+end)
 
 SkriptsSection:NewToggle("Infinite jump 2", "use if original doesnt work", function(state)
     if state then
