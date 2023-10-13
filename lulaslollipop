@@ -46,6 +46,7 @@ local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/12/2023", "Version: 6.2", "4 new hubs added", "rate my avatar skript(Games)", "bladeball skripts(Games)", "NEW BLOXFRUITS skripts(Games)", "mystery skript added(Skripts)", "lyrik bot(Fun)", "xheru is lame"}, function(currentOption)
     print(currentOption)
 end)
+SkriptsSection:NewLabel("Welkome" "..player.DisplayName..")
 
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
