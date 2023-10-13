@@ -152,6 +152,10 @@ end
     end
 end)
 
+SkriptsSection:NewButton("Anti-Fall (for obbys)", "this will tp u previous area before u fell", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
+end)
+
 SkriptsSection:NewButton("Aimbot(R6 only)", "simple aimbot skript by me", function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
 end)
