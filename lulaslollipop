@@ -27,7 +27,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V6.2","Ocean")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6.3","Ocean")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.2","Ocean")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/12/2023", "Version: 6.2", "added emoji", "lyrik bot(Fun)", "added emojis(More) -xherusea"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/13/2023", "Version: 6.3", "lyrik bot(Fun)", "added emojis(More) -xherusea"}, function(currentOption)
     print(currentOption)
 end)
 
@@ -150,10 +150,6 @@ end
 game.Players.LocalPlayer.Character.Humanoid.Jump = false --false~jumping
 end
     end
-end)
-
-SkriptsSection:NewButton("Anti-Fall (for obbys)", "this will tp u previous area before u fell", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
 end)
 
 SkriptsSection:NewButton("Aimbot(R6 only)", "simple aimbot skript by me", function()
@@ -1011,9 +1007,10 @@ local FunSection = Fun:NewSection("Message Fun")
 FunSection:NewButton("Fake Message Troll", "type for others", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/MBpnp3yS'))()
 end)
-FunSection:NewButton("Diskord Emojis (example: :rofl:)", "diskord emojis", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
+FunSection:NewButton("Diskord Emojis [example: :angry:]", "type the emoji name in between the kolons", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
 end)
+
 FunSection:NewButton("Spell Out Any Kurseword (use L tool given)", "use L tool to open/klose gui", function()
 -- spell out kurse word
 loadstring(game:HttpGet("https://pastebin.com/raw/xinPiBSU"))()
