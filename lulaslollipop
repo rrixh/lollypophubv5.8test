@@ -48,7 +48,7 @@ SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/12/
     print(currentOption)
 end)
 
-SkriptsSection:NewLabel("Welkome [..player.DisplayName..]")
+SkriptsSection:NewLabel("Welkome" ..player.DisplayName..")
 
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
