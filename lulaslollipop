@@ -9,14 +9,14 @@ Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
   Text = "LOLLYPOP HUB V6.2🍭😋🍭😋",
-  Duration = 11
+  Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
   Text = "almost every skript in this joint",
-  Duration = 10
+  Duration = 8
 })
 --bloodball.Endnotif
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.2","Ocean")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("UPDATES:","updates here", {"Last Updated: 10/12/2023", "Version: 6.2", "4 new hubs added", "rate my avatar skript(Games)", "bladeball skripts(Games)", "NEW BLOXFRUITS skripts(Games)", "lyrik bot(Fun)", "xheru is lame"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/12/2023", "Version: 6.2", "4 new hubs added", "rate my avatar skript(Games)", "bladeball skripts(Games)", "NEW BLOXFRUITS skripts(Games)", "mystery skript added(Skripts)", "lyrik bot(Fun)", "xheru is lame"}, function(currentOption)
     print(currentOption)
 end)
 
@@ -125,6 +125,7 @@ SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
     end
 end)
 --infjump.Diskonnekt
+
 SkriptsSection:NewToggle("Infinite jump 2", "use if original doesnt work", function(state)
     if state then
         local InfiniteJumpEnabled = true
@@ -2406,16 +2407,8 @@ end)
 
 
 -- Home.TabMy.Skrpts
+
 local Home = Window:NewTab("Home")
-
-HomeSection:NewButton("Destroy toggle", "bye", function()
-    for i,v in pairs(game.CoreGui:GetDescendants()) do
-     if v.Name == "Frame" then
-      v:Destroy()
-     end
-    end
-end)
-
 local HomeSection = Home:NewSection("Home")
 
 HomeSection:NewButton("🔎 Skript", "look up any skript", function()
