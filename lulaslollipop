@@ -1,14 +1,13 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 6.3
--- emojis added in Fun
+-- Version: 6.4
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
-
+--loadstring(gameLoaded:true)--
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V6.3🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V6.4🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -26,8 +25,9 @@ Text = "lulaslollipop🍭",
 	Duration = 6
 })
 
+
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V6.3","Ocean")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6.4","Serpent")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,10 +44,10 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.3","Ocean")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"last updated: 10/13/2023", "Version: 6.3", "lyrik bot(Fun)", "added emojis(More) -xherusea"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"Last Updated: 10/15/2023", "Version: 6.4", "added:", "nokom exekutor(skripts), F3X(tools)", "7 new hubs(hubs&gui), dark dex mobile(Home)", "fe mobile skript maker(FE), juanko hub brookhaven(Games)", "version life hub Prison Life(Games)", "BetterBypasser(Fun)"}, function(currentOption)
     print(currentOption)
 end)
-
+--donedrop
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
@@ -528,6 +528,11 @@ SkriptsSection:NewButton("Shadow X", "shadow x gui",
 function()loadstring(game:HttpGet("https://pastebin.com/raw/2qjBZB1Y"))()
 -- shadow x exe gui
 end)
+SkriptsSection:NewButton("Nokom exe", "shadow x gui",
+function()loadstring(game:HttpGet("https://raw.githubusercontent.com/YellowGreg/NoCom-Executor/main/NoCom"))()
+-- nokom exe gui
+end)
+
 
 --r15 animationz
 local SkriptsSection = Skripts:NewSection("R15 Animation")
@@ -1231,6 +1236,10 @@ FunSection:NewButton("Lyrik Bot (say: >lyrics SongName by ArtistName)", "sing so
     
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/lyricsBot/main/singer.lua"))()
 end)
+FunSection:NewButton("BetterBypasser", "hmmmm", function()
+loadstring(game:HttpGet("https://gist.githubusercontent.com/lexsplorsex/b4b3b1243329327faec92f6953d4ed02/raw/a144202fc87db6493a109bf91a7cd14445e012ec/gistfile1.txt"))()
+end)
+
 
 local FunSection = Fun:NewSection("Humanoid")
 
@@ -1265,17 +1274,18 @@ ToolsSection:NewButton("Free Gear Tools 🧨", "💣⚙️👊🏽⛓️fun", fu
 loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
 end)
 
-ToolsSection:NewButton("Flashlight(use for dark games)", "good for darkness and horror games",
+ToolsSection:NewButton("F3X", "good for darkness and horror games",
 function()
     local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-    Text = "good for horror games",
-    Duration = 4
+    Text = "f3x tools sinxe u wna be bob the builder",
+    Duration = 5
 })
-    -- flashlight
-loadstring(game:HttpGet"https://raw.githubusercontent.com/VIPFirstTime/UploadFile/main/77_LYGCA1V7C3RWMJ.lua", true)()
+    --tools
+    loadstring(game:GetObjects("rbxassetid://6695644299")[1].Source)()
+    --F3X skript
 end)
 
 ToolsSection:NewButton("KAKE/KAIK Tool", "gives u a kake tool to throw", function()
@@ -1701,6 +1711,49 @@ Ghub ui v8 new version
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/GHUBUIV8/main/GhubUIv8.txt"))()
 end)
+HubSection:NewButton("Ghub ui V8 (new version)", "request by emil", function()
+--[[
+Ghub ui v8 new version
+]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/GHUBUIV8/main/GhubUIv8.txt"))()
+end)
+HubSection:NewButton("TMR X hub", "request by emil", function()
+--[[
+    TMR X hub
+]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RedCoat33/Britishhub/main/Protected_6197636954202456.lua.txt"))()
+end)
+HubSection:NewButton("K00lkidd gui revival (old)", "k00lkid gay", function()
+--[[
+ K00lkidd gui revival old
+]]
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/theawesomari0/c00lgui/main/c00lgui"), true))()
+end)
+HubSection:NewButton("K00lkidd gui revival (new)", "k00lkid new gayahh gui", function()
+--[[
+    K00lkidd gui revival new
+]]
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/theawesomari0/c00lgui/66033e8ff67eccc421fb04b3924e42d4adf3d7a2/c00lgui%20v2.2"), true))()
+end)
+HubSection:NewButton("Hydro hub", "blah", function()
+--[[
+    Hydro hub
+]]
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/FRX397/Hydrohub/main/Hydro_hub", true))()
+end)
+HubSection:NewButton("The hub v3", "theeeee hub", function()
+--[[
+    The hub v3
+]]
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/hassantheking123321/TheHub/main/The%20hub%20v3%20test",true))()
+end)
+HubSection:NewButton("Universal Shakars hub", "what the hell", function()
+--[[
+    Universal shakars hub
+]]
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/shakar60/USH.P/main/rotected",true))()
+end)
+
 
 
 
@@ -1839,6 +1892,12 @@ GamesSection:NewButton("MalixiousDev Hub", "bladeball", function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/malicious-dev/RobloxScripting/main/bladeball.lua'),true))()
 end)
 
+GamesSection:NewLabel("[Brookhaven]")
+GamesSection:NewButton("Juanko Hub", "skripthub by juanko", function()loadstring(game:HttpGet("https://pastebin.com/raw/qBHKy3Ss"))()
+end)
+
+
+
 --BLOXFRUIT
 GamesSection:NewLabel("[BLOX FRUITS]")
 GamesSection:NewButton("SepuhHub", "bloxfruit", function()loadstring(game:HttpGet("https://isnahamzahpastebin.tech/sepuh/puh_007.lua"))()
@@ -1914,6 +1973,14 @@ GamesSection:NewButton("Juanko Prison Life Admin Hub", "request by emil", functi
 ]]
 loadstring(game:HttpGet("https://pastebin.com/raw/0Jyaa9aQ"))()
 end)
+
+GamesSection:NewButton("Version Life hub", "request by emil", function()
+--[[
+  version life hub for prisonlife
+]]
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Berliandakhensy/Version/main/version%20life.lua.txt"))()
+end)
+
 
 local GamesSection = Games:NewSection("[Flee The Faxility]")
 
@@ -2212,12 +2279,15 @@ local FeSection = Fe:NewSection("FE Skripts")
 FeSection:NewButton("FE Stop Time", "freeze in mid air or whatever", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
 end)
-
 FeSection:NewButton("FE Fish", "(need hat) Parrot Fishfaxe", function()
 -- fe fish
 loadstring(game:HttpGet(('https://pastefy.app/yrp6En96/raw'),true))()
 end)
-FeSection:NewButton("FE Universal Zombie", "zombie anim", function()-- univrslzomb
+FeSection:NewButton("FE Mobile gui skript maker", "requires 40% experienxe w kreating skripts", function()
+-- fe mobike gui
+    loadstring(game:HttpGet(('https://pastefy.app/EOgPqinS/raw'),true))()
+end)
+FeSection:NewButton("FE Universal Zombie", "prolly dont even work no more", function()-- univrslzomb
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/zombie/main/Z.animation_lulaslollipop",true))()
 end)
 FeSection:NewButton("FE Ragdoll Yourself", "reset or die to disable", function()loadstring(game:HttpGet("https://pastebin.com/raw/VY5d58xz"))()
@@ -2510,6 +2580,11 @@ ab.TextColor3=Color3.new(0,1,1)ab.TextSize=20;local bb=game:service'VirtualUser'
 game:service'Players'.LocalPlayer.Idled:connect(function()
 bb:CaptureController()bb:ClickButton2(Vector2.new())
 ab.Text="Roblox tried to kixk u but i kixked him instead"wait(2)ab.Text="Status : Aktive"end)
+end)
+
+HomeSection:NewButton("Dark Dex mobile", "darkdex for mobile", function()--dark dex mobile
+getgenv().Key = "Bash"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3AIY%20Dex",true))()
 end)
 
 HomeSection:NewButton("FraktureSS", "my baxkdoor.exe serverside", function()--FRAKTURE SS
