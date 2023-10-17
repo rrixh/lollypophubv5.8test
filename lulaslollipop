@@ -2370,135 +2370,178 @@ end)
 
 
 --// more skripts \\--
-local w = Window:NewTab("More Skripts...")
-local wSection = w:NewSection("Teleport To Game")
-local wSection = w:NewSection("ask for more game teleports if your game is not here🍭")
+local ex = Window:NewTab("Teleports & Extras")
 
-wSection:NewButton("Teleport to 99% fail impossible obby", "no info", function()-- tp to 99
+local exSection = ex:NewSection("99% fail impossible obby teleportation")
+
+exSection:NewButton("Teleport to Treasure", "teleport to the xhest",
+function()-- teleport to xhest
+Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-911.98291015625, 2005.8095703125, -149.64857482910156)
+end)
+
+exSection:NewButton("Teleport to Finish", "teleport to the xhest",
+function()-- teleport behind xhest
+Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-921.2446899414062, 1995.87255859375, -150.1106719970703)
+end)
+
+exSection:NewButton("Teleport to Danger Zone (tile 60)", "teleport to dz",
+function()-- teleport to dzaktually
+Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-593.0650634765625, 1993.9764404296875,
+-153.38563537597656)
+end)--tptodz
+
+exSection:NewButton("Teleport to Start", "teleport to beginning",
+function()Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(253.8822479248047, 1995.86083984375, -149.1727752685547)
+end)--tptostart
+
+exSection:NewButton("Teleport to Winners Room", "teleport to the golden room",
+function()-- teleport to winning room
+Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(314.3387451171875, 17002.197265625, 202.53802490234375)
+end)
+
+exSection:NewButton("Teleport to Offixe Seat", "sits u in the offixe seat",
+function()-- sit in the offixe
+Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(259.6474304199219, 17004.259765625,
+162.38287353515625)
+    -- sit while tp
+game.Players.LocalPlayer.Character.Humanoid.Sit = true
+end)
+
+exSection:NewButton("Teleport to Hidden Area", "teleport to unknown area",
+function()-- teleport to hidden 99
+Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(269.36907958984375, 17024.74609375,
+139.19142150878906)
+end)
+--[endTP]--
+
+local exSection = ex:NewSection("Teleport To Game")
+local exSection = w:NewSection("ask for more game teleports if your game is not here🍭")
+
+exSection:NewButton("Teleport to 99% fail impossible obby", "no info", function()-- tp to 99
 local PlaceId = 7584496019 -- gameID
 
 game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-wSection:NewButton("Teleport to Zombie Attaxk", "no info", function()-- tp to zombie atk
+exSection:NewButton("Teleport to Zombie Attaxk", "no info", function()-- tp to zombie atk
 local PlaceId = 1240123653 -- gameID
 
 game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-local wSection = w:NewSection("more skripts here")
+local exSection = ex:NewSection("Weapons/FX")
 
-wSection:NewButton("Non-FE Hub (old)", "some dont work", function()-- NONFE HUB
+exSection:NewButton("Non-FE Hub (old)", "some dont work", function()-- NONFE HUB
 loadstring(game:HttpGet("https://pastebin.com/raw/mjPzCChH"))()
 end)
 
-wSection:NewButton("Klone script", "klones ur avatar not fe", function()
+exSection:NewButton("Klone script", "klones ur avatar not fe", function()
     loadstring(game:GetObjects('rbxassetid://7339698872')[1].Source)()
 end)
 
-wSection:NewButton("Fake kixk", "when people leave it makes them think you kixk them", function()
+exSection:NewButton("Fake kixk", "when people leave it makes them think you kixk them", function()
     loadstring(game:HttpGet('https://pastebin.com/raw/9H4EGzHg'))()
 end)
 
-wSection:NewButton("Loop Fling all", "automatikally flings people", function()
+exSection:NewButton("Loop Fling all", "automatikally flings people", function()
     loadstring(game:HttpGet('https://github.com/DigitalityScripts/roblox-scripts/raw/main/loop%20fling%20all'))()
 end)
 
-wSection:NewButton("Message Logs", "see xhatlogs gui", function()
+exSection:NewButton("Message Logs", "see xhatlogs gui", function()
     loadstring(game:GetObjects("rbxassetid://1295331911")[1].Source)()
 end)
 
-wSection:NewLabel("Fighters/Weapons")
+exSection:NewLabel("Weapons")
 
-wSection:NewButton("Klumsy Gunner", "kool", function()-- klumsy gunner
+exSection:NewButton("Klumsy Gunner", "kool", function()-- klumsy gunner
 loadstring(game:HttpGet("https://pastebin.com/raw/VdfTg8Rm"))()
 end)
 
-wSection:NewButton("Army Gunner", "🪖", function()-- army gunner
+exSection:NewButton("Army Gunner", "🪖", function()-- army gunner
 loadstring(game:HttpGet("https://pastebin.com/raw/6yf2cDfG"))()
 end)
 
-wSection:NewButton("Annoying Dual Pistols", "annoying", function()-- annoying dualpistols
+exSection:NewButton("Annoying Dual Pistols", "annoying", function()-- annoying dualpistols
 loadstring(game:HttpGet("https://pastebin.com/raw/vWMd3ErY"))()
 end)
 
-wSection:NewButton("Alien Rifle", "annoying", function()-- huge double barrel alien rifle
+exSection:NewButton("Alien Rifle", "annoying", function()-- huge double barrel alien rifle
 loadstring(game:HttpGet("https://pastebin.com/raw/Ntq5K6gC"))()
 end)
 
-wSection:NewButton("Kamikaze", "timed bomb vest💣", function()-- kamikaze time bomb
+exSection:NewButton("Kamikaze", "timed bomb vest💣", function()-- kamikaze time bomb
 loadstring(game:HttpGet("https://pastebin.com/raw/W34i4R8N"))()
 end)
 
-wSection:NewButton("Skull Smasher", "use mobile keyboard for movelist", function()-- SKULL SMASHER
+exSection:NewButton("Skull Smasher", "use mobile keyboard for movelist", function()-- SKULL SMASHER
 loadstring(game:HttpGet("https://pastebin.com/raw/tnevgHaV"))()
 end)
 
-wSection:NewButton("Dark Edged Dual Blades", "use mobile keyboard for movelist", function()-- dark edged dual blades
+exSection:NewButton("Dark Edged Dual Blades", "use mobile keyboard for movelist", function()-- dark edged dual blades
 loadstring(game:HttpGet("https://pastebin.com/raw/C334rgCT"))()
 end)
 
-wSection:NewButton("How to train your dragon", "gives u the pet from tbe movie", function()-- how to train your dragon pet
+exSection:NewButton("How to train your dragon", "gives u the pet from tbe movie", function()-- how to train your dragon pet
 loadstring(game:HttpGet("https://pastebin.com/raw/iQZ9PJ4x"))()
 end)
 
-wSection:NewButton("Water Rings", "yes", function()-- water rings
+exSection:NewButton("Water Rings", "yes", function()-- water rings
 loadstring(game:HttpGet("https://pastebin.com/raw/ijWxVpmf"))()
 end)
 
-wSection:NewButton("Dual Shield Lasers", "yes", function()-- dual dark shield lasers
+exSection:NewButton("Dual Shield Lasers", "yes", function()-- dual dark shield lasers
 loadstring(game:HttpGet("https://pastebin.com/raw/XpzHT9Fh"))()
 end)
 
-wSection:NewButton("Glowing Matrix Man", "yes", function()-- glowing matrix runner
+exSection:NewButton("Glowing Matrix Man", "yes", function()-- glowing matrix runner
 loadstring(game:HttpGet("https://pastebin.com/raw/SwLFx5pw"))()
 end)
 
-wSection:NewButton("Robot Umbrella", "yes", function()-- dangerous umbrella
+exSection:NewButton("Robot Umbrella", "yes", function()-- dangerous umbrella
 loadstring(game:HttpGet("https://pastebin.com/raw/V78KfuNf"))()
 end)
 
-wSection:NewButton("Invisible Laser Shooter", "kool", function()-- invisible laser shooter
+exSection:NewButton("Invisible Laser Shooter", "kool", function()-- invisible laser shooter
 loadstring(game:HttpGet("https://pastebin.com/raw/8Za5RNGH"))()
 end)
 
-wSection:NewButton("Dual Plasma Rifles", "yes", function()-- dual plasma shooter
+exSection:NewButton("Dual Plasma Rifles", "yes", function()-- dual plasma shooter
 loadstring(game:HttpGet("https://pastebin.com/raw/HEvM7C2t"))()
 end)
 
-wSection:NewButton("Shotgun", "partner", function()-- shotgun
+exSection:NewButton("Shotgun", "partner", function()-- shotgun
 loadstring(game:HttpGet("https://pastebin.com/raw/aMgrBsnQ"))()
 end)
 
-wSection:NewButton("Bomb Vest", "blow urself up", function()-- shotgun
+exSection:NewButton("Bomb Vest", "blow urself up", function()-- shotgun
 loadstring(game:HttpGet("https://pastebin.com/raw/aMgrBsnQ"))()
 end)
 
-wSection:NewButton("The Big Blank R6", "blank r6 guy", function()-- Blank R6 guy
+exSection:NewButton("The Big Blank R6", "blank r6 guy", function()-- Blank R6 guy
 loadstring(game:HttpGet("https://pastebin.com/raw/pRETy1aA"))()
 end)
 
-wSection:NewButton("M86-SR Bipod", "snipeup", function()--M89-SR with Bipod
+exSection:NewButton("M86-SR Bipod", "snipeup", function()--M89-SR with Bipod
 loadstring(game:HttpGet("https://pastebin.com/raw/4sBhUxS0"))()
 end)
 
-wSection:NewButton("Unknown Magik", "magixian", function()-- unknown Magik
+exSection:NewButton("Unknown Magik", "magixian", function()-- unknown Magik
 loadstring(game:HttpGet("https://pastebin.com/raw/FSH0S4C2"))()
 end)
 
-wSection:NewButton("Invisible Weapon", "no info", function()-- invisible weapon
+exSection:NewButton("Invisible Weapon", "no info", function()-- invisible weapon
 loadstring(game:HttpGet("https://pastebin.com/raw/GCUivFzA"))()
 end)
 
-wSection:NewButton("Speedy Winged Fighter", "no info", function()-- speedy winged fighter
+exSection:NewButton("Speedy Winged Fighter", "no info", function()-- speedy winged fighter
 loadstring(game:HttpGet("https://pastebin.com/raw/RKPE68Gz"))()
 end)
 
-wSection:NewButton("Dual M1911's", "no info", function()-- dual m1911
+exSection:NewButton("Dual M1911's", "no info", function()-- dual m1911
 loadstring(game:HttpGet("https://pastebin.com/raw/N1Jr8BBd"))()
 end)
 
-wSection:NewButton("Winged Fire", "no info", function()-- Winged Fire
+exSection:NewButton("Winged Fire", "no info", function()-- Winged Fire
 loadstring(game:HttpGet("https://pastebin.com/L0GbxNfL"))()
 end)
 
@@ -2651,7 +2694,7 @@ function()loadstring(game:HttpGet("https://pastebin.com/raw/eg8uzYiQ"))()
 end)
 
 MoreSection:NewButton("Kneel", "kneel and walk",
-function()--Crouch Animation ID: 287325678
+function()--Krouxh Animation ID: 287325678
 
 local Crouch = Instance.new("Animation")
 Crouch.AnimationId = "rbxassetid://287325678"
@@ -2659,7 +2702,7 @@ local DoIt = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnima
 DoIt:Play()
 end)
 
-MoreSection:NewButton("Kneel V2", "C to toggle USE GENERATE ANY KEYBIND skript",
+MoreSection:NewButton("Kneel V2 (c to toggle)", "C to toggle USE GENERATE ANY KEYBIND skript",
 function()KEY = "C" -- Key to crouch
 CROUCHWALKSPEED = 12 -- Walkspeed when you are crouching
 
@@ -2701,47 +2744,7 @@ Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
 end)
 end)
 
-local MoreSection = More:NewSection("99% fail impossible obby lokations (extras)")
-
-MoreSection:NewButton("Teleport to Treasure", "teleport to the xhest",
-function()-- teleport to xhest
-Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-911.98291015625, 2005.8095703125, -149.64857482910156)
-end)
-
-MoreSection:NewButton("Teleport to Finish", "teleport to the xhest",
-function()-- teleport behind xhest
-Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-921.2446899414062, 1995.87255859375, -150.1106719970703)
-end)
-
-MoreSection:NewButton("Teleport to Danger Zone (tile 60)", "teleport to dz",
-function()-- teleport to dzaktually
-Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-593.0650634765625, 1993.9764404296875,
--153.38563537597656)
-end)--tptodz
-
-MoreSection:NewButton("Teleport to Start", "teleport to beginning",
-function()Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(253.8822479248047, 1995.86083984375, -149.1727752685547)
-end)--tptostart
-
-MoreSection:NewButton("Teleport to Winners Room", "teleport to the golden room",
-function()-- teleport to winning room
-Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(314.3387451171875, 17002.197265625, 202.53802490234375)
-end)
-
-MoreSection:NewButton("Teleport to Offixe Seat", "sits u in the offixe seat",
-function()-- sit in the offixe
-Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(259.6474304199219, 17004.259765625,
-162.38287353515625)
-    -- sit while tp
-game.Players.LocalPlayer.Character.Humanoid.Sit = true
-end)
-
-MoreSection:NewButton("Teleport to Hidden Area", "teleport to unknown area",
-function()-- teleport to hidden 99
-Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(269.36907958984375, 17024.74609375,
-139.19142150878906)
-end)
---[endTP]--
+--[ E M O J I S ]--
 MoreSection:NewLabel("Emojis")
 -- emoji buttons
 MoreSection:NewButton("😁", "smiley", function()--player will say this
@@ -2750,6 +2753,10 @@ end)
 MoreSection:NewButton("😆", "smiley", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("😆","All")
 end)
 MoreSection:NewButton("😊", "smiley", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("😊","All")
+end)
+MoreSection:NewButton("🍭", "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("🍭","All")
+end)
+MoreSection:NewButton("🍭🍭", "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("🍭🍭","All")
 end)
 MoreSection:NewButton("🍭🍭🍭", "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("🍭🍭🍭","All")
 end)
