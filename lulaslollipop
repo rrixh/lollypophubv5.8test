@@ -2414,8 +2414,8 @@ Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFram
 end)
 --[endTP]--
 
-local exSection = ex:NewSection("Teleport To Game")
-local exSection = w:NewSection("ask for more game teleports if your game is not here🍭")
+exSection:NewLabel("Teleport To Game")
+exSection:NewLabel("ask for more game teleports if your game is not here🍭")
 
 exSection:NewButton("Teleport to 99% fail impossible obby", "no info", function()-- tp to 99
 local PlaceId = 7584496019 -- gameID
