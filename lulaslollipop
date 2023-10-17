@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 6.4
+-- Version: 6.5(soon)
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -7,7 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V6.4🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V6.5(soon)🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.4","Serpent")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"Last Updated: 10/15/2023", "Version: 6.4", "added:", "nokom exekutor(skripts), F3X(tools)", "7 new hubs(hubs&gui), dark dex mobile(Home)", "fe mobile skript maker(FE), juanko hub brookhaven(Games)", "version life hub Prison Life(Games)", "BetterBypasser(Fun)"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"Last Updated: 10/15/2023", "Version: 6.4", "nokom exekutor(skripts), F3X(tools)", "7 new hubs(hubs&gui), dark dex mobile(Home)", "fe mobile skript maker(FE), juanko hub brookhaven(Games)", "version life hub Prison Life(Games)", "BetterBypasser(Fun)"}, function(currentOption)
     print(currentOption)
 end)
 --donedrop
@@ -1645,11 +1645,11 @@ Bido skins 1.8 new version
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BidoSkinsYT/BidoSkinsYT/main/Bido%20Skins%20V1.8"))()
 end)
-HubSection:NewButton("Haxker 6666666 Hub (fixed)", "o:", function()
+HubSection:NewButton("Haxker_6666666 Hub V2.8", "o:", function()
 --[[
 Haxker_666 hub fixed
 ]]
-loadstring(game:HttpGet('https://raw.githubusercontent.com/FreeRobloxScripts1/Haxker_6666666-Hub/main/Script-Hub/Version-2.7/Fixed.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/FreeRobloxScripts1/Haxker_6666666-Hub/main/Script-Hub/Version-2.8'))()
 end)
 HubSection:NewButton("Ghub ui v7", "good hub", function()
 --[[
@@ -1699,6 +1699,12 @@ Astronlynx hub
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1tsFire/Astrolynx/main/AstrolynxScripts.lua", true))()
 end)
+HubSection:NewButton("Astronlynix hub 0.4 (new version)", "request by emil", function()
+--[[
+Astronlynix hub
+]]
+loadstring(game:HttpGet("https://freenote.biz/raw/vBfN3NeVYN", true))()
+end)
 HubSection:NewButton("Universal c9 Hub", "request by emil", function()
 --[[
 C9 hub unvrsl
@@ -1711,11 +1717,17 @@ Ghub ui v8 new version
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/GHUBUIV8/main/GhubUIv8.txt"))()
 end)
-HubSection:NewButton("Ghub ui V8 (new version)", "request by emil", function()
+HubSection:NewButton("Ghub ui V8 (old version)", "request by emil", function()
 --[[
-Ghub ui v8 new version
+Ghub ui v8 old version
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/GHUBUIV8/main/GhubUIv8.txt"))()
+end)
+HubSection:NewButton("Ghub ui V9 (new)", "request by emil", function()
+--[[
+Ghub ui v9 new
+]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/Ghub-v9/main/Ghubv9UI.txt"))()
 end)
 HubSection:NewButton("TMR X hub", "request by emil", function()
 --[[
