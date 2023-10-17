@@ -2429,7 +2429,7 @@ local PlaceId = 1240123653 -- gameID
 game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-local exSection = ex:NewSection("Weapons/FX")
+local exSection = ex:NewSection("Troll")
 
 exSection:NewButton("Non-FE Hub (old)", "some dont work", function()-- NONFE HUB
 loadstring(game:HttpGet("https://pastebin.com/raw/mjPzCChH"))()
@@ -2447,9 +2447,6 @@ exSection:NewButton("Loop Fling all", "automatikally flings people", function()
     loadstring(game:HttpGet('https://github.com/DigitalityScripts/roblox-scripts/raw/main/loop%20fling%20all'))()
 end)
 
-exSection:NewButton("Message Logs", "see xhatlogs gui", function()
-    loadstring(game:GetObjects("rbxassetid://1295331911")[1].Source)()
-end)
 
 exSection:NewLabel("Weapons")
 
@@ -2566,6 +2563,11 @@ end)
 HomeSection:NewButton("Reset Walkspeed","reset walkspeed to default", function()game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
 
+HomeSection:NewButton("Reset Walkspeed/Jumppower", "resets Walkspeed and jumpPower to default", function()
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end)
+
 HomeSection:NewButton("Ping Kounter", "see ping", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MvKKJ331"))()
 end)
@@ -2634,9 +2636,16 @@ HomeSection:NewButton("FraktureSS", "my baxkdoor.exe serverside", function()--FR
 loadstring(game:HttpGet("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/unobfuscated.lua"))()
 end)
 
-HomeSection:NewButton("Reset WS/JP", "Rests Walkspeed and jumpPower to default", function()
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+HomeSection:NewButton("Message Logs", "see xhatlogs gui", function()
+    loadstring(game:GetObjects("rbxassetid://1295331911")[1].Source)()
+end)
+
+HomeSection:NewButton("Destroy gui", "bye", function()--gui destroyer
+    for i,v in pairs(game.CoreGui:GetDescendants()) do
+     if v.Name == "ScreenGui" then
+      v:Destroy()
+     end
+    end
 end)
 
 
