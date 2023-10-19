@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 6.5(soon)
+-- Version: 6.5
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -7,7 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V6.5(soon)🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V6.5🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -27,7 +27,7 @@ Text = "lulaslollipop🍭",
 
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V6.4","Serpent")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6.5","Serpent")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.4","Serpent")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW SKRIPTS:","updates here", {"Last Updated: 10/15/2023", "Version: 6.4", "nokom exekutor(skripts), F3X(tools)", "7 new hubs(hubs&gui), dark dex mobile(Home)", "fe mobile skript maker(FE), juanko hub brookhaven(Games)", "version life hub Prison Life(Games)", "BetterBypasser(Fun)"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/19/2023", "Version: 6.5", "16 new prison life skripts(Games)", "6 new hubs added(hubs&gui)"}, function(currentOption)
     print(currentOption)
 end)
 --donedrop
@@ -1765,7 +1765,30 @@ HubSection:NewButton("Universal Shakars hub", "what the hell", function()
 ]]
     loadstring(game:HttpGet("https://raw.githubusercontent.com/shakar60/USH.P/main/rotected",true))()
 end)
-
+HubSection:NewButton("VersionHub V2.3.1", "a hub", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ScripterGamerBobux/VersionHub/main/V2.3.1.lua.txt",true))()
+    -- Version hub
+end)
+HubSection:NewButton("Versus hub (LoaderV2)", "LoaderV2", function()
+    loadstring(game:HttpGet("https://gitlab.com/Ner0ox/versus/-/raw/main/LoaderV2/Loader.lua"))()
+    -- Versus  hub
+end)
+HubSection:NewButton("Dex skripthub", "binarydex", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main/Init"))()
+    --Dex hub
+end)
+HubSection:NewButton("Spanish hub v4", "no ingles", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-SPANISH-HUB-V4-THE-GOAT-HUB-8429"))()
+    --Spanish v4 hub
+end)
+HubSection:NewButton("GLoader hub", "g loader", function()
+    loadstring(game:HttpGet("https://github.com/GroceyLot/My-roblox-stuff/raw/Things/GLoader.lua"))()
+    --Gloader hub
+end)
+HubSection:NewButton("Spaxe hub", "orbituniverse", function()
+    loadstring(game:HttpGet("https://orbituniverse.com/spacehub"))()
+    --Spaxe hub
+end)
 
 
 
@@ -1979,6 +2002,12 @@ end
 end
 end)
 
+GamesSection:NewButton("Tiger Admin (REVAMPED)", "tiger admin revamp",
+function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-TIGER-ADMIN-REVAMPED-7593"))()
+    --Tiger admin revamped new version
+end)
+
 GamesSection:NewButton("Juanko Prison Life Admin Hub", "request by emil", function()
 --[[
 	Juanko prison life admin hub only games prison life
@@ -1991,6 +2020,85 @@ GamesSection:NewButton("Version Life hub", "request by emil", function()
   version life hub for prisonlife
 ]]
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Berliandakhensy/Version/main/version%20life.lua.txt"))()
+end)
+
+GamesSection:NewButton("Nexus Hub", "hub",
+function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/GwnStefano/NexusHub/main/Main", true))()
+    --Nexus hub for prison life game
+end)
+
+GamesSection:NewButton("Synix Beta Hub", "hub",
+function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/GwnStefano/NexusHub/main/Main", true))()
+    --Nexus hub for prison life game
+end)
+
+GamesSection:NewButton("Remove Trees", "self explanatory", function()
+--[[
+  delete trees
+]]
+game:GetService("Workspace").Trees:Destroy()
+end)
+
+GamesSection:NewButton("FE sound for prison life", "fe sound", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SmartModBoy/script4/main/prisonsound", true))()
+    --fe sound for prison life game
+end)
+
+GamesSection:NewButton("Mobile Paxks for prison life", "paxks", function()
+    loadstring(game:HttpGet('https://freenote.biz/raw/ZcYw0XR8lW'))()
+    --Mobile paxks
+end)
+
+GamesSection:NewButton("prison life 1", "skript", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Roblox-script-8414"))()
+    --Prison life 1 
+end)
+
+GamesSection:NewButton("prison life 2", "skript", function()
+    loadstring(game:HttpGet('https://paste.website/p/96d68817-3f1e-4fef-a8b8-9aafdc810329.txt'))()
+    --Prison life 2
+end)
+
+GamesSection:NewButton("prison life 3", "skript", function()
+    loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\70\101\37\50\48\98\121\112\97\115\115\34\44\32\116\114\117\101\41\41\40\41\10")()
+    --Prison life 3
+end)
+
+GamesSection:NewButton("prison life 4", "skript", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/xgJ27vLc"))()
+    --Prison life 4
+end)
+
+GamesSection:NewButton("prison life 5 - SSSWWW222", "skript", function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/zeuise0002/SSSWWW222/main/README.md'),true))()
+    --Prison life 5
+end)
+
+GamesSection:NewButton("prison life 6 gui", "gui for prisonlife", function()
+    loadstring(game:HttpGet("https://pastebin.com/3caDghrg"))();
+    --Prison life 6
+end)
+
+GamesSection:NewButton("prison life 7 - PixelLoxkers", "gui for prisonlife", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/PixelLockers/Roblox-Scripts----/main/Prison%20Life-Script%20(v1)', true))()
+    --Prison life 7
+end)
+
+GamesSection:NewButton("PRISONWARE v1.3", "gui for prisonlife", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
+    --Prison life 8
+end)
+
+GamesSection:NewButton("TeddyHub", "gui for prisonlife", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-(Cars-fixed!)-Prison-life-teddy-hub-2451"))()
+    --Prison life 9
+end)
+
+GamesSection:NewButton("prison life 10 gui", "gui for prisonlife idk", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/mHfK0Xk4", true))()
+    --Prison life 10
 end)
 
 
