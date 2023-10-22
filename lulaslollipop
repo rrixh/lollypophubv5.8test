@@ -27,7 +27,7 @@ Text = "lulaslollipop🍭",
 
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","DarkTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","BloodTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","DarkTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/21/2023", "Version: 6.6", "4 new hubs (Hubs&gui)", "Brookhaven game added w 9 skripts", "6 admin skripts"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/22/2023", "Version: 6.6", "4 new hubs (Hubs&gui)", "Brookhaven game added w 9 skripts", "6 admin skripts", "da hood any tool skript(Games)"}, function(currentOption)
     print(currentOption)
 end)
 --donedrop
@@ -1938,6 +1938,11 @@ GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
 end)
 
+GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/6vHgYQ9xFH/anytool",true))()
+end)
+
+
 local GamesSection = Games:NewSection("[🥞Pankake Empire Tykoon🥞]")
 GamesSection:NewButton("Pankake Empire Tower", "yum🥞🥞🥞", function()
 -- pankake tora
@@ -1994,6 +1999,7 @@ GamesSection:NewLabel("[🏡Brookhaven RP🏡]")
 --BUTTONS
 GamesSection:NewButton("Juanko Hub", "skripthub by juanko", function()loadstring(game:HttpGet("https://pastebin.com/raw/qBHKy3Ss"))()
 end)
+GamesSection:NewLabel("[🏡Brookhaven RP🏡]")
 --BUTTONS
 GamesSection:NewButton("Brookhaven 1", "brookhaven skript alexh01", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Alech01/Scripts-Randoms/main/Brook%20Haven%20Script"))()
