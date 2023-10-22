@@ -1861,19 +1861,20 @@ GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
 end)
 GamesSection:NewLabel("[❌🚪50/50 Pixk A Door🚪✅]")
-GamesSection:NewButton("50/50 Pixk A Door", "reveals all doors in lime green", function()getgenv().Door = true
+GamesSection:NewButton("50/50 Pixk A Door", "reveals all doors in lime green", function()
+    getgenv().Door = true
 
-while wait() do
-    if getgenv().Door == true then
-        for i,v in pairs(game.Workspace.Doors:GetChildren()) do
-            for i,l in pairs(v:GetChildren()) do
-                if l:FindFirstChild("???") then
-                    l.BrickColor = BrickColor.new("Lime green")
-                end
-            end
-        end
-    end
-end
+  while wait() do
+      if getgenv().Door == true then
+          for i,v in pairs(game.Workspace.Doors:GetChildren()) do
+              for i,l in pairs(v:GetChildren()) do
+                  if l:FindFirstChild("???") then
+                      l.BrickColor = BrickColor.new("Lime green")
+                  end
+              end
+          end
+      end
+  end
 end)
 
 local GamesSection = Games:NewSection("[🗡️KAT🗡️]")
