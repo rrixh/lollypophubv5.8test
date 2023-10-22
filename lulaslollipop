@@ -1994,7 +1994,6 @@ GamesSection:NewLabel("[🏡Brookhaven RP🏡]")
 --BUTTONS
 GamesSection:NewButton("Juanko Hub", "skripthub by juanko", function()loadstring(game:HttpGet("https://pastebin.com/raw/qBHKy3Ss"))()
 end)
-GamesSection:NewLabel("[🏡Brookhaven RP🏡]")
 --BUTTONS
 GamesSection:NewButton("Brookhaven 1", "brookhaven skript alexh01", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Alech01/Scripts-Randoms/main/Brook%20Haven%20Script"))()
