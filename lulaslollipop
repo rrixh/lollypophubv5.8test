@@ -1,7 +1,6 @@
--- Gui to Lua LOLLYPOPHUB
--- Version: 6.6
--- Instanxes:
-
+--Gui to Lua
+--Version: 6.6
+--Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -27,7 +26,7 @@ Duration = 6
 })
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V5.6","BloodTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6", "DarkTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -1064,46 +1063,13 @@ Auto-Exkuse
 loadstring(game:HttpGet("https://raw.githubusercontent.com/goldmoments/auto-excuse/main/Script"))("Auto-Exkuse Script | lulaslollipoo#0140") 
 end)
 
-FunSection:NewButton("Kopy Server Messages", "repeats all players messages", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
-local ChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
-local OnMessageEvent = ChatEvents:WaitForChild("OnMessageDoneFiltering")
-local SayMessageRequest = ChatEvents:WaitForChild("SayMessageRequest")
-
-if not SayMessageRequest:IsA("RemoteEvent") or not OnMessageEvent:IsA("RemoteEvent") then return end
-
-local ChatLegth = require(game:FindService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings")).MaximumMessageLength
-local lp = game:FindService("Players").LocalPlayer.Name
-
-OnMessageEvent.OnClientEvent:Connect(function(data)
-    if not data then return end
-    local player = tostring(data.FromSpeaker)
-    if player == lp then return end
-    local message = tostring(data.Message)
-    if (message):len() <= (ChatLegth-7) then
-        SayMessageRequest:FireServer(('\%s'):format(message,""),tostring(data.OriginalChannel))
-    end
-end)
+FunSection:NewButton("Kopy Server Messages", "repeats all players messages", function()
+    --kopy server msgs
+    loadstring(game:HttpGet("https://pastecode.dev/raw/gByZwgnyZo/kopyServerMessages",true))()
 end)
 
-FunSection:NewButton("Nerd Quote", " repeats all msgs with a nerd quote", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
-local ChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
-local OnMessageEvent = ChatEvents:WaitForChild("OnMessageDoneFiltering")
-local SayMessageRequest = ChatEvents:WaitForChild("SayMessageRequest")
-
-if not SayMessageRequest:IsA("RemoteEvent") or not OnMessageEvent:IsA("RemoteEvent") then return end
-
-local ChatLegth = require(game:FindService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings")).MaximumMessageLength
-local lp = game:FindService("Players").LocalPlayer.Name
-
-OnMessageEvent.OnClientEvent:Connect(function(data)
-    if not data then return end
-    local player = tostring(data.FromSpeaker)
-    if player == lp then return end
-    local message = tostring(data.Message)
-    if (message):len() <= (ChatLegth-7) then
-        SayMessageRequest:FireServer(('\"%s\"%s'):format(message,"🤓"),tostring(data.OriginalChannel))
-    end
-end)
+FunSection:NewButton("Nerd Quote", " repeats all msgs with a nerd quote", function()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/zZ3dtGcs78/nerdquote_lulaslollipop",true))()
 end)
 
 FunSection:NewButton("Rainbow Messages", "enables xhat bubble and see msg frm far away", function()
@@ -1273,12 +1239,16 @@ b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
 b.BinType = 3
 end)--end.kopytool
 --end btools.Tools tab
-ToolsSection:NewButton("Free Gear Tools 🧨", "💣⚙️👊🏽⛓️fun", function()
+ToolsSection:NewButton("Free Gear Tools 🧨", "💣⚙️👊🏽⛓️", function()
 loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
 end)
 
 ToolsSection:NewButton("Flashlight(use for dark games)", "good for darkness and horror games",
 function()
+        -- flashlight
+loadstring(game:HttpGet("https://raw.githubusercontent.com/VIPFirstTime/UploadFile/main/77_LYGCA1V7C3RWMJ.lua", true))()
+
+    
     local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
@@ -1286,8 +1256,6 @@ Library:Notification({
     Text = "good for horror games",
     Duration = 4
 })
-    -- flashlight
-loadstring(game:HttpGet"https://raw.githubusercontent.com/VIPFirstTime/UploadFile/main/77_LYGCA1V7C3RWMJ.lua", true)()
 end)
 
 ToolsSection:NewButton("KAKE/KAIK Tool", "gives u a kake tool to throw", function()
