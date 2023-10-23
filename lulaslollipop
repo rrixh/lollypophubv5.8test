@@ -103,6 +103,22 @@ function()-- kokushibo notifier
 loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
 end)
 
+SkriptsSection:NewButton("ANTI-AFK", "no afk",
+function()local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+       vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+       wait(1)
+       vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
+    --end anti afk 
+        local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+    Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+    Library:Notification({
+        Text = "now they kant stop u frm sleeping😴",
+        Duration = 5.5
+    })
+end)
 
 local SkriptsSection = Skripts:NewSection("Skripts")
 
@@ -981,7 +997,7 @@ AdminSection:NewButton("Nameless Admin", "type ;cmds", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
 end)
 AdminSection:NewButton("Universal Admin Panel", "admin panel", function()
--- unvrsl admin
+-- unvrsl admin --
 loadstring(game:HttpGet(('https://pastefy.app/Oic24KzG/raw'),true))()
 end)
 AdminSection:NewButton("IV Admin v3", "admin kommands", function()
@@ -989,6 +1005,12 @@ AdminSection:NewButton("IV Admin v3", "admin kommands", function()
 Iv admin v3
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BloodyBurns/Hex/main/Iv%20Admin%20v3.lua"))()
+end)
+AdminSection:NewButton("IV Admin", "admin kommands", function()
+--[[
+Iv admin
+]]
+    loadstring(game:HttpGet("https://pastecode.dev/raw/yX8bQ6ZgUe/ivadmin",true))()
 end)
 AdminSection:NewButton("Hextus Admin", "admin logs", function()
 --[[
@@ -1939,7 +1961,7 @@ GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
 end)
 
 GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
-    loadstring(game:HttpGet("https://pastecode.dev/raw/6vHgYQ9xFH/anytool",true))()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
 end)
 
 
