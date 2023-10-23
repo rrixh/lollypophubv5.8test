@@ -21,12 +21,12 @@ Library:Notification({
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
 Title = "made by:",  	
 Text = "lulaslollipop🍭",
-	Icon = "rbxthumb://type=Asset&id=11425468695=150&h=150",
-	Duration = 6
+  Icon = "rbxthumb://type=Asset&id=11425468695=150&h=150",
+  Duration = 6
 })
 
 
-local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
+local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
 local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","BloodTheme")
 
 ---//yum lollypop hub\\--
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","BloodTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/22/2023", "Version: 6.6", "4 new hubs (Hubs&gui)", "Brookhaven game added w 9 skripts", "6 admin skripts", "da hood any tool skript(Games)"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/23/2023", "Version: 6.6", "da hood any tool skript(Games)"}, function(currentOption)
     print(currentOption)
 end)
 --donedrop
@@ -67,8 +67,8 @@ RunService:BindToRenderStep("tempBinding", 1000, antiSit)
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
 Title = "Anti-Mythikal✅",  	
 Text = "u will auto stand",
-	
-	Duration = 3
+
+  Duration = 3
 })
     else
         local RunService = game:GetService("RunService")
@@ -82,8 +82,8 @@ RunService:BindToRenderStep("tempBinding", 1000, antiSit)
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
 Title = "Anti-Mythikal❌",  	
 Text = "off",
-	
-	Duration = 3
+
+  Duration = 3
 })
     end
 end)
@@ -179,7 +179,7 @@ loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRI
 end)
 
 SkriptsSection:NewButton("Aimbot 2 (say /console)", "aimbot", function()
-    
+
     -- aimbot print 
 loadstring(game:HttpGet("https://pastebin.com/raw/i9QLTtbD"))()
 end)
@@ -1220,13 +1220,13 @@ end)()
 
 local settings = {
 
-	}
+  }
 
 while wait() do
 
     pcall(function()
 
-    	game:GetService("Chat"):SetBubbleChatSettings({
+      game:GetService("Chat"):SetBubbleChatSettings({
 
             TextColor3 = textcolour,
 
@@ -1264,13 +1264,13 @@ while wait() do
 
             VerticalStudsOffset = 0,
 
-        
+
 
             -- Space in pixels between two bubbles
 
             BubblesSpacing = 3,
 
-        
+
 
             -- The distance (from the camera) that bubbles turn into a single bubble
 
@@ -1300,7 +1300,7 @@ FunSection:NewButton("Lyrik Bot (say: >lyrics SongName by ArtistName)", "sing so
       Text = ">lyrics SongName by AristName (doesnt work for urself)",
       Duration = 7
     })
-    
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/lyricsBot/main/singer.lua"))()
 end)
 FunSection:NewButton("BetterBypasser", "hmmmm", function()
@@ -1657,14 +1657,14 @@ end)
 
 HubSection:NewButton("FathomHub", "request by emil", function()
 --[[
-	fathomhub
+  fathomhub
 ]]
 loadstring(game:HttpGet("https://pastebin.com/raw/Y4AGJALY"))();
 end)
 
 HubSection:NewButton("OrangeX Hub V5", "request by emil", function()
 --[[
-	orange x hubv5
+  orange x hubv5
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ImJosh66/Ab2rW/main/ORANGEX%20V5%20RELEASED%20ORANGEX%20ON%20TOP%20.txt"))()
 end)
@@ -1690,13 +1690,13 @@ loadstring(game:HttpGet('https://pastebin.com/raw/DFjY4nMy'))()
 end)
 HubSection:NewButton("Davi hub v2.2", "request by emil", function()
 --[[
-	davi hub2.2
+  davi hub2.2
 ]]
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Davicoderliner/davigui/main/davi.lua'))()
 end)
 HubSection:NewButton("Ultimate troll hub 2.2 (new version)", "request by emil", function()
 --[[
-	ultimate troll hub 2.2
+  ultimate troll hub 2.2
 ]]
 loadstring(game:HttpGet('https://raw.githubusercontent.com/AkilExploitz/AkilBlox14-s-Script-Hub-v1.1/main/Utg%202.2%20startup'))()
 end)
@@ -2139,7 +2139,7 @@ end)
 
 GamesSection:NewButton("Juanko Prison Life Admin Hub", "request by emil", function()
 --[[
-	Juanko prison life admin hub only games prison life
+  Juanko prison life admin hub only games prison life
 ]]
 loadstring(game:HttpGet("https://pastebin.com/raw/0Jyaa9aQ"))()
 end)
@@ -2912,7 +2912,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/c5JacC0M"))()
 game.StarterGui:SetCore("SendNotification", {
     Title = "Player Notifier✅On";
     Text = "u will be notified wen players leave/join";
- 
+
 })
 end)
 
