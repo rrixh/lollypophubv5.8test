@@ -27,7 +27,7 @@ Text = "lulaslollipop🍭",
 
 
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","BloodTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","Ocean")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","BloodTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/21/2023", "Version: 6.6", "4 new hubs (Hubs&gui)", "Brookhaven game added", "9 brookhaven skripts(Games)"}, function(currentOption)
+SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/23/2023", "Version: 6.6"}, function(currentOption)
     print(currentOption)
 end)
 --donedrop
@@ -1838,15 +1838,15 @@ HubSection:NewButton("Lego hub v3", "lego", function()
     loadstring(game:HttpGet("https://comensal.is-not-a.dev/legohub"))()
     -- Lego hub v3
 end)
-HubSection:NewButton("Balkan hub x v3", "balkan", function()
+HubSection:NewButton("Balkan hub x v3", "by balkan", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Balkanx/Balkan-x/main/Balkan%20x", true))()
     -- Balkan hub x v3
 end)
-HubSection:NewButton("BUTIF Universal hub", "balkan", function()
+HubSection:NewButton("BUTIF Universal hub", "by BUTIF", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NEWBUTIF/Universal-Script-Hub/main/Butif%20Hub%202"))()
     -- Butif universal hub
 end)
-HubSection:NewButton("Hyperlib Universal hub", "balkan", function()
+HubSection:NewButton("Hyperlib hub", "hyperlib", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Fantemil/Trenglehub/main/trenglehub.lua"))()
     -- Hyperlib hub
 end)
@@ -1861,19 +1861,20 @@ GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
 end)
 GamesSection:NewLabel("[❌🚪50/50 Pixk A Door🚪✅]")
-GamesSection:NewButton("50/50 Pixk A Door", "reveals all doors in lime green", function()getgenv().Door = true
+GamesSection:NewButton("50/50 Pixk A Door", "reveals all doors in lime green", function()
+    getgenv().Door = true
 
-while wait() do
-    if getgenv().Door == true then
-        for i,v in pairs(game.Workspace.Doors:GetChildren()) do
-            for i,l in pairs(v:GetChildren()) do
-                if l:FindFirstChild("???") then
-                    l.BrickColor = BrickColor.new("Lime green")
-                end
-            end
-        end
-    end
-end
+  while wait() do
+      if getgenv().Door == true then
+          for i,v in pairs(game.Workspace.Doors:GetChildren()) do
+              for i,l in pairs(v:GetChildren()) do
+                  if l:FindFirstChild("???") then
+                      l.BrickColor = BrickColor.new("Lime green")
+                  end
+              end
+          end
+      end
+  end
 end)
 
 local GamesSection = Games:NewSection("[🗡️KAT🗡️]")
@@ -1935,6 +1936,10 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/Balligu
 end)
 GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
+end)
+
+GamesSection:NewButton("any tool -", "Q tool", function()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/yyeBvjrxrX/Any%20tool%20scarlet"))()
 end)
 
 local GamesSection = Games:NewSection("[🥞Pankake Empire Tykoon🥞]")
