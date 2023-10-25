@@ -1867,6 +1867,10 @@ HubSection:NewButton("Balkan hub x v3", "by balkan", function()
   -- Balkan hub x v3
 end)
 
+HubSection:NewButton("BUTIF Universal hub", "by BUTIF", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NEWBUTIF/Universal-Script-Hub/main/Butif%20Hub%202"))()
+    -- Butif universal hub
+end)
 
 
 
