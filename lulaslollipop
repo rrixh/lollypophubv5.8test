@@ -300,7 +300,7 @@ function()-- v3 fly
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/mobileflygui/main/v3_lulaslollipop",true))()
 end)
 SkriptsSection:NewButton("Mobile Fly GUI B&W", "modded",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/TeNifRrX"))()
+function()loadstring(game:HttpGet("https://pastecode.dev/raw/kTcdBFf4aV/moddedFlyguiV3",true))()
 end)
 SkriptsSection:NewButton("Mobile FLY HD ADMIN", "mobile fly HD ADMIN version",
 function()-- FLY HD ADMIN
