@@ -47,7 +47,7 @@ local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/25/2023", "Version: 6.7", "gui not showing wen exekuted (Fixed)"}, function(currentOption)
   print(currentOption)
 end)
---donedrop
+
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
@@ -101,6 +101,8 @@ end)
 SkriptsSection:NewButton("Kokushibo notifier🚨📢", "will notify u if kokushibo joins",
 function()-- kokushibo notifier
 loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
+end)
+SkriptsSection:NewButton("Anti-Ban (push Yes 2x then No to klose)", "anti xhat logger", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/antixhatlogger/main/lulaslollipop",true))()
 end)
 
 SkriptsSection:NewButton("ANTI-AFK", "no afk",
@@ -251,24 +253,6 @@ SkriptsSection:NewButton("less lag 2", "less rendering", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/nHKkMHpN",true))()
 end)
 
-SkriptsSection:NewButton("ANTI-AFK", "afk limit bypass", function()
-  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-  Text = "now they kant stop u😴",
-  Duration = 5
-})
-  --end notif
--- anti afk
-local vu = game:GetService("VirtualUser")
-game:GetService("Players").LocalPlayer.Idled:connect(function()
- vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
- wait(1)
- vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-end)
-end)
-
 SkriptsSection:NewButton("WALKSPEED GUI", "+ -", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/2gGvc9ya"))()
 end)
@@ -281,7 +265,7 @@ SkriptsSection:NewButton("R6 Klimb on walls", "klimb on any walls", function()
   loadstring(game:HttpGet('https://pastebin.com/raw/jLVhHEVW'))()
 end)
 
-SkriptsSection:NewButton("Drag&ResizeMessage Box", "lets u kontrol the xhat drag and size it", function()
+SkriptsSection:NewButton("Drag & resize chat", "lets u kontrol the xhat drag and size it", function()
 -- drag &resize xhat
 loadstring(game:HttpGet("https://pastebin.com/raw/e3KhdyYS"))()
 end)
@@ -300,7 +284,8 @@ function()-- v3 fly
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/mobileflygui/main/v3_lulaslollipop",true))()
 end)
 SkriptsSection:NewButton("Mobile Fly GUI B&W", "modded",
-function()loadstring(game:HttpGet("https://pastecode.dev/raw/kTcdBFf4aV/moddedFlyguiV3",true))()
+function()--b&w fly gui mobile
+    loadstring(game:HttpGet("https://pastecode.dev/raw/hARYYPVGuq/moddedflygui_lulaslollipop",true))()
 end)
 SkriptsSection:NewButton("Mobile FLY HD ADMIN", "mobile fly HD ADMIN version",
 function()-- FLY HD ADMIN
@@ -349,6 +334,22 @@ end)
   {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"},
   {"Ctrl", "Win", "Alt", "Space", "Alt", "Menu", "Ctrl"}
 ]]
+--[GODMODE SKRIPTS]--
+SkriptsSection:NewLabel("GodMode skripts")
+SkriptsSection:NewButton("GodMode (99% fail impossible obby)", "no death 99% fail and some obbys",
+function()
+  loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N",true))()
+end)
+
+SkriptsSection:NewButton("GodMode V2", "no death 99% fail and survive kill brixks",
+function()-- fe brixk toggle 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))()
+end)
+SkriptsSection:NewButton("Universal Godmode", "universal",
+function()-- unvrsl godmode 
+loadstring(game:HttpGet("https://freenote.biz/raw/Fhpx5r5A8M"))()
+end)
+
 SkriptsSection:NewLabel("Keybind Gens")
 SkriptsSection:NewButton("KEYBIND GENERATOR", "keyboard letters generator (useful)",
 function()
@@ -364,20 +365,7 @@ SkriptsSection:NewButton("MOUSE KURSOR", "gives u a mouse kursor touxh",
 function()
   loadstring(game:HttpGet(('https://pastefy.app/58d8d52G/raw'),true))()
 end)
-SkriptsSection:NewLabel("GodMode skripts")
-SkriptsSection:NewButton("GodMode (99% fail impossible obby)", "no death 99% fail and some obbys",
-function()
-  loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N",true))()
-end)
 
-SkriptsSection:NewButton("GodMode V2", "no death 99% fail and survive kill brixks",
-function()-- fe brixk toggle 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))()
-end)
-SkriptsSection:NewButton("Universal Godmode", "universal",
-function()-- unvrsl godmode 
-loadstring(game:HttpGet("https://freenote.biz/raw/Fhpx5r5A8M"))()
-end)
 SkriptsSection:NewLabel("...")
 SkriptsSection:NewButton("fast animations", "player animation will be sped up",
 function()-- FAST animations
@@ -1337,6 +1325,9 @@ b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
 b.BinType = 3
 end)--end.kopytool
 --end btools.Tools tab
+ToolsSection:NewButton("Tp To Player GUI (small)", "small like zuki", function()
+loadstring(game:HttpGet(("https://pastebin.com/raw/YNVbeqPy")))()
+end)
 ToolsSection:NewButton("Free Gear Tools 🧨", "💣⚙️👊🏽⛓️fun", function()
 loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
 end)
@@ -1379,10 +1370,6 @@ pos = CFrame.new(pos.X,pos.Y,pos.Z)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
 end)
 tool.Parent = game.Players.LocalPlayer.Backpack
-end)
-
-ToolsSection:NewButton("Tp To Player GUI", "equip and press to tele anywhere", function()
-loadstring(game:HttpGet(("https://pastebin.com/raw/YNVbeqPy")))()
 end)
 
 ToolsSection:NewButton("Invisible Tool", "hides and unhides your body in the air", function()
@@ -2842,8 +2829,6 @@ HomeSection:NewButton("No Lib %FO", "nolib%", function()loadstring(game:HttpGet(
 end)
 HomeSection:NewButton("Get Koords", "x,y,z finder say /console", function()print(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position)
 end)
-HomeSection:NewButton("Anti-Ban (push Yes 2x then No to klose)", "anti xhat logger", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/antixhatlogger/main/lulaslollipop",true))()
-end)
 HomeSection:NewButton("BaxkDoorFinder", "finds a baxkdoor for admin or additional skripts", function()
   loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
 end)
@@ -2887,7 +2872,7 @@ HomeSection:NewButton("Message Logs", "see xhatlogs gui", function()
   loadstring(game:GetObjects("rbxassetid://1295331911")[1].Source)()
 end)
 
-HomeSection:NewButton("Destroy gui", "bye", function()--gui destroyer
+HomeSection:NewButton("Destroy toggle", "bye", function()--gui destroyer
   for i,v in pairs(game.CoreGui:GetDescendants()) do
    if v.Name == "ScreenGui" then
     v:Destroy()
