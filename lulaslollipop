@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 6.6
+-- Version: 6.7
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -7,7 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V6.6🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V6.7🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -27,7 +27,7 @@ Text = "lulaslollipop🍭",
 
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","BloodTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V6.7","BloodTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,8 +44,8 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.6","BloodTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/23/2023", "Version: 6.6", "da hood any tool skript(Games)"}, function(currentOption)
-    print(currentOption)
+SkriptsSection:NewDropdown("NEW:","updates and add-ons to the skript will be here", {"Last Updated: 10/25/2023", "Version: 6.7", "gui not showing wen exekuted (Fixed)"}, function(currentOption)
+  print(currentOption)
 end)
 --donedrop
 -- SKRIPTS BUTTONS
@@ -55,8 +55,8 @@ loadstring(game:HttpGet(('https://pastebin.com/raw/DhLMep63'),true))()
 end)
 -- toggle antimythikal
 SkriptsSection:NewToggle("Anti-Sit (99% fail mythikals)", "kinda good but i prefer using godmode", function(state)
-    if state then
-        local RunService = game:GetService("RunService")
+  if state then
+      local RunService = game:GetService("RunService")
 function antiSit()
 if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
 game.Players.LocalPlayer.Character.Humanoid.Sit = false
@@ -68,10 +68,10 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 Title = "Anti-Mythikal✅",  	
 Text = "u will auto stand",
 
-  Duration = 3
+Duration = 3
 })
-    else
-        local RunService = game:GetService("RunService")
+  else
+      local RunService = game:GetService("RunService")
 function antiSit()
 if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
 game.Players.LocalPlayer.Character.Humanoid.Sit = true
@@ -83,9 +83,9 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 Title = "Anti-Mythikal❌",  	
 Text = "off",
 
-  Duration = 3
+Duration = 3
 })
-    end
+  end
 end)
 --end toggle antimythikal
 
@@ -105,73 +105,73 @@ end)
 
 SkriptsSection:NewButton("ANTI-AFK", "no afk",
 function()local vu = game:GetService("VirtualUser")
-    game:GetService("Players").LocalPlayer.Idled:connect(function()
-       vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-       wait(1)
-       vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-    end)
-    --end anti afk 
-        local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-    Library.DefaultColor = Color3.fromRGB(50,205,50)
+  game:GetService("Players").LocalPlayer.Idled:connect(function()
+     vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+     wait(1)
+     vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+  end)
+  --end anti afk 
+      local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+  Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-    Library:Notification({
-        Text = "now they kant stop u frm sleeping😴",
-        Duration = 5.5
-    })
+  Library:Notification({
+      Text = "now they kant stop u frm sleeping😴",
+      Duration = 5.5
+  })
 end)
 
 local SkriptsSection = Skripts:NewSection("Skripts")
 
 --infjump.Konnekt
 SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
-    if toggled then
-        getgenv().InfJump = true
-        spawn(function()
-            while getgenv().InfJump == true do
-                game:GetService("UserInputService").JumpRequest:connect(function()
-                    if getgenv().InfJump == true then
-                        game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-                    end
-                end)
-                wait()
-            end
-        end)
-    else
-        getgenv().InfJump = false
-    end
+  if toggled then
+      getgenv().InfJump = true
+      spawn(function()
+          while getgenv().InfJump == true do
+              game:GetService("UserInputService").JumpRequest:connect(function()
+                  if getgenv().InfJump == true then
+                      game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+                  end
+              end)
+              wait()
+          end
+      end)
+  else
+      getgenv().InfJump = false
+  end
 end)
 --infjump.Diskonnekt
 
 SkriptsSection:NewToggle("Infinite jump 2", "use if original doesnt work", function(state)
-    if state then
-        local InfiniteJumpEnabled = true
-      game:GetService("UserInputService").JumpRequest:connect(function()
-          if InfiniteJumpEnabled then
-              game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-          end
-      end)
-    else
-        InfiniteJumpEnabled = false
-    end
+  if state then
+      local InfiniteJumpEnabled = true
+    game:GetService("UserInputService").JumpRequest:connect(function()
+        if InfiniteJumpEnabled then
+            game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+        end
+    end)
+  else
+      InfiniteJumpEnabled = false
+  end
 end)
 
 
 SkriptsSection:NewToggle("Auto Jump", "untested", function(state)
-    if state then
-        while true do wait()
+  if state then
+      while true do wait()
 game.Players.LocalPlayer.Character.Humanoid.Jump = true --true~jumping
 end
-    else
-        while true do wait()
+  else
+      while true do wait()
 game.Players.LocalPlayer.Character.Humanoid.Jump = false --false~jumping
 end
-    end
+  end
 end)
 
 SkriptsSection:NewButton("Anti-Fall (for obbys)", "it will tp u to the previous area before u fell",
 function()
-    -- anti fall
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
+  -- anti fall
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
 end)
 
 SkriptsSection:NewButton("Aimbot(R6 only)", "simple aimbot skript by me", function()
@@ -180,34 +180,34 @@ end)
 
 SkriptsSection:NewButton("Aimbot 2 (say /console)", "aimbot", function()
 
-    -- aimbot print 
+  -- aimbot print 
 loadstring(game:HttpGet("https://pastebin.com/raw/i9QLTtbD"))()
 end)
 
 -- superhuman
 SkriptsSection:NewToggle("Super-Human", "boosts jumppower and speed", function(state)
-        if state then
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 120
-            game.Players.LocalPlayer.Character.Humanoid.JumpPower = 120
-        else
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-            game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-        end
-    end)
+      if state then
+          game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 120
+          game.Players.LocalPlayer.Character.Humanoid.JumpPower = 120
+      else
+          game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+          game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+      end
+  end)
 
 SkriptsSection:NewToggle("Sit", "sit/unsit", function(state)
-    if state then
-        -- sitTrue
+  if state then
+      -- sitTrue
 game.Players.LocalPlayer.Character.Humanoid.Sit = true
-    else
-        -- sitFalse
+  else
+      -- sitFalse
 game.Players.LocalPlayer.Character.Humanoid.Sit = false
-    end
+  end
 end)
 
 SkriptsSection:NewButton("what does this do?", "???",
 function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/DQ1a5ggY",true))()
+  loadstring(game:HttpGet("https://pastebin.com/raw/DQ1a5ggY",true))()
 end)
 
 SkriptsSection:NewButton("99% fail Loner Animation", "for 99% fail impossible obby",
@@ -218,7 +218,7 @@ end)
 
 SkriptsSection:NewButton("Show chatBox (for games w out chatBox)", "good for games like evade w no msg box",
 function()
-    game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
+  game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
 end)
 
 SkriptsSection:NewButton("Loner Animation (99% fail)", "for 99% fail impossible obby",
@@ -238,34 +238,34 @@ end)
 
 SkriptsSection:NewButton("less lag", "FX remover", function()
 for _, v in pairs(game:GetService("Workspace"):GetDescendants()) do
-    if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
-        v.Material = Enum.Material.SmoothPlastic
-        if v:IsA("Texture") then
-            v:Destroy()
-        end
-    end
+  if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
+      v.Material = Enum.Material.SmoothPlastic
+      if v:IsA("Texture") then
+          v:Destroy()
+      end
+  end
 end	
 end)
 
 SkriptsSection:NewButton("less lag 2", "less rendering", function()
-  loadstring(game:HttpGet("https://pastebin.com/raw/nHKkMHpN",true))()
+loadstring(game:HttpGet("https://pastebin.com/raw/nHKkMHpN",true))()
 end)
 
 SkriptsSection:NewButton("ANTI-AFK", "afk limit bypass", function()
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-    Text = "now they kant stop u😴",
-    Duration = 5
+  Text = "now they kant stop u😴",
+  Duration = 5
 })
-    --end notif
+  --end notif
 -- anti afk
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
-   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-   wait(1)
-   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+ vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+ wait(1)
+ vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 end)
 
@@ -278,7 +278,7 @@ loadstring(game:HttpGet('https://pastebin.com/raw/djAd7g2W'))()
 end)
 
 SkriptsSection:NewButton("R6 Klimb on walls", "klimb on any walls", function()
-    loadstring(game:HttpGet('https://pastebin.com/raw/jLVhHEVW'))()
+  loadstring(game:HttpGet('https://pastebin.com/raw/jLVhHEVW'))()
 end)
 
 SkriptsSection:NewButton("Drag&ResizeMessage Box", "lets u kontrol the xhat drag and size it", function()
@@ -329,7 +329,7 @@ end)
 SkriptsSection:NewLabel("Mobile Keyboard")
 SkriptsSection:NewButton("Mobile Keyboard", "its a mobile keyboard",
 function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
 end)
 SkriptsSection:NewButton("Better Keyboard", "keyboard gui",
 function()-- bettter keyboard 
@@ -342,32 +342,32 @@ loadstring(game:HttpGet(('https://pastefy.app/Te4dwSw2/raw'),true))()
 end)
 
 --[[
-    {"Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"},
-    {"~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="},
-    {"Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]"},
-    {"CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "\\"},
-    {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"},
-    {"Ctrl", "Win", "Alt", "Space", "Alt", "Menu", "Ctrl"}
+  {"Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"},
+  {"~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="},
+  {"Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]"},
+  {"CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "\\"},
+  {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"},
+  {"Ctrl", "Win", "Alt", "Space", "Alt", "Menu", "Ctrl"}
 ]]
 SkriptsSection:NewLabel("Keybind Gens")
 SkriptsSection:NewButton("KEYBIND GENERATOR", "keyboard letters generator (useful)",
 function()
-    loadstring(game:HttpGet(('https://pastefy.app/Ujm4HWxh/raw'),true))()
+  loadstring(game:HttpGet(('https://pastefy.app/Ujm4HWxh/raw'),true))()
 end)
 SkriptsSection:NewButton("KEYBIND GENERATOR V2", "keyboard letters generator (useful)",
 function()
-    -- keybind generator v2
+  -- keybind generator v2
 loadstring(game:HttpGet("https://gist.githubusercontent.com/RedZenXYZ/4d80bfd70ee27000660e4bfa7509c667/raw/da903c570249ab3c0c1a74f3467260972c3d87e6/KeyBoard%2520From%2520Ohio%2520Fr%2520Fr"))()
 end)
 SkriptsSection:NewLabel("...")
 SkriptsSection:NewButton("MOUSE KURSOR", "gives u a mouse kursor touxh",
 function()
-    loadstring(game:HttpGet(('https://pastefy.app/58d8d52G/raw'),true))()
+  loadstring(game:HttpGet(('https://pastefy.app/58d8d52G/raw'),true))()
 end)
 SkriptsSection:NewLabel("GodMode skripts")
 SkriptsSection:NewButton("GodMode (99% fail impossible obby)", "no death 99% fail and some obbys",
 function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N",true))()
+  loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N",true))()
 end)
 
 SkriptsSection:NewButton("GodMode V2", "no death 99% fail and survive kill brixks",
@@ -399,15 +399,15 @@ end)
 SkriptsSection:NewButton("RAINBOW MAP", " ",
 function()--RAINBOW MAP 
 while true do
-    for _, part in ipairs(workspace:GetDescendants()) do
-        if part:IsA("BasePart") then
-            local r = math.random()
-            local g = math.random()
-            local b = math.random()
-            part.BrickColor = BrickColor.new(Color3.new(r, g, b))
-        end
-    end
-    wait(0.5)
+  for _, part in ipairs(workspace:GetDescendants()) do
+      if part:IsA("BasePart") then
+          local r = math.random()
+          local g = math.random()
+          local b = math.random()
+          part.BrickColor = BrickColor.new(Color3.new(r, g, b))
+      end
+  end
+  wait(0.5)
 end
 end)
 
@@ -431,19 +431,19 @@ end)
 SkriptsSection:NewButton("OP SUPER SKREEN STRETXH", "better skreen",
 function()local camera = workspace.CurrentCamera
 local settings = {
-    ["Aspect Ratio"] = true, --// leave it like this if i don't know what You're doing
-    ["Ratio Value"] = 0.6 --// leave it like this if i don't know what You're doing
+  ["Aspect Ratio"] = true, --// leave it like this if i don't know what You're doing
+  ["Ratio Value"] = 0.6 --// leave it like this if i don't know what You're doing
 }
 
 local oldNewindex
 
 oldNewindex = hookmetamethod(game, "__newindex", function(object, propertyName, propertyValue)
-    if object == camera and propertyName == "CFrame" then
-        if settings["Aspect Ratio"] then
-            propertyValue = propertyValue * CFrame.new(0, 0, 0, 1, 0, 0, 0, settings["Ratio Value"], 0, 0, 0, 1)
-        end
-    end
-    return oldNewindex(object, propertyName, propertyValue)
+  if object == camera and propertyName == "CFrame" then
+      if settings["Aspect Ratio"] then
+          propertyValue = propertyValue * CFrame.new(0, 0, 0, 1, 0, 0, 0, settings["Ratio Value"], 0, 0, 0, 1)
+      end
+  end
+  return oldNewindex(object, propertyName, propertyValue)
 end)
 end)
 
@@ -455,11 +455,11 @@ part.BrickColor = BrickColor.new("Bright blue")
 part.Size = Vector3.new(5, 5, 5)
 
 while true do
-    local position = character.PrimaryPart.Position
-    local randomOffset = Vector3.new(math.random(-10, 10), math.random(-10, 10), math.random(-10, 10))
-    part:Clone().Parent = workspace
-    part.Position = position + randomOffset
-    wait(0.1) -- Adjust the delay between spawns as desired
+  local position = character.PrimaryPart.Position
+  local randomOffset = Vector3.new(math.random(-10, 10), math.random(-10, 10), math.random(-10, 10))
+  part:Clone().Parent = workspace
+  part.Position = position + randomOffset
+  wait(0.1) -- Adjust the delay between spawns as desired
 end
 end)
 
@@ -489,7 +489,7 @@ function()loadstring(game:HttpGet("https://pastebin.com/raw/daM0ut53"))()
 end)
 
 SkriptsSection:NewButton("GreenSkreengui", "not fe but perfekt for videos", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Green%20Screen'))()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Green%20Screen'))()
 end)
 
 local SkriptsSection = Skripts:NewSection("ESP")
@@ -526,7 +526,7 @@ loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))()
 end)
 SkriptsSection:NewButton("Neptune Exekutor II", "an exekutor",
 function()loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))() 
-    -- neptune exekutor gui
+  -- neptune exekutor gui
 end)
 SkriptsSection:NewButton("Rc7 exekutor(old)", "request by emil", function()
 --[[
@@ -554,8 +554,8 @@ function()loadstring(game:HttpGet("https://raw.githubusercontent.com/YellowGreg/
 end)
 SkriptsSection:NewButton("Exekutor gui", "exe gui",
 function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/yGxeT8zC", true))()
-    -- exekutor gui
+  loadstring(game:HttpGet("https://pastebin.com/raw/yGxeT8zC", true))()
+  -- exekutor gui
 end)
 
 
@@ -566,9 +566,9 @@ local SkriptsSection = Skripts:NewSection("R15 Animation")
 
 SkriptsSection:NewButton("Zombie Animation", "R15 animation", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616158929"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616160636"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
@@ -577,14 +577,14 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616161997"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616156119"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616157476"
 game.Players.LocalPlayer.Character.Humanoid.Jump = false
-    end
+  end
 end
 end)
 SkriptsSection:NewButton("Kartoony Animation", "R15 animation", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=742637544"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=742638445"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=742640026"
@@ -593,15 +593,15 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=742637942"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=742636889"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=742637151"
 game.Players.LocalPlayer.Character.Humanoid.Jump = false
-    end
+  end
 end
 end)
 
 SkriptsSection:NewButton("Astronaut", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=891621366"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=891633237"
@@ -611,15 +611,15 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=891627522"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=891609353"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=891617961"
 game.Players.LocalPlayer.Character.Humanoid.Jump = false
-     end
+   end
 end
 end)
 
 SkriptsSection:NewButton("Bubbly", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=910004836"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=910009958"
@@ -630,15 +630,15 @@ Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
 game.Players.LocalPlayer.Character.Humanoid.Jump = false
-     end
+   end
 end
 end)
 
 SkriptsSection:NewButton("Elder", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=845400520"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=845403856"
@@ -646,16 +646,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=845386501"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=845398858"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=845392038"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=845396048"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end) 
 
 SkriptsSection:NewButton("Knight", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
@@ -664,16 +664,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616010382"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616003713"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end 
 end)
 
 SkriptsSection:NewButton("Levitation", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=750781874"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=750782770"
@@ -682,16 +682,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=750783738"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=750782230"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=750779899"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=750780242"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Mage", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=707742142"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=707855907"
@@ -700,15 +700,15 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=707861613"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=707853694"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=707826056"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=707829716"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 SkriptsSection:NewButton("Ninja", "lokal skripts", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=656117400"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=656118341"
@@ -717,16 +717,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=656118852"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=656117878"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=656114359"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=656115606"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Pirate", "lokal skripts", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=750781874"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=750782770"
@@ -735,16 +735,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=750783738"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=750782230"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=750779899"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=750780242"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Robot", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616088211"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616089559"
@@ -753,16 +753,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616091570"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616090535"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616086039"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616087089"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Stylish", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616136790"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616138447"
@@ -771,16 +771,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616140816"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616139451"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616133594"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616134815"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Superhero", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616111295"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616113536"
@@ -789,16 +789,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616117076"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616115533"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616104706"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616108001"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end 
 end 
 end)
 
 SkriptsSection:NewButton("Toy", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
@@ -807,16 +807,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=782842708"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=782847020"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=782843869"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=782846423"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Vampire", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083445855"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083450166"
@@ -825,16 +825,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1083462077"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083455352"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083439238"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1083443587"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Werewolf", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083195517"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083214717"
@@ -843,16 +843,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1083216690"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083218792"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083182000"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1083189019"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Patrol", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1149612882"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1150842221"
@@ -861,16 +861,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1150967949"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1148811837"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1148811837"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1148863382"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Konfident", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1069977950"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1069987858"
@@ -879,16 +879,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1070001516"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1069984524"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1069946257"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1069973677"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Ghost", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
@@ -898,16 +898,16 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=616012453"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=616011509"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Sneaky", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
@@ -917,16 +917,16 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=616012453"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=616011509"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Prinxess", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=941003647"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=941013098"
@@ -935,16 +935,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=941015281"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=941008832"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=940996062"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=941000007"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("No Animation", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
@@ -954,16 +954,16 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
 
 SkriptsSection:NewButton("Athro", "lokal skript", function()
 while true do
-    wait(1)
-    for i, player in ipairs(game.Players:GetChildren()) do
-    local Animate = game.Players.LocalPlayer.Character.Animate
+  wait(1)
+  for i, player in ipairs(game.Players:GetChildren()) do
+  local Animate = game.Players.LocalPlayer.Character.Animate
 local Animate = game.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=2510196951"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=2510197257"
@@ -972,7 +972,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=2510198475"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
-    game.Players.LocalPlayer.Character.Humanoid.Jump = false
+  game.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)
@@ -1010,7 +1010,7 @@ AdminSection:NewButton("IV Admin", "admin kommands", function()
 --[[
 Iv admin
 ]]
-    loadstring(game:HttpGet("https://pastecode.dev/raw/yX8bQ6ZgUe/ivadmin",true))()
+  loadstring(game:HttpGet("https://pastecode.dev/raw/yX8bQ6ZgUe/ivadmin",true))()
 end)
 AdminSection:NewButton("Hextus Admin", "admin logs", function()
 --[[
@@ -1028,28 +1028,28 @@ AdminSection:NewButton("Lion Admin", "property", function()
 --[[
 lion admin
 ]]
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WCodesEz/Lion-Admin/main/v1.lua"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/WCodesEz/Lion-Admin/main/v1.lua"))()
 end)
 AdminSection:NewButton("Unknown Admin", "hmm", function()
 --[[
 unknown admin
 ]]
-    loadstring(game:HttpGet("https://gist.github.com/someunknowndude/38cecea5be9d75cb743eac8b1eaf6758/raw"))()
-    -- someunknowndude Admin 
+  loadstring(game:HttpGet("https://gist.github.com/someunknowndude/38cecea5be9d75cb743eac8b1eaf6758/raw"))()
+  -- someunknowndude Admin 
 end)
 AdminSection:NewButton("Legs Admin v2", "leg day", function()
 --[[
 legs admin v2
 ]]
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/leg1337/legadmv2/main/legadminv2.lua'))()
-    -- Legs admin v2 
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/leg1337/legadmv2/main/legadminv2.lua'))()
+  -- Legs admin v2 
 end)
 AdminSection:NewButton("ShatterVast Admin", "shattervast old", function()
 --[[
 shattervast admin
 ]]
-    loadstring(game:HttpGet("https://pastebin.com/raw/m66HEHFu"))()
-    -- ShatterVast admin
+  loadstring(game:HttpGet("https://pastebin.com/raw/m66HEHFu"))()
+  -- ShatterVast admin
 end)
 
 -- OTHER ADMINS
@@ -1077,7 +1077,7 @@ FunSection:NewButton("Be A Helikopter", "human xhoppa", function()-- laydown spi
 loadstring(game:HttpGet("https://pastebin.com/raw/XP8yfVbk"))()
 end)
 FunSection:NewButton("Krawl", "simple krawl gui", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt'))()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt'))()
 end)
 FunSection:NewButton("R6 pose gui", "pose📸",
 function()loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
@@ -1090,13 +1090,13 @@ FunSection:NewButton("Fake Message Troll", "type for others", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/MBpnp3yS'))()
 end)
 FunSection:NewButton("Diskord Emojis [example: :angry:]", "type the emoji name in between the kolons", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
 end)
 
 FunSection:NewButton("Spell Out Any Kurseword (use L tool given)", "use L tool to open/klose gui", function()
 -- spell out kurse word
 loadstring(game:HttpGet("https://pastebin.com/raw/xinPiBSU"))()
-    loadstring(game:HttpGet("https://pastebin.com/raw/QzxqjgSf"))()
+  loadstring(game:HttpGet("https://pastebin.com/raw/QzxqjgSf"))()
 end)
 FunSection:NewButton("Kompliment Random Player", "push to kompliment a random player", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/0n4YDguK"))()
@@ -1106,7 +1106,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/0HidbJsd"))()
 end)
 FunSection:NewButton("Auto Exkuse", "auto msg wen u die", function()
 getgenv().dmsgs = {
-  deathmessages = {"i was lagging", "that wasnt fair", "bruh", "dude", "i was doing something", "whyyyyy", "that wasnt fair", "wow"}
+deathmessages = {"i was lagging", "that wasnt fair", "bruh", "dude", "i was doing something", "whyyyyy", "that wasnt fair", "wow"}
 }
 --[[
 Auto-Exkuse
@@ -1124,13 +1124,13 @@ local ChatLegth = require(game:FindService("Chat"):WaitForChild("ClientChatModul
 local lp = game:FindService("Players").LocalPlayer.Name
 
 OnMessageEvent.OnClientEvent:Connect(function(data)
-    if not data then return end
-    local player = tostring(data.FromSpeaker)
-    if player == lp then return end
-    local message = tostring(data.Message)
-    if (message):len() <= (ChatLegth-7) then
-        SayMessageRequest:FireServer(('\%s'):format(message,""),tostring(data.OriginalChannel))
-    end
+  if not data then return end
+  local player = tostring(data.FromSpeaker)
+  if player == lp then return end
+  local message = tostring(data.Message)
+  if (message):len() <= (ChatLegth-7) then
+      SayMessageRequest:FireServer(('\%s'):format(message,""),tostring(data.OriginalChannel))
+  end
 end)
 end)
 
@@ -1145,13 +1145,13 @@ local ChatLegth = require(game:FindService("Chat"):WaitForChild("ClientChatModul
 local lp = game:FindService("Players").LocalPlayer.Name
 
 OnMessageEvent.OnClientEvent:Connect(function(data)
-    if not data then return end
-    local player = tostring(data.FromSpeaker)
-    if player == lp then return end
-    local message = tostring(data.Message)
-    if (message):len() <= (ChatLegth-7) then
-        SayMessageRequest:FireServer(('\"%s\"%s'):format(message,"🤓"),tostring(data.OriginalChannel))
-    end
+  if not data then return end
+  local player = tostring(data.FromSpeaker)
+  if player == lp then return end
+  local message = tostring(data.Message)
+  if (message):len() <= (ChatLegth-7) then
+      SayMessageRequest:FireServer(('\"%s\"%s'):format(message,"🤓"),tostring(data.OriginalChannel))
+  end
 end)
 end)
 
@@ -1164,127 +1164,127 @@ game:GetService("Chat").BubbleChatEnabled = true
 
 coroutine.wrap(function()
 
-    while wait() do
+  while wait() do
 
-        for i = 0,255,10 do
+      for i = 0,255,10 do
 
-            textcolour = Color3.new(255/255,i/255,0/255)
+          textcolour = Color3.new(255/255,i/255,0/255)
 
-            wait()
+          wait()
 
-        end
+      end
 
-        for i = 255,0,-10 do
+      for i = 255,0,-10 do
 
-            textcolour = Color3.new(i/255,255/255,0/255)
+          textcolour = Color3.new(i/255,255/255,0/255)
 
-            wait()
+          wait()
 
-        end
+      end
 
-        for i = 0,255,10 do
+      for i = 0,255,10 do
 
-            textcolour = Color3.new(0/255,255/255,i/255)
+          textcolour = Color3.new(0/255,255/255,i/255)
 
-            wait()
+          wait()
 
-        end
+      end
 
-        for i = 255,0,-10 do
+      for i = 255,0,-10 do
 
-            textcolour = Color3.new(0/255,i/255,255/255)
+          textcolour = Color3.new(0/255,i/255,255/255)
 
-            wait()
+          wait()
 
-        end
+      end
 
-        for i = 0,255,10 do
+      for i = 0,255,10 do
 
-            textcolour = Color3.new(i/255,0/255,255/255)
+          textcolour = Color3.new(i/255,0/255,255/255)
 
-            wait()
+          wait()
 
-        end
+      end
 
-        for i = 255,0,-10 do
+      for i = 255,0,-10 do
 
-            textcolour = Color3.new(255/255,0/255,i/255)
+          textcolour = Color3.new(255/255,0/255,i/255)
 
-            wait()
+          wait()
 
-        end
+      end
 
-    end
+  end
 
 end)()
 
 local settings = {
 
-  }
+}
 
 while wait() do
 
-    pcall(function()
+  pcall(function()
 
-      game:GetService("Chat"):SetBubbleChatSettings({
+    game:GetService("Chat"):SetBubbleChatSettings({
 
-            TextColor3 = textcolour,
+          TextColor3 = textcolour,
 
-            -- The amount of time, in seconds, to wait before a bubble fades out.
+          -- The amount of time, in seconds, to wait before a bubble fades out.
 
-            BubbleDuration = 20,
+          BubbleDuration = 20,
 
-            -- The amount of messages to be displayed, before old ones disappear
+          -- The amount of messages to be displayed, before old ones disappear
 
-            -- immediately when a new message comes in.
+          -- immediately when a new message comes in.
 
-            MaxBubbles = 20,
+          MaxBubbles = 20,
 
-            -- Styling for the bubbles. These settings will change various visual aspects.
+          -- Styling for the bubbles. These settings will change various visual aspects.
 
-            BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+          BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 
-            TextSize = 16,
+          TextSize = 16,
 
-            Font = Enum.Font.Ubuntu, --Enum.Font.GothamSemibold
+          Font = Enum.Font.Ubuntu, --Enum.Font.GothamSemibold
 
-            Transparency = .1,
+          Transparency = .1,
 
-            CornerRadius = UDim.new(0, 30),
+          CornerRadius = UDim.new(0, 30),
 
-            TailVisible = true,
+          TailVisible = true,
 
-            Padding = 8, -- in pixels
+          Padding = 8, -- in pixels
 
-            MaxWidth = 500, --in pixels
+          MaxWidth = 500, --in pixels
 
-            -- Extra space between the head and the billboard (useful if you want to
+          -- Extra space between the head and the billboard (useful if you want to
 
-            -- leave some space for other character billboard UIs)
+          -- leave some space for other character billboard UIs)
 
-            VerticalStudsOffset = 0,
-
-
-
-            -- Space in pixels between two bubbles
-
-            BubblesSpacing = 3,
+          VerticalStudsOffset = 0,
 
 
 
-            -- The distance (from the camera) that bubbles turn into a single bubble
+          -- Space in pixels between two bubbles
 
-            -- with ellipses (...) to indicate chatter.
+          BubblesSpacing = 3,
 
-            MinimizeDistance = 250,
 
-            -- The max distance (from the camera) that bubbles are shown at
 
-            MaxDistance = 2222,
+          -- The distance (from the camera) that bubbles turn into a single bubble
 
-        })
+          -- with ellipses (...) to indicate chatter.
 
-    end)
+          MinimizeDistance = 250,
+
+          -- The max distance (from the camera) that bubbles are shown at
+
+          MaxDistance = 2222,
+
+      })
+
+  end)
 
 end
 end)
@@ -1293,13 +1293,13 @@ FunSection:NewButton("SpamHub", "sing songs etx.", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/ColdStep2/Chatdestroyer-Hub-V1/main/Chatdestroyer%20Hub%20V1'),true))()
 end)
 FunSection:NewButton("Lyrik Bot (say: >lyrics SongName by ArtistName)", "sing songs requested by other users", function()
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-    Library.DefaultColor = Color3.fromRGB(50,205,50)
+  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+  Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-    Library:Notification({
-      Text = ">lyrics SongName by AristName (doesnt work for urself)",
-      Duration = 7
-    })
+  Library:Notification({
+    Text = ">lyrics SongName by AristName (doesnt work for urself)",
+    Duration = 7
+  })
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/lyricsBot/main/singer.lua"))()
 end)
@@ -1343,20 +1343,20 @@ end)
 
 ToolsSection:NewButton("F3X", "good for darkness and horror games",
 function()
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-    Text = "f3x tools sinxe u wna be bob the builder",
-    Duration = 5
+  Text = "f3x tools sinxe u wna be bob the builder",
+  Duration = 5
 })
-    --tools
-    loadstring(game:GetObjects("rbxassetid://6695644299")[1].Source)()
-    --F3X skript
+  --tools
+  loadstring(game:GetObjects("rbxassetid://6695644299")[1].Source)()
+  --F3X skript
 end)
 
 ToolsSection:NewButton("KAKE/KAIK Tool", "gives u a kake tool to throw", function()
-    -- KAIK 🎂 TOOL
+  -- KAIK 🎂 TOOL
 loadstring(game:HttpGet("https://textbin.net/raw/tccg5bly5b"))()
 end)
 
@@ -1434,7 +1434,7 @@ end)
 
 HubSection:NewButton("Universal OP Shiftloxk gui", "shiftloxk ", function()
 -- shiftloxk gui op
-    loadstring(game:HttpGet("https://scriptblox.com/raw/Baseplate-Universal-Script-Permanent-Shift-Lock-6924"))()
+  loadstring(game:HttpGet("https://scriptblox.com/raw/Baseplate-Universal-Script-Permanent-Shift-Lock-6924"))()
 end)
 
 HubSection:NewButton("Keybind Tools GUI (unfinished)", "simple keybind gui", function()
@@ -1570,11 +1570,11 @@ loadstring(game:HttpGet("https://pastebin.com/raw/n3FDLDh3"))()
 end)
 
 HubSection:NewButton("RemX Gui", "old But Op", function()
-   loadstring(game:HttpGet(('https://raw.githubusercontent.com/Henry887/RemX-Script-Hub/main/main.lua'),true))()
+ loadstring(game:HttpGet(('https://raw.githubusercontent.com/Henry887/RemX-Script-Hub/main/main.lua'),true))()
 end)
 
 HubSection:NewButton("Legon Hub", "Op hub with alot of skripts", function()
-    loadstring(game:HttpGet('https://pastebin.com/raw/B1cUSJsv'))()
+  loadstring(game:HttpGet('https://pastebin.com/raw/B1cUSJsv'))()
 end)
 
 HubSection:NewButton("Bloodfest GUI", "game Gui lol", function()
@@ -1599,7 +1599,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/YourLocalNzi/Ye/main
 end)
 
 HubSection:NewButton("Vhub", "A big Gui full of skripts for trolling etx.", function()
-    -- is a loadstring skript bekause skript is to large >https://roblxopayscript.godaddysites.com<
+  -- is a loadstring skript bekause skript is to large >https://roblxopayscript.godaddysites.com<
 
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/itsyaboivincentt5315/script/main/VHub.txt'),true))()
 end)
@@ -1624,19 +1624,19 @@ HubSection:NewButton("Pro Hub", "New Gui", function()loadstring(game:HttpGet("ht
 end)
 
 HubSection:NewButton("KZS Hub", "idk ._.", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/KZSHUB/KZS-HUB/main/KZSHUBV1.5", true))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/KZSHUB/KZS-HUB/main/KZSHUBV1.5", true))()
 end)
 
 HubSection:NewButton("Frixon Hub", "Eee idk", function()
-    loadstring(game:HttpGet('https://gist.githubusercontent.com/RedoGaming/459eb467f3df927b07ca398a68f3b053/raw/6d1f7a2c8fefd072dc53ebbbec38c6f93c7de1ad/Frixon%2520Hub!%2520New%2520OP%2520Exploit%2520Hub%2520for%2520Roblox!'))()
+  loadstring(game:HttpGet('https://gist.githubusercontent.com/RedoGaming/459eb467f3df927b07ca398a68f3b053/raw/6d1f7a2c8fefd072dc53ebbbec38c6f93c7de1ad/Frixon%2520Hub!%2520New%2520OP%2520Exploit%2520Hub%2520for%2520Roblox!'))()
 end)
 
 HubSection:NewButton("RageFlake Hub", "Lol", function()
-    loadstring(game:HttpGet('https://gist.githubusercontent.com/RedoGaming/2e5943498c487ea97df0d436dd35c234/raw/f0445b1afcd9193bfb94bc75dda7318310a22ad2/Rageflake!%2520New%2520OP%2520Roblox%2520Exploit%2520Hub!'))()
+  loadstring(game:HttpGet('https://gist.githubusercontent.com/RedoGaming/2e5943498c487ea97df0d436dd35c234/raw/f0445b1afcd9193bfb94bc75dda7318310a22ad2/Rageflake!%2520New%2520OP%2520Roblox%2520Exploit%2520Hub!'))()
 end)
 
 HubSection:NewButton("Zen Hub", "Eeeeee idk", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Kaizenofficiall/KaiZen/main/GameHub", true))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/Kaizenofficiall/KaiZen/main/GameHub", true))()
 end)
 
 HubSection:NewButton("Ultimate Trolling Gui V3", "utg old", function()
@@ -1657,14 +1657,14 @@ end)
 
 HubSection:NewButton("FathomHub", "request by emil", function()
 --[[
-  fathomhub
+fathomhub
 ]]
 loadstring(game:HttpGet("https://pastebin.com/raw/Y4AGJALY"))();
 end)
 
 HubSection:NewButton("OrangeX Hub V5", "request by emil", function()
 --[[
-  orange x hubv5
+orange x hubv5
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ImJosh66/Ab2rW/main/ORANGEX%20V5%20RELEASED%20ORANGEX%20ON%20TOP%20.txt"))()
 end)
@@ -1677,26 +1677,26 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Multi-S
 end)
 
 HubSection:NewButton("British Hub V15", "request by emil", function()
-    --britishhub v15
+  --britishhub v15
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RedCoat8102/Britishhub/main/Protected_7002515694901812.lua.txt", true))()
 end)
 HubSection:NewButton("British Hub V16 (new)", "request by emil", function()
-    --britishhub v16 new
+  --britishhub v16 new
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1tsFire/Br1tishHub/main/Protected_6883620778116350.lua.txt", true))()
 end)
 HubSection:NewButton("Thunder Hub", "request by emil", function()
-    --thunderhub
+  --thunderhub
 loadstring(game:HttpGet('https://pastebin.com/raw/DFjY4nMy'))()
 end)
 HubSection:NewButton("Davi hub v2.2", "request by emil", function()
 --[[
-  davi hub2.2
+davi hub2.2
 ]]
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Davicoderliner/davigui/main/davi.lua'))()
 end)
 HubSection:NewButton("Ultimate troll hub 2.2 (new version)", "request by emil", function()
 --[[
-  ultimate troll hub 2.2
+ultimate troll hub 2.2
 ]]
 loadstring(game:HttpGet('https://raw.githubusercontent.com/AkilExploitz/AkilBlox14-s-Script-Hub-v1.1/main/Utg%202.2%20startup'))()
 end)
@@ -1798,84 +1798,79 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/Ghub-v9/main/G
 end)
 HubSection:NewButton("TMR X hub", "request by emil", function()
 --[[
-    TMR X hub
+  TMR X hub
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RedCoat33/Britishhub/main/Protected_6197636954202456.lua.txt"))()
 end)
 HubSection:NewButton("K00lkidd gui revival (old)", "k00lkid gay", function()
 --[[
- K00lkidd gui revival old
+K00lkidd gui revival old
 ]]
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/theawesomari0/c00lgui/main/c00lgui"), true))()
 end)
 HubSection:NewButton("K00lkidd gui revival (new)", "k00lkid new gayahh gui", function()
 --[[
-    K00lkidd gui revival new
+  K00lkidd gui revival new
 ]]
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/theawesomari0/c00lgui/66033e8ff67eccc421fb04b3924e42d4adf3d7a2/c00lgui%20v2.2"), true))()
 end)
 HubSection:NewButton("Hydro hub", "blah", function()
 --[[
-    Hydro hub
+  Hydro hub
 ]]
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/FRX397/Hydrohub/main/Hydro_hub", true))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/FRX397/Hydrohub/main/Hydro_hub", true))()
 end)
 HubSection:NewButton("The hub v3", "theeeee hub", function()
 --[[
-    The hub v3
+  The hub v3
 ]]
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/hassantheking123321/TheHub/main/The%20hub%20v3%20test",true))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/hassantheking123321/TheHub/main/The%20hub%20v3%20test",true))()
 end)
 HubSection:NewButton("Universal Shakars hub", "what the hell", function()
 --[[
-    Universal shakars hub
+  Universal shakars hub
 ]]
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/shakar60/USH.P/main/rotected",true))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/shakar60/USH.P/main/rotected",true))()
 end)
 HubSection:NewButton("VersionHub V2.3.1", "a hub", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ScripterGamerBobux/VersionHub/main/V2.3.1.lua.txt",true))()
-    -- Version hub
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/ScripterGamerBobux/VersionHub/main/V2.3.1.lua.txt",true))()
+  -- Version hub
 end)
 HubSection:NewButton("Versus hub (LoaderV2)", "LoaderV2", function()
-    loadstring(game:HttpGet("https://gitlab.com/Ner0ox/versus/-/raw/main/LoaderV2/Loader.lua"))()
-    -- Versus  hub
+  loadstring(game:HttpGet("https://gitlab.com/Ner0ox/versus/-/raw/main/LoaderV2/Loader.lua"))()
+  -- Versus  hub
 end)
 HubSection:NewButton("Dex skripthub", "binarydex", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main/Init"))()
-    --Dex hub
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main/Init"))()
+  --Dex hub
 end)
 HubSection:NewButton("Spanish hub v4", "no ingles", function()
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-SPANISH-HUB-V4-THE-GOAT-HUB-8429"))()
-    --Spanish v4 hub
+  loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-SPANISH-HUB-V4-THE-GOAT-HUB-8429"))()
+  --Spanish v4 hub
 end)
 HubSection:NewButton("GLoader hub", "g loader", function()
-    loadstring(game:HttpGet("https://github.com/GroceyLot/My-roblox-stuff/raw/Things/GLoader.lua"))()
-    --Gloader hub
+  loadstring(game:HttpGet("https://github.com/GroceyLot/My-roblox-stuff/raw/Things/GLoader.lua"))()
+  --Gloader hub
 end)
 HubSection:NewButton("Spaxe hub", "orbituniverse", function()
-    loadstring(game:HttpGet("https://orbituniverse.com/spacehub"))()
-    --Spaxe hub
+  loadstring(game:HttpGet("https://orbituniverse.com/spacehub"))()
+  --Spaxe hub
 end)
+
 HubSection:NewButton("Lego hub v3", "lego", function()
-    loadstring(game:HttpGet("https://comensal.is-not-a.dev/legohub"))()
-    -- Lego hub v3
+  loadstring(game:HttpGet("https://comensal.is-not-a.dev/legohub"))()
+  -- Lego hub v3
 end)
+
 HubSection:NewButton("Balkan hub x v3", "by balkan", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Balkanx/Balkan-x/main/Balkan%20x", true))()
-    -- Balkan hub x v3
-end)
-HubSection:NewButton("BUTIF Universal hub", "by BUTIF", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NEWBUTIF/Universal-Script-Hub/main/Butif%20Hub%202"))()
-    -- Butif universal hub
-end)
-HubSection:NewButton("Hyperlib hub", "hyperlib", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Fantemil/Trenglehub/main/trenglehub.lua"))()
-    -- Hyperlib hub
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/Balkanx/Balkan-x/main/Balkan%20x", true))()
+  -- Balkan hub x v3
 end)
 
 
 
--- games
+
+-- game skripts
 local Games = Window:NewTab("Games")
 local GamesSection = Games:NewSection("Games")
 
@@ -1884,19 +1879,19 @@ GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", functi
 end)
 GamesSection:NewLabel("[❌🚪50/50 Pixk A Door🚪✅]")
 GamesSection:NewButton("50/50 Pixk A Door", "reveals all doors in lime green", function()
-    getgenv().Door = true
+  getgenv().Door = true
 
-  while wait() do
-      if getgenv().Door == true then
-          for i,v in pairs(game.Workspace.Doors:GetChildren()) do
-              for i,l in pairs(v:GetChildren()) do
-                  if l:FindFirstChild("???") then
-                      l.BrickColor = BrickColor.new("Lime green")
-                  end
-              end
-          end
-      end
-  end
+while wait() do
+    if getgenv().Door == true then
+        for i,v in pairs(game.Workspace.Doors:GetChildren()) do
+            for i,l in pairs(v:GetChildren()) do
+                if l:FindFirstChild("???") then
+                    l.BrickColor = BrickColor.new("Lime green")
+                end
+            end
+        end
+    end
+end
 end)
 
 local GamesSection = Games:NewSection("[🗡️KAT🗡️]")
@@ -1926,17 +1921,17 @@ local GamesSection = Games:NewSection("[🏚️🧱Da Hood🧱🏚️]")
 GamesSection:NewButton("DaHood Reborn Aim", "dahood aimloxk", function()loadstring(game:HttpGet("https://pastebin.com/raw/iNd3xTPv"))()
 end)
 GamesSection:NewButton("Da Hood GUI 1", "DA HOOD is kinda good", function()
-   loadstring(game:HttpGet('https://pastebin.com/raw/ZCiS8jSd'))()
+ loadstring(game:HttpGet('https://pastebin.com/raw/ZCiS8jSd'))()
 end)
 
 GamesSection:NewButton("DaHood GUI 2", "New GUI", function()
-   loadstring(game:HttpGet(("https://raw.githubusercontent.com/SoftVortex/.../main/....."),true))()
+ loadstring(game:HttpGet(("https://raw.githubusercontent.com/SoftVortex/.../main/....."),true))()
 end)
 GamesSection:NewButton("Da Hood GUI 3", "DaHood Evil", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
 end)
 GamesSection:NewButton("Da Hood GUI 4", "DaHood Evil", function()
-   loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\71\97\109\101\114\69\109\105\108\105\97\110\111\70\70\47\116\114\105\112\95\47\109\97\105\110\47\72\117\98\10",true))()
+ loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\71\97\109\101\114\69\109\105\108\105\97\110\111\70\70\47\116\114\105\112\95\47\109\97\105\110\47\72\117\98\10",true))()
 end)
 GamesSection:NewButton("Da Hood Gui 5", "Dahood idk", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
@@ -1948,7 +1943,7 @@ ch = p.Character
 ch.BodyEffects.Dead:Destroy()
 end)
 GamesSection:NewButton("DaHood Silent Aim", "silent aim", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
 end)
 GamesSection:NewButton("DaHood Gui 6(New and Op)", "So many skripts", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/SpaceYes/Lua/Main/DaHood.Lua'))()
@@ -1957,11 +1952,11 @@ GamesSection:NewButton("DaHood Gui 7(New)", "gai", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/UntitledhoodGui"))()
 end)
 GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
+  loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
 end)
 
 GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
-    loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
+  loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
 end)
 
 
@@ -1974,7 +1969,7 @@ end)
 --XHAOS GAME
 GamesSection:NewLabel("[⚔️Chaos⚔️]")
 GamesSection:NewButton("KILL PLAYER FROM FAR V2", "selekt a player and put kill", function()--xhaos kill
-    loadstring(game:HttpGet("https://pastebin.com/raw/W9SYMbiw"))()
+  loadstring(game:HttpGet("https://pastebin.com/raw/W9SYMbiw"))()
 end)
 
 
@@ -1982,38 +1977,38 @@ GamesSection:NewLabel("[🏏Blade Ball☄️]")
 
 GamesSection:NewButton("Ln Hub", "lm hub v2 bladeball V2", function()--Ln Hub (blade ball)
 
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/No6No6No7yt/Lumin-Hub/main/BladeV2.lua'))();
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/No6No6No7yt/Lumin-Hub/main/BladeV2.lua'))();
 end)
 GamesSection:NewButton("AUTO PARRY", "auto parry for bladeball", function()_G.Config = {
-      MinDistance = 10,
-      DelBallSpeed = 3,
-    }
+    MinDistance = 10,
+    DelBallSpeed = 3,
+  }
 
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/-beta-/main/AutoParry.lua"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/-beta-/main/AutoParry.lua"))()
 end)
 GamesSection:NewButton("AUTO BLOXK", "auto bloxk for bladeball", function()--autoblox
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/AutoBlock"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/AutoBlock"))()
 end)
 GamesSection:NewButton("Insurgent Hub", "bladeball", function()--insurgenthub
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/InsurgenceHub/IncurgenceHub.github.io/main/InsurgentHubOfficial'))()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/InsurgenceHub/IncurgenceHub.github.io/main/InsurgentHubOfficial'))()
 end)
 GamesSection:NewButton("Lumin Hub V4", "bladeball", function()--luminhubv4
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/No6No6No7yt/Lumin-Hub/main/BladeV4.lua'))();
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/No6No6No7yt/Lumin-Hub/main/BladeV4.lua'))();
 end)
 GamesSection:NewButton("Baller Hub", "bladeball", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/Blade231/main/Baller"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/Blade231/main/Baller"))()
 end)
 GamesSection:NewButton("Bladeball Hub", "bladeball", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/SourceLua/main/Blade_Ball.lua"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/SourceLua/main/Blade_Ball.lua"))()
 end)
 GamesSection:NewButton("R3THPRIV Hub", "bladeball", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/R3TH-PRIV/R3THPRIV/main/loader.lua'))()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/R3TH-PRIV/R3THPRIV/main/loader.lua'))()
 end)
 GamesSection:NewButton("ImNotFat Hub", "bladeball", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ImNotFatBitch/LoaderScripts/main/LoaderScripts"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/ImNotFatBitch/LoaderScripts/main/LoaderScripts"))()
 end)
 GamesSection:NewButton("MalixiousDev Hub", "bladeball", function()
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/malicious-dev/RobloxScripting/main/bladeball.lua'),true))()
+  loadstring(game:HttpGet(('https://raw.githubusercontent.com/malicious-dev/RobloxScripting/main/bladeball.lua'),true))()
 end)
 
 --BROOKHAVEN
@@ -2024,40 +2019,40 @@ end)
 GamesSection:NewLabel("[🏡Brookhaven RP🏡]")
 --BUTTONS
 GamesSection:NewButton("Brookhaven 1", "brookhaven skript alexh01", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Alech01/Scripts-Randoms/main/Brook%20Haven%20Script"))()
-    -- Brookhaven skript 
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/Alech01/Scripts-Randoms/main/Brook%20Haven%20Script"))()
+  -- Brookhaven skript 
 end)
 GamesSection:NewButton("smilex2222 Brookhaven ", "infohere", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/smilex2222/script/main/Brookhavenscript.lua'))()
-    -- Brookhaven skript 2
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/smilex2222/script/main/Brookhavenscript.lua'))()
+  -- Brookhaven skript 2
 end)
 GamesSection:NewButton("BOTSK HUB", "botsk hub", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/BOTSKHUB/Brookhaven-SKPC/main/si"))()
-    -- Brookhaven skript 3
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/BOTSKHUB/Brookhaven-SKPC/main/si"))()
+  -- Brookhaven skript 3
 end)
 GamesSection:NewButton("Brookhaven  rp v1", "v1 brookhsven skript", function()
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Brookhaven-rp-v1-7505"))()
-    -- Brookhaven skript 4
+  loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Brookhaven-rp-v1-7505"))()
+  -- Brookhaven skript 4
 end)
 GamesSection:NewButton("Pormans Brookhaven", "V1 keyless", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/pormansutility/PormansBrookhaven/main/BrookhavenV1Keyless"))()
-    -- Brookhaven skript 5
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/pormansutility/PormansBrookhaven/main/BrookhavenV1Keyless"))()
+  -- Brookhaven skript 5
 end)
 GamesSection:NewButton("BrookHaven skript", "BH RP", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/eCpipCTH"))()
-    -- Brookhaven skript 6
+  loadstring(game:HttpGet("https://pastebin.com/raw/eCpipCTH"))()
+  -- Brookhaven skript 6
 end)
 GamesSection:NewButton("BrookHaven RP xhat bypasser", "bypasst xhat only for BH", function()
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-chatbypasser-6851"))()
-    -- Brookhaven xhatbypasser skript
+  loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-chatbypasser-6851"))()
+  -- Brookhaven xhatbypasser skript
 end)
 GamesSection:NewButton("REDz Hub", "redz for bh", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/REDzHUB/main/REDzHUB"))()
-    -- Brookhaven  7
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/REDzHUB/main/REDzHUB"))()
+  -- Brookhaven  7
 end)
 GamesSection:NewButton("❄️Ixe Hub❄️", "brookHaven ixehub", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
-    -- ixe hub skript
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
+  -- ixe hub skript
 end)
 
 
@@ -2072,7 +2067,7 @@ end)
 GamesSection:NewLabel("[👧🏽Rate My Avatar👦🏼]")
 
 GamesSection:NewButton("Rate my avatar 1", "rma1", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/xDvJRDzg",true))()
+  loadstring(game:HttpGet("https://pastebin.com/raw/xDvJRDzg",true))()
 end)
 
 
@@ -2080,7 +2075,7 @@ local GamesSection = Games:NewSection("[T-TITANS BATTLEGROUNDS🦸‍♀️🦹�
 
 GamesSection:NewButton("T-TITANS BATTEGROUNDS OP GUI", "no kooldown blah blah", function()pcall(function()
 
-  loadstring(game:HttpGet("https://roflux.net/scripts/games/" .. tostring(game.PlaceId) .. ".lua"))()
+loadstring(game:HttpGet("https://roflux.net/scripts/games/" .. tostring(game.PlaceId) .. ".lua"))()
 end)
 end)
 
@@ -2133,101 +2128,101 @@ end)
 
 GamesSection:NewButton("Tiger Admin (REVAMPED)", "tiger admin revamp",
 function()
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-TIGER-ADMIN-REVAMPED-7593"))()
-    --Tiger admin revamped new version
+  loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-TIGER-ADMIN-REVAMPED-7593"))()
+  --Tiger admin revamped new version
 end)
 
 GamesSection:NewButton("Juanko Prison Life Admin Hub", "request by emil", function()
 --[[
-  Juanko prison life admin hub only games prison life
+Juanko prison life admin hub only games prison life
 ]]
 loadstring(game:HttpGet("https://pastebin.com/raw/0Jyaa9aQ"))()
 end)
 
 GamesSection:NewButton("Version Life hub", "request by emil", function()
 --[[
-  version life hub for prisonlife
+version life hub for prisonlife
 ]]
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Berliandakhensy/Version/main/version%20life.lua.txt"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/Berliandakhensy/Version/main/version%20life.lua.txt"))()
 end)
 
 GamesSection:NewButton("Nexus Hub", "hub",
 function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/GwnStefano/NexusHub/main/Main", true))()
-    --Nexus hub for prison life game
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/GwnStefano/NexusHub/main/Main", true))()
+  --Nexus hub for prison life game
 end)
 
 GamesSection:NewButton("Synix Beta Hub", "hub",
 function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/GwnStefano/NexusHub/main/Main", true))()
-    --Nexus hub for prison life game
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/GwnStefano/NexusHub/main/Main", true))()
+  --Nexus hub for prison life game
 end)
 
 GamesSection:NewButton("Remove Trees", "self explanatory", function()
 --[[
-  delete trees
+delete trees
 ]]
 game:GetService("Workspace").Trees:Destroy()
 end)
 
 GamesSection:NewButton("FE sound for prison life", "fe sound", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/SmartModBoy/script4/main/prisonsound", true))()
-    --fe sound for prison life game
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/SmartModBoy/script4/main/prisonsound", true))()
+  --fe sound for prison life game
 end)
 
 GamesSection:NewButton("Mobile Paxks for prison life", "paxks", function()
-    loadstring(game:HttpGet('https://freenote.biz/raw/ZcYw0XR8lW'))()
-    --Mobile paxks
+  loadstring(game:HttpGet('https://freenote.biz/raw/ZcYw0XR8lW'))()
+  --Mobile paxks
 end)
 
 GamesSection:NewButton("prison life 1", "skript", function()
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Roblox-script-8414"))()
-    --Prison life 1 
+  loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Roblox-script-8414"))()
+  --Prison life 1 
 end)
 
 GamesSection:NewButton("prison life 2", "skript", function()
-    loadstring(game:HttpGet('https://paste.website/p/96d68817-3f1e-4fef-a8b8-9aafdc810329.txt'))()
-    --Prison life 2
+  loadstring(game:HttpGet('https://paste.website/p/96d68817-3f1e-4fef-a8b8-9aafdc810329.txt'))()
+  --Prison life 2
 end)
 
 GamesSection:NewButton("prison life 3", "skript", function()
-    loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\70\101\37\50\48\98\121\112\97\115\115\34\44\32\116\114\117\101\41\41\40\41\10")()
-    --Prison life 3
+  loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\70\101\37\50\48\98\121\112\97\115\115\34\44\32\116\114\117\101\41\41\40\41\10")()
+  --Prison life 3
 end)
 
 GamesSection:NewButton("prison life 4", "skript", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/xgJ27vLc"))()
-    --Prison life 4
+  loadstring(game:HttpGet("https://pastebin.com/raw/xgJ27vLc"))()
+  --Prison life 4
 end)
 
 GamesSection:NewButton("prison life 5 - SSSWWW222", "skript", function()
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/zeuise0002/SSSWWW222/main/README.md'),true))()
-    --Prison life 5
+  loadstring(game:HttpGet(('https://raw.githubusercontent.com/zeuise0002/SSSWWW222/main/README.md'),true))()
+  --Prison life 5
 end)
 
 GamesSection:NewButton("prison life 6 gui", "gui for prisonlife", function()
-    loadstring(game:HttpGet("https://pastebin.com/3caDghrg"))();
-    --Prison life 6
+  loadstring(game:HttpGet("https://pastebin.com/3caDghrg"))();
+  --Prison life 6
 end)
 
 GamesSection:NewButton("prison life 7 - PixelLoxkers", "gui for prisonlife", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/PixelLockers/Roblox-Scripts----/main/Prison%20Life-Script%20(v1)', true))()
-    --Prison life 7
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/PixelLockers/Roblox-Scripts----/main/Prison%20Life-Script%20(v1)', true))()
+  --Prison life 7
 end)
 
 GamesSection:NewButton("PRISONWARE v1.3", "gui for prisonlife", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
-    --Prison life 8
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
+  --Prison life 8
 end)
 
 GamesSection:NewButton("TeddyHub", "gui for prisonlife", function()
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-(Cars-fixed!)-Prison-life-teddy-hub-2451"))()
-    --Prison life 9
+  loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-(Cars-fixed!)-Prison-life-teddy-hub-2451"))()
+  --Prison life 9
 end)
 
 GamesSection:NewButton("prison life 10 gui", "gui for prisonlife idk", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/mHfK0Xk4", true))()
-    --Prison life 10
+  loadstring(game:HttpGet("https://pastebin.com/raw/mHfK0Xk4", true))()
+  --Prison life 10
 end)
 
 
@@ -2258,7 +2253,7 @@ end)
 
 GamesSection:NewButton("Symphony Hub (OP!)", "op asf",
 function()
-    local a,b,c,d=loadstring,request or http_request or (http and http.request) or (syn and syn.request),assert,"https://itsjidy.github.io/SymphonyHub/Loader.html"c(a and b, "your exekutor is not supported")a(b({Url=d,Method="GET"}).Body)()
+  local a,b,c,d=loadstring,request or http_request or (http and http.request) or (syn and syn.request),assert,"https://itsjidy.github.io/SymphonyHub/Loader.html"c(a and b, "your exekutor is not supported")a(b({Url=d,Method="GET"}).Body)()
 end)
 
 local GamesSection = Games:NewSection("[FREE ADMIN]")
@@ -2271,23 +2266,23 @@ end)
 local GamesSection = Games:NewSection("🗼Tower Of Hell🗼")
 
 GamesSection:NewButton("ToH Admin", "its only admin kommands", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/TwomadJR/nto/main/admiin"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/TwomadJR/nto/main/admiin"))()
 end)
 
 GamesSection:NewButton("ToH GUI 1", "so Op for TOH", function()
-    loadstring(game:HttpGet('https://pastebin.com/raw/BbVHjH56'))()
+  loadstring(game:HttpGet('https://pastebin.com/raw/BbVHjH56'))()
 end)
 
 GamesSection:NewButton("ToH Gui 2", "2", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/2dgeneralspam1/scripts-and-stuff/master/scripts/garfield%20hub", true))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/2dgeneralspam1/scripts-and-stuff/master/scripts/garfield%20hub", true))()
 end)
 
 GamesSection:NewButton("ToH Gui 3", "gui3", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/03koios/TowerOfHell/main/README.md"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/03koios/TowerOfHell/main/README.md"))()
 end)
 
 GamesSection:NewButton("ToH Gui 4", "toh gui4", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/iiProductionz/Floater-Scripts/main/WaifuEdition/Tower%20Of%20Hell"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/iiProductionz/Floater-Scripts/main/WaifuEdition/Tower%20Of%20Hell"))()
 end)
 
 GamesSection:NewLabel("🏈Football Fusion🏈")
@@ -2302,7 +2297,7 @@ loadstring(game:HttpGet("https://wiihub.wiigen.net/loaderfree.lua", true))()
 end)
 
 GamesSection:NewButton("Football Fusion GUI 3", "ff gui idk", function()
-    --football fusion 3
+  --football fusion 3
 loadstring(game:HttpGet('https://pastebin.com/raw/94bSvnqL'))()
 end)
 
@@ -2321,7 +2316,7 @@ end)
 GamesSection:NewLabel("🏃🏽‍♂️Sonik Speed Simulator🏃🏽‍♂️")
 GamesSection:NewButton("Sonik Speed Sim gui", "sonikspeedsim gui",
 function()
-    -- sonik speed sim
+  -- sonik speed sim
 loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/King-Hub-v2/main/Loader.lua'))()
 end)
 
@@ -2368,7 +2363,7 @@ end)
 GamesSection:NewLabel("😡Stairs Of Rage😡")
 GamesSection:NewButton("Stairs of rage 1", "let them stay mad",
 function()
-    -- stairs of rage
+  -- stairs of rage
 loadstring(game:HttpGet("https://raw.githubusercontent.com/WinterDinder/Stairs-Of-Rage/main/Main", true))()
 end)
 
@@ -2381,7 +2376,7 @@ end)
 GamesSection:NewLabel("🎹Piano Player🎹")
 GamesSection:NewButton("Auto Piano Player", "auto piano",
 function()
-    -- piano player
+  -- piano player
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Madness676/3.2Lol/main/AutoPiano3-2.lua", true))()
 end)
 
@@ -2394,14 +2389,14 @@ end)
 GamesSection:NewLabel("👧🏽Rate My Avatar👦🏽")
 GamesSection:NewButton("Rate My Avatar 1", "idk",
 function()
-    -- rate my avatar
+  -- rate my avatar
 loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
 end)
 
 local GamesSection = Games:NewSection("🦸Anime Dimensions")
 
 GamesSection:NewButton("Anime Dimensions 1", "Different anime lol", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/TheWitch-BirdHub/BirdHubv0.1/main/load"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/TheWitch-BirdHub/BirdHubv0.1/main/load"))()
 end)
 
 GamesSection:NewButton("Anime Dimension 2", "Anime wow im a fan lol", function()
@@ -2411,13 +2406,13 @@ end)
 local GamesSection = Games:NewSection("No Skope Sniper")
 
 GamesSection:NewButton("Op Silent Aim", "Well its not silent lol", function()
-      getgenv().Settings = {
+    getgenv().Settings = {
 
-   Fov = 150,
+ Fov = 150,
 
-   Hitbox = "Head",
+ Hitbox = "Head",
 
-   FovCircle = true,
+ FovCircle = true,
 
 }
 
@@ -2429,15 +2424,15 @@ end)
 local GamesSection = Games:NewSection("🚢Build A Boat🚢")
 
 GamesSection:NewButton("Build a Boat 1", "havent played", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/ThunderZ-HUB/HUB/main/Script"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/ThunderZ-HUB/HUB/main/Script"))()
 end)
 
 GamesSection:NewButton("Build a Boat 2", "havent play", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/StenDirt/Trash-Game/main/Script.lua"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/StenDirt/Trash-Game/main/Script.lua"))()
 end)
 
 GamesSection:NewButton("Build a Boat 3", "Dino-Hub", function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/SandaFrosty/Dino-Script/main/Build-Boat-For-Treasure"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/SandaFrosty/Dino-Script/main/Build-Boat-For-Treasure"))()
 end)
 
 GamesSection:NewButton("Build a Boat 4", "i dont play it so idk", function()
@@ -2452,11 +2447,11 @@ end)
 local GamesSection = Games:NewSection("💪🏽💥Musxle Legend💥💪🏽")
 
 GamesSection:NewButton("Musxle Lengend GUI 1", "op", function()
-   loadstring(game:HttpGet('https://raw.githubusercontent.com/jynzl/main/main/Musclas%20Legenos.lua'))()
+ loadstring(game:HttpGet('https://raw.githubusercontent.com/jynzl/main/main/Musclas%20Legenos.lua'))()
 end)
 
 GamesSection:NewButton("Musxle legend Gui 2", "yea", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/harisiskandar178/Roblox-Script/main/Muscle%20Legend"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/harisiskandar178/Roblox-Script/main/Muscle%20Legend"))()
 end)
 
 local GamesSection = Games:NewSection("🥷Ninja Legend🥷")
@@ -2505,7 +2500,7 @@ local GamesSection = Games:NewSection("Starving Artist")
 
 GamesSection:NewButton("Starving Artist Kopy", "wow u bad at art lol", function()
 Settings = {
-    Timer = false -- false if You Dont Wanna Timer --
+  Timer = false -- false if You Dont Wanna Timer --
 }
 
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/anisnouacer1/My-Roblox-Scripts/main/Starving%20Artists.lua')))()
@@ -2528,29 +2523,28 @@ local FeSection = Fe:NewSection("FE Skripts")
 FeSection:NewButton("FE Stop Time", "freeze in mid air or whatever", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
 end)
+
 FeSection:NewButton("FE Fish", "(need hat) Parrot Fishfaxe", function()
 -- fe fish
 loadstring(game:HttpGet(('https://pastefy.app/yrp6En96/raw'),true))()
 end)
-FeSection:NewButton("FE Mobile gui skript maker", "requires 40% experienxe w kreating skripts", function()
--- fe mobike gui
-    loadstring(game:HttpGet(('https://pastefy.app/EOgPqinS/raw'),true))()
-end)
-FeSection:NewButton("FE Universal Zombie", "prolly dont even work no more", function()-- univrslzomb
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/zombie/main/Z.animation_lulaslollipop",true))()
-end)
+
 FeSection:NewButton("FE Ragdoll Yourself", "reset or die to disable", function()loadstring(game:HttpGet("https://pastebin.com/raw/VY5d58xz"))()
 end)
+
 FeSection:NewButton("FE Korblox", "need korblox rekolor for 65 robux, R15", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/0NzfiZJn"))()
 end)
+
 FeSection:NewButton("FE Vehikle Fly", "flying kar gui", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MHE1cbWF"))()
 end)
+
 FeSection:NewButton("FE Baxkflip/Frontflip", "baxk and frontflip", function()
 -- fe bk & front
 loadstring(game:HttpGet(('https://pastefy.app/yrp6En96/raw'),true))()
 end)
+
 FeSection:NewButton("FE Time Reverse", "reverses what u do", function()
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(0,255,0)
@@ -2652,7 +2646,7 @@ exSection:NewButton("Teleport to Offixe Seat", "sits u in the offixe seat",
 function()-- sit in the offixe
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(259.6474304199219, 17004.259765625,
 162.38287353515625)
-    -- sit while tp
+  -- sit while tp
 game.Players.LocalPlayer.Character.Humanoid.Sit = true
 end)
 
@@ -2685,15 +2679,15 @@ loadstring(game:HttpGet("https://pastebin.com/raw/mjPzCChH"))()
 end)
 
 exSection:NewButton("Klone script", "klones ur avatar not fe", function()
-    loadstring(game:GetObjects('rbxassetid://7339698872')[1].Source)()
+  loadstring(game:GetObjects('rbxassetid://7339698872')[1].Source)()
 end)
 
 exSection:NewButton("Fake kixk", "when people leave it makes them think you kixk them", function()
-    loadstring(game:HttpGet('https://pastebin.com/raw/9H4EGzHg'))()
+  loadstring(game:HttpGet('https://pastebin.com/raw/9H4EGzHg'))()
 end)
 
 exSection:NewButton("Loop Fling all", "automatikally flings people", function()
-    loadstring(game:HttpGet('https://github.com/DigitalityScripts/roblox-scripts/raw/main/loop%20fling%20all'))()
+  loadstring(game:HttpGet('https://github.com/DigitalityScripts/roblox-scripts/raw/main/loop%20fling%20all'))()
 end)
 
 
@@ -2813,8 +2807,8 @@ HomeSection:NewButton("Reset Walkspeed","reset walkspeed to default", function()
 end)
 
 HomeSection:NewButton("Reset Walkspeed/Jumppower", "resets Walkspeed and jumpPower to default", function()
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+  game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+  game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
 
 HomeSection:NewButton("Ping Kounter", "see ping", function()
@@ -2847,10 +2841,10 @@ end)
 HomeSection:NewButton("Anti-Ban (push Yes 2x then No to klose)", "anti xhat logger", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/antixhatlogger/main/lulaslollipop",true))()
 end)
 HomeSection:NewButton("BaxkDoorFinder", "finds a baxkdoor for admin or additional skripts", function()
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
+  loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
 end)
 HomeSection:NewButton("Harked Reborn V2 (leaked)", "only in sekret games", function()
-    loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Harked-Skript-6804"))()
+  loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Harked-Skript-6804"))()
 end)
 HomeSection:NewButton("Anti AFK", "disables afk limit", function()
 ---- Roblox Anti Afk Script
@@ -2886,15 +2880,15 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/L1ghtingBolt/Frakture
 end)
 
 HomeSection:NewButton("Message Logs", "see xhatlogs gui", function()
-    loadstring(game:GetObjects("rbxassetid://1295331911")[1].Source)()
+  loadstring(game:GetObjects("rbxassetid://1295331911")[1].Source)()
 end)
 
 HomeSection:NewButton("Destroy gui", "bye", function()--gui destroyer
-    for i,v in pairs(game.CoreGui:GetDescendants()) do
-     if v.Name == "ScreenGui" then
-      v:Destroy()
-     end
-    end
+  for i,v in pairs(game.CoreGui:GetDescendants()) do
+   if v.Name == "ScreenGui" then
+    v:Destroy()
+   end
+  end
 end)
 
 
@@ -2908,10 +2902,10 @@ local MoreSection = More:NewSection("more skripts koming soon...🍭")
 MoreSection:NewButton("Player Notifier", "will notify if a player leaves/joined",
 function()-- player joined/left lobby
 loadstring(game:HttpGet("https://pastebin.com/raw/c5JacC0M"))()
-    -- notifikation joiend/left
+  -- notifikation joiend/left
 game.StarterGui:SetCore("SendNotification", {
-    Title = "Player Notifier✅On";
-    Text = "u will be notified wen players leave/join";
+  Title = "Player Notifier✅On";
+  Text = "u will be notified wen players leave/join";
 
 })
 end)
@@ -2925,7 +2919,7 @@ end)
 --buttons.MoreSektion
 MoreSection:NewButton("Auto Grammar V2", "type with good punkuation(not that good so what)",
 function()shared.CustomCorrections = {
-    ["examplething12"] = "hello" -- if you say "examplething12" it will become hello
+  ["examplething12"] = "hello" -- if you say "examplething12" it will become hello
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/eosuwu/boblox/main/autogremer.lua"))()
 end)
@@ -2978,27 +2972,27 @@ Crouch.Priority = Enum.AnimationPriority.Action
 
 local Crouching = false
 UserInputService.InputBegan:Connect(function(input,gameprocessed)
-   if gameprocessed then return end
-   if input.KeyCode == Enum.KeyCode[KEY] then
-       Crouching = true
-       Crouch:Play(.1)
-       Humanoid.WalkSpeed = CROUCHWALKSPEED
-   end
+ if gameprocessed then return end
+ if input.KeyCode == Enum.KeyCode[KEY] then
+     Crouching = true
+     Crouch:Play(.1)
+     Humanoid.WalkSpeed = CROUCHWALKSPEED
+ end
 end)
 
 UserInputService.InputEnded:Connect(function(input,gameprocessed)
-   if gameprocessed then return end
-   if input.KeyCode == Enum.KeyCode[KEY] then
-       Crouching = false
-       Crouch:Stop(.1)
-       Humanoid.WalkSpeed = oldWS
-   end
+ if gameprocessed then return end
+ if input.KeyCode == Enum.KeyCode[KEY] then
+     Crouching = false
+     Crouch:Stop(.1)
+     Humanoid.WalkSpeed = oldWS
+ end
 end)
 
 Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
-   if Crouching then
-       Humanoid.WalkSpeed = CROUCHWALKSPEED
-   end
+ if Crouching then
+     Humanoid.WalkSpeed = CROUCHWALKSPEED
+ end
 end)
 end)
 
