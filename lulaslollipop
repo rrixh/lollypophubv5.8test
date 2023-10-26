@@ -1865,6 +1865,156 @@ end)
 local Games = Window:NewTab("Games")
 local GamesSection = Games:NewSection("Games")
 
+GamesSection:NewLabel("🎃🎃🎃FREE UGC SKRIPTS🎃🎃🎃***")
+GamesSection:NewLabel("Tower of Madness")
+GamesSection:NewButton("[🎃] tower of madness", "free ugx", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0TowerMadness'))()
+    --tower of madness
+end)
+GamesSection:NewButton("teleport to game", "towerofmadness", function()
+    local PlaceId = 6470944645 -- tower of madness
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("Karry A Friend")
+GamesSection:NewButton("karry a friend (teamwork obby)", "free ugx", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0Carry"))()
+    --karry a friend-
+end)
+GamesSection:NewButton("teleport to game", "karry deeznuts", function()
+    local PlaceId = 14448662003 -- karry a friend
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("[🎃] Pull A Sword")
+GamesSection:NewButton("pull a sword", "free ugx", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0PullaSword",true))()
+    --pull a sword
+end)
+GamesSection:NewButton("teleport to game", "pull a sword", function()
+    local PlaceId = 13827198708 -- pull a sword
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("[🎃] Harmony Hills RP")
+GamesSection:NewButton("harmony Hills RP", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Harmony",true))()
+    --harmony hills RP
+end)
+GamesSection:NewButton("teleport to game", "harmony hills rp", function()
+    local PlaceId = 11707114324 -- harmony hills rp
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+
+end)
+
+GamesSection:NewLabel("Mining Faktory Tykoon")
+GamesSection:NewButton("mining faktory tykoon (INSTANT)", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0MiningFactory",true))()
+    --mining faktory tykoon(instant)
+end)
+GamesSection:NewButton("teleport to game", "miningfaktory", function()
+    local PlaceId = 12717051222 -- mining faktory tykoon
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("[🎃] Driving Empire")
+GamesSection:NewButton("driving empire", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0DrivingEmpire",true))()
+    --driving empire
+end)
+GamesSection:NewButton("teleport to game", "drivingempire", function()
+    local PlaceId = 3351674303 -- driving empire
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("[🎃] Halloween Hunt")
+GamesSection:NewButton("Halloween hunt👻", "free ugx", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/BaconBossScript/HalloweenHunt/main/HalloweenHunt"))()
+    --halloween hunt
+end)
+GamesSection:NewButton("teleport to game", "halloweenHunt", function()
+    local PlaceId = 14460259920 -- halloween hunt
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("Barrel Raxe")
+GamesSection:NewButton("barrell raxe", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Barrel",true))()
+    --barrel raxe
+end)
+GamesSection:NewButton("teleport to game", "barrelraxe", function()
+    local PlaceId = 14947359762 -- barrell raxe
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("[🎃NEW] Rainbow Friends")
+GamesSection:NewButton("Rainbow Friends Morphs", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Rainbow",true))()
+    --Rainbow friends morphs
+end)
+GamesSection:NewButton("teleport to game", "rainbowfriends", function()
+    local PlaceId = 10132505018 -- rainbow friends
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("Sumo Simulator")
+GamesSection:NewButton("sumo simulator", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Sumo",true))()
+    --sumo simulator
+end)
+GamesSection:NewButton("teleport to game", "sumosimulator", function()
+    local PlaceId = 14021953565 -- sumo sim
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("iHeartLand Temple of Sound")
+GamesSection:NewButton("iheartland - Temple of Sound", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0iHeartLand",true))()
+    --iheartland Temple of Sound
+end)
+GamesSection:NewButton("teleport to game", "iheartlandtempleofsound", function()
+    local PlaceId = 9524757503 -- iheart land temple of sound
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("AFK FOR UGC")
+GamesSection:NewButton("AFK for ugc", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0UGCAFK",true))()
+    --AFK for ugc
+end)
+GamesSection:NewButton("teleport to game", "afkforugc", function()
+    local PlaceId = 14776528572 -- afk for ugc
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+GamesSection:NewLabel("Dont Move")
+GamesSection:NewButton("dont move", "free ugx", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0DontMove",true))()
+    --dontmove1
+end)
+GamesSection:NewButton("dont move - skript 2", "dontmove", function()
+    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Don'tMove",true))()
+    --dontmove2
+end)
+GamesSection:NewButton("teleport to game", "dontmove", function()
+    local PlaceId = 14620329550 -- dontmove 1
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
 end)
