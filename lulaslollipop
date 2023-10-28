@@ -48,7 +48,7 @@ SkriptsSection:NewDropdown("FREE UGC SKRIPTS:","updates and add-ons to the skrip
   print(currentOption)
 end)
 
-SkriptsSection:NewLabel("Welkome" ..plr.Name)
+SkriptsSection:NewLabel("Welkome" " ..plr.Name.. ")
 
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
