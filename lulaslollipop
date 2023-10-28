@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.9","BloodTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("FREE UGC SKRIPTS:","updates and add-ons to the skript will be here", {"Last Updated: 10/27/2023", "Version: 6.9", "3+ hubs added", "added Brixk Admin, Vortex admin", "gui fixes"}, function(currentOption)
+SkriptsSection:NewDropdown("updates:","updates and add-ons to the skript will be here", {"Last Updated: 10/27/2023", "Version: 6.9", "3+ hubs added", "added Brixk Admin, Vortex admin", "gui fixes"}, function(currentOption)
   print(currentOption)
 end)
 
@@ -147,7 +147,7 @@ SkriptsSection:NewToggle("godmode toggle", "testing", function(state)
               Text = "niggamode ❌",
               Duration = 2
             })
-      lollypop = not lollypop
+      lollypop = false
       end
       end)
 
@@ -165,7 +165,7 @@ SkriptsSection:NewToggle("godmode toggle", "testing", function(state)
         Text = "niggamode ✅",
         Duration = 2
       })
-        lollypop = true
+      lollypop = true
     end
 end)
 
