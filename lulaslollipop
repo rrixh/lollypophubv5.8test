@@ -130,6 +130,45 @@ end)
 
 local SkriptsSection = Skripts:NewSection("Skripts")
 
+SkriptsSection:NewToggle("godmode toggle", "testing", function(state)
+    if state then
+      -- Z to toggle 
+      local player = game:GetService("Players").LocalPlayer
+      local UIS = game:GetService("UserInputService")
+      local lollypop = false
+
+      UIS.InputBegan:Connect(function(input, GPE)
+      if GPE then return end
+      if input.KeyCode == Enum.KeyCode.Z then
+            local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+            Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+            Library:Notification({
+              Text = "niggamode ❌",
+              Duration = 2
+            })
+      lollypop = not lollypop
+      end
+      end)
+
+      while task.wait() do
+      local parts = workspace:GetPartBoundsInRadius(player.Character:WaitForChild("HumanoidRootPart").Position, 10)
+      for _, part in ipairs(parts) do
+      part.CanTouch = lollypop
+      end
+      end
+    else
+      local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+      Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+      Library:Notification({
+        Text = "niggamode ✅",
+        Duration = 2
+      })
+        lollypop = true
+    end
+end)
+
 --infjump.Konnekt
 SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
   if toggled then
