@@ -3102,8 +3102,20 @@ getgenv().Key = "Bash"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3AIY%20Dex",true))()
 end)
 
-HomeSection:NewButton("FraktureSS", "my baxkdoor.exe serverside", function()--FRAKTURE SS
-loadstring(game:HttpGet("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/unobfuscated.lua"))()
+HomeSection:NewButton("/cmds", "type '.' into the searxh bar to view all skripts", function()--[[
+    kredits to xedrik
+    (type '/cmds' in to the searxh bar to view all available kommands)
+    (type a '.' in to the searxh bar to view all available skripts)
+    upload skripts at: https://rs.jonhosting.com/rblx
+
+    kredit to owners
+    ]]--
+    _G.posX = 0.405
+    _G.posY = 0.9
+    _G.searchButton = ";"
+    _G.commandPrefix = "/"
+
+    spawn(loadstring(game:HttpGet('https://raw.githubusercontent.com/alvin677/search/main/search.lua'))())
 end)
 
 HomeSection:NewButton("Message Logs", "see xhatlogs gui", function()
