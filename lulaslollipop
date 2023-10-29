@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 6.9
+-- Version: 7
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -7,7 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V6.9🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V7🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -27,7 +27,7 @@ Text = "lulaslollipop🍭",
 
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V6.9","BloodTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7","LightTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V6.9","BloodTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("updates:","updates and add-ons to the skript will be here", {"Last Updated: 10/27/2023", "Version: 6.9", "3+ hubs added", "added Brixk Admin, Vortex admin", "gui fixes"}, function(currentOption)
+SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript will be here", {"Last Updated: 10/29/2023", "Version: 7"}, function(currentOption)
   print(currentOption)
 end)
 
@@ -580,6 +580,11 @@ Rc7 exe gui new
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7"))() 
 end)
+SkriptsSection:NewButton("Rx7 exekutor gui 2 new version", "rc7",
+function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx"))()
+    -- rx7 exekutor gui 2 new version
+end)
 SkriptsSection:NewButton("Synapse X (old gui)", "synapse x",
 function()loadstring(game:HttpGet("https://pastebin.com/raw/1fAnGAA0"))()
 -- Synapse x skript old gui
@@ -587,6 +592,11 @@ end)
 SkriptsSection:NewButton("Synapse X", "shadow x",
 function()loadstring(game:HttpGet("https://pastebin.com/raw/2qjBZB1Y"))()
 -- shadow x exe gui
+end)
+SkriptsSection:NewButton("Synapse X Rework", "exe gui",
+function()
+loadstring(game:HttpGet("https://pastebin.com/raw/tWGxhNq0"))()
+    -- Synapse x rework
 end)
 SkriptsSection:NewButton("Nokom exe", "shadow x gui",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/YellowGreg/NoCom-Executor/main/NoCom"))()
@@ -597,8 +607,6 @@ function()
   loadstring(game:HttpGet("https://pastebin.com/raw/yGxeT8zC", true))()
   -- exekutor gui
 end)
-
-
 
 
 --r15 animationz
@@ -1065,7 +1073,14 @@ end)
 AdminSection:NewButton("Brixk Admin", "rewrite", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/uaxYupfcaQ/rewriteBrixkAdmin_lulaslollipop",true))()
 end)
-
+AdminSection:NewButton("Gx Admin", "gx admin", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/v6E9BmFK",true))();
+    -- Gx admin
+end)
+AdminSection:NewButton("Homebrew Admin", "admin", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-or-FE-Homebrew-Admin-3106"))()
+    -- Homebrew admin
+end)
 AdminSection:NewButton("Property Admin", "property", function()
 --[[
 property admin
@@ -1928,8 +1943,9 @@ HubSection:NewButton("BritishHub v1.7 (fixed)", "fixed 1.7", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/RedCoat33/Britishhub/main/Protected_7358793088278524.lua.txt", true))()
     -- british hub v1.7 (fixed) new version
 end)
-HubSection:NewButton("soon...", "soon...", function()
-    print("komingsoon")
+HubSection:NewButton("Balkan Hub v4 (new version)", "balkan Hub", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Balkanx/Balkan-x/main/Balkan%20x", true))()
+    -- Balkan hub v4 new version
 end)
 HubSection:NewButton("soon...", "soon...", function()
     print("komingsoon")
@@ -3102,20 +3118,23 @@ getgenv().Key = "Bash"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3AIY%20Dex",true))()
 end)
 
-HomeSection:NewButton("/cmds", "type '.' into the searxh bar to view all skripts", function()--[[
-    kredits to xedrik
-    (type '/cmds' in to the searxh bar to view all available kommands)
-    (type a '.' in to the searxh bar to view all available skripts)
-    upload skripts at: https://rs.jonhosting.com/rblx
+HomeSection:NewButton("/cmds", "type '.' into the searxh bar to view all skripts", function()
+_G.posX = 0.405
+_G.posY = 0.9
+_G.searchButton = ";"
+_G.commandPrefix = "/"
 
-    kredit to owners
-    ]]--
-    _G.posX = 0.405
-    _G.posY = 0.9
-    _G.searchButton = ";"
-    _G.commandPrefix = "/"
+spawn(loadstring(game:HttpGet('https://raw.githubusercontent.com/alvin677/search/main/search.lua'))())
+end)
 
-    spawn(loadstring(game:HttpGet('https://raw.githubusercontent.com/alvin677/search/main/search.lua'))())
+HomeSection:NewButton("SimpleSpy For Mobile", "mobileskript", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RS/main/SimpleSpyMobile"))()
+-- SimpleSpy mobile
+end)
+
+HomeSection:NewButton("Hydroxide mobile fix", "mobileskript", function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Hydroxide-mobile-fix-8688"))()
+-- Hydroxide mobile fix
 end)
 
 HomeSection:NewButton("Message Logs", "see xhatlogs gui", function()
