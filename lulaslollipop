@@ -44,7 +44,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7","LightTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript will be here", {"Last Updated: 10/29/2023", "Version: 7"}, function(currentOption)
+SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript will be here", {"Last Updated: 10/29/2023", "Version: 7", "Added:", "Gx Admin, Homebrew admin", "simpleSpy,hydroxide,/cmds (Home)"}, function(currentOption)
   print(currentOption)
 end)
 
