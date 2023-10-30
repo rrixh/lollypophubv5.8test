@@ -48,8 +48,6 @@ SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript wil
   print(currentOption)
 end)
 
-local SkriptsSection = Skripts:NewSection("Welkome, " .. plr.Name)
-
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
