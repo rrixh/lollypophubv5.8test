@@ -25,7 +25,6 @@ Text = "lulaslollipop🍭",
   Duration = 6
 })
 
-
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
 local Window = Library.CreateLib("Lollypop Hub🍭 | V7","LightTheme")
 
