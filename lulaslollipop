@@ -1,7 +1,7 @@
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 7
 -- Instanxes:
-
+loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
@@ -1773,11 +1773,12 @@ Bido skins 1.8 new version
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BidoSkinsYT/BidoSkinsYT/main/Bido%20Skins%20V1.8"))()
 end)
-HubSection:NewButton("Haxker_6666666 Hub V2.8", "o:", function()
+HubSection:NewButton("Haxker_666 v2.9 (new update)", "o:", function()
 --[[
 Haxker_666 hub fixed
 ]]
-loadstring(game:HttpGet('https://raw.githubusercontent.com/FreeRobloxScripts1/Haxker_6666666-Hub/main/Script-Hub/Version-2.8'))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/FreeRobloxScripts1/Haxker_6666666-Hub/main/Script-Hub/Version-2.9'))()
+    -- Haxker_666 2.9 new update
 end)
 HubSection:NewButton("Ghub ui v7", "good hub", function()
 --[[
@@ -1851,11 +1852,15 @@ Ghub ui v8 old version
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/GHUBUIV8/main/GhubUIv8.txt"))()
 end)
-HubSection:NewButton("Ghub ui V9 (new)", "request by emil", function()
+HubSection:NewButton("Ghub ui V9", "request by emil", function()
 --[[
 Ghub ui v9 new
 ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/Ghub-v9/main/Ghubv9UI.txt"))()
+end)
+HubSection:NewButton("Ghub ui v10 new version", "new version ghub", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/Ghubv10/main/GHUBv10.txt"))()
+    -- Ghub ui v10 new version
 end)
 HubSection:NewButton("TMR X(new version) (fixed)", "fixed", function()
   loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/TMR-X/main/Script"))()
@@ -1950,6 +1955,9 @@ HubSection:NewButton("soon...", "soon...", function()
     print("komingsoon")
 end)
 --more soon
+
+
+
 
 
 
