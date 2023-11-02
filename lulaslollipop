@@ -1,9 +1,6 @@
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 7
 -- Instanxes:
-if not game:IsLoaded() then
-game.Loaded:Wait()
-end
 
 --loadstring(gameLoaded:true)--
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
