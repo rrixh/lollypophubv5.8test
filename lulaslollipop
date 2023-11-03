@@ -1,13 +1,13 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 7
+-- Version: 7.1
 -- Instanxes:
-
+loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V7🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V7.1🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -26,7 +26,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7","LightTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","LightTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -130,42 +130,43 @@ end)
 local SkriptsSection = Skripts:NewSection("Skripts")
 
 SkriptsSection:NewToggle("godmode toggle", "testing", function(state)
-    if state then
-      -- Z to toggle 
-      local player = game:GetService("Players").LocalPlayer
-      local UIS = game:GetService("UserInputService")
-      local lollypop = false
+  if state then
+    -- Z to toggle 
+    local player = game:GetService("Players").LocalPlayer
+    local UIS = game:GetService("UserInputService")
+    local lollypop = false
 
-      UIS.InputBegan:Connect(function(input, GPE)
-      if GPE then return end
-      if input.KeyCode == Enum.KeyCode.Z then
-            local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-            Library.DefaultColor = Color3.fromRGB(50,205,50)
+    UIS.InputBegan:Connect(function(input, GPE)
+    if GPE then return end
+    if input.KeyCode == Enum.KeyCode.Z then
+          local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+          Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-            Library:Notification({
-              Text = "niggamode ❌",
-              Duration = 2
-            })
-      lollypop = false
-      end
-      end)
-
-      while task.wait() do
-      local parts = workspace:GetPartBoundsInRadius(player.Character:WaitForChild("HumanoidRootPart").Position, 10)
-      for _, part in ipairs(parts) do
-      part.CanTouch = lollypop
-      end
-      end
-    else
-      local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-      Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-      Library:Notification({
-        Text = "niggamode ✅",
-        Duration = 2
-      })
-      lollypop = true
+          Library:Notification({
+            Text = "niggamode ❌",
+            Duration = 2
+          })
+    lollypop = true --not lollypop
     end
+    end)
+
+    while task.wait() do
+    local parts = workspace:GetPartBoundsInRadius(player.Character:WaitForChild("HumanoidRootPart").Position, 10)
+    for _, part in ipairs(parts) do
+    part.CanTouch = lollypop
+    end
+    end
+  else
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+    Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+    Library:Notification({
+      Text = "niggamode ✅",
+      Duration = 2
+    })
+      parts = false
+    lollypop = false
+  end
 end)
 
 --infjump.Konnekt
