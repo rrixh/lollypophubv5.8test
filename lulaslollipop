@@ -1,7 +1,7 @@
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 7.1
 -- Instanxes:
-
+loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
@@ -26,7 +26,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","LightTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","DarkTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -43,7 +43,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","LightTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript will be here", {"Last Updated: 10/29/2023", "Version: 7", "Added:", "Gx Admin, Homebrew admin", "simpleSpy,hydroxide,/cmds (Home)"}, function(currentOption)
+SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript will be here", {"Last Updated: 10/29/2023", "Version: 7.1", "Added:"}, function(currentOption)
   print(currentOption)
 end)
 
@@ -1913,6 +1913,10 @@ HubSection:NewButton("Dex skripthub", "binarydex", function()
   loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main/Init"))()
   --Dex hub
 end)
+HubSection:NewButton("DexHub", "dexhub", function()
+    --dexHub
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main/Init"))()
+end)
 HubSection:NewButton("Spanish hub v4", "no ingles", function()
   loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-SPANISH-HUB-V4-THE-GOAT-HUB-8429"))()
   --Spanish v4 hub
@@ -2165,6 +2169,9 @@ end)
 
 local GamesSection = Games:NewSection("[🏚️🧱Da Hood🧱🏚️]")
 
+GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
+end)
 GamesSection:NewButton("DaHood Reborn Aim", "dahood aimloxk", function()loadstring(game:HttpGet("https://pastebin.com/raw/iNd3xTPv"))()
 end)
 GamesSection:NewButton("Da Hood GUI 1", "DA HOOD is kinda good", function()
@@ -2215,9 +2222,14 @@ end)
 
 --XHAOS GAME
 GamesSection:NewLabel("[⚔️Chaos⚔️]")
+
 GamesSection:NewButton("KILL PLAYER FROM FAR V2", "selekt a player and put kill", function()--xhaos kill
   loadstring(game:HttpGet("https://pastebin.com/raw/W9SYMbiw"))()
 end)
+GamesSection:NewButton("xhaos skript", "for xhaos", function()--xhaos 
+    loadstring(game:HttpGet("https://pastebin.com/raw/3aks6wJy"))()
+end)
+
 
 
 GamesSection:NewLabel("[🏏Blade Ball☄️]")
@@ -2257,14 +2269,17 @@ end)
 GamesSection:NewButton("MalixiousDev Hub", "bladeball", function()
   loadstring(game:HttpGet(('https://raw.githubusercontent.com/malicious-dev/RobloxScripting/main/bladeball.lua'),true))()
 end)
+GamesSection:NewButton("bladeball skript", "bladeball", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Godyulikkjos/goolisn0/main/obf_iv59yI506e9j5Vx44SXUtCC0V1TdwuDipkiHVh2OcN7ntzT8Y8j89cWv39yJ22k5.lua'))()
+end)
+
 
 --BROOKHAVEN
 GamesSection:NewLabel("[🏡Brookhaven RP🏡]")
 --BUTTONS
 GamesSection:NewButton("Juanko Hub", "skripthub by juanko", function()loadstring(game:HttpGet("https://pastebin.com/raw/qBHKy3Ss"))()
 end)
-GamesSection:NewLabel("[🏡Brookhaven RP🏡]")
---BUTTONS
+
 GamesSection:NewButton("Brookhaven 1", "brookhaven skript alexh01", function()
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Alech01/Scripts-Randoms/main/Brook%20Haven%20Script"))()
   -- Brookhaven skript 
@@ -2301,7 +2316,10 @@ GamesSection:NewButton("❄️Ixe Hub❄️", "brookHaven ixehub", function()
   loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
   -- ixe hub skript
 end)
-
+GamesSection:NewButton("❄️IxeMael7 Hub❄️", "brookHaven ixehub", function()
+    --Brookhaven IxeMael7
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
+end)
 
 
 --BLOXFRUIT
@@ -2309,6 +2327,13 @@ GamesSection:NewLabel("[🍒🍊BLOX FRUITS🍇🍎]")
 GamesSection:NewButton("SepuhHub", "bloxfruit", function()loadstring(game:HttpGet("https://isnahamzahpastebin.tech/sepuh/puh_007.lua"))()
 end)
 GamesSection:NewButton("MTriet Hub", "bloxfruits", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
+end)
+GamesSection:NewButton("BloxFruits btteam", "bloxfruits", function()
+    loadstring(game:HttpGet('https://btteam.net/scripts-auth/', true))()
+end)
+GamesSection:NewButton("NEVAHub", "bloxfruits", function()loadstring(game:HttpGet('https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2'))()
+end)
+GamesSection:NewButton("malfume Lair Hub", "bloxfruits", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/malfume/Lair/main/(BT)%F0%9F%8D%8A%E2%9B%B5"))()
 end)
 
 GamesSection:NewLabel("[👧🏽Rate My Avatar👦🏼]")
@@ -2479,6 +2504,29 @@ GamesSection:NewButton("prison life 10 gui", "gui for prisonlife idk", function(
 end)
 
 
+local GamesSection = Games:NewSection("[☮️🕊️HAZE PIEXE🧘🏽‍♂️🕊️]")
+
+GamesSection:NewButton("skript for haze piexe", "gui for prisonlife idk", function()
+    loadstring(game:HttpGet(“https://raw.githubusercontent.com/LOLking123456/Haze/main/Piece”))()
+end)
+
+
+GamesSection:NewButton("NamelessSkripts - haze2", "gui for prisonlife idk", function()
+    loadstring(game:HttpGet(“https://raw.githubusercontent.com/NamelessScripts/haze2/main/piece”))()
+end)
+
+
+GamesSection:NewButton("HyperHub", "gui for prisonlife idk", function()
+    repeat wait() until game:IsLoaded()
+    loadstring(game:HttpGet(“https://raw.githubusercontent.com/DookDekDEE/Hyper/main/script.lua”))()
+end)
+
+
+GamesSection:NewButton("ThundarZ hub for haze piexe", "haze piexe", function()
+    loadstring(game:HttpGet((‘https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/Loader/AllGame.lua’))()
+end)
+  
+
 local GamesSection = Games:NewSection("[🏃🏽‍♂️💨Flee The Faxility💻]")
 
 GamesSection:NewButton("AutoHaxk,ESP & more", "ftf gui",
@@ -2501,7 +2549,16 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Amenteso/robloxscript
 end)
 
 GamesSection:NewButton("Kopy >OP MM2 GUI 2< 🔑", "key: mTAgLLFQJazwRWGh",
-function()setclipboard("mTAgLLFQJazwRWGh")
+function()
+    setclipboard("mTAgLLFQJazwRWGh")
+
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+    Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+    Library:Notification({
+      Text = "kopied 'OP MM2 GUI 2' 🔑",
+      Duration = 3.5
+    })
 end)
 
 GamesSection:NewButton("Symphony Hub (OP!)", "op asf",
@@ -2509,12 +2566,54 @@ function()
   local a,b,c,d=loadstring,request or http_request or (http and http.request) or (syn and syn.request),assert,"https://itsjidy.github.io/SymphonyHub/Loader.html"c(a and b, "your exekutor is not supported")a(b({Url=d,Method="GET"}).Body)()
 end)
 
+GamesSection:NewButton("TheHanki (may be lag)", "🔑 = hawkhubneverdies (work fluxus and delta)",
+function()
+    -- mm2
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TheHanki/Hawk/main/Loader", true))()
+end)
+
+GamesSection:NewButton("Kopy > TheHanki < 🔑", "key: hawkhubneverdies",
+function()
+    setclipboard("hawkhubneverdies")
+    
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+    Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+    Library:Notification({
+      Text = "kopied 'TheHanki' 🔑",
+      Duration = 3.5
+    })
+end)
+
+
 local GamesSection = Games:NewSection("[FREE ADMIN]")
 
 GamesSection:NewButton("Fedatorum Admin Abuser", "only works in freeadmin games",
 function()-- fedatorum admin abuser
 loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/showcases/main/fedoratumadmin",true))()
 end)
+
+
+local GamesSection = Games:NewSection("[Breaking Point]")
+
+GamesSection:NewButton("H4R7NHaxks breakingpoint skript", "bp",
+function()--Skript Breaking point
+
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/H4R7NHacks/Obfuscated/master/Breaking%20Point%20H4R7N%20Hack%20v1.2.lua"))()
+end)
+
+GamesSection:NewButton("Anti Die", "work for fluxus and delta",
+function()--anti die
+
+    loadstring(game:HttpGet(("https://pastebin.com/raw/mT10xnt7"), true))()
+end)
+
+
+
+
+
+
 
 local GamesSection = Games:NewSection("🗼Tower Of Hell🗼")
 
@@ -2717,7 +2816,7 @@ GamesSection:NewButton("Ninja Legend GUI 2", "its OP but its old", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/StormSKz12/StirkeHub1/main/Gameincluded"))()
 end)
 
-local GamesSection = Games:NewSection("🥺💰Pls Donate💰🥺")
+local GamesSection = Games:NewSection("[🥺💰Pls Donate💰🥺]")
 
 GamesSection:NewButton("Pls Donate Gui 1", "pls", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NocturneMoDz/PLEASE-DONATE-NEW-GUI-/main/METAB"))();
@@ -2727,7 +2826,7 @@ GamesSection:NewButton("Pls Donate Gui 2", " Poor", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NocturneMoDz/PLEASE-DONATE-BOOTH-/main/METAB"))()
 end)
 
-local GamesSection = Games:NewSection("One Piexe")
+local GamesSection = Games:NewSection("[One Piexe]")
 
 GamesSection:NewButton("One piexe 1", "Luffy,Zoro,Sanji,Usopp", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/32"))()
@@ -2737,21 +2836,21 @@ GamesSection:NewButton("One Piexe 2", "Pirate king", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/Urbanstorms/Cool-things/main/A%200ne%20Piece%20Game.lua'),true))()
 end)
 
-local GamesSection = Games:NewSection("Raise A Floppa")
+local GamesSection = Games:NewSection("[Raise A Floppa]")
 
 GamesSection:NewButton("Raise a Floppa Gui 1", "Feed kat", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/SunkenMuch/Soggyware/main/Main',true))()
 end)
 
-local GamesSection = Games:NewSection("Shrek in Baxkroom")
+local GamesSection = Games:NewSection("[Shrek in Baxkroom]")
 
 GamesSection:NewButton("Shrek in Baxkroom Gui 1", "Shrekkkk", function()
 loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\110\106\120\66\100\102\67\76\10"))()
 end)
 
-local GamesSection = Games:NewSection("Starving Artist")
+local GamesSection = Games:NewSection("[🧑🏽‍🎨Starving Artist🖌️]")
 
-GamesSection:NewButton("Starving Artist Kopy", "wow u bad at art lol", function()
+GamesSection:NewButton("steal art", "wow u bad at art lol", function()
 Settings = {
   Timer = false -- false if You Dont Wanna Timer --
 }
@@ -2760,13 +2859,65 @@ loadstring(game:HttpGet(('https://raw.githubusercontent.com/anisnouacer1/My-Robl
 end)
 
 
-local GamesSection = Games:NewSection("Be A parkour Ninja")
+local GamesSection = Games:NewSection("[🥷Be A parkour Ninja🛝]")
 
 GamesSection:NewButton("Be a Parkour Gui 1", "op", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Min1273/n-to/main/README.md"))()
 end)
 
 
+local GamesSection = Games:NewSection("[Roblox is Unbreakable]")
+
+GamesSection:NewButton("roblox is unbreakable", "skript", function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/MorikTV/Roblox-is-Unbreakable/main/Unbreakable.lua", true))()
+end)
+
+
+local GamesSection = Games:NewSection("[🚽Toilet Tower Defense🧻]")
+
+GamesSection:NewButton("laziumHub", "lazium", function()
+        -- Toilet Tower defenxe
+
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/NUTellaVING/LaziumHub/main/ToiletTowerDefense.lua"))()
+end)
+
+
+local GamesSection = Games:NewSection("[Sakura Stand]")
+  --Sakura Stand
+  
+GamesSection:NewButton("sakura Stand", "direkt exekute", function()
+      loadstring(game:HttpGet("https://pastecode.dev/raw/I0KOXXRe/sakuraStand.direktExekute",true))()
+end)
+
+
+local GamesSection = Games:NewSection("[👹Demon Fall👹]")
+
+GamesSection:NewButton("sakura Stand", "direkt exekute", function()
+      --Demon Fall
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/KeoneGithub/KeoneGithub/main/DemonCockCandy",true))()
+end)
+
+
+local GamesSection = Games:NewSection("[🐝Bee Swarm Simulator🐝")
+
+GamesSection:NewButton("item name,item kount", "bee swarm", function()
+      --Bee Swarm Simulator
+      game:GetService("ReplicatedStorage").Remotes.ModifyItemData:FireServer("Item Name", ItemCount)
+end)
+GamesSection:NewButton("Bee swarm sim skript", "bee swarm", function()
+      loadstring(game:HttpGet(('https://raw.githubusercontent.com/AltsegoD/script/master/BeeSwarmSimulator.lua')))()
+end)
+
+
+local GamesSection = Games:NewSection("[🚗Kar Dealership💵]")
+
+GamesSection:NewButton("kar dealership", "skript for kar dealership", function()
+      --Kar dealership
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/03koios/Loader/main/Loader.lua"))()
+end)
+  
+
+  
 
 --// FE SKRIPTS \\--
 
