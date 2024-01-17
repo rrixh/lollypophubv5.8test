@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 7.1
+-- Version: 7.2
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -7,14 +7,21 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V7.1🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V7.2🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "almost every skript in this joint",
+  Text = "HAPPY NEW YEARS🎉🥳🎈2024",
+  Duration = 8.5
+})
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+Library:Notification({
+  Text = "ARKEUS X NEO BETA EXPLOIT OUT FOR IOS🥳🎉🍭",
   Duration = 8.5
 })
 --bloodball.Endnotif
@@ -26,7 +33,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","BloodTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.2","GrapeTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -43,7 +50,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","BloodTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript will be here", {"Last Updated: 10/29/2023", "Version: 7.1", "ARKEUS X IOS BETA OUT LEGOO🍭"}, function(currentOption)
+SkriptsSection:NewDropdown("ARKEUS X NEO IOS BETA FINALLY OUT🍭","updates and add-ons to the skript will be here", {"Last Updated: Jan 16, 2024", "Version: 7.1", "ARKEUS X IOS BETA OUT LEGOO🍭", "some skripts wont work if using ArkeusX IOS beta its still in produktion"}, function(currentOption)
   print(currentOption)
 end)
 
