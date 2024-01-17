@@ -1,7 +1,7 @@
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 7.1
 -- Instanxes:
-
+loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
@@ -26,7 +26,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","DarkTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","BloodTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -43,12 +43,12 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.1","DarkTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript will be here", {"Last Updated: 10/29/2023", "Version: 7.1", "Added:"}, function(currentOption)
+SkriptsSection:NewDropdown("🎃🍭🍬","updates and add-ons to the skript will be here", {"Last Updated: 10/29/2023", "Version: 7.1", "ARKEUS X IOS BETA OUT LEGOO🍭"}, function(currentOption)
   print(currentOption)
 end)
 
 -- SKRIPTS BUTTONS
-SkriptsSection:NewButton("99% fail impossible obby memory skript", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
+SkriptsSection:NewButton("99% fail (doesnt work on IOS exploit yet)", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
 loadstring(game:HttpGet(('https://pastebin.com/raw/DhLMep63'),true))()
 end)
@@ -2506,27 +2506,11 @@ end)
 
 local GamesSection = Games:NewSection("[☮️🕊️HAZE PIEXE🧘🏽‍♂️🕊️]")
 
-GamesSection:NewButton("skript for haze piexe", "gui for prisonlife idk", function()
-    loadstring(game:HttpGet(“https://raw.githubusercontent.com/LOLking123456/Haze/main/Piece”))()
-end)
-
-
-GamesSection:NewButton("NamelessSkripts - haze2", "gui for prisonlife idk", function()
-    loadstring(game:HttpGet(“https://raw.githubusercontent.com/NamelessScripts/haze2/main/piece”))()
-end)
-
-
-GamesSection:NewButton("HyperHub", "gui for prisonlife idk", function()
-    repeat wait() until game:IsLoaded()
-    loadstring(game:HttpGet(“https://raw.githubusercontent.com/DookDekDEE/Hyper/main/script.lua”))()
-end)
-
-
 GamesSection:NewButton("ThundarZ hub for haze piexe", "haze piexe", function()
-    loadstring(game:HttpGet((‘https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/Loader/AllGame.lua’))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/Loader/AllGame.lua"))()
 end)
   
-
+--Ftf
 local GamesSection = Games:NewSection("[🏃🏽‍♂️💨Flee The Faxility💻]")
 
 GamesSection:NewButton("AutoHaxk,ESP & more", "ftf gui",
