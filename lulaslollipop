@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 7.2
+-- Version: 7.3
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -7,7 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V7.2🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V7.3🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -21,7 +21,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "ARKEUS X NEO BETA EXPLOIT OUT FOR IOS🥳🎉🍭",
+  Text = "ARKEUS X NEO BETA v1.0.2 EXPLOIT OUT FOR IOS🥳🎉🍭",
   Duration = 8.5
 })
 --bloodball.Endnotif
@@ -33,7 +33,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.2","GrapeTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.3","DarkTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -50,7 +50,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.2","GrapeTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("ARKEUS X NEO IOS BETA FINALLY OUT🍭","updates and add-ons to the skript will be here", {"Last Updated: Jan 16, 2024", "Version: 7.1", "ARKEUS X IOS BETA OUT LEGOO🍭", "some skripts wont work if using ArkeusX IOS beta its still in produktion"}, function(currentOption)
+SkriptsSection:NewDropdown("ARKEUS X NEO IOS BETA FINALLY OUT🍭","updates and add-ons to the skript will be here", {"Last Updated: Jan 20, 2024", "Version: 7.3", "ARKEUS X IOS BETA 1.0.2", "some ArkeusX IOS krashlogs fixed legooo"}, function(currentOption)
   print(currentOption)
 end)
 
@@ -2962,6 +2962,13 @@ Library:Notification({
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/L"))()
 end)
 
+FeSection:NewButton("FE Orbit player", "spin em", function()--skrip
+loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Orbit%20GUI"))()
+--notif
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+end)
+
+
 FeSection:NewButton("FE 2007 animation", "baxk to the old days", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/8gi79AtK"))()
 end)
@@ -2998,8 +3005,18 @@ FeSection:NewButton("FE Mimik GUI", "kopy users messages", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./2520c121ab919b2b9697ab5c70797dcfdaa5db43/Ohio'))()
 end)
 
+FeSection:NewButton("FE Mimik GUI 2 (no username)", "kopy users messages", function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe./8fb5ed20fb168d1ae3044ede45b90f67e3fb37a2/file'),true))()
+end)
+
 FeSection:NewButton("FE Message Art", "turn text into art", function()
 loadstring(game:HttpGet("https://textbin.net/raw/hmtw3zllmp",true))()
+end)
+
+FeSection:NewButton("FE break arms", "break arms duh", function()-- break arms FE
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Wow'))()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Wow%202'))()
 end)
 
 FeSection:NewButton("FE Invisible & Teleport GUI", "any game *op*", function()-- FE Invisible GUI & Teleport R15/R6 | ANY GAME *OP*
