@@ -1156,6 +1156,9 @@ end)
 
 local FunSection = Fun:NewSection("Message Fun")
 
+FunSection:NewButton("Rizzer", "rizz", function()loadstring(game:HttpGet("https://pastecode.dev/raw/K1EI6AwS/rizzer_lulaslollipop",true))()
+end)
+
 FunSection:NewButton("Fake Message Troll", "type for others", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/MBpnp3yS'))()
 end)
