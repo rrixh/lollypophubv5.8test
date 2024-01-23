@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 7.3
+-- Version: 7.4
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -7,7 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V7.3🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V7.4🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -50,50 +50,15 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.3","DarkTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("ARKEUS X NEO IOS BETA FINALLY OUT🍭","updates and add-ons to the skript will be here", {"Last Updated: Jan 20, 2024", "Version: 7.3", "ARKEUS X IOS BETA 1.0.2", "some ArkeusX IOS krashlogs fixed legooo"}, function(currentOption)
+SkriptsSection:NewDropdown("ARKEUS X NEO IOS BETA FINALLY OUT🍭","updates and add-ons to the skript will be here", {"Last Updated: Jan 22, 2024", "Version: 7.4", "ARKEUS X IOS BETA 1.0.2", "ArkeusX krashlogs fixed legooo"}, function(currentOption)
   print(currentOption)
 end)
 
 -- SKRIPTS BUTTONS
-SkriptsSection:NewButton("99% fail (doesnt work on IOS exploit yet)", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
+SkriptsSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
 loadstring(game:HttpGet(('https://pastebin.com/raw/DhLMep63'),true))()
 end)
--- toggle antimythikal
-SkriptsSection:NewToggle("Anti-Sit (99% fail mythikals)", "kinda good but i prefer using godmode", function(state)
-  if state then
-      local RunService = game:GetService("RunService")
-function antiSit()
-if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
-game.Players.LocalPlayer.Character.Humanoid.Sit = false
-end
-end
-RunService:BindToRenderStep("tempBinding", 1000, antiSit)
-
-game:GetService("StarterGui"):SetCore("SendNotification",{ 	
-Title = "Anti-Mythikal✅",  	
-Text = "u will auto stand",
-
-Duration = 3
-})
-  else
-      local RunService = game:GetService("RunService")
-function antiSit()
-if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
-game.Players.LocalPlayer.Character.Humanoid.Sit = true
-end
-end
-RunService:BindToRenderStep("tempBinding", 1000, antiSit)
-
-game:GetService("StarterGui"):SetCore("SendNotification",{ 	
-Title = "Anti-Mythikal❌",  	
-Text = "off",
-
-Duration = 3
-})
-  end
-end)
---end toggle antimythikal
 
 SkriptsSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
@@ -104,11 +69,11 @@ end)
 -- loadstring(game:HttpGet("https://pastebin.com/raw/C96cg2xG"))()
 -- end)
 
-SkriptsSection:NewButton("Kokushibo notifier🚨📢", "will notify u if kokushibo joins",
-function()-- kokushibo notifier
-loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
-end)
-SkriptsSection:NewButton("Anti-Ban (read how to enable)", "anti xhat logger", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/antixhatlogger/main/lulaslollipop",true))()
+-- SkriptsSection:NewButton("Kokushibo notifier🚨📢", "will notify u if kokushibo joins",
+-- function()-- kokushibo notifier
+-- loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
+-- end)
+SkriptsSection:NewButton("ANTI-BAN (wont log your messages)", "anti xhat logger", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/antixhatlogger/main/lulaslollipop",true))()
 end)
 
 SkriptsSection:NewButton("ANTI-AFK", "no afk",
@@ -136,45 +101,41 @@ end)
 
 local SkriptsSection = Skripts:NewSection("Skripts")
 
-SkriptsSection:NewToggle("godmode toggle", "testing", function(state)
-  if state then
-    -- Z to toggle 
-    local player = game:GetService("Players").LocalPlayer
-    local UIS = game:GetService("UserInputService")
-    local lollypop = false
+-- toggle anti sit
+SkriptsSection:NewToggle("Anti-Sit", "kinda good but i prefer using godmode", function(state)
+if state then
+    local RunService = game:GetService("RunService")
+function antiSit()
+if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
+game.Players.LocalPlayer.Character.Humanoid.Sit = false
+end
+end
+RunService:BindToRenderStep("tempBinding", 1000, antiSit)
 
-    UIS.InputBegan:Connect(function(input, GPE)
-    if GPE then return end
-    if input.KeyCode == Enum.KeyCode.Z then
-          local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-          Library.DefaultColor = Color3.fromRGB(50,205,50)
+game:GetService("StarterGui"):SetCore("SendNotification",{ 	
+Title = "Anti-Sit✅",  	
+Text = "on",
 
-          Library:Notification({
-            Text = "niggamode ❌",
-            Duration = 2
-          })
-    lollypop = true --not lollypop
-    end
-    end)
+Duration = 3
+})
+else
+    local RunService = game:GetService("RunService")
+function antiSit()
+if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
+game.Players.LocalPlayer.Character.Humanoid.Sit = true
+end
+end
+RunService:BindToRenderStep("tempBinding", 1000, antiSit)
 
-    while task.wait() do
-    local parts = workspace:GetPartBoundsInRadius(player.Character:WaitForChild("HumanoidRootPart").Position, 10)
-    for _, part in ipairs(parts) do
-    part.CanTouch = lollypop
-    end
-    end
-  else
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-    Library.DefaultColor = Color3.fromRGB(50,205,50)
+game:GetService("StarterGui"):SetCore("SendNotification",{ 	
+Title = "Anti-Sit❌",  	
+Text = "off",
 
-    Library:Notification({
-      Text = "niggamode ✅",
-      Duration = 2
-    })
-      parts = false
-    lollypop = false
-  end
+Duration = 3
+})
+end
 end)
+--end toggle antisit
 
 --infjump.Konnekt
 SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
@@ -210,7 +171,7 @@ SkriptsSection:NewToggle("Infinite jump 2", "use if original doesnt work", funct
 end)
 
 
-SkriptsSection:NewToggle("Auto Jump", "untested", function(state)
+SkriptsSection:NewToggle("Auto Jump", "auto jumps", function(state)
   if state then
       while true do wait()
 game.Players.LocalPlayer.Character.Humanoid.Jump = true --true~jumping
@@ -1153,6 +1114,17 @@ FunSection:NewButton("R6 pose gui", "pose📸",
 function()loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
 end)
 
+FunSection:NewButton("KraxkHead walking", "turn into a krakhead", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/w5QIzqKn/kraxkhead_lulaslollipop",true))()
+end)
+
+FunSection:NewButton("Wii Remote XD", "XDDDDDDD", function()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
+end)
+FunSection:NewButton("Jump to flip", "keybind Jump", function()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/7nZso3Lj/jumpToFlip_lulaslollipop",true))()
+end)
+
 
 local FunSection = Fun:NewSection("Message Fun")
 
@@ -1985,7 +1957,7 @@ end)
 local Games = Window:NewTab("Games")
 local GamesSection = Games:NewSection("Games")
 
-GamesSection:NewLabel("🎃🎃🎃FREE UGC SKRIPTS🎃🎃🎃***")
+GamesSection:NewLabel("FREE UGC SKRIPTS")
 GamesSection:NewLabel("Tower of Madness")
 GamesSection:NewButton("[🎃] tower of madness", "free ugx", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0TowerMadness'))()
@@ -1997,7 +1969,7 @@ GamesSection:NewButton("teleport to game", "towerofmadness", function()
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-GamesSection:NewLabel("Karry A Friend")
+GamesSection:NewLabel("[Karry A Friend]")
 GamesSection:NewButton("karry a friend (teamwork obby)", "free ugx", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0Carry"))()
     --karry a friend-
@@ -2008,7 +1980,7 @@ GamesSection:NewButton("teleport to game", "karry deeznuts", function()
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-GamesSection:NewLabel("[🎃] Pull A Sword")
+GamesSection:NewLabel("[Pull A Sword]")
 GamesSection:NewButton("pull a sword", "free ugx", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0PullaSword",true))()
     --pull a sword
@@ -2019,52 +1991,7 @@ GamesSection:NewButton("teleport to game", "pull a sword", function()
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-GamesSection:NewLabel("[🎃] Harmony Hills RP")
-GamesSection:NewButton("harmony Hills RP", "free ugx", function()
-    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Harmony",true))()
-    --harmony hills RP
-end)
-GamesSection:NewButton("teleport to game", "harmony hills rp", function()
-    local PlaceId = 11707114324 -- harmony hills rp
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-
-end)
-
-GamesSection:NewLabel("Mining Faktory Tykoon")
-GamesSection:NewButton("mining faktory tykoon (INSTANT)", "free ugx", function()
-    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0MiningFactory",true))()
-    --mining faktory tykoon(instant)
-end)
-GamesSection:NewButton("teleport to game", "miningfaktory", function()
-    local PlaceId = 12717051222 -- mining faktory tykoon
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
-
-GamesSection:NewLabel("[🎃] Driving Empire")
-GamesSection:NewButton("driving empire", "free ugx", function()
-    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0DrivingEmpire",true))()
-    --driving empire
-end)
-GamesSection:NewButton("teleport to game", "drivingempire", function()
-    local PlaceId = 3351674303 -- driving empire
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
-
-GamesSection:NewLabel("[🎃] Halloween Hunt")
-GamesSection:NewButton("Halloween hunt👻", "free ugx", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/BaconBossScript/HalloweenHunt/main/HalloweenHunt"))()
-    --halloween hunt
-end)
-GamesSection:NewButton("teleport to game", "halloweenHunt", function()
-    local PlaceId = 14460259920 -- halloween hunt
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
-
-GamesSection:NewLabel("Barrel Raxe")
+GamesSection:NewLabel("[Barrel Raxe]")
 GamesSection:NewButton("barrell raxe", "free ugx", function()
     loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Barrel",true))()
     --barrel raxe
@@ -2075,35 +2002,13 @@ GamesSection:NewButton("teleport to game", "barrelraxe", function()
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-GamesSection:NewLabel("[🎃NEW] Rainbow Friends")
+GamesSection:NewLabel("[UGC] Rainbow Friends")
 GamesSection:NewButton("Rainbow Friends Morphs", "free ugx", function()
     loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Rainbow",true))()
     --Rainbow friends morphs
 end)
 GamesSection:NewButton("teleport to game", "rainbowfriends", function()
     local PlaceId = 10132505018 -- rainbow friends
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
-
-GamesSection:NewLabel("Sumo Simulator")
-GamesSection:NewButton("sumo simulator", "free ugx", function()
-    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Sumo",true))()
-    --sumo simulator
-end)
-GamesSection:NewButton("teleport to game", "sumosimulator", function()
-    local PlaceId = 14021953565 -- sumo sim
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
-
-GamesSection:NewLabel("iHeartLand Temple of Sound")
-GamesSection:NewButton("iheartland - Temple of Sound", "free ugx", function()
-    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0iHeartLand",true))()
-    --iheartland Temple of Sound
-end)
-GamesSection:NewButton("teleport to game", "iheartlandtempleofsound", function()
-    local PlaceId = 9524757503 -- iheart land temple of sound
 
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
@@ -2119,20 +2024,7 @@ GamesSection:NewButton("teleport to game", "afkforugc", function()
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-GamesSection:NewLabel("Dont Move")
-GamesSection:NewButton("dont move", "free ugx", function()
-    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0DontMove",true))()
-    --dontmove1
-end)
-GamesSection:NewButton("dont move - skript 2", "dontmove", function()
-    loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0Don'tMove",true))()
-    --dontmove2
-end)
-GamesSection:NewButton("teleport to game", "dontmove", function()
-    local PlaceId = 14620329550 -- dontmove 1
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()
 
 
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
@@ -2161,7 +2053,7 @@ GamesSection:NewButton("KAT GUI", "esp,spam shoot (aimbot💻)", function()--kat
 loadstring(game:HttpGet("https://pastebin.com/raw/78kG7trR"))()
 end)
 
-GamesSection:NewButton("OP Darkyyware", "OP skript for KAT",
+GamesSection:NewButton("OP Darkyyware(might not work anymore)", "OP skript for KAT",
 function()-- KAT darkyyware
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AndrewDarkyy/NOWAY/main/darkyyware.lua"))()
 end)
@@ -2177,6 +2069,28 @@ function()-- kat aimbot
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
 end)
 
+GamesSection:NewLabel("[💪STRONGMAN SIMULATOR🏋💪]")
+GamesSection:NewButton("autofarm - destinyhub (OP ASF) ", "strngmansimslript", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()
+end)
+
+GamesSection:NewButton("anti afk", "strongman anti afk", function()local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+       vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+       wait(1)
+       vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
+    --end anti afk 
+        local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+    Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+    Library:Notification({
+        Text = "anti afk has been aktivated✅",
+        Duration = 5
+    })
+end)
+
+
+--Dh
 local GamesSection = Games:NewSection("[🏚️🧱Da Hood🧱🏚️]")
 
 GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
