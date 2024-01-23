@@ -1958,16 +1958,6 @@ local Games = Window:NewTab("Games")
 local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("FREE UGC SKRIPTS")
-GamesSection:NewLabel("Tower of Madness")
-GamesSection:NewButton("[🎃] tower of madness", "free ugx", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0TowerMadness'))()
-    --tower of madness
-end)
-GamesSection:NewButton("teleport to game", "towerofmadness", function()
-    local PlaceId = 6470944645 -- tower of madness
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
 
 GamesSection:NewLabel("[Karry A Friend]")
 GamesSection:NewButton("karry a friend (teamwork obby)", "free ugx", function()
@@ -2024,8 +2014,6 @@ GamesSection:NewButton("teleport to game", "afkforugc", function()
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()
-
 
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
@@ -2070,25 +2058,8 @@ loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRI
 end)
 
 GamesSection:NewLabel("[💪STRONGMAN SIMULATOR🏋💪]")
-GamesSection:NewButton("autofarm - destinyhub (OP ASF) ", "strngmansimslript", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()
+GamesSection:NewButton("autofarm - destinyhub (OP ASF) ", "strngmansimslript", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()--
 end)
-
-GamesSection:NewButton("anti afk", "strongman anti afk", function()local vu = game:GetService("VirtualUser")
-    game:GetService("Players").LocalPlayer.Idled:connect(function()
-       vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-       wait(1)
-       vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-    end)
-    --end anti afk 
-        local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-    Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-    Library:Notification({
-        Text = "anti afk has been aktivated✅",
-        Duration = 5
-    })
-end)
-
 
 --Dh
 local GamesSection = Games:NewSection("[🏚️🧱Da Hood🧱🏚️]")
