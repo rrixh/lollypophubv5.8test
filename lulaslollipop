@@ -17,13 +17,6 @@ Library:Notification({
   Text = "HAPPY NEW YEARS🎉🥳🎈2024",
   Duration = 8.5
 })
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-  Text = "ARKEUS X NEO BETA v1.0.2 EXPLOIT OUT FOR IOS🥳🎉🍭",
-  Duration = 8.5
-})
 --bloodball.Endnotif
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
 Title = "made by:",  	
@@ -33,7 +26,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.3","DarkTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.4","DarkTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -1476,6 +1469,11 @@ HubSection:NewButton("99% fail impossible obby teleport gui", "small tp gui by m
 loadstring(game:HttpGet("https://pastebin.com/raw/HQY7LiGn"))()
 end)
 
+HubSection:NewButton("%", "9pf", function()
+    --99
+    loadstring(game:HttpGet("https://pastecode.dev/raw/E7GMNU4Q/99fail-fling_lulaslollipop",true))()
+end)
+
 HubSection:NewButton("Universal OP Shiftloxk gui", "shiftloxk ", function()
 -- shiftloxk gui op
   loadstring(game:HttpGet("https://scriptblox.com/raw/Baseplate-Universal-Script-Permanent-Shift-Lock-6924"))()
@@ -2013,6 +2011,8 @@ GamesSection:NewButton("teleport to game", "afkforugc", function()
 
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()
 
 
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
