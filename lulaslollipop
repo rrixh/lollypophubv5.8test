@@ -2012,8 +2012,6 @@ GamesSection:NewButton("teleport to game", "afkforugc", function()
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()
-
 
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
@@ -2802,6 +2800,10 @@ end)
 
 local Fe = Window:NewTab("FE")
 local FeSection = Fe:NewSection("FE Skripts")
+
+FeSection:NewButton("FE server browser ui", "list of servers ui", function()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/l83qm3as/FEserver-browser90_lulaslollipop",true))()
+end)
 
 FeSection:NewButton("FE Stop Time", "freeze in mid air or whatever", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
