@@ -1485,7 +1485,7 @@ HubSection:NewButton("99% fail impossible obby teleport gui", "small tp gui by m
 loadstring(game:HttpGet("https://pastebin.com/raw/HQY7LiGn"))()
 end)
 
-HubsSection:NewButton("ANTI AFK gui (auto enabled anti-afk)", "no afk",
+HubSection:NewButton("ANTI AFK gui (auto enabled anti-afk)", "no afk",
 function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/-Roblox-Projects-/main/____Anti_Afk_Remastered_______"))();
 end)
