@@ -26,7 +26,10 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.5","DarkTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.5 ~" ..game.Players.LocalPlayer.Name.. "DarkTheme")
+
+
+-- "text" ..game.Players.LocalPlayer.Name.. "text",
 
 ---//yum lollypop hub\\--
 -- LightTheme
