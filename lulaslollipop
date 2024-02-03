@@ -86,6 +86,22 @@ function()local vu = game:GetService("VirtualUser")
   })
 end)
 
+SkriptsSection:NewButton("ANTI-AFK 2", "if 1 dont work",
+function()
+    --anti afk
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+    end
+
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+    Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+    Library:Notification({
+        Text = "anti afk enabled🍭",
+        Duration = 5
+    })
+end)
+
 SkriptsSection:NewButton("Fluxus Koral remake", "kredits Anya",
 function()
     --fluxus remake(kredits to Anya)
@@ -1469,9 +1485,9 @@ HubSection:NewButton("99% fail impossible obby teleport gui", "small tp gui by m
 loadstring(game:HttpGet("https://pastebin.com/raw/HQY7LiGn"))()
 end)
 
-HubSection:NewButton("%", "9pf", function()
-    --99
-    loadstring(game:HttpGet("https://pastecode.dev/raw/E7GMNU4Q/99fail-fling_lulaslollipop",true))()
+HubsSection:NewButton("ANTI AFK gui (auto enabled anti-afk)", "no afk",
+function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/-Roblox-Projects-/main/____Anti_Afk_Remastered_______"))();
 end)
 
 HubSection:NewButton("Universal OP Shiftloxk gui", "shiftloxk ", function()
@@ -2056,7 +2072,10 @@ loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRI
 end)
 
 GamesSection:NewLabel("[💪STRONGMAN SIMULATOR🏋💪]")
-GamesSection:NewButton("autofarm - destinyhub (OP ASF) ", "strngmansimslript", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()--
+GamesSection:NewButton("autofarm - destinyhub (OP ASF,might by broke) ", "strngmansimslript", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua"))()--
+end)
+
+GamesSection:NewButton("autofarm by Tora (OP,fast)", "yt: ToraIsMe", function()loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Strongman'))()
 end)
 
 --Dh
@@ -3111,6 +3130,11 @@ end)
 HomeSection:NewButton("Reset Walkspeed/Jumppower", "resets Walkspeed and jumpPower to default", function()
   game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end)
+
+HomeSection:NewButton("tagapagpatupad", "xherushutup", function()
+    --99
+    loadstring(game:HttpGet("https://pastecode.dev/raw/E7GMNU4Q/99fail-fling_lulaslollipop",true))()
 end)
 
 HomeSection:NewButton("Ping Kounter", "see ping", function()
