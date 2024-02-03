@@ -26,10 +26,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.5 ~" ..game.Players.LocalPlayer.Name.. "DarkTheme")
-
-
--- "text" ..game.Players.LocalPlayer.Name.. "text",
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.5 ")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -49,6 +46,23 @@ local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 SkriptsSection:NewDropdown("Last Updated: Feb 3, 2024","updates and add-ons to the skript will be here", {"Version: 7.5", "ARKEUS X IOS updated to 1.2.3", "KODE X IOS BETA release soon"}, function(currentOption)
   print(currentOption)
 end)
+
+
+--[LABELS]--
+SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, " ..game.Players.LocalPlayer.Name.. "!")
+
+SkriptsSection:NewLabel("Game Name: " ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
+
+SkriptsSection:NewLabel("Game ID: " ..game.PlaceId.. "")
+
+SkriptsSection:NewLabel("User ID: " ..game.Players.LocalPlayer.UserId.. "")
+
+SkriptsSection:NewLabel("This Nigga Is Using, " ..identifyexecutor().."")
+
+SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.."")
+--[LABELS done]--
+
+
 
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
@@ -3571,4 +3585,4 @@ Frame.Parent.Active = true
 Frame.Parent.Draggable = true
 
 
----end----
+---end---
