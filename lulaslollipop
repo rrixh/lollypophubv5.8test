@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 7.4
+-- Version: 7.5
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -7,7 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = "LOLLYPOP HUB V7.4🍭😋🍭😋",
+  Text = "LOLLYPOP HUB V7.5🍭😋🍭😋",
   Duration = 9
 })
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -26,7 +26,7 @@ Text = "lulaslollipop🍭",
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.4","DarkTheme")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.5","DarkTheme")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -43,7 +43,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.4","DarkTheme")
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("ARKEUS X NEO IOS BETA FINALLY OUT🍭","updates and add-ons to the skript will be here", {"Last Updated: Jan 22, 2024", "Version: 7.4", "ARKEUS X IOS BETA 1.0.2", "ArkeusX krashlogs fixed legooo"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Feb 3, 2024","updates and add-ons to the skript will be here", {"Version: 7.5", "ARKEUS X IOS updated to 1.2.3", "KODE X IOS BETA release soon"}, function(currentOption)
   print(currentOption)
 end)
 
@@ -2421,7 +2421,7 @@ local GamesSection = Games:NewSection("[☮️🕊️HAZE PIEXE🧘🏽‍♂️
 GamesSection:NewButton("ThundarZ hub for haze piexe", "haze piexe", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/Loader/AllGame.lua"))()
 end)
-  
+
 --Ftf
 local GamesSection = Games:NewSection("[🏃🏽‍♂️💨Flee The Faxility💻]")
 
@@ -2472,7 +2472,7 @@ end)
 GamesSection:NewButton("Kopy > TheHanki < 🔑", "key: hawkhubneverdies",
 function()
     setclipboard("hawkhubneverdies")
-    
+
     local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
     Library.DefaultColor = Color3.fromRGB(50,205,50)
 
@@ -2780,7 +2780,7 @@ end)
 
 local GamesSection = Games:NewSection("[Sakura Stand]")
   --Sakura Stand
-  
+
 GamesSection:NewButton("sakura Stand", "direkt exekute", function()
       loadstring(game:HttpGet("https://pastecode.dev/raw/I0KOXXRe/sakuraStand.direktExekute",true))()
 end)
@@ -2811,9 +2811,9 @@ GamesSection:NewButton("kar dealership", "skript for kar dealership", function()
       --Kar dealership
       loadstring(game:HttpGet("https://raw.githubusercontent.com/03koios/Loader/main/Loader.lua"))()
 end)
-  
 
-  
+
+
 
 --// FE SKRIPTS \\--
 
