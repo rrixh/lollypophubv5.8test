@@ -60,11 +60,11 @@ Library:Notification({
 
   SkriptsSection:NewLabel("User ID: " ..game.Players.LocalPlayer.UserId.. "")
 
-  SkriptsSection:NewLabel("Game Name: " ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."[ID: "..game.PlaceId.."]")
+  SkriptsSection:NewLabel("Game Name: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." [Game ID: "..game.PlaceId.."]")
 
-  SkriptsSection:NewLabel("This Nigga Is Using, " ..identifyexecutor().."Exekutor")
+  SkriptsSection:NewLabel("This Nigga Is Using " ..identifyexecutor().."")
 
-  SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.."")
+  SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.." day(s)")
   --[LABELS done]--
 
 
@@ -1074,6 +1074,9 @@ Library:Notification({
   AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
   loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
   end)
+AdminSection:NewButton("Infinite Yield Mobile setting", "has a Keep Ui Open option settings", function()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/nw589b1f/infiniteyield-mobile",true))()
+end)
   AdminSection:NewButton("Fates Admin", "default prefix :", function()
   loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
   end)
