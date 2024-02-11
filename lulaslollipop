@@ -81,26 +81,6 @@ SkriptsSection:NewLabel("Game ID: "..game.PlaceId.."")
   loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
   end)
 
-SkriptsSection:NewButton("Bossbooster3 notifier📢", "alert", function()
-    local spy = "BostBooster3" -- user
-
-    game:GetService'Players'.PlayerAdded:Connect(function(player)
-    if player.Name == spy then
-    -- game:ReplikatedStorage.VietnamJoined
-    game.StarterGui:SetCore("SendNotification", {
-        Title = "BossBooster3 joined the game";
-        Text = "🚨";
-
-    })
-    end
-    end)
-    -- bb3
-    game.StarterGui:SetCore("SendNotification", {
-        Title = "ENABLED ✅";
-        Text = "u will be notified wen bossbooster3 joins"
-    })
-end)
-
   -- SkriptsSection:NewButton("Vietnam notifier🚨📢", "will send u a notif if viet joins", function()
   -- -- be notified wen viet joins
   -- loadstring(game:HttpGet("https://pastebin.com/raw/C96cg2xG"))()
