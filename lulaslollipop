@@ -3053,10 +3053,9 @@ function()-- teleport behind xhest
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-362.5283203125, 1995.8741455078125, -149.48646545410156)
 end)
 
-exSection:NewButton("Teleport to Danger Zone (tile 60)", "teleport to dz",
+exSection:NewButton("Teleport to Danger Zone (tile 40)", "teleport to dz",
 function()-- teleport to dzaktually
-Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-593.0650634765625, 1993.9764404296875,
--153.38563537597656)
+Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(349741844177246094, 1994.09912109375, -143.1316680908203)
 end)--tptodz
 
 exSection:NewButton("Teleport to Start", "teleport to beginning",
