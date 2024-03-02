@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 7.7
+-- Version: 7.8
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -14,12 +14,12 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V7.7🍭😋🍭😋",
+Text = "LOLLYPOP HUB UPDATED TO V7.8🍭😋",
 Duration = 9
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.7 | Playing: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.8 | Playing: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -36,8 +36,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.7 | Playing: "..game:Get
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("Last Updated: Feb 29, 2024","updates and add-ons to the skript will be here", {"Version: 7.7", "xhangelogs:", "fixed 99% teleports", "added FE deathnote fling(FE)", "new xhat bypasser with antilogger(Fun) 100%Safe",
-  "thanks to xhelulu💚🍭for helping"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 1, 2024","updates and add-ons to the skript will be here", {"Version: 7.8", "xhangelogs:", "-new (Games) bladeball skripts", "-new (FE) skripts", "thanks to xhelulu💚🍭for helping"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2186,6 +2185,32 @@ end)
 
 GamesSection:NewLabel("[🏏Blade Ball☄️]")
 
+GamesSection:NewButton("just another autoparry&spam gui", "bladeball", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/qxA2ETxy"))()
+end)
+
+GamesSection:NewButton("WhiteHub v1 - autoparryv1,v2 autodetekt ", "bladeball", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/E07Wyg7L"))()
+end)
+
+GamesSection:NewButton("bladeball- AutoparryV2 gui", "bladeball", function()
+    --bladeball autopartyv2,antilag,holdforspam
+    loadstring(game:HttpGet("https://pastebin.com/raw/g35Y87cu",true))()
+end)
+
+GamesSection:NewButton("bladeball- Darkrai Hub V2", "bladeball", function()--Blade ball darkraiHubv2
+    loadstring(game:HttpGet("https://pastefy.app/y3MGGd9n/raw"))()
+end)
+
+GamesSection:NewButton("Alxhemy Hubv2 (OP)", "bladeball", function()
+  --bladeball alxhemyhubv2
+    loadstring(game:HttpGet("https://pastecode.dev/raw/g3fz5w4s/alxhemyhubv2-bladeball",true))()
+end)
+
+GamesSection:NewButton("autoparry easy on/off gui", "bladeball", function()--bladeball auto on/off
+    loadstring(game:HttpGet("https://paste.gg/p/anonymous/1734a4ee207844b994df2f36157afacd/files/1e79ac12fc8a47ef8263d5e9d43b7137/raw"))()
+end)
+--yes
 GamesSection:NewButton("bladeball", "bladeball", function()
   --bladeball holdbloxkbutton
   game:GetService("StarterGui"):SetCore("SendNotification",{
@@ -2322,6 +2347,10 @@ end)
 
 --BLOXFRUIT
 GamesSection:NewLabel("[🍒🍊BLOX FRUITS🍇🍎]")
+GamesSection:NewButton("REDz Hub - Blox fruit", "redzhub", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
+end)
+
 GamesSection:NewButton("speedHub X", "blox", function()
   -- Blox Fruits
   loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SpeedHubX", true))()
@@ -2418,9 +2447,11 @@ end
 end
 end)
 
-GamesSection:NewButton("Tiger Admin (REVAMPED)", "tiger admin revamp",
+GamesSection:NewButton("Tiger Admin (REVAMPED, fix))", "tiger admin revamp",
 function()
-loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-TIGER-ADMIN-REVAMPED-7593"))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/qb10tlse/tigeradminRevamped_lulaslollipop",true))()
+    
+-- loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-TIGER-ADMIN-REVAMPED-7593"))()
 --Tiger admin revamped new version
 end)
 
@@ -2538,6 +2569,11 @@ function()loadstring(game:HttpGet("https://raw.githubusercontent.com/LeviTheOtak
 end)
 
 local GamesSection = Games:NewSection("[❓Murder Mystery 2🔪]")
+
+GamesSection:NewButton("MM2 - TbaoHub thaibao",
+function()-- Mm2 tbaohub
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubMurderMystery2"))()
+end)
 
 GamesSection:NewButton("MM2 GUI (New)", "esp,see murderer&more",
 function()loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Drifter0507/GUIS/main/MURDER%20MYSTERY%202", true))();
@@ -2984,12 +3020,29 @@ FeSection:NewButton("FE Deathnote (fling)", "fling a player by walking into them
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'G'..'o'..'K'..'x'..'Y'..'B'..'k'..'U'..'/'..'r'..'a'..'w'), true))()
 end)
 
+FeSection:NewButton("FE Ghost", "fling a player by walking into them", function()
+    --FE GHOST SKRIPT
+    --WORKS ON R6
+    --KREDITS TO THE OWNER
+
+    loadstring(game:HttpGet("https://pastebin.com/raw/uUtRsAX5"))()
+end)
+
+FeSection:NewButton("FE Deathnote (fling)", "fling a player by walking into them", function()
+  --feDeathnote
+loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'G'..'o'..'K'..'x'..'Y'..'B'..'k'..'U'..'/'..'r'..'a'..'w'), true))()
+end)
+
+FeSection:NewButton("FE bring gui (kollision games only)", "kollision games only", function()
+    --febringgui
+    loadstring(game:HttpGet("https://pastecode.dev/raw/yd80ly8m/FEbringgui_lulaslollipop",true))()
+end)
+
 FeSection:NewButton("FE Orbit player", "spin em", function()--skrip
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Orbit%20GUI"))()
 --notif
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
-
 
 FeSection:NewButton("FE 2007 animation", "baxk to the old days", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/8gi79AtK"))()
