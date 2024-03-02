@@ -2570,8 +2570,7 @@ end)
 
 local GamesSection = Games:NewSection("[❓Murder Mystery 2🔪]")
 
-GamesSection:NewButton("MM2 - TbaoHub thaibao",
-function()-- Mm2 tbaohub
+GamesSection:NewButton("MM2 - TbaoHub thaibao", "tbaohub", function()-- Mm2 tbaohub
     loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubMurderMystery2"))()
 end)
 
