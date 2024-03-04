@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 7.8
+-- Version: 7.9
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -8,18 +8,18 @@ Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
 Text = "🍭 Welkome to Lollypop Hub, " ..game.Players.LocalPlayer.Name.. "🍭",
-Duration = 10
+Duration = 8.5
 })--needme
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "LOLLYPOP HUB UPDATED TO V7.8🍭😋",
-Duration = 9
+Text = "LOLLYPOP HUB V7.9🍭😋",
+Duration = 7
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.8 | Playing: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V7.9 |", "BloodTheme", " Playing: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -36,7 +36,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.8 | Playing: "..game:Get
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("Last Updated: Mar 1, 2024","updates and add-ons to the skript will be here", {"Version: 7.8", "xhangelogs:", "-new (Games) bladeball skripts", "-new (FE) skripts", "thanks to xhelulu💚🍭for helping"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 4, 2024","updates and add-ons to the skript will be here", {"Version: 7.9", "updates:", "-added 2 xhatbypassers (Fun)", "thanks to xhelulu💚🍭for helping"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -1203,22 +1203,46 @@ end)
 FunSection:NewButton("Diskord Emojis [example: :angry:]", "type the emoji name in between the kolons", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
 end)
+--[bypasses]--
+FunSection:NewLabel("Xhat Bypass")
+FunSection:NewButton("Explikit Bypasser🔞(100% safe)", "has an antilogger so u will not be banned", function()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+    Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-FunSection:NewButton("NGA Bypasser w/antilogger (100% safe)", "has an antilogger so u will not be banned", function()--ngabypasser
+    Library:Notification({
+    Text = "Loading Explikit Bypasser...(10s)",
+    Duration = 3
+    })
+    
+    --explikitbypasser🔞+
+    loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'a'..'B'..'i'..'X'..'w'..'6'..'R'..'C'..'/'..'r'..'a'..'w'), true))()
+
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+    Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+    Library:Notification({
+    Text = "loaded! have fun nigger",
+    Duration = 3
+    })
+end)
+FunSection:NewButton("NGA Bypasser(100% safe)", "has an antilogger so u will not be banned", function()--ngabypasser
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'J'..'h'..'8'..'r'..'s'..'l'..'a'..'5'..'/'..'r'..'a'..'w'), true))()
 end)
-
-FunSection:NewButton("Spell Out Any Kurseword (use L tool given)", "use L tool to open/klose gui", function()
+FunSection:NewButton("Spell kursewords (use L to toggle) \n(100% safe)", "use L tool to open/klose gui", function()
 -- spell out kurse word
 loadstring(game:HttpGet("https://pastebin.com/raw/xinPiBSU"))()
 loadstring(game:HttpGet("https://pastebin.com/raw/QzxqjgSf"))()
 end)
+
+FunSection:NewLabel("Kompliment Gen")
 FunSection:NewButton("Kompliment Random Player", "push to kompliment a random player", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/0n4YDguK"))()
 end)
 FunSection:NewButton("Kompliment V2", "makes u say a kompliment", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/0HidbJsd"))()
 end)
+
+FunSection:NewLabel("Others")
 FunSection:NewButton("Auto Exkuse", "auto msg wen u die", function()
 getgenv().dmsgs = {
 deathmessages = {"i was lagging", "that wasnt fair", "bruh", "dude", "i was doing something", "whyyyyy", "that wasnt fair", "wow"}
@@ -1270,7 +1294,7 @@ end
 end)
 end)
 
-FunSection:NewButton("Rainbow Messages", "enables xhat bubble and see msg frm far away", function()
+FunSection:NewButton("Rainbow bubble Messages", "enables xhat bubble and see msg frm far away", function()
 --enables bubble chat also
 
 textcolour = Color3.new(0,0,0)
@@ -1404,10 +1428,11 @@ end)
 end
 end)
 
+FunSection:NewLabel("singing/spam")
 FunSection:NewButton("SpamHub", "sing songs etx.", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/ColdStep2/Chatdestroyer-Hub-V1/main/Chatdestroyer%20Hub%20V1'),true))()
 end)
-FunSection:NewButton("Lyrik Bot (say: >lyrics SongName by ArtistName)", "sing songs requested by other users", function()
+FunSection:NewButton("Lyrik Bot \n(type >lyrics SongName by ArtistName)", "sing songs requested by other users", function()
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
@@ -1417,9 +1442,6 @@ Library:Notification({
 })
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/lyricsBot/main/singer.lua"))()
-end)
-FunSection:NewButton("BetterBypasser", "hmmmm", function()
-loadstring(game:HttpGet("https://gist.githubusercontent.com/lexsplorsex/b4b3b1243329327faec92f6953d4ed02/raw/a144202fc87db6493a109bf91a7cd14445e012ec/gistfile1.txt"))()
 end)
 
 
