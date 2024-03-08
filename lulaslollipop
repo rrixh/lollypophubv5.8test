@@ -36,7 +36,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.9 |", "BloodTheme", " Pl
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("Last Updated: Mar 4, 2024","updates and add-ons to the skript will be here", {"Version: 7.9", "updates:", "-added 2 xhatbypassers (Fun)", "thanks to xhelulu💚🍭for helping"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 8, 2024","updates and add-ons to the skript will be here", {"Version: 7.9", "updates:", "-added nyula aimloxk (DaHood)", "thanks to xhelulu💚🍭for helping"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2142,6 +2142,16 @@ end)
 --Dh
 local GamesSection = Games:NewSection("[🏚️🧱Da Hood🧱🏚️]")
 
+GamesSection:NewButton("Nyula(aimloxk)", "nyulanyula", function()--nyula aimloxk
+    loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'X'..'Y'..'Q'..'z'..'d'..'l'..'Z'..'u'..'/'..'r'..'a'..'w'), true))()
+end)
+GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
+end)
+
+GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
+end)
 GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
   loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
 end)
@@ -2178,13 +2188,7 @@ end)
 GamesSection:NewButton("DaHood Gui 7(New)", "gai", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/UntitledhoodGui"))()
 end)
-GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
-loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
-end)
 
-GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
-end)
 
 
 local GamesSection = Games:NewSection("[🥞Pankake Empire Tykoon🥞]")
