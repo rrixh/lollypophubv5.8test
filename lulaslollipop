@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 7.9
+-- Version: 8
 -- Instanxes:
 loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 --loadstring(gameLoaded:true)--
@@ -8,18 +8,18 @@ Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
 Text = "🍭 Welkome to Lollypop Hub, " ..game.Players.LocalPlayer.Name.. "🍭",
-Duration = 8.5
+Duration = 8
 })--needme
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V7.9🍭😋",
+Text = "LOLLYPOP HUB V8🍭😋",
 Duration = 7
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V7.9 |", "BloodTheme", " Playing: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V8 |", "BloodTheme", " Playing: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -31,12 +31,12 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V7.9 |", "BloodTheme", " Pl
 -- Sentinel
 -- Synapse
 -- Serpent(new)
---tools1134,skripts35,game1443
+--tools1134,skripts35,game1443,games2450
 
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("Last Updated: Mar 8, 2024","updates and add-ons to the skript will be here", {"Version: 7.9", "updates:", "-added nyula aimloxk (DaHood)", "thanks to xhelulu💚🍭for helping"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 8, 2024 \n[FREE ITEMS SKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8", "updates:", "-added nyula aimloxk (DaHood)", "FREE UGc SKRIPTS(Games)","xhelulu,HG💚🍭"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2061,18 +2061,46 @@ end)
 local Games = Window:NewTab("Games")
 local GamesSection = Games:NewSection("Games")
 
-GamesSection:NewLabel("FREE UGC SKRIPTS")
+GamesSection:NewLabel("FREE UGc SKRIPTS 2024")
+--🐼🐼🐼🐼🐼🆓--
+GamesSection:NewLabel("🐼KUNG FU PANDA 4 OBBY🐼 \n[FREE SKADOOSH🥋EMOTE]")
+GamesSection:NewButton("autofarm(getallfood,instantwin", "free ugx", function()
 
-GamesSection:NewLabel("AFK FOR UGC")
-GamesSection:NewButton("AFK for ugc", "free ugx", function()
-  loadstring(game:HttpGet("https://github.com/ToraIsMe/ToraIsMe/raw/main/0UGCAFK",true))()
-  --AFK for ugc
+    --kungfu:16078980231
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/KungFu"))()
 end)
-GamesSection:NewButton("teleport to game", "afkforugc", function()
-  local PlaceId = 14776528572 -- afk for ugc
+GamesSection:NewButton("teleport to game", "everybodyloveskungfufighting", function()
+    local PlaceId = 16078980231 -- kungfupanda4obby
 
-  game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
+--kungfu:end--
+
+--🔪🩸🔪🩸🔪🩸
+GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE [FREE ITEM (cHUcKY BAcKPAcK)]")
+GamesSection:NewButton("🔪autofarm by ToraIsMe", "ToraIsMe", function()--xhuxky:16578847473
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
+end)
+GamesSection:NewButton("teleport to game", "🩸🩸🔪🩸🔪🩸🔪", function()
+    local PlaceId = 16578847473 -- xhuxky
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+--xhuxky:end--
+
+
+--🦍🦖🦍🦖🦍🦖
+GamesSection:NewLabel("🦖GODZILLA X KONG OBBY🦍 \n[FREE ITEMS]")
+GamesSection:NewButton("orbs autofarm by ToraIsMe", "free ugx", function()--godzilla:16462849084
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Godzilla'))()
+end)
+GamesSection:NewButton("teleport to game", "💥🦖🦍🦖🦍🦖💥", function()
+    local PlaceId = 16462849084 -- godzila
+
+    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+end)
+--godzilla:end--
+
 
 GamesSection:NewLabel("[Evade🏃🏽‍♂️💨]")
 GamesSection:NewButton("show messages", "shows xhat kause evade dont allow it", function()
@@ -3773,4 +3801,4 @@ Frame.Parent.Active = true
 Frame.Parent.Draggable = true
 
 
----end--- 
+---end--- -
