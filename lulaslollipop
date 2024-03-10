@@ -36,7 +36,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8 |", "BloodTheme", " Play
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("Last Updated: Mar 8, 2024 \n[FREE ITEMS SKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8", "updates:", "-added nyula aimloxk (DaHood)", "FREE UGc SKRIPTS(Games)","xhelulu,HG💚🍭"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 9, 2024 \n[FREE ITEMS SKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8", "updates:", "-added nyula aimloxk (DaHood)", "FREE UGc SKRIPTS(Games)","-added fake boot \n players from game(Fun)","xhelulu,HG💚🍭"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -1200,6 +1200,10 @@ end)
 FunSection:NewButton("Fake Message Troll", "type for others", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/MBpnp3yS'))()
 end)
+
+FunSection:NewButton("Fake boot Players🦵🏽🤡", "pretends to kixk a player wen they leave", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/fakeboot-lulaslollipop/main/fakebootanigga",true))()
+end)
+
 FunSection:NewButton("Diskord Emojis [example: :angry:]", "type the emoji name in between the kolons", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
 end)
