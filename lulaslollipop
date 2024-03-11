@@ -1503,7 +1503,10 @@ end)
 ToolsSection:NewButton("Free Gear Tools 🧨", "💣⚙️👊🏽⛓️fun", function()
 loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
 end)
-
+ToolsSection:NewButton("Klone Tool (not fe)", "lego", function()
+    --klonez
+loadstring(game:HttpGet("https://pastecode.dev/raw/m4u6g9j1/klonesnotfe",true))()
+end)
 ToolsSection:NewButton("F3X", "f3x building",
 function()
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -1590,6 +1593,11 @@ local HubSection = Hub:NewSection("everything u need😋🍭")
 HubSection:NewButton("Tp To Player GUI (small)", "small like zuki", function()
   --tpgui
 loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))()
+end)
+
+HubSection:NewButton("funeral home gui(works in old games \n W less players)", "kixk gui", function()
+    --funeralhomekixkgui
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/FHOMEkik/main/funeralhome_lulaslollipop",true))()
 end)
 
 HubSection:NewButton("99% fail impossible obby teleport gui", "small tp gui by me", function()
