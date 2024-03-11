@@ -1,7 +1,7 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8
+-- Version: 8.1
 -- Instanxes:
-loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
+
 --loadstring(gameLoaded:true)--
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
@@ -14,12 +14,12 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8🍭😋",
+Text = "LOLLYPOP HUB V8.1🍭😋",
 Duration = 7
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V8 |", "BloodTheme", " Playing: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V8.1 |", "Serpent", " Playing: " ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. "")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -36,7 +36,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8 |", "BloodTheme", " Play
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("Last Updated: Mar 9, 2024 \n[FREE ITEMS SKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8", "updates:", "-added nyula aimloxk (DaHood)", "FREE UGc SKRIPTS(Games)","-added fake boot \n players from game(Fun)","xhelulu,HG💚🍭"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 11, 2024 [FREE ITEMS \nSKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8.1", "updates:", "-added flashlight(Tools) good for 👻Horror games", "FREE UGc SKRIPTS(Games)","-added fake boot players from game(Fun)","xhelulu,HG💚🍭 "}, function(currentOption)
 print(currentOption)
 end)
 
@@ -44,7 +44,7 @@ end)
 --[LABELS]--
 SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, " ..game.Players.LocalPlayer.Name.. "!")
 
-SkriptsSection:NewLabel("User ID: " ..game.Players.LocalPlayer.UserId.. "")
+SkriptsSection:NewLabel("UID: " ..game.Players.LocalPlayer.UserId.. " | Akkount Age: " ..game.Players.LocalPlayer.AccountAge.. " day(s)")
 
 SkriptsSection:NewLabel("Game Name: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
 
@@ -52,7 +52,7 @@ SkriptsSection:NewLabel("Game ID: "..game.PlaceId.."")
 
 SkriptsSection:NewLabel("This Nigga Is Using: " ..identifyexecutor().."")
 
-SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.." day(s)")
+-- SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.." day(s)")
 --[LABELS done]--
 
 
@@ -1496,9 +1496,9 @@ b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
 b.BinType = 3
 end)--end.kopytool
 --end btools.Tools tab
-ToolsSection:NewButton("tiny tp gui moved to Hubs & gui \n i will add a new tool soon...", "soon", function()
-    --tpgui
-loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))()
+ToolsSection:NewButton("Flashlight🔦(good for horror or dark games)", "use this is dark horror games(rekommend)", function()
+    --flashlight/FE torxh
+loadstring(game:HttpGet("https://pastecode.dev/raw/7o10k3hq/flashlightLS_lulaslollipop",true))()
 end)
 ToolsSection:NewButton("Free Gear Tools 🧨", "💣⚙️👊🏽⛓️fun", function()
 loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
@@ -3771,7 +3771,8 @@ local MoreSection = More:NewSection("no")
 MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, function()
   Library:ToggleUI()
 end)
-
+--sumthing
+loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
 
 
 
@@ -3834,4 +3835,4 @@ Frame.Parent.Active = true
 Frame.Parent.Draggable = true
 
 
----end--- -
+---end---
