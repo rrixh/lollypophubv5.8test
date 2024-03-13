@@ -36,7 +36,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8.1 |", "Serpent", " Playi
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("Last Updated: Mar 13, 2024 [FREE ITEMS \nSKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8.1", "updates:","-added innovation rewards voting hub\n skript(Hubs & gui)(new)" "-added flashlight(Tools) good for 👻Horror games", "FREE UGc SKRIPTS(Games)","-added fake boot players from game(Fun)","xhelulu,HG💚🍭 "}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 13, 2024 [FREE ITEMS \nSKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8.1", "updates:","-added innovation rewards voting hub\n skript(Hubs & gui)(new)", "-added flashlight(Tools) good for 👻Horror games", "FREE UGc SKRIPTS(Games)","-added fake boot players from game(Fun)","xhelulu,HG💚🍭 "}, function(currentOption)
 print(currentOption)
 end)
 
