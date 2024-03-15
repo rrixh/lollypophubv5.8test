@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.1
+-- Version: 8.2
 -- Instanxes:
 
 --loadstring(gameLoaded:true)--
@@ -14,12 +14,12 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8.1🍭😋",
+Text = "LOLLYPOP HUB V8.2🍭😋",
 Duration = 7
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V8.1 |", "Serpent", " Playing: " ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. "")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V8.2 |", "DarkTheme", " Playing: " ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. "")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -36,7 +36,12 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8.1 |", "Serpent", " Playi
 --skripts tab
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-SkriptsSection:NewDropdown("Last Updated: Mar 13, 2024 [FREE ITEMS \nSKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8.1", "updates:","-added innovation rewards voting hub\n skript(Hubs & gui)(new)", "-added flashlight(Tools) good for 👻Horror games", "FREE UGc SKRIPTS(Games)","-added fake boot players from game(Fun)","xhelulu,HG💚🍭 "}, function(currentOption)
+
+SkriptsSection:NewButton("🍭Lollypop Admin🍭 (anti-byfron ui)\n type ;cmds", "anti byfron kause they tryna troll us lmao", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
+end)
+
+SkriptsSection:NewDropdown("Last Updated: Mar 15, 2024 [FREE ITEMS \nSKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8.2", "updates:","-added new 🍭Lollypop Admin🍭 (hella kommands)", "-added innovation rewards voting hub skript\n(Hubs & gui)(new)", "-added flashlight(Tools) good for 👻Horror games", "FREE UGc SKRIPTS(Games)","-added fake boot players from game(Fun)","xhelulu,HG💚🍭 "}, function(currentOption)
 print(currentOption)
 end)
 
@@ -68,16 +73,17 @@ loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
 end)
 
 SkriptsSection:NewButton("view plr", "spekt", function(...)
-    game.Workspace.CurrentCamera.CameraSubject = character:FindFirstChildWhichIsA("Humanoid")
-       view = false
-     wait(0.3)
-       view = true
-     Username = (...)
+    game.Workspace.CurrentCamera.CameraSubject = (...).Character.Humanoid
+    -- character:FindFirstChildWhichIsA("Humanoid")
+    --    view = false
+    --  wait(0.3)
+    --    view = true
+    --  Username = (...)
 
-     local target = getPlr(Username)
-     repeat wait()
-     workspace.CurrentCamera.CameraSubject = target.Character.Humanoid
-     until view == false
+    --  local target = getPlr(Username)
+    --  repeat wait()
+    --  workspace.CurrentCamera.CameraSubject = target.Character.Humanoid
+    --  until view == false
 end)
 
 
@@ -1086,9 +1092,23 @@ end)
 AdminSection:NewButton("Reviz Admin", "default prefix ; say ;cmds", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RqaZUrBZ"))()
 end)
-AdminSection:NewButton("Nameless Admin", "type ;cmds", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
-end)
+
+-- AdminSection:NewButton("Nameless Admin", "type ;cmds", function()
+-- --NA
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+
+--     if --byfron gui detekted
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/asd"))() then
+
+-- loadstring(game:HttpGet("https://pastecode.dev/raw/ls5sz890/antiboot-bypassKlient",true))()
+--     wait(106)
+-- loadstring(game:HttpGet("https://pastecode.dev/raw/wvafknzn/fuxkbyfron-destroy.lua",true))()--END:byfrondestroyer
+--     wait()
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
+--     Notify("BYFRON DETEKTED", "DESTROYED THAT SHIT GTFO", 6)
+--     end
+-- end)
+
 AdminSection:NewButton("Universal Admin Panel", "admin panel", function()
 -- unvrsl admin --
 loadstring(game:HttpGet(('https://pastefy.app/Oic24KzG/raw'),true))()
