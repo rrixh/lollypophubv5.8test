@@ -37,7 +37,7 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8.2 |", "DarkTheme", " Pla
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 
-SkriptsSection:NewButton("🍭Lollypop Admin🍭 (anti-byfron ui)\n type ;cmds", "anti byfron kause they tryna troll us lmao", function()
+SkriptsSection:NewButton("🍭Lollypop Admin🍭 (anti-byfron ui)\n (type ;cmds) 🚨use after skript loads", "anti byfron kause they tryna troll us lmao", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
