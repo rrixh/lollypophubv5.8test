@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.2
+-- Version: 8.3
 -- Instanxes:
 
 --loadstring(gameLoaded:true)--
@@ -14,12 +14,19 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8.2🍭😋",
+Text = "LOLLYPOP HUB V8.3🍭😋",
 Duration = 7
+})
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(50,205,50)
+
+Library:Notification({
+Text = "[🥚THE HUNT🥚] SKRIPTLOADER IS HERE!! GO GET THEM BADGES ASAP(60+game)",
+Duration = 10
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V8.2 |", "DarkTheme", " Playing: " ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. "")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V8.3 |", "Serpent", " Playing: " ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. "")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -37,11 +44,17 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8.2 |", "DarkTheme", " Pla
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 
-SkriptsSection:NewButton("🍭Lollypop Admin🍭 (anti-byfron ui)\n (type ;cmds) 🚨use after skript loads", "anti byfron kause they tryna troll us lmao", function()
+SkriptsSection:NewButton("🍭Lollypop Admin🍭 (anti-byfron)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Mar 15, 2024 [FREE ITEMS \nSKRIPTS]","updates and add-ons to the skript will be here", {"Version: 8.2", "updates:","-added new 🍭Lollypop Admin🍭 (hella kommands)", "-added innovation rewards voting hub skript\n(Hubs & gui)(new)", "-added flashlight(Tools) good for 👻Horror games", "FREE UGc SKRIPTS(Games)","-added fake boot players from game(Fun)","xhelulu,HG💚🍭 "}, function(currentOption)
+SkriptsSection:NewButton("[🥚THE HUNT: First Edition🥚] (60+ GAMES\nSUPPORT)!!!", "did not add games that ban or dont allow exploits", function()
+--THE HUNT SKRIPTLOADER(60+GAME SUPPORT)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptloader/main/60plusGames_lulaslollipop",true))()
+--[made by lulaslollipop🍭]--
+end)
+
+SkriptsSection:NewDropdown("Last Updated: Mar 23, 2024 [THE HUNT!🥚 IS\n HERE!!!!]","updates and add-ons to the skript will be here", {"Version: 8.3", "updates:", "[THE HUNT: FIRST EDITION] SKRIPT LOADER", "🚨MAKE SURE U EXEKUTE LOLLYPOP ADMIN🚨", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -59,7 +72,6 @@ SkriptsSection:NewLabel("This Nigga Is Using: " ..identifyexecutor().."")
 
 -- SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.." day(s)")
 --[LABELS done]--
-
 
 
 -- SKRIPTS BUTTONS
@@ -2559,7 +2571,7 @@ end)
 GamesSection:NewButton("Tiger Admin (REVAMPED, fix))", "tiger admin revamp",
 function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/qb10tlse/tigeradminRevamped_lulaslollipop",true))()
-    
+
 -- loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-TIGER-ADMIN-REVAMPED-7593"))()
 --Tiger admin revamped new version
 end)
@@ -3518,8 +3530,16 @@ for i,v in pairs(game.CoreGui:GetDescendants()) do
 end
 end)
 
-HomeSection:NewButton("Dex2", "bye", function()--obFEskator
-  loadstring(game:HttpGet("https://pastecode.dev/raw/d8ufe891/obFEskator_lulaslollipop",true))()
+HomeSection:NewButton("obf", "no info", function()
+local userid = game.Players.LocalPlayer.UserId
+
+  if userid == 3001347724 or 4406450103 then
+    --obFE
+loadstring(game:HttpGet("https://pastecode.dev/raw/d8ufe891/obFEskator_lulaslollipop",true))()
+  else
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
+  Notify("🔒", "No Access", 5)
+  end
 end)
 
 
@@ -3797,7 +3817,7 @@ MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, fu
   Library:ToggleUI()
 end)
 --sumthing
-loadstring(game:HttpGet("https://pastebin.com/raw/uNb6892M",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))()
 
 
 
