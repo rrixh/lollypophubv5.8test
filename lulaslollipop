@@ -259,20 +259,15 @@ end)
 --       InfiniteJumpEnabled = false
 --   end
 -- end)
-function autojump()
-  
 
-SkriptsSection:NewToggle("Auto Jump", "auto jumps", function()
-    autojump = true
-      while autojump do 
-    while true do wait()
-game.Players.LocalPlayer.Character.Humanoid.Jump = true --true~jumping
-end
-else
-      autojump = false
-end
-end
-end)
+-- SkriptsSection:NewToggle("Auto Jump", "auto jumps", function()
+--     local jump = game.Players.LocalPlayer.Character.Humanoid.Jump
+--     wait()
+-- jump = true
+--     end
+--   else
+-- jump = false
+-- end)fuxking stupid ass autojump
 
 SkriptsSection:NewButton("Anti-Fall (for obbys)", "it will tp u to the previous area before u fell",
 function()
