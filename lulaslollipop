@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.3
+-- Version: 8.4
 -- Instanxes:
 
 --loadstring(gameLoaded:true)--
@@ -41,7 +41,7 @@ SkriptsSection:NewButton("(ANTI BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "
 loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
-SkriptsSection:NewButton("🍭Lollypop Admin🍭 (nameless w out byfron remake)", "type the kommand in the kommand bar", function()
+SkriptsSection:NewButton("🍭Lollypop Admin🍭\n(nameless w out byfron remake)", "type the kommand in the kommand bar", function()
   --lollypopadmin,fukbyfron&NAdevs
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
 end)
