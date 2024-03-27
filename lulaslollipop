@@ -14,19 +14,12 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8.3🍭😋",
+Text = "LOLLYPOP HUB V8.4🍭😋",
 Duration = 7
-})
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-Text = "[🥚THE HUNT🥚] SKRIPTLOADER IS HERE!! GO GET THEM BADGES ASAP(60+game)",
-Duration = 10
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V8.3 |", "Serpent", " Playing: " ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. "")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V8.4 |", "Serpent", " Playing: " .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -44,22 +37,27 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8.3 |", "Serpent", " Playi
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 
-SkriptsSection:NewButton("🍭Lollypop Admin🍭 (anti-byfron)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
+SkriptsSection:NewButton("(ANTI BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
-SkriptsSection:NewButton("[🥚THE HUNT: First Edition🥚] (60+ GAMES\nSUPPORT)!!!", "did not add games that ban or dont allow exploits", function()
+SkriptsSection:NewButton("🍭Lollypop Admin🍭 (nameless w out byfron remake)", "type the kommand in the kommand bar", function()
+  --lollypopadmin,fukbyfron&NAdevs
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
+end)
+
+SkriptsSection:NewButton("[🥚THE HUNT: First Edition🥚] (63 GAMES\nSUPPORT)!!! fixed KombatWarriors,GunfightArena", "did not add games that ban or dont allow exploits", function()
 --THE HUNT SKRIPTLOADER(60+GAME SUPPORT)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptloader/main/60plusGames_lulaslollipop",true))()
 --[made by lulaslollipop🍭]--
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Mar 23, 2024 [THE HUNT!🥚 IS\n HERE!!!!]","updates and add-ons to the skript will be here", {"Version: 8.3", "updates:", "[THE HUNT: FIRST EDITION] SKRIPT LOADER", "🚨MAKE SURE U EXEKUTE LOLLYPOP ADMIN🚨", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 26, 2024 [THE HUNT!🥚 IS\n HERE!!!!] see NEW:","updates and add-ons to the skript will be here", {"Version: 8.4", "updates:", "Lollypop Admin(no byfron)Nameless remake kause\nthey assholes", "[THE HUNT: FIRST EDITION] SKRIPT LOADER", "🚨MAKE SURE U EXEKUTE LOLLYPOP ADMIN🚨", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
 
---[LABELS]--
+--[LABELS]--he
 SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, " ..game.Players.LocalPlayer.Name.. "!")
 
 SkriptsSection:NewLabel("UID: " ..game.Players.LocalPlayer.UserId.. " | Akkount Age: " ..game.Players.LocalPlayer.AccountAge.. " day(s)")
@@ -86,16 +84,16 @@ end)
 
 SkriptsSection:NewButton("view plr", "spekt", function(...)
     game.Workspace.CurrentCamera.CameraSubject = (...).Character.Humanoid
-    -- character:FindFirstChildWhichIsA("Humanoid")
-    --    view = false
-    --  wait(0.3)
-    --    view = true
-    --  Username = (...)
+    character:FindFirstChildWhichIsA("Humanoid")
+       view = false
+     wait(0.3)
+       view = true
+     Username = (...)
 
-    --  local target = getPlr(Username)
-    --  repeat wait()
-    --  workspace.CurrentCamera.CameraSubject = target.Character.Humanoid
-    --  until view == false
+     local target = getPlr(Username)
+     repeat wait()
+     workspace.CurrentCamera.CameraSubject = target.Character.Humanoid
+     until view == false
 end)
 
 
@@ -261,16 +259,17 @@ end)
 --       InfiniteJumpEnabled = false
 --   end
 -- end)
+function autojump()
+  
 
-
-SkriptsSection:NewToggle("Auto Jump", "auto jumps", function(state)
-if state then
+SkriptsSection:NewToggle("Auto Jump", "auto jumps", function()
+    autojump = true
+      while autojump do 
     while true do wait()
 game.Players.LocalPlayer.Character.Humanoid.Jump = true --true~jumping
 end
 else
-    while true do wait()
-game.Players.LocalPlayer.Character.Humanoid.Jump = false --false~jumpingg
+      autojump = false
 end
 end
 end)
@@ -1091,7 +1090,6 @@ end)
 -- admin skripts
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
-
 AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
@@ -1104,22 +1102,6 @@ end)
 AdminSection:NewButton("Reviz Admin", "default prefix ; say ;cmds", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RqaZUrBZ"))()
 end)
-
--- AdminSection:NewButton("Nameless Admin", "type ;cmds", function()
--- --NA
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
-
---     if --byfron gui detekted
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/asd"))() then
-
--- loadstring(game:HttpGet("https://pastecode.dev/raw/ls5sz890/antiboot-bypassKlient",true))()
---     wait(106)
--- loadstring(game:HttpGet("https://pastecode.dev/raw/wvafknzn/fuxkbyfron-destroy.lua",true))()--END:byfrondestroyer
---     wait()
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
---     Notify("BYFRON DETEKTED", "DESTROYED THAT SHIT GTFO", 6)
---     end
--- end)
 
 AdminSection:NewButton("Universal Admin Panel", "admin panel", function()
 -- unvrsl admin --
