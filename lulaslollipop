@@ -52,12 +52,12 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptl
 --[made by lulaslollipop🍭]--
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Mar 28, 2024 [THE HUNT!🥚 IS\n ALMOST OVER!!!!]:","updates and add-ons to the skript will be here", {"Version: 8.4", "updates:", "Lollypop Admin(no byfron)Nameless remake kause\nthey assholes", "[THE HUNT: FIRST EDITION] SKRIPT LOADER", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 28, 2024 [THE HUNT!🥚 IS\n ALMOST OVER!!!!(2d)]:","updates and add-ons to the skript will be here", {"Version: 8.4", "updates:", "-added V3rge Bypasser(Fun)", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
 
---[LABELS]--he
+--[LABELS]--
 SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, " ..game.Players.LocalPlayer.Name.. "!")
 
 SkriptsSection:NewLabel("UID: " ..game.Players.LocalPlayer.UserId.. " | Akkount Age: " ..game.Players.LocalPlayer.AccountAge.. " day(s)")
@@ -128,12 +128,6 @@ function()
       Text = "anti afk enabled🍭",
       Duration = 5
   })
-end)
-
-SkriptsSection:NewButton("Fluxus Koral remake", "kredits Anya",
-function()
-  --fluxus remake(kredits to Anya)
-loadstring(game:HttpGet("https://pastecode.dev/raw/DhToGLHKE9/fluxusExekutor_lulaslollipopAnya",true))()
 end)
 
 local SkriptsSection = Skripts:NewSection("Skripts")
@@ -213,6 +207,15 @@ Duration = 3
 end
 end)
 --end toggle antisit
+SkriptsSection:NewButton("Anti-Fall (universal)", "it will tp u to the previous area before u fell",
+function()
+-- anti fall
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
+    wait(0.1)
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+end)
+
+--end:"ANTI"()
 
 --infjump.Konnekt
 SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
@@ -255,14 +258,6 @@ end)
 --   else
 -- jump = false
 -- end)fuxking stupid ass autojump
-
-SkriptsSection:NewButton("Anti-Fall (for obbys)", "it will tp u to the previous area before u fell",
-function()
--- anti fall
-loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
-
-  loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
-end)
 
 SkriptsSection:NewButton("Aimbot(R6 only)", "simple aimbot skript by me", function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
@@ -602,6 +597,11 @@ local SkriptsSection = Skripts:NewSection("Exekutors")
 SkriptsSection:NewButton("Arkeus X Exekutor", "android exekutor works for ios",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))()
 end)
+SkriptsSection:NewButton("Fluxus Koral remake", "kredits Anya&me",
+function()
+  --fluxus remake(kredits to Anya&🍭)
+loadstring(game:HttpGet("https://pastecode.dev/raw/DhToGLHKE9/fluxusExekutor_lulaslollipopAnya",true))()
+end)
 SkriptsSection:NewButton("KRNL Exekutor", "an exekutor",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))()
 end)
@@ -648,7 +648,6 @@ function()
 loadstring(game:HttpGet("https://pastebin.com/raw/yGxeT8zC", true))()
 -- exekutor gui
 end)
-
 
 --r15 animationz
 local SkriptsSection = Skripts:NewSection("R15 Animation")
@@ -1199,8 +1198,6 @@ FunSection:NewButton("XD", "XDDDDDDD", function()
   loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
 end)
 
-
-
 local FunSection = Fun:NewSection("Message Fun")
 
 FunSection:NewButton("Rizzer", "rizz", function()loadstring(game:HttpGet("https://pastecode.dev/raw/K1EI6AwS/rizzer_lulaslollipop",true))()
@@ -1216,8 +1213,9 @@ end)
 FunSection:NewButton("Diskord Emojis [example: :angry:]", "type the emoji name in between the kolons", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
 end)
+
 --[bypasses]--
-FunSection:NewLabel("Xhat Bypass")
+FunSection:NewLabel("Bypasses (no ban)")
 FunSection:NewButton("Explikit Bypasser🔞(100% safe)", "has an antilogger so u will not be banned", function()
   local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
   Library.DefaultColor = Color3.fromRGB(50,205,50)
@@ -1241,11 +1239,33 @@ end)
 FunSection:NewButton("NGA Bypasser(100% safe)", "has an antilogger so u will not be banned", function()--ngabypasser
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'J'..'h'..'8'..'r'..'s'..'l'..'a'..'5'..'/'..'r'..'a'..'w'), true))()
 end)
+
+FunSection:NewButton("V3rge Bypasser", "kredits to owner", function()
+    local executorEnviroment = debug.getfenv()
+    local Services = setmetatable({}, {
+      __index = function(_, serviceName)
+        if debug.getfenv(2) ~= executorEnviroment then
+          return nil;
+        end
+        return cloneref(game[serviceName])
+      end
+    })
+    local player = Services.Players.LocalPlayer
+    
+    repeat task.wait() until game:IsLoaded() and player.Character
+    
+    getgenv().options = ({...})[1]
+    
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/publicproduct.lua",true))()
+end)
+
 FunSection:NewButton("Spell kursewords (use L to toggle) \n(100% safe)", "use L tool to open/klose gui", function()
 -- spell out kurse word
 loadstring(game:HttpGet("https://pastebin.com/raw/xinPiBSU"))()
 loadstring(game:HttpGet("https://pastebin.com/raw/QzxqjgSf"))()
 end)
+
+
 
 FunSection:NewLabel("Kompliment Gen")
 FunSection:NewButton("Kompliment Random Player", "push to kompliment a random player", function()
