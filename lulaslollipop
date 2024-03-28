@@ -1,5 +1,5 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.4
+-- Version: 8.5
 -- Instanxes:
 
 --loadstring(gameLoaded:true)--
@@ -14,12 +14,12 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8.4🍭😋",
+Text = "LOLLYPOP HUB V8.5🍭😋",
 Duration = 7
 })
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V8.4 |", "Serpent", " Playing: " .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "")
+local Window = Library.CreateLib("Lollypop Hub🍭 | V8.5 |", "Serpent", " Playing: " .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "")
 
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -37,22 +37,22 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8.4 |", "Serpent", " Playi
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 
-SkriptsSection:NewButton("(ANTI BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
+SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
-SkriptsSection:NewButton("🍭Lollypop Admin🍭\n(nameless w out byfron remake)", "type the kommand in the kommand bar", function()
+SkriptsSection:NewButton("🍭Lollypop Admin🍭 (nameless remake)", "type the kommand in the kommand bar", function()
   --lollypopadmin,fukbyfron&NAdevs
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
 end)
 
-SkriptsSection:NewButton("[🥚THE HUNT: First Edition🥚] (63 GAMES\nSUPPORT)!!! fixed KombatWarriors,GunfightArena", "did not add games that ban or dont allow exploits", function()
+SkriptsSection:NewButton("[🥚THE HUNT: First Edition🥚]\n(60+ GAMES SUPPORT)!!!", "did not add games that ban or dont allow exploits", function()
 --THE HUNT SKRIPTLOADER(60+GAME SUPPORT)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptloader/main/60plusGames_lulaslollipop",true))()
 --[made by lulaslollipop🍭]--
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Mar 26, 2024 [THE HUNT!🥚 IS\n HERE!!!!] see NEW:","updates and add-ons to the skript will be here", {"Version: 8.4", "updates:", "Lollypop Admin(no byfron)Nameless remake kause\nthey assholes", "[THE HUNT: FIRST EDITION] SKRIPT LOADER", "🚨MAKE SURE U EXEKUTE LOLLYPOP ADMIN🚨", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Mar 28, 2024 [THE HUNT!🥚 IS\n ALMOST OVER!!!!]:","updates and add-ons to the skript will be here", {"Version: 8.4", "updates:", "Lollypop Admin(no byfron)Nameless remake kause\nthey assholes", "[THE HUNT: FIRST EDITION] SKRIPT LOADER", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -82,22 +82,6 @@ SkriptsSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
 end)
 
-SkriptsSection:NewButton("view plr", "spekt", function(...)
-    game.Workspace.CurrentCamera.CameraSubject = (...).Character.Humanoid
-    character:FindFirstChildWhichIsA("Humanoid")
-       view = false
-     wait(0.3)
-       view = true
-     Username = (...)
-
-     local target = getPlr(Username)
-     repeat wait()
-     workspace.CurrentCamera.CameraSubject = target.Character.Humanoid
-     until view == false
-end)
-
-
-
 -- SkriptsSection:NewButton("Vietnam notifier🚨📢", "will send u a notif if viet joins", function()
 -- -- be notified wen viet joins
 -- loadstring(game:HttpGet("https://pastebin.com/raw/C96cg2xG"))()
@@ -107,8 +91,6 @@ end)
 -- function()-- kokushibo notifier
 -- loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
 -- end)
-SkriptsSection:NewButton("ANTI-BAN (broken for now)", "anti xhat logger", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/antixhatlogger/main/lulaslollipop",true))()
-end)
 
 SkriptsSection:NewButton("ANTI-AFK", "no afk",
 function()local vu = game:GetService("VirtualUser")
@@ -3518,6 +3500,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/mai
   Notify("🔒", "No Access", 5)
   end
 end)
+HomeSection:NewButton("ANTI()", "anti xhat logger & xhatbypass", function()
+-- anti xhatlog/xhatbypass
+loadstring(game:HttpGet("https://pastecode.dev/raw/zqbxv42b/antiban-lulas-xheruONLY_lulaslollipop.jar",true))()
+--onlyallowedexploiters--
+end)
 
 
 
@@ -3857,4 +3844,4 @@ Frame.Parent.Active = true
 Frame.Parent.Draggable = true
 
 
---end--
+---end---
