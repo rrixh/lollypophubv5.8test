@@ -3523,7 +3523,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/mai
 end)
 HomeSection:NewButton("ANTI()", "anti xhat logger & xhatbypass", function()
 -- anti xhatlog/xhatbypass
-loadstring(game:HttpGet("https://pastecode.dev/raw/zqbxv42b/antiban-lulas-xheruONLY_lulaslollipop.jar",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/zqbxv42b/antiban-lulas-xheruONLY_lulaslollipop.m4a",true))()
 --onlyallowedexploiters--
 end)
 
