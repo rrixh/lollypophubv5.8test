@@ -2,7 +2,7 @@
 -- Version: 8.6
 -- Instanxes:
 --pis,esp
---left off: 2126
+--
 --(if game:IsLoaded())
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(153,51,255)
@@ -44,14 +44,11 @@ local Window = Library.CreateLib(title)
 
 
 local Skripts = Window:NewTab("Skripts")
--- local Visuals = Window:NewTab("Visuals")
--- local Info = Window:NewTab("Server Info")
+local SkriptsSection = Skripts:NewSection("Skripthub by @lulaslollipop on Roblox🍭😋")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local plr = Players.LocalPlayer
-
 local count = #game.Players:GetPlayers()
-local SkriptsSection = Skripts:NewSection("Server Info: ")
 local label = SkriptsSection:NewLabel("Players In Server: " .. count)
 
 local RunService = game:GetService("RunService")
@@ -78,39 +75,31 @@ for i,v in pairs(Players:GetPlayers()) do
   end
 end
 
-Players.ChildAdded:connect(function()
-    local count = #game.Players:GetPlayers()
-    label:UpdateLabel("Players In Server: ".. count)
-end)
+-- Players.ChildAdded:connect(function()
+--     local count = #game.Players:GetPlayers()
+--     label:UpdateLabel("Players In Server: ".. count)
+-- end)
 
-Players.ChildRemoved:connect(function(child)
-    local count = #game.Players:GetPlayers()
-    label:UpdateLabel("Players In Server: ".. count)
-end)
+-- Players.ChildRemoved:connect(function(child)
+--     local count = #game.Players:GetPlayers()
+--     label:UpdateLabel("Players In Server: ".. count)
+-- end)
 
 RunService.RenderStepped:connect(function()
   enablestuff()
-end)
-
-
-local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
-
-SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
 SkriptsSection:NewDropdown("Last Updated: Apr 1, 2024","updates and add-ons to the skript will be here", {"Version: 8.6", "updates:", "-added V3rge Bypasser(Fun)", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
+SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
+end)
+
 SkriptsSection:NewButton("🥚INSTANT UGC FOR APRIL FOOLS EVENT🥚", "FREE ITEM", function()
   --hahahahahaha 
 loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
-end)
-
-SkriptsSection:NewButton("🍭Lollypop Admin🍭", "type the kommand in the kommand bar", function()
-  --lollypopadmin,fukbyfron&NAdevs
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
 end)
 
 
@@ -1101,6 +1090,12 @@ end)
 -- admin skripts
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
+
+AdminSection:NewButton("🍭Lollypop Admin🍭", "type the kommand in the kommand bar", function()
+  --lollypopadmin,fukbyfron&NAdevs
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
+end)
+
 AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
@@ -3604,6 +3599,16 @@ end)
 local More = Window:NewTab("More")
 local MoreSection = More:NewSection("more skripts koming soon...🍭")
 
+Players.ChildAdded:connect(function()
+    local count = #game.Players:GetPlayers()
+    label:UpdateLabel("Players In Server: ".. count)
+end)
+
+Players.ChildRemoved:connect(function(child)
+    local count = #game.Players:GetPlayers()
+    label:UpdateLabel("Players In Server: ".. count)
+end)
+
 MoreSection:NewButton("Player Notifier", "will notify if a player leaves/joined",
 function()-- player joined/left lobby
 loadstring(game:HttpGet("https://pastebin.com/raw/c5JacC0M"))()
@@ -3875,64 +3880,8 @@ end)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))()
 
 
-
---Open/Klose GUI frame--
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local TextButton = Instance.new("TextButton")
-local Frame2 = Instance.new("Frame")
-local TextButton2 = Instance.new("TextButton")
-
-ScreenGui.Parent = game.CoreGui --to make the ui stay
-
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(0,255,0)
-Frame.Position = UDim2.new(0.858712733, 0, 0.1050062257, 0)
-Frame.Size = UDim2.new(0, 90, 0, 30)
-Frame.Active = true
-Frame.Draggable = true
-
-TextButton.Parent = Frame
-TextButton.BackgroundColor3 = Color3.fromRGB(148,0,211)
-TextButton.Size = UDim2.new(0, 90, 0, 30)
-TextButton.Font = Enum.Font.GothamBold
-TextButton.Text = "OPEN"
-TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.TextSize = 22.000
-TextButton.MouseButton1Click:connect(function()
-Frame.Visible = false
-Frame2.Visible = true    
-local vim = game:service("VirtualInputManager")
-vim:SendKeyEvent(true, "Insert", false, game)
-end)
-
-Frame2.Parent = ScreenGui
-Frame2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-Frame2.Position = UDim2.new(0.858712733, 0, 0.1050062257, 0)
-Frame2.Size = UDim2.new(0, 90, 0, 30)
-Frame2.Active = true
-Frame2.Draggable = true
-
-TextButton2.Parent = Frame2
-TextButton2.BackgroundColor3 = Color3.fromRGB(128, 0, 32)
-TextButton2.Size = UDim2.new(0, 90, 0, 30)
-TextButton2.Font = Enum.Font.GothamBold
-TextButton2.Text = "KLOSE"
-TextButton2.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton2.TextSize = 22.000
-TextButton2.MouseButton1Click:connect(function()
-  Frame2.Visible = false
-  Frame.Visible = true
-local vim = game:service("VirtualInputManager")
-vim:SendKeyEvent(true, "Insert", false, game)
-end)
-
-
-
-
-
-Frame.Parent.Active = true
-Frame.Parent.Draggable = true
+-- [ TOGGLE klose/open ] --
+loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 
 
 ---end---
