@@ -1,26 +1,35 @@
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.5
+-- Version: 8.6
 -- Instanxes:
-
---loadstring(gameLoaded:true)--
+--pis,esp
+--left off: 2126
+--(if game:IsLoaded())
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
+Library.DefaultColor = Color3.fromRGB(153,51,255)
 
 Library:Notification({
 Text = "🍭 Welkome to Lollypop Hub, " ..game.Players.LocalPlayer.Name.. "🍭",
 Duration = 8
-})--needme
+})
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
+Library.DefaultColor = Color3.fromRGB(153,51,255)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8.5🍭😋",
+Text = "LOLLYPOP HUB V8.6🍭😋",
 Duration = 7
-})
+})--endnotif
+
+
+-- [ uh ] --
+-- exploit = identifyexecutor()
+-- username = game.Players.LocalPlayer.Name
+-- gameID = game.PlaceId
+-- user = game.Players.LocalPlayer
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local Window = Library.CreateLib("Lollypop Hub🍭 | V8.5 |", "Serpent", " Playing: " .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "")
-
+local title = "Lollypop Hub🍭 | V8.6 | " .. identifyexecutor()
+local Window = Library.CreateLib(title)
+-- themes:
 ---//yum lollypop hub\\--
 -- LightTheme
 -- DarkTheme
@@ -33,60 +42,107 @@ local Window = Library.CreateLib("Lollypop Hub🍭 | V8.5 |", "Serpent", " Playi
 -- Serpent(new)
 --tools1134,skripts35,game1443,games2450
 
---skripts tab
+
 local Skripts = Window:NewTab("Skripts")
+-- local Visuals = Window:NewTab("Visuals")
+-- local Info = Window:NewTab("Server Info")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local plr = Players.LocalPlayer
+
+local count = #game.Players:GetPlayers()
+local SkriptsSection = Skripts:NewSection("Server Info: ")
+local label = SkriptsSection:NewLabel("Players In Server: " .. count)
+
+local RunService = game:GetService("RunService")
+getgenv().Enabled = false
+getgenv().espstuff =Color3.fromRGB(255,255,255)
+
+function enablestuff()
+for i,v in pairs(Players:GetPlayers()) do
+    if v~= plr and v.Character then
+        if not v.Character:FindFirstChild('ESP') then
+            local highlight = Instance.new('Highlight')
+            highlight.Name = 'ESP'
+            highlight.Parent = v.Character
+            highlight.Enabled = getgenv().Enabled
+            highlight.FillColor = getgenv().espstuff
+            highlight.OutlineColor = getgenv().espstuff
+        else
+            local highlight = v.Character:FindFirstChild('ESP')
+            highlight.Enabled = getgenv().Enabled
+            highlight.FillColor = getgenv().espstuff
+            highlight.OutlineColor = getgenv().espstuff
+        end
+    end
+  end
+end
+
+Players.ChildAdded:connect(function()
+    local count = #game.Players:GetPlayers()
+    label:UpdateLabel("Players In Server: ".. count)
+end)
+
+Players.ChildRemoved:connect(function(child)
+    local count = #game.Players:GetPlayers()
+    label:UpdateLabel("Players In Server: ".. count)
+end)
+
+RunService.RenderStepped:connect(function()
+  enablestuff()
+end)
+
+
 local SkriptsSection = Skripts:NewSection("Skript hub by lulaslollipop🍭😋")
 
 SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
-SkriptsSection:NewButton("🍭Lollypop Admin🍭 (nameless remake)", "type the kommand in the kommand bar", function()
+SkriptsSection:NewDropdown("Last Updated: Apr 1, 2024","updates and add-ons to the skript will be here", {"Version: 8.6", "updates:", "-added V3rge Bypasser(Fun)", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+print(currentOption)
+end)
+
+SkriptsSection:NewButton("🥚INSTANT UGC FOR APRIL FOOLS EVENT🥚", "FREE ITEM", function()
+  --hahahahahaha 
+loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
+end)
+
+SkriptsSection:NewButton("🍭Lollypop Admin🍭", "type the kommand in the kommand bar", function()
   --lollypopadmin,fukbyfron&NAdevs
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
 end)
 
-SkriptsSection:NewButton("[🥚THE HUNT: First Edition🥚]\n(60+ GAMES SUPPORT)!!!", "did not add games that ban or dont allow exploits", function()
---THE HUNT SKRIPTLOADER(60+GAME SUPPORT)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptloader/main/60plusGames_lulaslollipop",true))()
---[made by lulaslollipop🍭]--
-end)
-
-SkriptsSection:NewDropdown("Last Updated: Mar 28, 2024 [THE HUNT!🥚 IS\n ALMOST OVER!!!!(2d)]:","updates and add-ons to the skript will be here", {"Version: 8.4", "updates:", "-added V3rge Bypasser(Fun)", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "xhelulu,HG💚🍭🍜"}, function(currentOption)
-print(currentOption)
-end)
-
 
 --[LABELS]--
-SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, " ..game.Players.LocalPlayer.Name.. "!")
+SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, ".. game.Players.LocalPlayer.DisplayName .."!")
 
-SkriptsSection:NewLabel("UID: " ..game.Players.LocalPlayer.UserId.. " | Akkount Age: " ..game.Players.LocalPlayer.AccountAge.. " day(s)")
+SkriptsSection:NewLabel("User ID: "..game.Players.LocalPlayer.UserId.. " | Akkount Age: "..game.Players.LocalPlayer.AccountAge.." day(s)")
 
-SkriptsSection:NewLabel("Game Name: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."")
+SkriptsSection:NewLabel("Game Name: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\nGame ID: ".. game.PlaceId)
 
-SkriptsSection:NewLabel("Game ID: "..game.PlaceId.."")
-
-SkriptsSection:NewLabel("This Nigga Is Using: " ..identifyexecutor().."")
+SkriptsSection:NewLabel("This Nigga Is Using: " .. identifyexecutor())
 
 -- SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.." day(s)")
 --[LABELS done]--
 
+--[ ALL SKRIPTS ]--
+local SkriptsSection = Skripts:NewSection("Skripts:")
+SkriptsSection:NewToggle("Highlight Players", "esp players", function(state)
+    getgenv().Enabled = state
+end)
+
+SkriptsSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if broken", Color3.fromRGB(255,255,255), function(color)
+  getgenv().espstuff = color
+end)
 
 -- SKRIPTS BUTTONS
-SkriptsSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
--- lulas 99 fail memory skript
-loadstring(game:HttpGet(('https://pastebin.com/raw/DhLMep63'),true))()
-end)
-
-SkriptsSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
-loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
-end)
-
 SkriptsSection:NewButton("ANTI-BAN (fixed &working✅)", "anti-ban skript/antilogger", function()
     --just anti logger (safexhat)
 loadstring(game:HttpGet("https://pastecode.dev/raw/tarixx9o/lulas-antiban.jar",true))()
 end)
-  
+
+
 -- SkriptsSection:NewButton("Vietnam notifier🚨📢", "will send u a notif if viet joins", function()
 -- -- be notified wen viet joins
 -- loadstring(game:HttpGet("https://pastebin.com/raw/C96cg2xG"))()
@@ -96,6 +152,28 @@ end)
 -- function()-- kokushibo notifier
 -- loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
 -- end)
+SkriptsSection:NewButton("Anti-Xheat bypass\nUse: bypass any klient fly/fling detektion", "allows u to hide stuff on your klient", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+    wait()
+    --allows u to hide stuff on your klient
+    --kommon use: bypass any klient anti-xheat fly/fling detektion (hides bodymovers)
+loadstring(game:HttpGet("https://pastecode.dev/raw/0jvzh3eh/antiInstanxe-antixheatbypass_lulaslollipop.zip",true))()
+end)
+
+SkriptsSection:NewButton("Anti-Bang", "this will send u to void if they bang u", function()
+    -- anti bang exekuted
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))() 
+    -- this will tp u to the void killing people who use bang on u if they dont use workspace.FallenPartsDestroyHeight = 0/0 to bypass void limit
+loadstring(game:HttpGet("https://pastecode.dev/raw/wz0rgb10/antibang_lulaslollipop.mp3",true))()--antibang
+end)
+
+SkriptsSection:NewButton("Anti-Fall (universal)", "it will tp u to the previous area before u fell",
+function()
+-- anti fall
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
+    wait(0.01)
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+end)
 
 SkriptsSection:NewButton("ANTI-AFK", "no afk",
 function()local vu = game:GetService("VirtualUser")
@@ -114,7 +192,7 @@ Library:Notification({
 })
 end)
 
-SkriptsSection:NewButton("ANTI-AFK 2", "if 1 dont work",
+SkriptsSection:NewButton("ANTI-AFK 2", "selfe",
 function()
   --anti afk
   for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
@@ -129,48 +207,6 @@ function()
       Duration = 5
   })
 end)
-
-local SkriptsSection = Skripts:NewSection("Skripts")
-
--- SkriptsSection:NewToggle("godmode toggle test", "test", function(state)
---     if state then
---       local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
---       Library.DefaultColor = Color3.fromRGB(50,205,50)
-
---       Library:Notification({
---           Text = "godmode on✅",
---           Duration = 2.5
---       })
---       -- Z to Toggle
---       local player = game:GetService("Players").LocalPlayer
---       local UIS = game:GetService("UserInputService")
---       local lollypop = false
-
---       UIS.InputBegan:Connect(function(input, GPE)
---       if GPE then return end
---       if input.KeyCode == Enum.KeyCode.Z then
---       lollypop = not lollypop
---       end
---       end)
-
---       while task.wait() do
---       local parts = workspace:GetPartBoundsInRadius(player.Character:WaitForChild("HumanoidRootPart").Position, 10)
---       for _, part in ipairs(parts) do
---       part.CanTouch = lollypop
---       end
---       end
---     else
---       lollypop = not lollypop
-
---       local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
---       Library.DefaultColor = Color3.fromRGB(50,205,50)
-
---       Library:Notification({
---           Text = "godmode off❌",
---           Duration = 2.5
---       })
---     end
--- end)
 
 -- toggle anti sit
 SkriptsSection:NewToggle("Anti-Sit", "kinda good but i prefer using godmode", function(state)
@@ -207,15 +243,9 @@ Duration = 3
 end
 end)
 --end toggle antisit
-SkriptsSection:NewButton("Anti-Fall (universal)", "it will tp u to the previous area before u fell",
-function()
--- anti fall
-loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
-    wait(0.1)
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
-end)
 
 --end:"ANTI"()
+
 
 --infjump.Konnekt
 SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
@@ -290,13 +320,13 @@ game.Players.LocalPlayer.Character.Humanoid.Sit = false
 end
 end)
 
-SkriptsSection:NewButton("what does this do?", "???",
+SkriptsSection:NewButton("???", "???",
 function()
 --???--
 loadstring(game:HttpGet("https://pastebin.com/raw/DQ1a5ggY",true))()
 end)
 
-SkriptsSection:NewButton("Show chatBox (for games without it)", "good for games like evade w no msg box",
+SkriptsSection:NewButton("show msgs (for games without it)", "good for games like evade w no msg box",
 function()
 game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
 end)
@@ -1240,19 +1270,9 @@ FunSection:NewButton("NGA Bypasser(100% safe)", "has an antilogger so u will not
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'J'..'h'..'8'..'r'..'s'..'l'..'a'..'5'..'/'..'r'..'a'..'w'), true))()
 end)
 
-FunSection:NewButton("V3rge Bypasser", "kredits to owner", function()
-    local executorEnviroment = debug.getfenv()
-    local Services = setmetatable({}, {
-      __index = function(_, serviceName)
-        if debug.getfenv(2) ~= executorEnviroment then
-          return nil;
-        end
-        return cloneref(game[serviceName])
-      end
-    })
-    local player = Services.Players.LocalPlayer
-    
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/publicproduct.lua",true))()
+FunSection:NewButton("V3rge Bypasser(100% safe)", "kredits to owner", function()
+ --v3rge
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BakaPraselol/bypass/main/OrionHub.dev"))()
 end)
 
 FunSection:NewButton("Spell kursewords (use L to toggle) \n(100% safe)", "use L tool to open/klose gui", function()
@@ -1263,7 +1283,7 @@ end)
 
 
 
-FunSection:NewLabel("Kompliment Gen")
+FunSection:NewLabel("Kompliments")
 FunSection:NewButton("Kompliment Random Player", "push to kompliment a random player", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/0n4YDguK"))()
 end)
@@ -2103,25 +2123,65 @@ end)
 
 
 
-
 -- game skripts
-local Games = Window:NewTab("Games")
+local Games = Window:NewTab("Games ⭐️(FREE ugc)")
 local GamesSection = Games:NewSection("Games")
 
-GamesSection:NewLabel("FREE UGc SKRIPTS 2024")
---🐼🐼🐼🐼🐼🆓--
-GamesSection:NewLabel("🐼KUNG FU PANDA 4 OBBY🐼 \n[FREE SKADOOSH🥋EMOTE]")
-GamesSection:NewButton("autofarm(getallfood,instantwin", "free ugx", function()
+GamesSection:NewLabel("⭐️ 2024 INSTANT UGc ⭐️")
 
-    --kungfu:16078980231
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/KungFu"))()
-end)
-GamesSection:NewButton("teleport to game", "everybodyloveskungfufighting", function()
-    local PlaceId = 16078980231 -- kungfupanda4obby
+-- [ 🥚🥚ROBLOX EGG HUNT🥚🥚 ] --
+GamesSection:NewLabel("🥚Roblox Egg Hunt Event 2024🥚")
 
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+GamesSection:NewButton("go to Terrible DIY Paper Egg", "free ugx", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/dm174yjv/toEgg-instantUGc_lulaslollipop.jpg",true))()
 end)
---kungfu:end--
+
+GamesSection:NewButton("teleport to game(rekommended),\ngame is hard to find", "goto robloxegghunt2024", function()
+    --goto robloxegghunt2024:16962137393
+game:GetService("TeleportService"):Teleport(16962137393, game:GetService("Players").LocalPlayer)
+end)
+
+-- [ 🎒👯‍♀️🫂KARRY A FRIEND👯‍♀️🫂🎒 ] --
+GamesSection:NewLabel("Karry A Friend")
+
+GamesSection:NewButton("start ugc event", "free ugx", function()
+    --goto event
+loadstring(game:HttpGet("https://pastecode.dev/raw/7yrvjsw7/toUGcEVENT-karryAFriend_lulaslollipop.jpg",true))()
+end)
+
+GamesSection:NewButton("1)tp to ugc, 2)invite friends, 3)klaim", "free ugx", function()
+    --karry a friend instant:16962137393
+loadstring(game:HttpGet("https://paste-drop.com/save/CaRsVwCG09",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "goto karry a friend", function()
+    --tp to karry a friend
+  game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer)
+end)
+
+
+
+-- [ THE HUNT SKRIPTLOADER ] --
+GamesSection:NewLabel("🥚THE HUNT: First Edition 2024🥚 (event ended")
+GamesSection:NewButton("[🥚THE HUNT: First Edition 2024🥚]\n(60+ GAMES SUPPORT)!!!", "did not add games that ban or dont allow exploits", function()
+--THE HUNT SKRIPTLOADER(60+GAME SUPPORT)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptloader/main/60plusGames_lulaslollipop",true))()
+--[made by lulaslollipop🍭]--
+end)
+
+-- --🐼🐼🐼🐼🐼🆓--
+-- GamesSection:NewLabel("🐼KUNG FU PANDA 4 OBBY🐼 \n[FREE SKADOOSH🥋EMOTE]")
+-- GamesSection:NewButton("autofarm(getallfood,instantwin", "free ugx", function()
+
+--     --kungfu:16078980231
+--     loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/KungFu"))()
+-- end)
+-- GamesSection:NewButton("teleport to game", "everybodyloveskungfufighting", function()
+--     local PlaceId = 16078980231 -- kungfupanda4obby
+
+--     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+-- end)
+-- --kungfu:end--
 
 --🔪🩸🔪🩸🔪🩸
 GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE [FREE ITEM (cHUcKY BAcKPAcK)]")
@@ -2147,6 +2207,16 @@ GamesSection:NewButton("teleport to game", "💥🦖🦍🦖🦍🦖💥", funct
     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 --godzilla:end--
+
+GamesSection:NewLabel("99% Fail Obby")
+GamesSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
+-- lulas 99 fail memory skript
+loadstring(game:HttpGet(('https://pastebin.com/raw/DhLMep63'),true))()
+end)
+
+GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
+end)
 
 
 GamesSection:NewLabel("[Evade🏃🏽‍♂️💨]")
@@ -3813,7 +3883,7 @@ local TextButton = Instance.new("TextButton")
 local Frame2 = Instance.new("Frame")
 local TextButton2 = Instance.new("TextButton")
 
-ScreenGui.Parent = game.CoreGui
+ScreenGui.Parent = game.CoreGui --to make the ui stay
 
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(0,255,0)
