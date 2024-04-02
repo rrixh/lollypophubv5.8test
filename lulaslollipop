@@ -2134,10 +2134,15 @@ local GamesSection = Games:NewSection("Games")
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
 -- [ TOMMY PLAYS ] --
-GamesSection:NewButton("kollekt koins until ugc pops up\n(by Tora)(buxket hat)", "free ugx", function()
+GamesSection:NewButton("farm koins until ugc pops up\n(by Tora)(buxket hat)", "free ugx", function()
 --TOMMY PLAYS 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/ac7e71100b141578a85e69cee1b0eefc29c6ddbf/TommyPlay",true))()
 end)
+GamesSection:NewButton("teleport to game", "free ugx", function()
+--tommy plays game
+game:GetService("TeleportService"):Teleport(9129288160, game:GetService("Players").LocalPlayer)
+end)
+
 
 -- [ ⭐️🛼ULTA VERSE 🛼⭐️ ] --
 
