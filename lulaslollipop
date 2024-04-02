@@ -1,8 +1,8 @@
+--main8.6
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 8.6
 -- Instanxes:
 --pis,esp
---
 --(if game:IsLoaded())
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(153,51,255)
@@ -19,6 +19,21 @@ Text = "LOLLYPOP HUB V8.6🍭😋",
 Duration = 7
 })--endnotif
 
+-- local red = 192,192,192
+--light gray/light grey	=	211,211,211
+-- local brightre	=	255,105,180
+-- slateblue =	106,90,205
+-- mediumorchid	=	186,85,211
+-- mediumslateblue	=	123,104,238
+-- mediumpurple	=	147,112,219
+-- dodgerblue	=	30,144,255
+-- darkorange	=	255,140,0
+-- goldenrod	=	218,165,32
+-- yellowgreen	=	154,205,50
+-- darkturquoise	=	0,206,209
+-- turquoise	=	64,224,208
+-- mediumturquoise = 72,209,204
+local count = #game.Players:GetPlayers()
 
 -- [ uh ] --
 -- exploit = identifyexecutor()
@@ -27,8 +42,8 @@ Duration = 7
 -- user = game.Players.LocalPlayer
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local title = "Lollypop Hub🍭 | V8.6 | " .. identifyexecutor()
-local Window = Library.CreateLib(title)
+local lollypopHub = "Lollypop Hub🍭 | V8.6 | " .. identifyexecutor()
+local Window = Library.CreateLib(lollypopHub)
 -- themes:
 ---//yum lollypop hub\\--
 -- LightTheme
@@ -48,8 +63,8 @@ local SkriptsSection = Skripts:NewSection("Skripthub by @lulaslollipop on Roblox
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local plr = Players.LocalPlayer
-local count = #game.Players:GetPlayers()
-local label = SkriptsSection:NewLabel("Players In Server: " .. count)
+-- local count = #game.Players:GetPlayers()
+local label = SkriptsSection:NewLabel("Server Size: " .. count)
 
 local RunService = game:GetService("RunService")
 getgenv().Enabled = false
@@ -89,7 +104,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Apr 1, 2024","updates and add-ons to the skript will be here", {"Version: 8.6", "updates:", "-added V3rge Bypasser(Fun)", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Apr 2, 2024","updates and add-ons to the skript will be here", {"Version: 8.6", "updates:", "-added V3rge Bypasser(Fun)", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -97,18 +112,17 @@ SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "
 loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
-SkriptsSection:NewButton("🥚INSTANT UGC FOR APRIL FOOLS EVENT🥚", "FREE ITEM", function()
-  --hahahahahaha 
-loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
+SkriptsSection:NewButton("🍭 Admin (;cmds)", "type the kommand in the kommand bar", function()
+  --lollypopadmin,fukbyfron&NAdevs
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
 end)
-
 
 --[LABELS]--
 SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, ".. game.Players.LocalPlayer.DisplayName .."!")
 
 SkriptsSection:NewLabel("User ID: "..game.Players.LocalPlayer.UserId.. " | Akkount Age: "..game.Players.LocalPlayer.AccountAge.." day(s)")
 
-SkriptsSection:NewLabel("Game Name: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\nGame ID: ".. game.PlaceId)
+SkriptsSection:NewLabel("Game: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\nGame ID: ".. game.PlaceId)
 
 SkriptsSection:NewLabel("This Nigga Is Using: " .. identifyexecutor())
 
@@ -1090,11 +1104,6 @@ end)
 -- admin skripts
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
-
-AdminSection:NewButton("🍭Lollypop Admin🍭", "type the kommand in the kommand bar", function()
-  --lollypopadmin,fukbyfron&NAdevs
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
-end)
 
 AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
@@ -3601,12 +3610,12 @@ local MoreSection = More:NewSection("more skripts koming soon...🍭")
 
 Players.ChildAdded:connect(function()
     local count = #game.Players:GetPlayers()
-    label:UpdateLabel("Players In Server: ".. count)
+    label:UpdateLabel("Server Size: ".. count)
 end)
 
 Players.ChildRemoved:connect(function(child)
     local count = #game.Players:GetPlayers()
-    label:UpdateLabel("Players In Server: ".. count)
+    label:UpdateLabel("Server Size: ".. count)
 end)
 
 MoreSection:NewButton("Player Notifier", "will notify if a player leaves/joined",
@@ -3884,4 +3893,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/p
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 
 
----end---
+---end--
