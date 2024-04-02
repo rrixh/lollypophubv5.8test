@@ -104,7 +104,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Apr 2, 2024","updates and add-ons to the skript will be here", {"Version: 8.6", "updates:", "-added V3rge Bypasser(Fun)", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Apr 2, 2024","updates and add-ons to the skript will be here", {"Version: 8.6", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2128,10 +2128,85 @@ end)
 
 
 -- game skripts
-local Games = Window:NewTab("Games ⭐️(FREE ugc)")
+local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
-GamesSection:NewLabel("⭐️ 2024 INSTANT UGc ⭐️")
+GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
+
+-- [ ⭐️🛼ULTA VERSE 🛼⭐️ ] --
+
+GamesSection:NewLabel("🛹ULTAVERSE⛸️")
+
+GamesSection:NewButton("start", "free ugx", function()
+    --start area inf to work
+loadstring(game:HttpGet("https://pastecode.dev/raw/yybqw7w5/startInfPoints-ultaverse_lulaslollipop.jpg",true))()
+end)
+GamesSection:NewButton("inf points (skript by Tora)\n(no key,easy)", "free ugx", function()--inf points
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Ultaverse",true))()
+end)
+GamesSection:NewButton("teleport to game", "free ugx", function()
+    --tp to ultaverse
+game:GetService("TeleportService"):Teleport(8980446061, game:GetService("Players").LocalPlayer)
+end)
+
+
+-- [ ⭐️🏋STRONGMAN SIMUALTOR🏋️‍♀️⭐️ ] --
+GamesSection:NewLabel("⭐️🏋️‍♀️STRONGMAN SIMUALTOR🏋️‍♀️⭐️")
+GamesSection:NewButton("strongman autofarm (skript by Tora)\n(no key)", "free ugx", function()
+    --swordstrongman
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SwordStrongman",true))()
+end)
+GamesSection:NewButton("strongman autofarm (skript by BaconBoss)\n(key,has more)", "free ugx", function()
+    --strongman sim skript/id:6766156863
+loadstring(game:HttpGet("https://pastefy.app/TwNiYO5Y/raw",true))()
+end)
+GamesSection:NewButton("teleport to game", "free ugx", function()
+    --tp to strongman sim game
+game:GetService("TeleportService"):Teleport(6766156863, game:GetService("Players").LocalPlayer)
+end)
+
+
+-- [🗼TOWER HEROES🦸] --
+GamesSection:NewLabel("🗼 TOWER HEROES 🦸")
+
+GamesSection:NewButton("Tower Heroes (skript by Tora)", "free ugx", function()
+    --towerheroes egg
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/EGGTowerHero",true))()
+end)
+
+GamesSection:NewButton("goto desk", "free ugx", function()
+  --desk
+loadstring(game:HttpGet("https://pastecode.dev/raw/1uc9v5c3/towerheroes-desk_lulaslollipop.jpg",true))()
+end)
+
+GamesSection:NewButton("Read steps 1-2", "free ugx", function()
+  --info 1-2
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
+  Notify("🍭Tower Heroes (Future Egg)", "1) Tap progress where the red arrow is lokated\n 2) Tap 'spexial maps' and selekt Play Map on\n'The Library' map and press Start", 6.6)
+end)
+
+GamesSection:NewButton("Read steps 3-5", "free ugx", function()
+  --info 3-5
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
+  Notify("🍭Tower Heroes (Future Egg)", "3) Go to the desk\n4) Use Skript to match the shapes with the numbers to get\nyour kode\n5) use 'fov 20' in infinite yield to zoom if sheet is too small", 6.3)
+  wait(0.01)
+  --IY main
+loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
+end)
+
+GamesSection:NewButton("Read steps 6-8", "free ugx", function()
+  --info 6-8
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
+  Notify("🍭Tower Heroes (Future Egg)", "6) After u have your kode leave the game and join again\n7) On the left side is a Roblox Logo, tap to input kode for item\n8) If kode didnt work u input it wrong or item is sold", 7.3)
+end)
+
+GamesSection:NewButton("teleport to game", "free ugx", function()
+    --tp to towerheroes
+game:GetService("TeleportService"):Teleport(4646477729, game:GetService("Players").LocalPlayer)
+end)
+-- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+
+
 
 -- [ 🥚🥚ROBLOX EGG HUNT🥚🥚 ] --
 GamesSection:NewLabel("🥚Roblox Egg Hunt Event 2024🥚")
@@ -3893,4 +3968,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/p
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 
 
----end--
+---end---
