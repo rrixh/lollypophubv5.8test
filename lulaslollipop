@@ -2144,6 +2144,9 @@ end)
 GamesSection:NewButton("inf points (skript by Tora)\n(no key,easy)", "free ugx", function()--inf points
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Ultaverse",true))()
 end)
+GamesSection:NewButton("inf points (skript by Bacon)\n(key,Toras might not work idk)", "free ugx", function()--ultaverse inf pt
+loadstring(game:HttpGet("https://pastefy.app/nSUUKWrJ/raw",true))()
+end)
 GamesSection:NewButton("teleport to game", "free ugx", function()
     --tp to ultaverse
 game:GetService("TeleportService"):Teleport(8980446061, game:GetService("Players").LocalPlayer)
