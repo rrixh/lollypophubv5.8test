@@ -2133,7 +2133,8 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
--- [ TOMMY PLAYS ] --
+-- [ 👦🏻TOMMY PLAYS👦🏻 ] --
+GamesSection:NewLabel("👦🏻TOMMY PLAYS👦🏻UGC")
 GamesSection:NewButton("farm koins until ugc pops up\n(by Tora)(buxket hat)", "free ugx", function()
 --TOMMY PLAYS 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/ac7e71100b141578a85e69cee1b0eefc29c6ddbf/TommyPlay",true))()
@@ -2146,7 +2147,7 @@ end)
 
 -- [ ⭐️🛼ULTA VERSE 🛼⭐️ ] --
 
-GamesSection:NewLabel("🛹ULTAVERSE⛸️")
+GamesSection:NewLabel("🛹ULTAVERSE⛸️UGC")
 
 GamesSection:NewButton("start", "free ugx", function()
     --start area inf to work
@@ -2165,7 +2166,7 @@ end)
 
 
 -- [ ⭐️🏋STRONGMAN SIMUALTOR🏋️‍♀️⭐️ ] --
-GamesSection:NewLabel("⭐️🏋️‍♀️STRONGMAN SIMUALTOR🏋️‍♀️⭐️")
+GamesSection:NewLabel("⭐️🏋️‍♀️STRONGMAN SIMUALTOR🏋️‍♀️⭐️UGC")
 GamesSection:NewButton("strongman autofarm (skript by Tora)\n(no key)", "free ugx", function()
     --swordstrongman
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SwordStrongman",true))()
@@ -2181,7 +2182,7 @@ end)
 
 
 -- [🗼TOWER HEROES🦸] --
-GamesSection:NewLabel("🗼 TOWER HEROES 🦸")
+GamesSection:NewLabel("🗼 TOWER HEROES 🦸UGC")
 
 GamesSection:NewButton("Tower Heroes (skript by Tora)", "free ugx", function()
     --towerheroes egg
@@ -2218,6 +2219,8 @@ GamesSection:NewButton("teleport to game", "free ugx", function()
     --tp to towerheroes
 game:GetService("TeleportService"):Teleport(4646477729, game:GetService("Players").LocalPlayer)
 end)
+
+GamesSection:NewLabel("🏁end of free UGc skripts🏁")
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
 
 
@@ -2225,6 +2228,18 @@ end)
 -- [ 🥚🥚ROBLOX EGG HUNT🥚🥚 ] --
 GamesSection:NewLabel("🥚Roblox Egg Hunt Event 2024🥚")
 
+-- [ 🚘🚗VEHIKLE LEGENDS🚗⛽️ ] --
+GamesSection:NewLabel("🚘VEHIKLE LEGENDS🛵(EGG HUNT)")
+GamesSection:NewButton("🥚Find all EGG🥚(Tora)", "free ugx", function()
+--vehikle legends tora
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/d91a987e102b62817da769ccb0862fe3cb95e360/EGGVehicleLegends",true))()
+end)
+GamesSection:NewButton("teleport to game", "free ugx", function()
+--vlegends tp
+loadstring(game:HttpGet("https://pastecode.dev/raw/f3hzw927/goto-VLEGENDS_lulaslollipop.jpg",true))()
+end)
+
+GamesSection:NewLabel("🥚Roblox Egg Hunt 2024🥚")
 GamesSection:NewButton("go to Terrible DIY Paper Egg", "free ugx", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/dm174yjv/toEgg-instantUGc_lulaslollipop.jpg",true))()
 end)
@@ -2233,6 +2248,9 @@ GamesSection:NewButton("teleport to game(rekommended),\ngame is hard to find", "
     --goto robloxegghunt2024:16962137393
 game:GetService("TeleportService"):Teleport(16962137393, game:GetService("Players").LocalPlayer)
 end)
+
+GamesSection:NewLabel("🏁🥚END OF EGGHUNT 2024")
+-- [ 🏁🥚END ROBLOX EGG HUNT🥚🏁 ] --
 
 -- [ 🎒👯‍♀️🫂KARRY A FRIEND👯‍♀️🫂🎒 ] --
 GamesSection:NewLabel("Karry A Friend")
