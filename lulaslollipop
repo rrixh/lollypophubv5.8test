@@ -1,6 +1,6 @@
---main8.6
+--main8.7
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.6
+-- Version: 8.
 -- Instanxes:
 --pis,esp
 --(if game:IsLoaded())
@@ -15,7 +15,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(153,51,255)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8.6🍭😋",
+Text = "LOLLYPOP HUB V8.7🍭😋",
 Duration = 7
 })--endnotif
 
@@ -42,7 +42,7 @@ local count = #game.Players:GetPlayers()
 -- user = game.Players.LocalPlayer
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local lollypopHub = "Lollypop Hub🍭 | V8.6 | " .. identifyexecutor()
+local lollypopHub = "Lollypop Hub🍭 | V8.7 | " .. identifyexecutor()
 local Window = Library.CreateLib(lollypopHub)
 -- themes:
 ---//yum lollypop hub\\--
@@ -104,7 +104,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Apr 2, 2024","updates and add-ons to the skript will be here", {"Version: 8.6", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Apr 3, 2024","updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "- 2 FREE ugc skript[Last to Leave]\n(Games)" "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2126,12 +2126,23 @@ end)
 
 
 
-
 -- game skripts
 local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
+
+-- [ 💨⭕️ Last to Leave ⭕️💨 ] --
+
+GamesSection:NewLabel(" ⭕️ Last to Leave ⭕️2 UGC")
+GamesSection:NewButton("Last to Leave\n(reindeer hat & pumpkin hat)", "free ugx", function()
+--last to leavelula:8305160617
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/last-to-leave/main/obf-8Adf82hs82hs8273891918_rrixh-lulaslollipop",true))()
+end)
+GamesSection:NewButton("teleport to game", "free ugx", function()
+--go last to leave
+game:GetService("TeleportService"):Teleport(8305160617, game:GetService("Players").LocalPlayer)
+end)
 
 -- [ 👦🏻TOMMY PLAYS👦🏻 ] --
 GamesSection:NewLabel("👦🏻TOMMY PLAYS👦🏻UGC")
