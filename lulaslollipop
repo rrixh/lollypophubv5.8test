@@ -1,6 +1,6 @@
 --main8.7
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.
+-- Version: 8.7
 -- Instanxes:
 --pis,esp
 --(if game:IsLoaded())
@@ -104,7 +104,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Apr 4, 2024","updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Apr 4, 2024","updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added Outfit Square INSTANT ugx", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2144,6 +2144,20 @@ end)
 GamesSection:NewButton("teleport to game", "MULTIPLE FREE ugx", function()
 --go lunxhable playables
 game:GetService("TeleportService"):Teleport(14565246812, game:GetService("Players").LocalPlayer)
+end)
+
+-- [ 👗👔 Outfit Square 👔👗 ] --
+
+GamesSection:NewLabel("👗👔 Outfit Square 👔👗")
+
+GamesSection:NewButton("Klaim item", "free ugx", function()
+--outfit square instant
+loadstring(game:HttpGet("https://pastecode.dev/raw/hklwq3qk/outfitsquare-instantugx.mp3",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "free ugx", function()
+--go outfit square
+game:GetService("TeleportService"):Teleport(16874704673, game:GetService("Players").LocalPlayer)
 end)
 
 -- [ 💨⭕️ Last to Leave ⭕️💨 ] --
