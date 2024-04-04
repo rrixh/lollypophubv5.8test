@@ -2132,11 +2132,23 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
+GamesSection:NewLabel("💃🏽🕺🏾 AVNU: Where Musik Meets FT. WesGhost")
+
+GamesSection:NewButton("skript", "FREE ugx", function()
+--AVNU instant item by me
+loadstring(game:HttpGet("https://pastecode.dev/raw/hb3q9j7e/AVNU-instantUGc.9283839372837282828obf_ulaslollipop.mp4",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--avnu
+game:GetService("TeleportService"):Teleport(12108137135, game:GetService("Players").LocalPlayer)
+end)
+
 
 
 -- [ 🤖 AI TYKOON 🤖 ] --
 
---GamesSection:NewLabel("🤖 AI TYKOON 🤖")
+GamesSection:NewLabel("🤖 AI TYKOON 🤖")
 
 GamesSection:NewButton("Auto tykoon", "FREE ugx", function()
 --ai tykoon
