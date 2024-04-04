@@ -104,7 +104,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Apr 3, 2024","updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Apr 4, 2024","updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2131,6 +2131,20 @@ local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
+
+-- [ 🥪 Lunxhable Playables 🥪 ] --
+
+GamesSection:NewLabel(" 🥪 Lunxhable Playables 🥪\nMULTIPLE FREE INSTANT UGC(thanks Tora)")
+
+GamesSection:NewButton("Enter all kodes, G points", "MULTIPLE FREE ugx", function()
+--lunxhable:14565246812
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4c8940890035f7d0435c7e01bbb1788cd15365d4/Lunchables",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "MULTIPLE FREE ugx", function()
+--go lunxhable playables
+game:GetService("TeleportService"):Teleport(14565246812, game:GetService("Players").LocalPlayer)
+end)
 
 -- [ 💨⭕️ Last to Leave ⭕️💨 ] --
 
