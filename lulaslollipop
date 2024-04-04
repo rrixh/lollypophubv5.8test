@@ -104,7 +104,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Apr 4, 2024","updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added Outfit Square INSTANT ugx", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Apr 4, 2024","updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added AI🤖 TYKOON FREE UGc", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2131,6 +2131,22 @@ local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
+
+
+
+-- [ 🤖 AI TYKOON 🤖 ] --
+
+--GamesSection:NewLabel("🤖 AI TYKOON 🤖")
+
+GamesSection:NewButton("Auto tykoon", "FREE ugx", function()
+--ai tykoon
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/5c1823e12f1830a8b23309a4d53a7d72e1a32d2f/AITycoon",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--go aitykoon
+game:GetService("TeleportService"):Teleport(16121315773, game:GetService("Players").LocalPlayer)
+end)
 
 -- [ 🥪 Lunxhable Playables 🥪 ] --
 
