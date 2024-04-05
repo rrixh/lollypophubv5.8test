@@ -2389,7 +2389,7 @@ end)
 GamesSection:NewLabel("99% Fail Obby")
 GamesSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
-loadstring(game:HttpGet(('https://pastebin.com/raw/DhLMep63'),true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/22iezhpd/99uwu.obf928392872828_lulaslollipop.png",true))()
 end)
 
 GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
