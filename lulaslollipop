@@ -107,7 +107,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) 🌟ULTIMATE EASY OBBY INSTANT UGX:", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW)💥ANIME ENERGY SIMULATOR FREE UGX", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2135,6 +2135,19 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
+GamesSection:NewLabel("💥 ANIME ENERGY SIMULATOR 💥")
+
+GamesSection:NewButton("autofarm", "FREE ugx", function()
+--anime energy sim💥🦹
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/96cb4e16d8bbb7e5c3dc83f053cdfab488d737f4/AnimeEnergy",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE instant ugx", function()
+--anime energy go
+game:GetService("TeleportService"):Teleport(16622178021, game:GetService("Players").LocalPlayer)
+end)
+
+
 GamesSection:NewLabel("🌟Ultimate Easy Obby🌟")
 
 GamesSection:NewButton("instant item", "FREE ugx", function()
@@ -3388,6 +3401,11 @@ end)
 FeSection:NewButton("FE Fish", "(need hat) Parrot Fishfaxe", function()
 -- fe fish
 loadstring(game:HttpGet(('https://pastefy.app/yrp6En96/raw'),true))()
+end)
+
+FeSection:NewButton("FE Fish", "(need hat) Parrot Fishfaxe", function()
+--fe telek v3
+loadstring(game:HttpGet("https://pastecode.dev/raw/8472d704/FEteleknesisv3_lulaslollipop.mp3",true))()
 end)
 
 FeSection:NewButton("FE Ragdoll Yourself", "reset or die to disable", function()loadstring(game:HttpGet("https://pastebin.com/raw/VY5d58xz"))()
