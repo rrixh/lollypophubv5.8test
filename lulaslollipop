@@ -2135,6 +2135,18 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
+GamesSection:NewLabel("🌟Ultimate Easy Obby🌟")
+
+GamesSection:NewButton("instant item", "FREE ugx", function()
+--speksavers tora
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/f5935d7c60cf236187698cc5ff8825e99a18121a/Specsavers",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE instant ugx", function()
+--ultimate obby go
+game:GetService("TeleportService"):Teleport(10760024537, game:GetService("Players").LocalPlayer)
+end)
+
 --🔪🩸🔪🩸🔪🩸
 GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE [FREE ITEM (cHUcKY BAcKPAcK)]")
 GamesSection:NewButton("🔪AUTOFARM (FREE PIG HEAD UGX)", "ToraIsMe", function()--xhuxky:16578847473
@@ -4120,4 +4132,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/p
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 
 
----end--
+---end---
