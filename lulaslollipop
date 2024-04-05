@@ -107,7 +107,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) FREE UGX for GRIEFVILLE🩸🔪:", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) 🌟ULTIMATE EASY OBBY INSTANT UGX:", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
