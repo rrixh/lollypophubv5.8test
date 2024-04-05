@@ -2132,7 +2132,7 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
-GamesSection:NewLabel("🌿🌱 CHANGIVERSE 🌱🌿")
+GamesSection:NewLabel("🌿🌱 CHANGIVERSE 🌱🌿\n thx Tora")
 
 GamesSection:NewButton("🌿🌱MANY FREE UGX THE LONGER U\nAUTOFARM🌿🌱", "MANY FREE ugx", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/xhangiverseXTora/main/freeugxSkripts/autofarm-infseed_lulaslollipop",true))()
