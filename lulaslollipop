@@ -4120,4 +4120,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/p
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 
 
----end---
+---end--
