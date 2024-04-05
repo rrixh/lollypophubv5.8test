@@ -104,7 +104,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("Last Updated: Apr 4, 2024","updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added AI🤖 TYKOON FREE ugx", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE UGc SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("Last Updated: Apr 5, 2024 (NEW UGX):", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "-added 🌿cHANGIVERSE(2 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2131,6 +2131,18 @@ local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
+
+GamesSection:NewLabel("🌿🌱 CHANGIVERSE 🌱🌿")
+
+GamesSection:NewButton("🌿🌱MANY FREE UGX THE LONGER U\nAUTOFARM🌿🌱", "MANY FREE ugx", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/xhangiverseXTora/main/freeugxSkripts/autofarm-infseed_lulaslollipop",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "MANY FREE🌿🌱 ugx", function()
+--avnu
+game:GetService("TeleportService"):Teleport(11576508871, game:GetService("Players").LocalPlayer)
+end)
+
 
 GamesSection:NewLabel("💃🏽🕺🏾 AVNU: Where Musik Meets FT. WesGhost")
 
