@@ -107,7 +107,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("NEW FREE UGX:", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "karate fight sim FREE UGX🥋 "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) FREE UGX for Prinxe Of Egypt:", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨", "karate fight sim FREE UGX🥋 "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2134,6 +2134,19 @@ local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
+
+GamesSection:NewLabel("[+13 🐰| Prince Of Egypt] TOD")
+
+GamesSection:NewButton("🇪🇬 auto headphone (no key) (BaconBoss) ", "FREE ugx", function()
+--auto kollekt ugx prinxe of egypt
+loadstring(game:HttpGet(('https://pastefy.app/WwFIUeQo/raw'),true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE egypt ugx", function()
+--egypt go
+game:GetService("TeleportService"):Teleport(12262046571, game:GetService("Players").LocalPlayer)
+end)
+
 
 GamesSection:NewLabel("🌿🌱 CHANGIVERSE 🌱🌿(thx Tora) (9 EASY FREE\nUGX)")
 
