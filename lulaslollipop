@@ -1108,11 +1108,12 @@ end)
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
 
-AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
+AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
-AdminSection:NewButton("Infinite Yield Mobile setting", "has a Keep Ui Open option settings", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nw589b1f/infiniteyield-mobile",true))()
+AdminSection:NewButton("Infinite Yield (kustom)", "edited by me with added kommands", function()
+  --Infiniteyield main
+loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
 end)
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
@@ -2198,7 +2199,7 @@ end)
 
 GamesSection:NewLabel("🌌 Sol's RNG 🌌")
 
-GamesSection:NewButton("Find Eggs (Tora)", "FREE ugx", function()
+GamesSection:NewButton("Find Eggs, esp (Tora)", "FREE ugx", function()
 --sols rng tora find eggs
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/068a73e1ba670a0e8b7b5700680cf7c4c2ce0cad/EGGSolsRNG",true))()
 end)
