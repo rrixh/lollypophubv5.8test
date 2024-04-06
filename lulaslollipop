@@ -107,7 +107,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) ⭐️🛼ULTA VERSE 🛼⭐️ 2nd drop", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨","(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨","(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2159,6 +2159,11 @@ end)
 
 
 GamesSection:NewLabel("🌟Ultimate Easy Obby🌟")
+
+GamesSection:NewButton("instant green shades💚🕶️ (2ND drop)", "FREE ugx", function()
+--instant shades
+loadstring(game:HttpGet(('https://pastefy.app/dwaf6LSh/raw'),true))()
+end)
 
 GamesSection:NewButton("instant item", "FREE ugx", function()
 --speksavers tora
