@@ -2145,6 +2145,18 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
+--GamesSection:NewLabel("soonNewSkript")
+
+GamesSection:NewButton("soon...🍭", "FREE ugx", function()
+print("skript soon...🍭")
+end)
+
+--GamesSection:NewButton("teleport to --game", "FREE ugx", function()
+--tp to
+--game:GetService("TeleportService"):Teleport(IDGOESHEREBRO, --game:GetService("Players").LocalPlayer)
+--end)
+
+
 GamesSection:NewLabel("[UGX] 🤓Math Answer or Die")
 
 GamesSection:NewButton("Auto answer(🥓)", "FREE ugx", function()
