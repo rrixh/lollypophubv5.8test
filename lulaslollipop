@@ -107,7 +107,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) 🌟[UGX] 🤓Math Answer or Die", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) 🌟[UGX] 🤓Math Answer or Die", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2180,6 +2180,32 @@ end)
 GamesSection:NewButton("teleport to game", "FREE ugx", function()
 --bulked up tp go
 game:GetService("TeleportService"):Teleport(6847090259, game:GetService("Players").LocalPlayer)
+end)
+
+
+GamesSection:NewLabel("🤺 [RELEASE] Bladers: Rebirth 🤺")
+
+GamesSection:NewButton("Autofarm kash&more (Tora)", "FREE ugx", function()
+--bladers ugx
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4590ce7a1600f1725086442b79cc5b1b67d385d5/Bladers",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--bladers tp go
+game:GetService("TeleportService"):Teleport(15423741735, game:GetService("Players").LocalPlayer)
+end)
+
+
+GamesSection:NewLabel("🌌 Sol's RNG 🌌")
+
+GamesSection:NewButton("Find Eggs (Tora)", "FREE ugx", function()
+--sols rng tora find eggs
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/068a73e1ba670a0e8b7b5700680cf7c4c2ce0cad/EGGSolsRNG",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--sols rng tp go
+game:GetService("TeleportService"):Teleport(15532962292, game:GetService("Players").LocalPlayer)
 end)
 
 
