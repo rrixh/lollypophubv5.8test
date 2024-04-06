@@ -107,7 +107,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW)💥ANIME ENERGY SIMULATOR FREE UGX", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨MAKE SURE U EXEKUTE ANTI-BYFRON🚨",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) 📸The Maze skript", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -1237,6 +1237,11 @@ end)
 
 local FunSection = Fun:NewSection("Message Fun")
 
+FunSection:NewButton("Fake Data Leaker", "leak data troll", function()
+--dataleak
+loadstring(game:HttpGet("https://pastecode.dev/raw/px2detsx/fakedataleak_lulaslollipop.jpg",true))()
+end)
+
 FunSection:NewButton("Rizzer", "rizz", function()loadstring(game:HttpGet("https://pastecode.dev/raw/K1EI6AwS/rizzer_lulaslollipop",true))()
 end)
 
@@ -1628,6 +1633,11 @@ end)
 -- hubs and gui
 local Hub = Window:NewTab("Hubs & GUIs")
 local HubSection = Hub:NewSection("everything u need😋🍭")
+
+HubSection:NewButton("k00pkid gui (Reupload)", "k000000000pppppppp", function()
+        --k00p revival skript       
+loadstring(game:HttpGet("https://pastecode.dev/raw/tb4x2127/k00pkidRevival_lulaslollipop.mp3",true))()
+end)
 
 HubSection:NewButton("Roblox Innovation Rewards\n(kollekt badges/items)", "autokollekt badges/kubes", function()
         --voting hub skript       
@@ -2309,7 +2319,6 @@ GamesSection:NewButton("teleport to game", "free ugx", function()
 game:GetService("TeleportService"):Teleport(8980446061, game:GetService("Players").LocalPlayer)
 end)
 
-
 -- [ ⭐️🏋STRONGMAN SIMUALTOR🏋️‍♀️⭐️ ] --
 GamesSection:NewLabel("⭐️🏋️‍♀️STRONGMAN SIMUALTOR🏋️‍♀️⭐️UGC")
 GamesSection:NewButton("strongman autofarm (skript by Tora)\n(no key)", "free ugx", function()
@@ -2425,33 +2434,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptl
 --[made by lulaslollipop🍭]--
 end)
 
--- --🐼🐼🐼🐼🐼🆓--
--- GamesSection:NewLabel("🐼KUNG FU PANDA 4 OBBY🐼 \n[FREE SKADOOSH🥋EMOTE]")
--- GamesSection:NewButton("autofarm(getallfood,instantwin", "free ugx", function()
-
---     --kungfu:16078980231
---     loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/KungFu"))()
--- end)
--- GamesSection:NewButton("teleport to game", "everybodyloveskungfufighting", function()
---     local PlaceId = 16078980231 -- kungfupanda4obby
-
---     game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
--- end)
--- --kungfu:end--
-
---🔪🩸🔪🩸🔪🩸
-GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE [FREE ITEM (cHUcKY BAcKPAcK)]")
-GamesSection:NewButton("🔪autofarm by ToraIsMe", "ToraIsMe", function()--xhuxky:16578847473
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
-end)
-GamesSection:NewButton("teleport to game", "🩸🩸🔪🩸🔪🩸🔪", function()
-    local PlaceId = 16578847473 -- xhuxky
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
---xhuxky:end--
-
-
 --🦍🦖🦍🦖🦍🦖
 GamesSection:NewLabel("🦖GODZILLA X KONG OBBY🦍 \n[FREE ITEMS]")
 GamesSection:NewButton("orbs autofarm by ToraIsMe", "free ugx", function()--godzilla:16462849084
@@ -2460,11 +2442,11 @@ end)
 GamesSection:NewButton("teleport to game", "💥🦖🦍🦖🦍🦖💥", function()
     local PlaceId = 16462849084 -- godzila
 
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
 end)
 --godzilla:end--
 
-GamesSection:NewLabel("99% Fail Obby")
+GamesSection:NewLabel("😩99% Fail Obby😩")
 GamesSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
 loadstring(game:HttpGet("https://pastecode.dev/raw/22iezhpd/99uwu.obf928392872828_lulaslollipop.png",true))()
@@ -2474,6 +2456,12 @@ GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
 end)
 
+
+GamesSection:NewLabel("🔦📸 The Maze 📸🔦")
+GamesSection:NewButton("(new) mob esp, get items, teleports & more", "good skript used myself", function()
+  --the maze skript by lulas
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/the-maze/lulas/1t2o3msn0f3oa3im9ci_lulaslollipop",true))()
+end)
 
 GamesSection:NewLabel("[Evade🏃🏽‍♂️💨]")
 GamesSection:NewButton("show messages", "shows xhat kause evade dont allow it", function()
