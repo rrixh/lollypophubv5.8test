@@ -1,6 +1,6 @@
---main8.7
+--main8.8
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.7
+-- Version: 8.8
 -- Instanxes:
 --pis,esp
 --(if game:IsLoaded())
@@ -42,7 +42,7 @@ local count = #game.Players:GetPlayers()
 -- user = game.Players.LocalPlayer
 
 --last update
-local LastUpdate = "Last Update: Apr 5, 2024"
+local LastUpdate = "Last Update: Apr 6, 2024"
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
 local lollypopHub = "Lollypop Hub🍭 | V8.7 | " .. identifyexecutor().. " | " .. LastUpdate
@@ -107,7 +107,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "updates and add-ons to the skript will be here", {"Version: 8.7", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨","(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) 🌟[UGX] 🤓Math Answer or Die", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2144,6 +2144,32 @@ local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
+
+GamesSection:NewLabel("[UGX] 🤓Math Answer or Die")
+
+GamesSection:NewButton("Auto answer(🥓)", "FREE ugx", function()
+--auto answer🤓
+loadstring(game:HttpGet(('https://pastefy.app/H4Suuo6w/raw'),true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--answer or die tp
+game:GetService("TeleportService"):Teleport(16605144885, game:GetService("Players").LocalPlayer)
+end)
+
+
+GamesSection:NewLabel("💪🏽 Bulked Up 💪🏽")
+
+GamesSection:NewButton("autofarm gui (Tora)", "FREE ugx", function()
+--bulked up tora💪🏽
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/a5764f385ca6c779d4a4ff2c71129ad636197cd4/BulkedUp",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--bulked up tp go
+game:GetService("TeleportService"):Teleport(6847090259, game:GetService("Players").LocalPlayer)
+end)
+
 
 GamesSection:NewLabel("💥 ANIME ENERGY SIMULATOR 💥")
 
