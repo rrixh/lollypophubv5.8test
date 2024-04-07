@@ -68,7 +68,7 @@ local RunService = game:GetService("RunService")
 local plr = Players.LocalPlayer
 -- local count = #game.Players:GetPlayers()
 local maxplrs = game.Players.MaxPlayers
-local label = SkriptsSection:NewLabel("Server Size: " ..count.."/" .. maxplrs)
+local label = SkriptsSection:NewLabel("Server Size: ".. count .."/" .. maxplrs)
 
 local RunService = game:GetService("RunService")
 getgenv().Enabled = false
@@ -93,16 +93,6 @@ for i,v in pairs(Players:GetPlayers()) do
     end
   end
 end
-
--- Players.ChildAdded:connect(function()
---     local count = #game.Players:GetPlayers()
---     label:UpdateLabel("Players In Server: ".. count)
--- end)
-
--- Players.ChildRemoved:connect(function(child)
---     local count = #game.Players:GetPlayers()
---     label:UpdateLabel("Players In Server: ".. count)
--- end)
 
 RunService.RenderStepped:connect(function()
   enablestuff()
@@ -2154,10 +2144,10 @@ GamesSection:NewButton("auto obby, auto jump quest, blah (🥓)", "FREE ugx", fu
 loadstring(game:HttpGet(('https://pastefy.app/JgV8iccp/raw'),true))()
 end)
 
-GamesSection:NewButton("teleport to --game", "FREE ugx", function()
-tp to
-game:GetService("TeleportService"):Teleport(16542835017, --game:GetService("Players").LocalPlayer)
---end)
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--tp to spinner
+game:GetService("TeleportService"):Teleport(16542835017, game:GetService("Players").LocalPlayer)
+end)
 
 
 GamesSection:NewLabel("[UGX] 🤓Math Answer or Die")
