@@ -42,7 +42,7 @@ local count = #game.Players:GetPlayers()
 -- user = game.Players.LocalPlayer
 
 --last update
-local LastUpdate = "Last Update: Apr 6, 2024"
+local LastUpdate = "Last Update: Apr 7, 2024"
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
 local lollypopHub = "Lollypop Hub🍭 | V8.7 | " .. identifyexecutor().. " | " .. LastUpdate
@@ -98,7 +98,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("☸️ [NEW!] FREE UGX SPINNER ☸️", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) ANIME RAXING 2 (FREE UGX)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2137,6 +2137,19 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
+GamesSection:NewLabel("🏃🏽‍♂️💨 ANIME RAXING 2 💨🏃🏽‍♂️")
+
+GamesSection:NewButton("autofarm (Tora)", "FREE ugx", function()
+--anime raxing 2
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/1b39cd57ff319d26dbfe7214a0f97550ad10aff8/AnimeRacing",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--tp to animeraxing
+game:GetService("TeleportService"):Teleport(16712648821, game:GetService("Players").LocalPlayer)
+end)
+
+
 GamesSection:NewLabel("☸️ [NEW!] FREE UGX SPINNER ☸️")
 
 GamesSection:NewButton("auto obby, auto jump quest, blah (🥓)", "FREE ugx", function()
@@ -3926,12 +3939,12 @@ local MoreSection = More:NewSection("more skripts koming soon...🍭")
 
 Players.ChildAdded:connect(function()
     local count = #game.Players:GetPlayers()
-    label:UpdateLabel("Server Size: ".. count)
+    label:UpdateLabel("Server Size: ".. count .."/" .. maxplrs)
 end)
 
 Players.ChildRemoved:connect(function(child)
     local count = #game.Players:GetPlayers()
-    label:UpdateLabel("Server Size: ".. count)
+    label:UpdateLabel("Server Size: ".. count .."/" .. maxplrs)
 end)
 
 MoreSection:NewButton("Player Notifier", "will notify if a player leaves/joined",
