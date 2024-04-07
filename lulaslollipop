@@ -2188,6 +2188,35 @@ GamesSection:NewButton("teleport to game", "FREE ugx", function()
 game:GetService("TeleportService"):Teleport(15423741735, game:GetService("Players").LocalPlayer)
 end)
 
+-- [ ⭐️🛼ULTA VERSE 🛼⭐️ ] --
+
+GamesSection:NewLabel("🛹ULTAVERSE⛸️UGC")
+
+GamesSection:NewButton("3 - inf points, auto krystal", "raxer helm free ugx", function()
+--ugx 3 ultaverse raxer
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Qrto1/Ultaverse/main/AutoFarm"))()
+end)
+
+GamesSection:NewButton("start", "free ugx", function()
+    --start area inf to work
+loadstring(game:HttpGet("https://pastecode.dev/raw/yybqw7w5/startInfPoints-ultaverse_lulaslollipop.jpg",true))()
+end)
+
+GamesSection:NewButton("NEW FREE UGX 2nd drop", "2nd drop free ugx", function()--ultaverse 2
+loadstring(game:HttpGet(('https://pastefy.app/XeQUxiD1/raw'),true))()
+end)
+
+GamesSection:NewButton("inf points (skript by Tora)\n(no key,easy)", "free ugx", function()--inf points
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Ultaverse",true))()
+end)
+GamesSection:NewButton("inf points (skript by Bacon)\n(key,Toras might not work idk)", "free ugx", function()--ultaverse inf pt
+loadstring(game:HttpGet("https://pastefy.app/nSUUKWrJ/raw",true))()
+end)
+GamesSection:NewButton("teleport to game", "free ugx", function()
+    --tp to ultaverse
+game:GetService("TeleportService"):Teleport(8980446061, game:GetService("Players").LocalPlayer)
+end)
+
 
 GamesSection:NewLabel("🌌 Sol's RNG 🌌")
 
@@ -2295,7 +2324,6 @@ game:GetService("TeleportService"):Teleport(12108137135, game:GetService("Player
 end)
 
 
-
 -- [ 🤖 AI TYKOON 🤖 ] --
 
 GamesSection:NewLabel("🤖 AI TYKOON 🤖")
@@ -2361,30 +2389,6 @@ GamesSection:NewButton("teleport to game", "free ugx", function()
 game:GetService("TeleportService"):Teleport(9129288160, game:GetService("Players").LocalPlayer)
 end)
 
-
--- [ ⭐️🛼ULTA VERSE 🛼⭐️ ] --
-
-GamesSection:NewLabel("🛹ULTAVERSE⛸️UGC")
-
-GamesSection:NewButton("start", "free ugx", function()
-    --start area inf to work
-loadstring(game:HttpGet("https://pastecode.dev/raw/yybqw7w5/startInfPoints-ultaverse_lulaslollipop.jpg",true))()
-end)
-
-GamesSection:NewButton("NEW FREE UGX 2nd drop", "2nd drop free ugx", function()--ultaverse 2
-loadstring(game:HttpGet(('https://pastefy.app/XeQUxiD1/raw'),true))()
-end)
-
-GamesSection:NewButton("inf points (skript by Tora)\n(no key,easy)", "free ugx", function()--inf points
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Ultaverse",true))()
-end)
-GamesSection:NewButton("inf points (skript by Bacon)\n(key,Toras might not work idk)", "free ugx", function()--ultaverse inf pt
-loadstring(game:HttpGet("https://pastefy.app/nSUUKWrJ/raw",true))()
-end)
-GamesSection:NewButton("teleport to game", "free ugx", function()
-    --tp to ultaverse
-game:GetService("TeleportService"):Teleport(8980446061, game:GetService("Players").LocalPlayer)
-end)
 
 -- [ ⭐️🏋STRONGMAN SIMUALTOR🏋️‍♀️⭐️ ] --
 GamesSection:NewLabel("⭐️🏋️‍♀️STRONGMAN SIMUALTOR🏋️‍♀️⭐️UGC")
