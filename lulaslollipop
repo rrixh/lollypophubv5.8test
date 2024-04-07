@@ -1624,16 +1624,26 @@ end)
 
 -- hubs and gui
 local Hub = Window:NewTab("Hubs & GUIs")
-local HubSection = Hub:NewSection("everything u need😋🍭")
+local HubSection = Hub:NewSection("erthang u need🍭")
 
-HubSection:NewButton("k00pkid gui (Reupload)", "k000000000pppppppp", function()
-        --k00p revival skript       
-loadstring(game:HttpGet("https://pastecode.dev/raw/tb4x2127/k00pkidRevival_lulaslollipop.mp3",true))()
+HubSection:NewLabel("🆓 FREE Items GUIs:")
+
+HubSection:NewButton("🎶🎤 24kGoldn Koncert Experienxe 🎤🎶\n(free 24kgoldn shades)", "24kgoldn shades", function()
+--24kgoldn obf
+loadstring(game:HttpGet("https://pastecode.dev/raw/oas3bnqw/24kGoldn-findMiks_lulaslollipop.zip",true))()
 end)
 
 HubSection:NewButton("Roblox Innovation Rewards\n(kollekt badges/items)", "autokollekt badges/kubes", function()
         --voting hub skript       
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/innovationawards/main/autokollekt/votinghub_lulaslollipop",true))()
+end)
+
+-- [ OTHER GUIS HUBSEKTION ] --
+HubSection:NewLabel("Other guis")
+
+HubSection:NewButton("k00pkid gui (Reupload)", "k000000000pppppppp", function()
+        --k00p revival skript       
+loadstring(game:HttpGet("https://pastecode.dev/raw/tb4x2127/k00pkidRevival_lulaslollipop.mp3",true))()
 end)
 
 HubSection:NewButton("funeral home gui(works in old games \n W less players)", "kixk gui", function()
