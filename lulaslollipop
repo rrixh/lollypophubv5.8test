@@ -67,7 +67,8 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local plr = Players.LocalPlayer
 -- local count = #game.Players:GetPlayers()
-local label = SkriptsSection:NewLabel("Server Size: " .. count)
+local maxplrs = game.Players.MaxPlayers
+local label = SkriptsSection:NewLabel("Server Size: " ..count.."/" .. maxplrs)
 
 local RunService = game:GetService("RunService")
 getgenv().Enabled = false
@@ -107,7 +108,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) 🌟[UGX] 🤓Math Answer or Die", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("☸️ [NEW!] FREE UGX SPINNER ☸️", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2146,15 +2147,16 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
---GamesSection:NewLabel("soonNewSkript")
+GamesSection:NewLabel("☸️ [NEW!] FREE UGX SPINNER ☸️")
 
-GamesSection:NewButton("soon...🍭", "FREE ugx", function()
-print("skript soon...🍭")
+GamesSection:NewButton("auto obby, auto jump quest, blah (🥓)", "FREE ugx", function()
+--spinner☸️
+loadstring(game:HttpGet(('https://pastefy.app/JgV8iccp/raw'),true))()
 end)
 
---GamesSection:NewButton("teleport to --game", "FREE ugx", function()
---tp to
---game:GetService("TeleportService"):Teleport(IDGOESHEREBRO, --game:GetService("Players").LocalPlayer)
+GamesSection:NewButton("teleport to --game", "FREE ugx", function()
+tp to
+game:GetService("TeleportService"):Teleport(16542835017, --game:GetService("Players").LocalPlayer)
 --end)
 
 
