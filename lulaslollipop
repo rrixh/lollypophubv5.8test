@@ -2152,12 +2152,17 @@ GamesSection:NewLabel("🦄 Singapore Wanderland 🦄")
 
 GamesSection:NewButton("instant UGX", "FREE ugx", function()
 --singapore
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4a3cae71ac6949a6f964098a09e8834021fe1b24/Singapore2",true))()
+loadstring(game:HttpGet("https://paste-drop.com/save/OnvuYp20se",true))()
 end)
 
-GamesSection:NewButton("wins minigame", "FREE ugx", function()
+GamesSection:NewButton("farm gui", "farmgui", function()
 --singapore
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4a3cae71ac6949a6f964098a09e8834021fe1b24/Singapore",true))()
+end)
+
+GamesSection:NewButton("auto klaim quest, komplete", "ya", function()
+--singapore
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4a3cae71ac6949a6f964098a09e8834021fe1b24/Singapore2",true))()
 end)
 
 
