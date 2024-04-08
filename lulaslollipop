@@ -2179,6 +2179,15 @@ GamesSection:NewButton("teleport to game", "FREE ugx", function()
 game:GetService("TeleportService"):Teleport(13000007654, game:GetService("Players").LocalPlayer)
 end)
 
+GamesSection:NewLabel("[🔥UPD] Solo challenging Simulator")
+
+GamesSection:NewButton("inf stats,get best sword,best eggs&more", "FREE ugx", function()
+--anime raxing 2
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/1b39cd57ff319d26dbfe7214a0f97550ad10aff8/AnimeRacing",true))()
+end)
+
+--solo xhallenging
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SoloChallenging",true))()
 
 
 GamesSection:NewLabel("🏃🏽‍♂️💨 ANIME RAXING 2 💨🏃🏽‍♂️")
