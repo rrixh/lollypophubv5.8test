@@ -2155,6 +2155,12 @@ GamesSection:NewButton("instant UGX", "FREE ugx", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4a3cae71ac6949a6f964098a09e8834021fe1b24/Singapore2",true))()
 end)
 
+GamesSection:NewButton("wins minigame", "FREE ugx", function()
+--singapore
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4a3cae71ac6949a6f964098a09e8834021fe1b24/Singapore",true))()
+end)
+
+
 GamesSection:NewButton("teleport to game", "FREE ugx", function()
 --tp to singapore
 game:GetService("TeleportService"):Teleport(13000007654, game:GetService("Players").LocalPlayer)
