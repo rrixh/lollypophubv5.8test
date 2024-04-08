@@ -2150,7 +2150,12 @@ GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
 GamesSection:NewLabel("🦄 Singapore Wanderland 🦄")
 
-GamesSection:NewButton("auto klaim quest, komplete, instant ugc", "ya", function()
+GamesSection:NewButton("auto klaim quest, instant get 3 ugc", "ya", function()
+--singapore
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/19750789fad6ffd41a68f1e2bef323eef9da83a9/Singapore2",true))()
+end)
+
+GamesSection:NewButton("auto klaim quest, komplete", "ya", function()
 --singapore
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4a3cae71ac6949a6f964098a09e8834021fe1b24/Singapore2",true))()
 end)
