@@ -2179,29 +2179,6 @@ GamesSection:NewButton("teleport to game", "FREE ugx", function()
 game:GetService("TeleportService"):Teleport(13000007654, game:GetService("Players").LocalPlayer)
 end)
 
-GamesSection:NewLabel("[🔥UPD] Solo challenging Simulator")
-
-GamesSection:NewButton("inf stats,get best sword,best eggs&more", "FREE ugx", function()
---anime raxing 2
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/1b39cd57ff319d26dbfe7214a0f97550ad10aff8/AnimeRacing",true))()
-end)
-
---solo xhallenging
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SoloChallenging",true))()
-
-
-GamesSection:NewLabel("🏃🏽‍♂️💨 ANIME RAXING 2 💨🏃🏽‍♂️")
-
-GamesSection:NewButton("autofarm (Tora)", "FREE ugx", function()
---anime raxing 2
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/1b39cd57ff319d26dbfe7214a0f97550ad10aff8/AnimeRacing",true))()
-end)
-
-GamesSection:NewButton("teleport to game", "FREE ugx", function()
---tp to animeraxing
-game:GetService("TeleportService"):Teleport(16712648821, game:GetService("Players").LocalPlayer)
-end)
-
 
 GamesSection:NewLabel("☸️ [NEW!] FREE UGX SPINNER ☸️")
 
@@ -2713,6 +2690,26 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/SpaceYes/Lua/Main/DaH
 end)
 GamesSection:NewButton("DaHood Gui 7(New)", "gai", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/UntitledhoodGui"))()
+end)
+
+GamesSection:NewLabel("[🔥UPD] Solo challenging Simulator")
+
+GamesSection:NewButton("inf stats,get best sword,best eggs&more", "FREE ugx", function()
+--solo xhallenging
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SoloChallenging",true))()
+end)
+
+
+GamesSection:NewLabel("🏃🏽‍♂️💨 ANIME RAXING 2 💨🏃🏽‍♂️")
+
+GamesSection:NewButton("autofarm (Tora)", "FREE ugx", function()
+--anime raxing 2
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/1b39cd57ff319d26dbfe7214a0f97550ad10aff8/AnimeRacing",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "FREE ugx", function()
+--tp to animeraxing
+game:GetService("TeleportService"):Teleport(16712648821, game:GetService("Players").LocalPlayer)
 end)
 
 
