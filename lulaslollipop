@@ -2152,7 +2152,10 @@ GamesSection:NewLabel("🦄 Singapore Wanderland 🦄")
 
 GamesSection:NewButton("instant UGX", "FREE ugx", function()
 --singapore
-loadstring(game:HttpGet("https://paste-drop.com/save/OnvuYp20se",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/n0g8qjf8/singapore-instant_lulaslollipop.zip",true))()
+wait()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
+Notify("kredits", "YT: ToraIsMe", 3)
 end)
 
 GamesSection:NewButton("farm gui", "farmgui", function()
