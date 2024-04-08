@@ -15,7 +15,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(153,51,255)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8.7🍭😋",
+Text = "LOLLYPOP HUB V8.8🍭😋",
 Duration = 7
 })--endnotif
 
@@ -45,7 +45,7 @@ local count = #game.Players:GetPlayers()
 local LastUpdate = "Last Update: Apr 8, 2024"
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local lollypopHub = "Lollypop Hub🍭 | V8.7 | " .. identifyexecutor().. " | " .. LastUpdate
+local lollypopHub = "Lollypop Hub🍭 | V8.8 | " .. identifyexecutor().. " | " .. LastUpdate
 local Window = Library.CreateLib(lollypopHub)
 -- themes:
 ---//yum lollypop hub\\--
