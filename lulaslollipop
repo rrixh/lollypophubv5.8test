@@ -99,7 +99,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) The Troll Obby 2🧌 (FAST UGX)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -434,7 +434,7 @@ end)
 SkriptsSection:NewButton("KEYBIND GENERATOR V2", "keyboard letters generator (useful)",
 function()
 -- keybind generator v2
-loadstring(game:HttpGet("https://gist.githubusercontent.com/RedZenXYZ/4d80bfd70ee27000660e4bfa7509c667/raw/da903c570249ab3c0c1a74f3467260972c3d87e6/KeyBoard%2520From%2520Ohio%2520Fr%2520Fr"))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/6s8k3fqa/keybindgenV2.jar",true))()
 end)
 --others--
 SkriptsSection:NewLabel("...")
@@ -2150,7 +2150,16 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
+GamesSection:NewLabel("🧌 The Troll Obby 2 🧌") 
 
+GamesSection:NewButton("Auto Obby (fast free item)", "auto obby", function()  
+--trollobby
+loadstring(game:HttpGet(('https://pastefy.app/qHIOgbpr/raw'),true))()
+end)
+
+GamesSection:NewButton("teleport to game", "trollobby2", function()  
+game:GetService("TeleportService"):Teleport(17026696082, game:GetService("Players").LocalPlayer)
+end) 
 
 
 GamesSection:NewLabel("🏴‍☠️ Pirate Tykoon 🏴‍☠️")
@@ -2539,22 +2548,18 @@ GamesSection:NewLabel("🏁🥚END OF EGGHUNT 2024")
 
 -- [ 🎒👯‍♀️🫂KARRY A FRIEND👯‍♀️🫂🎒 ] --
 GamesSection:NewLabel("Karry A Friend")
-
 GamesSection:NewButton("start ugc event", "free ugx", function()
     --goto event
 loadstring(game:HttpGet("https://pastecode.dev/raw/7yrvjsw7/toUGcEVENT-karryAFriend_lulaslollipop.jpg",true))()
 end)
-
 GamesSection:NewButton("1)tp to ugc, 2)invite friends, 3)klaim", "free ugx", function()
     --karry a friend instant:16962137393
 loadstring(game:HttpGet("https://paste-drop.com/save/CaRsVwCG09",true))()
 end)
-
 GamesSection:NewButton("teleport to game", "goto karry a friend", function()
     --tp to karry a friend
-  game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer)
+game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer)
 end)
-
 
 
 -- [ THE HUNT SKRIPTLOADER ] --
@@ -2571,9 +2576,7 @@ GamesSection:NewButton("orbs autofarm by ToraIsMe", "free ugx", function()--godz
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Godzilla'))()
 end)
 GamesSection:NewButton("teleport to game", "💥🦖🦍🦖🦍🦖💥", function()
-    local PlaceId = 16462849084 -- godzila
-
-game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
+game:GetService("TeleportService"):Teleport(16462849084, game:GetService("Players").LocalPlayer)
 end)
 --godzilla:end--
 
@@ -2592,20 +2595,37 @@ GamesSection:NewButton("(new) mob esp, get items, teleports & more", "good skrip
   --the maze skript by lulas
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/the-maze/lulas/1t2o3msn0f3oa3im9ci_lulaslollipop",true))()
 end)
+GamesSection:NewButton("teleport to game", "the maze", function()  
+game:GetService("TeleportService"):Teleport(730951264, game:GetService("Players").LocalPlayer)
+end)
+
 
 GamesSection:NewLabel("[Evade🏃🏽‍♂️💨]")
 GamesSection:NewButton("show messages", "shows xhat kause evade dont allow it", function()
   --xhat on
-  game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
+game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
 end)
-
 GamesSection:NewButton("AutoSpawn,godmode&more - TbaoHub", "good skript used myself", function()
   --evade autospawn,godmode(tbaoHub)
   loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubEvade"))()
 end)
-
 GamesSection:NewButton("HydraHub mobile", "good skript used myself", function()
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Dc2-masket27727/Mobile-s-Hub/main/Main/Hydra/Evade.exe"))();
+end)
+GamesSection:NewButton("🆕Dot.Hub(kinda big use toggle on/off)\nFarmWins,godmode,bot ESP &more(OP)", "OP skript", function()
+--evade OP kredits: CF Trail
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/random/main/.x.vr.e.hi/loader.lua",true))()
+end)
+GamesSection:NewButton("toggle keybind for Dot.Hub//type 'RightShift' ", "key to toggle(RightShift)", function()  
+--kgen1
+loadstring(game:HttpGet(('https://pastefy.app/Ujm4HWxh/raw'),true))()
+end)
+GamesSection:NewButton("keybind gen 2// 'RightShift' to toggle\nwill freeze for 2s", "keybind gen2", function()  
+--kgen2
+loadstring(game:HttpGet("https://pastecode.dev/raw/6s8k3fqa/keybindgenV2.jar",true))()
+end)
+GamesSection:NewButton("teleport to game", "evade", function()  
+game:GetService("TeleportService"):Teleport(9872472334, game:GetService("Players").LocalPlayer)
 end)
 
 GamesSection:NewLabel("👅 Tongue Battles 👅")
