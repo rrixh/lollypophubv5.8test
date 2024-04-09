@@ -42,7 +42,7 @@ local count = #game.Players:GetPlayers()
 -- user = game.Players.LocalPlayer
 
 --last update
-local LastUpdate = "Last Update: Apr 8, 2024"
+local LastUpdate = "Last Update: Apr 9, 2024"
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
 local lollypopHub = "Lollypop Hub🍭 | V8.7 | " .. identifyexecutor().. " | " .. LastUpdate
@@ -99,7 +99,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) 🦄 Singapore Wanderland 🦄(FREE UGX)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2142,11 +2142,28 @@ end)
 
 
 
+
+
 -- game skripts
 local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
+
+
+
+
+GamesSection:NewLabel("🏴‍☠️ Pirate Tykoon 🏴‍☠️")
+
+GamesSection:NewButton("autofarm", "FREE GREenworried egg", function()
+--pirate
+loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/main/PirateTycoon",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "to pirate tyk", function()
+game:GetService("TeleportService"):Teleport(15763597166, game:GetService("Players").LocalPlayer)
+end)
+
 
 GamesSection:NewLabel("🦄 Singapore Wanderland 🦄")
 
@@ -2565,7 +2582,6 @@ GamesSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, gre
 -- lulas 99 fail memory skript
 loadstring(game:HttpGet("https://pastecode.dev/raw/22iezhpd/99uwu.obf928392872828_lulaslollipop.png",true))()
 end)
-
 GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
 end)
@@ -2591,6 +2607,15 @@ end)
 GamesSection:NewButton("HydraHub mobile", "good skript used myself", function()
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Dc2-masket27727/Mobile-s-Hub/main/Main/Hydra/Evade.exe"))();
 end)
+
+GamesSection:NewLabel("👅 Tongue Battles 👅")
+GamesSection:NewButton("player farm, Anti-fall &more (🔑)", "ToraIsMe", function()  
+--tongue👅
+loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/814301bca04a6a09705f133ea8514487480d4083/Tongue",true))() 
+end)
+GamesSection:NewButton("teleport to game", "to tonguebattles", function()  
+game:GetService("TeleportService"):Teleport(16721806812, game:GetService("Players").LocalPlayer)
+end) 
 
 
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
@@ -4272,4 +4297,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/p
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 
 
----end---dm
+---end---
