@@ -134,6 +134,15 @@ SkriptsSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot o
   getgenv().espstuff = color
 end)
 
+SkriptsSection:NewToggle("HiddenFling", "fling", function(flingg)
+if flingg then
+loadstring(game:HttpGet("https://pastecode.dev/raw/w4g226cm/hiddenfling-toggle.deb",true))()
+else
+hiddenfling=false;
+end
+end)
+
+
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("ANTI-BAN (fixed &working✅)", "anti-ban skript/antilogger", function()
     --just anti logger (safexhat)
@@ -2616,7 +2625,7 @@ end)
 GamesSection:NewLabel("😩99% Fail Obby😩")
 GamesSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
 -- lulas 99 fail memory skript
-loadstring(game:HttpGet("https://pastecode.dev/raw/22iezhpd/99uwu.obf928392872828_lulaslollipop.png",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/qruuo3lc/99uwuHook.-.-.-.-.-.-.-.-.-.-._lulaslollipop.zip",true))()
 end)
 GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
