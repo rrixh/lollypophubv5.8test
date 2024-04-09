@@ -2150,6 +2150,17 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
+GamesSection:NewLabel("💪 Bro Reskue Simulator 💪")
+
+GamesSection:NewButton("Auto Farm", "🍭3 free ugx", function()  
+loadstring(game:HttpGet("https://pastecode.dev/raw/dd0zeq9z/broreskuesim-.v6lkzybn3m0pmno4dgsy_lulaslollipop.jar",true))()
+end) 
+
+GamesSection:NewButton("teleport to game", "3 free ugx", function()  
+game:GetService("TeleportService"):Teleport(12101371523, game:GetService("Players").LocalPlayer)
+end)
+
+
 GamesSection:NewLabel("👓🥶 XHILL OBBY 🥶👓")
 
 GamesSection:NewButton("GET SPEKSAVERS👓INSTANT UGX", "FREEINSTANTUGX", function()  
