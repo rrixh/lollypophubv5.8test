@@ -99,7 +99,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) The Troll Obby 2🧌 (FAST UGX)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) JBL LAND 🧥 (INSTANT UGX)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2150,6 +2150,17 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
+GamesSection:NewLabel("🧥 JBL LAND 🧥")
+
+GamesSection:NewButton("Instant ugx🧥 (Tora)", "instant item koat", function()
+--jblland instant🧥
+loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/fb4aa71e5f8c302e48410643a6e427c79ee03c19/JBLLand",true))()
+ end)
+
+GamesSection:NewButton("gameButtonText", "gameInfo", function()  
+game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer)
+end) 
+
 GamesSection:NewLabel("🧌 The Troll Obby 2 🧌") 
 
 GamesSection:NewButton("Auto Obby (fast free item)", "auto obby", function()  
@@ -3918,16 +3929,17 @@ end)
 HomeSection:NewButton("Ping Kounter", "see ping", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MvKKJ331"))()
 end)
+
 HomeSection:NewButton("Rejoin", "rejoins the same lobby",
-function()--rejoin lobby
+function()
+--rejoin lobby
 local ts = game:GetService("TeleportService")
 
 local p = game:GetService("Players").LocalPlayer
 
-
-
 ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, p)
 end)
+
 HomeSection:NewButton("Server Hop", "leave the game",
 function()
 loadstring(game:HttpGet("https://pastebin.com/raw/KahMvMeh"))()
