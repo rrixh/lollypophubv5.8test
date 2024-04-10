@@ -42,7 +42,7 @@ local count = #game.Players:GetPlayers()
 -- user = game.Players.LocalPlayer
 
 --last update
-local LastUpdate = "Last Update: Apr 9, 2024"
+local LastUpdate = "Last Update: Apr 10, 2024"
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
 local lollypopHub = "Lollypop Hub🍭 | V8.8 | " .. identifyexecutor().. " | " .. LastUpdate
