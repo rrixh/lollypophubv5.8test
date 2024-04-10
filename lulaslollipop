@@ -2159,6 +2159,15 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("💦 SONGKRAN FESTIVAL EVENT 💦")
 
+GamesSection:NewLabel(" 🏝️ติดเกาะ สงกรานต์(Next to Songkran Island) 🏝️")
+
+GamesSection:NewButton("ติดเกาะ สงกรานต์\ntranslation:(Next to Songkran Island)", "get badge for event", function()  
+loadstring(game:HttpGet("https://pastecode.dev/raw/2om0pgfp/nextToIsland-songkranevent.deb",true))()
+end) 
+
+GamesSection:NewButton("teleport to game(hard to find)", "hard to find", function()   game:GetService("TeleportService"):Teleport(14369197094, game:GetService("Players").LocalPlayer) 
+end)
+
 GamesSection:NewLabel("👮🏼‍♂️🚓 Prison Life v3 🚓👮🏻‍♀️")
 GamesSection:NewButton("Get Badge", "gameInfo", function()  
 loadstring(game:HttpGet("https://pastecode.dev/raw/ertf27ye/prisonlifeV3-instantSongKranbadge_lulaslollipop.deb",true))()
