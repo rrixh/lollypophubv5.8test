@@ -2185,13 +2185,13 @@ end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
-GamesSection:NewLabel("NEWGAMELBL")
+GamesSection:NewLabel("soon...🍭")
 
 GamesSection:NewButton("VERYSOON", "free ugx", function()  
 print("soon🍭")
 end)
 
-GamesSection:NewButton("teleport to game", "gameInfo", function()   game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) 
+GamesSection:NewButton("teleport to NOTHING", "gameInfo", function()   game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) 
 end)
 
 GamesSection:NewLabel("➗✖️ UGX MATH RAXE ✖️➗")
