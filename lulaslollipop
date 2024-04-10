@@ -2157,7 +2157,7 @@ end)
 local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
-GamesSection:NewLabel("💦 SONGKRAN FESTIVAL EVENT 💦")
+GamesSection:NewLabel("💦 2024 SONGKRAN FESTIVAL EVENT 💦")
 
 GamesSection:NewLabel(" 🏝️ติดเกาะ สงกรานต์(Next to Songkran Island) 🏝️")
 
