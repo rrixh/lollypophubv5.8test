@@ -42,7 +42,7 @@ local count = #game.Players:GetPlayers()
 -- user = game.Players.LocalPlayer
 
 --last update
-local LastUpdate = "Last Update: Apr 9, 2024"
+local LastUpdate = "Last Update: Apr 10, 2024"
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
 local lollypopHub = "Lollypop Hub🍭 | V8.8 | " .. identifyexecutor().. " | " .. LastUpdate
@@ -99,7 +99,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) ❇️ 🎉 Gummy Bear Party! 🎉 ❇️FREEUGc", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2157,6 +2157,16 @@ end)
 local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
+GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
+GamesSection:NewLabel("❇️ 🎉 Gummy Bear Party! 🎉 ❇️ ")
+
+GamesSection:NewButton("Inf points,autofarm(OP)", "free ugx", function()  
+loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/5bca7639ea0206af6b5f91f406ec1cbaec1d3c10/GummyBear",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "2 FREE UGX BY PLAYING THE FAME", function()   game:GetService("TeleportService"):Teleport(14889649635, game:GetService("Players").LocalPlayer) 
+end)
+
 GamesSection:NewLabel("💦 2024 SONGKRAN FESTIVAL EVENT 💦")
 
 GamesSection:NewLabel(" 🏝️ติดเกาะ สงกรานต์(Next to Songkran Island) 🏝️")
@@ -2185,14 +2195,6 @@ end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc⭐️")
 
-GamesSection:NewLabel("soon...🍭")
-
-GamesSection:NewButton("VERYSOON", "free ugx", function()  
-print("soon🍭")
-end)
-
-GamesSection:NewButton("teleport to NOTHING", "gameInfo", function()   game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) 
-end)
 
 GamesSection:NewLabel("➗✖️ UGX MATH RAXE ✖️➗")
 
