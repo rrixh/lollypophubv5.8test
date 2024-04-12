@@ -2805,6 +2805,23 @@ end)
 --Dh
 local GamesSection = Games:NewSection("[🏚️🧱Da Hood🧱🏚️]")
 
+
+GamesSection:NewButton("Rainbow/sunshine Aimloxk", "idk if its rainbow or sunshine lol", function()  
+--rainbow loxk 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealXORA/Roblox-Scripts/main/Rainbow%20Sunshine%20Aimlock.lua", true))()
+end)
+
+GamesSection:NewButton("Permanent Shiftloxk", "PERMANENT NIGGA YES", function()  
+--shiftloxk perm
+loadstring(game:HttpGet("https://scriptblox.com/raw/Baseplate-Universal-Script-Permanent-Shift-Lock-6924"))()
+end)
+
+GamesSection:NewButton("Ballisgusapo Loxk", "SUM RANDOM LOXK IDk", function()  
+--ballisgusapo loxk
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/Lockmomento"))()
+end)
+
+
 GamesSection:NewButton("Nyula(aimloxk)", "nyulanyula", function()--nyula aimloxk
     loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'X'..'Y'..'Q'..'z'..'d'..'l'..'Z'..'u'..'/'..'r'..'a'..'w'), true))()
 end)
@@ -3133,18 +3150,19 @@ function()-- strongman simulator
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ProjectLightningDev/Project-Lightning-Loader/main/Loader.Lua"))()
 end)
 
-local GamesSection = Games:NewSection("[YEET A FRIEND]")
+local GamesSection = Games:NewSection("[👯‍♀️ YEET A FRIEND 👯‍♀️]")
 
 GamesSection:NewButton("autofarm,autothrow,autorebirth, etx.", "req by xhelulu",
-function()loadstring(game:HttpGet("https://raw.githubusercontent.com/robloxfui/LuxurySoucre/main/Foru",true))()
+function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/robloxfui/LuxurySoucre/main/Foru",true))()
 end)
 
 
 
 local GamesSection = Games:NewSection("[⛓️Prison Life🚔]")
 
-GamesSection:NewButton("Tiger Admin", "admin kommands, kmdlist",
-function()loadstring(game:HttpGet('https://raw.githubusercontent.com/H17S32/Tiger_Admin/main/Script'))()
+GamesSection:NewButton("X Rawnder (🆕 [4/12/24])", "admin kommands, kmdlist",
+function()loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-X-Rawnder-12363",true))()tt
 end)
 
 GamesSection:NewButton("STEAL ALL TOOLS", "works if player has tools (tools=items)",
@@ -3156,7 +3174,7 @@ end
 end
 end)
 
-GamesSection:NewButton("Tiger Admin (REVAMPED, fix))", "tiger admin revamp",
+GamesSection:NewButton("Tiger Admin (REVAMPED, fix)", "tiger admin revamp",
 function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/qb10tlse/tigeradminRevamped_lulaslollipop",true))()
 
