@@ -2644,6 +2644,73 @@ end)
 GamesSection:NewLabel("🏁end of free UGc skripts🏁")
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
 
+--Dh
+local GamesSection = Games:NewSection("[🏚️🧱Da Hood🧱🏚️]")
+
+GamesSection:NewButton("Rainbow/sunshine Aimloxk", "idk if its rainbow or sunshine lol", function()  
+--rainbow loxk 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealXORA/Roblox-Scripts/main/Rainbow%20Sunshine%20Aimlock.lua", true))()
+end)
+
+GamesSection:NewButton("Permanent Shiftloxk", "PERMANENT NIGGA YES", function()  
+--shiftloxk perm
+loadstring(game:HttpGet("https://scriptblox.com/raw/Baseplate-Universal-Script-Permanent-Shift-Lock-6924"))()
+end)
+
+GamesSection:NewButton("Ballisgusapo Loxk", "SUM RANDOM LOXK IDk", function()  
+--ballisgusapo loxk
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/Lockmomento"))()
+end)
+
+
+GamesSection:NewButton("Nyula(aimloxk)", "nyulanyula", function()--nyula aimloxk
+    loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'X'..'Y'..'Q'..'z'..'d'..'l'..'Z'..'u'..'/'..'r'..'a'..'w'), true))()
+end)
+GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
+end)
+
+GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
+end)
+GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
+end)
+GamesSection:NewButton("DaHood Reborn Aim", "dahood aimloxk", function()loadstring(game:HttpGet("https://pastebin.com/raw/iNd3xTPv"))()
+end)
+GamesSection:NewButton("Da Hood GUI 1", "DA HOOD is kinda good", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/ZCiS8jSd'))()
+end)
+
+GamesSection:NewButton("dahood-soft vortex GUI", "New GUI", function()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/SoftVortex/.../main/....."),true))()
+end)
+GamesSection:NewButton("Da Hood GUI - by Impulse", "DaHood Evil", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
+end)
+GamesSection:NewButton("Da Hood random gui", "DaHood Evil", function()
+loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\71\97\109\101\114\69\109\105\108\105\97\110\111\70\70\47\116\114\105\112\95\47\109\97\105\110\47\72\117\98\10",true))()
+end)
+GamesSection:NewButton("Da Hood Gui 2 - by impulse", "Dahood idk", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
+end)
+GamesSection:NewButton("Da Hood GodMode", "invinxibility", function()
+p = game.Players.LocalPlayer
+ch = p.Character
+
+ch.BodyEffects.Dead:Destroy()
+end)
+GamesSection:NewButton("DaHood Silent Aim", "silent aim", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
+end)
+GamesSection:NewButton("DaHood Gui - SpaxeYes", "So many skripts", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/SpaceYes/Lua/Main/DaHood.Lua'))()
+end)
+GamesSection:NewButton("Untitled DaHood Gui", "gai", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/UntitledhoodGui"))()
+end)
+
+-- [ 🧱🏚️END OF DA HOOD 🏚️🧱 ] --
 
 
 -- [ 🥚🥚ROBLOX EGG HUNT🥚🥚 ] --
@@ -2802,72 +2869,6 @@ end)
 GamesSection:NewButton("autofarm by Tora (OP,fast)", "yt: ToraIsMe", function()loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Strongman'))()
 end)
 
---Dh
-local GamesSection = Games:NewSection("[🏚️🧱Da Hood🧱🏚️]")
-
-
-GamesSection:NewButton("Rainbow/sunshine Aimloxk", "idk if its rainbow or sunshine lol", function()  
---rainbow loxk 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealXORA/Roblox-Scripts/main/Rainbow%20Sunshine%20Aimlock.lua", true))()
-end)
-
-GamesSection:NewButton("Permanent Shiftloxk", "PERMANENT NIGGA YES", function()  
---shiftloxk perm
-loadstring(game:HttpGet("https://scriptblox.com/raw/Baseplate-Universal-Script-Permanent-Shift-Lock-6924"))()
-end)
-
-GamesSection:NewButton("Ballisgusapo Loxk", "SUM RANDOM LOXK IDk", function()  
---ballisgusapo loxk
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/Lockmomento"))()
-end)
-
-
-GamesSection:NewButton("Nyula(aimloxk)", "nyulanyula", function()--nyula aimloxk
-    loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'X'..'Y'..'Q'..'z'..'d'..'l'..'Z'..'u'..'/'..'r'..'a'..'w'), true))()
-end)
-GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
-loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
-end)
-
-GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
-end)
-GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
-  loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
-end)
-GamesSection:NewButton("DaHood Reborn Aim", "dahood aimloxk", function()loadstring(game:HttpGet("https://pastebin.com/raw/iNd3xTPv"))()
-end)
-GamesSection:NewButton("Da Hood GUI 1", "DA HOOD is kinda good", function()
-loadstring(game:HttpGet('https://pastebin.com/raw/ZCiS8jSd'))()
-end)
-
-GamesSection:NewButton("DaHood GUI 2", "New GUI", function()
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/SoftVortex/.../main/....."),true))()
-end)
-GamesSection:NewButton("Da Hood GUI 3", "DaHood Evil", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
-end)
-GamesSection:NewButton("Da Hood GUI 4", "DaHood Evil", function()
-loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\71\97\109\101\114\69\109\105\108\105\97\110\111\70\70\47\116\114\105\112\95\47\109\97\105\110\47\72\117\98\10",true))()
-end)
-GamesSection:NewButton("Da Hood Gui 5", "Dahood idk", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
-end)
-GamesSection:NewButton("Da Hood GodMode", "invinxibility", function()
-p = game.Players.LocalPlayer
-ch = p.Character
-
-ch.BodyEffects.Dead:Destroy()
-end)
-GamesSection:NewButton("DaHood Silent Aim", "silent aim", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
-end)
-GamesSection:NewButton("DaHood Gui 6(New and Op)", "So many skripts", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/SpaceYes/Lua/Main/DaHood.Lua'))()
-end)
-GamesSection:NewButton("DaHood Gui 7(New)", "gai", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/UntitledhoodGui"))()
-end)
 
 GamesSection:NewLabel("[🔥UPD] Solo challenging Simulator")
 
