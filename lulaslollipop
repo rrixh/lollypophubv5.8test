@@ -3162,7 +3162,7 @@ end)
 local GamesSection = Games:NewSection("[⛓️Prison Life🚔]")
 
 GamesSection:NewButton("X Rawnder (🆕 [4/12/24])", "admin kommands, kmdlist",
-function()loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-X-Rawnder-12363",true))()tt
+function()loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-X-Rawnder-12363",true))()
 end)
 
 GamesSection:NewButton("STEAL ALL TOOLS", "works if player has tools (tools=items)",
