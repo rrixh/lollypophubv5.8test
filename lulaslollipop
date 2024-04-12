@@ -2167,7 +2167,7 @@ GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
 GamesSection:NewLabel("🥤 BUBBLE TEA TYKOON 🥤")
 
-GamesSection:NewButton("instant komplete obby for bubble tea item", "gameInfo", function()  
+GamesSection:NewButton("instant komplete obby for bubble tea🥤 item", "INSTANT BUBBLE TEA ITEM", function()  
 loadstring(game:HttpGet("https://pastecode.dev/raw/l4wjh4a1/instantBubbleTea.THANKSTORA_lulaslollipop.jar",true))()
 end)
 
@@ -4106,10 +4106,10 @@ end)
 
 HomeSection:NewButton("obf", "no info", function()
 local userid = game.Players.LocalPlayer.UserId
-
-  if userid == 3001347724 or 4406450103 then
-    --obFE
-loadstring(game:HttpGet("https://pastecode.dev/raw/d8ufe891/obFEskator_lulaslollipop",true))()
+local whitelisted = {3001347724, 4406450103};
+  if userid == whitelisted then
+--obFEskator
+loadstring(game:HttpGet("https://pastecode.dev/raw/d8ufe891/obFEskator_lulaslollipop.zip",true))();
   else
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
   Notify("🔒", "No Access", 5)
