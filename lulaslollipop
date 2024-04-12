@@ -101,7 +101,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW)🐱MY HELLOKITTY KAFE skript\n(FREE UGX)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW) BUBBLE-TEA TYKOON🥤\n(INSTANT UGX)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -1653,6 +1653,10 @@ end)
 -- [ OTHER GUIS HUBSEKTION ] --
 HubSection:NewLabel("Other guis")
 
+HubSection:NewButton("Teleport to player bypass(full @name)", "bypasses tp on games that dont allow teleporting", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/ac5t78wc/tptoplr.bypass_lulaslollipop.jar",true))() 
+end)
+
 HubSection:NewButton("k00pkid gui (Reupload)", "k000000000pppppppp", function()
         --k00p revival skript       
 loadstring(game:HttpGet("https://pastecode.dev/raw/tb4x2127/k00pkidRevival_lulaslollipop.mp3",true))()
@@ -2161,6 +2165,16 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
+GamesSection:NewLabel("🥤 BUBBLE TEA TYKOON 🥤")
+
+GamesSection:NewButton("instant komplete obby for bubble tea item", "gameInfo", function()  
+loadstring(game:HttpGet("https://pastecode.dev/raw/l4wjh4a1/instantBubbleTea.THANKSTORA_lulaslollipop.jar",true))()
+end)
+
+GamesSection:NewButton("teleport to game", "bubbletea", function()   game:GetService("TeleportService"):Teleport(16036703153, game:GetService("Players").LocalPlayer) 
+end)
+
+
 GamesSection:NewLabel("👋🏽🐈  MY HELLO KITTY KAFE 🐈👋🏽")
 
 GamesSection:NewButton("autofarm+auto gifts(2 skripts in 1)\n💫LeviTheOtaku, alialii404", "free baxkpaxk ugx", function()  
@@ -2226,6 +2240,18 @@ end)
 GamesSection:NewButton("teleport to game", "2 FREE UGX BY PLAYING THE FAME", function()   game:GetService("TeleportService"):Teleport(14889649635, game:GetService("Players").LocalPlayer) 
 end)
 
+GamesSection:NewLabel("👅 Tongue Battles 👅")
+GamesSection:NewButton("player farm, Anti-fall &more (🔑)", "ToraIsMe", function()  
+--tongue👅
+loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/814301bca04a6a09705f133ea8514487480d4083/Tongue",true))() 
+end)
+GamesSection:NewButton("🥓auto player, auto krate, auto fight", "freeugx", function()  
+--tongue battles bakon
+loadstring(game:HttpGet(('https://pastefy.app/Tx6uIEm7/raw'),true))()
+end)
+GamesSection:NewButton("teleport to game", "to tonguebattles", function()  
+game:GetService("TeleportService"):Teleport(16721806812, game:GetService("Players").LocalPlayer)
+end) 
 
 GamesSection:NewLabel("🏴‍☠️ Pirate Tykoon 🏴‍☠️")
 
@@ -2507,19 +2533,6 @@ game:GetService("TeleportService"):Teleport(11576508871, game:GetService("Player
 end)
 
 
-GamesSection:NewLabel("🥋 KARATE FIGHT SIMULATOR 🥋")
-
-GamesSection:NewButton("🥋 skript", "FREE ugx", function()
---Karate Fight Simulator
-loadstring(game:HttpGet(('https://pastefy.app/gSmzAg0t/raw'),true))()
-end)
-
-GamesSection:NewButton("teleport to game", "FREE UGX KARATESIM ugx", function()
---karate fightsim
-game:GetService("TeleportService"):Teleport(14460678407, game:GetService("Players").LocalPlayer)
-end)
-
-
 GamesSection:NewLabel("💃🏽🕺🏾 AVNU: Where Musik Meets FT. WesGhost")
 
 GamesSection:NewButton("skript", "FREE ugx", function()
@@ -2561,15 +2574,6 @@ GamesSection:NewButton("teleport to game", "MULTIPLE FREE ugx", function()
 game:GetService("TeleportService"):Teleport(14565246812, game:GetService("Players").LocalPlayer)
 end)
 
--- [ 👗👔 Outfit Square 👔👗 ] --
-
-GamesSection:NewLabel("👗👔 Outfit Square 👔👗")
-
-GamesSection:NewButton("Klaim item", "free ugx", function()
---outfit square instant
-loadstring(game:HttpGet("https://pastecode.dev/raw/hklwq3qk/outfitsquare-instantugx.mp3",true))()
-end)
-
 GamesSection:NewButton("teleport to game", "free ugx", function()
 --go outfit square
 game:GetService("TeleportService"):Teleport(16874704673, game:GetService("Players").LocalPlayer)
@@ -2577,7 +2581,7 @@ end)
 
 -- [ 💨⭕️ Last to Leave ⭕️💨 ] --
 
-GamesSection:NewLabel(" ⭕️ Last to Leave ⭕️2 UGC")
+GamesSection:NewLabel(" ⭕️ Last to Leave ⭕️2 FREE UGX")
 GamesSection:NewButton("Last to Leave\n(reindeer hat & pumpkin hat)", "free ugx", function()
 --last to leavelula:8305160617
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/last-to-leave/main/obf-8Adf82hs82hs8273891918_rrixh-lulaslollipop",true))()
@@ -2600,7 +2604,7 @@ end)
 
 
 -- [ ⭐️🏋STRONGMAN SIMUALTOR🏋️‍♀️⭐️ ] --
-GamesSection:NewLabel("⭐️🏋️‍♀️STRONGMAN SIMUALTOR🏋️‍♀️⭐️UGC")
+GamesSection:NewLabel("⭐️🏋️‍♀️STRONGMAN SIMULATOR🏋️‍♀️⭐️FFRREUGX")
 GamesSection:NewButton("strongman autofarm (skript by Tora)\n(no key)", "free ugx", function()
     --swordstrongman
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SwordStrongman",true))()
@@ -2612,46 +2616,6 @@ end)
 GamesSection:NewButton("teleport to game", "free ugx", function()
     --tp to strongman sim game
 game:GetService("TeleportService"):Teleport(6766156863, game:GetService("Players").LocalPlayer)
-end)
-
-
--- [🗼TOWER HEROES🦸] --
-GamesSection:NewLabel("🗼 TOWER HEROES 🦸UGC")
-
-GamesSection:NewButton("Tower Heroes (skript by Tora)", "free ugx", function()
-    --towerheroes egg
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/EGGTowerHero",true))()
-end)
-
-GamesSection:NewButton("goto desk", "free ugx", function()
-  --desk
-loadstring(game:HttpGet("https://pastecode.dev/raw/1uc9v5c3/towerheroes-desk_lulaslollipop.jpg",true))()
-end)
-
-GamesSection:NewButton("Read steps 1-2", "free ugx", function()
-  --info 1-2
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
-  Notify("🍭Tower Heroes (Future Egg)", "1) Tap progress where the red arrow is lokated\n 2) Tap 'spexial maps' and selekt Play Map on\n'The Library' map and press Start", 6.6)
-end)
-
-GamesSection:NewButton("Read steps 3-5", "free ugx", function()
-  --info 3-5
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
-  Notify("🍭Tower Heroes (Future Egg)", "3) Go to the desk\n4) Use Skript to match the shapes with the numbers to get\nyour kode\n5) use 'fov 20' in infinite yield to zoom if sheet is too small", 6.3)
-  wait(0.01)
-  --IY main
-loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
-end)
-
-GamesSection:NewButton("Read steps 6-8", "free ugx", function()
-  --info 6-8
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
-  Notify("🍭Tower Heroes (Future Egg)", "6) After u have your kode leave the game and join again\n7) On the left side is a Roblox Logo, tap to input kode for item\n8) If kode didnt work u input it wrong or item is sold", 7.3)
-end)
-
-GamesSection:NewButton("teleport to game", "free ugx", function()
-    --tp to towerheroes
-game:GetService("TeleportService"):Teleport(4646477729, game:GetService("Players").LocalPlayer)
 end)
 
 GamesSection:NewLabel("🏁end of free UGc skripts🏁")
@@ -2685,23 +2649,6 @@ end)
 
 GamesSection:NewLabel("🏁🥚END OF EGGHUNT 2024")
 -- [ 🏁🥚END ROBLOX EGG HUNT🥚🏁 ] --
-
--- [ 🎒👯‍♀️🫂KARRY A FRIEND👯‍♀️🫂🎒 ] --
-GamesSection:NewLabel("Karry A Friend")
-GamesSection:NewButton("start ugc event", "free ugx", function()
-    --goto event
-loadstring(game:HttpGet("https://pastecode.dev/raw/7yrvjsw7/toUGcEVENT-karryAFriend_lulaslollipop.jpg",true))()
-end)
-GamesSection:NewButton("1)tp to ugc, 2)invite friends, 3)klaim", "free ugx", function()
-    --karry a friend instant:16962137393
-loadstring(game:HttpGet("https://paste-drop.com/save/CaRsVwCG09",true))()
-end)
-GamesSection:NewButton("teleport to game", "goto karry a friend", function()
-    --tp to karry a friend
-game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer)
-end)
-
-
 -- [ THE HUNT SKRIPTLOADER ] --
 GamesSection:NewLabel("🥚THE HUNT: First Edition 2024🥚 (event ended")
 GamesSection:NewButton("[🥚THE HUNT: First Edition 2024🥚]\n(60+ GAMES SUPPORT)!!!", "did not add games that ban or dont allow exploits", function()
@@ -2768,19 +2715,6 @@ GamesSection:NewButton("teleport to game", "evade", function()
 game:GetService("TeleportService"):Teleport(9872472334, game:GetService("Players").LocalPlayer)
 end)
 
-GamesSection:NewLabel("👅 Tongue Battles 👅")
-GamesSection:NewButton("player farm, Anti-fall &more (🔑)", "ToraIsMe", function()  
---tongue👅
-loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/814301bca04a6a09705f133ea8514487480d4083/Tongue",true))() 
-end)
-GamesSection:NewButton("🥓auto player, auto krate, auto fight", "freeugx", function()  
---tongue battles bakon
-loadstring(game:HttpGet(('https://pastefy.app/Tx6uIEm7/raw'),true))()
-end)
-GamesSection:NewButton("teleport to game", "to tonguebattles", function()  
-game:GetService("TeleportService"):Teleport(16721806812, game:GetService("Players").LocalPlayer)
-end) 
-
 
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
@@ -2801,6 +2735,20 @@ while wait() do
   end
 end
 end)
+
+GamesSection:NewLabel("🟨 Luxky Bloxk Battlegrounds 🟨") 
+GamesSection:NewButton("get tools ui", "gameInfo", function()
+--luxkybloxk 
+loadstring(game:HttpGet("https://pastecode.dev/raw/f9g8ybyk/LuxkyBloxksBattlegrounds_lulaslollipop.jar",true))()
+end) 
+
+
+GamesSection:NewLabel("✋🏽🛑 Simon Says 🚥✋🏽") 
+GamesSection:NewButton("kommand spam abuse", "simonsays", function()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Pr0jectNight/Script-Hubs/main/Antares/SuperSimonSays.lua"))()
+end)
+
+
 
 local GamesSection = Games:NewSection("[🗡️KAT🗡️]")
 
@@ -3468,6 +3416,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/iShield2005/scripts/m
 end)
 
 GamesSection:NewLabel("👻🚪DOORS🚪👻")
+GamesSection:NewButton("ESP&more", "doors skript ", function()  
+loadstring(game:HttpGet("https://pastecode.dev/raw/4rv9np5f/doors",true))()
+end) 
 GamesSection:NewButton("Doors -Awesome Hub gui", "awesomehubgui",
 function()-- doors awesome skript
 loadstring(game:HttpGet("https://rawscripts.net/raw/DOORS-awesome-script-11450"))()
