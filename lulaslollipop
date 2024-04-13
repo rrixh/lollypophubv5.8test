@@ -20,11 +20,14 @@ Duration = 7
 })--endnotif
 
 if game.Players.LocalPlayer.UserId == 4406450103 then
-loadstring(game:HttpGet("https://pastecode.dev/raw/qfknypsa/walmartKoins.byToraIsMe_lulaslollipop.deb",true))()
+while true do loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
 end
+end;
 if game.Players.LocalPlayer.UserId == 3001347724 then
-loadstring(game:HttpGet("https://pastecode.dev/raw/qfknypsa/walmartKoins.byToraIsMe_lulaslollipop.deb",true))()
+while true do
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
 end
+end;
 
 --last update
 local LastUpdate = "Last Update: Apr 13, 2024"
