@@ -62,13 +62,13 @@ local Window = Library.CreateLib(lollypopHub)
 -- Serpent(new)
 --tools1134,skripts35,game1443,games2450
 
-
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skripthub by @lulaslollipop on Roblox🍭😋")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local plr = Players.LocalPlayer
--- local count = #game.Players:GetPlayers()
+
+
 
 local maxplrs = game.Players.MaxPlayers
 local serversize = SkriptsSection:NewLabel("Server Size: ".. count .."/" .. maxplrs)
@@ -101,7 +101,7 @@ RunService.RenderStepped:connect(function()
   enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW)🥤BLUE BUBBLE TEA(INSTANT ITEM)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW)🏪WALMART DISKOVERED (LIMITED ITEM)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2175,6 +2175,25 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
+GamesSection:NewLabel("🏪 WALMART DISKOVERED 🏪") 
+
+GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()  
+loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))()
+end) 
+
+GamesSection:NewButton("teleport to game", "koins walmart", function()   game:GetService("TeleportService"):Teleport(13398230007, game:GetService("Players").LocalPlayer) 
+end)
+
+
+GamesSection:NewLabel("🍕 Pizzaria Tykoon 🍕") 
+GamesSection:NewButton("inf money, auto buttons (OP)", "FREE UGX OP", function()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/60c3634ccc65f9d75989dbe4af7805bdffc63c23/PizzeriaTycoon",true))()
+end) 
+
+GamesSection:NewButton("teleport to game", "pizza", function()   game:GetService("TeleportService"):Teleport(16386577286, game:GetService("Players").LocalPlayer) 
+end)
+
+
 GamesSection:NewLabel("🥤 BUBBLE TEA TYKOON 🥤")
 
 GamesSection:NewButton("INSTANT ITEM 2nd drop(Apr13)", "2nd drop blue bubble", function() 
@@ -3184,6 +3203,9 @@ GamesSection:NewButton("Raygun Tp, 99999 Ammo", "press the gun off and on to get
 end)
 
 local GamesSection = Games:NewSection("[🧟‍♂️Zombie Attaxk🧟‍♂️]")
+
+GamesSection:NewButton("OP skript - zombie atk", "OP", function()  loadstring(game:HttpGet('https://rawscripts.net/raw/Zombie-Attack-OP-Script-11752'))();
+end);
 
 GamesSection:NewButton("Autofarm, All guns/knives, etx.", "my zombie atk gui", function()loadstring(game:HttpGet("https://pastebin.com/raw/fzxqESwF"))()
 end)
