@@ -2176,8 +2176,9 @@ local GamesSection = Games:NewSection("Games")
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
 GamesSection:NewLabel("🐟 Blippi's Playground 🐟") 
-GamesSection:NewButton("auto dig, auto sell(get 150 blah to get)", "free ugx", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Blippi2",true))()
+GamesSection:NewButton("auto dig, auto sell by Tora(get 150)", "free ugx", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Blippi2",true))()
 end)
+GamesSection:NewButton("auto dig, auto sell by 🥓", "gameInfo", function()  end)
 
 GamesSection:NewButton("teleport to game", "tp to blippi", function()   game:GetService("TeleportService"):Teleport(14834598561, game:GetService("Players").LocalPlayer) 
 
@@ -2187,6 +2188,8 @@ GamesSection:NewLabel("[EVENT🎄] Boat Empire Tykoon 🛳️")
 GamesSection:NewButton("Boat Empire Tykoon", "freeugx", function()  
 loadstring(game:HttpGet(('https://pastefy.app/IGj8Gpvy/raw'),true))()
 end)
+GamesSection:NewButton("teleport to game", "gameInfo", function()   game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) end)
+
 
 -- [ 💨⭕️ Last to Leave ⭕️💨 ] --
 
@@ -2201,7 +2204,17 @@ game:GetService("TeleportService"):Teleport(8305160617, game:GetService("Players
 end)
 
 
-GamesSection:NewButton("teleport to game", "gameInfo", function()   game:GetService("TeleportService"):Teleport(14079247169, game:GetService("Players").LocalPlayer) end) 
+--🔪🩸🔪🩸🔪🩸
+GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE [FREE ITEM (cHUcKY BAcKPAcK)]")
+GamesSection:NewButton("🔪AUTOFARM (FREE PIG HEAD UGX)", "ToraIsMe", function()--xhuxky:16578847473
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
+end)
+GamesSection:NewButton("teleport to game", "🩸🩸🔪🩸🔪🩸🔪", function()
+game:GetService("TeleportService"):Teleport(16578847473, game:GetService("Players").LocalPlayer)
+end)
+--xhuxky:end--
+
+
 
 GamesSection:NewLabel("🧥 MAX MARA KOATS ADVENTURE 🧥(apr12 drop)")
 
@@ -2547,17 +2560,6 @@ GamesSection:NewButton("teleport to game", "FREE instant ugx", function()
 game:GetService("TeleportService"):Teleport(10760024537, game:GetService("Players").LocalPlayer)
 end)
 
---🔪🩸🔪🩸🔪🩸
-GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE [FREE ITEM (cHUcKY BAcKPAcK)]")
-GamesSection:NewButton("🔪AUTOFARM (FREE PIG HEAD UGX)", "ToraIsMe", function()--xhuxky:16578847473
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
-end)
-GamesSection:NewButton("teleport to game", "🩸🩸🔪🩸🔪🩸🔪", function()
-    local PlaceId = 16578847473 -- xhuxky
-
-    game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
---xhuxky:end--
 
 GamesSection:NewLabel("[+13 🐰| Prince Of Egypt] TOD")
 
