@@ -2176,9 +2176,14 @@ local GamesSection = Games:NewSection("Games")
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
 GamesSection:NewLabel("🫂 KARRY A FRIEND 🫂")
-GamesSection:NewButton("skript", "karry a friend", function()  
+GamesSection:NewButton("skript by Tora", "karry a friend", function()  
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/CarryAFriend'))()
 end)
+GamesSection:NewButton("skript by 🥓", "karry a friend", function()  
+--karry bakon
+loadstring(game:HttpGet(('https://pastefy.app/tSEf0cah/raw'),true))()
+end)
+
 
 GamesSection:NewButton("teleport to game", "to karry a friend", function()   game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer) 
 end)
