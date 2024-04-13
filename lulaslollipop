@@ -20,7 +20,7 @@ Duration = 7
 })--endnotif
 
 --last update
-local LastUpdate = "Last Update: Apr 12, 2024"
+local LastUpdate = "Last Update: Apr 13, 2024"
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
@@ -2204,11 +2204,16 @@ game:GetService("TeleportService"):Teleport(8305160617, game:GetService("Players
 end)
 
 
---🔪🩸🔪🩸🔪🩸
-GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE [FREE ITEM (cHUcKY BAcKPAcK)]")
+-- [ 🔪🩸XHUXKY 🔪🩸] --
+GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE (FREE ITEM)")
 GamesSection:NewButton("🔪AUTOFARM (FREE PIG HEAD UGX)", "ToraIsMe", function()--xhuxky:16578847473
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
 end)
+
+GamesSection:NewButton("kill aura,auto kollect &more 🥓", "xhuxky", function()  
+loadstring(game:HttpGet(('https://pastefy.app/kz1l7Xpz/raw'),true))()
+end)
+
 GamesSection:NewButton("teleport to game", "🩸🩸🔪🩸🔪🩸🔪", function()
 game:GetService("TeleportService"):Teleport(16578847473, game:GetService("Players").LocalPlayer)
 end)
