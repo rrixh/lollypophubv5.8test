@@ -2188,6 +2188,19 @@ GamesSection:NewButton("Boat Empire Tykoon", "freeugx", function()
 loadstring(game:HttpGet(('https://pastefy.app/IGj8Gpvy/raw'),true))()
 end)
 
+-- [ 💨⭕️ Last to Leave ⭕️💨 ] --
+
+GamesSection:NewLabel(" ⭕️ Last to Leave ⭕️FREE UGX")
+GamesSection:NewButton("skript 2nd drop ,get 10 wins(Apr12)", "free ugx", function()
+--last to leavelula:8305160617
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/last-to-leave/main/obf-8Adf82hs82hs8273891918_rrixh-lulaslollipop",true))()
+end)
+GamesSection:NewButton("teleport to game", "free ugx", function()
+--go last to leave
+game:GetService("TeleportService"):Teleport(8305160617, game:GetService("Players").LocalPlayer)
+end)
+
+
 GamesSection:NewButton("teleport to game", "gameInfo", function()   game:GetService("TeleportService"):Teleport(14079247169, game:GetService("Players").LocalPlayer) end) 
 
 GamesSection:NewLabel("🧥 MAX MARA KOATS ADVENTURE 🧥(apr12 drop)")
@@ -2617,17 +2630,6 @@ GamesSection:NewButton("teleport to game", "free ugx", function()
 game:GetService("TeleportService"):Teleport(16874704673, game:GetService("Players").LocalPlayer)
 end)
 
--- [ 💨⭕️ Last to Leave ⭕️💨 ] --
-
-GamesSection:NewLabel(" ⭕️ Last to Leave ⭕️2 FREE UGX")
-GamesSection:NewButton("Last to Leave\n(reindeer hat & pumpkin hat)", "free ugx", function()
---last to leavelula:8305160617
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/last-to-leave/main/obf-8Adf82hs82hs8273891918_rrixh-lulaslollipop",true))()
-end)
-GamesSection:NewButton("teleport to game", "free ugx", function()
---go last to leave
-game:GetService("TeleportService"):Teleport(8305160617, game:GetService("Players").LocalPlayer)
-end)
 
 -- [ 👦🏻TOMMY PLAYS👦🏻 ] --
 GamesSection:NewLabel("👦🏻TOMMY PLAYS👦🏻UGC")
