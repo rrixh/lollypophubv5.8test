@@ -2177,7 +2177,7 @@ GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
 GamesSection:NewLabel("🫂 KARRY A FRIEND 🫂")
 GamesSection:NewButton("skript", "karry a friend", function()  
-loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/7916fcb19079e43ece00ac08b521ca2d73b960fe/CarryAFriend",true))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/CarryAFriend'))()
 end)
 
 GamesSection:NewButton("teleport to game", "to karry a friend", function()   game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer) 
