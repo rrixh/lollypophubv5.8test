@@ -2183,7 +2183,9 @@ GamesSection:NewButton("skript by 🥓", "karry a friend", function()
 --karry bakon
 loadstring(game:HttpGet(('https://pastefy.app/tSEf0cah/raw'),true))()
 end)
-
+GamesSection:NewButton("skript by 🍭", "karry a friend", function()  
+loadstring(game:HttpGet("https://pastecode.dev/raw/fa5hda5b/karryAFriend.kompleteLvls_lulaslollipop.jar",true))()
+end)
 
 GamesSection:NewButton("teleport to game", "to karry a friend", function()   game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer) 
 end)
