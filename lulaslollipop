@@ -2176,6 +2176,22 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
+GamesSection:NewLabel("❄️🥶 XHILL OBBY 🥶❄️")
+
+GamesSection:NewButton("2ND DROP (Apr13) INSTANT GET FREE Hearing Aids\n LIMITED ITEM", "instant", function()
+--2nd drop xhillObby
+loadstring(game:HttpGet(('https://pastefy.app/Dbry7WOW/raw'),true))()
+end)
+
+GamesSection:NewButton("GET SPEKSAVERS👓INSTANT UGX", "FREEINSTANTUGX", function()  
+loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/ba2fe9c22ccfe81a15d8d98d274b3e3404f9338d/ChillObby",true))()
+--xhill obby
+end)
+
+GamesSection:NewButton("teleport to game", "FREE HEARING AIDS(apr13)", function()  
+game:GetService("TeleportService"):Teleport(12357508217, game:GetService("Players").LocalPlayer)
+end)
+
 GamesSection:NewLabel("🏪 WALMART DISKOVERED 🏪") 
 
 GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()
@@ -2217,6 +2233,18 @@ end)
 GamesSection:NewButton("teleport to game", "zombiedefense tp", function()   game:GetService("TeleportService"):Teleport(4711958375, game:GetService("Players").LocalPlayer) 
 end)
 
+-- [ 💨⭕️ Last to Leave ⭕️💨 ] --
+
+GamesSection:NewLabel(" ⭕️ Last to Leave ⭕️FREE UGX")
+GamesSection:NewButton("skript 2nd drop ,get 10 wins(Apr12)", "free ugx", function()
+--last to leavelula:8305160617
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/last-to-leave/main/obf-8Adf82hs82hs8273891918_rrixh-lulaslollipop",true))()
+end)
+GamesSection:NewButton("teleport to game", "free ugx", function()
+--go last to leave
+game:GetService("TeleportService"):Teleport(8305160617, game:GetService("Players").LocalPlayer)
+end)
+
 
 GamesSection:NewLabel("🫂 KARRY A FRIEND 🫂")
 GamesSection:NewButton("skript by Tora", "karry a friend", function()  
@@ -2249,18 +2277,6 @@ loadstring(game:HttpGet(('https://pastefy.app/IGj8Gpvy/raw'),true))()
 end)
 GamesSection:NewButton("teleport to game", "gameInfo", function()   game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) end)
 
-
--- [ 💨⭕️ Last to Leave ⭕️💨 ] --
-
-GamesSection:NewLabel(" ⭕️ Last to Leave ⭕️FREE UGX")
-GamesSection:NewButton("skript 2nd drop ,get 10 wins(Apr12)", "free ugx", function()
---last to leavelula:8305160617
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/last-to-leave/main/obf-8Adf82hs82hs8273891918_rrixh-lulaslollipop",true))()
-end)
-GamesSection:NewButton("teleport to game", "free ugx", function()
---go last to leave
-game:GetService("TeleportService"):Teleport(8305160617, game:GetService("Players").LocalPlayer)
-end)
 
 
 -- [ 🔪🩸XHUXKY 🔪🩸] --
@@ -2432,23 +2448,6 @@ end)
 
 GamesSection:NewButton("teleport to game", "3 free ugx", function()  
 game:GetService("TeleportService"):Teleport(12101371523, game:GetService("Players").LocalPlayer)
-end)
-
-
-GamesSection:NewLabel("👓🥶 XHILL OBBY 🥶👓")
-
-GamesSection:NewButton("2ND DROP (Apr13) INSTANT GET FREE Hearing Aids\n LIMITED ITEM", "instant", function()
---2nd drop xhillObby
-loadstring(game:HttpGet(('https://pastefy.app/Dbry7WOW/raw'),true))()
-end)
-
-GamesSection:NewButton("GET SPEKSAVERS👓INSTANT UGX", "FREEINSTANTUGX", function()  
-loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/ba2fe9c22ccfe81a15d8d98d274b3e3404f9338d/ChillObby",true))()
---xhill obby
-end)
-
-GamesSection:NewButton("teleport to game", "FREE HEARING AIDS(apr13)", function()  
-game:GetService("TeleportService"):Teleport(12357508217, game:GetService("Players").LocalPlayer)
 end)
 
 
