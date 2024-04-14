@@ -2179,13 +2179,8 @@ GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 GamesSection:NewLabel("🏪 WALMART DISKOVERED 🏪") 
 
 GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()
-    local userid = game.Players.LocalPlayers.UserId
-if userid == 4406450103 and 3001347724  then
-while true do loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))();
-      end
-   else
-loadstring(game:HttpGet("https://pastecode.dev/raw/qfknypsa/walmartKoins.byToraIsMe_lulaslollipop.deb",true))()
-  end
+while true do loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))()
+      end;
 end) 
 
 GamesSection:NewButton("teleport to game", "koins walmart", function()   game:GetService("TeleportService"):Teleport(13398230007, game:GetService("Players").LocalPlayer) 
