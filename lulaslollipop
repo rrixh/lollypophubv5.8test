@@ -21,7 +21,7 @@ Duration = 7
 
 
 --last update
-local LastUpdate = "Last Update: Apr 13, 2024"
+local LastUpdate = "Last Update: Apr 14, 2024"
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
@@ -102,7 +102,7 @@ RunService.RenderStepped:connect(function()
 enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW)🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("(NEW)🐇🏁 Pet Raxer Simulator(free ugx)", "updates and add-ons to the skript will be here", {"Version: 8.8", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2176,6 +2176,16 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
+GamesSection:NewLabel("🐇🏁 Pet Raxer Simulator 🏁🐇")
+
+GamesSection:NewButton("autofarm (no key) 🥓", "freeugx", function()  
+--pet raxer sim
+loadstring(game:HttpGet(('https://pastefy.app/JKL1MNIK/raw'),true))()
+end) 
+
+GamesSection:NewButton("teleport to game", "to pet raxer sim", function()   game:GetService("TeleportService"):Teleport(14041207387, game:GetService("Players").LocalPlayer) end) 
+
+
 GamesSection:NewLabel("❄️🥶 XHILL OBBY 🥶❄️")
 
 GamesSection:NewButton("2ND DROP (Apr13) INSTANT GET FREE Hearing Aids\n LIMITED ITEM", "instant", function()
@@ -2198,6 +2208,11 @@ GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op 
 while true do loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))()
       end;
 end) 
+
+GamesSection:NewButton("fast koins farm by 🥓", "walmart", function()
+--walmart;
+loadstring(game:HttpGet(('https://pastefy.app/M8KotvgU/raw'),true))()
+end)
 
 GamesSection:NewButton("teleport to game", "koins walmart", function()   game:GetService("TeleportService"):Teleport(13398230007, game:GetService("Players").LocalPlayer) 
 end)
@@ -2751,9 +2766,13 @@ end)
 GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
 end)
-GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
-loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
-end)
+
+-- [ ❌❌❌❌❌❌❌❌❌ ] --
+--GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
+--loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
+--end)
+-- [ ❌❌❌❌❌❌❌❌❌ ] --
+
 GamesSection:NewButton("DaHood Reborn Aim", "dahood aimloxk", function()loadstring(game:HttpGet("https://pastebin.com/raw/iNd3xTPv"))()
 end)
 GamesSection:NewButton("Da Hood GUI 1", "DA HOOD is kinda good", function()
@@ -2763,21 +2782,20 @@ end)
 GamesSection:NewButton("dahood-soft vortex GUI", "New GUI", function()
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/SoftVortex/.../main/....."),true))()
 end)
-GamesSection:NewButton("Da Hood GUI - by Impulse", "DaHood Evil", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
-end)
+
 GamesSection:NewButton("Da Hood random gui", "DaHood Evil", function()
 loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\71\97\109\101\114\69\109\105\108\105\97\110\111\70\70\47\116\114\105\112\95\47\109\97\105\110\47\72\117\98\10",true))()
 end)
 GamesSection:NewButton("Da Hood Gui 2 - by impulse", "Dahood idk", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
 end)
-GamesSection:NewButton("Da Hood GodMode", "invinxibility", function()
-p = game.Players.LocalPlayer
-ch = p.Character
 
-ch.BodyEffects.Dead:Destroy()
-end)
+--GamesSection:NewButton("Da Hood GodMode", "invinxibility", function()
+--p = game.Players.LocalPlayer
+--ch = p.Character
+--ch.BodyEffects.Dead:Destroy()
+--end)
+
 GamesSection:NewButton("DaHood Silent Aim", "silent aim", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
 end)
