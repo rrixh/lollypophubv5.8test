@@ -21,7 +21,7 @@ Duration = 7
 
 
 --last update
-local LastUpdate = "Last Update: Apr 14, 2024"
+local LastUpdate = "Last Update: Apr 15, 2024"
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
