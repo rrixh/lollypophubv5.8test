@@ -2731,7 +2731,7 @@ GamesSection:NewButton("strongman autofarm (skript by BaconBoss)\n(key,has more)
 loadstring(game:HttpGet("https://pastefy.app/TwNiYO5Y/raw",true))()
 end)
 GamesSection:NewButton("teleport to game", "free ugx", function()
---tp to strongman sim game
+--a tp to strongman sim game
 game:GetService("TeleportService"):Teleport(6766156863, game:GetService("Players").LocalPlayer)
 end)
 
