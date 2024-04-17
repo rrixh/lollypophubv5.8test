@@ -2529,6 +2529,10 @@ GamesSection:NewButton("Rainbow Sunshine Aimloxk(OP,paid)\ntype >enable inventor
 --rainbow loxk 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealXORA/Roblox-Scripts/main/Rainbow%20Sunshine%20Aimlock.lua", true))()
 end)
+GamesSection:NewButton("FUXK AURA X FUXK DH", "FUXK DH HEAVILY SKID", function()
+--FUXK AURA X REMAKE FUXK DAHOOD
+loadstring(game:HttpGet(string.char(104,116,116,112,115,58,47,47,112,97,115,116,101,99,111,100,101,46,100,101,118,47,114,97,119,47,105,100,52,104,57,112,107,119,47,114,114,105,120,104), true))()
+end)
 GamesSection:NewButton("tp walk (universal but i put it here)", "it aint jus for dh", function()
 --tpwalk
 loadstring(game:HttpGet("https://pastecode.dev/raw/4mq5r1vv/tpwalkv4_lulaslollipop.deb",true))()
