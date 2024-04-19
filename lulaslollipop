@@ -4389,9 +4389,9 @@ local MoreSection = More:NewSection("no")
 MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, function()
 Library:ToggleUI()
 end)
-loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar",true))()
+--loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar",true))()
 --sumthing
---loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
 
 
 -- [ TOGGLE klose/open ] --
