@@ -2219,7 +2219,7 @@ GamesSection:NewButton("auto finish obbys 🥓", "free ugx", function()
 -- grand skool eskape:16384951009
 loadstring(game:HttpGet("https://pastefy.app/76hP3KBp/raw",true))()
 end)
-GamesSection:NewButton("godmode toggle, fly", "wont die", function()  
+GamesSection:NewButton("godmode toggle, fly (for superman obby,item)", "wont die", function()  
 loadstring(game:HttpGet("https://pastecode.dev/raw/pj1zaxgd/grandEskapeUi_lulaslollipop.png",true))()
 end)
 GamesSection:NewButton("teleport to game", "grand skool", function()
