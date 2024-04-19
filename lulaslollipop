@@ -4452,7 +4452,7 @@ end)
 
 -- eye
 pcall(function()
-    loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar", true))()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/n3xjnexx/eyeLoveyou.jar",true))()
 end)
 
 -- main lollypop notif
@@ -4461,6 +4461,7 @@ pcall(function()
 end)
 
 pcall(function()
+    
 -- [ TOGGLE klose/open ] --
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 end)
