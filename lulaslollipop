@@ -117,7 +117,7 @@ end
 spawn(updateTimeLabel)
 -- [ END UPDATE TIME ] --
 
-SkriptsSection:NewDropdown("(NEW)🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "updates and add-ons to the skript will be here", {"Version: 8.9", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "GRAND SKOOL ESKAPE 🏃🏽‍♂️💨🏫", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("[NEW] FREE UGX LIMITED SKRIPTS (Games)", "updates and add-ons to the skript will be here", {"Version: 8.9", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2214,11 +2214,48 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
+GamesSection:NewLabel("🪄 UGX RNG 🪄")
+
+GamesSection:NewButton("INSTANT UGX", "rng item", function()  
+loadstring(game:HttpGet(('https://pastefy.app/68WYydeo/raw'),true))()
+end)
+
+GamesSection:NewButton("teleport to game", "rng tp", function()   game:GetService("TeleportService"):Teleport(17038228508, game:GetService("Players").LocalPlayer) end) 
+
+GamesSection:NewLabel("▫️Button Hell ▫️")
+
+GamesSection:NewButton("AUTO BUTTONS (tora)", "ugx limited", function()  
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/ButtonHell'))()
+end)
+
+GamesSection:NewButton("AUTO BUTTONS 🥓", "free limited", function()
+--button hell 🥓
+loadstring(game:HttpGet(('https://pastefy.app/68WYydeo/raw'),true))()
+end)
+
+GamesSection:NewButton("teleport to game", "freeugx", function()   game:GetService("TeleportService"):Teleport(14329385031, game:GetService("Players").LocalPlayer) end)
+
+
+
+GamesSection:NewLabel("▫️Button Hell ▫️")
+
+GamesSection:NewButton("AUTO BUTTONS (tora)", "ugx limited", function()  
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/ButtonHell'))()
+end)
+
+GamesSection:NewButton("teleport to game", "freeugx", function()   game:GetService("TeleportService"):Teleport(14329385031, game:GetService("Players").LocalPlayer) end)
+
+
 GamesSection:NewLabel("🏃🏽‍♂️🏫 Grand Skool Eskape 🏃🏽‍♂️🏫")
-GamesSection:NewButton("auto finish obbys 🥓", "free ugx", function()
+GamesSection:NewButton("auto finish obbys, remove holding to pixkup items🥓", "free ugx", function()
 -- grand skool eskape:16384951009
 loadstring(game:HttpGet("https://pastefy.app/76hP3KBp/raw",true))()
 end)
+
+GamesSection:NewButton("by Tora", "freeugx trash game", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/2dc6a3949b04b6a94789881f1528d2def9b2eecc/GrandSchool",true))()
+end)
+
 GamesSection:NewButton("godmode toggle, fly (for superman obby,item)", "wont die", function()  
 loadstring(game:HttpGet("https://pastecode.dev/raw/pj1zaxgd/grandEskapeUi_lulaslollipop.png",true))()
 end)
