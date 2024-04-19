@@ -101,9 +101,8 @@ end)
 
 
 -- [ UPDATE TIME ] --
-local timelabel = SkriptsSection:NewLabel("🔴 Live Time: [00:00:00]") -- initial time
+local timelabel = SkriptsSection:NewLabel("🔴 Live Time: [00:00:00]");
 
--- [ UPDATE TIME ] --
 local function updateTimeLabel()
     while true do
         local formatted_time = os.date("🔴Live Time: %I:%M:%S %p")
