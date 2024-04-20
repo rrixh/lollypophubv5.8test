@@ -2212,10 +2212,10 @@ end)
 local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
-GamesSection:NewLabel("NEWLABELTEXT") 
+--GamesSection:NewLabel("NEWLABELTEXT") 
 
-GamesSection:NewButton("gameButtonText", "gameInfo", function()  
-end)
+--GamesSection:NewButton("gameButtonText", "gameInfo", function()  
+--end)
 
 GamesSection:NewButton("teleport to game", "goto bettys nursey obby", function()   game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) end)
 
