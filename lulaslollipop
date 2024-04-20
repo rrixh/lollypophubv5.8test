@@ -2205,6 +2205,7 @@ end)
 -- game skripts
 local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
+GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
 --GamesSection:NewLabel("NEWLABELTEXT") 
 
@@ -2239,9 +2240,7 @@ GamesSection:NewButton("teleport to game", "to tonguebattles", function()
 game:GetService("TeleportService"):Teleport(16721806812, game:GetService("Players").LocalPlayer)
 end) 
 
-GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
-
-GamesSection:NewLabel("🪄 UGX RNG 🪄")
+GamesSection:NewLabel("UGX RNG")
 
 GamesSection:NewButton("INSTANT UGX", "rng item", function()  
 loadstring(game:HttpGet(('https://pastefy.app/68WYydeo/raw'),true))()
