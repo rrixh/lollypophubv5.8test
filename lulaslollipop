@@ -2212,12 +2212,19 @@ end)
 local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 
+GamesSection:NewLabel("NEWLABELTEXT") 
 
-GamesSection:NewLabel("👩‍⚕️BETTYS NURSEY ESKAPE OBBY👩‍⚕️")
-GamesSection:NewButton("instant item,rejoin and keep finishing obby", "2", function()
-loadstring(game:HttpGet(('https://pastefy.app/EaeidP9Y/raw'),true))()
+GamesSection:NewButton("gameButtonText", "gameInfo", function()  
 end)
 
+GamesSection:NewButton("teleport to game", "goto bettys nursey obby", function()   game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) end)
+
+
+GamesSection:NewLabel("👩‍⚕️ BETTYS NURSEY ESKAPE OBBY 👩‍⚕️")
+
+GamesSection:NewButton("instant item,rejoin and keep finishing obby", "2", function()
+loadstring(game:HttpGet(('https://pastefy.app/EaeidP9Y/raw'),true))()
+end);
 GamesSection:NewButton("teleport to game", "gameInfo", function()   game:GetService("TeleportService"):Teleport(12857619746, game:GetService("Players").LocalPlayer) end)
 
 
