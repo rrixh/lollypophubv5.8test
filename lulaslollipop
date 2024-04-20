@@ -2217,7 +2217,8 @@ local GamesSection = Games:NewSection("Games")
 --GamesSection:NewButton("gameButtonText", "gameInfo", function()  
 --end)
 
-GamesSection:NewButton("teleport to game", "goto bettys nursey obby", function()   game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) end)
+--GamesSection:NewButton("teleport to game", "goto bettys nursey obby", function()   --game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer) 
+--end)
 
 
 GamesSection:NewLabel("👩‍⚕️ BETTYS NURSEY ESKAPE OBBY 👩‍⚕️")
