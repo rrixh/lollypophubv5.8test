@@ -2648,6 +2648,10 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 -- [ 🏚️🧱 Da Hood 🧱🏚️ ] --
 local GamesSection = Games:NewSection("[🏚️🔫🧱 Da Hood 🧱🔫🏚️] (work for any dh game)")
 
+GamesSection:NewButton("Osiris gui", "osiris shit talk blah more", function()  
+loadstring(game:HttpGet("https://pastecode.dev/raw/j3dc9a2r/osiris",true))()
+end)
+
 GamesSection:NewButton("Rainbow Sunshine Aimloxk(OP,paid)\ntype >enable inventory<if tool not visible", "type >enable inventory<if tool not visible", function()  
 --rainbow loxk 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealXORA/Roblox-Scripts/main/Rainbow%20Sunshine%20Aimlock.lua", true))()
