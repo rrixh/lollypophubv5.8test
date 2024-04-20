@@ -21,7 +21,7 @@ Duration = 7
 
 
 --last update
-local LastUpdate = "Last Update: Apr 19, 2024"
+local LastUpdate = "Last Update: Apr 20, 2024"
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
@@ -171,16 +171,6 @@ SkriptsSection:NewButton("ANTI-BAN (fixed &working✅)", "anti-ban skript/antilo
 loadstring(game:HttpGet("https://pastecode.dev/raw/tarixx9o/lulas-antiban.jar",true))()
 end)
 
-
--- SkriptsSection:NewButton("Vietnam notifier🚨📢", "will send u a notif if viet joins", function()
--- -- be notified wen viet joins
--- loadstring(game:HttpGet("https://pastebin.com/raw/C96cg2xG"))()
--- end)
-
--- SkriptsSection:NewButton("Kokushibo notifier🚨📢", "will notify u if kokushibo joins",
--- function()-- kokushibo notifier
--- loadstring(game:HttpGet("https://pastebin.com/raw/1hnL2uEj"))()
--- end)
 SkriptsSection:NewButton("Anti-Xheat bypass\nUse: bypass any klient fly/fling detektion", "allows u to hide stuff on your klient", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 wait()
@@ -203,6 +193,10 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/
 wait(0.01)
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
+
+--SkriptsSection:NewButton("Anti Fog", "no fog", function()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/Ruinins/scripts-/main/Anti%20fog"))()
+--end)
 
 SkriptsSection:NewButton("ANTI-AFK", "no afk",
 function()local vu = game:GetService("VirtualUser")
@@ -2895,6 +2889,12 @@ GamesSection:NewButton("inf stats,get best sword,best eggs&more", "FREE ugx", fu
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SoloChallenging",true))()
 end)
 
+-- [ pillow ] --
+GamesSection:NewLabel("Pillow Fighting")
+GamesSection:NewButton("Auto train,rebirth,wins,hatxh,equip best", "pillow fight sim skript by ToraIsMe", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/d18e41cb4c01c507f1bfba45a450cd69a584acb6/PillowFighting",true))()
+end)
+
 
 GamesSection:NewLabel("🏃🏽‍♂️💨 ANIME RAXING 2 💨🏃🏽‍♂️")
 
@@ -3479,6 +3479,10 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/iShield2005/scripts/m
 end)
 
 GamesSection:NewLabel("👻🚪DOORS🚪👻")
+GamesSection:NewButton("[new] FFJ hub\nitem esp, faster run, 3 anti's, event (OP)", "OP skript", function()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FFJ1/Roblox-Exploits/main/scripts/Loader.lua"))()
+end)
+
 GamesSection:NewButton("ESP&more", "doors skript ", function()  
 loadstring(game:HttpGet("https://pastecode.dev/raw/4rv9np5f/doors",true))()
 end) 
@@ -4054,10 +4058,40 @@ HomeSection:NewButton("🔎 Skript", "look up any skript", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/ScriptSearcher"))()
 end)
 
-HomeSection:NewTextBox("Walkspeed","xhanges the walkspeed", function(e)game.Players.LocalPlayer.Character.Humanoid.WalkSpeed=e 
+HomeSection:NewButton("Rejoin", "rejoins the same lobby",
+function()
+--rejoin lobby
+local ts = game:GetService("TeleportService");
+local p = game:GetService("Players").LocalPlayer;
+--rj
+ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, p)
+end)
+HomeSection:NewButton("Server Hop", "leave the game",
+function()
+loadstring(game:HttpGet("https://pastebin.com/raw/KahMvMeh"))()
+end)
+HomeSection:NewButton("Join Lowest Player Server", "makes u join same game but lowest player",
+function()
+--low server
+loadstring(game:HttpGet("https://pastebin.com/raw/H0LwsNGc"))()
+wait()
+      local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
+      local Notify = AkaliNotif.Notify;
+      wait();
+      Notify({
+      Description = "Finding smallest server...";
+      Title = "Lollypop Admin🍭";
+      Duration = 5;
+      });
+end)
+HomeSection:NewButton("Exit", "leave the game",
+function()game:Shutdown()
 end)
 
-HomeSection:NewTextBox("Jump Power","xhanges the jumppower", function(e)game.Players.LocalPlayer.Character.Humanoid.JumpHeight=e 
+HomeSection:NewTextBox("Walkspeed","xhanges the walkspeed", function(speed)game.Players.LocalPlayer.Character.Humanoid.WalkSpeed=speed;
+end)
+
+HomeSection:NewTextBox("Jump Power","xhanges the jumppower", function(jp)game.Players.LocalPlayer.Character.Humanoid.JumpHeight=jp
 end)
 
 HomeSection:NewButton("Reset Walkspeed","reset walkspeed to default", function()game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
@@ -4068,39 +4102,34 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
 
-HomeSection:NewButton("tagapagpatupad", "xherushutup", function()
+--HomeSection:NewButton("tagapagpatupad", "xherushutup", function()
 --99
-loadstring(game:HttpGet("https://pastecode.dev/raw/E7GMNU4Q/99fail-fling_lulaslollipop",true))()
-end)
+--loadstring(game:HttpGet("https://pastecode.dev/raw/E7GMNU4Q/99fail-fling_lulaslollipop",true))()
+--end)
 
 HomeSection:NewButton("Ping Kounter", "see ping", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MvKKJ331"))()
 end)
 
-HomeSection:NewButton("Rejoin", "rejoins the same lobby",
-function()
---rejoin lobby
-local ts = game:GetService("TeleportService")
+--HomeSection:NewButton("No Lib %FO", "nolib%", function()
+--loadstring(game:HttpGet("https://pastebin.com/raw/2Vxg0a72"))()
+--end)
 
-local p = game:GetService("Players").LocalPlayer
-
-ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, p)
+HomeSection:NewButton("Get Koords", "x,y,z finder say /console", function()
+print(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position)
+ wait()
+      local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
+      local Notify = AkaliNotif.Notify;
+      Notify({
+      Description = "koordinates kopied to klipboard";
+      Title = "Lollypop Admin🍭";
+      Duration = 5;
+      });
+end)
+HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakes", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/yealugpt/koordsgui.kxls.xlsk.xls",true))()
 end)
 
-HomeSection:NewButton("Server Hop", "leave the game",
-function()
-loadstring(game:HttpGet("https://pastebin.com/raw/KahMvMeh"))()
-end)
-HomeSection:NewButton("Join Lowest Player Server", "makes u join same game but lowest player",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/H0LwsNGc"))()
-end)
-HomeSection:NewButton("Exit", "leave the game",
-function()game:Shutdown()
-end)
-HomeSection:NewButton("No Lib %FO", "nolib%", function()loadstring(game:HttpGet("https://pastebin.com/raw/2Vxg0a72"))()
-end)
-HomeSection:NewButton("Get Koords", "x,y,z finder say /console", function()print(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position)
-end)
 HomeSection:NewButton("BaxkDoorFinder", "finds a baxkdoor for admin or additional skripts", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
 end)
@@ -4191,6 +4220,25 @@ end)
 local More = Window:NewTab("More")
 local MoreSection = More:NewSection("more skripts koming soon...🍭")
 
+MoreSection:NewButton("Bypass & Anti", "an anti", function()-- anti bit detektion
+local X;
+X = hookmetamethod(game, "__namecall",function(self,...)
+local args = {...};
+local method = getnamecallmethod()
+if method == "Kick"   then
+return
+end
+return X(self,...)
+end);
+wait()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+end)
+
+MoreSection:NewButton("Universal 🔑 Bypasser", "key bypsr", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/MariyaFurmanova/Library/main/un_LaukHubKeyBypass", true))()
+end)
+
+
 Players.ChildAdded:connect(function()
 local count = #game.Players:GetPlayers()
 serversize:UpdateLabel("Server Size: ".. count .."/" .. maxplrs)
@@ -4201,6 +4249,8 @@ local count = #game.Players:GetPlayers()
 serversize:UpdateLabel("Server Size: ".. count .."/" .. maxplrs)
 end)
 
+MoreSection:NewLabel("Others")
+
 MoreSection:NewButton("Player Notifier", "will notify if a player leaves/joined",
 function()-- player joined/left lobby
 loadstring(game:HttpGet("https://pastebin.com/raw/c5JacC0M"))()
@@ -4210,6 +4260,11 @@ Title = "Player Notifier✅On";
 Text = "u will be notified wen players leave/join";
 
 })
+end)
+
+MoreSection:NewButton("Universal Speed Slider", "unvrsl", function()
+--unvrsl speed slider
+loadstring(game:HttpGet("https://pastebin.com/raw/DH4b3T5S"))();
 end)
 
 MoreSection:NewButton("Kopy Avatars (IY)", "use infinite yield 'copyid (playername)'",
@@ -4485,4 +4540,4 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop
 end)
 
 
----end---;
+---end---
