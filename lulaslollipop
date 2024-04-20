@@ -2217,6 +2217,11 @@ GamesSection:NewButton("Finish event game, kollect stars, invite friends", "free
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/9c0d68bcf09aa7d4036c8ba848fecce81d0e142f/Teamwork2",true))()
 end)
 
+GamesSection:NewButton("invite all friends", "karry a friend", function()  
+--karry bakon
+loadstring(game:HttpGet(('https://pastefy.app/tSEf0cah/raw'),true))()
+end)
+
 GamesSection:NewButton("teleport to game", "goto bettys nursey obby", function()
 game:GetService("TeleportService"):Teleport(12641272458, game:GetService("Players").LocalPlayer) 
 end)
@@ -2430,20 +2435,16 @@ end)
 GamesSection:NewButton("teleport to game", "zombiedefense tp", function()   game:GetService("TeleportService"):Teleport(4711958375, game:GetService("Players").LocalPlayer) 
 end)
 
--- GamesSection:NewLabel("🫂 KARRY A FRIEND 🫂")
--- GamesSection:NewButton("skript by Tora", "karry a friend", function()  
--- loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/CarryAFriend'))()
--- end)
--- GamesSection:NewButton("skript by 🥓", "karry a friend", function()  
--- --karry bakon
--- loadstring(game:HttpGet(('https://pastefy.app/tSEf0cah/raw'),true))()
--- end)
--- GamesSection:NewButton("skript by 🍭", "karry a friend", function()  
--- loadstring(game:HttpGet("https://pastecode.dev/raw/fa5hda5b/karryAFriend.kompleteLvls_lulaslollipop.jar",true))()
--- end)
+GamesSection:NewLabel("🫂 KARRY A FRIEND 🫂")
+GamesSection:NewButton("skript by Tora", "karry a friend", function()  
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/CarryAFriend'))()
+end)
+GamesSection:NewButton("skript by 🍭", "karry a friend", function()  
+loadstring(game:HttpGet("https://pastecode.dev/raw/fa5hda5b/karryAFriend.kompleteLvls_lulaslollipop.jar",true))()
+end)
 
--- GamesSection:NewButton("teleport to game", "to karry a friend", function() game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer)
--- end)
+GamesSection:NewButton("teleport to game", "to karry a friend", function() game:GetService("TeleportService"):Teleport(14448662003, game:GetService("Players").LocalPlayer)
+end)
 
 GamesSection:NewLabel("🐟 Blippi's Playground 🐟") 
 GamesSection:NewButton("auto dig, auto sell by Tora(get 150)", "free ugx", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Blippi2",true))()
@@ -2654,6 +2655,10 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 -- [ 🏚️🧱 Da Hood 🧱🏚️ ] --
 local GamesSection = Games:NewSection("[🏚️🔫🧱 Da Hood 🧱🔫🏚️] (work for any dh game)")
 
+GamesSection:NewButton("Blue Red hub", "unvrsl", function()
+loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-BlueRed-Hub-V11-12372'))()
+end)
+
 GamesSection:NewButton("Osiris gui", "osiris shit talk blah more", function()  
 loadstring(game:HttpGet("https://pastecode.dev/raw/j3dc9a2r/osiris",true))()
 end)
@@ -2767,6 +2772,27 @@ GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
 end)
 
+GamesSection:NewLabel(" 💀 Death Ball ☄️")
+
+GamesSection:NewButton("MEGA auto parry", "parry auto", function()  
+loadstring(game:HttpGet('https://rawscripts.net/raw/Death-Ball-Mega-Auto-Parry-12099'))()
+end) 
+
+
+GamesSection:NewLabel("🐶🐹 PET SIMULATOR 99 🐰🐇")
+
+GamesSection:NewButton("dupe skript", "dupe", function()  
+loadstring(game:HttpGet("https://gist.githubusercontent.com/filiposin/e7e3978db9dcc63e8c95586e7dfb4d1f/raw/0a0d16489f9d440a9417be8e8b3a197d28e8442c/PS99%2520DUPE%2520SCRIPT", true))()
+end)
+
+GamesSection:NewButton("PS99 - Zaphub", "BEST SKRIPT", function()  
+loadstring(game:HttpGet('https://rawscripts.net/raw/Pet-Simulator-99!-ZapHub-The-Best-PS99-Script-Update-8-12066'))()
+end) 
+
+GamesSection:NewButton("PS99 - Syrex hub", "PS99", function()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gerisxx/ps99-Script/main/syrexhub",true))()
+end)
+
 
 GamesSection:NewLabel("🔦📸 The Maze 📸🔦")
 GamesSection:NewButton("(new) mob esp, get items, teleports & more", "good skript used myself", function()
@@ -2806,6 +2832,14 @@ GamesSection:NewButton("teleport to game", "evade", function()
 game:GetService("TeleportService"):Teleport(9872472334, game:GetService("Players").LocalPlayer)
 end)
 
+GamesSection:NewLabel("🍇🫐FRUIT BATTLEGROUNDS 🍓🥭")
+GamesSection:NewButton("gameButtonText", "fruit battlegrounds", function()  
+--fruit battlground HUNT:9224601490
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/HUNTFruitBattle'))()
+end)
+
+
+
 GamesSection:NewLabel("⚔️ KOMBAT WARRIORS ⚔️")
 GamesSection:NewButton("killAura,Autoparry- kombat warriors 1", "kombatwarriors", function()
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/1d4db6a1b04aaeccf046f7c63fbad31a.lua"))()
@@ -2824,6 +2858,17 @@ end)
 GamesSection:NewButton("METAB - booth", " Poor", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NocturneMoDz/PLEASE-DONATE-BOOTH-/main/METAB"))()
 end)
+
+GamesSection:NewLabel("🪖 Arsenal 🪖")
+GamesSection:NewButton("thunder klient OP AF", "OP AF", function()
+loadstring(game:HttpGet('https://rawscripts.net/raw/Arsenal-Thunder-Client-OP-AF-7057'))()
+end)
+
+GamesSection:NewLabel("🌪️ 🌀NATURAL DISASTER SURVIVAL 🏃🏽‍♂️🌪️")
+GamesSection:NewButton("LiverMods ui", "nds skript", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/LiverMods/Rawnder-NTDR/main/NaturalDisaster'))("t.me/arceusxscripts")
+end)
+
 
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
@@ -2952,6 +2997,10 @@ end)
 
 
 GamesSection:NewLabel("[🏏Blade Ball☄️]")
+
+GamesSection:NewButton("blue red hub", "unvrsl", function()
+loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-BlueRed-Hub-V11-12372'))()
+end)
 
 GamesSection:NewButton("just another autoparry&spam gui", "bladeball", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/qxA2ETxy"))()
@@ -3340,7 +3389,12 @@ GamesSection:NewButton("AutoHaxk,ESP & more", "ftf gui",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/LeviTheOtaku/roblox-scripts/main/FTFHAX.lua",true))()
 end)
 
-local GamesSection = Games:NewSection("[❓Murder Mystery 2🔪]")
+GamesSection:NewLabel("[❓Murder Mystery 2🔪]")
+
+GamesSection:NewButton("Suslik Hub", "gameInfo", function()  
+--// https://t.me/arceusxscripts
+loadstring(game:HttpGet"https://raw.githubusercontent.com/KrutoySuslik/-SuslikHub-/main/%7CSuslik%20Hub%7C%20%7CAll%20Scripts%7C")("https://t.me/arceusxscripts")
+end)
 
 GamesSection:NewButton("MM2 - TbaoHub thaibao", "tbaohub", function()-- Mm2 tbaohub
 loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubMurderMystery2"))()
@@ -3502,6 +3556,15 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/iShield2005/scripts/m
 end)
 
 GamesSection:NewLabel("👻🚪DOORS🚪👻")
+
+GamesSection:NewButton("rafan hub", "no ban doors", function()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Rafanchik123/script/main/DoorsNew19"))()
+end)
+
+GamesSection:NewButton("dark hub(new) apr20", "dark", function()  
+loadstring(game:HttpGet("https://pst.innomi.net/paste/dw8uteaxwdb4ga9kyuf9hcga/raw"))()
+end)
+
 GamesSection:NewButton("[new] FFJ hub\nitem esp, faster run, 3 anti's, event (OP)", "OP skript", function()  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FFJ1/Roblox-Exploits/main/scripts/Loader.lua"))()
 end)
