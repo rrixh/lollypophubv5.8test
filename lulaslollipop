@@ -2213,7 +2213,8 @@ GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
 GamesSection:NewLabel("🧩 TEAMWORK PUZZLES 2") 
 
-GamesSection:NewButton("Finish event game, kollect stars, invite friends", "free ugx skript by ToraIsMe", function()  
+GamesSection:NewButton("Finish event game, kollect stars, invite friends", "free ugx skript by ToraIsMe", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/9c0d68bcf09aa7d4036c8ba848fecce81d0e142f/Teamwork2",true))()
 end)
 
 GamesSection:NewButton("teleport to game", "goto bettys nursey obby", function()
