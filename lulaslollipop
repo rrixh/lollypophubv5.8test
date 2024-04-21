@@ -2781,13 +2781,18 @@ end)
 
 GamesSection:NewLabel("😩99% Fail Obby😩")
 GamesSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))();
-wait()
-spawn(function()
--- lulas 99 fail memory skript
+--99 by lulas
 loadstring(game:HttpGet("https://pastecode.dev/raw/qruuo3lc/99uwuHook.-.-.-.-.-.-.-.-.-.-._lulaslollipop.zip",true))()
+--hook
+pcall(function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/27r0btda/wHook-.-.-99failobby_lulaslollipop.deb",true))()
+end);
+--eye toggle
+pcall(function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))()
+end);
 end)
-end)
+
 GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
 end)
@@ -3411,7 +3416,9 @@ end)
 
 GamesSection:NewLabel("[❓Murder Mystery 2🔪]")
 
-GamesSection:NewButton("Suslik Hub", "gameInfo", function()  
+GamesSection:NewButton("Kidaxhi hub (big) - koin farm, egg farm", "kidixhiHb", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/KidichiHB/Kidachi/main/Scripts/MM2", true))() end)
+
+GamesSection:NewButton("Suslik Hub", "mm2", function()  
 --// https://t.me/arceusxscripts
 loadstring(game:HttpGet"https://raw.githubusercontent.com/KrutoySuslik/-SuslikHub-/main/%7CSuslik%20Hub%7C%20%7CAll%20Scripts%7C")("https://t.me/arceusxscripts")
 end)
