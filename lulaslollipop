@@ -2222,8 +2222,12 @@ GamesSection:NewButton("teleport to game", "xyberkill", function()   game:GetSer
 
 GamesSection:NewLabel("💩 POOP with friends 💩") 
 
-GamesSection:NewButton("start obby, instant komplete to get", "free poop limited", function()  
+GamesSection:NewButton("start obby, instant komplete to get", "free poop limited by Tora", function()  
 loadstring(game:HttpGet("https://pastecode.dev/raw/2gi9rh8a/poopwithfriends_lulaslollipop.xlsxlslxlslxl.xls",true))()
+end)
+
+GamesSection:NewButton("instant win obby 🥓", "by BakonBoss", function()  
+loadstring(game:HttpGet(('https://pastefy.app/g9OFpe96/raw'),true))()
 end)
 
 GamesSection:NewButton("teleport to game", "poopwfriends", function()   game:GetService("TeleportService"):Teleport(8110845141, game:GetService("Players").LocalPlayer) end) 
