@@ -21,7 +21,7 @@ Duration = 7
 
 
 --last update
-local LastUpdate = "Last Update: Apr 20, 2024"
+local LastUpdate = "Last Update: Apr 21, 2024"
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
@@ -117,8 +117,9 @@ end
 spawn(updateTimeLabel);
 -- [ END UPDATE TIME ] --
 
+-- "NEWDROPDOWNHERE", 
 
-SkriptsSection:NewDropdown("[NEW] 🦾Xyber Killer(LIMITED UGX) ", "updates and add-ons to the skript will be here", {"Version: 8.9", "updates:", "🚨EXEKUTE ANTI-BYFRON IF BYFRON SHOWS🚨", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("[NEW] 🦾Xyber Killer(LIMITED UGX) ", "updates and add-ons to the skript will be here", {"Version: 8.9", "updates:", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -126,11 +127,11 @@ SkriptsSection:NewButton("Enable Toggle✅(if it doesnt load)", "toggle", functi
 -- [ TOGGLE klose/open ] --
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 end)
-SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨MUST USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
-end)
+--SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
+--loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
+--end)
 
-SkriptsSection:NewButton("🍭 Admin (;cmds)", "type the kommand in the kommand bar", function()
+SkriptsSection:NewButton("🍭Lollypop Admin (;cmds)", "type the kommand in the kommand bar", function()
 --lollypopadmin,fukbyfron&NAdevs
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
 end)
@@ -347,7 +348,7 @@ end)
 SkriptsSection:NewButton("???", "???",
 function()
 --???--
-loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))();
 wait()
 spawn(function()
 -- troll skript (???)
@@ -2213,7 +2214,8 @@ GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
 GamesSection:NewLabel("🦾 Xyber Killer 🦾")
 
-GamesSection:NewButton("auto safezone, auto kollect koins", "xyberkiller freelimited", function()  
+GamesSection:NewButton("auto safezone, auto kollect koins 🥓", "xyberkiller freelimited", function()
+--bakon
 loadstring(game:HttpGet("https://pastefy.app/fRLi7Dxa/raw",true))()
 end)
 
@@ -2226,10 +2228,6 @@ GamesSection:NewButton("start obby, instant komplete to get", "free poop limited
 loadstring(game:HttpGet("https://pastecode.dev/raw/2gi9rh8a/poopwithfriends_lulaslollipop.xlsxlslxlslxl.xls",true))()
 end)
 
-GamesSection:NewButton("instant win obby 🥓", "by BakonBoss", function()  
-loadstring(game:HttpGet(('https://pastefy.app/g9OFpe96/raw'),true))()
-end)
-
 GamesSection:NewButton("teleport to game", "poopwfriends", function()   game:GetService("TeleportService"):Teleport(8110845141, game:GetService("Players").LocalPlayer) end) 
 
 
@@ -2239,10 +2237,9 @@ GamesSection:NewButton("Finish event game, kollect stars, invite friends", "free
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/9c0d68bcf09aa7d4036c8ba848fecce81d0e142f/Teamwork2",true))()
 end)
 
-GamesSection:NewButton("invite all friends", "karry a friend", function()  
---karry bakon
-
-loadstring(game:HttpGet(('https://pastefy.app/tSEf0cah/raw'),true))()
+GamesSection:NewButton("skript 🥓", "by BakonBoss", function()
+--🥓🧩
+loadstring(game:HttpGet(('https://pastefy.app/g9OFpe96/raw'),true))()
 end)
 
 GamesSection:NewButton("teleport to game", "goto bettys nursey obby", function()
@@ -2784,7 +2781,7 @@ end)
 
 GamesSection:NewLabel("😩99% Fail Obby😩")
 GamesSection:NewButton("99% fail impossible obby", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥 ", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))();
 wait()
 spawn(function()
 -- lulas 99 fail memory skript
@@ -4624,9 +4621,9 @@ MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, fu
 Library:ToggleUI()
 end)
 
--- eye
+--xlsxeyetoggle
 pcall(function()
-    loadstring(game:HttpGet("https://pastecode.dev/raw/hzt2u41z/EYEgottrolled_getgenv.jar", true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))();
 end)
 
 -- main lollypop notif
@@ -4638,6 +4635,13 @@ pcall(function()
 -- [ TOGGLE klose/open ] --
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 end)
+
+pcall(function()
+-- anti byfron
+loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
+end)
+
+
 
 
 ---end---
