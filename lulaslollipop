@@ -17,7 +17,7 @@ Library.DefaultColor = Color3.fromRGB(192,192,192)
 Library:Notification({
 Text = "LOLLYPOP HUB V8.9🍭😋",
 Duration = 7
-})--endnotif
+})loadstring(game:HttpGet("https://pastecode.dev/raw/9ap4hr0c/lollyhub-systemMsg_lulaslollipop.xlsx", true))()
 
 
 --last update
@@ -62,6 +62,11 @@ local Window = Library.CreateLib(lollypopHub)
 -- Synapse
 -- Serpent(new)
 --tools1134,skripts35,game1443,games2450
+
+local function skriptLoaded()
+    loadstring(game:HttpGet("https://pastecode.dev/raw/9ap4hr0c/lollyhub-systemMsg_lulaslollipop.xlsx", true))()
+end
+
 
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skripthub by @lulaslollipop on Roblox🍭😋")
@@ -4628,6 +4633,7 @@ MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, fu
 Library:ToggleUI()
 end)
 
+
 --xlsxeyetoggle
 pcall(function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))();
@@ -4641,12 +4647,17 @@ end)
 pcall(function()
 -- [ TOGGLE klose/open ] --
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
-end)
+end);
 
 pcall(function()
 -- anti byfron
 loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
-end)
+end);
+
+
+
+skriptLoaded()
+
 
 
 
