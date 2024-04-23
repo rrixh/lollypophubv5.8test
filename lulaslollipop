@@ -14,7 +14,48 @@ local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766
         Font = Enum.Font.Arial,
         FontSize = Enum.FontSize.Size24
     })
-end
+end;
+
+--UserInputService
+local UserInputService = game:GetService("UserInputService")
+
+local platform = UserInputService:GetPlatform()
+local niggaIsUsing = table.find({Enum.Platform.IOS, Enum.Platform.Android}, platform)
+local devixe_name
+
+if niggaIsUsing then
+    if niggaIsUsing == 1 then
+    devixe_name = "iOS(iPhone/iPad)"
+    elseif niggaIsUsing == 2 then
+    devixe_name = "Android"
+    else
+    devixe_name = "Unknown Mobile Devixe"
+    end
+else
+    if platform == Enum.Platform.Windows then
+    devixe_name = "Windows"
+    elseif platform == Enum.Platform.OSX then
+    devixe_name = "OSX"
+    elseif platform == Enum.Platform.Ubuntu then
+    devixe_name = "Ubuntu"
+    elseif platform == Enum.Platform.ChromeOS then
+    devixe_name = "ChromeOS"
+    elseif platform == Enum.Platform.Linux then
+    devixe_name = "Linux"
+    elseif platform == Enum.Platform.XBoxOne then
+    devixe_name = "XBoxOne"
+    elseif platform == Enum.Platform.PS4 then
+    devixe_name = "PS4/PS5"
+    elseif platform == Enum.Platform.Switch then
+    devixe_name = "Switxh"
+    else
+    devixe_name = "Unknown Devixe Platform"
+    end
+end;
+
+--msg
+-- game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe.name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
+
 
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
@@ -38,7 +79,7 @@ spawn(function()
 
 
 --last update
-local LastUpdate = "Last Update: Apr 22, 2024"
+local LastUpdate = "Last Update: Apr 23, 2024"
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
@@ -165,7 +206,7 @@ SkriptsSection:NewLabel("User ID: "..game.Players.LocalPlayer.UserId.. " | Akkou
 
 SkriptsSection:NewLabel("Game: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\nGame ID: ".. game.PlaceId)
 
-SkriptsSection:NewLabel("This Nigga Is Using: " .. identifyexecutor())
+SkriptsSection:NewLabel("This Nigga Is Using "..identifyexecutor().." on " ..devixe_name)
 
 -- SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.." day(s)")
 --[LABELS done]--
@@ -2234,7 +2275,7 @@ local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
-GamesSection:NewLabel("🥥 VITA KOKO KOKONUT GRAVE 🥥\n2024 VERSION")
+GamesSection:NewLabel("🥥 VITA KOKO KOKONUT GRAVE 🥥(2024)")
 
 GamesSection:NewButton("🥓 skript", "easy suit", function()  loadstring(game:HttpGet(('https://pastefy.app/v7fsofXk/raw'),true))()
 end)
