@@ -9,16 +9,22 @@ local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766
     local displayname = game.Players.LocalPlayer.DisplayName
 
     game.StarterGui:SetCore("ChatMakeSystemMessage", {
-        Text = "[Lollypop Hub] Welkome to Lollypop Hub, @"..username.." ("..displayname..")!\nSkript by @lulaslollipop🍭 on Roblox👺",
+        Text = "[Lollypop Hub] Welkome to Lollypop Hub, @"..username.." ("..displayname..")!\nSkript by @lulaslollipop🍭 on Roblox👺\n i aim to make this the most free/keyless hub for everyone",
         Color = Color3.fromRGB(0,255,0),
         Font = Enum.Font.Arial,
         FontSize = Enum.FontSize.Size24
     })
-end; --218,133,65
+wait(1)
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
+        Text = "🔔my goal is to make this the most free/keyless hub for every living nigga or female to use",
+        Color = Color3.fromRGB(278,75,43),
+        Font = Enum.Font.Arial,
+        FontSize = Enum.FontSize.Size24
+    })
+end; --218,133,65=orange...0,255,0=green...278,75,43=red/orange...
 
 -- [ 📱💻PLATFORM / DEVIXE🖥️🎮 ] --
 local UserInputService = game:GetService("UserInputService")
-
 local platform = UserInputService:GetPlatform()
 local niggaIsUsing = table.find({Enum.Platform.IOS, Enum.Platform.Android}, platform)
 local devixe_name
@@ -4148,7 +4154,7 @@ end)
 local More = Window:NewTab("More")
 local MoreSection = More:NewSection("more skripts koming soon...🍭")
 
-MoreSection:NewButton("Bypass & Anti", "an anti", function()-- anti bit detektion
+MoreSection:NewButton("Bypasses & Anti-cheats", "an anti", function()-- anti bit detektion
 local X;
 X = hookmetamethod(game, "__namecall",function(self,...)
 local args = {...};
@@ -4158,6 +4164,26 @@ return
 end
 return X(self,...)
 end);
+wait()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+end)
+
+MoreSection:NewButton("BTNNAME", "sum", function() 
+for _, key in next, getgc(true) do 
+        local function updateKey(instanceType)
+            if pcall(function() return rawget(key, instanceType) end) and typeof(rawget(key, instanceType)) == 'table' and (rawget(key, instanceType))[1] == 'kick' then
+                key.tvk = {
+                    'kick',
+                    function() 
+                        return game.Workspace:WaitForChild('')
+                    end
+                }
+            end
+        end
+
+        updateKey('indexInstance')
+        updateKey('namecallInstance')
+    end;
 wait()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
