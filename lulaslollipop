@@ -1,6 +1,6 @@
---main8.9
+--main9
 -- Gui to Lua LOLLYPOPHUB
--- Version: 8.9
+-- Version: 9
 -- Instanxes:
 --pis,esp
 
@@ -10,13 +10,13 @@ local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766
 
     game.StarterGui:SetCore("ChatMakeSystemMessage", {
         Text = "[Lollypop Hub] Welkome to Lollypop Hub, @"..username.." ("..displayname..")!\nSkript by @lulaslollipop🍭 on Roblox👺",
-        Color = Color3.fromRGB(0, 255, 0),
+        Color = Color3.fromRGB(0,255,0),
         Font = Enum.Font.Arial,
         FontSize = Enum.FontSize.Size24
     })
-end;
+end; --218,133,65
 
---UserInputService
+-- [ 📱💻PLATFORM / DEVIXE🖥️🎮 ] --
 local UserInputService = game:GetService("UserInputService")
 
 local platform = UserInputService:GetPlatform()
@@ -25,36 +25,38 @@ local devixe_name
 
 if niggaIsUsing then
     if niggaIsUsing == 1 then
-    devixe_name = "iOS(iPhone/iPad)"
+    devixe_name = "iOS📱(iPhone/iPad)"
     elseif niggaIsUsing == 2 then
-    devixe_name = "Android"
+    devixe_name = "Android/Tablet 📱"
     else
-    devixe_name = "Unknown Mobile Devixe"
+    devixe_name = "Unknown Mobile 📵"
     end
 else
     if platform == Enum.Platform.Windows then
-    devixe_name = "Windows"
+    devixe_name = "Windows 💻"
     elseif platform == Enum.Platform.OSX then
-    devixe_name = "OSX"
+    devixe_name = "OSX 💻"
     elseif platform == Enum.Platform.Ubuntu then
-    devixe_name = "Ubuntu"
+    devixe_name = "Ubuntu 💻"
     elseif platform == Enum.Platform.ChromeOS then
-    devixe_name = "ChromeOS"
+    devixe_name = "ChromeOS 💻"
     elseif platform == Enum.Platform.Linux then
     devixe_name = "Linux"
     elseif platform == Enum.Platform.XBoxOne then
-    devixe_name = "XBoxOne"
+    devixe_name = "XBoxOne 🎮"
     elseif platform == Enum.Platform.PS4 then
     devixe_name = "PS4/PS5"
     elseif platform == Enum.Platform.Switch then
-    devixe_name = "Switxh"
+    devixe_name = "Switxh 🎮"
+    elseif platform == Enum.Platform.UWP then
+     devixe_name = "UWP"
     else
-    devixe_name = "Unknown Devixe Platform"
+    devixe_name = "Unknown Devixe 📵"
     end
 end;
+-- [ 📱💻PLATFORM / DEVIXE🖥️🎮 ] --
 
---msg
--- game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe.name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
+--game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
 
 
 
@@ -69,7 +71,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(192,192,192)
 
 Library:Notification({
-Text = "LOLLYPOP HUB V8.9🍭😋",
+Text = "LOLLYPOP HUB V9🍭😋",
 Duration = 7
 })
 
@@ -78,7 +80,7 @@ spawn(function()
   end)
 
 
---last update
+-- [ last update ] --
 local LastUpdate = "Last Update: Apr 23, 2024"
 
 -- local red = 192,192,192
@@ -106,7 +108,7 @@ local count = #game.Players:GetPlayers()
 
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local lollypopHub = "Lollypop Hub🍭 | V8.9 | " .. identifyexecutor() .. " | " .. LastUpdate
+local lollypopHub = "Lollypop Hub🍭 | V9 | " .. identifyexecutor() .. " | " .. LastUpdate
 local Window = Library.CreateLib(lollypopHub)
 -- themes:
 ---//yum lollypop hub\\--
@@ -182,7 +184,7 @@ spawn(updateTimeLabel);
 
 --  "NEWDROPDOWNHERE", 
 
-SkriptsSection:NewDropdown("[NEW]VITA KOKO SUIT🥥\n(2024 version)easy ugx🥥", "updates and add-ons to the skript will be here", {"Version: 8.9", "updates:", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore",  "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
+SkriptsSection:NewDropdown("[NEW]VITA KOKO SUIT🥥\n(2024 version)easy ugx🥥", "updates and add-ons to the skript will be here", {"Version: 9", "updates:", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore",  "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
 print(currentOption)
 end)
 
@@ -2500,6 +2502,7 @@ GamesSection:NewButton("Blue Red hub", "unvrsl", function()
 loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-BlueRed-Hub-V11-12372'))()
 end)
 
+
 GamesSection:NewButton("Osiris gui", "osiris shit talk blah more", function()  
 loadstring(game:HttpGet("https://pastecode.dev/raw/j3dc9a2r/osiris",true))()
 end)
@@ -2678,7 +2681,7 @@ GamesSection:NewButton("teleport to game", "evade", function()
 game:GetService("TeleportService"):Teleport(9872472334, game:GetService("Players").LocalPlayer)
 end)
 
-GamesSection:NewLabel("🍇🫐FRUIT BATTLEGROUNDS 🍓🥭")
+GamesSection:NewLabel("🍇🍎 FRUIT BATTLEGROUNDS 🍓🥭")
 GamesSection:NewButton("gameButtonText", "fruit battlegrounds", function()  
 --fruit battlground HUNT:9224601490
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/HUNTFruitBattle'))()
