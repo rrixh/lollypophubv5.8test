@@ -4168,7 +4168,7 @@ wait()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
 
-MoreSection:NewButton("BTNNAME", "sum", function() 
+MoreSection:NewButton("Anti *InvokeServer()*", "sum", function() 
 for _, key in next, getgc(true) do 
         local function updateKey(instanceType)
             if pcall(function() return rawget(key, instanceType) end) and typeof(rawget(key, instanceType)) == 'table' and (rawget(key, instanceType))[1] == 'kick' then
