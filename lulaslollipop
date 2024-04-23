@@ -50,8 +50,8 @@ else
     devixe_name = "Linux"
     elseif platform == Enum.Platform.XBoxOne then
     devixe_name = "XBoxOne 🎮"
-    elseif platform == Enum.Platform.PS4 then
-    devixe_name = "PS4/PS5"
+    elseif platform == Enum.Platform.PS4 or platform == Enum.Platform.PS5 or platform == Enum.Platform.PS3 then
+    devixe_name = "Playstation🎮"
     elseif platform == Enum.Platform.Switch then
     devixe_name = "Switxh 🎮"
     elseif platform == Enum.Platform.UWP then
@@ -60,7 +60,7 @@ else
     devixe_name = "Unknown Devixe 📵"
     end
 end;
--- [ 📱💻PLATFORM / DEVIXE🖥️🎮 ] --
+
 
 --game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
 
