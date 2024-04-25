@@ -2676,6 +2676,12 @@ GamesSection:NewButton("Heaven Map (99% fail)", "reduxes lag too", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
 end)
 
+GamesSection:NewLabel("🪩🕺🏾 FUNKY FRIDAY 💃🏽🪩") 
+GamesSection:NewButton("🕺🏾💃🏽 Autoplayer", "autoplay", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nadir3709/RandomScript/main/FunkyFridayMobile"))()
+--autoplay
+end)
+
 GamesSection:NewLabel(" 💀 Death Ball ☄️")
 
 GamesSection:NewButton("MEGA auto parry", "parry auto", function()  
