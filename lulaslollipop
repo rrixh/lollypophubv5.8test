@@ -2307,10 +2307,12 @@ end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
-GamesSection:NewDropdown("🏘️ [FREE UGX] RoVille 🏘️", "find items to get ugx", {"FIND ITEMS", "go to game"}, function(x)
-if x == "FIND ITEMS" then
+GamesSection:NewDropdown("🏘️ [FREE UGX] RoVille 🏘️", "find items to get ugx", {"FIND ITEMS(Tora)", "FIND ITEMS(bakon)", "go to game"}, function(x)
+if x == "FIND ITEMS(Tora)" then
 --tora roville autoget
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/d90547dd424e2047aeb23e204452ac069f65e77c/RoVille",true))()
+elseif x == "FIND ITEMS(bakon)" then
+loadstring(game:HttpGet("https://pastefy.app/KJAxi51h/raw",true))()
 elseif x == "go to game"
 then
 --to roville
