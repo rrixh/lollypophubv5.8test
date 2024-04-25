@@ -1,3 +1,4 @@
+--updated 🍭hub test dropdown
 --main9
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 9
@@ -7,16 +8,16 @@
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
     local username = game.Players.LocalPlayer.Name
     local displayname = game.Players.LocalPlayer.DisplayName
-
+--;
     game.StarterGui:SetCore("ChatMakeSystemMessage", {
-        Text = "[Lollypop Hub] Welkome to Lollypop Hub, @"..username.." ("..displayname..")!\nSkript by @lulaslollipop🍭 on Roblox👺\n i aim to make this the most free/keyless hub for everyone",
+        Text = "[Lollypop Hub] Welkome to Lollypop Hub, @"..username.." ("..displayname..")!\nSkript by @lulaslollipop🍭 on Roblox👺",
         Color = Color3.fromRGB(0,255,0),
         Font = Enum.Font.Arial,
         FontSize = Enum.FontSize.Size24
     })
 wait(1)
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
-        Text = "🔔my goal is to make this the most free/keyless hub for every living nigga or female to use",
+        Text = "🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript",
         Color = Color3.fromRGB(278,75,43),
         Font = Enum.Font.Arial,
         FontSize = Enum.FontSize.Size24
@@ -39,23 +40,23 @@ if niggaIsUsing then
     end
 else
     if platform == Enum.Platform.Windows then
-    devixe_name = "Windows 💻"
+    devixe_name = "Windows💻"
     elseif platform == Enum.Platform.OSX then
-    devixe_name = "OSX 💻"
+    devixe_name = "OSX🍎💻"
     elseif platform == Enum.Platform.Ubuntu then
-    devixe_name = "Ubuntu 💻"
+    devixe_name = "Ubuntu💻"
     elseif platform == Enum.Platform.ChromeOS then
-    devixe_name = "ChromeOS 💻"
+    devixe_name = "ChromeOS🍎🖥️"
     elseif platform == Enum.Platform.Linux then
-    devixe_name = "Linux"
+    devixe_name = "Linux💻"
     elseif platform == Enum.Platform.XBoxOne then
-    devixe_name = "XBoxOne 🎮"
+    devixe_name = "XBoxOne🎮"
     elseif platform == Enum.Platform.PS4 or platform == Enum.Platform.PS5 or platform == Enum.Platform.PS3 then
-    devixe_name = "Playstation🎮"
+    devixe_name = "Sony PlayStation🎮"
     elseif platform == Enum.Platform.Switch then
-    devixe_name = "Switxh 🎮"
+    devixe_name = "Switxh🎮"
     elseif platform == Enum.Platform.UWP then
-     devixe_name = "UWP"
+     devixe_name = "UWP🐸"
     else
     devixe_name = "Unknown Devixe 📵"
     end
@@ -87,7 +88,9 @@ e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydj
 
 
 -- [ last update ] --
-local LastUpdate = "Last Update: Apr 24, 2024"
+local LastUpdate="Last Update: Apr 24, 2024";
+local Vv="9";
+local exploit=identifyexecutor();
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
@@ -114,7 +117,8 @@ local count = #game.Players:GetPlayers()
 
 
 local Library = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local lollypopHub = "Lollypop Hub🍭 | V9 | " .. identifyexecutor() .. " | " .. LastUpdate
+local lollypopHub = "Lollypop Hub🍭 | V" ..Vv.. " | " ..exploit.. " | " ..LastUpdate
+
 local Window = Library.CreateLib(lollypopHub)
 -- themes:
 ---//yum lollypop hub\\--
@@ -127,12 +131,12 @@ local Window = Library.CreateLib(lollypopHub)
 -- Sentinel
 -- Synapse
 -- Serpent(new)
---tools1134,skripts35,game1443,games2450
+--lulaTheme
+-- tools1134,skripts35,game1443,games2450
 
 local function skriptLoaded()
-print("🍭✅🍭✅🍭✅🍭")
-end
-
+print("@lulaslollipop🍭 on Roblox // @rrixh diskord // @siipped on Telegram")
+end;
 
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skripthub by @lulaslollipop on Roblox🍭😋")
@@ -140,7 +144,7 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local plr = Players.LocalPlayer
 local maxplrs = game.Players.MaxPlayers
-local serversize = SkriptsSection:NewLabel("Server Size: ".. count .."/" .. maxplrs)
+local serversize = SkriptsSection:NewLabel("Server Size: "..count.."/"..maxplrs)
 
 local RunService = game:GetService("RunService")
 getgenv().Enabled = false
@@ -190,11 +194,22 @@ spawn(updateTimeLabel);
 
 --  "NEWDROPDOWNHERE", 
 
-SkriptsSection:NewDropdown("[NEW]VITA KOKO SUIT🥥\n(2024 version)easy ugx🥥", "updates and add-ons to the skript will be here", {"Version: 9", "updates:", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore",  "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(currentOption)
-print(currentOption)
+SkriptsSection:NewDropdown("[NEW] zombie attaxk skript(#1 OP)\nby me🍭", "updates and add-ons to the skript will be here", {"Version: "..Vv, "updates:", "zombie attaxk skript(#1 OP)\nby me", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore", "VITA KOKO SUIT🥥\n(2024 version) easy ugx", "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(lula)
+if lula == "zombie attaxk skript(#1 OP)\nby me" then
+loadstring(game:HttpGet("https://rentry.co/ZombieAttaxk_RRixh/raw",true))()
+    end
 end)
 
-SkriptsSection:NewButton("Enable Toggle✅(if it doesnt load)", "toggle", function()
+SkriptsSection:NewDropdown("Remade Skripts(jus added extra kmds Kreds to owners)", "xhoose a skript", {"Lollypop Admin", "Infinite Yield"}, function(...)
+if ...== "Lollypop Admin" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
+    elseif ...== "Infinite Yield" then
+loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
+    end
+end)
+
+
+SkriptsSection:NewButton("Enable Toggle✅ (if it doesnt load)", "toggle", function()
 -- [ TOGGLE klose/open ] --
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 end)
@@ -2283,21 +2298,25 @@ local Games = Window:NewTab("⭐️Games (NEW ugc)⭐️")
 local GamesSection = Games:NewSection("Games")
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
-GamesSection:NewLabel("🥥 VITA KOKO KOKONUT GRAVE 🥥(2024)")
+GamesSection:NewDropdown("🥥 VITA KOKO KOKONUT GRAVE (2024) 🥥", "kokonut", {"VITA KOKO KOKONUT GRAVE (2024)", "Option 2", "Option 3"}, function(x)     if x == "VITA KOKO KOKONUT GRAVE (2024)" then
+--bakon
+loadstring(game:HttpGet(('https://pastefy.app/v7fsofXk/raw'),true))()
+    elseif x == "teleport to game" then
+game:GetService("TeleportService"):Teleport(13069754677, game:GetService("Players").LocalPlayer)
+    end
+  end)
 
-GamesSection:NewButton("🥓 skript", "easy suit", function()  loadstring(game:HttpGet(('https://pastefy.app/v7fsofXk/raw'),true))()
-end)
 
-GamesSection:NewButton("teleport to game", "gameInfo", function()   game:GetService("TeleportService"):Teleport(13069754677, game:GetService("Players").LocalPlayer) end) 
 
 GamesSection:NewLabel("🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️") 
 
-GamesSection:NewButton("AUTOFARM", "freelimited", function()  
+GamesSection:NewDropdown("🧙‍♂️ INKREMENTAL ADVENTURES 🧙‍♂️", "freeugx drop", {"Autofarm", "teleport to game"}, function(x)
+      if x == "Autofarm" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Qrto1/IncrementalAdventures/main/AutoSlime"))()
+      elseif x == "teleport to game" then
+game:GetService("TeleportService"):Teleport(16800501783, game:GetService("Players").LocalPlayer)
+      end
 end)
-
-GamesSection:NewButton("teleport to game", "adventures", function()   game:GetService("TeleportService"):Teleport(16800501783, game:GetService("Players").LocalPlayer)end)
-
 
 GamesSection:NewLabel("🦾 Xyber Killer 🦾")
 
@@ -2310,52 +2329,43 @@ GamesSection:NewButton("teleport to game", "xyberkill", function()   game:GetSer
 
 
 GamesSection:NewLabel("👅 Tongue Battles 👅")
-GamesSection:NewButton("[EVENT apr19] auto quest, auto farm", "2", function()
+
+GamesSection:NewDropdown("👅 TONGUE BATTLES 👅", "DropdownInf", {"[event apr19] auto quest, autofarm", "playerfarm,anti fall&more (key)", "auto player, auto krate, auto fight", "4th"}, function(x)
+    if x =="[event apr19] auto quest, autofarm" then
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Tongue'))()
-end)
-GamesSection:NewButton("player farm, Anti-fall &more (🔑)", "ToraIsMe", function()  
---tongue👅
-loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/814301bca04a6a09705f133ea8514487480d4083/Tongue",true))() 
-end)
-GamesSection:NewButton("🥓auto player, auto krate, auto fight", "freeugx", function()  
---tongue battles bakon
+    elseif x =="playerfarm,anti fall&more (key)" then
+        --tongue👅
+loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/814301bca04a6a09705f133ea8514487480d4083/Tongue",true))()
+      elseif x == "auto player, auto krate, auto fight" then
 loadstring(game:HttpGet(('https://pastefy.app/Tx6uIEm7/raw'),true))()
-end)
-GamesSection:NewButton("teleport to game", "to tonguebattles", function()  
+      elseif x == "4th" then
 game:GetService("TeleportService"):Teleport(16721806812, game:GetService("Players").LocalPlayer)
-end)
+        end
+  end)
+
+    
 
 -- [ 🥪 Lunxhable Playables 🥪 ] --
 
-GamesSection:NewLabel(" 🥪 Lunxhable Playables 🥪\nMULTIPLE FREE INSTANT UGC(thanks Tora)")
-
-GamesSection:NewButton("Enter all kodes, G points", "MULTIPLE FREE ugx", function()
---lunxhable:14565246812
+GamesSection:NewDropdown("🥪 Lunxhable Playables 🥪\nMULTIPLE FREE INSTANT UGC(thanks Tora)", "points", {"enter all kodes, auto get points", "teleport to game"}, function(p)
+    if p =="enter all kodes, auto get points" then
+      --lunxhable:14565246812
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4c8940890035f7d0435c7e01bbb1788cd15365d4/Lunchables",true))()
-end)
-
-GamesSection:NewButton("teleport to game", "MULTIPLE FREE ugx", function()
---go lunxhable playables
+    elseif p == "teleport to game" then
+      --go lunxhable playables
 game:GetService("TeleportService"):Teleport(14565246812, game:GetService("Players").LocalPlayer)
+  end
 end)
 
-GamesSection:NewLabel("▫️Button Hell ▫️")
-GamesSection:NewButton("AUTO BUTTONS (tora)", "ugx limited", function()  
+
+GamesSection:NewDropdown("▫️Button Hell ▫️", "bh", {"Button Hell", "Autopush buttons - bakon", "teleport to game"}, function(x)
+    if x == "Button Hell" then 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/ButtonHell'))()
-end)
-GamesSection:NewButton("AUTO BUTTONS 🥓", "free limited", function()
---button hell 🥓
+    elseif x == "Autopush buttons - bakon" then
 loadstring(game:HttpGet(('https://pastefy.app/68WYydeo/raw'),true))()
-end)
-GamesSection:NewButton("teleport to game", "freeugx", function()   game:GetService("TeleportService"):Teleport(14329385031, game:GetService("Players").LocalPlayer) end)
-
-GamesSection:NewLabel("😳 The TERROR Elevator [UGX] 😳")
-GamesSection:NewButton("auto safe zone", "free ugx", function()
---terror elevator:16384951009
-loadstring(game:HttpGet("https://pastefy.app/iuhRUGZ1/raw",true))()
-end)
-GamesSection:NewButton("teleport to game", "elevator terror ugx", function()
-game:GetService("TeleportService"):Teleport(16384951009, game:GetService("Players").LocalPlayer)
+    elseif x =="teleport to game" then
+game:GetService("TeleportService"):Teleport(14329385031, game:GetService("Players").LocalPlayer)
+    end
 end)
 
 
@@ -2409,38 +2419,37 @@ end)
 
 -- [ 🔪🩸XHUXKY 🔪🩸] --
 GamesSection:NewLabel("🔪🩸(SURVIVE cHUcKY's NIGHTMARE)'🔪🩸 \nGRIEFVILLE (FREE ITEM)")
-GamesSection:NewButton("🔪AUTOFARM (FREE PIG HEAD UGX)", "ToraIsMe", function()--xhuxky:16578847473
+
+GamesSection:NewDropdown("cHUcKY & TIFFANY - GRIEFVILLE", "autofarm get ugx", {"AUTOFARM BY TORAISME(OP)", "AUTOFARM BY BAKON(OP)", "teleport to game"}, function(x)
+    if x=="AUTOFARM BY TORAISME(OP)" then 
+      --xhuxky:16578847473
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
-end)
-
-GamesSection:NewButton("kill aura,auto kollect &more 🥓", "xhuxky", function()  
+    elseif x =="AUTOFARM BY BAKON(OP)" then
 loadstring(game:HttpGet(('https://pastefy.app/kz1l7Xpz/raw'),true))()
-end)
-
-GamesSection:NewButton("teleport to game", "🩸🩸🔪🩸🔪🩸🔪", function()
+    elseif x =="teleport to game" then
 game:GetService("TeleportService"):Teleport(16578847473, game:GetService("Players").LocalPlayer)
-end)
---xhuxky:end--
-
-
-GamesSection:NewLabel("🧥 MAX MARA KOATS ADVENTURE 🧥")
-
-GamesSection:NewButton("on april 26", "max mara instant item apr26", function()  
-print("april 26 dumbass")
+    end
 end)
 
-GamesSection:NewButton("teleport to game", "goto max mara", function()   game:GetService("TeleportService"):Teleport(14905728989, game:GetService("Players").LocalPlayer)
-end) 
 
-GamesSection:NewLabel("👋🏽🐈  MY HELLO KITTY KAFE 🐈👋🏽")
+GamesSection:NewDropdown("🧥 MAX MARA KOATS ADVENTURE 🧥", "freeugx", {"get ugx", "teleport to game"}, function(x)
+    if x == "get ugx" then
+      print("april 26 dumbass")
+    elseif x == "teleport to game"
+      then
+game:GetService("TeleportService"):Teleport(14905728989, game:GetService("Players").LocalPlayer)
+    end
+end)
 
-GamesSection:NewButton("autofarm+auto gifts(2 skripts in 1)\n💫LeviTheOtaku, alialii404", "free baxkpaxk ugx", function()  
---helokitty
+
+GamesSection:NewDropdown("👋🏽🐈  MY HELLO KITTY KAFE 🐈👋🏽", "DropdownInf", {"autofarm, auto gifts(2 skripts in 1", "teleport to game"}, function(h)
+    if h == "autofarm, auto gifts(2 skripts in 1" then 
+      --helokitty:16698955784
 loadstring(game:HttpGet("https://pastecode.dev/raw/eitjmaw4/helloKittyAutofarm-LeviAndAli_lulaslollipop.png",true))()
+    elseif h == "teleport to game" then
+game:GetService("TeleportService"):Teleport(9346039031, game:GetService("Players").LocalPlayer)
+    end
 end)
-
-GamesSection:NewButton("teleport to game", "hellokittymykafe", function()   game:GetService("TeleportService"):Teleport(9346039031, game:GetService("Players").LocalPlayer) 
-end);
 
 -- [ 💨⭕️ Last to Leave ⭕️💨 ] --
 
@@ -2588,6 +2597,17 @@ GamesSection:NewButton("DaHood Gui - SpaxeYes", "So many skripts", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/SpaceYes/Lua/Main/DaHood.Lua'))()
 end)
 -- [ 🧱🏚️END OF DA HOOD 🏚️🧱 ] --
+
+GamesSection:NewDropdown("🌊 Flood Eskape 2 🌊", "op skript(paid)", {"flood eskape skript (paid)", "teleport to game"}, function(x)
+    if x == "flood eskape skript (paid)" then
+      --flood eskape 2
+loadstring(game:HttpGet("https://paste.gg/p/basketballfan102/3dd93d321ea249b88872f4f099ab48ea/files/8bac6a4c605c4c13b56f0369e38cb981/raw"))()
+    elseif x =="teleport to game" then
+--to game
+game:GetService("TeleportService"):Teleport(738339342, game:GetService("Players").LocalPlayer)
+    end
+end)
+
 
 GamesSection:NewLabel("🦸‍♀️ LEGENDS ARENA 🦸")
 
@@ -4478,21 +4498,25 @@ MoreSection:NewKeybind("Toggle ui", "toggle the ui yes", Enum.KeyCode.Insert, fu
 Library:ToggleUI()
 end)
 
-
---xlsxeyetoggle
-pcall(function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))();
-end)
-
--- main lollypop notif
-pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M", true))()
-end)
-
 pcall(function()
 -- [ TOGGLE klose/open ] --
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 end);
+
+--xlsxeyetoggle
+pcall(function()
+    local x=game.Players.LocalPlayer.Name;
+    if x=="lulaslollipop" then
+      print("😛")
+    else
+loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))();
+    end
+end)
+
+-- main lollypop notif
+pcall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M", true))()
+end)
 
 pcall(function()
 -- anti byfron
@@ -4500,10 +4524,34 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkby
 end);
 
 
+local startTime = tick()
 
-skriptLoaded();
+loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
+
+
+wait(2)
+
+local duration = tick() - startTime
+print("GUI took "..duration.." sekonds to load")
+
+skriptLoaded()
 
 
 
 
----end---
+
+-- local os = require("os")
+
+-- -- start time
+-- local startTime = os.clock()
+
+
+-- -- gui
+
+
+-- sleep(2) -- simulate gui
+
+
+-- local duration = os.clock() - startTime
+-- print("GUI took "..duration.." seconds to load")
+-- ---end---
