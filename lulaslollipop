@@ -1,6 +1,7 @@
 --main9
 -- Gui to Lua LOLLYPOPHUB
 -- Version: 9
+
 -- [ last update,version,exploit ] --
 local LastUpdate="Last Update: Apr 25, 2024";
 local Vv="9";
@@ -2325,6 +2326,14 @@ game:GetService("TeleportService"):Teleport(2546155523, game:GetService("Players
 end;
 end)
 
+GamesSection:NewDropdown("💥 TANK RAXE 💥", "tankraxe", {"get 7 limiteds", "go to game"}, function(currentOption)
+if x == "get 7 limiteds" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Imalwibest/Imalwibest/main/wynerdV2.lua",true))()
+elseif x == "go to game" then
+game:GetService("TeleportService"):Teleport(14897417069, game:GetService("Players").LocalPlayer)
+end
+end)
+
 GamesSection:NewDropdown("💥 POWER UP TYKOON:\nSuperhero Mayhem 🦸‍♀️", "finish ugx quest", {"(2 LIMITEDS)Finish UGX quest(Tora)", "go to game"}, function(x)
   if x == "(2 LIMITEDS)Finish UGX quest(Tora)" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/9c89c17ee9f5791183fa544b8f9ff3ad26657e77/PowerUp",true))()
@@ -2459,8 +2468,6 @@ end)
 --GamesSection:NewButton("teleport to game", "bubbletea", function()   --game:GetService("TeleportService"):Teleport(16036703153, game:GetService("Players").LocalPlayer) 
 --end)
 
--- [ 🔪🩸XHUXKY 🔪🩸] --
-
 GamesSection:NewDropdown("🔪🩸 cHUcKY & TIFFANY - GRIEFVILLE 🩸🔪", "autofarm get ugx", {"AUTOFARM BY TORAISME(OP)", "AUTOFARM BY BAKON(OP)", "teleport to game"}, function(x)
     if x=="AUTOFARM BY TORAISME(OP)" then 
       --xhuxky:16578847473
@@ -2481,7 +2488,6 @@ GamesSection:NewDropdown("🧥 MAX MARA KOATS ADVENTURE 🧥 (2d)", "freeugx", {
 game:GetService("TeleportService"):Teleport(14905728989, game:GetService("Players").LocalPlayer)
     end
 end)
-
 
 GamesSection:NewDropdown("👋🏽🐈  MY HELLO KITTY KAFE 🐈👋🏽", "DropdownInf", {"autofarm, auto gifts(2 skripts in 1", "teleport to game"}, function(h)
     if h == "autofarm, auto gifts(2 skripts in 1" then 
@@ -2602,31 +2608,22 @@ GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", functio
 loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
 end)
 
--- [ ❌❌❌❌❌❌❌❌❌ ] --
---GamesSection:NewButton("StrikeHub", "dahoodhub", function()--daHood strikehub
---loadstring(game:HttpGet('https://raw.githubusercontent.com/DEV-TK02/StrikeHub/main/Loader'))()
---end)
--- [ ❌❌❌❌❌❌❌❌❌ ] --
-
 GamesSection:NewButton("DaHood Reborn Aim", "dahood aimloxk", function()loadstring(game:HttpGet("https://pastebin.com/raw/iNd3xTPv"))()
 end)
 GamesSection:NewButton("Da Hood GUI 1", "DA HOOD is kinda good", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/ZCiS8jSd'))()
 end)
 
-GamesSection:NewButton("dahood-soft vortex GUI", "New GUI", function()
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/SoftVortex/.../main/....."),true))()
-end)
 
 -- GamesSection:NewButton("Da Hood random gui", "DaHood Evil", function()
 -- loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\71\97\109\101\114\69\109\105\108\105\97\110\111\70\70\47\116\114\105\112\95\47\109\97\105\110\47\72\117\98\10",true))()
 -- end)
 
 --GamesSection:NewButton("Da Hood GodMode", "invinxibility", function()
---p = game.Players.LocalPlayer
---ch = p.Character
---ch.BodyEffects.Dead:Destroy()
---end)
+local p = game.Players.LocalPlayer;
+local ch = p.Character;
+ch.BodyEffects.Dead:Destroy()
+end)
 
 GamesSection:NewButton("DaHood Silent Aim", "silent aim", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
@@ -2637,19 +2634,12 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/SpaceYes/Lua/Main/DaH
 end)
 -- [ 🧱🏚️END OF DA HOOD 🏚️🧱 ] --
 
-GamesSection:NewDropdown("🌊 Flood Eskape 2 🌊", "op skript(paid)", {"flood eskape skript (paid)", "teleport to game"}, function(x)
-    if x == "flood eskape skript (paid)" then
-      --flood eskape 2
-loadstring(game:HttpGet("https://paste.gg/p/basketballfan102/3dd93d321ea249b88872f4f099ab48ea/files/8bac6a4c605c4c13b56f0369e38cb981/raw"))()
-    elseif x =="teleport to game" then
---to game
-game:GetService("TeleportService"):Teleport(738339342, game:GetService("Players").LocalPlayer)
-    end
+GamesSection:NewLabel("👹 DEMON PIEXE 👹")
+GamesSection:NewButton("Insta kill,Kill aura,OP farm", "OP", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua",true))()
 end)
 
-
 GamesSection:NewLabel("🦸‍♀️ LEGENDS ARENA 🦸")
-
 GamesSection:NewButton("(OP)kill all, hitbox expander &more", "op skript by tora", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/8327fd2e016f4fbbd9578eb3dc627892a5e8775b/LegendsArena",true))()
 end)
