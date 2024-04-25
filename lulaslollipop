@@ -2326,7 +2326,7 @@ game:GetService("TeleportService"):Teleport(2546155523, game:GetService("Players
 end;
 end)
 
-GamesSection:NewDropdown("💥 TANK RAXE 💥", "tankraxe", {"get 7 limiteds", "go to game"}, function(currentOption)
+GamesSection:NewDropdown("💥 TANK RAXE 💥", "tankraxe", {"get 7 limiteds", "go to game"}, function(x)
 if x == "get 7 limiteds" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Imalwibest/Imalwibest/main/wynerdV2.lua",true))()
 elseif x == "go to game" then
