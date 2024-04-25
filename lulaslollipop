@@ -216,10 +216,10 @@ end)
 --loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 --end)
 
-SkriptsSection:NewButton("🍭Lollypop Admin (;cmds)", "type the kommand in the kommand bar", function()
+--SkriptsSection:NewButton("🍭Lollypop Admin (;cmds)", "type the kommand in the kommand bar", function()
 --lollypopadmin,fukbyfron&NAdevs
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
-end)
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/LollypopAdmin-skiddedbylulas/main/nobyfron.main",true))()
+--end)
 
 --[LABELS]--
 SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, ".. game.Players.LocalPlayer.DisplayName .."!")
@@ -1234,6 +1234,7 @@ AdminSection:NewButton("Infinite Yield (kustom)", "edited by me with added komma
 --Infiniteyield main
 loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
 end)
+
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
 end)
