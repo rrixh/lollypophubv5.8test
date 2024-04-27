@@ -35,31 +35,31 @@ if niggaIsUsing then
     if niggaIsUsing == 1 then
     devixe_name = "iOS 📱 (iPhone/iPad)"
     elseif niggaIsUsing == 2 then
-    devixe_name = "Android/Tablet 📱"
+    devixe_name = "Android/Tablet📱"
     else
-    devixe_name = "Unknown Mobile 📵"
+    devixe_name = "Unknown Mobile📵"
     end
 else
     if platform == Enum.Platform.Windows then
-    devixe_name = "Windows💻"
+    devixe_name = "Windows 💻"
     elseif platform == Enum.Platform.OSX then
-    devixe_name = "OSX🍎💻"
+    devixe_name = "OSX 🍎💻"
     elseif platform == Enum.Platform.Ubuntu then
-    devixe_name = "Ubuntu💻"
+    devixe_name = "Ubuntu 💻"
     elseif platform == Enum.Platform.ChromeOS then
-    devixe_name = "ChromeOS🍎🖥️"
+    devixe_name = "ChromeOS 🍎🖥️"
     elseif platform == Enum.Platform.Linux then
     devixe_name = "Linux💻"
     elseif platform == Enum.Platform.XBoxOne then
-    devixe_name = "XBoxOne🎮"
+    devixe_name = "XBoxOne 🎮"
     elseif platform == Enum.Platform.PS4 or platform == Enum.Platform.PS5 or platform == Enum.Platform.PS3 then
     devixe_name = "Sony PlayStation🎮"
     elseif platform == Enum.Platform.Switch then
-    devixe_name = "Switxh🎮"
+    devixe_name = "Nintendo Switxh🎮"
     elseif platform == Enum.Platform.UWP then
      devixe_name = "UWP🐸"
     else
-    devixe_name = "Unknown Devixe 📵"
+    devixe_name = "Unknown Devixe📵"
     end
 end;
 
