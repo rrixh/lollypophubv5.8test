@@ -230,7 +230,7 @@ SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 --[LABELS done]--
 
 --[[📝 SKRIPT REQUESTS 📝]]--
-SkriptsSection:NewTextBox("skript request", "type whatever skript u want then push enter", function(nigga_req)skriptrequest = nigga_req;loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description="request sent%E2%9C%85";Duration=3;});end)
+SkriptsSection:NewTextBox("skript request", "type whatever skript u want then push enter", function(nigga_req)skriptrequest = nigga_req;loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description="requested: '"..skriptrequest.. "' sent✅";Duration=3.7;});end)
 --[[]]----[[x]]----[[x]]----[[x]]----[[x]]----[[x]]
 
 --[ ALL SKRIPTS ]--
