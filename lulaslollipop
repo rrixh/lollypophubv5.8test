@@ -2325,6 +2325,31 @@ end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
+GamesSection:NewDropdown("(OP) 💪 Training Simulator 💪", "INF GEMS OP SKRIPT by tora", {"INF GEMS &more", "to game"}, function(x)
+if x == "INF GEMS &more" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/08213e6158ba202b0474509c58a4402f498bafef/TrainingSimulator",true))()
+elseif x == "to game" then
+game:GetService("TeleportService"):Teleport(16572004551, game:GetService("Players").LocalPlayer)
+end 
+end)
+
+
+GamesSection:NewDropdown("🔍 Kollect for UGX 🔎", "DropdownInf", {"kollect by Tora", "Option 2", "Option 3"}, function(x)
+if x == "kollect by Tora" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/d7ccf4d717ba665e5d18c783239aa7d41e869d02/CollectforUGC",true))()
+elseif x == "to game" then
+game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer)
+end
+end)
+
+GamesSection:NewDropdown("🧍 STAY FOR UGX 🧍🏾‍♂️", "stayugx", {"autofarm by Tora", "to game"}, function(x)
+if x == "autofarm by Tora" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/844a4788159b6db1f62c83bac80d16e57d043ad0/STAYFORUGC",true))()
+elseif x == "to game" then
+game:GetService("TeleportService"):Teleport(16518162890, game:GetService("Players").LocalPlayer)
+end
+end)
+
 GamesSection:NewDropdown("🦖 Dinosaur Zoo 🦕\n(wait on release)", "not yet", {"dinosaur zoo instant ugx", "to game"}, function(x)
 if x == "dinosaur zoo instant ugx" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/c31343769adc43446a0ccac098851d5a5c520830/DinosaurZoo",true))()
