@@ -1,6 +1,5 @@
 --main v9 LOLLYPOP HUB
 -- Version: 9
---main9(baxkup apr 28) LOLLYPOP HUB
 
 -- skreengui obj
 local gui = Instance.new("ScreenGui")
@@ -1852,6 +1851,10 @@ end)
 
 -- [ OTHER GUIS HUBSEKTION ] --
 HubSection:NewLabel("Other guis")
+
+HubSection:NewButton("GamerSkripter(good)", "kreds to this nigga he a very good skripter", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Game-Hub-All-Tycoons/main/loader"))()
+end)
 
 HubSection:NewButton("Teleport to player bypass(full @name)", "bypasses tp on games that dont allow teleporting", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/ac5t78wc/tptoplr.bypass_lulaslollipop.jar",true))() 
