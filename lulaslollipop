@@ -319,16 +319,19 @@ SkriptsSection:NewButton("ANTI-BAN (fixed &working✅)", "anti-ban skript/antilo
 loadstring(game:HttpGet("https://pastecode.dev/raw/tarixx9o/lulas-antiban.jar",true))()
 end)
 
-SkriptsSection:NewButton("No jump Kooldown", "nojumpkooldown", function()
-local IsA = game.IsA
-                    local newindex = nil
-        
-                    newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
-                        if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" then
-                            return
-                        end
-                        return newindex(self, Index, Value)
-                    end)
+SkriptsSection:NewDropdown("Lighting/Sunrays", "lightings", {"Beautiful Sunset🌅", "Beautiful Bloom🌻", "Beautiful Vignette🦋"}, function(s)
+if s == "Beautiful Sunset🌅" then
+--Beautiful Sunset🌅
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/beautiful%20sunset", true))();
+
+elseif s == "Beautiful Bloom🌻" then
+--Beautiful bloom🌻
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/beautifulbloom", true))();
+
+elseif s == "Beautiful Vignette🦋" then
+--Beautiful vignette🦋
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/vignetteLighting", true))();
+end
 end)
 
 SkriptsSection:NewButton("Anti-Xheat bypass\nUse: bypass any klient fly/fling detektion", "allows u to hide stuff on your klient", function()
@@ -502,6 +505,7 @@ else
 game.Players.LocalPlayer.Character.Humanoid.Sit = false
 end
 end)
+
 
 SkriptsSection:NewButton("???", "???",
 function()
@@ -2867,6 +2871,10 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Nadir3709/RandomScrip
 --autoplay
 end)
 
+GamesSection:NewButton("👋 Slap Battles 👋", "koolsb", function()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Slap%20Battles")))();
+end)
+
 GamesSection:NewLabel(" 💀 Death Ball ☄️")
 
 GamesSection:NewButton("MEGA auto parry", "parry auto", function()  
@@ -3654,6 +3662,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/iShield2005/scripts/m
 end)
 
 GamesSection:NewLabel("👻🚪DOORS🚪👻")
+GamesSection:NewButton("king hub", "blaxkking", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/R8QMbhzv",true))()
+end)
 
 GamesSection:NewButton("rafan hub", "no ban doors", function()  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Rafanchik123/script/main/DoorsNew19"))()
@@ -4401,6 +4412,18 @@ return X(self,...)
 end);
 wait()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+end)
+
+MoreSection:NewButton("Anti for jumppower", "nojumpkooldown", function()
+local IsA = game.IsA
+                    local newindex = nil
+        
+                    newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
+                        if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" then
+                            return
+                        end
+                        return newindex(self, Index, Value)
+                    end)
 end)
 
 MoreSection:NewButton("Anti *InvokeServer()*", "sum", function() 
