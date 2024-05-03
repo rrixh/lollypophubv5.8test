@@ -2797,6 +2797,26 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 -- [ 🏚️🧱 Da Hood 🧱🏚️ ] --
 local GamesSection = Games:NewSection("[🏚️🔫🧱 Da Hood 🧱🔫🏚️] (work for any dh game)")
 
+GamesSection:NewButton("Mobile loxk", "hood games", function()
+framework = {
+    Enabled = true,
+    ToolIsEnabled = false,
+    Prediction = 0.1435,
+    HitscanPriority = "HumanoidRootPart",
+    FOV = 100,
+    Scan = false,
+    JumpOffset = 0,
+    TargetStrafeSettings = {
+        Enabled = false,
+        Speed = 1,
+        Height = 0,
+        Distance = 6
+    }
+};
+
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/7dd05d66b1acebfeec4fb31431a601eb.lua"))();
+end)
+
 GamesSection:NewButton("Ruby.WTF aimloxk/kam, KO check(OP)", "OP skript", function()  
 loadstring(game:HttpGet("https://rentry.co/rubywtf-kamloxk-aimloxk_lulaslollipop/raw",true))()
 end)
