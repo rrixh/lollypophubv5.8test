@@ -2444,9 +2444,12 @@ end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
-GamesSection:NewDropdown("⚽️🌕 [PLAYER UGc OUTFITS] Man city Blue Moon 🌕⚽️", "free player ugx outfits", {"bring ball, bounxe on geysers 🥓", "to game"}, function(x)
+GamesSection:NewDropdown("⚽️🌕 [PLAYER UGc OUTFITS] Man city Blue Moon 🌕⚽️", "free player ugx outfits", {"bring ball, bounxe on geysers 🥓", "join minigame, finish 🟢&🔴, finish obby(Tora)", "to game"}, function(x)
 if x == "bring ball, bounxe on geysers 🥓" then
 loadstring(game:HttpGet(('https://pastefy.app/hkvWcWdn/raw'),true))();
+
+elseif x == "join minigame, finish 🟢&🔴, finish obby(Tora)" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/6e9e31378298cd43d1f3aed17909dfaf3db4011f/ManCity",true))();
 
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(9616411936, game:GetService("Players").LocalPlayer)  end  end)
 
