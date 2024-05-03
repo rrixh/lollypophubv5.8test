@@ -1906,6 +1906,9 @@ end)
 -- [ OTHER GUIS HUBSEKTION ] --
 HubSection:NewLabel("Other guis")
 
+HubSection:NewButton("Sumit Hub", "gets updated", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/SumitScripts/SumitScripts-Hub/main/UpdateLoader"))();
+end)
+
 HubSection:NewButton("GamerSkripter(good)", "kreds to this nigga he a very good skripter", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Game-Hub-All-Tycoons/main/loader"))()
 end)
@@ -3263,6 +3266,9 @@ end)
 
 GamesSection:NewLabel("[🏏Blade Ball☄️]")
 
+GamesSection:NewButton("Sumit hub", "idk", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/SumitScripts/Blade-ball/main/SumitScriptsHub-V7-Projecter"))();
+end)
+
 GamesSection:NewButton("FFJ hub", "idk", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FFJ1/Roblox-Exploits/main/scripts/Loader.lua"))()
 end)
@@ -3753,6 +3759,8 @@ end)
 
 
 local GamesSection = Games:NewSection("🗼Tower Of Hell🗼")
+
+GamesSection:NewButton("Sumit hub", "toh sumit hub", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/SumitScripts/SumitScripts-Hub/main/Games/Tower%20of%20hell",true))(); end)
 
 GamesSection:NewButton("ToH Admin", "its only admin kommands", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TwomadJR/nto/main/admiin"))()
