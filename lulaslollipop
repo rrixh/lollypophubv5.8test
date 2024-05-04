@@ -59,7 +59,7 @@ loadingText.Text = "Skript Loading..."
 loadingText.Parent = frame;
 
 --animateloadingbar
-function animateSkript()--4994
+function animateSkript()
     local progress = 0;
 
     while progress < 100 do
@@ -2409,7 +2409,7 @@ end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
-GamesSection:NewDropdown("[🎸ROXKSTAR] Sonik Speed Simulator", "symphonyshowdown", {"SYMPHONY SHOWDOWN SKRIPT (Tora)", "to game"}, function(x) 
+GamesSection:NewDropdown("[🎸ROXKSTAR] Sonik Speed Simulator", "symphonyshowdown", {"SYMPHONY SHOWDOWN SKRIPT (Tora)", "teleport to game"}, function(x) 
 if x == "SYMPHONY SHOWDOWN SKRIPT (Tora)" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/venoxhh/universalscripts/main/webhook_tools",true))();
 
@@ -2573,7 +2573,7 @@ end)
         if x=="AUTOFARM BY TORAISME(OP)" then 
           --xhuxky:16578847473
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
-
+                
 elseif x =="AUTOFARM BY BAKON(OP)" then
     loadstring(game:HttpGet(('https://pastefy.app/kz1l7Xpz/raw'),true))()
 
@@ -4991,7 +4991,7 @@ end)
 
 skriptLoaded();
 
-end;--line62
+end
 
 function updateProgress(progress)
     loadingBarFrame.Size = UDim2.new(progress / 105, 0, 0.2, 0)
