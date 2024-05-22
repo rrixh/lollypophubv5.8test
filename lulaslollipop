@@ -98,28 +98,35 @@ loadingSkreen:Destroy() --end
 
 
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
-local user = niggas.Players.LocalPlayer.Name
-local display = niggas.Players.LocalPlayer.DisplayName
---;
+local user=niggas.Players.LocalPlayer.Name
+local display=niggas.Players.LocalPlayer.DisplayName;
+local garamondfont =Enum.Font.Garamond;
+local arialfont=Enum.Font.Arial;
+
+local x1 ="[Lollypop Hub v"..Vv"] Welkome to Lollypop Hub, "..display.." (@"..display..")!\nSkript by @lulaslollipop🍭 on Roblox👺";
+
+local x2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript";
+local limegreen=Color3.fromRGB(0,255,0);
 
 niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
-    Text = "[Lollypop Hub v"..Vv"] Welkome to Lollypop Hub, "..display.." (@"..display..")!\nSkript by @lulaslollipop🍭 on Roblox👺",
-    Color = Color3.fromRGB(0,255,0),
-    Font = Enum.Font.Garamond,
+    Text = x1,
+    Color = limegreen,
+    Font = garamondfont,
     FontSize = Enum.FontSize.Size24
-})
+});
+local redorange=Color3.fromRGB(278,75,43);
 wait(1)
 niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
-    Text = "🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript",
-    Color = Color3.fromRGB(278,75,43),
-    Font = Enum.Font.Arial,
+    Text = x2,
+    Color = redorange,
+    Font = arialfont,
     FontSize = Enum.FontSize.Size24
 })
 end; --218,133,65=orange...0,255,0=green...278,75,43=red/orange...
 
 -- [ 📱💻PLATFORM / DEVIXE🖥️🎮 ] --
-local UIS = niggas:GetService("UserInputService")
-local platform=UIS:GetPlatform();
+local uis = niggas:GetService("UserInputService")
+local platform=uis:GetPlatform();
 local niggaIsUsing = table.find({Enum.Platform.IOS, Enum.Platform.Android}, platform)
 local devixe_name
 
@@ -367,7 +374,7 @@ repeat
 wait()
 until game:IsLoaded()
 
-local player = game.Players.LocalPlayer
+local player = niggas.Players.LocalPlayer
 local nigguh = player.Character
 
 local part = Instance.new("Part", nigguh)
@@ -476,9 +483,9 @@ end)
 -- toggle anti sit
 SkriptsSection:NewToggle("Anti-Sit", "kinda good but i prefer using godmode", function(state)
 if state then
-local RunService = game:GetService("RunService")
+local RunService = niggas:GetService("RunService")
 function antiSit()
-if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
+if niggas.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
 game.Players.LocalPlayer.Character.Humanoid.Sit = false
 end
 end
@@ -518,9 +525,9 @@ if toggled then
 getgenv().InfJump = true
 spawn(function()
 while getgenv().InfJump == true do
-    game:GetService("UserInputService").JumpRequest:connect(function()
+    uis.JumpRequest:connect(function()
   if getgenv().InfJump == true then
-game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+niggas:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
   end
     end)
     wait()
@@ -5031,7 +5038,7 @@ function()KEY = "C" -- Key to crouch
 CROUCHWALKSPEED = 12 -- Walkspeed when you are crouching
 
 local Player = game:GetService("Players").LocalPlayer;
-local UserInputService = game:GetService("UserInputService");
+local uis = niggas:GetService("UserInputService");
 
 local Character = Player.Character;
 local Humanoid = Character:FindFirstChildOfClass("Humanoid");
@@ -5043,7 +5050,7 @@ local Crouch = Humanoid:LoadAnimation(CrouchAnimation);
 Crouch.Priority = Enum.AnimationPriority.Action
 
 local Crouching = false
-UserInputService.InputBegan:Connect(function(input,gameprocessed)
+uis.InputBegan:Connect(function(input,gameprocessed)
 if gameprocessed then return end
 if input.KeyCode == Enum.KeyCode[KEY] then
 Crouching = true
@@ -5052,7 +5059,7 @@ Humanoid.WalkSpeed = CROUCHWALKSPEED
 end
 end)
 
-UserInputService.InputEnded:Connect(function(input,gameprocessed)
+uis.InputEnded:Connect(function(input,gameprocessed)
 if gameprocessed then return end
 if input.KeyCode == Enum.KeyCode[KEY] then
 Crouching = false
