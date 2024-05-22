@@ -1,10 +1,19 @@
 --main v9 LOLLYPOP HUB
 -- Version: 9
--- [ last update,version,exploit ] --
-local niggas=game;
+-- [ main/info ] --
 local LastUpdate="Last Update: May 22, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
+
+-- [ 🍭 beginning 🍭 ] --
+local lulas=game;local workspaxe=workspace;
+local _1=math.random(1,10);local _2=math.random(1,100);local _3=math.random(1,1000);
+local holup=wait;
+local _0=print;
+local mystery="mysterious numbers: ";
+local niggas=game;
+
+--[[LOADING vars]]--
 local loadingskreen = Instance.new("ScreenGui");
 local newFrame=Instance.new("Frame");
 local UiKorner=Instance.new("UICorner")
@@ -16,13 +25,55 @@ local LIME=Color3.new(0, 255, 0)
 local YELLOWAF=Color3.new(255, 165, 0);
 
 --[[ KUSTOM FUNKTIONS ]]--
-local function rrixh(say_lulaslollipop)local notifikation=Instance.new("Message");notifikation.Text=say_lulaslollipop;notifikation.Parent=game.Workspace;
-wait(3);notifikation:Destroy();
+local function partTouxhed()
+loadstring(lulas:HttpGet("https://pastecode.dev/raw/a66spl54/say-partTouxhed.orStep_lulaslollipop.deb",true))();
+end;
+
+local function alert(say_lulaslollipop,say_RRixh)
+local notifikation=Instance.new("Message");
+notifikation.Text=say_lulaslollipop or say_RRixh;
+local lollypops=lulas.Workspace;
+notifikation.Parent=lollypops;
+holup(3);notifikation:Destroy();
+end;
+rrixh=alert;say=alert;msg=alert;
+
+local function shoutPart(player,message)
+if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+        say("u stepped on a part"..message);
+        _0(mystery, _1,_2,_3);
+end
+end;
+
+--nigga steps on part
+local function touxhed(part, hit)
+local robloxNigga = hit.Parent
+if robloxNigga and robloxNigga:FindFirstChildOfClass("Humanoid") then
+    local kookiemonster = lulas.Players:GetPlayerFromCharacter(robloxNigga)
+    if kookiemonster then
+        local steppedOnPart = part.Parent and part.Parent:IsA("Model") and part.Parent.Name or part.Name;
+        shoutPart(kookiemonster, " stepped on: " .. steppedOnPart);
+            --kustom notif
+            holup(2);
+            alert(kookiemonster, "u stepped on part: " ..steppedOnPart)
+    end;
+end;
+end;
+
+--konnekt touxh to all parts in workspaxe
+local function partTouxhed__skript__by__lulaslollipop()
+for _, part in ipairs(workspaxe:GetDescendants()) do
+    if part:IsA("BasePart") then
+        part.Touched:Connect(function(hit)
+            touxhed(part, hit);
+        end);
+    end
+end
 end;
 
 function konsole(...)
-    local lulas=select("#",...);
-    for i=1,lulas do
+    local lula=select("#",...);
+    for i=1,lula do
   if i>1 then
 io.write("\t")
   end;
@@ -30,7 +81,7 @@ io.write("\t")
   io.write(tostring(lollypop))
     end;
     io.write("\n")
-end;
+end;konsole("print", "test");
 
 -- [[ LOADING ]] --
 local loadingSkreen = loadingskreen;
@@ -96,20 +147,19 @@ loadingText.Text = loaded
 wait(0.5)
 loadingSkreen:Destroy() --end
 
-
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
 local user=niggas.Players.LocalPlayer.Name
 local display=niggas.Players.LocalPlayer.DisplayName;
 local garamondfont =Enum.Font.Garamond;
 local arialfont=Enum.Font.Arial;
 
-local x1 ="[Lollypop Hub v"..Vv"] Welkome to Lollypop Hub, "..display.." (@"..display..")!\nSkript by @lulaslollipop🍭 on Roblox👺";
-
-local x2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript";
+local _1 ="[Lollypop Hub v"..Vv"] Welkome to Lollypop Hub, "..display.." (@"..user..")!\nSkript by @lulaslollipop🍭 on Roblox👺";
+    
+local _2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript";
 local limegreen=Color3.fromRGB(0,255,0);
 
 niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
-    Text = x1,
+    Text = _1,
     Color = limegreen,
     Font = garamondfont,
     FontSize = Enum.FontSize.Size24
@@ -117,7 +167,7 @@ niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
 local redorange=Color3.fromRGB(278,75,43);
 wait(1)
 niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
-    Text = x2,
+    Text = _2,
     Color = redorange,
     Font = arialfont,
     FontSize = Enum.FontSize.Size24
@@ -162,6 +212,8 @@ devixe_name = "Unknown Devixe📵"
 end
 end;
 
+partTouxhed();
+partTouxhed__skript__by__lulaslollipop();
 
 --game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
 
@@ -4726,6 +4778,9 @@ end)
 
 local Home = Window:NewTab("Home")
 local HomeSection = Home:NewSection("Home")
+HomeSection:NewButton("Say part stepped on", "test parttouxhed", function()
+partTouxhed__skript__by__lulaslollipop();
+end)
 
 HomeSection:NewButton("🔎 Skript", "look up any skript", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/ScriptSearcher"))()
