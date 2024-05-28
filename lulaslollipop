@@ -1,7 +1,7 @@
 --main v9 LOLLYPOP HUB
 -- Version: 9
 -- [ main/info ] --
-local LastUpdate="Last Update: May 27, 2024";
+local LastUpdate="Last Update: May 28, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
 
@@ -40,8 +40,8 @@ rrixh=alert;say=alert;msg=alert;
 
 local function shoutPart(player,message)
 if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
-say("u stepped on a part"..message);
-_0(mystery, _1,_2,_3);
+        say("u stepped on a part"..message);
+        _0(mystery, _1,_2,_3);
 end
 end;
 
@@ -49,38 +49,38 @@ end;
 local function touxhed(part, hit)
 local robloxNigga = hit.Parent
 if robloxNigga and robloxNigga:FindFirstChildOfClass("Humanoid") then
-local kookiemonster = lulas.Players:GetPlayerFromCharacter(robloxNigga)
-if kookiemonster then
-local steppedOnPart = part.Parent and part.Parent:IsA("Model") and part.Parent.Name or part.Name;
-shoutPart(kookiemonster, " stepped on: " .. steppedOnPart);
---kustom notif
-holup(2);
-alert(kookiemonster, "u stepped on part: " ..steppedOnPart)
-end;
+    local kookiemonster = lulas.Players:GetPlayerFromCharacter(robloxNigga)
+    if kookiemonster then
+        local steppedOnPart = part.Parent and part.Parent:IsA("Model") and part.Parent.Name or part.Name;
+        shoutPart(kookiemonster, " stepped on: " .. steppedOnPart);
+            --kustom notif
+            holup(2);
+            alert(kookiemonster, "u stepped on part: " ..steppedOnPart)
+    end;
 end;
 end;
 
 --konnekt touxh to all parts in workspaxe
 local function partTouxhed__skript__by__lulaslollipop()
 for _, part in ipairs(workspaxe:GetDescendants()) do
-if part:IsA("BasePart") then
-part.Touched:Connect(function(hit)
-touxhed(part, hit);
-end);
-end
+    if part:IsA("BasePart") then
+        part.Touched:Connect(function(hit)
+            touxhed(part, hit);
+        end);
+    end
 end
 end;
 
 function konsole(...)
-local lula=select("#",...);
-for i=1,lula do
-if i>1 then
+    local lula=select("#",...);
+    for i=1,lula do
+  if i>1 then
 io.write("\t")
-end;
-local lollypop=select(i,...);
-io.write(tostring(lollypop))
-end;
-io.write("\n")
+  end;
+  local lollypop=select(i,...);
+  io.write(tostring(lollypop))
+    end;
+    io.write("\n")
 end;konsole("print", "test");
 
 -- [[ LOADING ]] --
@@ -138,9 +138,9 @@ function animateSkript()
 local kookie=0;
 
 while kookie < 100 do
-kookie = kookie + 3.5
-milk(kookie)
-wait(0.05)-- speed
+    kookie = kookie + 3.5
+    milk(kookie)
+    wait(0.05)-- speed
 end;local loaded="Suxxessfully Loaded"
 
 loadingText.Text = loaded
@@ -153,24 +153,24 @@ local display=niggas.Players.LocalPlayer.DisplayName;
 local garamondfont =Enum.Font.Garamond;
 local arialfont=Enum.Font.Arial;
 
-local _1 ="[Lollypop Hub v"..Vv"] Welkome to Lollypop Hub, "..display.." (@"..user..")!\nSkript by @lulaslollipop🍭 on Roblox👺";
+local _1 ="[Lollypop Hub v"..Vv.."] Welkome to Lollypop Hub, "..display.."! (@"..user..")\nSkript by @lulaslollipop🍭 on Roblox👺";
 
 local _2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript";
 local limegreen=Color3.fromRGB(0,255,0);
 
 niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
-Text = _1,
-Color = limegreen,
-Font = garamondfont,
-FontSize = Enum.FontSize.Size24
+    Text = _1,
+    Color = limegreen,
+    Font = garamondfont,
+    FontSize = Enum.FontSize.Size24
 });
 local redorange=Color3.fromRGB(278,75,43);
 wait(1)
 niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
-Text = _2,
-Color = redorange,
-Font = arialfont,
-FontSize = Enum.FontSize.Size24
+    Text = _2,
+    Color = redorange,
+    Font = arialfont,
+    FontSize = Enum.FontSize.Size24
 })
 end; --218,133,65=orange...0,255,0=green...278,75,43=red/orange...
 
@@ -206,7 +206,7 @@ devixe_name = "Sony PlayStation🎮"
 elseif platform == Enum.Platform.Switch then
 devixe_name = "Nintendo Switxh🎮"
 elseif platform == Enum.Platform.UWP then
-devixe_name = "UWP🐸"
+ devixe_name = "UWP🐸"
 else
 devixe_name = "Unknown Devixe📵"
 end
@@ -291,17 +291,17 @@ function enablestuff()
 for i,v in pairs(Players:GetPlayers()) do
 if v~= plr and v.Character then
 if not v.Character:FindFirstChild('ESP') then
-local highlight = Instance.new('Highlight')
-highlight.Name = 'ESP'
-highlight.Parent = v.Character
-highlight.Enabled = getgenv().Enabled
-highlight.FillColor = getgenv().espstuff
-highlight.OutlineColor = getgenv().espstuff
+    local highlight = Instance.new('Highlight')
+    highlight.Name = 'ESP'
+    highlight.Parent = v.Character
+    highlight.Enabled = getgenv().Enabled
+    highlight.FillColor = getgenv().espstuff
+    highlight.OutlineColor = getgenv().espstuff
 else
-local highlight = v.Character:FindFirstChild('ESP')
-highlight.Enabled = getgenv().Enabled
-highlight.FillColor = getgenv().espstuff
-highlight.OutlineColor = getgenv().espstuff
+    local highlight = v.Character:FindFirstChild('ESP')
+    highlight.Enabled = getgenv().Enabled
+    highlight.FillColor = getgenv().espstuff
+    highlight.OutlineColor = getgenv().espstuff
 end
 end
 end
@@ -317,13 +317,13 @@ local time = SkriptsSection:NewLabel("🔴 Live Time: [00:00:00]");
 
 local function updatetimelabel()
 while true do
-local formatted_time = os.date("🔴Live Time: %I:%M:%S %p")
+    local formatted_time = os.date("🔴Live Time: %I:%M:%S %p")
 local todays_date = os.date("Today's Date: %A | %B %d, %Y");
 
---⏰////%I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year\\\\⏰
+    --⏰////%I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year\\\\⏰
 
 time:UpdateLabel("[" ..formatted_time.."]\n ["..todays_date.."]")
-wait(0.001)
+    wait(0.001)
 end
 end
 
@@ -577,12 +577,12 @@ if toggled then
 getgenv().InfJump = true
 spawn(function()
 while getgenv().InfJump == true do
-uis.JumpRequest:connect(function()
-if getgenv().InfJump == true then
+    uis.JumpRequest:connect(function()
+  if getgenv().InfJump == true then
 niggas:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-end
-end)
-wait()
+  end
+    end)
+    wait()
 end
 end)
 else
@@ -2490,6 +2490,18 @@ local GamesSection = Games:NewSection("Games")
 
 GamesSection:NewLabel("🎉🎂 [ROBLOX - THE KLASSIK] EVENT 2024 🎂🎉");
 
+GamesSection:NewDropdown("😳🐖 Piggy 🐖😳", "ready two player event", {"ready two player event - ESP ITEMS, npc", "teleport to Piggy"}, function(x) 
+if x == "ready two player event - ESP ITEMS, npc" then
+loadstring(game:HttpGet(('https://pastefy.app/iWChQoQo/raw'),true))();
+
+elseif x == "teleport to Piggy" then game:GetService("TeleportService"):Teleport(4623386862, game:GetService("Players").LocalPlayer)  end  end)
+
+GamesSection:NewDropdown("🦈 [KLASSIK] SharkBite 🦈", "klassik roblox event", {"🦈SharkBite - EASY BOSS, ESP BUOYS(floaties)", "teleport to: SharkBite Classic 🦈"}, function(x) 
+if x == "🦈SharkBite - EASY BOSS, ESP BUOYS(floaties)" then  
+loadstring(game:HttpGet(('https://pastefy.app/RTgjxAP5/raw'),true))();
+
+elseif x == "teleport to: SharkBite Classic 🦈" then game:GetService("TeleportService"):Teleport(734159876, game:GetService("Players").LocalPlayer)  end  end)
+
 GamesSection:NewDropdown("Livetopia 📦KLASSIK!", "ROBLOXEVENT", {"instant get tokens/tix - livetopia", "teleport to: Livetopia 📦CLASSIC!"}, function(x) 
 if x == "instant get tokens/tix - livetopia" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/bd61fb1f254def0fc7b178802f4ee7d583a90200/ClassicLivetopia",true))(); 
@@ -2499,7 +2511,7 @@ elseif x == "teleport to: Livetopia 📦CLASSIC!" then game:GetService("Teleport
 GamesSection:NewDropdown("[🛣️KLASSIK] Toilet Tower Defense", "robloxevent", {"find all tix - Toilet Tower Def", "teleport to: [🛣️CLASSIC] Toilet Tower Defense"}, function(x) 
 if x == "find all tix - Toilet Tower Def" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/b4799ed24253e56cde7bf51064eb9f0f56044b07/ClassicToiletTower",true))(); 
 
-elseif x == "teleport to: [🛣️CLASSIC] Toilet Tower Defense" then game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer)  end  end) 
+elseif x == "teleport to: [🛣️CLASSIC] Toilet Tower Defense" then game:GetService("TeleportService"):Teleport(13775256536, game:GetService("Players").LocalPlayer)  end  end) 
 
 GamesSection:NewDropdown("🎉🎂 ROBLOX  - THE KLASSIK EVENT 🎂🎉", "2024 event", {"🎉the klassik skript - komplete all quests, tokens", "teleport to: The Classic"}, function(x) 
 if x == "🎉the klassik skript - komplete all quests, tokens" then  
@@ -2567,6 +2579,13 @@ end;
 end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
+
+GamesSection:NewDropdown("📚 Robloxian High Skool 📚", "ready 2 player event", {"ready two player event (bombastik look-alike necklace)", "teleport to: Robloxian High School 🏫 RP"}, function(x) 
+if x == "ready two player event (bombastik look-alike necklace)" then
+--robloxian high skool op (bombastik similiar nexklaxe)
+loadstring(game:HttpGet(('https://pastefy.app/qWoxgjRe/raw'),true))()
+
+elseif x == "teleport to: Robloxian High School 🏫 RP" then game:GetService("TeleportService"):Teleport(447452406, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("💄💋 BLAXKPINK The Palaxe 💋💄", "free baxkpaxks Limiteds", {"fast krystal quest", "teleport to BLAXKPINK The Palaxe"}, function(x) 
 if x == "fast krystal quest" then  
@@ -2689,11 +2708,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/mai
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(16451161308, game:GetService("Players").LocalPlayer) end;
 end);
 
-GamesSection:NewDropdown("🧟 KOLONY SURVIVAL 🧟", "opskript FREEUGX", {"KOLLECT RED SKULLS, KILL ZOMBIE (tora)", "to game"}, function(x) 
+GamesSection:NewDropdown("🧟 KOLONY SURVIVAL (Rpg Update🔥) 🧟", "opskript FREEUGX", {"KOLLECT RED SKULLS, KILL ZOMBIE (tora)", "to game"}, function(x) 
 if x == "KOLLECT RED SKULLS, KILL ZOMBIE (tora)" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/883f01a81164a84759b6ef6b45a18d3b50720e29/ColonySurvival",true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer)  end  end)
+elseif x == "to game" then game:GetService("TeleportService"):Teleport(14888386963, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("🥷 [RELEASE] Rogue Ninja 🥷", "OPskript by tora", {"🥷ANTI DEAD, KILL PLAYER, AUTO SKILLS(Tora)", "to game"}, function(x) 
 if x == "ANTI DEAD, KILL PLAYER, AUTO SKILLS(Tora)" then
@@ -2712,7 +2731,7 @@ GamesSection:NewDropdown("🏆 RAPID RUMBLE 🏆", "freeugx", {"AUTOPLAY MINIGAM
 if x == "AUTOPLAY MINIGAMES(updated) 🥓" then  
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/BaconBossScript/RapidRumble/main/RapidRumble'),true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer)  end  end)
+elseif x == "to game" then game:GetService("TeleportService"):Teleport(16103460713, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("🐛🐜 SMASH BUGS FOR UGc 🐞🕷️", "skript by Tora", {"🪰swing aura&koins farm (Tora)", "to game"}, function(x) 
 if x == "🪰swing aura&koins farm (Tora)" then
@@ -2886,7 +2905,7 @@ end
 end)
 
 GamesSection:NewDropdown("🔪🩸 cHUcKY & TIFFANY - GRIEFVILLE 🩸🔪", "autofarm get ugx", {"AUTOFARM BY TORAISME(OP)", "AUTOFARM BY BAKON(OP)", "teleport to game"}, function(x)
-if x=="AUTOFARM BY TORAISME(OP)" then 
+    if x=="AUTOFARM BY TORAISME(OP)" then 
 --xhuxky:16578847473
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
 
@@ -2895,7 +2914,7 @@ loadstring(game:HttpGet(('https://pastefy.app/kz1l7Xpz/raw'),true))()
 
 elseif x =="teleport to game" then
 game:GetService("TeleportService"):Teleport(16578847473, game:GetService("Players").LocalPlayer)
-end;
+    end;
 end)
 
 
@@ -2954,23 +2973,23 @@ GamesSection:NewDropdown("👅 TONGUE BATTLES 👅", "bleh", {"[event apr19] aut
 if x =="[event apr19] auto quest, autofarm" then
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Tongue'))()
 elseif x =="playerfarm,anti fall&more (key)" then
---tongue👅
+    --tongue👅
 loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/814301bca04a6a09705f133ea8514487480d4083/Tongue",true))()
-elseif x == "auto player, auto krate, auto fight" then
+  elseif x == "auto player, auto krate, auto fight" then
 loadstring(game:HttpGet(('https://pastefy.app/Tx6uIEm7/raw'),true))()
-elseif x == "to game" then
+  elseif x == "to game" then
 game:GetService("TeleportService"):Teleport(16721806812, game:GetService("Players").LocalPlayer)
-end
+    end
 end)
 
 -- [ 🥪 Lunxhable Playables 🥪 ] --
 
 GamesSection:NewDropdown("🥪 Lunxhable Playables 🥪\nMULTIPLE FREE INSTANT UGC(thanks Tora)", "points", {"enter all kodes, auto get points", "teleport to game"}, function(p)
 if p =="enter all kodes, auto get points" then
---lunxhable:14565246812
+  --lunxhable:14565246812
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4c8940890035f7d0435c7e01bbb1788cd15365d4/Lunchables",true))()
 elseif p == "teleport to game" then
---go lunxhable playables
+  --go lunxhable playables
 game:GetService("TeleportService"):Teleport(14565246812, game:GetService("Players").LocalPlayer)
 end
 end)
@@ -2980,11 +2999,11 @@ if h == "🐈AUTO KRATE 🥓" then
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/BaconBossScript/Kitty/main/Kitty'),true))();
 
 elseif h == "autofarm, auto gifts(2 skripts in 1)" then 
---helokitty:16698955784
+ --helokitty:16698955784
 loadstring(game:HttpGet("https://pastecode.dev/raw/eitjmaw4/helloKittyAutofarm-LeviAndAli_lulaslollipop.png",true))()
-elseif h == "teleport to game" then
+    elseif h == "teleport to game" then
 game:GetService("TeleportService"):Teleport(9346039031, game:GetService("Players").LocalPlayer)
-end
+    end
 end)
 
 
@@ -2999,7 +3018,7 @@ GamesSection:NewButton("teleport to game", "2 FREE UGX BY PLAYING THE FAME", fun
 
 --GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()
 --while true do --loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))()
---end;
+  --end;
 --end) 
 
 --GamesSection:NewButton("fast koins farm by 🥓", "walmart", function()
@@ -3026,7 +3045,7 @@ GamesSection:NewButton("teleport to game", "2 FREE UGX BY PLAYING THE FAME", fun
 
 --GamesSection:NewDropdown("🧥 MAX MARA KOATS ADVENTURE 🧥 (2d)", "freeugx", {"get ugx", "teleport to game"}, function(x)
 --if x == "get ugx" then
---print("april 26 dumbass")
+  --print("april 26 dumbass")
 --elseif x == "teleport to game" then
 --game:GetService("TeleportService"):Teleport(14905728989, game:GetService("Players").LocalPlayer)
 --end
@@ -3208,7 +3227,7 @@ GamesSection:NewDropdown("💪👊THE STRONGEST BATTLEGROUNDS👊💪", "op skri
 if x == "op strongest battlegrounds skript\n⚠️test on alt idk if itll ban" then  
 loadstring(game:HttpGet("https://pastebin.com/raw/LBne5eKS",true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer)  end  end) 
+elseif x == "to game" then game:GetService("TeleportService"):Teleport(10449761463, game:GetService("Players").LocalPlayer)  end  end) 
 
 
 GamesSection:NewDropdown("⚔️👑 King Legaxy 👑⚔️", "zeehub op", {"ZEE HUB(OP)", "autofarm, kombat", "to game", "hyper hub", "draxxskripts", "ganteng hub"}, function(x) 
@@ -3228,7 +3247,7 @@ loadstring(game:HttpGet("http://hexasptr.my.id/script/KingLegacy.lua"))();
 elseif x == "draxxskripts" then
 loadstring(game:HttpGet("https://pastebin.com/raw/SGJwY3bQ",true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(IDGOESHERE, game:GetService("Players").LocalPlayer)  end  end)
+elseif x == "to game" then game:GetService("TeleportService"):Teleport(4520749081, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("🚰🚽 publik bathroom simulator 🚽🚰", "stupid ahh game", {"skript (this game stupid but aight)", "teleport to game"}, function(x) 
 if x == "skript (this game stupid but aight)" then  
@@ -3257,10 +3276,10 @@ FOV = 100,
 Scan = false,
 JumpOffset = 0,
 TargetStrafeSettings = {
-Enabled = false,
-Speed = 1,
-Height = 0,
-Distance = 6
+    Enabled = false,
+    Speed = 1,
+    Height = 0,
+    Distance = 6
 }
 };
 
@@ -3635,11 +3654,11 @@ getgenv().Door = true;
 while wait() do
 if getgenv().Door == true then
 for i,v in pairs(game.Workspace.Doors:GetChildren()) do
-for i,l in pairs(v:GetChildren()) do
+  for i,l in pairs(v:GetChildren()) do
 if l:FindFirstChild("???") then
-l.BrickColor = BrickColor.new("Lime green")
+    l.BrickColor = BrickColor.new("Lime green")
 end
-end
+  end
 end
 end
 end
@@ -4870,14 +4889,14 @@ function()
 --low server
 loadstring(game:HttpGet("https://pastebin.com/raw/H0LwsNGc"))()
 wait()
-local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
-local Notify = AkaliNotif.Notify;
-wait();
-Notify({
-Description = "Finding smallest server...";
-Title = "Lollypop Admin🍭";
-Duration = 5;
-});
+  local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
+  local Notify = AkaliNotif.Notify;
+  wait();
+  Notify({
+  Description = "Finding smallest server...";
+  Title = "Lollypop Admin🍭";
+  Duration = 5;
+  });
 end)
 HomeSection:NewButton("Exit", "leave the game",
 function()game:Shutdown()
@@ -4913,13 +4932,13 @@ end)
 HomeSection:NewButton("Get Koords", "x,y,z finder say /console", function()
 print(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position)
 wait()
-local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
-local Notify = AkaliNotif.Notify;
-Notify({
-Description = "koordinates kopied to klipboard";
-Title = "Lollypop Admin🍭";
-Duration = 5;
-});
+  local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
+  local Notify = AkaliNotif.Notify;
+  Notify({
+  Description = "koordinates kopied to klipboard";
+  Title = "Lollypop Admin🍭";
+  Duration = 5;
+  });
 end)
 HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakes", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/yealugpt/koordsgui.kxls.xlsk.xls",true))()
@@ -5031,31 +5050,31 @@ end)
 
 MoreSection:NewButton("Anti for jumppower", "nojumpkooldown", function()
 local IsA = game.IsA
-local newindex = nil
+    local newindex = nil
 
-newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
-if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" then
+    newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
+  if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" then
 return
-end
-return newindex(self, Index, Value)
-end)
+  end
+  return newindex(self, Index, Value)
+    end)
 end)
 
 MoreSection:NewButton("Anti *InvokeServer()*", "sum", function() 
 for _, key in next, getgc(true) do 
-local function updateKey(instanceType)
-if pcall(function() return rawget(key, instanceType) end) and typeof(rawget(key, instanceType)) == 'table' and (rawget(key, instanceType))[1] == 'kick' then
+    local function updateKey(instanceType)
+  if pcall(function() return rawget(key, instanceType) end) and typeof(rawget(key, instanceType)) == 'table' and (rawget(key, instanceType))[1] == 'kick' then
 key.tvk = {
-'kick',
-function() 
-return game.Workspace:WaitForChild('')
-end
+    'kick',
+    function() 
+  return game.Workspace:WaitForChild('')
+    end
 }
-end
-end
+  end
+    end
 
-updateKey('indexInstance')
-updateKey('namecallInstance')
+    updateKey('indexInstance')
+    updateKey('namecallInstance')
 end;
 wait()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
