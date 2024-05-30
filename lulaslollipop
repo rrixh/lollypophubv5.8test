@@ -1,17 +1,15 @@
 --main v9 LOLLYPOP HUB
 -- Version: 9
 -- [ main/info ] --
-local LastUpdate="Last Update: May 28, 2024";
+local LastUpdate="Last Update: May 30, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
 
 -- [ 🍭 beginning 🍭 ] --
-local lulas=game;local workspaxe=workspace;
+lulas=game;workspaxe=workspace;
 local _1=math.random(1,10);local _2=math.random(1,100);local _3=math.random(1,1000);
-local holup=wait;
-local _0=print;
-local mystery="mysterious numbers: ";
-local niggas=game;
+holup=wait;_0=print;local mystery="mysterious numbers: ";
+niggas=game;
 
 --[[LOADING vars]]--
 local loadingskreen = Instance.new("ScreenGui");
@@ -40,8 +38,8 @@ rrixh=alert;say=alert;msg=alert;
 
 local function shoutPart(player,message)
 if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
-        say("u stepped on a part"..message);
-        _0(mystery, _1,_2,_3);
+    say("u stepped on a part"..message);
+    _0(mystery, _1,_2,_3);
 end
 end;
 
@@ -49,39 +47,40 @@ end;
 local function touxhed(part, hit)
 local robloxNigga = hit.Parent
 if robloxNigga and robloxNigga:FindFirstChildOfClass("Humanoid") then
-    local kookiemonster = lulas.Players:GetPlayerFromCharacter(robloxNigga)
-    if kookiemonster then
-        local steppedOnPart = part.Parent and part.Parent:IsA("Model") and part.Parent.Name or part.Name;
-        shoutPart(kookiemonster, " stepped on: " .. steppedOnPart);
-            --kustom notif
-            holup(2);
-            alert(kookiemonster, "u stepped on part: " ..steppedOnPart)
-    end;
+local kookiemonster = lulas.Players:GetPlayerFromCharacter(robloxNigga)
+if kookiemonster then
+    local steppedOnPart = part.Parent and part.Parent:IsA("Model") and part.Parent.Name or part.Name;
+    shoutPart(kookiemonster, " stepped on: " .. steppedOnPart);
+        --kustom notif
+        holup(2);
+        alert(kookiemonster, "u stepped on part: " ..steppedOnPart)
+end;
 end;
 end;
 
 --konnekt touxh to all parts in workspaxe
 local function partTouxhed__skript__by__lulaslollipop()
 for _, part in ipairs(workspaxe:GetDescendants()) do
-    if part:IsA("BasePart") then
-        part.Touched:Connect(function(hit)
-            touxhed(part, hit);
-        end);
-    end
+if part:IsA("BasePart") then
+    part.Touched:Connect(function(hit)
+        touxhed(part, hit);
+    end);
+end
 end
 end;
 
-function konsole(...)
-    local lula=select("#",...);
-    for i=1,lula do
-  if i>1 then
+local function konsole(...)
+local lula=select("#", ...);
+for i=1,lula do
+if i>1 then
 io.write("\t")
-  end;
-  local lollypop=select(i,...);
-  io.write(tostring(lollypop))
-    end;
-    io.write("\n")
-end;konsole("print", "test");
+end;
+local lollypop=select(i, ...);
+io.write(tostring(lollypop))
+end;
+io.write("\n")
+end; yo="test: yo";
+konsole(yo);
 
 -- [[ LOADING ]] --
 local loadingSkreen = loadingskreen;
@@ -138,9 +137,9 @@ function animateSkript()
 local kookie=0;
 
 while kookie < 100 do
-    kookie = kookie + 3.5
-    milk(kookie)
-    wait(0.05)-- speed
+kookie = kookie + 3.5
+milk(kookie)
+wait(0.05)-- speed
 end;local loaded="Suxxessfully Loaded"
 
 loadingText.Text = loaded
@@ -159,18 +158,18 @@ local _2 ="🔔my goal is to make this the most free/keyless hub for every livin
 local limegreen=Color3.fromRGB(0,255,0);
 
 niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
-    Text = _1,
-    Color = limegreen,
-    Font = garamondfont,
-    FontSize = Enum.FontSize.Size24
+Text = _1,
+Color = limegreen,
+Font = garamondfont,
+FontSize = Enum.FontSize.Size24
 });
 local redorange=Color3.fromRGB(278,75,43);
 wait(1)
 niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
-    Text = _2,
-    Color = redorange,
-    Font = arialfont,
-    FontSize = Enum.FontSize.Size24
+Text = _2,
+Color = redorange,
+Font = arialfont,
+FontSize = Enum.FontSize.Size24
 })
 end; --218,133,65=orange...0,255,0=green...278,75,43=red/orange...
 
@@ -206,7 +205,7 @@ devixe_name = "Sony PlayStation🎮"
 elseif platform == Enum.Platform.Switch then
 devixe_name = "Nintendo Switxh🎮"
 elseif platform == Enum.Platform.UWP then
- devixe_name = "UWP🐸"
+devixe_name = "UWP🐸"
 else
 devixe_name = "Unknown Devixe📵"
 end
@@ -291,17 +290,17 @@ function enablestuff()
 for i,v in pairs(Players:GetPlayers()) do
 if v~= plr and v.Character then
 if not v.Character:FindFirstChild('ESP') then
-    local highlight = Instance.new('Highlight')
-    highlight.Name = 'ESP'
-    highlight.Parent = v.Character
-    highlight.Enabled = getgenv().Enabled
-    highlight.FillColor = getgenv().espstuff
-    highlight.OutlineColor = getgenv().espstuff
+local highlight = Instance.new('Highlight')
+highlight.Name = 'ESP'
+highlight.Parent = v.Character
+highlight.Enabled = getgenv().Enabled
+highlight.FillColor = getgenv().espstuff
+highlight.OutlineColor = getgenv().espstuff
 else
-    local highlight = v.Character:FindFirstChild('ESP')
-    highlight.Enabled = getgenv().Enabled
-    highlight.FillColor = getgenv().espstuff
-    highlight.OutlineColor = getgenv().espstuff
+local highlight = v.Character:FindFirstChild('ESP')
+highlight.Enabled = getgenv().Enabled
+highlight.FillColor = getgenv().espstuff
+highlight.OutlineColor = getgenv().espstuff
 end
 end
 end
@@ -317,13 +316,13 @@ local time = SkriptsSection:NewLabel("🔴 Live Time: [00:00:00]");
 
 local function updatetimelabel()
 while true do
-    local formatted_time = os.date("🔴Live Time: %I:%M:%S %p")
+local formatted_time = os.date("🔴Live Time: %I:%M:%S %p")
 local todays_date = os.date("Today's Date: %A | %B %d, %Y");
 
-    --⏰////%I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year\\\\⏰
+--⏰////%I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year\\\\⏰
 
 time:UpdateLabel("[" ..formatted_time.."]\n ["..todays_date.."]")
-    wait(0.001)
+wait(0.001)
 end
 end
 
@@ -332,7 +331,7 @@ spawn(updatetimelabel);
 
 --  "NEWDROPDOWNHERE", 
 
-SkriptsSection:NewDropdown("[NEW] 🍎🍉🍍🌊fruit seas  - auto mob, auto quest", "updates and add-ons to the skript will be here", {"Version: "..Vv, "🎉🎂🎉🎂ROBLOX - [THE KLASSIK EVENT] 2024 skripts", "[KLASSIK] Bedwards - 🎟️TIX ESP", "🍎🍉🍍🌊fruit seas  - auto mob, auto quest", "ANIME REALMS - best auto farm", "💄💋BLAXKPINK The Palaxe - Fast krystal quest (FREE LIMITED:\n(🎒Baxkpaxks)", "🚽Toilet Defense - Inf koins, get all units", "🗡️MM2 - FolderHub", "🐈The Garfield Movie - get odie & grumpy baby garfield limited", "🚗kar dealership - drift farm", "⚔️Attaxk On Titan - auto kill titan", "🛒 walmart diskovered - instant limited(OP)", "🐈MM2 kill NPC - FREE LIMITED! skript for Silly Milly Kat", "🎥Netflix Nextworld [EARLY AXXESS]\ninstant item: 🦖DINOSAUR HEAD", "updates:", "MY HELLO KITTY KAFE - AUTO KRATE🥓", "NIKELAND - LIMITED: THE KROWN OF LEGENDS", "🏀#3 LIMITED, JBL LAND - PARTYBOX LIMITED", "T-TITANS BATTLEGROUNDS - zen hub", "☄️Death Ball - FFJ hub💀", "🚽TTD- buanghub", "TELEFONIKA TOWN (OP)(FREEUGc)🤖🦿", "-added game SOL'S RNG &hub", "EVADE - XENON(best)", "zombie attaxk - ghostHub", "🍓🍊blox fruits - bananahub, EZ PVP, KITSUNE EVENT", "skript requests added(flyguiV3,ignore touxh interest & daHood,HoodKustoms)", "🗡️MM2 🥚EGG HUNT EVENT🥚(moved to top)", "🐰🐇PET SIM 99 - SpeedHubX", "🏒NHL BLAST (OP AF, 3 FREE LIMITEDS)", "The Garfield Movie skript (finish 4 quests)\n (garfield shoulder pet, EASY)", "🏳️‍🌈easy obby(INSTANT 2 UGc's", "(OP) 🚗 Push A Kar skript", "added 🏳️‍🌈Easy obby skript (tora)", "Build A Roxket (FREEUGX LIMITED)", "🏳️‍🌈Easy Obby - INSTANT UGX🥓", "🔵One Piexe: East Blue Brawls skript", "🧟KOLONY SURVIVAL skript(OP)", "[RELEASE] 🥷 Rogue Ninja skript", "🌀 AURA KRAFT skript (OP)", "RO-GHOUL Autofarm skript (OP)", "🏆 Rapid Rumble skript (FREEUGX)", "🦖Dino Tykoon OP skript", "🪰SMASH BUGS FOR UGc skript", "Blaxk Grimoire: Odysee 👹(FREEUGX)", "🤩STYLE STARS skript (FREEUGX)", "-added [🎸ROXKSTAR] Sonik Speed Simulator", "-added 🐰🐹5 Pet Simulator 99 skripts (Games)", "🥷ninja/nigga legends skript, INF EVERYTHING", "🏎️PLANET HUGO(4 FREE UGc)", "📚e.l.f UP (FREE UGX ITEM)", "💪👊THE STRONGEST BATTLEGROUNDS", "⚔️👑 King Legaxy skripts(OP)", "🚽🚰 publik bathroom simulator skript", "🏡 Ultimate Home Tykoon(OP)", "🌕⚽️(PLAYER UGc OUTFITS)Man city Blue Moon", "(Game added):🦠PARASITE V0.0.3a skript", "🎤🎵 [UGc 🎁] Gangnam Projekt : K-pop Obby!", "🦹🏼‍♀️Wonder Woman(FREE ITEM)", "✏️Doodle Obby skript(FREEUGc)", "blade ball - FFJ HUB", "🐊👟 KROCS WORLD TYKOON(FREE LIMITED)", "🚀Build A Roxket (FREE LIMITED)(Infinity hammer)", "-added Ragdoll engine skript", "💪MUSXLE LEGENDS (OP) skript", "💎Limited Katchers (FREELIMITED)", "👊 BAKUGAN BRAWL SIMULATOR(FREELIMITED)",  "🤺 Gear Fight for UGX", "🐸FROGGIE POND TYKOON(FREELIMITED)", "🏃🏽‍♂️RUNNING RAXE OP SKRIPT(FREELIMITED)", "👹MONSTER BATTLE SIMULATOR (FREELIMITED)", "🍉🏞️ WATERMELON RIVER(DIAMOND PINGUS\n KUB)FREE LIMITED", "🦾  xyber killer LIMITED", "🚽lameass Skibidi warrior skript", "🚪Glass Doors Obby FREE LIMITED\n(DUMMY BUDDY)", "🔪 Murder Time [EVENT] FREE LIMITED", "🔍HUNT🔍KAR DEALERSHIP TYKOON", "-added skript requests", "-added BYPASSES (4/28)", "-added blue,yellow,pink,silver tiles(4/27)", "🐈‍⬛KAT TYKOON 🐈(FREELIMITED)", "💄💋BeautyGIRL(FREELIMITED)", "🚤Boat Empire Tykoon(FREELIMITED)", "🦖Dinosaur Zoo (instant ugx wings", "OP SKRIPT buy free gamepass in tank\nraxe", "🔥 Montee's Ultimate Obby(INSTANT UGX)",  "ANIME WAR TYKOON🦹‍♀️(FREE UGX)", "🔥 LAVA SURVIVAL(FREE UGX)", "🎒 La Station SQUAT🎒(FAST FREE UGX)", "🏘️RoVille FREE UGX FIND ITEMS", "🍪PlayKookiePlay Obby🍪\n(free limited)", "zombie attaxk skript(#1 OP)\nby me", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore", "VITA KOKO SUIT🥥\n(2024 version) easy ugx", "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(...)
+SkriptsSection:NewDropdown("[NEW] 🍎🍉🍍🌊fruit seas  - auto mob, auto quest", "updates and add-ons to the skript will be here", {"Version: "..Vv, "🏀bekome an nba star to prove mom wrong! -\nauto rekord, build", "🎉🎂🎉🎂ROBLOX - [THE KLASSIK EVENT] 2024 skripts", "[KLASSIK] Bedwards - 🎟️TIX ESP", "🍎🍉🍍🌊fruit seas  - auto mob, auto quest", "ANIME REALMS - best auto farm", "💄💋BLAXKPINK The Palaxe - Fast krystal quest (FREE LIMITED:\n(🎒Baxkpaxks)", "🚽Toilet Defense - Inf koins, get all units", "🗡️MM2 - FolderHub", "🐈The Garfield Movie - get odie & grumpy baby garfield limited", "🚗kar dealership - drift farm", "⚔️Attaxk On Titan - auto kill titan", "🛒 walmart diskovered - instant limited(OP)", "🐈MM2 kill NPC - FREE LIMITED! skript for Silly Milly Kat", "🎥Netflix Nextworld [EARLY AXXESS]\ninstant item: 🦖DINOSAUR HEAD", "updates:", "MY HELLO KITTY KAFE - AUTO KRATE🥓", "NIKELAND - LIMITED: THE KROWN OF LEGENDS", "🏀#3 LIMITED, JBL LAND - PARTYBOX LIMITED", "T-TITANS BATTLEGROUNDS - zen hub", "☄️Death Ball - FFJ hub💀", "🚽TTD- buanghub", "TELEFONIKA TOWN (OP)(FREEUGc)🤖🦿", "-added game SOL'S RNG &hub", "EVADE - XENON(best)", "zombie attaxk - ghostHub", "🍓🍊blox fruits - bananahub, EZ PVP, KITSUNE EVENT", "skript requests added(flyguiV3,ignore touxh interest & daHood,HoodKustoms)", "🗡️MM2 🥚EGG HUNT EVENT🥚(moved to top)", "🐰🐇PET SIM 99 - SpeedHubX", "🏒NHL BLAST (OP AF, 3 FREE LIMITEDS)", "The Garfield Movie skript (finish 4 quests)\n (garfield shoulder pet, EASY)", "🏳️‍🌈easy obby(INSTANT 2 UGc's", "(OP) 🚗 Push A Kar skript", "added 🏳️‍🌈Easy obby skript (tora)", "Build A Roxket (FREEUGX LIMITED)", "🏳️‍🌈Easy Obby - INSTANT UGX🥓", "🔵One Piexe: East Blue Brawls skript", "🧟KOLONY SURVIVAL skript(OP)", "[RELEASE] 🥷 Rogue Ninja skript", "🌀 AURA KRAFT skript (OP)", "RO-GHOUL Autofarm skript (OP)", "🏆 Rapid Rumble skript (FREEUGX)", "🦖Dino Tykoon OP skript", "🪰SMASH BUGS FOR UGc skript", "Blaxk Grimoire: Odysee 👹(FREEUGX)", "🤩STYLE STARS skript (FREEUGX)", "-added [🎸ROXKSTAR] Sonik Speed Simulator", "-added 🐰🐹5 Pet Simulator 99 skripts (Games)", "🥷ninja/nigga legends skript, INF EVERYTHING", "🏎️PLANET HUGO(4 FREE UGc)", "📚e.l.f UP (FREE UGX ITEM)", "💪👊THE STRONGEST BATTLEGROUNDS", "⚔️👑 King Legaxy skripts(OP)", "🚽🚰 publik bathroom simulator skript", "🏡 Ultimate Home Tykoon(OP)", "🌕⚽️(PLAYER UGc OUTFITS)Man city Blue Moon", "(Game added):🦠PARASITE V0.0.3a skript", "🎤🎵 [UGc 🎁] Gangnam Projekt : K-pop Obby!", "🦹🏼‍♀️Wonder Woman(FREE ITEM)", "✏️Doodle Obby skript(FREEUGc)", "blade ball - FFJ HUB", "🐊👟 KROCS WORLD TYKOON(FREE LIMITED)", "🚀Build A Roxket (FREE LIMITED)(Infinity hammer)", "-added Ragdoll engine skript", "💪MUSXLE LEGENDS (OP) skript", "💎Limited Katchers (FREELIMITED)", "👊 BAKUGAN BRAWL SIMULATOR(FREELIMITED)",  "🤺 Gear Fight for UGX", "🐸FROGGIE POND TYKOON(FREELIMITED)", "🏃🏽‍♂️RUNNING RAXE OP SKRIPT(FREELIMITED)", "👹MONSTER BATTLE SIMULATOR (FREELIMITED)", "🍉🏞️ WATERMELON RIVER(DIAMOND PINGUS\n KUB)FREE LIMITED", "🦾  xyber killer LIMITED", "🚽lameass Skibidi warrior skript", "🚪Glass Doors Obby FREE LIMITED\n(DUMMY BUDDY)", "🔪 Murder Time [EVENT] FREE LIMITED", "🔍HUNT🔍KAR DEALERSHIP TYKOON", "-added skript requests", "-added BYPASSES (4/28)", "-added blue,yellow,pink,silver tiles(4/27)", "🐈‍⬛KAT TYKOON 🐈(FREELIMITED)", "💄💋BeautyGIRL(FREELIMITED)", "🚤Boat Empire Tykoon(FREELIMITED)", "🦖Dinosaur Zoo (instant ugx wings", "OP SKRIPT buy free gamepass in tank\nraxe", "🔥 Montee's Ultimate Obby(INSTANT UGX)",  "ANIME WAR TYKOON🦹‍♀️(FREE UGX)", "🔥 LAVA SURVIVAL(FREE UGX)", "🎒 La Station SQUAT🎒(FAST FREE UGX)", "🏘️RoVille FREE UGX FIND ITEMS", "🍪PlayKookiePlay Obby🍪\n(free limited)", "zombie attaxk skript(#1 OP)\nby me", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore", "VITA KOKO SUIT🥥\n(2024 version) easy ugx", "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(...)
 if ... == "zombie attaxk skript(OP)" then
 loadstring(game:HttpGet("https://rentry.co/ZombieAttaxk_RRixh/raw",true))()
 end;
@@ -406,6 +405,37 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/w4g226cm/hiddenfling-toggle.d
 else
 hiddenfling=false;
 end
+end);
+
+SkriptsSection:NewTextBox("Air Walk", "lets u walk on air", function(x)
+lulas.Players.LocalPlayer.Character.Humanoid.HipHeight=x;
+end)
+
+SkriptsSection:NewTextBox("Send Alert", "lets u send msg to server not fe", function(text)
+local m = Instance.new("Message")
+m.Parent = Workspace
+m.Text = text
+end)
+
+SkriptsSection:NewTextBox("Rainbow Msg Spam", "spam rainbow server msg", function(rainbowspam)
+game:GetService("RunService").Stepped:connect(function()
+kolors = {"Blue", "Green", "Red"} for i,v in pairs(game.Players:GetChildren()) do game.Lighting.Remote.SendMessage:FireServer(v, Colors[math.random(1, #kolors)], rainbowspam) 
+end;
+end);
+end)
+
+SkriptsSection:NewTextBox("Rainbow Name", "makes ur name rainbow", function(rainbowName)
+bill = Instance.new("BillboardGui", game.Players.LocalPlayer.Character.Head)
+bill.Size = UDim2.new(4, 0, 4.5, 0)
+bill.AlwaysOnTop = true
+label = Instance.new("TextLabel", bill)
+label.Size = UDim2.new(2, 0, 1, 0) 
+                            label.Position = UDim2.new(-0.5, 0, -0.5, 0)              label.BackgroundTransparency = 1          label.FontSize = "Size14"
+while true do
+label.TextColor3 = Color3.new(math.random(),math.random(),math.random())
+wait(.09)                               label.TextStrokeColor3 = Color3.new(0 ,0 ,0)                    label.TextStrokeTransparency = 0
+label.Text = rainbowName;
+end;
 end)
 
 SkriptsSection:NewTextBox("FPS unloxker", "sum", function(lag)
@@ -577,12 +607,12 @@ if toggled then
 getgenv().InfJump = true
 spawn(function()
 while getgenv().InfJump == true do
-    uis.JumpRequest:connect(function()
-  if getgenv().InfJump == true then
+uis.JumpRequest:connect(function()
+if getgenv().InfJump == true then
 niggas:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-  end
-    end)
-    wait()
+end
+end)
+wait()
 end
 end)
 else
@@ -2580,6 +2610,12 @@ end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
+GamesSection:NewDropdown("DropdownText", "DropdownInf", {"🏀AUTO REKORD & BUILD", "teleport to: [UGC] 🏀become an nba star to prove mom wrong!"}, function(x) 
+if x == "🏀AUTO REKORD & BUILD" then  
+loadstring(game:HttpGet(('https://pastefy.app/RtI31UGP/raw'),true))();
+
+elseif x == "teleport to: [UGC] 🏀become an nba star to prove mom wrong!" then game:GetService("TeleportService"):Teleport(14114964898, game:GetService("Players").LocalPlayer)  end  end)
+
 GamesSection:NewDropdown("📚 Robloxian High Skool 📚", "ready 2 player event", {"ready two player event (bombastik look-alike necklace)", "teleport to: Robloxian High School 🏫 RP"}, function(x) 
 if x == "ready two player event (bombastik look-alike necklace)" then
 --robloxian high skool op (bombastik similiar nexklaxe)
@@ -2905,7 +2941,7 @@ end
 end)
 
 GamesSection:NewDropdown("🔪🩸 cHUcKY & TIFFANY - GRIEFVILLE 🩸🔪", "autofarm get ugx", {"AUTOFARM BY TORAISME(OP)", "AUTOFARM BY BAKON(OP)", "teleport to game"}, function(x)
-    if x=="AUTOFARM BY TORAISME(OP)" then 
+if x=="AUTOFARM BY TORAISME(OP)" then 
 --xhuxky:16578847473
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/GRIEFVILLE'))()
 
@@ -2914,7 +2950,7 @@ loadstring(game:HttpGet(('https://pastefy.app/kz1l7Xpz/raw'),true))()
 
 elseif x =="teleport to game" then
 game:GetService("TeleportService"):Teleport(16578847473, game:GetService("Players").LocalPlayer)
-    end;
+end;
 end)
 
 
@@ -2973,23 +3009,23 @@ GamesSection:NewDropdown("👅 TONGUE BATTLES 👅", "bleh", {"[event apr19] aut
 if x =="[event apr19] auto quest, autofarm" then
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Tongue'))()
 elseif x =="playerfarm,anti fall&more (key)" then
-    --tongue👅
+--tongue👅
 loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/814301bca04a6a09705f133ea8514487480d4083/Tongue",true))()
-  elseif x == "auto player, auto krate, auto fight" then
+elseif x == "auto player, auto krate, auto fight" then
 loadstring(game:HttpGet(('https://pastefy.app/Tx6uIEm7/raw'),true))()
-  elseif x == "to game" then
+elseif x == "to game" then
 game:GetService("TeleportService"):Teleport(16721806812, game:GetService("Players").LocalPlayer)
-    end
+end
 end)
 
 -- [ 🥪 Lunxhable Playables 🥪 ] --
 
 GamesSection:NewDropdown("🥪 Lunxhable Playables 🥪\nMULTIPLE FREE INSTANT UGC(thanks Tora)", "points", {"enter all kodes, auto get points", "teleport to game"}, function(p)
 if p =="enter all kodes, auto get points" then
-  --lunxhable:14565246812
+--lunxhable:14565246812
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4c8940890035f7d0435c7e01bbb1788cd15365d4/Lunchables",true))()
 elseif p == "teleport to game" then
-  --go lunxhable playables
+--go lunxhable playables
 game:GetService("TeleportService"):Teleport(14565246812, game:GetService("Players").LocalPlayer)
 end
 end)
@@ -2999,11 +3035,11 @@ if h == "🐈AUTO KRATE 🥓" then
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/BaconBossScript/Kitty/main/Kitty'),true))();
 
 elseif h == "autofarm, auto gifts(2 skripts in 1)" then 
- --helokitty:16698955784
+--helokitty:16698955784
 loadstring(game:HttpGet("https://pastecode.dev/raw/eitjmaw4/helloKittyAutofarm-LeviAndAli_lulaslollipop.png",true))()
-    elseif h == "teleport to game" then
+elseif h == "teleport to game" then
 game:GetService("TeleportService"):Teleport(9346039031, game:GetService("Players").LocalPlayer)
-    end
+end
 end)
 
 
@@ -3018,7 +3054,7 @@ GamesSection:NewButton("teleport to game", "2 FREE UGX BY PLAYING THE FAME", fun
 
 --GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()
 --while true do --loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))()
-  --end;
+--end;
 --end) 
 
 --GamesSection:NewButton("fast koins farm by 🥓", "walmart", function()
@@ -3045,7 +3081,7 @@ GamesSection:NewButton("teleport to game", "2 FREE UGX BY PLAYING THE FAME", fun
 
 --GamesSection:NewDropdown("🧥 MAX MARA KOATS ADVENTURE 🧥 (2d)", "freeugx", {"get ugx", "teleport to game"}, function(x)
 --if x == "get ugx" then
-  --print("april 26 dumbass")
+--print("april 26 dumbass")
 --elseif x == "teleport to game" then
 --game:GetService("TeleportService"):Teleport(14905728989, game:GetService("Players").LocalPlayer)
 --end
@@ -3276,10 +3312,10 @@ FOV = 100,
 Scan = false,
 JumpOffset = 0,
 TargetStrafeSettings = {
-    Enabled = false,
-    Speed = 1,
-    Height = 0,
-    Distance = 6
+Enabled = false,
+Speed = 1,
+Height = 0,
+Distance = 6
 }
 };
 
@@ -3654,11 +3690,11 @@ getgenv().Door = true;
 while wait() do
 if getgenv().Door == true then
 for i,v in pairs(game.Workspace.Doors:GetChildren()) do
-  for i,l in pairs(v:GetChildren()) do
+for i,l in pairs(v:GetChildren()) do
 if l:FindFirstChild("???") then
-    l.BrickColor = BrickColor.new("Lime green")
+l.BrickColor = BrickColor.new("Lime green")
 end
-  end
+end
 end
 end
 end
@@ -4889,14 +4925,14 @@ function()
 --low server
 loadstring(game:HttpGet("https://pastebin.com/raw/H0LwsNGc"))()
 wait()
-  local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
-  local Notify = AkaliNotif.Notify;
-  wait();
-  Notify({
-  Description = "Finding smallest server...";
-  Title = "Lollypop Admin🍭";
-  Duration = 5;
-  });
+local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
+local Notify = AkaliNotif.Notify;
+wait();
+Notify({
+Description = "Finding smallest server...";
+Title = "Lollypop Admin🍭";
+Duration = 5;
+});
 end)
 HomeSection:NewButton("Exit", "leave the game",
 function()game:Shutdown()
@@ -4932,13 +4968,13 @@ end)
 HomeSection:NewButton("Get Koords", "x,y,z finder say /console", function()
 print(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position)
 wait()
-  local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
-  local Notify = AkaliNotif.Notify;
-  Notify({
-  Description = "koordinates kopied to klipboard";
-  Title = "Lollypop Admin🍭";
-  Duration = 5;
-  });
+local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
+local Notify = AkaliNotif.Notify;
+Notify({
+Description = "koordinates kopied to klipboard";
+Title = "Lollypop Admin🍭";
+Duration = 5;
+});
 end)
 HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakes", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/yealugpt/koordsgui.kxls.xlsk.xls",true))()
@@ -5050,31 +5086,31 @@ end)
 
 MoreSection:NewButton("Anti for jumppower", "nojumpkooldown", function()
 local IsA = game.IsA
-    local newindex = nil
+local newindex = nil
 
-    newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
-  if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" then
+newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
+if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" then
 return
-  end
-  return newindex(self, Index, Value)
-    end)
+end
+return newindex(self, Index, Value)
+end)
 end)
 
 MoreSection:NewButton("Anti *InvokeServer()*", "sum", function() 
 for _, key in next, getgc(true) do 
-    local function updateKey(instanceType)
-  if pcall(function() return rawget(key, instanceType) end) and typeof(rawget(key, instanceType)) == 'table' and (rawget(key, instanceType))[1] == 'kick' then
+local function updateKey(instanceType)
+if pcall(function() return rawget(key, instanceType) end) and typeof(rawget(key, instanceType)) == 'table' and (rawget(key, instanceType))[1] == 'kick' then
 key.tvk = {
-    'kick',
-    function() 
-  return game.Workspace:WaitForChild('')
-    end
+'kick',
+function() 
+return game.Workspace:WaitForChild('')
+end
 }
-  end
-    end
+end
+end
 
-    updateKey('indexInstance')
-    updateKey('namecallInstance')
+updateKey('indexInstance')
+updateKey('namecallInstance')
 end;
 wait()
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
@@ -5409,6 +5445,6 @@ end;
 function milk(kookie)
 loadingBar.Size = UDim2.new(kookie / 105, 0, 0.2, 0)
 loadingText.Text = "Skript Loading: " .. kookie .. "%"
-end
+end;
 
 spawn(animateSkript);
