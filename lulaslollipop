@@ -6,10 +6,10 @@ local Vv="9.1";
 local exploit=identifyexecutor();
 
 -- [ 🍭 beginning 🍭 ] --
-lulas=game;workspaxe=workspace;
-local _1=math.random(1,10);local _2=math.random(1,100);local _3=math.random(1,1000);
+lulas=game;local workspaxe=workspace;
+local r1=math.random(1,10);local r2=math.random(1,100);local r3=math.random(1,1000);
 holup=wait;_0=print;local mystery="mysterious numbers: ";
-niggas=game;
+local niggas=game;
 
 --[[LOADING vars]]--
 local loadingskreen = Instance.new("ScreenGui");
@@ -21,12 +21,8 @@ local KustomLoader="CustomLoader"
 local MAGENTA=Color3.new(20, 0, 21)
 local LIME=Color3.new(0, 255, 0)
 local YELLOWAF=Color3.new(255, 165, 0);
-
+local Rainbow = Color3.new(math.random(),math.random(),math.random())
 --[[ KUSTOM FUNKTIONS ]]--
-local function partTouxhed()
-loadstring(lulas:HttpGet("https://pastecode.dev/raw/a66spl54/say-partTouxhed.orStep_lulaslollipop.deb",true))();
-end;
-
 local function alert(say_lulaslollipop,say_RRixh)
 local notifikation=Instance.new("Message");
 notifikation.Text=say_lulaslollipop or say_RRixh;
@@ -35,39 +31,6 @@ notifikation.Parent=lollypops;
 holup(3);notifikation:Destroy();
 end;
 rrixh=alert;say=alert;msg=alert;
-
-local function shoutPart(player,message)
-if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
-    say("u stepped on a part"..message);
-    _0(mystery, _1,_2,_3);
-end
-end;
-
---nigga steps on part
-local function touxhed(part, hit)
-local robloxNigga = hit.Parent
-if robloxNigga and robloxNigga:FindFirstChildOfClass("Humanoid") then
-local kookiemonster = lulas.Players:GetPlayerFromCharacter(robloxNigga)
-if kookiemonster then
-    local steppedOnPart = part.Parent and part.Parent:IsA("Model") and part.Parent.Name or part.Name;
-    shoutPart(kookiemonster, " stepped on: " .. steppedOnPart);
-        --kustom notif
-        holup(2);
-        alert(kookiemonster, "u stepped on part: " ..steppedOnPart)
-end;
-end;
-end;
-
---konnekt touxh to all parts in workspaxe
-local function partTouxhed__skript__by__lulaslollipop()
-for _, part in ipairs(workspaxe:GetDescendants()) do
-if part:IsA("BasePart") then
-    part.Touched:Connect(function(hit)
-        touxhed(part, hit);
-    end);
-end
-end
-end;
 
 -- [[ LOADING ]] --
 local loadingSkreen = loadingskreen;
@@ -197,24 +160,22 @@ else
 devixe_name = "Unknown Devixe📵"
 end
 end;
-
-partTouxhed();
-partTouxhed__skript__by__lulaslollipop();
+    local defaultKolor = Color3.fromRGB(192,192,192);
 
 --game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
 
-local xxx = loadstring(niggas:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-xxx.DefaultColor = Color3.fromRGB(192,192,192)
+local lollypophub=loadstring(niggas:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
+    
+lollypophub.DefaultColor = defaultKolor
 
-xxx:Notification({
-Text = "🍭 Welkome to Lollypop Hub, " ..niggas.Players.LocalPlayer.Name.. "🍭",
+    lollypophub:Notification({
+Text = "🍭 Welkome to Lollypop Hub, " ..niggas.Players.LocalPlayer.Name.. "!🍭",
 Duration = 8
 })
-local xxx = loadstring(niggas:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-xxx.DefaultColor = Color3.fromRGB(192,192,192)
+lollypophub.DefaultColor = defaultKolor
 
-xxx:Notification({
-Text = "LOLLYPOP HUB V9🍭😋",
+lollypophub:Notification({
+Text = "V"..Vv.."🍭😋",
 Duration = 7
 })
 
@@ -372,7 +333,7 @@ SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 --[[📝 SKRIPT REQUESTS 📝]]--
 SkriptsSection:NewTextBox("Skript request", "type whatever skript u want then push enter", function(skript)
 skriptrequest=skript;
-loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))();local Notify = RRixh1.Notify;wait();Notify({ Description="u requested: '" ..skriptrequest.. "'\nRequest sent✅";Duration=3.7;});end)
+loadstring(niggas:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(niggas:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))();local Notify = RRixh1.Notify;holup();Notify({ Description="u requested: '" ..skriptrequest.. "'\nRequest sent✅";Duration=3.7;});end)
 --[[]]----[[x]]----[[x]]----[[x]]----[[x]]----[[x]]
 
 
@@ -398,30 +359,31 @@ SkriptsSection:NewTextBox("Air Walk", "lets u walk on air", function(x)
 lulas.Players.LocalPlayer.Character.Humanoid.HipHeight=x;
 end)
 
-SkriptsSection:NewTextBox("Send Alert", "lets u send msg to server not fe", function(text)
+SkriptsSection:NewTextBox("Send Alert", "lets u send msg to server not fe", function(...)
 local m = Instance.new("Message")
 m.Parent = Workspace
-m.Text = text
+m.Text = ...
 end)
 
 SkriptsSection:NewTextBox("Rainbow Msg Spam", "spam rainbow server msg", function(rainbowspam)
-game:GetService("RunService").Stepped:connect(function()
-kolors = {"Blue", "Green", "Red"} for i,v in pairs(game.Players:GetChildren()) do game.Lighting.Remote.SendMessage:FireServer(v, Colors[math.random(1, #kolors)], rainbowspam) 
+lulas:GetService("RunService").Stepped:connect(function()
+kolors = {"Blue", "Green", "Red"};
+for i,v in pairs(niggas.Players:GetChildren()) do lulas.Lighting.Remote.SendMessage:FireServer(v, Colors[math.random(1, #kolors)], rainbowspam) 
 end;
 end);
 end)
 
-SkriptsSection:NewTextBox("Rainbow Name", "makes ur name rainbow", function(rainbowName)
-bill = Instance.new("BillboardGui", game.Players.LocalPlayer.Character.Head)
+SkriptsSection:NewTextBox("Rainbow Name", "makes ur name rainbow", function(...) local none = 0
+bill = Instance.new("BillboardGui", niggas.Players.LocalPlayer.Character.Head)
 bill.Size = UDim2.new(4, 0, 4.5, 0)
 bill.AlwaysOnTop = true
 label = Instance.new("TextLabel", bill)
 label.Size = UDim2.new(2, 0, 1, 0) 
-                            label.Position = UDim2.new(-0.5, 0, -0.5, 0)              label.BackgroundTransparency = 1          label.FontSize = "Size14"
+                        label.Position = UDim2.new(-0.5, 0, -0.5, 0)              label.BackgroundTransparency = 1         label.FontSize = "Size14";
 while true do
-label.TextColor3 = Color3.new(math.random(),math.random(),math.random())
-wait(.09)                               label.TextStrokeColor3 = Color3.new(0 ,0 ,0)                    label.TextStrokeTransparency = 0
-label.Text = rainbowName;
+label.TextColor3 = Rainbow
+wait(.09)                               label.TextStrokeColor3 = Color3.new(0 ,0 ,0)                    label.TextStrokeTransparency = none
+label.Text = (...);
 end;
 end)
 
