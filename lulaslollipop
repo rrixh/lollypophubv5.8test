@@ -23,11 +23,12 @@ local Rainbow = Color3.new(math.random(),math.random(),math.random());
 
 --[[ KUSTOM FUNKTIONS ]]--
 local function alert(say_lulaslollipop,say_RRixh)
-local notifikation=Instance.new("Message");
-notifikation.Text=say_lulaslollipop or say_RRixh;
+local notifikation = Instance.new("Message");
+notifikation.Text = say_lulaslollipop or say_RRixh;
 local lollypops=lulas.Workspace;
 notifikation.Parent=lollypops;
-holup(3);notifikation:Destroy();
+holup(3);
+notifikation:Destroy();
 end;
 rrixh=alert;say=alert;msg=alert;
 
@@ -98,8 +99,27 @@ loadingSkreen:Destroy() --end
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
 local user=niggas.Players.LocalPlayer.Name
 local display=niggas.Players.LocalPlayer.DisplayName;
-local garamondfont =Enum.Font.Garamond;
+local lulaslollipop=3001347724;
+local cheru=4406450103;
+local plrId = niggas.Players.LocalPlayer.UserId;
+local garamondfont=Enum.Font.Garamond;
 local arialfont=Enum.Font.Arial;
+
+if type(lulaslollipop) == "number" and type(cheru) == "number" then do
+                    
+if plrId == lulaslollipop then
+rrixh("OH shit 👑lulaslollipop👑 is here⭐️🍭")
+elseif plrId == cheru then
+rrixh("OH shit 👑chelulu👑 is here")
+end;
+  end;
+ else 
+if plrId == lulaslollipop then    rrixh("OH shit 👑lulaslollipop👑 is here⭐️🍭")
+warn("lulaslollipop was not a number");
+elseif plrId == cheru then
+rrixh("OH shit 👑chelulu👑 is here") warn("cheru was not a number")
+end;
+end;
 
 local _1 ="[Lollypop Hub v"..Vv.."] Welkome to Lollypop Hub, "..display.."! (@"..user..")\nSkript by @lulaslollipop🍭 on Roblox👺";
 
