@@ -2523,7 +2523,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/266
 
 elseif x == "teleport to: Bee Swarm Simulator" then game:GetService("TeleportService"):Teleport(1537690962, game:GetService("Players").LocalPlayer)  end  end)
 
-GamesSection:NewDropdown("Dress To Impress 💖 [UPDATE]", "fnd al tix", {"find all tix - 👗💄", "telepr"}, function(x) 
+GamesSection:NewDropdown("Dress To Impress 💖 [UPDATE]", "fnd al tix", {"find all tix - 👗💄", "teleport to: Dress To Impress 💖 [UPDATE]"}, function(x) 
 if x == "find all tix - 👗💄" then  
 print("skript")  
 
@@ -2554,7 +2554,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/6ad
 
 elseif x == "teleport to: CLASSIC 💥 Dragon Adventures 🐉 Fantasy Pets ✨" then game:GetService("TeleportService"):Teleport(3475397644, game:GetService("Players").LocalPlayer)  end  end)
 
-GamesSection:NewDropdown("🎟️[ROBLOX THE KLASSIK EVENT 2024] 🎫 TIX ESP", "ROBLOX - THE KLASSIK EVENT 2024", {"TIX ESP 🎂ROBLOX - THE KLASSIK", "BedWars🎂[CLASSIC + ANNIVERSARY]"}, function(x) 
+GamesSection:NewDropdown("🎟️[ROBLOX THE KLASSIK EVENT 2024] 🎫 TIX ESP", "ROBLOX - THE KLASSIK EVENT 2024", {"TIX ESP 🎂ROBLOX - THE KLASSIK", "teleport to: BedWars🎂[CLASSIC + ANNIVERSARY]"}, function(x) 
 if x == "TIX ESP 🎂ROBLOX - THE KLASSIK" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/dd2e9fdd872cce58c6ee4eb16111a46d9b9f7847/ClassicBedWars",true))();
 
