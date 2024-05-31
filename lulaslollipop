@@ -16,7 +16,6 @@ local loadingskreen = Instance.new("ScreenGui");
 local newFrame=Instance.new("Frame");
 local UiKorner=Instance.new("UICorner")
 local textlabel=Instance.new("TextLabel");
-local KustomLoader="CustomLoader"
 --[[ KOLORS ]]--
 local MAGENTA=Color3.new(20, 0, 21)
 local LIME=Color3.new(0, 255, 0)
@@ -34,10 +33,10 @@ rrixh=alert;say=alert;msg=alert;
 
 -- [[ LOADING ]] --
 local loadingSkreen = loadingskreen;
-loadingSkreen.Name = KustomLoader
+loadingSkreen.Name = "CustomLoader"
 loadingSkreen.Parent = niggas.Players.LocalPlayer:WaitForChild("PlayerGui");
 -- frame
-local frame = newFrame;
+local frame = Instance.new("Frame");
 frame.Size = UDim2.new(0, 300, 0, 180)
 frame.Position = UDim2.new(0.5, -150, 0.9, -280)
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -59,7 +58,7 @@ tt.Text = "Lollypop Hub V"..Vv.."🍭";
 --skriptName ^
 tt.Parent = frame
 --load bar frame
-local loadingBar = newFrame
+local loadingBar = Instance.new("Frame");
 loadingBar.Size = UDim2.new(0, 0, 0.2, 0)
 loadingBar.Position = UDim2.new(0.02, 0, 0.7, 0)
 loadingBar.BackgroundColor3 = MAGENTA --💒KOLOR💒]
