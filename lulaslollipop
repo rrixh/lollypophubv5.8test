@@ -13,14 +13,14 @@ local niggas=game;
 
 --[[LOADING vars]]--
 local loadingskreen = Instance.new("ScreenGui");
-local newFrame=Instance.new("Frame");
 local UiKorner=Instance.new("UICorner")
 local textlabel=Instance.new("TextLabel");
 --[[ KOLORS ]]--
 local MAGENTA=Color3.new(20, 0, 21)
 local LIME=Color3.new(0, 255, 0)
 local YELLOWAF=Color3.new(255, 165, 0);
-local Rainbow = Color3.new(math.random(),math.random(),math.random())
+local Rainbow = Color3.new(math.random(),math.random(),math.random());
+
 --[[ KUSTOM FUNKTIONS ]]--
 local function alert(say_lulaslollipop,say_RRixh)
 local notifikation=Instance.new("Message");
@@ -34,9 +34,9 @@ rrixh=alert;say=alert;msg=alert;
 -- [[ LOADING ]] --
 local loadingSkreen = loadingskreen;
 loadingSkreen.Name = "CustomLoader"
-loadingSkreen.Parent = niggas.Players.LocalPlayer:WaitForChild("PlayerGui");
+loadingSkreen.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui");
 -- frame
-local frame = Instance.new("Frame");
+local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 300, 0, 180)
 frame.Position = UDim2.new(0.5, -150, 0.9, -280)
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -62,7 +62,7 @@ local loadingBar = Instance.new("Frame");
 loadingBar.Size = UDim2.new(0, 0, 0.2, 0)
 loadingBar.Position = UDim2.new(0.02, 0, 0.7, 0)
 loadingBar.BackgroundColor3 = MAGENTA --💒KOLOR💒]
-loadingBar.Parent = frame
+loadingBar.Parent = frame;
 --uikorner loading bar frame
 local korner_2 = UiKorner
 korner_2.CornerRadius = UDim.new(0, 6)
