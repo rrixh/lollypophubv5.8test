@@ -108,16 +108,16 @@ local arialfont=Enum.Font.Arial;
 if type(lulaslollipop) == "number" and type(cheru) == "number" then do
                     
 if plrId == lulaslollipop then
-rrixh("OH shit 👑lulaslollipop👑 is here⭐️🍭")
+print("OH shit 👑lulaslollipop👑 is here⭐️🍭")
 elseif plrId == cheru then
-rrixh("OH shit 👑chelulu👑 is here")
+print("OH shit 👑chelulu👑 is here")
 end;
   end;
  else 
-if plrId == lulaslollipop then    rrixh("OH shit 👑lulaslollipop👑 is here⭐️🍭")
+if plrId == lulaslollipop then    print("OH shit 👑lulaslollipop👑 is here⭐️🍭")
 warn("lulaslollipop was not a number");
 elseif plrId == cheru then
-rrixh("OH shit 👑chelulu👑 is here") warn("cheru was not a number")
+print("OH shit 👑chelulu👑 is here") warn("cheru was not a number")
 end;
 end;
 
