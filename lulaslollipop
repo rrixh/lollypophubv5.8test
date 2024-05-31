@@ -69,19 +69,6 @@ end
 end
 end;
 
-local function konsole(...)
-local lula=select("#", ...);
-for i=1,lula do
-if i>1 then
-io.write("\t")
-end;
-local lollypop=select(i, ...);
-io.write(tostring(lollypop))
-end;
-io.write("\n")
-end; yo="test: yo";
-konsole(yo);
-
 -- [[ LOADING ]] --
 local loadingSkreen = loadingskreen;
 loadingSkreen.Name = KustomLoader
@@ -3126,7 +3113,7 @@ if ... == "teleport to: Murder Mystery 2 🗡️" then niggas:GetService("Telepo
 
 if ... == "this is nothing" then
 rrixh("👺");
-konsole("nothing here retard");
+print'nothing here'
 end;
 end)
 
