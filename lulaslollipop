@@ -12,7 +12,6 @@ holup=wait;_0=print;local mystery="mysterious numbers: ";
 local niggas=game;
 
 --[[LOADING vars]]--
-local textlabel=Instance.new("TextLabel");
 --[[ KOLORS ]]--
 local MAGENTA=Color3.new(20, 0, 21)
 local LIME=Color3.new(0, 255, 0)
@@ -41,7 +40,7 @@ frame.Position = UDim2.new(0.5, -150, 0.9, -280)
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.Parent = loadingSkreen
 -- uikorner of the frame
-local korner = UiKorner
+local korner = Instance.new("UICorner");
 korner.CornerRadius = UDim.new(0, 10)
 korner.Parent = frame
 --title
@@ -53,8 +52,7 @@ tt.BackgroundTransparency = 1
 tt.TextColor3 = Color3.new(1, 1, 1)
 tt.TextSize = 25
 tt.Font = Enum.Font.SourceSansBold
-tt.Text = "Lollypop Hub V"..Vv.."🍭";
---skriptName ^
+tt.Text = "Lollypop Hub V"..Vv.."🍭"; --name
 tt.Parent = frame
 --load bar frame
 local loadingBar = Instance.new("Frame");
@@ -63,13 +61,13 @@ loadingBar.Position = UDim2.new(0.02, 0, 0.7, 0)
 loadingBar.BackgroundColor3 = MAGENTA --💒KOLOR💒]
 loadingBar.Parent = frame;
 --uikorner loading bar frame
-local korner_2 = UiKorner
+local korner_2 = Instance.new("UICorner");
 korner_2.CornerRadius = UDim.new(0, 6)
 korner_2.Parent = loadingBar
 --loading text
 local loadingTextSize="18";
 local skriptloading="Skript Loading..."
-local loadingText = textlabel;
+local loadingText = Instance.new("TextLabel");
 loadingText.Size = UDim2.new(0.95, 0, 0, 30)
 loadingText.Position = UDim2.new(0.03, 0, 0.7, 0)
 loadingText.BackgroundColor3 = Color3.new(0, 0, 0)
