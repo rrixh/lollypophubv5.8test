@@ -3307,27 +3307,38 @@ GamesSection:NewDropdown("😩99% Fail Obby😩", "purple = ✅, red = ❌, gree
 if x =="Memory Skript - PURPLE" then
 --99purple uwu
 loadstring(game:HttpGet("https://pastecode.dev/raw/79ecv4td/99purple_lulaslollipop.ppt",true))();
+--hook
+print("purple")
 
 elseif x == "Memory Skript - PINK" then
 --99pink uwu
 loadstring(game:HttpGet("https://pastecode.dev/raw/c7qs6fqb/99pink_lulaslollipop.ppt",true))();
+--hook
+print("pink")
 
 elseif x == "Memory Skript - YELLOW" then
 --99yellow uwu✅
 loadstring(game:HttpGet("https://pastecode.dev/raw/b5o74rh0/99fail.yellow_lulaslollipop.ppt",true))();
+--99hk
+print("yellow")
 
 elseif x == "Memory Skript - BLUE" then
 --99blue uwu✅
 loadstring(game:HttpGet("https://pastecode.dev/raw/w2wwx2ez/99fail.blue_lulaslollipop.ppt",true))();
+--99hk
+print("blue")
 
 elseif x == "Memory Skript - SILVER" then
 --99silver uwu✅
 loadstring(game:HttpGet("https://pastecode.dev/raw/4c3ey5kd/99fail.silver_lulaslollipop.ppt",true))();
+--99hk
+print("silver")
 
 elseif x == "Heaven Map (less lag too)" then
 --heaven map skript
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))()
 end;
+--------------------------------------------------
 wait(0.000001)
 pcall(function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/27r0btda/wHook-.-.-99failobby_lulaslollipop.deb",true))()
@@ -5327,9 +5338,14 @@ pcall(function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))()
 end)
 
--- main lollypop notif
 pcall(function()
+-- main lollypop notif
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M", true))()
+end)
+
+pcall(function()
+--eye skriptwork
+loadstring(game:HttpGet("https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx",true))();
 end)
 
 pcall(function()
@@ -5339,7 +5355,7 @@ end)
 
 skriptLoaded();
 
-end;
+end;--skript loading done
 
 function milk(kookie)
 loadingBar.Size = UDim2.new(kookie / 105, 0, 0.2, 0)
