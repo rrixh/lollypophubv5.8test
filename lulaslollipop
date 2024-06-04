@@ -5,15 +5,6 @@ local LastUpdate="Last Update: June 4, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
 
-local function dekal()
-detektion = Instance.new("Decal");
-detektion.Name = "LULASLOLLIPOPxxINJEKTED";
-detektion.Parent = game:GetService("ReplicatedStorage");
-for i=1,10 do
-print("DEKAL KREATED: '"..detektion.Name.."' ✅")
-wait(2);end
-end;
-
 -- [ 🍭 beginning 🍭 ] --
 lulas=game;local workspaxe=workspace;
 local r1=math.random(1,10);local r2=math.random(1,100);local r3=math.random(1,1000);
@@ -43,6 +34,15 @@ notify=alert;send=alert;
 --[[ 
 alert("notiftexthere", 5)
 ]]
+local function dekal()
+detektion = Instance.new("Decal");
+detektion.Name = "LULASLOLLIPOPxxINJEKTED";
+detektion.Parent = game:GetService("ReplicatedStorage");
+for i=1,10 do
+print("DEKAL KREATED: '"..detektion.Name.."' ✅")
+wait(2)
+  end;
+end;
 
 -- [[ LOADING ]] --
 local loadingSkreen = Instance.new("ScreenGui");
@@ -101,7 +101,8 @@ while kookie < 100 do
 kookie = kookie + 3.5
 milk(kookie)
 wait(0.05)-- speed
-end;local loaded="Suxxessfully Loaded"
+end;
+local loaded="Suxxessfully Loaded"
 
 loadingText.Text = loaded
 wait(0.5)
@@ -189,7 +190,7 @@ devixe_name = "UWP🐸"
 else
 devixe_name = "Unknown Devixe📵"
 end
-end;
+end; end
 local defaultKolor = Color3.fromRGB(192,192,192);
 
 --game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
@@ -249,9 +250,8 @@ local Window = kavo.CreateLib(lollypopHub)
 --lulaTheme
 -- tools1134,skripts35,game1443,games2450
 
-local function skriptLoaded()
+function skriptLoaded()
 print("@lulaslollipop🍭 on Roblox // @rrixh diskord // @siipped on Telegram")
-    dekal();
 end;
 
 local Skripts = Window:NewTab("Skripts")
@@ -263,7 +263,7 @@ local maxplrs = niggas.Players.MaxPlayers
 local serversize = SkriptsSection:NewLabel("Server Size: "..kount.."/"..maxplrs)
 
 getgenv().Enabled = false
-getgenv().espstuff =Color3.fromRGB(255,255,255)
+getgenv().espstuff = Color3.fromRGB(255,255,255)
 
 function enablehighlight()
 for i,v in pairs(Players:GetPlayers()) do
@@ -280,10 +280,10 @@ local highlight = v.Character:FindFirstChild('ESP')
 highlight.Enabled = getgenv().Enabled
 highlight.FillColor = getgenv().espstuff
 highlight.OutlineColor = getgenv().espstuff
-end
-end
-end
-end
+end;--for
+end;--if
+end;--funktion
+
 
 RunService.RenderStepped:connect(function()
 enablehighlight();
@@ -297,7 +297,7 @@ local function updatetimelabel()
 while true do
 local formatted_time = os.date("🔴Live Time: %I:%M:%S %p");--[[
 12hformat,Minute,Sekond,pm/am]]
-local todays_date = os.date("Today's Date: %A | %B %d, %Y");--[[dayofweek | fullmonth dayofmonth, fullyear
+local todays_date = os.date("Today's Date: %A | %B %d, %Y");--[[dayofweek | fullmonth dayofmonth, fullyear]]
 
 --[[
 ⏰ %I=12 Hour
@@ -5415,8 +5415,8 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkby
 end)
 
 skriptLoaded();
-
-end;--skript loading done
+dekal();
+--skript loading done
 
 function milk(kookie)
 loadingBar.Size = UDim2.new(kookie / 105, 0, 0.2, 0)
