@@ -45,68 +45,70 @@ wait(2)
 end;
 
 -- [[ LOADING ]] --
-local loadingSkreen = Instance.new("ScreenGui");
-loadingSkreen.Name = "CustomLoader"
-loadingSkreen.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui");
--- frame
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 300, 0, 180)
-frame.Position = UDim2.new(0.5, -150, 0.9, -280)
-frame.BackgroundColor3 = Color3.new(0, 0, 0)
-frame.Parent = loadingSkreen
--- uikorner of the frame
-local korner = Instance.new("UICorner");
-korner.CornerRadius = UDim.new(0, 10)
-korner.Parent = frame
---title
-local tt = Instance.new("TextLabel");
-tt.Size = UDim2.new(0.99, 0, 0, 60)
-tt.Position = UDim2.new(0.03, 0, 0.10, 0)
-tt.BackgroundColor3 = Color3.new(0, 0, 0)
-tt.BackgroundTransparency = 1
-tt.TextColor3 = Color3.new(1, 1, 1)
-tt.TextSize = 25
-tt.Font = Enum.Font.SourceSansBold
-tt.Text = "Lollypop Hub V"..Vv.."🍭"; --name
-tt.Parent = frame
---load bar frame
-local loadingBar = Instance.new("Frame");
-loadingBar.Size = UDim2.new(0, 0, 0.2, 0)
-loadingBar.Position = UDim2.new(0.02, 0, 0.7, 0)
-loadingBar.BackgroundColor3 = MAGENTA --💒KOLOR💒]
-loadingBar.Parent = frame;
---uikorner loading bar frame
-local korner_2 = Instance.new("UICorner");
-korner_2.CornerRadius = UDim.new(0, 6)
-korner_2.Parent = loadingBar
---loading text
-local loadingTextSize="18";
-local skriptloading="Skript Loading..."
-local loadingText = Instance.new("TextLabel");
-loadingText.Size = UDim2.new(0.95, 0, 0, 30)
-loadingText.Position = UDim2.new(0.03, 0, 0.7, 0)
-loadingText.BackgroundColor3 = Color3.new(0, 0, 0)
-loadingText.BackgroundTransparency = 1
-loadingText.TextColor3 = Color3.new(1, 1, 1)
-loadingText.TextSize = loadingTextSize
-loadingText.Font = Enum.Font.SourceSansBold
-loadingText.Text = skriptloading
-loadingText.Parent = frame;
+  -- [[ LOADING ]] --
+  local loadingSkreen = Instance.new("ScreenGui");
+  loadingSkreen.Name = "CustomLoader"
+  loadingSkreen.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui");
+  -- frame
+  local frame = Instance.new("Frame")
+  frame.Size = UDim2.new(0, 300, 0, 180)
+  frame.Position = UDim2.new(0.5, -150, 0.9, -280)
+  frame.BackgroundColor3 = Color3.new(0, 0, 0)
+  frame.Parent = loadingSkreen
+  -- uikorner of the frame
+  local korner = Instance.new("UICorner");
+  korner.CornerRadius = UDim.new(0, 10)
+  korner.Parent = frame
+  --title
+  local tt = Instance.new("TextLabel");
+  tt.Size = UDim2.new(0.99, 0, 0, 60)
+  tt.Position = UDim2.new(0.03, 0, 0.10, 0)
+  tt.BackgroundColor3 = Color3.new(0, 0, 0)
+  tt.BackgroundTransparency = 1
+  tt.TextColor3 = Color3.new(1, 1, 1)
+  tt.TextSize = 25
+  tt.Font = Enum.Font.SourceSansBold
+  tt.Text = "Lollypop Hub V"..Vv.."🍭"; --name
+  tt.Parent = frame
+  --load bar frame
+  local loadingBar = Instance.new("Frame");
+  loadingBar.Size = UDim2.new(0, 0, 0.2, 0)
+  loadingBar.Position = UDim2.new(0.02, 0, 0.7, 0)
+  loadingBar.BackgroundColor3 = MAGENTA --💒KOLOR💒]
+  loadingBar.Parent = frame;
+  --uikorner loading bar frame
+  local korner_2 = Instance.new("UICorner");
+  korner_2.CornerRadius = UDim.new(0, 6)
+  korner_2.Parent = loadingBar
+  --loading text
+  local loadingTextSize="18";
+  local skriptloading="Skript Loading..."
+  local loadingText = Instance.new("TextLabel");
+  loadingText.Size = UDim2.new(0.95, 0, 0, 30)
+  loadingText.Position = UDim2.new(0.03, 0, 0.7, 0)
+  loadingText.BackgroundColor3 = Color3.new(0, 0, 0)
+  loadingText.BackgroundTransparency = 1
+  loadingText.TextColor3 = Color3.new(1, 1, 1)
+  loadingText.TextSize = loadingTextSize
+  loadingText.Font = Enum.Font.SourceSansBold
+  loadingText.Text = skriptloading
+  loadingText.Parent = frame;
 
---animateloadingbar
-function animateSkript()
-local kookie=0;
+  --animateloadingbar
+  function animateSkript()
+    local kookie = 0
 
-while kookie < 100 do
-kookie = kookie + 3.5
-milk(kookie)
-wait(0.05)-- speed
-end;
-local loaded="Suxxessfully Loaded"
+    while kookie < 100 do
+        kookie = kookie + 4
+        milk(kookie)
+        wait(0.05) -- adjust if u want
+    end
 
-loadingText.Text = loaded
-wait(0.5)
-loadingSkreen:Destroy() --end
+    loadingText.Text = "Suxxessfully Loaded"
+  wait(0.5)
+  loadingSkreen:Destroy();
+
+
 
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
 local user=niggas.Players.LocalPlayer.Name
@@ -190,7 +192,7 @@ devixe_name = "UWP🐸"
 else
 devixe_name = "Unknown Devixe📵"
 end
-end; end
+end;
 local defaultKolor = Color3.fromRGB(192,192,192);
 
 --game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
@@ -250,7 +252,7 @@ local Window = kavo.CreateLib(lollypopHub)
 --lulaTheme
 -- tools1134,skripts35,game1443,games2450
 
-function skriptLoaded()
+local function skriptLoaded()
 print("@lulaslollipop🍭 on Roblox // @rrixh diskord // @siipped on Telegram")
 end;
 
@@ -263,12 +265,12 @@ local maxplrs = niggas.Players.MaxPlayers
 local serversize = SkriptsSection:NewLabel("Server Size: "..kount.."/"..maxplrs)
 
 getgenv().Enabled = false
-getgenv().espstuff = Color3.fromRGB(255,255,255)
+getgenv().espstuff =Color3.fromRGB(255,255,255)
 
-function enablehighlight()
+function enablestuff()
 for i,v in pairs(Players:GetPlayers()) do
 if v~= plr and v.Character then
---[[if not v.Character:FindFirstChild('ESP') then]]
+if not v.Character:FindFirstChild('ESP') then
 local highlight = Instance.new('Highlight')
 highlight.Name = 'ESP'
 highlight.Parent = v.Character
@@ -280,14 +282,13 @@ local highlight = v.Character:FindFirstChild('ESP')
 highlight.Enabled = getgenv().Enabled
 highlight.FillColor = getgenv().espstuff
 highlight.OutlineColor = getgenv().espstuff
-end;--for
-end;--if
-end;--funktion
-
-
+end
+end
+end
+end
 
 RunService.RenderStepped:connect(function()
-enablehighlight();
+enablestuff()
 end)
 
 
@@ -5425,3 +5426,4 @@ loadingText.Text = "Skript Loading: " .. kookie .. "%"
 end;
 
 spawn(animateSkript);
+end;
