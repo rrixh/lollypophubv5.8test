@@ -29,6 +29,15 @@ notifikation:Destroy();
 end;
 rrixh=alert;say=alert;msg=alert;
 
+function dekal()
+detektion = Instance.new("Decal");
+detektion.Name = "LULASLOLLIPOPxxINJEKTED";
+detektion.Parent= game:GetService("ReplicatedStorage")
+print("DEKAL KREATED: "..detektion.Name.."✅")
+end;
+dekal();
+
+
 -- [[ LOADING ]] --
 local loadingSkreen = Instance.new("ScreenGui");
 loadingSkreen.Name = "CustomLoader"
