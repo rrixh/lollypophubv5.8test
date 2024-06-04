@@ -1,9 +1,18 @@
 --main v9 LOLLYPOP HUB
 -- Version: 9
 -- [ main/info ] --
-local LastUpdate="Last Update: June 3, 2024";
+local LastUpdate="Last Update: June 4, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
+
+function dekal()
+detektion = Instance.new("Decal");
+detektion.Name = "LULASLOLLIPOPxxINJEKTED";
+detektion.Parent = game:GetService("ReplicatedStorage");
+for i=1,10 do
+print("DEKAL KREATED: '"..detektion.Name.."' ✅")
+wait(2);end
+end;
 
 -- [ 🍭 beginning 🍭 ] --
 lulas=game;local workspaxe=workspace;
@@ -19,15 +28,21 @@ local YELLOWAF=Color3.new(255, 165, 0);
 local Rainbow = Color3.new(math.random(),math.random(),math.random());
 
 --[[ KUSTOM FUNKTIONS ]]--
-local function alert(say_lulaslollipop,say_RRixh)
+local function alert(say_lulaslollipop, duration)
+local Lollypops=game;
+local holup=wait;
 local notifikation = Instance.new("Message");
-notifikation.Text = say_lulaslollipop or say_RRixh;
-local lollypops=lulas.Workspace;
+notifikation.Text = say_lulaslollipop;
+local lollypops = Lollypops.Workspace;
 notifikation.Parent=lollypops;
-holup(3);
+holup(duration)
 notifikation:Destroy();
-end;
-rrixh=alert;say=alert;msg=alert;
+end
+rrixh=alert;msg=alert;
+notify=alert;send=alert;
+--[[ 
+alert("notiftexthere", 5)
+]]
 
 -- [[ LOADING ]] --
 local loadingSkreen = Instance.new("ScreenGui");
@@ -108,8 +123,8 @@ print("OH shit 👑lulaslollipop👑 is here⭐️🍭")
 elseif plrId == cheru then
 print("OH shit 👑chelulu👑 is here")
 end;
-  end;
- else 
+end;
+else 
 if plrId == lulaslollipop then    print("OH shit 👑lulaslollipop👑 is here⭐️🍭")
 warn("lulaslollipop was not a number");
 elseif plrId == cheru then
@@ -236,6 +251,7 @@ local Window = kavo.CreateLib(lollypopHub)
 
 local function skriptLoaded()
 print("@lulaslollipop🍭 on Roblox // @rrixh diskord // @siipped on Telegram")
+dekal();
 end;
 
 local Skripts = Window:NewTab("Skripts")
@@ -249,10 +265,10 @@ local serversize = SkriptsSection:NewLabel("Server Size: "..kount.."/"..maxplrs)
 getgenv().Enabled = false
 getgenv().espstuff =Color3.fromRGB(255,255,255)
 
-function enablestuff()
+function enablehighlight()
 for i,v in pairs(Players:GetPlayers()) do
 if v~= plr and v.Character then
-if not v.Character:FindFirstChild('ESP') then
+--[[if not v.Character:FindFirstChild('ESP') then]]
 local highlight = Instance.new('Highlight')
 highlight.Name = 'ESP'
 highlight.Parent = v.Character
@@ -270,27 +286,44 @@ end
 end
 
 RunService.RenderStepped:connect(function()
-enablestuff()
+enablehighlight();
 end)
 
 
 -- [ UPDATE TIME ] --
-local time = SkriptsSection:NewLabel("🔴 Live Time: [00:00:00]");
+local livetime = SkriptsSection:NewLabel("🔴 Live Time: [00:00:00]");
 
 local function updatetimelabel()
 while true do
-local formatted_time = os.date("🔴Live Time: %I:%M:%S %p")
-local todays_date = os.date("Today's Date: %A | %B %d, %Y");
+local formatted_time = os.date("🔴Live Time: %I:%M:%S %p");--[[
+12hformat,Minute,Sekond,pm/am]]
+local todays_date = os.date("Today's Date: %A | %B %d, %Y");--[[dayofweek | fullmonth dayofmonth, fullyear
 
---⏰////%I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year\\\\⏰
+--[[
+⏰ %I=12 Hour
+%M=Minute
+%S=Sekond
+%p=am/pm
+%A=dayofweek
+%B=full month 
+%d=dayofmonth
+%a=abbreviated weekday
+%b=abbreviated month 
+%m=month
+%x=date(e.g., 09/16/98)
+%X=time (e.g., 23:48:10)
+%Y=full Year (1999)
+%y=2 digit yr (1950 = 50 or 2024 = 24)
+⏰
+]]
 
-time:UpdateLabel("[" ..formatted_time.."]\n ["..todays_date.."]")
+livetime:UpdateLabel("["..formatted_time.."]\n["..todays_date.."]")
 wait(0.001)
-end
-end
+end;
+end;--(
 
 spawn(updatetimelabel);
--- [ END UPDATE TIME ] --
+-- [⏰END UPDATE TIME ⏰] --
 
 --  "NEWDROPDOWNHERE", 
 
@@ -365,13 +398,13 @@ SkriptsSection:NewToggle("Highlight Players", "esp players", function(...)
 getgenv().Enabled = ...
 end)
 
-SkriptsSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(255,255,255), function(color)
-getgenv().espstuff = color
+SkriptsSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(255,255,255), function(kolors)
+getgenv().espstuff = kolors
 end)
 
 SkriptsSection:NewToggle("HiddenFling", "fling", function(x)
 if x then
-loadstring(game:HttpGet("https://pastecode.dev/raw/w4g226cm/hiddenfling-toggle.deb",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/w4g226cm/hiddenfling-toggle.deb",true))();
 else
 hiddenfling=false;
 end
@@ -401,7 +434,7 @@ bill.Size = UDim2.new(4, 0, 4.5, 0)
 bill.AlwaysOnTop = true
 label = Instance.new("TextLabel", bill)
 label.Size = UDim2.new(2, 0, 1, 0) 
-                    label.Position = UDim2.new(-0.5, 0, -0.5, 0)              label.BackgroundTransparency = 1         label.FontSize = "Size14";
+                label.Position = UDim2.new(-0.5, 0, -0.5, 0)              label.BackgroundTransparency = 1         label.FontSize = "Size14";
 while true do
 label.TextColor3 = Rainbow
 wait(.09)                               label.TextStrokeColor3 = Color3.new(0 ,0 ,0)                    label.TextStrokeTransparency = none
@@ -411,15 +444,20 @@ end)
 
 SkriptsSection:NewTextBox("FPS unloxker", "sum", function(lag)
 fps = lag;
-setfflag("TaskSchedulerTargetFps", fps);
+local bestfps = "500";
 
-local bestfps = "500"
 if fps == bestfps then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))() Notify("FPS unloxker", "BEST FPS!!", 2)
-end;
+setfflag("TaskSchedulerTargetFps", fps);
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop",true))() Notify("FPS unloxker", "BEST FPS!!", 2);
+wait(0.00001)
+local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "FPS set to "..fps.."";Duration = 2.5; });
 
+else
+
+setfflag("TaskSchedulerTargetFps", fps);
 wait()
 local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "FPS set to "..fps.."";Duration = 2.5; });
+end;
 end)
 
 SkriptsSection:NewButton("Kamera(movie style)", "makes ur kam delay like ur the main xharakter", function()
@@ -2527,7 +2565,7 @@ elseif x == "to game" then game:GetService("TeleportService"):Teleport(762204664
 
 GamesSection:NewDropdown("📝Fundamental Paper Edukation: Morphs RP [FREE UGc!]", "freelimited", {"find all oreos, get all badges", "teleport to: Fundamental Paper Education: Morphs RP [FREE UGC!]"}, function(x) if x == "find all oreos, get all badges" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4b735fd7d1d03efd1f2a117a729f0c5a5c6a6e47/Fundamental",true))(); 
 
-  elseif x == "teleport to: Fundamental Paper Education: Morphs RP [FREE UGC!]" then game:GetService("TeleportService"):Teleport(17270405009, game:GetService("Players").LocalPlayer)  end  end)
+elseif x == "teleport to: Fundamental Paper Education: Morphs RP [FREE UGC!]" then game:GetService("TeleportService"):Teleport(17270405009, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("bekome an nba star to prove mom wrong!", "blah", {"🏀AUTO REKORD & BUILD", "teleport to: [UGC] 🏀become an nba star to prove mom wrong!"}, function(x) 
 if x == "🏀AUTO REKORD & BUILD" then  
@@ -3010,7 +3048,7 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
 GamesSection:NewDropdown("Unnamed Shooter", "op skript by tora", {"AUTO KILL (op skript by tora)", "to game"}, function(x) if x == "AUTO KILL (op skript by tora)" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/e700beeb77025b72371b9383a4510f20cf438a4e/UnnamedShooter",true))();
 
-  elseif x == "to game" then game:GetService("TeleportService"):Teleport(14202073004, game:GetService("Players").LocalPlayer)  end  end)
+elseif x == "to game" then game:GetService("TeleportService"):Teleport(14202073004, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("[🕸️UPDATE 1] 🍉🍎 Fruit Seas 🍍🍊", "by tora", {"AUTO MOBS & AUTO QUEST", "teleport to: [🕸️UPDATE 1] Fruit Seas"}, function(x) 
 if x == "AUTO MOBS & AUTO QUEST" then  
@@ -5378,7 +5416,7 @@ end)
 
 skriptLoaded();
 
-end;--skript loading done
+--skript loading done
 
 function milk(kookie)
 loadingBar.Size = UDim2.new(kookie / 105, 0, 0.2, 0)
