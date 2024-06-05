@@ -1,33 +1,89 @@
 --main v9 LOLLYPOP HUB(baxkup jun2)
 -- Version: 9
 -- [ main/info ] --
-local LastUpdate="Last Update: June 4, 2024";
+local LastUpdate="Last Update: June 5, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
 
--- [ 🍭 beginning 🍭 ] --
+-- [ 🛠️ main vars 🛠️ ] --
 lulas=game;local workspaxe=workspace;
 local r1=math.random(1,10);local r2=math.random(1,100);local r3=math.random(1,1000);
-holup=wait;_0=print;local mystery="mysterious numbers: ";
-local niggas=game;
+holup=wait;task=task.wait;_0=print;LollypopHUB=print;local mystery="mysterious numbers: ";
+local niggas=game;local lpChar=game.Players.LocalPlayer.Character;local lp=game.Players.LocalPlayer;local plrs=game.Players;local human=game.Players.LocalPlayer.Character.Humanoid;local rs = game:GetService("ReplicatedStorage");
 
---[[LOADING vars]]--
 --[[ KOLORS ]]--
 local MAGENTA=Color3.new(20, 0, 21)
 local LIME=Color3.new(0, 255, 0)
 local YELLOWAF=Color3.new(255, 165, 0);
 local Rainbow = Color3.new(math.random(),math.random(),math.random());
 
+--[[ RBLX XHAT SERVIXE ]] --;
+local tcs = game:GetService("TextChatService");
+--find
+local generalchat = tcs:FindFirstChild("RBXGeneral");
+local find_gnrlchat = tcs:FindFirstChild("RBXGeneral");
+local gnrlchat_found = tcs:FindFirstChild("RBXGeneral");
+--end
+local GNRL = game:GetService("TextChatService").TextChannels.RBXGeneral;
+local SMR = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest or game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest');
+--end roblox xhat servixe vars--
+
 --[[ KUSTOM FUNKTIONS ]]--
-local function alert(say_lulaslollipop,say_RRixh)
+function kolor(r,b,g)
+return Color3.new(r,b,g)
+end;
+
+function speak(txt)
+  if generalchat then
+    GNRL:SendAsync(txt);
+      else
+SMR:FireServer(txt,"All");
+      end;
+end;--420
+
+local function alert(msg,sekonds)
 local notifikation = Instance.new("Message");
-notifikation.Text = say_lulaslollipop or say_RRixh;
+notifikation.Text = msg;
 local lollypops=lulas.Workspace;
 notifikation.Parent=lollypops;
-holup(3);
+holup(sekonds);
 notifikation:Destroy();
+end;rrixh=alert;say=alert;msg=alert;
+--[[
+alert("hello", 5)
+]]
+
+local owners = {
+"lulaslollipop", "lulaslollipop 5ever", "IlIIIlIlIIlIIlIIlIIl", "BHN5CP6VGTWV"
+};
+local function kreatorAlert()
+game:GetService('Players').PlayerRemoving:Connect(function(player)
+for _,owner in ipairs(owners) do
+  if player.Name ~= owner then
+game.StarterGui:SetCore("SendNotification", {
+Title = "the kreator of the skript has left your game😭";
+Button1 = "nooooo";
+Icon = "";
+Duration = 4.5;
+})
+          break
+        end;
+      end;
+    end)
+--[[x]]--[[x]]task()--[[x]]--[[x]]--[[x]]
+game:GetService('Players').PlayerAdded:Connect(function(player)
+  for _, owner in ipairs(owners) do
+    if player.Name ~= owner then
+game.StarterGui:SetCore("SendNotification", {
+  Title = "the kreator of the skript has joined your game!🍭";
+      Button1 = "😮";
+      Icon = "rbxassetid://57254792";
+        Duration = 4.5 }) 
+            break
+        end;
+      end;
+    end)
 end;
-rrixh=alert;say=alert;msg=alert;
 
 function dekal()
 detektion = Instance.new("Decal");
@@ -92,14 +148,14 @@ function animateSkript()
 local kookie=0;
 
 while kookie < 100 do
-kookie = kookie + 3.5
+kookie = kookie + 3.4
 milk(kookie)
 wait(0.05)-- speed
-end;local loaded="Suxxessfully Loaded"
+end;
 
-loadingText.Text = loaded
-wait(0.5)
-loadingSkreen:Destroy() --end
+loadingText.Text = "Suxxessfully Loaded 😛"
+wait(1.05)
+loadingSkreen:Destroy(); --[[end1]]
 
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
 local user=niggas.Players.LocalPlayer.Name
@@ -210,7 +266,7 @@ end);
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
--- local brightre	=	255,105,180
+-- local brightred	=	255,105,180
 -- slateblue =	106,90,205
 -- mediumorchid	=	186,85,211
 -- mediumslateblue	=	123,104,238
@@ -361,10 +417,13 @@ SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 -- SkriptsSection:NewLabel("Akkount Age: " ..game:GetService("Players").LocalPlayer.AccountAge.." day(s)")
 --[LABELS done]--
 
+
 --[[📝 SKRIPT REQUESTS 📝]]--
+GamesSection:NewLabel("u kan also use this if a skript is not working or \nneeds an update, etc.")
+
 SkriptsSection:NewTextBox("Skript request", "type whatever skript u want then push enter", function(skript)
 skriptrequest=skript;
-loadstring(niggas:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(niggas:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))();local Notify = RRixh1.Notify;holup();Notify({ Description="u requested: '" ..skriptrequest.. "'\nRequest sent✅";Duration=3.7;});end)
+loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))();local Notify = RRixh1.Notify;holup();Notify({ Description="u requested: '" ..skriptrequest.. "'\nRequest sent✅";Duration=3.7;});end)
 --[[]]----[[x]]----[[x]]----[[x]]----[[x]]----[[x]]
 
 
@@ -374,39 +433,56 @@ SkriptsSection:NewToggle("Highlight Players", "esp players", function(...)
 getgenv().Enabled = ...
 end)
 
-SkriptsSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(255,255,255), function(color)
-getgenv().espstuff = color
+SkriptsSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(255,255,255), function(kolor)
+getgenv().espstuff = kolor
 end)
 
 SkriptsSection:NewToggle("HiddenFling", "fling", function(x)
 if x then
-loadstring(game:HttpGet("https://pastecode.dev/raw/w4g226cm/hiddenfling-toggle.deb",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/w4g226cm/hiddenfling-toggle.deb",true))();
 else
-hiddenfling=false;
-end
+hiddenfling=false
+end;
 end);
 
-SkriptsSection:NewTextBox("Air Walk", "lets u walk on air", function(x)
-lulas.Players.LocalPlayer.Character.Humanoid.HipHeight=x;
+SkriptsSection:NewButton("HiddenFling (in a ui)", "🍭 all day", function() 
+loadstring(game:HttpGet("https://pastecode.dev/raw/rxsdbab5/hiddenflinguwu.docx",true))();
+end);
+
+local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfucking", "motherfuck", "motherfuckers", "asses", "ass", "shit", "pussy", "dick", "dixk", "slut", "slvt", "asshole", "masturbate", "raping", "rapist", "rape", "bullshit", "bitch", "bitxh", "bitches", "bitxhes", "bitchass", "bitxhass", "cum", "kum", "vagina", "vaginas", "sex", "sexy", "porn", "porno", "pornography", "pornos", "pornhub", "xvideos", "xxxvideos", "xxx", "😘", "😘😘", "😘😘😘", "dickhole", "butthole", "fuckin", "fuxkin", "fuxking", "nigga", "niggas", "niggaz", "nigger", "niggers", "niggerz", "nger", "nger", "nga", "dixkhead", "dickhead", "fuckface", "fucked", "whore", "whores", "thot", "thotass", "thots", "shitface", "shitted", "shitty", "shitting", "shittyass", "hoe", "hoes"};
+
+SkriptsSection:NewTextBox("Send chat", "use this if u kant speak in chat", function(playermsg)
+  function invalid()
+      --[[empty]]
+    if playermsg == "" then
+        local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "enter a message to send!";Duration = 3.7; });
+--[[protekt]]
+    elseif playermsg==bloxkedWords then
+          local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "dont say that shit u might get banned";Duration = 3.2; });
+  end;
+end
+      if invalid() then
+        invalid();
+         else
+    speak(playermsg)
+       end;--42
 end)
 
-SkriptsSection:NewTextBox("Send Alert", "lets u send msg to server not fe", function(...)
+SkriptsSection:NewTextBox("🚶Air Walk", "lets u walk on air", function(x)
+game.Players.LocalPlayer.Character.Humanoid.HipHeight=x;
+end)
+
+SkriptsSection:NewTextBox("📢Send a server alert", "lets u send msg to server not fe", function(...)
 local m = Instance.new("Message")
 m.Parent = Workspace
 m.Text = ...
 end)
 
-SkriptsSection:NewTextBox("Rainbow Msg Spam", "spam rainbow server msg", function(rainbowspam)
-lulas:GetService("RunService").Stepped:connect(function()
-kolors = {"Blue", "Green", "Red"};
-for i,v in pairs(niggas.Players:GetChildren()) do lulas.Lighting.Remote.SendMessage:FireServer(v, Colors[math.random(1, #kolors)], rainbowspam) 
-end;
-end);
-end)
-
-SkriptsSection:NewTextBox("Rainbow Name", "makes ur name rainbow", function(...) local none = 0
-bill = Instance.new("BillboardGui", niggas.Players.LocalPlayer.Character.Head)
+SkriptsSection:NewTextBox("🌈Rainbow Name", "makes ur name rainbow", function(...)
+local none = 0
+bill = Instance.new("BillboardGui", lpChar.Head)
 bill.Size = UDim2.new(4, 0, 4.5, 0)
+bill.Parent = game:GetService("ReplicatedStorage");
 bill.AlwaysOnTop = true
 label = Instance.new("TextLabel", bill)
 label.Size = UDim2.new(2, 0, 1, 0) 
@@ -417,6 +493,20 @@ wait(.09)                               label.TextStrokeColor3 = Color3.new(0 ,0
 label.Text = (...);
 end;
 end)
+
+SkriptsSection:NewButton("↩️ undo/reset Rainbow Name", "🍭 all day", function() 
+local billWasFound = rs:FindFirstChild("bill");
+
+if billWasFound then
+bill:Destroy();
+local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "found 'bill' in BillboardGui and destroyed it";Duration = 4; });
+
+else
+
+bill:Destroy();
+local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "the 'else' statement was kalled; not in ReplikatedStorage";Duration = 4; });
+end;
+end);
 
 SkriptsSection:NewTextBox("FPS unloxker", "sum", function(lag)
 fps = lag;
@@ -547,8 +637,8 @@ SkriptsSection:NewToggle("Anti-Sit", "kinda good but i prefer using godmode", fu
 if state then
 local RunService = niggas:GetService("RunService")
 function antiSit()
-if niggas.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
-game.Players.LocalPlayer.Character.Humanoid.Sit = false
+if human:GetState() == Enum.HumanoidStateType.Seated then 
+human.Sit = false
 end
 end
 RunService:BindToRenderStep("tempBinding", 1000, antiSit)
@@ -5348,7 +5438,7 @@ end)
 
 skriptLoaded();
 
-end;
+end;--loadingSkreen
 
 function milk(kookie)
 loadingBar.Size = UDim2.new(kookie / 105, 0, 0.2, 0)
@@ -5356,3 +5446,7 @@ loadingText.Text = "Skript Loading: " .. kookie .. "%"
 end;
 
 spawn(animateSkript);
+task()
+kreatorAlert(); 
+
+LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
