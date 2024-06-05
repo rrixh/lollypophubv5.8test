@@ -505,18 +505,12 @@ local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfuckin
 --   speak(msg,All);
 --     end
 -- end)
-SkriptsSection:NewTextBox("Send chat(works for both)", "🍭 all day", function(msg)
-local replikated = game:GetService("ReplicatedStorage");
+SkriptsSection:NewTextBox("Send chat(both)", "🍭 all day", function(msg)
     local SMR = replikated:WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest');
       local GNRL = game:GetService("TextChatService").TextChannels.RBXGeneral;
-        local defaultChatSystem = replikated:FindFirstChild("DefaultChatSystemChatEvents")
-        local defaultChat = defaultChatSystem:FindFirstChild("SayMessageRequest");
-
-      if defaultChat then
+    
     SMR:FireServer(msg,"All");
-      else
   GNRL:SendAsync(msg);
-      end;
 end);
   
 SkriptsSection:NewTextBox("Send chat(orginal)", "🍭 all day", function(msg)
