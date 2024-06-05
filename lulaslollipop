@@ -67,17 +67,6 @@ invalid
 
 ]]
 
-SkriptsSection:NewTextBox("Send chat(orginal)", "🍭 all day", function(...)
-    local SMR = game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest')
-    -- local chatEvents = replicatedStorage:WaitForChild('DefaultChatSystemChatEvents')
-    -- local sayMessageRequest = chatEvents:WaitForChild('SayMessageRequest')
-    SMR:FireServer(..., "All");
-end);
-
-SkriptsSection:NewTextBox("Send chat(general)", "🍭 all day", function(roblox) 
-game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(roblox);
-end);
-
 --speak2
 -- function speak_ifGen_elseSMR(txt2,all)
 -- local tcs = game:GetService("TextChatService");
@@ -501,23 +490,30 @@ end);
 
 local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfucking", "motherfuck", "motherfuckers", "asses", "ass", "shit", "pussy", "dick", "dixk", "slut", "slvt", "asshole", "masturbate", "raping", "rapist", "rape", "bullshit", "bitch", "bitxh", "bitches", "bitxhes", "bitchass", "bitxhass", "cum", "kum", "vagina", "vaginas", "sex", "sexy", "porn", "porno", "pornography", "pornos", "pornhub", "xvideos", "xxxvideos", "xxx", "dickhole", "butthole", "fuckin", "fuxkin", "fuxking", "nigga", "niggas", "niggaz", "nigger", "niggers", "niggerz", "nger", "nger", "nga", "dixkhead", "dickhead", "fuckface", "fucked", "whore", "whores", "thot", "thotass", "thots", "shitface", "shitted", "shitty", "shitting", "shittyass", "hoe", "hoes"};
 
-SkriptsSection:NewTextBox("Send chat", "use this if u kant speak in chat", function(msg, All)
-  if msg == "" then
-Notify({ Description = "must enter a message";Duration = 3.3; });
---[[protekt]]elseif table.find(bloxkedWords,msg) then do
-for _, msg in ipairs(bloxkedWords) do
-if msg == bloxkedWords then
-      task();
-Notify({ Description = "dont say that shit u might get banned";Duration = 3.2; });
-    end;
-    end;
-      end;
-       else
-  speak(msg,All);
-    end
-end)
+-- SkriptsSection:NewTextBox("Send chat", "use this if u kant speak in chat", function(msg, All)
+--   if msg == "" then
+-- Notify({ Description = "must enter a message";Duration = 3.3; });
+-- --[[protekt]]elseif table.find(bloxkedWords,msg) then do
+-- for _, msg in ipairs(bloxkedWords) do
+-- if msg == bloxkedWords then
+--       task();
+-- Notify({ Description = "dont say that shit u might get banned";Duration = 3.2; });
+--     end;
+--     end;
+--       end;
+--        else
+--   speak(msg,All);
+--     end
+-- end)
 
-SkriptsSection:NewTextBox("Send chat 2(test)", "testing", function(txt2,chatType) speak_ifGen_elseSMR(txt2,chatType)
+SkriptsSection:NewTextBox("Send chat(orginal)", "🍭 all day", function(msg)
+  local SMR = game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest')
+  SMR:FireServer(msg,"All");
+end);
+
+
+SkriptsSection:NewTextBox("Send chat(general)", "🍭 all day", function(roblox) 
+game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(roblox);
 end);
 
 SkriptsSection:NewTextBox("🚶Air Walk", "lets u walk on air", function(x)
