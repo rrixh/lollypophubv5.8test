@@ -27,30 +27,30 @@ end;
 --[[ RBLX XHAT SERVIXE ]] --;
 --speak1
 function speak(plrText,chatType)
-  local replicatedStorage = game:FindFirstChild("ReplicatedStorage");
-  local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
-  local sayMessageRequest = defaultChatSystemChatEvents:FindFirstChild("SayMessageRequest");
+local replicatedStorage = game:FindFirstChild("ReplicatedStorage");
+local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
+local sayMessageRequest = defaultChatSystemChatEvents:FindFirstChild("SayMessageRequest");
 
-  if replicatedStorage then
-    if defaultChatSystemChatEvents then
-        if sayMessageRequest then
-        --SayMessageRequest(default)
+if replicatedStorage then
+  if defaultChatSystemChatEvents then
+      if sayMessageRequest then
+      --SayMessageRequest(default)
 --[[ sayMessageRequest:FireServer(plrText, "All") ]]       game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest'):FireServer(plrText, chatType)
-        else
-  --TextXhatServixe(RBXGeneral)
+      else
+--TextXhatServixe(RBXGeneral)
 game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(plrText);
-       wait();
-  Notify({ Description = "'"..sayMessageRequest.."' was not found";Duration = 3.7; });
+     wait();
+Notify({ Description = "'"..sayMessageRequest.."' was not found";Duration = 3.7; });
 warn("SayMessageRequest was not found");
-        end
-    else
-       warn("DefaultChatSystemChatEvents not found")
-    end
+      end
   else
-  wait();
-  Notify({ Description = "'"..replicatedStorage.." was not found";Duration = 3.7; });
-    warn("ReplikatedStorage not found")
+     warn("DefaultChatSystemChatEvents not found")
   end
+else
+wait();
+Notify({ Description = "'"..replicatedStorage.." was not found";Duration = 3.7; });
+  warn("ReplikatedStorage not found")
+end
 end;
 
 --[[ 
@@ -69,15 +69,15 @@ invalid
 
 --speak2
 function speak_ifGen_elseSMR(txt2,all)
-  local tcs = game:GetService("TextChatService");
-  local generalchat = tcs:FindFirstChild("RBXGeneral");
-  if generalchat then
+local tcs = game:GetService("TextChatService");
+local generalchat = tcs:FindFirstChild("RBXGeneral");
+if generalchat then
 game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(txt2);
-      else
+    else
 game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest'):FireServer(txt2, all)
 --[[  game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(txt2,"All");
 ]]
-      end;
+    end;
 end
 
 local function alert(msg,sekonds)
@@ -98,30 +98,30 @@ local owners = {
 local function kreatorAlert()
 game:GetService('Players').PlayerRemoving:Connect(function(player)
 for _,owner in ipairs(owners) do
-  if player.Name ~= owner then
+if player.Name ~= owner then
 game.StarterGui:SetCore("SendNotification", {
 Title = "the kreator of the skript has left your game😭";
 Button1 = "nooooo";
 Icon = "";
 Duration = 4.5;
 })
-          break
-        end;
+        break
       end;
-    end)
+    end;
+  end)
 --[[x]]--[[x]]task()--[[x]]--[[x]]--[[x]]
 game:GetService('Players').PlayerAdded:Connect(function(player)
-  for _, owner in ipairs(owners) do
-    if player.Name ~= owner then
+for _, owner in ipairs(owners) do
+  if player.Name ~= owner then
 game.StarterGui:SetCore("SendNotification", {
-  Title = "the kreator of the skript has joined your game!🍭";
-      Button1 = "😮";
-      Icon = "rbxassetid://57254792";
-        Duration = 4.5 }) 
-            break
-        end;
+Title = "the kreator of the skript has joined your game!🍭";
+    Button1 = "😮";
+    Icon = "rbxassetid://57254792";
+      Duration = 4.5 }) 
+          break
       end;
-    end)
+    end;
+  end)
 end;
 
 function dekal()
@@ -212,8 +212,8 @@ print("OH shit 👑lulaslollipop👑 is here⭐️🍭")
 elseif plrId == cheru then
 print("OH shit 👑chelulu👑 is here")
 end;
-  end;
- else 
+end;
+else 
 if plrId == lulaslollipop then    print("OH shit 👑lulaslollipop👑 is here⭐️🍭")
 warn("lulaslollipop was not a number");
 elseif plrId == cheru then
@@ -458,7 +458,7 @@ SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 
 
 --[[📝 SKRIPT REQUESTS 📝]]--
-GamesSection:NewLabel("u kan also use this if a skript is not working or \nneeds an update, etc.")
+SkriptsSection:NewLabel("u kan also use this if a skript is not working or \nneeds an update, etc.")
 
 SkriptsSection:NewTextBox("Skript request", "type whatever skript u want then push enter", function(skript)
 skriptrequest=skript;
@@ -491,19 +491,19 @@ end);
 local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfucking", "motherfuck", "motherfuckers", "asses", "ass", "shit", "pussy", "dick", "dixk", "slut", "slvt", "asshole", "masturbate", "raping", "rapist", "rape", "bullshit", "bitch", "bitxh", "bitches", "bitxhes", "bitchass", "bitxhass", "cum", "kum", "vagina", "vaginas", "sex", "sexy", "porn", "porno", "pornography", "pornos", "pornhub", "xvideos", "xxxvideos", "xxx", "dickhole", "butthole", "fuckin", "fuxkin", "fuxking", "nigga", "niggas", "niggaz", "nigger", "niggers", "niggerz", "nger", "nger", "nga", "dixkhead", "dickhead", "fuckface", "fucked", "whore", "whores", "thot", "thotass", "thots", "shitface", "shitted", "shitty", "shitting", "shittyass", "hoe", "hoes"};
 
 SkriptsSection:NewTextBox("Send chat", "use this if u kant speak in chat", function(msg, All)
-    if msg == "" then
+  if msg == "" then
 Notify({ Description = "must enter a message";Duration = 3.3; });
 --[[protekt]]elseif table.find(bloxkedWords,msg) then do
-  for _, msg in ipairs(bloxkedWords) do
-  if msg == bloxkedWords then
-        task();
+for _, msg in ipairs(bloxkedWords) do
+if msg == bloxkedWords then
+      task();
 Notify({ Description = "dont say that shit u might get banned";Duration = 3.2; });
+    end;
+    end;
       end;
-      end;
-        end;
-         else
-    speak(msg,All);
-      end
+       else
+  speak(msg,All);
+    end
 end)
 
 SkriptsSection:NewTextBox("Send chat 2(test)", "testing", function(txt2,chatType) speak_ifGen_elseSMR(txt2,chatType)
@@ -527,7 +527,7 @@ bill.Parent = game:GetService("ReplicatedStorage");
 bill.AlwaysOnTop = true
 label = Instance.new("TextLabel", bill)
 label.Size = UDim2.new(2, 0, 1, 0) 
-                    label.Position = UDim2.new(-0.5, 0, -0.5, 0)              label.BackgroundTransparency = 1         label.FontSize = "Size14";
+                  label.Position = UDim2.new(-0.5, 0, -0.5, 0)              label.BackgroundTransparency = 1         label.FontSize = "Size14";
 while true do
 label.TextColor3 = Rainbow
 wait(.09)                               label.TextStrokeColor3 = Color3.new(0 ,0 ,0)                    label.TextStrokeTransparency = none
@@ -2644,7 +2644,7 @@ end)
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 GamesSection:NewDropdown("📝Fundamental Paper Edukation: Morphs RP [FREE UGc!]", "freelimited", {"find all oreos, get all badges", "teleport to: Fundamental Paper Education: Morphs RP [FREE UGC!]"}, function(x) if x == "find all oreos, get all badges" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4b735fd7d1d03efd1f2a117a729f0c5a5c6a6e47/Fundamental",true))(); 
 
-  elseif x == "teleport to: Fundamental Paper Education: Morphs RP [FREE UGC!]" then game:GetService("TeleportService"):Teleport(17270405009, game:GetService("Players").LocalPlayer)  end  end)
+elseif x == "teleport to: Fundamental Paper Education: Morphs RP [FREE UGC!]" then game:GetService("TeleportService"):Teleport(17270405009, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("bekome an nba star to prove mom wrong!", "blah", {"🏀AUTO REKORD & BUILD", "teleport to: [UGC] 🏀become an nba star to prove mom wrong!"}, function(x) 
 if x == "🏀AUTO REKORD & BUILD" then  
@@ -3127,7 +3127,7 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
 GamesSection:NewDropdown("Unnamed Shooter", "op skript by tora", {"AUTO KILL (op skript by tora)", "to game"}, function(x) if x == "AUTO KILL (op skript by tora)" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/e700beeb77025b72371b9383a4510f20cf438a4e/UnnamedShooter",true))();
 
-  elseif x == "to game" then game:GetService("TeleportService"):Teleport(14202073004, game:GetService("Players").LocalPlayer)  end  end)
+elseif x == "to game" then game:GetService("TeleportService"):Teleport(14202073004, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("[🕸️UPDATE 1] 🍉🍎 Fruit Seas 🍍🍊", "by tora", {"AUTO MOBS & AUTO QUEST", "teleport to: [🕸️UPDATE 1] Fruit Seas"}, function(x) 
 if x == "AUTO MOBS & AUTO QUEST" then  
