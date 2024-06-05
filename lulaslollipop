@@ -67,18 +67,29 @@ invalid
 
 ]]
 
+SkriptsSection:NewTextBox("Send chat(orginal)", "🍭 all day", function(...)
+    local SMR = game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest')
+    -- local chatEvents = replicatedStorage:WaitForChild('DefaultChatSystemChatEvents')
+    -- local sayMessageRequest = chatEvents:WaitForChild('SayMessageRequest')
+    SMR:FireServer(..., "All");
+end);
+
+SkriptsSection:NewTextBox("Send chat(general)", "🍭 all day", function(roblox) 
+game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(roblox);
+end);
+
 --speak2
-function speak_ifGen_elseSMR(txt2,all)
-local tcs = game:GetService("TextChatService");
-local generalchat = tcs:FindFirstChild("RBXGeneral");
-if generalchat then
-game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(txt2);
-    else
-game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest'):FireServer(txt2, all)
---[[  game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(txt2,"All");
-]]
-    end;
-end
+-- function speak_ifGen_elseSMR(txt2,all)
+-- local tcs = game:GetService("TextChatService");
+-- local generalchat = tcs:FindFirstChild("RBXGeneral");
+-- if generalchat then
+
+--     else
+
+-- --[[  game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(txt2,"All");
+-- ]]
+--     end;
+-- end
 
 local function alert(msg,sekonds)
 local notifikation = Instance.new("Message");
