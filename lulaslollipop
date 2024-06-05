@@ -1,3 +1,4 @@
+--LOLLYPOP HUB(for mistakes)
 --main v9 LOLLYPOP HUB(baxkup jun5)
 -- Version: 9
 -- [ main/info ] --
@@ -11,6 +12,7 @@ local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakay
 local r1=math.random(1,10);local r2=math.random(1,100);local r3=math.random(1,1000);
 holup=wait;task=task.wait;_0=print;LollypopHUB=print;local mystery="mysterious numbers: ";
 local niggas=game;local lpChar=game.Players.LocalPlayer.Character;local lp=game.Players.LocalPlayer;local plrs=game.Players;local human=game.Players.LocalPlayer.Character.Humanoid;local rs = game:GetService("ReplicatedStorage");
+local replikated = game:GetService("ReplicatedStorage");
 
 --[[ KOLORS ]]--
 local MAGENTA=Color3.new(20, 0, 21)
@@ -506,7 +508,7 @@ local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfuckin
 --     end
 -- end)
 SkriptsSection:NewTextBox("Send chat(both)", "🍭 all day", function(msg)
-    local SMR = replikated:WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest');
+    local SMR = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest;
       local GNRL = game:GetService("TextChatService").TextChannels.RBXGeneral;
     
     SMR:FireServer(msg,"All");
