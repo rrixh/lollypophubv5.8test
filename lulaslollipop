@@ -25,13 +25,12 @@ end;
 
 
 --[[ RBLX XHAT SERVIXE ]] --;
-local tcs = game:GetService("TextChatService");
---find
-local replicatedStorage = game:FindFirstChild("ReplicatedStorage");
-local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
-local sayMessageRequest = defaultChatSystemChatEvents:FindFirstChild("SayMessageRequest");
 --speak1
 function speak(plrText)
+  local replicatedStorage = game:FindFirstChild("ReplicatedStorage");
+  local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
+  local sayMessageRequest = defaultChatSystemChatEvents:FindFirstChild("SayMessageRequest");
+  
   if replicatedStorage then
     if defaultChatSystemChatEvents then
         if sayMessageRequest then
@@ -54,8 +53,13 @@ warn("SayMessageRequest was not found");
   end
 end;
 --speak2
-local generalchat = tcs:FindFirstChild("RBXGeneral");
 function speak2(txt2)
+  local tcs = game:GetService("TextChatService");
+  local generalchat = tcs:FindFirstChild("RBXGeneral");
+  --find
+  local replicatedStorage = game:FindFirstChild("ReplicatedStorage");
+  local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
+  local sayMessageRequest = defaultChatSystemChatEvents:FindFirstChild("SayMessageRequest");
   if generalchat then
     
 game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(txt2);
