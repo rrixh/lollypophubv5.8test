@@ -505,15 +505,28 @@ local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfuckin
 --   speak(msg,All);
 --     end
 -- end)
+SkriptsSection:NewTextBox("Send chat(works for both)", "🍭 all day", function(msg)
+local replikated = game:GetService("ReplicatedStorage");
+    local SMR = replikated:WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest');
+      local GNRL = game:GetService("TextChatService").TextChannels.RBXGeneral;
+        local defaultChatSystem = replikated:FindFirstChild("DefaultChatSystemChatEvents")
+        local defaultChat = defaultChatSystem:FindFirstChild("SayMessageRequest");
 
+      if defaultChat then
+    SMR:FireServer(msg,"All");
+      else
+  GNRL:SendAsync(msg);
+      end;
+end);
+  
 SkriptsSection:NewTextBox("Send chat(orginal)", "🍭 all day", function(msg)
   local SMR = game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest')
   SMR:FireServer(msg,"All");
 end);
 
 
-SkriptsSection:NewTextBox("Send chat(general)", "🍭 all day", function(roblox) 
-game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(roblox);
+SkriptsSection:NewTextBox("Send chat(general)", "🍭 all day", function(msg) 
+game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg);
 end);
 
 SkriptsSection:NewTextBox("🚶Air Walk", "lets u walk on air", function(x)
@@ -530,7 +543,6 @@ SkriptsSection:NewTextBox("🌈Rainbow Name", "makes ur name rainbow", function(
 local none = 0
 bill = Instance.new("BillboardGui", lpChar.Head)
 bill.Size = UDim2.new(4, 0, 4.5, 0)
-bill.Parent = game:GetService("ReplicatedStorage");
 bill.AlwaysOnTop = true
 label = Instance.new("TextLabel", bill)
 label.Size = UDim2.new(2, 0, 1, 0) 
@@ -543,17 +555,8 @@ end;
 end)
 
 SkriptsSection:NewButton("↩️ undo/reset Rainbow Name", "🍭 all day", function() 
-local billWasFound = rs:FindFirstChild("bill");
-
-if billWasFound then
 bill:Destroy();
-local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "found 'bill' in BillboardGui and destroyed it";Duration = 4; });
-
-else
-
-bill:Destroy();
-local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "the 'else' statement was kalled; not in ReplikatedStorage";Duration = 4; });
-end;
+      label:Destroy();
 end);
 
 SkriptsSection:NewTextBox("FPS unloxker", "sum", function(lag)
