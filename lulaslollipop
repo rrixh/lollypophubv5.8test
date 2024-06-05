@@ -1,4 +1,4 @@
---main v9 LOLLYPOP HUB(baxkup jun2)
+--main v9 LOLLYPOP HUB(baxkup jun5)
 -- Version: 9
 -- [ main/info ] --
 local LastUpdate="Last Update: June 5, 2024";
@@ -26,16 +26,16 @@ end;
 
 --[[ RBLX XHAT SERVIXE ]] --;
 --speak1
-function speak(plrText)
+function speak(plrText,chatType)
   local replicatedStorage = game:FindFirstChild("ReplicatedStorage");
   local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
   local sayMessageRequest = defaultChatSystemChatEvents:FindFirstChild("SayMessageRequest");
-  
+
   if replicatedStorage then
     if defaultChatSystemChatEvents then
         if sayMessageRequest then
         --SayMessageRequest(default)
---[[ sayMessageRequest:FireServer(plrText, "All") ]]       game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest'):FireServer(plrText, 'All')
+--[[ sayMessageRequest:FireServer(plrText, "All") ]]       game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest'):FireServer(plrText, chatType)
         else
   --TextXhatServixe(RBXGeneral)
 game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(plrText);
@@ -52,20 +52,31 @@ warn("SayMessageRequest was not found");
     warn("ReplikatedStorage not found")
   end
 end;
+
+--[[ 
+
+invalid:
+
+local replicatedStorage = game:FindFirstChild("ReplicatedStorage");
+
+local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
+
+local sayMessageRequest = defaultChatSystemChatEvents:FindFirstChild("SayMessageRequest");
+
+invalid
+
+]]
+
 --speak2
-function speak2(txt2)
+function speak_ifGen_elseSMR(txt2,all)
   local tcs = game:GetService("TextChatService");
   local generalchat = tcs:FindFirstChild("RBXGeneral");
-  --find
-  local replicatedStorage = game:FindFirstChild("ReplicatedStorage");
-  local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
-  local sayMessageRequest = defaultChatSystemChatEvents:FindFirstChild("SayMessageRequest");
   if generalchat then
-    
 game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(txt2);
       else
-game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest'):FireServer(txt2, 'All')
--- game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(txt2,"All");
+game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest'):FireServer(txt2, all)
+--[[  game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(txt2,"All");
+]]
       end;
 end
 
@@ -477,26 +488,25 @@ SkriptsSection:NewButton("HiddenFling (in a ui)", "🍭 all day", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/rxsdbab5/hiddenflinguwu.docx",true))();
 end);
 
-local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfucking", "motherfuck", "motherfuckers", "asses", "ass", "shit", "pussy", "dick", "dixk", "slut", "slvt", "asshole", "masturbate", "raping", "rapist", "rape", "bullshit", "bitch", "bitxh", "bitches", "bitxhes", "bitchass", "bitxhass", "cum", "kum", "vagina", "vaginas", "sex", "sexy", "porn", "porno", "pornography", "pornos", "pornhub", "xvideos", "xxxvideos", "xxx", "😘", "😘😘", "😘😘😘", "dickhole", "butthole", "fuckin", "fuxkin", "fuxking", "nigga", "niggas", "niggaz", "nigger", "niggers", "niggerz", "nger", "nger", "nga", "dixkhead", "dickhead", "fuckface", "fucked", "whore", "whores", "thot", "thotass", "thots", "shitface", "shitted", "shitty", "shitting", "shittyass", "hoe", "hoes"};
+local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfucking", "motherfuck", "motherfuckers", "asses", "ass", "shit", "pussy", "dick", "dixk", "slut", "slvt", "asshole", "masturbate", "raping", "rapist", "rape", "bullshit", "bitch", "bitxh", "bitches", "bitxhes", "bitchass", "bitxhass", "cum", "kum", "vagina", "vaginas", "sex", "sexy", "porn", "porno", "pornography", "pornos", "pornhub", "xvideos", "xxxvideos", "xxx", "dickhole", "butthole", "fuckin", "fuxkin", "fuxking", "nigga", "niggas", "niggaz", "nigger", "niggers", "niggerz", "nger", "nger", "nga", "dixkhead", "dickhead", "fuckface", "fucked", "whore", "whores", "thot", "thotass", "thots", "shitface", "shitted", "shitty", "shitting", "shittyass", "hoe", "hoes"};
 
-SkriptsSection:NewTextBox("Send chat", "use this if u kant speak in chat", function(playermsg)
-local function invalid()
-      --[[empty]]
-    if playermsg == "" then
-        local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "enter a message to send!";Duration = 3.7; });
---[[protekt]]
-    elseif playermsg==bloxkedWords then
-          local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "dont say that shit u might get banned";Duration = 3.2; });
-  end;
-end
-      if invalid() then
-        invalid();
+SkriptsSection:NewTextBox("Send chat", "use this if u kant speak in chat", function(msg, All)
+    if msg == "" then
+Notify({ Description = "must enter a message";Duration = 3.3; });
+--[[protekt]]elseif table.find(bloxkedWords,msg) then do
+  for _, msg in ipairs(bloxkedWords) do
+  if msg == bloxkedWords then
+        task();
+Notify({ Description = "dont say that shit u might get banned";Duration = 3.2; });
+      end;
+      end;
+        end;
          else
-    speak(playermsg, "All");
-       end;--42
+    speak(msg,All);
+      end
 end)
 
-SkriptsSection:NewTextBox("Send chat 2(test)", "testing", function(playertxt) speak2(playertxt, "All")
+SkriptsSection:NewTextBox("Send chat 2(test)", "testing", function(txt2,chatType) speak_ifGen_elseSMR(txt2,chatType)
 end);
 
 SkriptsSection:NewTextBox("🚶Air Walk", "lets u walk on air", function(x)
