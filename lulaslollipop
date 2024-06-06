@@ -1590,12 +1590,12 @@ end)
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
 
-AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
-end)
+--AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
+--loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+--end)
 
 AdminSection:NewButton("Infinite Yield (kustom)", "edited by me with added kommands", function()
---Infiniteyield kustom
+--Infiniteyield main
 loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
 end)
 
@@ -5497,16 +5497,25 @@ end)
 
 -- main lollypop notif
 pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M", true))();
 end)
 
-spawn(function()
+function krap()
+    pcall(function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/wg8p5jrb/lollypophubHK.xlsxtogglexlsx.xlsx",true))();
-end)
+    end);
+  for i=1,3 do 
+Notify({ 
+Description = "💩";
+Duration = 3; });
+    wait(0.5)
+       end;
+end;
+spawn(krap);
 
 pcall(function()
 -- anti byfron
-loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))();
 end)
 
 skriptLoaded();
@@ -5530,6 +5539,14 @@ LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
 -added send chat 5:22pm
 -added dekal
 -fixed ui half loading: (GamesSection in SkriptsSection)
+
+
+
+
+
+
+
+
 
 
 
