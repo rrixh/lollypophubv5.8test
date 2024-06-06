@@ -1590,12 +1590,12 @@ end)
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
 
---AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
---loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
---end)
+AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
 
 AdminSection:NewButton("Infinite Yield (kustom)", "edited by me with added kommands", function()
---Infiniteyield main
+--Infiniteyield kustom
 loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
 end)
 
