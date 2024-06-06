@@ -485,7 +485,7 @@ end;
 end);
 
 SkriptsSection:NewButton("HiddenFling (in a ui)", "🍭 all day", function() 
-loadstring(game:HttpGet("https://pastecode.dev/raw/rxsdbab5/hiddenflinguwu.docx",true))();
+loadstring(game:HttpGet("https://pastecode.dev/raw/jq7a89o4/hiddenflinguwu.docx",true))();
 end);
 
 local bloxkedWords = {"fuck", "fucking", "fucker", "motherfucker", "motherfucking", "motherfuck", "motherfuckers", "asses", "ass", "shit", "pussy", "dick", "dixk", "slut", "slvt", "asshole", "masturbate", "raping", "rapist", "rape", "bullshit", "bitch", "bitxh", "bitches", "bitxhes", "bitchass", "bitxhass", "cum", "kum", "vagina", "vaginas", "sex", "sexy", "porn", "porno", "pornography", "pornos", "pornhub", "xvideos", "xxxvideos", "xxx", "dickhole", "butthole", "fuckin", "fuxkin", "fuxking", "nigga", "niggas", "niggaz", "nigger", "niggers", "niggerz", "nger", "nger", "nga", "dixkhead", "dickhead", "fuckface", "fucked", "whore", "whores", "thot", "thotass", "thots", "shitface", "shitted", "shitty", "shitting", "shittyass", "hoe", "hoes"};
@@ -1590,12 +1590,12 @@ end)
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
 
---AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
---loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
---end)
+AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
 
 AdminSection:NewButton("Infinite Yield (kustom)", "edited by me with added kommands", function()
---Infiniteyield main
+--Infiniteyield kustom
 loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
 end)
 
@@ -5497,25 +5497,16 @@ end)
 
 -- main lollypop notif
 pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M", true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M", true))()
 end)
 
-function krap()
-    pcall(function()
+spawn(function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/wg8p5jrb/lollypophubHK.xlsxtogglexlsx.xlsx",true))();
-    end);
-  for i=1,3 do 
-Notify({ 
-Description = "💩";
-Duration = 3; });
-    wait(0.5)
-       end;
-end;
-spawn(krap);
+end)
 
 pcall(function()
 -- anti byfron
-loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))();
+loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
 end)
 
 skriptLoaded();
@@ -5534,19 +5525,13 @@ kreatorAlert();
 LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
 
 
---[[ 
+--[[
+
+-fixed hiddenfling in ui
 -fixed send chat 6:40pm
 -added send chat 5:22pm
 -added dekal
 -fixed ui half loading: (GamesSection in SkriptsSection)
-
-
-
-
-
-
-
-
 
 
 
