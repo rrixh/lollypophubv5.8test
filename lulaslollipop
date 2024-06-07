@@ -432,17 +432,9 @@ loadstring(niggas:HttpGet('https://raw.githubusercontent.com/lerkermer/lua-proje
 end;
 end)
 
-SkriptsSection:NewToggle("open/klose toggle", "toggle", function(toggled)
-if toggled then
+SkriptsSection:NewButton("Enable Toggle✅(if it doesnt load)", "toggle", function()
 -- [ TOGGLE klose/open ] --
 loadstring(niggas:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))();
-else
-for i,v in pairs(game.CoreGui:GetDescendants()) do
-if v.Name == "LollypopHub_mobile" then
-v:Destroy()
-    end
-  end
-end;
 end)
 --SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
 --loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
