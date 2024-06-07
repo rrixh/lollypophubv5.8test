@@ -1,7 +1,7 @@
---main v9 LOLLYPOP HUB(baxkup jun6)
+--main v9 LOLLYPOP HUB(baxkup jun7)
 -- Version: 9
 -- [ main/info ] --
-local LastUpdate="Last Update: June 5, 2024";
+local LastUpdate="Last Update: June 7, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
 
@@ -530,7 +530,6 @@ SkriptsSection:NewTextBox("🌈Rainbow Name", "makes ur name rainbow", function(
 local none = 0
 bill = Instance.new("BillboardGui", lpChar.Head)
 bill.Size = UDim2.new(4, 0, 4.5, 0)
-bill.Parent = game:GetService("ReplicatedStorage");
 bill.AlwaysOnTop = true
 label = Instance.new("TextLabel", bill)
 label.Size = UDim2.new(2, 0, 1, 0) 
@@ -542,18 +541,8 @@ label.Text = (...);
 end;
 end)
 
-SkriptsSection:NewButton("↩️ undo/reset Rainbow Name", "🍭 all day", function() 
-local billWasFound = rs:FindFirstChild("bill");
-
-if billWasFound then
+SkriptsSection:NewButton("↩️ undo/reset 🌈Rainbow Name", "🍭 all day", function() 
 bill:Destroy();
-local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "found 'bill' in BillboardGui and destroyed it";Duration = 4; });
-
-else
-
-bill:Destroy();
-local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))() local Notify = RRixh1.Notify; wait(); Notify({ Description = "the 'else' statement was kalled; not in ReplikatedStorage";Duration = 4; });
-end;
 end);
 
 SkriptsSection:NewTextBox("FPS unloxker", "sum", function(lag)
@@ -5532,6 +5521,18 @@ LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
 -added send chat 5:22pm
 -added dekal
 -fixed ui half loading: (GamesSection in SkriptsSection)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
