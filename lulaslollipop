@@ -437,7 +437,11 @@ if toggled then
 -- [ TOGGLE klose/open ] --
 loadstring(niggas:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))();
 else
-LollypopHub_mobile:Destroy();
+for i,v in pairs(game.CoreGui:GetDescendants()) do
+if v.Name == "LollypopHub_mobile" then
+v:Destroy()
+    end
+  end
 end;
 end)
 --SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
@@ -5100,7 +5104,7 @@ end)
 
 HomeSection:NewButton("Destroy toggle", "bye", function()--gui destroyer
 for i,v in pairs(game.CoreGui:GetDescendants()) do
-if v.Name == "ScreenGui" then
+if v.Name == "LollypopHub_mobile" then
 v:Destroy()
 end
 end
