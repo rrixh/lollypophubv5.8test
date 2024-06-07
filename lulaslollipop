@@ -864,7 +864,7 @@ end)
 
 --[godmode skripts]--
 SkriptsSection:NewLabel("GodMode skripts")
-SkriptsSection:NewButton("GodMode (99% fail impossible obby)", "no death 99% fail and some obbys",
+SkriptsSection:NewButton("GodMode(patxhed, making new)", "no death 99% fail and some obbys",
 function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N",true))()
 end)
