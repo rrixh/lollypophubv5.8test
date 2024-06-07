@@ -488,6 +488,15 @@ SkriptsSection:NewButton("HiddenFling (in a ui)", "🍭 all day", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/jq7a89o4/hiddenflinguwu.docx",true))();
 end);
 
+SkriptsSection:NewButton("🍭🍭🍭🍭🍭🍭🍭🍭🍭🍭🍭🍭🍭🍭", "🍭 all day", function()
+for i, v in pairs(game.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Torso; 
+emit.Texture = "http://www.roblox.com/asset/?id=17767521435"; 
+emit.VelocitySpread = 20; 
+end;
+
+end);
+
+
 SkriptsSection:NewTextBox("Send chat(orginal)", "🍭 all day", function(msg)
   local SMR = game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest')
   SMR:FireServer(msg,"All");
@@ -1696,6 +1705,16 @@ end)
 
 FunSection:NewButton("XD", "XDDDDDDD", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
+end)
+
+FunSection:NewLabel("FX/Partikles/Assets")
+
+FunSection:NewTextBox("Enter item/asset ID: ", "enter an asset id from roblox shop(any item)", function(assetId)  
+for i, v in pairs(game.Players:GetChildren()) do 
+local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Torso; 
+emit.Texture = "http://www.roblox.com/asset/?id="..assetId; 
+emit.VelocitySpread = 20;
+end;
 end)
 
 local FunSection = Fun:NewSection("Message Fun")
