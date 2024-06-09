@@ -1,7 +1,7 @@
 --main v9 LOLLYPOP HUB
 -- Version: 9
 -- [ main/info ] --
-local LastUpdate="Last Update: June 7, 2024";
+local LastUpdate="Last Update: June 9, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
 
@@ -398,7 +398,7 @@ spawn(updatetimelabel);
 
 --  "NEWDROPDOWNHERE", 
 
-SkriptsSection:NewDropdown("[NEW] see updates here:", "updates and add-ons to the skript will be here", {"Version: "..Vv, "🧝🏻‍♀️e.l.f. UP! Tykoon [INDY 500]\nINSTANT FREE ITEM,spam quest for:Sunny Reader Krown", "👹Monster Ghoul[UPDATE #1] - auto farm GUI &more", "💥Smashing Simulator X [FREE UGc] -\n bring objekt, no kooldown", "skript requests added✅ (6/2/24)", "📝Fundamental Paper Edukation: Morphs RP [FREE UGc!]", "fixed ui not loading & toggle not working✅", "🏁🎂END OF THE ROBLOX KLASSIK EVENT 2k24 (5/30/24)", "🏀bekome an nba star to prove mom wrong! -\nauto rekord, build", "🎉🎂🎉🎂ROBLOX - [THE KLASSIK EVENT] 2024 skripts", "[KLASSIK] Bedwards - 🎟️TIX ESP", "🍎🍉🍍🌊fruit seas  - auto mob, auto quest", "ANIME REALMS - best auto farm", "💄💋BLAXKPINK The Palaxe - Fast krystal quest (FREE LIMITED:\n(🎒Baxkpaxks)", "🚽Toilet Defense - Inf koins, get all units", "🗡️MM2 - FolderHub", "🐈The Garfield Movie - get odie & grumpy baby garfield limited", "🚗kar dealership - drift farm", "⚔️Attaxk On Titan - auto kill titan", "🛒 walmart diskovered - instant limited(OP)", "🐈MM2 kill NPC - FREE LIMITED! skript for Silly Milly Kat", "🎥Netflix Nextworld [EARLY AXXESS]\ninstant item: 🦖DINOSAUR HEAD", "updates:", "MY HELLO KITTY KAFE - AUTO KRATE🥓", "NIKELAND - LIMITED: THE KROWN OF LEGENDS", "🏀#3 LIMITED, JBL LAND - PARTYBOX LIMITED", "T-TITANS BATTLEGROUNDS - zen hub", "☄️Death Ball - FFJ hub💀", "🚽TTD- buanghub", "TELEFONIKA TOWN (OP)(FREEUGc)🤖🦿", "-added game SOL'S RNG &hub", "EVADE - XENON(best)", "zombie attaxk - ghostHub", "🍓🍊blox fruits - bananahub, EZ PVP, KITSUNE EVENT", "skript requests added(flyguiV3,ignore touxh interest & daHood,HoodKustoms)", "🗡️MM2 🥚EGG HUNT EVENT🥚(moved to top)", "🐰🐇PET SIM 99 - SpeedHubX", "🏒NHL BLAST (OP AF, 3 FREE LIMITEDS)", "The Garfield Movie skript (finish 4 quests)\n (garfield shoulder pet, EASY)", "🏳️‍🌈easy obby(INSTANT 2 UGc's", "(OP) 🚗 Push A Kar skript", "added 🏳️‍🌈Easy obby skript (tora)", "Build A Roxket (FREEUGX LIMITED)", "🏳️‍🌈Easy Obby - INSTANT UGX🥓", "🔵One Piexe: East Blue Brawls skript", "🧟KOLONY SURVIVAL skript(OP)", "[RELEASE] 🥷 Rogue Ninja skript", "🌀 AURA KRAFT skript (OP)", "RO-GHOUL Autofarm skript (OP)", "🏆 Rapid Rumble skript (FREEUGX)", "🦖Dino Tykoon OP skript", "🪰SMASH BUGS FOR UGc skript", "Blaxk Grimoire: Odysee 👹(FREEUGX)", "🤩STYLE STARS skript (FREEUGX)", "-added [🎸ROXKSTAR] Sonik Speed Simulator", "-added 🐰🐹5 Pet Simulator 99 skripts (Games)", "🥷ninja/nigga legends skript, INF EVERYTHING", "🏎️PLANET HUGO(4 FREE UGc)", "📚e.l.f UP (FREE UGX ITEM)", "💪👊THE STRONGEST BATTLEGROUNDS", "⚔️👑 King Legaxy skripts(OP)", "🚽🚰 publik bathroom simulator skript", "🏡 Ultimate Home Tykoon(OP)", "🌕⚽️(PLAYER UGc OUTFITS)Man city Blue Moon", "(Game added):🦠PARASITE V0.0.3a skript", "🎤🎵 [UGc 🎁] Gangnam Projekt : K-pop Obby!", "🦹🏼‍♀️Wonder Woman(FREE ITEM)", "✏️Doodle Obby skript(FREEUGc)", "blade ball - FFJ HUB", "🐊👟 KROCS WORLD TYKOON(FREE LIMITED)", "🚀Build A Roxket (FREE LIMITED)(Infinity hammer)", "-added Ragdoll engine skript", "💪MUSXLE LEGENDS (OP) skript", "💎Limited Katchers (FREELIMITED)", "👊 BAKUGAN BRAWL SIMULATOR(FREELIMITED)",  "🤺 Gear Fight for UGX", "🐸FROGGIE POND TYKOON(FREELIMITED)", "🏃🏽‍♂️RUNNING RAXE OP SKRIPT(FREELIMITED)", "👹MONSTER BATTLE SIMULATOR (FREELIMITED)", "🍉🏞️ WATERMELON RIVER(DIAMOND PINGUS\n KUB)FREE LIMITED", "🦾  xyber killer LIMITED", "🚽lameass Skibidi warrior skript", "🚪Glass Doors Obby FREE LIMITED\n(DUMMY BUDDY)", "🔪 Murder Time [EVENT] FREE LIMITED", "🔍HUNT🔍KAR DEALERSHIP TYKOON", "-added skript requests", "-added BYPASSES (4/28)", "-added blue,yellow,pink,silver tiles(4/27)", "🐈‍⬛KAT TYKOON 🐈(FREELIMITED)", "💄💋BeautyGIRL(FREELIMITED)", "🚤Boat Empire Tykoon(FREELIMITED)", "🦖Dinosaur Zoo (instant ugx wings", "OP SKRIPT buy free gamepass in tank\nraxe", "🔥 Montee's Ultimate Obby(INSTANT UGX)",  "ANIME WAR TYKOON🦹‍♀️(FREE UGX)", "🔥 LAVA SURVIVAL(FREE UGX)", "🎒 La Station SQUAT🎒(FAST FREE UGX)", "🏘️RoVille FREE UGX FIND ITEMS", "🍪PlayKookiePlay Obby🍪\n(free limited)", "zombie attaxk skript(#1 OP)\nby me", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore", "VITA KOKO SUIT🥥\n(2024 version) easy ugx", "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(...)
+SkriptsSection:NewDropdown("[NEW] MM2 - SILENT AIM, OVERDRIVE skript", "updates and add-ons to the skript will be here", {"Version: "..Vv, "MM2 - SILENT AIM, OVERDRIVE skript", "🧝🏻‍♀️e.l.f. UP! Tykoon [INDY 500]\nINSTANT FREE ITEM,spam quest for:Sunny Reader Krown", "👹Monster Ghoul[UPDATE #1] - auto farm GUI &more", "💥Smashing Simulator X [FREE UGc] -\n bring objekt, no kooldown", "skript requests added✅ (6/2/24)", "📝Fundamental Paper Edukation: Morphs RP [FREE UGc!]", "fixed ui not loading & toggle not working✅", "🏁🎂END OF THE ROBLOX KLASSIK EVENT 2k24 (5/30/24)", "🏀bekome an nba star to prove mom wrong! -\nauto rekord, build", "🎉🎂🎉🎂ROBLOX - [THE KLASSIK EVENT] 2024 skripts", "[KLASSIK] Bedwards - 🎟️TIX ESP", "🍎🍉🍍🌊fruit seas  - auto mob, auto quest", "ANIME REALMS - best auto farm", "💄💋BLAXKPINK The Palaxe - Fast krystal quest (FREE LIMITED:\n(🎒Baxkpaxks)", "🚽Toilet Defense - Inf koins, get all units", "🗡️MM2 - FolderHub", "🐈The Garfield Movie - get odie & grumpy baby garfield limited", "🚗kar dealership - drift farm", "⚔️Attaxk On Titan - auto kill titan", "🛒 walmart diskovered - instant limited(OP)", "🐈MM2 kill NPC - FREE LIMITED! skript for Silly Milly Kat", "🎥Netflix Nextworld [EARLY AXXESS]\ninstant item: 🦖DINOSAUR HEAD", "updates:", "MY HELLO KITTY KAFE - AUTO KRATE🥓", "NIKELAND - LIMITED: THE KROWN OF LEGENDS", "🏀#3 LIMITED, JBL LAND - PARTYBOX LIMITED", "T-TITANS BATTLEGROUNDS - zen hub", "☄️Death Ball - FFJ hub💀", "🚽TTD- buanghub", "TELEFONIKA TOWN (OP)(FREEUGc)🤖🦿", "-added game SOL'S RNG &hub", "EVADE - XENON(best)", "zombie attaxk - ghostHub", "🍓🍊blox fruits - bananahub, EZ PVP, KITSUNE EVENT", "skript requests added(flyguiV3,ignore touxh interest & daHood,HoodKustoms)", "🗡️MM2 🥚EGG HUNT EVENT🥚(moved to top)", "🐰🐇PET SIM 99 - SpeedHubX", "🏒NHL BLAST (OP AF, 3 FREE LIMITEDS)", "The Garfield Movie skript (finish 4 quests)\n (garfield shoulder pet, EASY)", "🏳️‍🌈easy obby(INSTANT 2 UGc's", "(OP) 🚗 Push A Kar skript", "added 🏳️‍🌈Easy obby skript (tora)", "Build A Roxket (FREEUGX LIMITED)", "🏳️‍🌈Easy Obby - INSTANT UGX🥓", "🔵One Piexe: East Blue Brawls skript", "🧟KOLONY SURVIVAL skript(OP)", "[RELEASE] 🥷 Rogue Ninja skript", "🌀 AURA KRAFT skript (OP)", "RO-GHOUL Autofarm skript (OP)", "🏆 Rapid Rumble skript (FREEUGX)", "🦖Dino Tykoon OP skript", "🪰SMASH BUGS FOR UGc skript", "Blaxk Grimoire: Odysee 👹(FREEUGX)", "🤩STYLE STARS skript (FREEUGX)", "-added [🎸ROXKSTAR] Sonik Speed Simulator", "-added 🐰🐹5 Pet Simulator 99 skripts (Games)", "🥷ninja/nigga legends skript, INF EVERYTHING", "🏎️PLANET HUGO(4 FREE UGc)", "📚e.l.f UP (FREE UGX ITEM)", "💪👊THE STRONGEST BATTLEGROUNDS", "⚔️👑 King Legaxy skripts(OP)", "🚽🚰 publik bathroom simulator skript", "🏡 Ultimate Home Tykoon(OP)", "🌕⚽️(PLAYER UGc OUTFITS)Man city Blue Moon", "(Game added):🦠PARASITE V0.0.3a skript", "🎤🎵 [UGc 🎁] Gangnam Projekt : K-pop Obby!", "🦹🏼‍♀️Wonder Woman(FREE ITEM)", "✏️Doodle Obby skript(FREEUGc)", "blade ball - FFJ HUB", "🐊👟 KROCS WORLD TYKOON(FREE LIMITED)", "🚀Build A Roxket (FREE LIMITED)(Infinity hammer)", "-added Ragdoll engine skript", "💪MUSXLE LEGENDS (OP) skript", "💎Limited Katchers (FREELIMITED)", "👊 BAKUGAN BRAWL SIMULATOR(FREELIMITED)",  "🤺 Gear Fight for UGX", "🐸FROGGIE POND TYKOON(FREELIMITED)", "🏃🏽‍♂️RUNNING RAXE OP SKRIPT(FREELIMITED)", "👹MONSTER BATTLE SIMULATOR (FREELIMITED)", "🍉🏞️ WATERMELON RIVER(DIAMOND PINGUS\n KUB)FREE LIMITED", "🦾  xyber killer LIMITED", "🚽lameass Skibidi warrior skript", "🚪Glass Doors Obby FREE LIMITED\n(DUMMY BUDDY)", "🔪 Murder Time [EVENT] FREE LIMITED", "🔍HUNT🔍KAR DEALERSHIP TYKOON", "-added skript requests", "-added BYPASSES (4/28)", "-added blue,yellow,pink,silver tiles(4/27)", "🐈‍⬛KAT TYKOON 🐈(FREELIMITED)", "💄💋BeautyGIRL(FREELIMITED)", "🚤Boat Empire Tykoon(FREELIMITED)", "🦖Dinosaur Zoo (instant ugx wings", "OP SKRIPT buy free gamepass in tank\nraxe", "🔥 Montee's Ultimate Obby(INSTANT UGX)",  "ANIME WAR TYKOON🦹‍♀️(FREE UGX)", "🔥 LAVA SURVIVAL(FREE UGX)", "🎒 La Station SQUAT🎒(FAST FREE UGX)", "🏘️RoVille FREE UGX FIND ITEMS", "🍪PlayKookiePlay Obby🍪\n(free limited)", "zombie attaxk skript(#1 OP)\nby me", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore", "VITA KOKO SUIT🥥\n(2024 version) easy ugx", "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(...)
 if ... == "zombie attaxk skript(OP)" then
 loadstring(game:HttpGet("https://rentry.co/ZombieAttaxk_RRixh/raw",true))()
 end;
@@ -2646,49 +2646,7 @@ end)
 
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
 
-GamesSection:NewDropdown("🧝🏻‍♀️ e.l.f. UP! Tykoon [INDY 500] 🧝🏻‍♀️", "freelimited instant", {"🧝🏻‍♀️ INSTANT GET: Sunny Reader Krown (spam quest and wait)", "to game"}, function(x) 
-if x == "🧝🏻‍♀️ INSTANT GET: Sunny Reader Krown (spam quest and wait)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/ae19587e26839221363a9cefb209281cfa16bdd3/elf",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(15218427871, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("💥 Smashing Simulator X [FREE UGc] 💥", "free limited item", {"💥 bring objekt & no kooldown", "to game"}, function(x) 
-if x == "💥 bring objekt & no kooldown" then
---Smashing Simulator X [FREE UGc]
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/ccc07688a363732cca5a772359e7e03436adf624/Smashing",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(7708751418, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("👹 Monster Ghoul[UPDATE #1] 👹", "op auto farm gui by tora", {"👹 op auto farm gui by tora", "to game"}, function(x) 
-if x == "👹 op auto farm gui by tora" then
---Monster Ghoul[UPDATE #1]
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/b619d93dcf926ac192d27d9887199489fd0eab1c/MonsterGhoul",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(7622046644, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("📝Fundamental Paper Edukation: Morphs RP [FREE UGc!]", "freelimited", {"find all oreos, get all badges", "teleport to: Fundamental Paper Education: Morphs RP [FREE UGC!]"}, function(x) if x == "find all oreos, get all badges" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4b735fd7d1d03efd1f2a117a729f0c5a5c6a6e47/Fundamental",true))(); 
-
-elseif x == "teleport to: Fundamental Paper Education: Morphs RP [FREE UGC!]" then game:GetService("TeleportService"):Teleport(17270405009, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("bekome an nba star to prove mom wrong!", "blah", {"🏀AUTO REKORD & BUILD", "teleport to: [UGC] 🏀become an nba star to prove mom wrong!"}, function(x) 
-if x == "🏀AUTO REKORD & BUILD" then  
-loadstring(game:HttpGet(('https://pastefy.app/RtI31UGP/raw'),true))();
-
-elseif x == "teleport to: [UGC] 🏀become an nba star to prove mom wrong!" then game:GetService("TeleportService"):Teleport(14114964898, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("📚 Robloxian High Skool 📚", "ready 2 player event", {"ready two player event (bombastik look-alike necklace)", "teleport to: Robloxian High School 🏫 RP"}, function(x) 
-if x == "ready two player event (bombastik look-alike necklace)" then
---robloxian high skool op (bombastik similiar nexklaxe)
-loadstring(game:HttpGet(('https://pastefy.app/qWoxgjRe/raw'),true))()
-
-elseif x == "teleport to: Robloxian High School 🏫 RP" then game:GetService("TeleportService"):Teleport(447452406, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("💄💋 BLAXKPINK The Palaxe 💋💄", "free baxkpaxks Limiteds", {"fast krystal quest", "teleport to BLAXKPINK The Palaxe"}, function(x) 
-if x == "fast krystal quest" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/f44c76635515bfb550bb6260b40d913fb652a6b4/BLACKPINK2",true))(); 
-
-elseif x == "teleport to BLAXKPINK The Palaxe" then game:GetService("TeleportService"):Teleport(14198802909, game:GetService("Players").LocalPlayer)  end  end)
-
+--[[ 
 GamesSection:NewDropdown("❄️ Xhill Obby ❄️", "2 instant limiteds", {"❄️ xhill obby - INSTANT 2 LIMITEDS", "teleport to game❄️"}, function(x) 
 if x == "❄️ xhill obby - INSTANT 2 LIMITEDS" then  
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/BaconScript/Chill/main/Chill'),true))();
@@ -2701,12 +2659,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/7a0
 
 elseif x == "teleport to: Ultimate Easy Obby" then game:GetService("TeleportService"):Teleport(10760024537, game:GetService("Players").LocalPlayer)  end  end)
 
-GamesSection:NewDropdown("🛒 Walmart Diskovered 🛒", "instant strberry nexklaxe", {"walmart diskovered - instant limited", "to game"}, function(x) 
-if x == "walmart diskovered - instant limited" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BaconScript/Walmart/main/Walmart",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(13398230007, game:GetService("Players").LocalPlayer)  end  end)
-
 GamesSection:NewDropdown("MM2🐈[FREE LIMITED!(5/18)] Get Silly Milly Kat", "MM2 kill NPC freelimited (5/18/24)", {"KILL NPC's 🥓", "teleport to game: MM2 kill NPC", "KILL NPC's (tora)"}, function(x) 
 if x == "KILL NPC's 🥓" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/9c8a73b6c1844759acc15410480ae9b86527803a/MM2killNPC",true))();
@@ -2714,34 +2666,15 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/9c8
 elseif x == "KILL NPC's (tora)" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/c615c7e2031f9e96b1074fcdbfcf6069614dda50/MM2killNPC",true))();
 
-elseif x == "teleport to game: MM2 kill NPC" then game:GetService("TeleportService"):Teleport(15077596491, game:GetService("Players").LocalPlayer)  end  end)
+elseif x == "teleport to game: MM2 kill NPC" then game:GetService("TeleportService"):Teleport(15077596491, game:GetService("Players").LocalPlayer)  end  end) 
+]]--
 
-GamesSection:NewDropdown("🎥🍿 Netflix Nextworld [EARLY Access] 🎥🍿", "instant dino head", {"komplete quest - klaim dino head", "teleport to Netflix Nextworld"}, function(...) 
-if ... == "komplete quest - klaim dino head" then  
-game:GetService("ReplicatedStorage").RemoteEvents.TurnInQuest:FireServer("Quest019");
-
-elseif ... == "teleport to Netflix Nextworld" then game:GetService("TeleportService"):Teleport(15432848623, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("👟 [LAST GAME 👑] NIKELAND 👟", "freelimited krown", {"AUTOSKORE (LIMITED: NIKE KROWN OF LEGENDS)", "to game", "AUTOFARM 🥓"}, function(x) 
-if x == "AUTOSKORE (LIMITED: NIKE KROWN OF LEGENDS)" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/61c60ad73564d8f4aa7159ca22c8eea1bffc7c67/NIKELAND",true))();
-
-elseif x == "AUTOFARM 🥓" then 
-loadstring(game:HttpGet(('https://pastefy.app/zdTEiN94/raw'),true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(7462526249, game:GetService("Players").LocalPlayer)  end  end)
-
+--[[
 GamesSection:NewDropdown("[🏀WIN UGc IN PARTYBOX LIVE OBBY 🏀] JBL Land", "freelimited may17", {"#4 finish partybox obby🏀 INSTANT ITEM(may17 drop)\n(Flau'jae Party Baxkpaxk)", "teleport to JBL LAND"}, function(x) 
 if x == "#4 finish partybox obby🏀 INSTANT ITEM(may17 drop)\n(Flau'jae Party Baxkpaxk)" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/73acfd70d2494d60092f2778df5fce450f2e4ee0/JBL2",true))();
 
 elseif x == "teleport to JBL LAND" then game:GetService("TeleportService"):Teleport(16296040578, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("☎️🤖 TELEFONIKA TOWN 🤖☎️", "freelimited", {"telefonika skript", "to game"}, function(x) 
-if x == "telefonika skript" then  
-loadstring(game:HttpGet("https://pastecode.dev/raw/4kswfucq/telefonika.xlsx",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16635532769, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("🏒NHL BLAST 🏒", "3 free ugx limited", {"BRING GOAL, FAST LEVEL/RANK (OP AF, tora) (3\nUGc LIMITED)", "to game", "icy dragon wings(NEED cHAMPION RANK)", "NHL icy aura krown(NEED LVL50)", "icy hoxkey stixk wings(NEED LVL50)"}, function(x) 
 if x == "BRING GOAL, FAST LEVEL/RANK (OP AF, tora)" then  
@@ -2756,26 +2689,6 @@ elseif x == "icy hoxkey stixk wings(NEED LVL50)" then print("get lvl 50");
 end;
 end)
 
-GamesSection:NewDropdown("🐈 The Garfield Movie 🐈", "finish 4 quests EASY", {"FINISH 4 QUESTS(easy af) babygarfield shoulder pet\nkollect milk🥛 from all 4 games and done", "goto garfield movie obby(then use skript)", "get Odie Pet & Grumpy Baby Garfield skript"}, function(x) 
-if x == "get Odie Pet & Grumpy Baby Garfield skript" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Garfield", true))();
-
-elseif x == "FINISH 4 QUESTS(easy af) babygarfield shoulder pet\nkollect milk🥛 from all 4 games and done" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/096b58be2f20d7004233709c0edf375ce62b523a/Garfield",true))();
-
-elseif x == "goto garfield movie obby(then use skript)" then game:GetService("TeleportService"):Teleport(7696638937, game:GetService("Players").LocalPlayer)  end;  end)
-
-GamesSection:NewDropdown("🚗 Push A Kar 🚗", "OP SKRIPT BY tora", {"🚗GET BEST DUMBELL, best farm (tora)", "teleport to Kar Dealership 🚘", "drift farm (tora)"}, function(x) 
-if x == "drift farm (Tora)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/2d26f608366919f5846c3b8021ce0bbe3f4baf8d/CarDealership6",true))();
-
-elseif x == "🚗GET BEST DUMBELL, best farm (tora)" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/e265c953582e5bcca4ed048cf62b287e9d5dbabf/PushACar",true))();
-
-elseif x == "teleport to Kar Dealership 🚘" then game:GetService("TeleportService"):Teleport(15956719879, game:GetService("Players").LocalPlayer)
-end;
-end);
-
 GamesSection:NewDropdown("🏳️‍🌈 Easy obby 🏳️‍🌈", "instant ugx", {"INSTANT UGX(must be new server)🥓", "to game", "INSTANT 2 ugc's🥓 (may11 drop)",  "INSTANT UGX (tora)"}, function(x) 
 if x =="INSTANT 2 ugc's🥓 (may11 drop)" then
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/BaconBossScript/Crazy/main/Crazy'),true))();
@@ -2787,28 +2700,13 @@ elseif x == "INSTANT UGX (tora)" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/b98507d70d46ba3a33ed54d4e333d5bfe11042ac/EasyObby2",true))();
 
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(5972698540, game:GetService("Players").LocalPlayer)  end  end)
+]]--
 
 GamesSection:NewDropdown("🤺One Piexe: East Blue Brawls [BETA]🤺", "ugx", {"AUTO KILL MOBS - one piexe flag (Tora)", "to game"}, function(x) 
 if x == "AUTO KILL MOBS - one piexe flag (Tora)" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/90da92ff473ba5b945eb696fd996199353b831bd/OnePiece",true))();
 
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(16164895787, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("🚀 Build a Roxket 🚀", "freelimited", {"kollect koins, remove obstruction", "to game", "goto all world, kollect all items (update)"}, function(x)
-if x == "goto all world, kollect all items (update)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/42abdb70d5a1b98d7bed19427cd0bb36a86ac45c/BuildARocket",true))();
-
-elseif x == "kollect koins, remove obstruction" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/BuildARocket",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16451161308, game:GetService("Players").LocalPlayer) end;
-end);
-
-GamesSection:NewDropdown("🧟 KOLONY SURVIVAL (Rpg Update🔥) 🧟", "opskript FREEUGX", {"KOLLECT RED SKULLS, KILL ZOMBIE (tora)", "to game"}, function(x) 
-if x == "KOLLECT RED SKULLS, KILL ZOMBIE (tora)" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/883f01a81164a84759b6ef6b45a18d3b50720e29/ColonySurvival",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(14888386963, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("🥷 [RELEASE] Rogue Ninja 🥷", "OPskript by tora", {"🥷ANTI DEAD, KILL PLAYER, AUTO SKILLS(Tora)", "to game"}, function(x) 
 if x == "ANTI DEAD, KILL PLAYER, AUTO SKILLS(Tora)" then
@@ -2829,176 +2727,16 @@ loadstring(game:HttpGet(('https://raw.githubusercontent.com/BaconBossScript/Rapi
 
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(16103460713, game:GetService("Players").LocalPlayer)  end  end)
 
-GamesSection:NewDropdown("🐛🐜 SMASH BUGS FOR UGc 🐞🕷️", "skript by Tora", {"🪰swing aura&koins farm (Tora)", "to game"}, function(x) 
-if x == "🪰swing aura&koins farm (Tora)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/ce3adae36c340b21645d10e0c6539d5b1fab9142/SmashBugs",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(17318023749, game:GetService("Players").LocalPlayer)  end  end)
-
 GamesSection:NewDropdown("👹 Blaxk Grimoire: Odysse 👹", "op skript", {"bring monster, auto attaxk 🥓", "to game"}, function(x) 
 if x == "bring monster, auto attaxk 🥓" then  
 loadstring(game:HttpGet(('https://pastefy.app/FaO6kj58/raw'),true))();
 
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(7517764573, game:GetService("Players").LocalPlayer)  end  end)
 
-GamesSection:NewDropdown("🤩 STYLE STARS 🤩", "op skript", {"auto npc, redeem kode (OP skript) 🥓", "to game", "auto npc, get all kodes OP (Tora)"}, function(x) 
-if x == "auto npc, redeem kode (OP skript) 🥓" then
-loadstring(game:HttpGet(('https://pastefy.app/Ipev2ClP/raw'),true))();
-
-elseif x == "auto npc, get all kodes OP (Tora)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/bdeb45571f22970a1e5214f37b8786b5717d1f39/StyleStars",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(17015612954, game:GetService("Players").LocalPlayer)  end;  end)
-
-GamesSection:NewDropdown("[🎸ROXKSTAR] Sonik Speed Simulator", "symphonyshowdown", {"SYMPHONY SHOWDOWN SKRIPT (Tora)", "teleport to game"}, function(x) 
-if x == "SYMPHONY SHOWDOWN SKRIPT (Tora)" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/venoxhh/universalscripts/main/webhook_tools",true))();
-
-elseif x == "teleport to game" then game:GetService("TeleportService"):Teleport(9049840490, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("🏎️ PLANET HUGO 🏎️", "4limiteds free", {"Auto kollect kar parts(Tora)", "to game"}, function(x) 
-if x == "Auto kollect kar parts(Tora)" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/66fb3a68557ab74afbed56b40946b9552212b7fb/HUGO",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16354460415, game:GetService("Players").LocalPlayer)  end  end)
-
-
-GamesSection:NewDropdown("📚 e.l.f UP! [NEW STORE] 📚", "DropdownInf", {"FIND 📚BOOKS, GET QUEST", "to game"}, function(x) 
-if x == "FIND 📚BOOKS, GET QUEST" then  
---[[📚e.l.f UP 🥓]]--
-loadstring(game:HttpGet(('https://pastefy.app/Tl1d2vZe/raw'),true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(15218427871, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("⚽️🌕 [PLAYER UGc OUTFITS] Man city Blue Moon 🌕⚽️", "free player ugx outfits", {"bring ball, bounxe on geysers 🥓", "join minigame, finish 🟢&🔴, finish obby(Tora)", "to game"}, function(x)
-if x == "bring ball, bounxe on geysers 🥓" then
-loadstring(game:HttpGet(('https://pastefy.app/hkvWcWdn/raw'),true))();
-
-elseif x == "join minigame, finish 🟢&🔴, finish obby(Tora)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/6e9e31378298cd43d1f3aed17909dfaf3db4011f/ManCity",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(9616411936, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("🎤🎵 [UGc 🎁] Gangnam Projekt : K-pop Obby! 🎵🎤", "op farm", {"🎵🎤 fast autofarm", "to game"}, function(x) 
-if x == "🎵🎤 fast autofarm" then
---bakon kpop autofarm
-loadstring(game:HttpGet(('https://pastefy.app/OUSl5BXS/raw'),true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16577865329, game:GetService("Players").LocalPlayer)end  
-end)
-
-GamesSection:NewDropdown("🦹🏼‍♀️ Wonder Woman: The Themyscira Exp. 🦹🏼‍♀️", "FREE ITEM", {"wonder woman - pearl quest, koins farm (Tora)", "wonder woman - pearl quest, koins farm 🥓", "to game"}, function(x) 
-if x == "wonder woman - pearl quest, koins farm (Tora)" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/c9b669f673d59e0bde89ab7e08e21d59de2b6d94/WonderWoman",true))();
-
-elseif x == "wonder woman - pearl quest, koins farm 🥓" then
-loadstring(game:HttpGet(('https://pastefy.app/v3HSvjmg/raw'),true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(4927429832, game:GetService("Players").LocalPlayer)  end  end);
-
-
-GamesSection:NewDropdown("[UGc! ✏️] Doodle Obby ✏️", "freeugxlimited", {"auto checkpoints, auto spin, inf leaf by Tora", "to game"}, function(x)
-if x == "auto checkpoints, auto spin, inf leaf by Tora" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/72c463105b6094570997818a2565b824db6c67f4/DoodleObby",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(15755895375, game:GetService("Players").LocalPlayer)  end  end);
-
-
-
-GamesSection:NewDropdown("🐊👟 KROCS WORLD TYKOON 👟🐊", "freelimitedugx", {"auto build, auto kollect kash", "to game"}, function(x)
-if x == "auto build, auto kollect kash" then
-loadstring(game:HttpGet(('https://pastefy.app/WLfisRIR/raw'),true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(10906235788, game:GetService("Players").LocalPlayer)  end  end);
-
-GamesSection:NewDropdown("[FREE LIMITED!] 💎 Limited Katchers!", "limitedugx", {"💎autofarm", "to game"}, function(x) 
-if x == "💎autofarm" then
-loadstring(game:HttpGet(('https://pastefy.app/Cl97Ravc/raw'),true))()
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16715919588, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("👊 Bakugan Brawl Simulator 👊", "freelimited", {"👊 Bakugan Brawl Simulator autofarm", "👊 bakugan autofarm (Tora)", "to game"}, function(x)
-if x == "👊 Bakugan Brawl Simulator autofarm" then
-loadstring(game:HttpGet(('https://pastefy.app/TZNN8v1m/raw'),true))();
-
-elseif x == "👊 bakugan autofarm (Tora)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/2ea5213bc57a98fa3f07e198079eef6704ee2bef/Bakugan",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(13677516356, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("🤺 Gear Fight for UGX 🤺", "DropdownInf", {"auto kollect koins(Dusekkars Dominus)", "to game"}, function(x) 
-if x == "auto kollect koins(Dusekkars Dominus)" then  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/c08301b61276e1100887d7db1483f3be543be9d9/GearFight",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16732817473, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("[NEW] 🏃‍♂️ Running Raxe 🏃🏽‍♂️", "limited free ugx", {"Running Raxe - auto koins,UGX shoes", "to game"}, function(x) 
-if x == "🏃🏽‍♂️Running Raxe - auto koins,UGX shoes" then  loadstring(game:HttpGet(('https://pastefy.app/lCc2Nb33/raw'),true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(15048876293, game:GetService("Players").LocalPlayer)  end  end) 
-
 GamesSection:NewDropdown("👹 Monster Battle Simulator 👹", "freelimited", {"kill aura &more", "to game"}, function(x)
 if x == "kill aura &more" then  loadstring(game:HttpGet(('https://pastefy.app/uZugkXkT/raw'),true))();
 
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(14181236474, game:GetService("Players").LocalPlayer)  end  end)
-
-
-GamesSection:NewDropdown("🍉🏞️ WATERMELON RIVER 🏞️🍉", "UGX LIMITED FREE", {"🍉 skript by Tora(DIAMOND PINGUS KUB)p", "to game"}, function(x)
-if x == "🍉 skript by Tora(DIAMOND PINGUS KUB)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/360af38e53a32307d0a8b72e87844fc07d0e9dcc/Watermelon",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(17170833688, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("🦾 Xyber Killer 🦾", "xyberkillerugx", {"skript (Krimson yellow kroks)", "auto safezone, auto kollect koins by bakon", "to game"}, function(x)
-if x == "skript (Krimson yellow kroks)" then 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/4db64e93312e580ae49f6e1019ad748d0f22ef25/CyberKiller",true))();
-
-elseif x == "auto safezone, auto kollect koins by bakon" then
---bakon
-loadstring(game:HttpGet("https://pastefy.app/fRLi7Dxa/raw",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16095574735, game:GetService("Players").LocalPlayer) 
-end 
-end)
-
-
-GamesSection:NewDropdown("🚽 Skibidi Warriors 🚽", "lame ass skbidi", {"kill aura,auto mobs&more Tora", "to game"}, function(x)
-if x == "kill aura,auto mobs&more Tora" then 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/1450c0ebbbc04880d0fbb7f7eea1f104524d9d42/SkibidiWarriors",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16564468950, game:GetService("Players").LocalPlayer) 
-end;
-end)
-
-GamesSection:NewDropdown("🚪 Glass Doors Obby 🚪", "freeitem", {"Find parts&more by Tora", "saturday next drop", "to game"}, function(x)
-if x == "Find parts&more by Tora" then 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/bc5817421a8cad22786da8f7b57fb091e56955c7/GlassDoors",true))();
-
-elseif x == "saturday next drop" then
-print("saturday fag");
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(17250919838, game:GetService("Players").LocalPlayer)
-end;
-end)
-
-GamesSection:NewDropdown("🔪 Murder Time [EVENT] 🔪", "freeugxlimited", {"Kollect Bunny krate(Tora)", "AUTO BUNNY KRATE(bakon)", "to game"}, function(x)
-if x == "Kollect Bunny krate(Tora)" then loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/MurderTime", true))();
-
-elseif x == "AUTO BUNNY KRATE(bakon)" then
---murder time bakon
-loadstring(game:HttpGet(('https://pastefy.app/fHcvAsCS/raw'),true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(15621061275, game:GetService("Players").LocalPlayer)
-end
-end) 
-
-GamesSection:NewDropdown("(OP) 💪 Training Simulator 💪", "INF GEMS OP SKRIPT by tora", {"INF GEMS &more", "to game"}, function(x)
-if x == "INF GEMS &more" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/08213e6158ba202b0474509c58a4402f498bafef/TrainingSimulator",true))()
-elseif x == "to game" then
-game:GetService("TeleportService"):Teleport(16572004551, game:GetService("Players").LocalPlayer)
-end 
-end)
 
 GamesSection:NewDropdown("🔪🩸 cHUcKY & TIFFANY - GRIEFVILLE 🩸🔪", "autofarm get ugx", {"AUTOFARM BY TORAISME(OP)", "AUTOFARM BY BAKON(OP)", "teleport to game"}, function(x)
 if x=="AUTOFARM BY TORAISME(OP)" then 
@@ -3011,71 +2749,6 @@ loadstring(game:HttpGet(('https://pastefy.app/kz1l7Xpz/raw'),true))()
 elseif x =="teleport to game" then
 game:GetService("TeleportService"):Teleport(16578847473, game:GetService("Players").LocalPlayer)
 end;
-end)
-
-
-GamesSection:NewDropdown("🔍 Kollect for UGX 🔎", "DropdownInf", {"kollect by Tora", "to game"}, function(x)
-if x == "kollect by Tora" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/d7ccf4d717ba665e5d18c783239aa7d41e869d02/CollectforUGC",true))();
-
-elseif x == "to game" then
-game:GetService("TeleportService"):Teleport(17103905229, game:GetService("Players").LocalPlayer)
-end
-end)
-
-GamesSection:NewDropdown("🧍 STAY FOR UGX 🧍🏾‍♂️", "stayugx", {"autofarm by Tora", "to game"}, function(x)
-if x == "autofarm by Tora" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/844a4788159b6db1f62c83bac80d16e57d043ad0/STAYFORUGC",true))()
-elseif x == "to game" then
-game:GetService("TeleportService"):Teleport(16518162890, game:GetService("Players").LocalPlayer)
-end
-end)
-
-
-GamesSection:NewDropdown("💄💋 Beauty Girl 💋💄", "freelimited beauty girl", {"INF KANDY, GEM, PTS.", "to game"}, function(x)
-if x == "INF KANDY, GEM, PTS." then
---beautygirl🥓
-loadstring(game:HttpGet(('https://pastefy.app/qXHnwrEf/raw'),true))()
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(14285029948, game:GetService("Players").LocalPlayer); end
-end)
-
-
-GamesSection:NewDropdown("🎒 La Station SQUAT 🎒", "get ugx fast", {"INF EXP/FRAGMENTS(La Squat Bag)", "go to game"}, function(x)
-if x == "INF EXP/FRAGMENTS(La Squat Bag)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/dbb0cf7516fb7aedd0e42d2f5fe46c02c370bb20/SQUAT",true))()
-elseif x=="go to game" then
-game:GetService("TeleportService"):Teleport(14966978495, game:GetService("Players").LocalPlayer)
-end
-end)
-
-
-GamesSection:NewDropdown("💥 TANK RAXE 💥", "tankraxe", {"get 7 limiteds", "go to game"}, function(x)
-if x == "get 7 limiteds" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Imalwibest/Imalwibest/main/wynerdV2.lua",true))()
-elseif x == "go to game" then
-game:GetService("TeleportService"):Teleport(14897417069, game:GetService("Players").LocalPlayer)
-end
-end)
-
-GamesSection:NewDropdown("🗝️ Keys 🗝️", "keys skript by Tora", {"best autofarm (Tora)", "to game"}, function(x)
-if x == "best autofarm (Tora)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/3e702023cbdda3755428d7a52740857ed9e7bc4f/Keys",true))()
-elseif x == "to game" then
-game:GetService("TeleportService"):Teleport(12407250267, game:GetService("Players").LocalPlayer)
-end
-end) 
-
-GamesSection:NewDropdown("👅 TONGUE BATTLES 👅", "bleh", {"[event apr19] auto quest, autofarm", "playerfarm,anti fall&more (key)", "auto player, auto krate, auto fight", "to game"}, function(x)
-if x =="[event apr19] auto quest, autofarm" then
-loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/Tongue'))()
-elseif x =="playerfarm,anti fall&more (key)" then
---tongue👅
-loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/814301bca04a6a09705f133ea8514487480d4083/Tongue",true))()
-elseif x == "auto player, auto krate, auto fight" then
-loadstring(game:HttpGet(('https://pastefy.app/Tx6uIEm7/raw'),true))()
-elseif x == "to game" then
-game:GetService("TeleportService"):Teleport(16721806812, game:GetService("Players").LocalPlayer)
-end
 end)
 
 -- [ 🥪 Lunxhable Playables 🥪 ] --
@@ -3103,29 +2776,6 @@ end
 end)
 
 
-GamesSection:NewLabel("❇️ 🎉 Gummy Bear Party! 🎉 ❇️ ")
-
-GamesSection:NewButton("Inf points,autofarm(OP)", "free ugx", function()loadstring(game:HttpGet("https://github.com/ToraScript/Script/raw/5bca7639ea0206af6b5f91f406ec1cbaec1d3c10/GummyBear",true))();
-end)
-
-GamesSection:NewButton("teleport to game", "2 FREE UGX BY PLAYING THE FAME", function()   game:GetService("TeleportService"):Teleport(14889649635, game:GetService("Players").LocalPlayer) end)
-
---GamesSection:NewLabel("🏪 WALMART DISKOVERED 🏪")
-
---GamesSection:NewButton("kollect koins (Spring Flower Krown LIMITED)", "koins op skript by Tora", function()
---while true do --loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/70e922f6b88eee9ca92a74a1dd51bdfa4dbde187/CoinsWalmart",true))()
---end;
---end) 
-
---GamesSection:NewButton("fast koins farm by 🥓", "walmart", function()
---walmart;
---loadstring(game:HttpGet(('https://pastefy.app/M8KotvgU/raw'),true))()
---end)
-
---GamesSection:NewButton("teleport to game", "koins walmart", function()   --game:GetService("TeleportService"):Teleport(13398230007, game:GetService("Players").LocalPlayer) 
---end)
-
-
 --GamesSection:NewLabel("🥤 BUBBLE TEA TYKOON 🥤")
 
 --GamesSection:NewButton("INSTANT ITEM 2nd drop(Apr13)", "2nd drop blue bubble", function() 
@@ -3139,16 +2789,9 @@ GamesSection:NewButton("teleport to game", "2 FREE UGX BY PLAYING THE FAME", fun
 --GamesSection:NewButton("teleport to game", "bubbletea", function()   --game:GetService("TeleportService"):Teleport(16036703153, game:GetService("Players").LocalPlayer) 
 --end)
 
---GamesSection:NewDropdown("🧥 MAX MARA KOATS ADVENTURE 🧥 (2d)", "freeugx", {"get ugx", "teleport to game"}, function(x)
---if x == "get ugx" then
---print("april 26 dumbass")
---elseif x == "teleport to game" then
---game:GetService("TeleportService"):Teleport(14905728989, game:GetService("Players").LocalPlayer)
---end
---end)
-
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+
 GamesSection:NewDropdown("Unnamed Shooter", "op skript by tora", {"AUTO KILL (op skript by tora)", "to game"}, function(x) if x == "AUTO KILL (op skript by tora)" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/e700beeb77025b72371b9383a4510f20cf438a4e/UnnamedShooter",true))();
 
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(14202073004, game:GetService("Players").LocalPlayer)  end  end)
@@ -3184,13 +2827,14 @@ end)
 
 GamesSection:NewLabel("??🗡️Murder Mystery 2 🗡️??]")
 
-GamesSection:NewDropdown("MM2 tp", "teleporttomm2", {"this is nothing", "teleport to: Murder Mystery 2 🗡️"}, function(...) 
-if ... == "teleport to: Murder Mystery 2 🗡️" then niggas:GetService("TeleportService"):Teleport(142823291, game:GetService("Players").LocalPlayer) end;
+GamesSection:NewDropdown("(NEW) SILENT AIM, OVERDRIVE", "6/9/24 mm2 upd", {"(NEW) SILENT AIM, OVERDRIVE", "kopy key >(NEW) SILENT AIM, OVERDRIVE<"}, function(x) 
+if x == "(NEW) SILENT AIM, OVERDRIVE" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ThatSick/ArrayField/main/OldSymphonyHub.lua"))();
 
-if ... == "this is nothing" then
-rrixh("👺");
-print'nothing here'
-end;
+elseif x == "kopy key >(NEW) SILENT AIM, OVERDRIVE<" then setclipboard("symphonyownoverdrive")
+wait()
+Notify({Description="MM2 key kopied to klipboard, paste in MM2 gui";Duration = 4.2});
+end
 end)
 
 GamesSection:NewButton("Folder Hub", "foldergui", function()
@@ -3255,7 +2899,6 @@ end)
 GamesSection:NewButton("TheHanki (may be lag)", "🔑 = hawkhubneverdies (work fluxus and delta)",
 function()
 -- mm2
-
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TheHanki/Hawk/main/Loader", true))()
 end)
 
@@ -4963,9 +4606,6 @@ end)
 
 local Home = Window:NewTab("Home")
 local HomeSection = Home:NewSection("Home")
-HomeSection:NewButton("Say part stepped on", "test parttouxhed", function()
-partTouxhed__skript__by__lulaslollipop();
-end)
 
 HomeSection:NewButton("🔎 Skript", "look up any skript", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/ScriptSearcher"))()
@@ -5015,7 +4655,7 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
 
-HomeSection:NewButton("tagapagpatupad", "xherushutup", function()
+HomeSection:NewButton("za tagapagpatupad", "xherushutup", function()
 --zombie attaxk hidden
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Unknownproootest/Unknown-ZombieAttack/main/Gui.lua'))();
 end)
@@ -5029,7 +4669,7 @@ end)
 --end)
 
 HomeSection:NewButton("Get Koords", "x,y,z finder say /console", function()
-print(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position)
+setclipboard(tostring(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position));
 wait()
 local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
 local Notify = AkaliNotif.Notify;
@@ -5043,9 +4683,14 @@ HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakes", funct
 loadstring(game:HttpGet("https://pastecode.dev/raw/yealugpt/koordsgui.kxls.xlsk.xls",true))()
 end)
 
+HomeSection:NewButton("SimpleSpy V2.2", "for seeing remotes and fired events", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/3y74x19q/simplespy2.2rrixh.zip",true))();
+end)
+
 HomeSection:NewButton("BaxkDoorFinder", "finds a baxkdoor for admin or additional skripts", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
 end)
+
 HomeSection:NewButton("Harked Reborn V2 (leaked)", "only in sekret games", function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Harked-Skript-6804"))()
 end)
