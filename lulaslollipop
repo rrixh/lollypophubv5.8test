@@ -1,7 +1,7 @@
 --main v9 LOLLYPOP HUB
 -- Version: 9
 -- [ main/info ] --
-local LastUpdate="Last Update: July 4, 2024";
+local LastUpdate="Last Update: July 14, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
 
