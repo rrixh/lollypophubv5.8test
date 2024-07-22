@@ -1,7 +1,7 @@
 --main v9 LOLLYPOP HUB
 -- Version: 9
 -- [ main/info ] --
-local LastUpdate="Last Update: July 20, 2024";
+local LastUpdate="Last Update: July 22, 2024";
 local Vv="9.1";
 local exploit=identifyexecutor();
 
@@ -2773,6 +2773,14 @@ Notify({ Description = "(KAT) Aimbot🟢";Duration = 4; });
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
 
+GamesSection:NewToggle("Highlight Playerz", "esp players", function(...)
+getgenv().Enabled = ...
+end)
+
+GamesSection:NewColorPicker("Highlight Kolor (rainbow on then stop on\nA kolor (for mobile))", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(0,0,255), function(kolor)
+getgenv().espstuff = kolor
+end);
+
 GamesSection:NewButton("KAT GUI", "esp,spam shoot (aimbot💻)", function()--kat gui
 loadstring(game:HttpGet("https://pastebin.com/raw/78kG7trR"))()
 end)
@@ -5180,6 +5188,8 @@ LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
 
 --[[
 
+-BetterBypasser UP
+-KAT esp highlight
 -new ugx game: launxh party:7277488595
 -fixed hiddenfling in ui
 -fixed send chat 6:40pm
