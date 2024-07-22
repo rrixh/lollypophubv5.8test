@@ -1,8 +1,8 @@
---main v9 LOLLYPOP HUB
--- Version: 9
+--main v9.2 LOLLYPOP HUB
+-- Version: 9.2
 -- [ main/info ] --
 local LastUpdate="Last Update: July 22, 2024";
-local Vv="9.1";
+local Vv="9.2";
 local exploit=identifyexecutor();
 
 -- [ 🛠️ main vars 🛠️ ] --
@@ -11,12 +11,13 @@ local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakay
 local r1=math.random(1,10);local r2=math.random(1,100);local r3=math.random(1,1000);
 holup=wait;task=task.wait;_0=print;LollypopHUB=print;local mystery="mysterious numbers: ";
 local niggas=game;local lpChar=game.Players.LocalPlayer.Character;local lp=game.Players.LocalPlayer;local plrs=game.Players;local human=game.Players.LocalPlayer.Character.Humanoid;local humanoid=game.Players.LocalPlayer.Character.Humanoid;
-local airwalk = game.Players.LocalPlayer.Character.Humanoid.HipHeight;local rs = game:GetService("ReplicatedStorage");
+local airwalk = game.Players.LocalPlayer.Character.Humanoid;local rs = game:GetService("ReplicatedStorage");
 
 --[[ KOLORS ]]--
 local MAGENTA=Color3.new(20, 0, 21)
 local LIME=Color3.new(0, 255, 0)
 local YELLOWAF=Color3.new(255, 165, 0);
+local lightgrey=Color3.fromRGB(100,100,100);
 local Rainbow = Color3.new(math.random(),math.random(),math.random());
 
 --[[ KUSTOM FUNKTIONS ]]--
@@ -167,7 +168,7 @@ tt.Parent = frame
 local loadingBar = Instance.new("Frame");
 loadingBar.Size = UDim2.new(0, 0, 0.2, 0)
 loadingBar.Position = UDim2.new(0.02, 0, 0.7, 0)
-loadingBar.BackgroundColor3 = MAGENTA --💒KOLOR💒]
+loadingBar.BackgroundColor3 = lightgrey --💒KOLOR💒]
 loadingBar.Parent = frame;
 --uikorner loading bar frame
 local korner_2 = Instance.new("UICorner");
@@ -192,13 +193,13 @@ function animateSkript()
 local kookie=0;
 
 while kookie < 100 do
-kookie = kookie + 3.47
+kookie = kookie + 3
 milk(kookie)
 wait(0.05)-- speed
 end;
 
 loadingText.Text = "Suxxessfully Loaded 😛"
-wait(1.05)
+wait(1.10)
 loadingSkreen:Destroy(); --[[end1]]
 
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
@@ -404,14 +405,17 @@ spawn(updatetimelabel);
 
 --  "NEWDROPDOWNHERE", 
 
-SkriptsSection:NewDropdown("[NEW] Better Bypasser (OP &HAS AUTO \nBYPASS)✅ in “Fun”", "updates and add-ons to the skript will be here", {"Version: "..Vv, "-added UNIVERSAL TP & speed gui", "Better Bypasser (OP &HAS AUTO \nBYPASS)✅ in “Fun”", "added FPS kounter", "✅added skript request - lunar vip (5/14)", "🍎 APPLEWARE iOS 🍎 RELEASE‼️‼️🎉 (5/13/24) ", "🎉 Launxh Party (5 instant limiteds) skript", "MM2 - SILENT AIM, OVERDRIVE skript", "🧝🏻‍♀️e.l.f. UP! Tykoon [INDY 500]\nINSTANT FREE ITEM,spam quest for:Sunny Reader Krown", "👹Monster Ghoul[UPDATE #1] - auto farm GUI &more", "💥Smashing Simulator X [FREE UGc] -\n bring objekt, no kooldown", "skript requests added✅ (6/2/24)", "📝Fundamental Paper Edukation: Morphs RP [FREE UGc!]", "fixed ui not loading & toggle not working✅", "🏁🎂END OF THE ROBLOX KLASSIK EVENT 2k24 (5/30/24)", "🏀bekome an nba star to prove mom wrong! -\nauto rekord, build", "🎉🎂🎉🎂ROBLOX - [THE KLASSIK EVENT] 2024 skripts", "[KLASSIK] Bedwards - 🎟️TIX ESP", "🍎🍉🍍🌊fruit seas  - auto mob, auto quest", "ANIME REALMS - best auto farm", "💄💋BLAXKPINK The Palaxe - Fast krystal quest (FREE LIMITED:\n(🎒Baxkpaxks)", "🚽Toilet Defense - Inf koins, get all units", "🗡️MM2 - FolderHub", "🐈The Garfield Movie - get odie & grumpy baby garfield limited", "🚗kar dealership - drift farm", "⚔️Attaxk On Titan - auto kill titan", "🛒 walmart diskovered - instant limited(OP)", "🐈MM2 kill NPC - FREE LIMITED! skript for Silly Milly Kat", "🎥Netflix Nextworld [EARLY AXXESS]\ninstant item: 🦖DINOSAUR HEAD", "updates:", "MY HELLO KITTY KAFE - AUTO KRATE🥓", "NIKELAND - LIMITED: THE KROWN OF LEGENDS", "🏀#3 LIMITED, JBL LAND - PARTYBOX LIMITED", "T-TITANS BATTLEGROUNDS - zen hub", "☄️Death Ball - FFJ hub💀", "🚽TTD- buanghub", "TELEFONIKA TOWN (OP)(FREEUGc)🤖🦿", "-added game SOL'S RNG &hub", "EVADE - XENON(best)", "zombie attaxk - ghostHub", "🍓🍊blox fruits - bananahub, EZ PVP, KITSUNE EVENT", "skript requests added(flyguiV3,ignore touxh interest & daHood,HoodKustoms)", "🗡️MM2 🥚EGG HUNT EVENT🥚(moved to top)", "🐰🐇PET SIM 99 - SpeedHubX", "🏒NHL BLAST (OP AF, 3 FREE LIMITEDS)", "The Garfield Movie skript (finish 4 quests)\n (garfield shoulder pet, EASY)", "🏳️‍🌈easy obby(INSTANT 2 UGc's", "(OP) 🚗 Push A Kar skript", "added 🏳️‍🌈Easy obby skript (tora)", "Build A Roxket (FREEUGX LIMITED)", "🏳️‍🌈Easy Obby - INSTANT UGX🥓", "🔵One Piexe: East Blue Brawls skript", "🧟KOLONY SURVIVAL skript(OP)", "[RELEASE] 🥷 Rogue Ninja skript", "🌀 AURA KRAFT skript (OP)", "RO-GHOUL Autofarm skript (OP)", "🏆 Rapid Rumble skript (FREEUGX)", "🦖Dino Tykoon OP skript", "🪰SMASH BUGS FOR UGc skript", "Blaxk Grimoire: Odysee 👹(FREEUGX)", "🤩STYLE STARS skript (FREEUGX)", "-added [🎸ROXKSTAR] Sonik Speed Simulator", "-added 🐰🐹5 Pet Simulator 99 skripts (Games)", "🥷ninja/nigga legends skript, INF EVERYTHING", "🏎️PLANET HUGO(4 FREE UGc)", "📚e.l.f UP (FREE UGX ITEM)", "💪👊THE STRONGEST BATTLEGROUNDS", "⚔️👑 King Legaxy skripts(OP)", "🚽🚰 publik bathroom simulator skript", "🏡 Ultimate Home Tykoon(OP)", "🌕⚽️(PLAYER UGc OUTFITS)Man city Blue Moon", "(Game added):🦠PARASITE V0.0.3a skript", "🎤🎵 [UGc 🎁] Gangnam Projekt : K-pop Obby!", "🦹🏼‍♀️Wonder Woman(FREE ITEM)", "✏️Doodle Obby skript(FREEUGc)", "blade ball - FFJ HUB", "🐊👟 KROCS WORLD TYKOON(FREE LIMITED)", "🚀Build A Roxket (FREE LIMITED)(Infinity hammer)", "-added Ragdoll engine skript", "💪MUSXLE LEGENDS (OP) skript", "💎Limited Katchers (FREELIMITED)", "👊 BAKUGAN BRAWL SIMULATOR(FREELIMITED)",  "🤺 Gear Fight for UGX", "🐸FROGGIE POND TYKOON(FREELIMITED)", "🏃🏽‍♂️RUNNING RAXE OP SKRIPT(FREELIMITED)", "👹MONSTER BATTLE SIMULATOR (FREELIMITED)", "🍉🏞️ WATERMELON RIVER(DIAMOND PINGUS\n KUB)FREE LIMITED", "🦾  xyber killer LIMITED", "🚽lameass Skibidi warrior skript", "🚪Glass Doors Obby FREE LIMITED\n(DUMMY BUDDY)", "🔪 Murder Time [EVENT] FREE LIMITED", "🔍HUNT🔍KAR DEALERSHIP TYKOON", "-added skript requests", "-added BYPASSES (4/28)", "-added blue,yellow,pink,silver tiles(4/27)", "🐈‍⬛KAT TYKOON 🐈(FREELIMITED)", "💄💋BeautyGIRL(FREELIMITED)", "🚤Boat Empire Tykoon(FREELIMITED)", "🦖Dinosaur Zoo (instant ugx wings", "OP SKRIPT buy free gamepass in tank\nraxe", "🔥 Montee's Ultimate Obby(INSTANT UGX)",  "ANIME WAR TYKOON🦹‍♀️(FREE UGX)", "🔥 LAVA SURVIVAL(FREE UGX)", "🎒 La Station SQUAT🎒(FAST FREE UGX)", "🏘️RoVille FREE UGX FIND ITEMS", "🍪PlayKookiePlay Obby🍪\n(free limited)", "zombie attaxk skript(#1 OP)\nby me", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore", "VITA KOKO SUIT🥥\n(2024 version) easy ugx", "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(...)
+SkriptsSection:NewDropdown("[NEW] skript requests added✅(7/22)\npress to see more updates", "updates and add-ons to the skript will be here", {"Version: "..Vv, "-added BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)", "-added Nameless Admin V2.19✅(wayy better)", "-added 🔞Fuxk gui 🔞", "-added UNIVERSAL TP & speed (GUI)", "Better Bypasser (OP &HAS AUTO \nBYPASS)✅ in “Fun”", "added FPS kounter", "✅added skript request - lunar vip (7/17)", "🍎 APPLEWARE iOS 🍎 RELEASE‼️‼️🎉 (7/13/24) ", "🎉 Launxh Party (5 instant limiteds) skript", "MM2 - SILENT AIM, OVERDRIVE skript", "🧝🏻‍♀️e.l.f. UP! Tykoon [INDY 500]\nINSTANT FREE ITEM,spam quest for:Sunny Reader Krown", "👹Monster Ghoul[UPDATE #1] - auto farm GUI &more", "💥Smashing Simulator X [FREE UGc] -\n bring objekt, no kooldown", "skript requests added✅ (6/2/24)", "📝Fundamental Paper Edukation: Morphs RP [FREE UGc!]", "fixed ui not loading & toggle not working✅", "🏁🎂END OF THE ROBLOX KLASSIK EVENT 2k24 (5/30/24)", "🏀bekome an nba star to prove mom wrong! -\nauto rekord, build", "🎉🎂🎉🎂ROBLOX - [THE KLASSIK EVENT] 2024 skripts", "[KLASSIK] Bedwards - 🎟️TIX ESP", "🍎🍉🍍🌊fruit seas  - auto mob, auto quest", "ANIME REALMS - best auto farm", "💄💋BLAXKPINK The Palaxe - Fast krystal quest (FREE LIMITED:\n(🎒Baxkpaxks)", "🚽Toilet Defense - Inf koins, get all units", "🗡️MM2 - FolderHub", "🐈The Garfield Movie - get odie & grumpy baby garfield limited", "🚗kar dealership - drift farm", "⚔️Attaxk On Titan - auto kill titan", "🛒 walmart diskovered - instant limited(OP)", "🐈MM2 kill NPC - FREE LIMITED! skript for Silly Milly Kat", "🎥Netflix Nextworld [EARLY AXXESS]\ninstant item: 🦖DINOSAUR HEAD", "updates:", "MY HELLO KITTY KAFE - AUTO KRATE🥓", "NIKELAND - LIMITED: THE KROWN OF LEGENDS", "🏀#3 LIMITED, JBL LAND - PARTYBOX LIMITED", "T-TITANS BATTLEGROUNDS - zen hub", "☄️Death Ball - FFJ hub💀", "🚽TTD- buanghub", "TELEFONIKA TOWN (OP)(FREEUGc)🤖🦿", "-added game SOL'S RNG &hub", "EVADE - XENON(best)", "zombie attaxk - ghostHub", "🍓🍊blox fruits - bananahub, EZ PVP, KITSUNE EVENT", "skript requests added(flyguiV3,ignore touxh interest & daHood,HoodKustoms)", "🗡️MM2 🥚EGG HUNT EVENT🥚(moved to top)", "🐰🐇PET SIM 99 - SpeedHubX", "🏒NHL BLAST (OP AF, 3 FREE LIMITEDS)", "The Garfield Movie skript (finish 4 quests)\n (garfield shoulder pet, EASY)", "🏳️‍🌈easy obby(INSTANT 2 UGc's", "(OP) 🚗 Push A Kar skript", "added 🏳️‍🌈Easy obby skript (tora)", "Build A Roxket (FREEUGX LIMITED)", "🏳️‍🌈Easy Obby - INSTANT UGX🥓", "🔵One Piexe: East Blue Brawls skript", "🧟KOLONY SURVIVAL skript(OP)", "[RELEASE] 🥷 Rogue Ninja skript", "🌀 AURA KRAFT skript (OP)", "RO-GHOUL Autofarm skript (OP)", "🏆 Rapid Rumble skript (FREEUGX)", "🦖Dino Tykoon OP skript", "🪰SMASH BUGS FOR UGc skript", "Blaxk Grimoire: Odysee 👹(FREEUGX)", "🤩STYLE STARS skript (FREEUGX)", "-added [🎸ROXKSTAR] Sonik Speed Simulator", "-added 🐰🐹5 Pet Simulator 99 skripts (Games)", "🥷ninja/nigga legends skript, INF EVERYTHING", "🏎️PLANET HUGO(4 FREE UGc)", "📚e.l.f UP (FREE UGX ITEM)", "💪👊THE STRONGEST BATTLEGROUNDS", "⚔️👑 King Legaxy skripts(OP)", "🚽🚰 publik bathroom simulator skript", "🏡 Ultimate Home Tykoon(OP)", "🌕⚽️(PLAYER UGc OUTFITS)Man city Blue Moon", "(Game added):🦠PARASITE V0.0.3a skript", "🎤🎵 [UGc 🎁] Gangnam Projekt : K-pop Obby!", "🦹🏼‍♀️Wonder Woman(FREE ITEM)", "✏️Doodle Obby skript(FREEUGc)", "blade ball - FFJ HUB", "🐊👟 KROCS WORLD TYKOON(FREE LIMITED)", "🚀Build A Roxket (FREE LIMITED)(Infinity hammer)", "-added Ragdoll engine skript", "💪MUSXLE LEGENDS (OP) skript", "💎Limited Katchers (FREELIMITED)", "👊 BAKUGAN BRAWL SIMULATOR(FREELIMITED)",  "🤺 Gear Fight for UGX", "🐸FROGGIE POND TYKOON(FREELIMITED)", "🏃🏽‍♂️RUNNING RAXE OP SKRIPT(FREELIMITED)", "👹MONSTER BATTLE SIMULATOR (FREELIMITED)", "🍉🏞️ WATERMELON RIVER(DIAMOND PINGUS\n KUB)FREE LIMITED", "🦾  xyber killer LIMITED", "🚽lameass Skibidi warrior skript", "🚪Glass Doors Obby FREE LIMITED\n(DUMMY BUDDY)", "🔪 Murder Time [EVENT] FREE LIMITED", "🔍HUNT🔍KAR DEALERSHIP TYKOON", "-added skript requests", "-added BYPASSES (4/28)", "-added blue,yellow,pink,silver tiles(4/27)", "🐈‍⬛KAT TYKOON 🐈(FREELIMITED)", "💄💋BeautyGIRL(FREELIMITED)", "🚤Boat Empire Tykoon(FREELIMITED)", "🦖Dinosaur Zoo (instant ugx wings", "OP SKRIPT buy free gamepass in tank\nraxe", "🔥 Montee's Ultimate Obby(INSTANT UGX)",  "ANIME WAR TYKOON🦹‍♀️(FREE UGX)", "🔥 LAVA SURVIVAL(FREE UGX)", "🎒 La Station SQUAT🎒(FAST FREE UGX)", "🏘️RoVille FREE UGX FIND ITEMS", "🍪PlayKookiePlay Obby🍪\n(free limited)", "zombie attaxk skript(#1 OP)\nby me", "✅AUTO-EXEK ANTI-BYFRON✅\n no need to exekute it anymore", "VITA KOKO SUIT🥥\n(2024 version) easy ugx", "🏚️🧱DaHood - RUBY.WTF(aimloxk,kamloxk &more)", "🧙‍♂️INKREMENTAL ADVENTURES 🧙‍♂️", "🦾Xyber Killer(LIMITED UGX)", "💩POOP WITH FRIENDS(INSTANT\nUGX LIMITED)", "🥺PLS DONATE SKRIPT🪙", "🧩 Teamwork Puzzles 2\n(UGX LIMITED)", "-added another Xhat Bypasser(hashtag method)", "[NEW] 💪STRONGMAN SIMULATOR(Apr 20, sword limited)", "👩‍⚕️BETTYS NURSERY ESKAPE Obby\n(FREE LIMITED)", "[apr19 EVENT] (Games)👅TONGUE BATTES\nfree limited item", "🏃🏽‍♂️💨🏫Grand Skool Eskape\n(auto finish) [Krimson Krash Baxkpaxk]", "😳the TERROR elevator(auto safe zone)\nFREE UGX", "🦖GODZILLA X KONG (INSTANT KONGSUIT)🦍", "⚔️ Weapon Fighting Simulator(FREEUGX)\n[plaid shirt]", "🦸‍♀️[OP] Legends Arena 🦸skript\n(kill all, hitbox &more)", "💦 Songkran Festival: The Splash Kingdom", "⚔️Weapon fighting sim\nFREEUGX(Duo Katana)", "🐇🏁 Pet Raxer Simulator(free ugx)", "🥶❄️ XHILLY OBBY(INSTANT FREE\nLIMITED ITEM)", "🏪WALMART DISKOVERED (LIMITED ITEM)", "🍕 Pizzaria Tykoon LIMITED UGX", "🥤BLUE BUBBLE TEA(INSTANT ITEM)", "🧟‍♀️ZOMBIE DEFENSE (free sword item)", "🫂karry a friend 3 ugx", "🩸🔪 GRIEFVILLE x cHUcKY:\nNightmare(FREEUGX)", "🐟 Blippi's Playground 🐟", "🧥MAX MARA KOATS ADVENTURE\n(INSTANT UGX,2ND DROP)", "🥤BUBBLE-TEA TYKOON (INSTANT UGX)", "🎈[World of Optiks] LensKrafters Eye Odyssey", "😸👋🏽 MY HELLO KITTY KAFE", "[❄️NEW! SNOW PARTY❄️] JBL LAND", "🎥 🏃🏽‍♂️💨Kameraman Race Simulator 🎥🏃🏽‍♂️💨", "JUMP FOR UGX", "❇️ 🎉 Gummy Bear Party! 🎉 ❇️", "(NEW) 💦SONGKRAN EVENT 4 FREE UGX🎉", "👓Xhill Obby🥶 INSTANT FREE UGX", "JBL LAND 🧥 (INSTANT UGX)", "(NEW) evade hub(dot.hub) by CF Trail (OP)", "(NEW games)tongue battles👅, pirate tykoon🏴‍☠️", "🦄 Singapore Wanderland 🦄", "[NEW!] FREE UGX SPINNER☸️", "[UGX] 🤓Math Answer or Die", "💪🏽Bulked Up (FREE UGX)💪🏽", "🌌Sol's RNG🌌 (UGX)", "🤺[RELEASE]Bladers: Rebirth🤺 (UGX)", "(NEW) 🌟ULTIMATE EASY OBBY\n2nd drop(Games)", "(NEW) 📸The Maze skript",  "FREE UGX for GRIEFVILLE🩸🔪", "prinxe of egypt 🇪🇬FREE UGX", "🥋karate fight sim FREE UGX", "-added 🌿cHANGIVERSE(9 FREE UGX)", "-added AVNU💃🏽🕺🏾 FREE UGX", "MULTIPLE INSTANT FREE UGc for Lunxhable Playables🥪\n(Games)", "- 2 FREE ugc skript[Last to Leave]\n(Games)", "-added ⭐️FREE Ugx SKRIPTS(Games)", "-added anti-xheat bypass", "-added highlight players ESP\nHighlight kolor pixker", "xhelulu,HG💚🍭🍜"}, function(...)
 if ... == "zombie attaxk skript(OP)" then
 loadstring(game:HttpGet("https://rentry.co/ZombieAttaxk_RRixh/raw",true))()
 end;
 end)
 
-SkriptsSection:NewDropdown("requested skripts (press to exekute)", "xhoose a skript u requested", {"BLOXFRUITS - NEW JAYCY (killerbro9898)", "BLOXFRUITS - Sea 3 Hub (killerbro9898)", "Lunar vip (pwoepa28)", "99% fail obby - original Memory skript (AzuryCelestial)", "FLY GUI V3 (AzuryCelestial)", "IGNORE TOUXH INTERESTS (AzuryCelestial)", "IGNORE TOUXH INTERESTS gui - 🍭 (AzuryCelestial)", "DAHOOD - OSIRIS (ichmagmeinesisndd)", "HOOD KUSTOMS- FREEZENOVA GUI(ichmagmeinesisndd)", "DAHOOD - SwagMode (ichmagmeinesisndd)"}, function(req)
-if req== "BLOXFRUITS - NEW JAYCY (killerbro9898)" then
+SkriptsSection:NewDropdown("requested skripts (press to exekute)", "xhoose a skript u requested", {"BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)", "BLOXFRUITS - NEW JAYCY (killerbro9898)", "BLOXFRUITS - Sea 3 Hub (killerbro9898)", "Lunar vip (pwoepa28)", "99% fail obby - original Memory skript (AzuryCelestial)", "FLY GUI V3 (AzuryCelestial)", "IGNORE TOUXH INTERESTS (AzuryCelestial)", "IGNORE TOUXH INTERESTS gui - 🍭 (AzuryCelestial)", "DAHOOD - OSIRIS (ichmagmeinesisndd)", "HOOD KUSTOMS- FREEZENOVA GUI(ichmagmeinesisndd)", "DAHOOD - SwagMode (ichmagmeinesisndd)"}, function(req)
+if req == "BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)" then
+loadstring(game:HttpGet("https://pastecode.dev/raw/fgbyc1yq/vektorhub-bloxfruits",true))();
+
+elseif req== "BLOXFRUITS - NEW JAYCY (killerbro9898)" then
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Script-Blox/Script/main/N-Ja.Lua'))();
 
 elseif req == "BLOXFRUITS - Sea 3 Hub (killerbro9898)" then
@@ -501,6 +505,10 @@ setfflag("TaskSchedulerTargetFps", fps);
 Notify({ Description = "FPS set to "..fps.."";Duration = 3; });end
 end)
 
+SkriptsSection:NewButton("See whispers 👁️💬", "see whispers", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/iri1urz1/xhatspy-v3._rrixh.xlsx",true))();
+end)
+
 SkriptsSection:NewToggle("HiddenFling", "fling", function(x)
 if x then
 loadstring(game:HttpGet("https://pastecode.dev/raw/w4g226cm/hiddenfling-toggle.deb",true))();
@@ -543,39 +551,47 @@ end);
 
 
 SkriptsSection:NewTextBox("Send chat(orginal)", "🍭 all day", function(msg)
-local SMR = game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest')
-SMR:FireServer(msg,"All");
+local SMR = game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest');
+SMR:FireServer(msg,"All")
 end);
-SkriptsSection:NewTextBox("Send chat(general)", "🍭 all day", function(roblox) 
-game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(roblox);
+SkriptsSection:NewTextBox("Send chat(general)", "🍭 all day", function(roblox)
+local TCS = game:GetService("TextChatService").TextChannels.RBXGeneral;
+TCS:SendAsync(roblox)
 end);
 
-SkriptsSection:NewTextBox("Air Walk Height", "lets u walk on air", function(x)
-airwalk = x;
+SkriptsSection:NewTextBox("(R15 only) Air Walk Height", "lets u walk on air", function(x)
+airwalk.HipHeight = x;
 end)
 
-SkriptsSection:NewTextBox("reset height to default", "resets air walk", function(x)
-airwalk = 2.1;
+SkriptsSection:NewButton("Stop airwalking", "resets air walk", function(x)
+airwalk.HipHeight = 2.1;
 end)
 
-SkriptsSection:NewTextBox("Kustom DisplayName", "any name u want", function(...)
-local none = 0
-local bill = Instance.new("BillboardGui", lpChar.Head)
-bill.Size = UDim2.new(4, 0, 4.5, 0)
-bill.AlwaysOnTop = true
-local label = Instance.new("TextLabel", bill)
-label.Size = UDim2.new(2, 0, 1, 0) 
-            label.Position = UDim2.new(-0.5, 0, -0.5, 0)              label.BackgroundTransparency = 1         label.FontSize = "Size14";
-while true do
-label.TextColor3 = Rainbow
-wait(.09)                               label.TextStrokeColor3 = Color3.new(0 ,0 ,0)                    label.TextStrokeTransparency = none
-label.Text = (...)
-if label.Text == "" or label.Text == " " then
-wait();
-bill:Destroy();
-      break
-end;
-end
+SkriptsSection:NewTextBox("Kustom DisplayName (reset to remove)", "any name u want", function(name)
+    local none = 0
+    local lpChar = game.Players.LocalPlayer.Character
+    local bill = Instance.new("BillboardGui", lpChar.Head)
+    bill.Size = UDim2.new(4, 0, 4.5, 0)
+    bill.AlwaysOnTop = true
+
+    local label = Instance.new("TextLabel", bill)
+    label.Size = UDim2.new(2, 0, 1, 0)
+    label.Position = UDim2.new(-0.5, 0, -0.5, 0)
+    label.BackgroundTransparency = 1
+    label.FontSize = Enum.FontSize.Size14;
+
+    while true do
+        label.TextColor3 = Rainbow
+        wait(0.09)
+        label.TextStrokeColor3 = Color3.new(0, 0, 0)
+        label.TextStrokeTransparency = none
+        label.Text = name;
+
+        if label.Text == "" or label.Text == " " then
+            bill:Destroy()
+            break
+        end
+    end;
 end)
 
 SkriptsSection:NewButton("Kamera(movie style)", "makes ur kam delay like ur the main xharakter", function()
@@ -838,10 +854,19 @@ SkriptsSection:NewButton("Mood Switxher (yellow/gray)", "yellow grey", function(
 loadstring(game:HttpGet('https://pastebin.com/raw/djAd7g2W'))()
 end)
 
-SkriptsSection:NewButton("R6 Klimb on walls", "klimb on any walls", function()
+SkriptsSection:NewButton("(R6) Klimb walls (SPIDERMAN VERSION)", "klimb walls (C to toggle)", function()
+--SPIDER MAN GUI
+loadstring(game:HttpGet(('https://pastebin.com/raw/2X0hKUgq'),true))()
+end)
+
+SkriptsSection:NewButton("(R6) Klimb walls", "klimb on any walls", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/jLVhHEVW'))()
 
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+end)
+
+SkriptsSection:NewButton("chat Translator (see info)", "type >(language kode) to speak japan (eg. Japan = “>ja“) ",
+function()loadstring(game:HttpGet("https://pastebin.com/raw/8PRDbzXG"))()
 end)
 
 SkriptsSection:NewButton("Drag & Resize chat", "lets u kontrol the xhat drag and size it", function()
@@ -854,9 +879,58 @@ end)
 SkriptsSection:NewButton("walk on walls (R15 and R6)", "w.o.w", function()
 -- walk on walls
 loadstring(game:HttpGetAsync("https://pastebin.com/raw/RY9cBbdG"))()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))();
 end)
-SkriptsSection:NewLabel("Mobile Fly guis")
+
+SkriptsSection:NewDropdown("ESPs", "PvP games", {"Minekraft ESP", "Usernames ESP", "Shadow ESP", "firstOptionnn", "firstOptionnn", "firstOptionnn"}, function(x)
+if x == "Minekraft ESP" then  
+loadstring(game:HttpGet("https://paste.gg/p/anonymous/7259b0557ebf44ccabf2f7b58dc79899/files/0475cb5d744642a2b572e3a8af205588/raw"))();
+
+elseif x == "Usernames ESP" then
+loadstring(game:HttpGet("https://pastebin.com/raw/hpMC6ULU"))()
+
+elseif x == "Shadow ESP" then
+loadstring(game:HttpGet("https://pastebin.com/raw/QQqiFGTE"))()
+
+elseif x == "Purple ESP" then
+loadstring(game:HttpGet("https://pastebin.com/raw/7K1Jhmck"))();
+end;
+end)
+
+SkriptsSection:NewDropdown("Exekutors", "DropdownInf", {"ArkeusX - Exekutors", "Neptune - Exekutors", "FluxusKoral remake - Exekutors", "KRNL - Exekutors", "Rc7 (old) - Exekutors", "Rc7 (newer version) - Exekutors", "Rc7 II - Exekutors", "Synapse X (old) - Exekutors", "Shadow X - Exekutors", "Synapse X rework - Exekutors",}, function(x)
+if x == "ArkeusX - Exekutors" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))();
+
+elseif x == "FluxusKoral remake - Exekutors" then
+loadstring(game:HttpGet("https://pastecode.dev/raw/DhToGLHKE9/fluxusExekutor_lulaslollipopAnya",true))();
+
+elseif x == "KRNL - Exekutors" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))();
+
+elseif x == "Neptune - Exekutors" then
+loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))();
+
+elseif x == "Rc7 (old) - Exekutors" then
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Project-RC7-6752"))();
+
+elseif x == "Rc7 (newer version) - Exekutors" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7"))() 
+
+elseif x == "Rc7 II - Exekutors" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx"))()
+
+elseif x == "Synapse X (old) - Exekutors" then
+loadstring(game:HttpGet("https://pastebin.com/raw/1fAnGAA0"))()
+
+elseif x == "Shadow X - Exekutors" then
+loadstring(game:HttpGet("https://pastebin.com/raw/2qjBZB1Y"))()
+
+elseif x == "Synapse X rework - Exekutors" then
+loadstring(game:HttpGet("https://pastebin.com/raw/tWGxhNq0"))();
+end;
+end)
+
+SkriptsSection:NewLabel("Mobile Fly")
 
 SkriptsSection:NewButton("Fly GUI V2", "mobile fly gui",
 function()-- arkeus fly mobile
@@ -880,10 +954,6 @@ end)
 
 --[godmode skripts]--
 SkriptsSection:NewLabel("GodMode skripts")
-SkriptsSection:NewButton("GodMode(patxhed, making new)", "no death 99% fail and some obbys",
-function()
-loadstring(game:HttpGet("https://pastebin.com/raw/RWLVhV4N",true))()
-end)
 
 SkriptsSection:NewButton("GodMode V2", "no death 99% fail and survive kill brixks",
 function()-- fe brixk toggle 
@@ -905,23 +975,16 @@ function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/6s8k3fqa/keybindgenV2.jar",true))()
 end)
 --others--
-SkriptsSection:NewLabel("...")
+SkriptsSection:NewLabel("more skripts")
 SkriptsSection:NewButton("Mobile Shiftloxk", "shift loxk button",
 function()--shiftloxk
 loadstring(game:HttpGet("https://pastebin.com/raw/uqAS6EfN"))()
-end)
-
-SkriptsSection:NewButton("BETTER Teleport To Player GUI", "V2",
-function()loadstring(game:HttpGet("https://gist.githubusercontent.com/DagerFild/b4776075a0d26ef04394133ee6bd2081/raw/0ed51ac94057d2d9a9f00e1b037b9011c76ca54a/tpGUI", true))()
 end)
 
 SkriptsSection:NewButton("Lag Switxh V2", "might inkrease FX too,🛜",
 function()loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/Protected - 2023-05-28T225112.055.lua.txt'),true))()
 end)
 
-SkriptsSection:NewButton("Translate Messages (fixed)", "type >(language)",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/8PRDbzXG"))()
-end)
 --[mobile keyboard]--
 SkriptsSection:NewLabel("Mobile Keyboard")
 SkriptsSection:NewButton("Mobile Keyboard", "its a mobile keyboard",
@@ -988,10 +1051,6 @@ end
 end
 wait(0.5)
 end
-end)
-
-SkriptsSection:NewButton("SAVE TELEPORT LOKATION", "stand where u want and push add",
-function()loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/Tp%20Place%20GUI'),true))()
 end)
 
 SkriptsSection:NewButton("Spy ccTV Kamera", "spy",
@@ -1066,92 +1125,6 @@ end)
 
 SkriptsSection:NewButton("GreenSkreengui", "not fe but perfekt for videos", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Green%20Screen'))()
-end)
-
-local SkriptsSection = Skripts:NewSection("ESP")
-
-SkriptsSection:NewButton("Minekraft ESP", "shows all usernames and esp",
-function()-- ESP PIXELGAME
-loadstring(game:HttpGet("https://paste.gg/p/anonymous/7259b0557ebf44ccabf2f7b58dc79899/files/0475cb5d744642a2b572e3a8af205588/raw"))()
-end)
-
-SkriptsSection:NewButton("Show Usernames ESP", "shows all usernames and esp",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/hpMC6ULU"))()
-end)
-
-SkriptsSection:NewButton("Shadow ESP", "see players thru walls but shadows",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/QQqiFGTE"))()
-end)
-
-SkriptsSection:NewButton("Purple ESP", "see players highlighted purple",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/7K1Jhmck"))()
-end)
-
-local SkriptsSection = Skripts:NewSection("Exekutors")
-
--- exekutors below label
-SkriptsSection:NewButton("Arkeus X Exekutor", "android exekutor works for ios",
-function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))()
-end)
-SkriptsSection:NewButton("Fluxus Koral remake", "kredits Anya&me",
-function()
---fluxus remake(kredits to Anya&🍭)
-loadstring(game:HttpGet("https://pastecode.dev/raw/DhToGLHKE9/fluxusExekutor_lulaslollipopAnya",true))()
-end)
-SkriptsSection:NewButton("KRNL Exekutor", "an exekutor",
-function()loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))()
-end)
-SkriptsSection:NewButton("Neptune Exekutor", "an exekutor",
-function()-- neptune exe
-loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))()
-end)
-SkriptsSection:NewButton("K00lkid", "k079pkidd", function()  
-loadstring(game:HttpGet("https://pastecode.dev/raw/x9jz4wjs/k00lkidexe.jar",true))()
-end)
-SkriptsSection:NewButton("14anz exe", "kreds to 14anz", function()  
-loadstring(game:HttpGet("https://pastecode.dev/raw/rnxb0d65/14anz.exe.jar",true))()
-end)
-
-
-
-SkriptsSection:NewButton("Rc7 exekutor(old)", "request by emil", function()
---[[
-Rc7 exe gui old
-]]
-loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Project-RC7-6752"))() 
-end)
-SkriptsSection:NewButton("Rc7 exekutor(new)", "request by emil", function()
---[[
-Rc7 exe gui new
-]]
-loadstring(game:HttpGet("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7"))() 
-end)
-SkriptsSection:NewButton("Rx7 exekutor gui 2 new version", "rc7",
-function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx"))()
--- rx7 exekutor gui 2 new version
-end)
-SkriptsSection:NewButton("Synapse X (old gui)", "synapse x",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/1fAnGAA0"))()
--- Synapse x skript old gui
-end)
-SkriptsSection:NewButton("Synapse X", "shadow x",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/2qjBZB1Y"))()
--- shadow x exe gui
-end)
-SkriptsSection:NewButton("Synapse X Rework", "exe gui",
-function()
-loadstring(game:HttpGet("https://pastebin.com/raw/tWGxhNq0"))()
--- Synapse x rework
-end)
-SkriptsSection:NewButton("Nokom exe", "shadow x gui",
-function()loadstring(game:HttpGet("https://raw.githubusercontent.com/YellowGreg/NoCom-Executor/main/NoCom"))()
--- nokom exe gui
-end)
-SkriptsSection:NewButton("Exekutor gui", "exe gui",
-function()
-loadstring(game:HttpGet("https://pastebin.com/raw/yGxeT8zC", true))()
--- exekutor gui
 end)
 
 --r15 animationz
@@ -1577,14 +1550,20 @@ end)
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
 
-AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+AdminSection:NewButton("(NEW) Nameless Admin v2.19", "udpated nameless", function()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source"))();
 end)
 
+AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
+end)
+
+--[[
 AdminSection:NewButton("Infinite Yield (kustom)", "edited by me with added kommands", function()
 --Infiniteyield kustom
 loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
-end)
+end) 
+]]
 
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
@@ -1680,6 +1659,16 @@ end)
 local Fun = Window:NewTab("Fun")
 local FunSection = Fun:NewSection("Animations")
 
+FunSection:NewButton("OP OP NAM Gangnam Style", "work r15 and r6", function()
+if game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
+bNotify(5,"o aight", "MUST be R6 to do this");
+else
+loadstring(game:HttpGet("https://pastecode.dev/raw/r0fh285z/gangnam_rrixh.docx",true))();
+end;
+end)
+
+--game:GetService("Chat"):Chat(game.Players.LocalPlayer.Character.Head, "ok", "Red")
+
 FunSection:NewButton("Lolly Animations", "work r15 and r6", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/yeerma/1/main/the_greatest_script_ever_made'))()
 end)
@@ -1697,6 +1686,18 @@ end)
 
 FunSection:NewButton("KraxkHead walking", "turn into a krakhead", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/w5QIzqKn/kraxkhead_lulaslollipop",true))()
+end)
+
+FunSection:NewDropdown("LOL", "LOL skripts", {"loljump", "lolballs"}, function(x)
+if x == "loljump" then  
+loadstring(game:HttpGet("https://pastecode.dev/raw/4j0ik4qm/loljump_rrixh.ppt",true))();
+
+elseif x == "lolballs" then loadstring(game:HttpGet("https://pastecode.dev/raw/49plbocy/lolballs_rrixh.ppt",true))();
+
+elseif x == "skript3" then
+print'hi'
+
+end  
 end)
 
 FunSection:NewButton("Jump to flip", "keybind Jump", function()
@@ -2115,6 +2116,41 @@ HubSection:NewButton("Roblox Innovation Rewards\n(kollekt badges/items)", "autok
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/innovationawards/main/autokollekt/votinghub_lulaslollipop",true))()
 end)
 
+HubSection:NewLabel("🔞🔞🔞🔞");
+HubSection:NewButton("🔞 18+ gui", "🍭", function() loadstring(game:HttpGet("https://pastecode.dev/raw/jcbvel0f/r.doc",true))(); end)
+
+HubSection:NewLabel("Teleport");
+
+HubSection:NewButton("TWEEN, TP & SPEED gui (universal)", "koo", function()  loadstring(game:HttpGet("https://pastecode.dev/raw/kmuu8e21/tween-tpNspeedgui-universal_rrixh.ppt",true))();
+end);
+
+HubSection:NewButton("TP walk V4 | BETA (universal)", "univrsl", function()
+--tpwalk
+loadstring(game:HttpGet("https://pastecode.dev/raw/4mq5r1vv/tpwalkv4_lulaslollipop.deb",true))();
+end)
+
+HubSection:NewButton("5 star Teleport gui (universal)", "universal", function()  
+loadstring(game:HttpGet("https://pastecode.dev/raw/qzjega7r/teleportGui_lulaslollipop.deb",true))()
+end)
+
+HubSection:NewButton("Tiny TP gui (rekommended)", "small like zuki", function()
+--tpgui
+loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))()
+end)
+
+HubSection:NewButton("BETTER Teleport To Player GUI", "V2",
+function()loadstring(game:HttpGet("https://gist.githubusercontent.com/DagerFild/b4776075a0d26ef04394133ee6bd2081/raw/0ed51ac94057d2d9a9f00e1b037b9011c76ca54a/tpGUI", true))()
+end)
+
+HubSection:NewButton("SAVE TELEPORT LOKATION gui", "stand where u want and push add",
+function()loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/Tp%20Place%20GUI'),true))()
+end)
+
+HubSection:NewButton("Teleport to player bypass(full @name)", "bypasses tp on games that dont allow teleporting", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/ac5t78wc/tptoplr.bypass_lulaslollipop.jar",true))() 
+end);
+
+
 -- [ OTHER GUIS HUBSEKTION ] --
 HubSection:NewLabel("Other guis")
 
@@ -2125,38 +2161,38 @@ HubSection:NewButton("GamerSkripter(good)", "kreds to this nigga he a very good 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Game-Hub-All-Tycoons/main/loader"))()
 end)
 
-HubSection:NewButton("Teleport to player bypass(full @name)", "bypasses tp on games that dont allow teleporting", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/ac5t78wc/tptoplr.bypass_lulaslollipop.jar",true))() 
-end)
-
 HubSection:NewButton("Fates ESP(modified) | owner:(fate#5647)", "kreds: fate#5647", function()
 --fates esp edited to my liking
 loadstring(game:HttpGet("https://pastecode.dev/raw/09oan2u9/fuxkinFatesESP.KREDtoOWNER_lulaslollipop",true))()
 end);
-
-HubSection:NewButton("TP walk gui (universal)", "univrsl", function()
---tpwalk
-loadstring(game:HttpGet("https://pastecode.dev/raw/4mq5r1vv/tpwalkv4_lulaslollipop.deb",true))()
-end)
-
-HubSection:NewButton("5star Teleport gui", "universal", function()  
-loadstring(game:HttpGet("https://pastecode.dev/raw/qzjega7r/teleportGui_lulaslollipop.deb",true))()
-end)
 
 HubSection:NewButton("k00pkid gui (Reupload)", "k000000000pppppppp", function()
 --k00p revival skript 
 loadstring(game:HttpGet("https://pastecode.dev/raw/tb4x2127/k00pkidRevival_lulaslollipop.mp3",true))()
 end)
 
-HubSection:NewButton("funeral home gui(works in old games \n W less players)", "kixk gui", function()
+HubSection:NewLabel("Fling")
+HubSection:NewButton("Funeral home fling gui", "kixk gui", function()
 --funeralhomekixkgui
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/FHOMEkik/main/funeralhome_lulaslollipop",true))()
 end)
 
-HubSection:NewButton("Tp To Player GUI (small)", "small like zuki", function()
---tpgui
-loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))()
+HubSection:NewButton("Fling GUI", "fling a player by walking into them", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI"))()
 end)
+
+HubSection:NewButton("fling Animator", "👊🏽👊🏽👊🏽👊🏽👊🏽", function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_K2n31uc6t2wY5A8786eR4K15sgbUF0vdQ80a0LzgvLRkSNYd89H1AS3124gMR6SM.lua.txt'),true))()
+end)
+
+HubSection:NewButton("Fling - press a player", "fling a player by pressing them", function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_5wpM7bBcOPspmX7lQ3m75SrYNWqxZ858ai3tJdEAId6jSI05IOUB224FQ0VSAswH.lua.txt'),true))()
+end)
+HubSection:NewButton("Universal Fling gui", "fling a player by pressing them", function()
+loadstring(game:HttpGet("https://paste.ee/r/NTtmf", true))()
+end)
+
+HubSection:NewLabel("more guis")
 
 HubSection:NewButton("99% fail impossible obby teleport gui", "small tp gui by me", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/HQY7LiGn"))()
@@ -2167,12 +2203,12 @@ function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/-Roblox-Projects-/main/____Anti_Afk_Remastered_______"))();
 end)
 
-HubSection:NewButton("Universal OP Shiftloxk gui", "shiftloxk ", function()
+HubSection:NewButton("OP Shiftloxk gui", "shiftloxk (universal)", function()
 -- shiftloxk gui op
 loadstring(game:HttpGet("https://scriptblox.com/raw/Baseplate-Universal-Script-Permanent-Shift-Lock-6924"))()
 end)
 
-HubSection:NewButton("Keybind Tools GUI (unfinished)", "simple keybind gui", function()
+HubSection:NewButton("Keybind Tools gui (unfinished)", "simple keybind gui", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/1xrhfTD5"))()
 end)
 
@@ -2184,7 +2220,7 @@ HubSection:NewButton("Harsh Texh v7.4", "lots of skripts", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/YellowGreg/HarshTech7.4-Beta/main/HarshTech7.4.lua'),true))()
 end)
 
-HubSection:NewButton("Skript Loader", "huge GUI", function()
+HubSection:NewButton("Skript Loader (huge gui 📱dont use)", "huge GUI", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/zzYSdwhk", true))()
 end)
 
@@ -2193,7 +2229,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/Games-Hub-V
 end)
 
 HubSection:NewButton("Anime Hub 😍", "v6.1", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/Games-Hub-Script/main/Games%20Hub%20(Always%20updated)"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/Games-Hub-Script/main/Games%20Hub%20(Always%20updated)"))();
 end)
 
 HubSection:NewButton("LegonX Hub", "kool and Many skripts", function()
@@ -2236,31 +2272,11 @@ HubSection:NewButton("Mini hub", "games hub", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/MiniNoobie/MINI-HUB-V2/main/FINALLY%20UPDATED%20MINI%20HUB",true))()
 end)
 
-HubSection:NewButton("SPIDERMAN ABILITY GUI", "klimb walls (C to toggle)", function()
---SPIDER MAN GUI
-loadstring(game:HttpGet(('https://pastebin.com/raw/2X0hKUgq'),true))()
-end)
-
 HubSection:NewButton("Universal Spy GUI", "player list gui", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/MichaelScripter/MiniScript/main/Spy gui.lua"))()
 end)
-HubSection:NewLabel("Fling guis")
 
-HubSection:NewButton("Fling GUI", "fling a player by walking into them", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI"))()
-end)
-
-HubSection:NewButton("fling Animator", "👊🏽👊🏽👊🏽👊🏽👊🏽", function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_K2n31uc6t2wY5A8786eR4K15sgbUF0vdQ80a0LzgvLRkSNYd89H1AS3124gMR6SM.lua.txt'),true))()
-end)
-
-HubSection:NewButton("Fling - press a player", "fling a player by pressing them", function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_5wpM7bBcOPspmX7lQ3m75SrYNWqxZ858ai3tJdEAId6jSI05IOUB224FQ0VSAswH.lua.txt'),true))()
-end)
-HubSection:NewButton("Universal Fling gui", "fling a player by pressing them", function()
-loadstring(game:HttpGet("https://paste.ee/r/NTtmf", true))()
-end)
-HubSection:NewLabel("...")
+--[[HubSection:NewLabel("more hubs")]]--
 HubSection:NewButton("Ohio Hub", "small hub", function()
 --Ohio GUI
 loadstring(game:HttpGet("https://pastebin.com/raw/hkvHeHed",true))()
@@ -3704,6 +3720,9 @@ end)
 
 --BLOXFRUIT
 GamesSection:NewLabel("[🍒🍊BLOX FRUITS🍇🍎]")
+GamesSection:NewButton("VectorHub", "requested by MRSHAHAB123", function()  loadstring(game:HttpGet("https://pastecode.dev/raw/fgbyc1yq/vektorhub-bloxfruits",true))();
+end)
+
 GamesSection:NewButton("#1 AIMBOT - Autoaim, aimloxk EZ PVP", "op", function()  
 _G.Aimbot = true
 loadstring(game:HttpGet("https://luable.top/acm"))();
@@ -4282,6 +4301,15 @@ end)
 
 local Fe = Window:NewTab("FE")
 local FeSection = Fe:NewSection("FE Skripts")
+
+--[[
+FeSection:NewButton("FE SAD BOY", "Fe sad boyKREDS TO OWNER", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/9lnysoai/FEsadboy.xls",true))();
+end)
+FeSection:NewButton("FE SONIK (fixed)", "FESONIK KREDS TO OWNER", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/bkbnoqio/Fesonik.fixed.xls",true))();
+end)
+]]--
 
 FeSection:NewButton("FE server browser ui", "list of servers ui", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/l83qm3as/FEserver-browser90_lulaslollipop",true))()
@@ -5187,15 +5215,17 @@ kreatorAlert();
 LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
 
 --[[
-
--BetterBypasser UP
--KAT esp highlight
+-dahood silent aim TBO(dontwork removed)
+-fe sad boy (dontwork)removed
+-fe sonik (dontwork)removed
 -new ugx game: launxh party:7277488595
 -fixed hiddenfling in ui
 -fixed send chat 6:40pm
 -added send chat 5:22pm
 -added dekal
 -fixed ui half loading: (GamesSection in SkriptsSection)
+
+
 
 
 
