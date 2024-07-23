@@ -358,7 +358,7 @@ local maxplrs = niggas.Players.MaxPlayers
 local serversize = SkriptsSection:NewLabel("Server Size: "..kount.."/"..maxplrs)
 
 getgenv().Enabled = false
-getgenv().espstuff =Color3.fromRGB(255,255,255)
+getgenv().espstuff =Color3.fromRGB(0,255,0)
 
 function enablestuff()
 for i,v in pairs(Players:GetPlayers()) do
@@ -2858,23 +2858,22 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 GamesSection:NewLabel("[🗡️KAT🗡️]")
 
 GamesSection:NewButton("KAT Aimbot (OP)", "shoots nearest player",
-function()-- kat aimbot
+function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))(); task.wait()
 Notify({ Description = "(KAT) Aimbot🟢";Duration = 4; });
 loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
 end)
 
-GamesSection:NewToggle("Highlight Playerz", "esp players", function(...)
-getgenv().Enabled = ...
-end)
-
-GamesSection:NewColorPicker("Highlight Kolor (rainbow on then stop on\nA kolor (for mobile))", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(0,0,255), function(kolor)
-getgenv().espstuff = kolor
-end);
-
 GamesSection:NewToggle("Auto Jump", "auto jumps", function(state)
     autoJumpEnabled = state
 end)
+
+GamesSection:NewToggle("Highlight Playerz", "esp players", function(...)
+getgenv().Enabled = ...
+end)
+GamesSection:NewColorPicker("Highlight Kolor (see info if mobile)", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(0,0,255), function(kolor)
+getgenv().espstuff = kolor
+end);
 
 GamesSection:NewButton("KAT GUI", "esp,spam shoot (aimbot💻)", function()--kat gui
 loadstring(game:HttpGet("https://pastebin.com/raw/78kG7trR"))()
@@ -2891,10 +2890,7 @@ end)
 GamesSection:NewButton("Kopy >REALKING KAT GUI< 🔑", "key: 7hFUsGVXaQ73mxgNjQJZjp4SEXy9yPdzN4bH38PdrYNBTkQw3nH2Y2mqKFcFkS52", function()
 setclipboard("7hFUsGVXaQ73mxgNjQJZjp4SEXy9yPdzN4bH38PdrYNBTkQw3nH2Y2mqKFcFkS52")
 end)
-GamesSection:NewButton("Aimbot(KAT)", "shoots nearest player",
-function()-- kat aimbot
-loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
-end)
+
 
 
 GamesSection:NewDropdown("Unnamed Shooter", "op skript by tora", {"AUTO KILL (op skript by tora)", "to game"}, function(x) if x == "AUTO KILL (op skript by tora)" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/e700beeb77025b72371b9383a4510f20cf438a4e/UnnamedShooter",true))();
