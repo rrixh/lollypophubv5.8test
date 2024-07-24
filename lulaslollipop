@@ -2911,7 +2911,7 @@ end)
 GamesSection:NewLabel("😤 99% FAIL OBBY😤 ")
 
 GamesSection:NewButton("🏃🏽‍♂️💨😩99% FAIL OBBY 🏃🏽‍♂️💨😩", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/uf8feguj/RRixh.newuwu-99fail-Trollgui-memory_lulaslollipop.ppt",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/99failobby.new_lulaslollipop",true))();
 wait(0.000001)
 pcall(function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/27r0btda/wHook-.-.-99failobby_lulaslollipop.deb",true))();
