@@ -1,7 +1,7 @@
 --main v9.2 LOLLYPOP HUB
 -- Version: 9.2
 -- [ main/info ] --
-local LastUpdate="Last Update: July 24, 2024";
+local LastUpdate="Last Update: July 25, 2024";
 local Vv="9.2";
 local exploit=identifyexecutor();
 
@@ -784,12 +784,13 @@ end)
 
 --[godmode skripts]--
 SkriptsSection:NewLabel("GodMode skripts")
+function gmodeOn()
+loadstring(game:HttpGet("https://pastecode.dev/raw/dls75069/LH.godmodeToggle-ON.xlsx",true))();end;
+function gmodeOff()
+loadstring(game:HttpGet("https://pastecode.dev/raw/vzpw8sqc/LH.godmodeToggle-OFF.xlsx",true))();end;
 
-SkriptsSection:NewToggle("(new) Godmode/Anti-Killbrixk/Ignore Touxh\nInterests", "anti kill brixks, for obbys, 99% fail", function(on)
-if on then
-loadstring(game:HttpGet("https://pastecode.dev/raw/dls75069/LH.godmodeToggle-ON.xlsx",true))();
-else
-loadstring(game:HttpGet("https://pastecode.dev/raw/vzpw8sqc/LH.godmodeToggle-OFF.xlsx",true))();
+SkriptsSection:NewToggle("[new] Godmode (toggle off then on again if die)", "anti kill brixks, for obbys, 99% fail", function(gmo)
+if gmo then gmodeOn(); else gmodeOff();
 end;
 end)
 
