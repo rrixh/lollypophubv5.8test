@@ -789,9 +789,8 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/dls75069/LH.godmodeToggle-ON.
 function gmodeOff()
 loadstring(game:HttpGet("https://pastecode.dev/raw/vzpw8sqc/LH.godmodeToggle-OFF.xlsx",true))();end;
 
-SkriptsSection:NewToggle("[new] Godmode (toggle off then on again if die)", "anti kill brixks, for obbys, 99% fail", function(gmo)
-if gmo then gmodeOn(); else gmodeOff();
-end;
+SkriptsSection:NewToggle("[new] Godmode (toggle off then on again if die)", "anti kill brixks, for obbys, 99% fail", function(g)
+if g then gmodeOn(); else gmodeOff(); end;
 end)
 
 SkriptsSection:NewButton("GodMode V2", "no death 99% fail and survive kill brixks",
@@ -2235,6 +2234,10 @@ end);
 
 -- [ OTHER GUIS HUBSEKTION ] --
 HubSection:NewLabel("Other guis")
+
+HubSection:NewButton("(UNIVERSAL) GHOST HUB", "🍭", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))();
+end)
 
 HubSection:NewButton("Sumit Hub", "gets updated", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/SumitScripts/SumitScripts-Hub/main/UpdateLoader"))();
 end)
