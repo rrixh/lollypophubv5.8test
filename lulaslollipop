@@ -1,7 +1,7 @@
 --main v9.2 LOLLYPOP HUB
 -- Version: 9.2
 -- [ main/info ] --
-local LastUpdate="Last Update: July 25, 2024";
+local LastUpdate="Last Update: July 26, 2024";
 local Vv="9.2";
 local exploit=identifyexecutor();
 
@@ -491,6 +491,7 @@ local SkriptsSection = Skripts:NewSection("Skripts:")
 --////---------------------------------
 SkriptsSection:NewLabel("Players");
 --------------////-------------------
+
 local selektedPlayerName = nil;
 local function ALLPLAYERS()
     local players = game.Players:GetPlayers()
@@ -646,6 +647,7 @@ SkriptsSection:NewTextBox("Send chat(old)", "for games without xhat", function(m
 local SMR = game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest');
 SMR:FireServer(msg,"All")
 end);
+
 SkriptsSection:NewTextBox("Send chat(general)", "🍭 all day", function(roblox)
 local TCS = game:GetService("TextChatService").TextChannels.RBXGeneral;
 TCS:SendAsync(roblox)
@@ -4836,7 +4838,6 @@ HomeSection:NewButton("Harked Reborn V2 (leaked)", "only in sekret games", funct
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Harked-Skript-6804"))()
 end)
 HomeSection:NewButton("Anti AFK", "disables afk limit", function()
----- Roblox Anti Afk Script
 
 wait(0.5)local ba=Instance.new("ScreenGui")
 local ca=Instance.new("TextLabel")local da=Instance.new("Frame")
