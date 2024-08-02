@@ -1,7 +1,6 @@
 --main v9.2 LOLLYPOP HUB
 -- Version: 9.2
 -- [ main/info ] --
-function LoLLyPoPHuB()
 local LastUpdate="Last Update: Aug 1, 2024";
 local Vv="9.2";
 local exploit=identifyexecutor();
@@ -5367,12 +5366,9 @@ loadingText.Text = "Skript Loading: " .. kookie .. "%"
 end;
 
 spawn(animateSkript);
-task()
 kreatorAlert(); 
 
-LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
-end;
-spawn(LoLLyPoPHuB);
+-- LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
 
 --[[
 -DandyIsMario nameless admin alr added(7/29)
