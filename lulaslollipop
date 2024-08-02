@@ -1,7 +1,8 @@
 --main v9.2 LOLLYPOP HUB
 -- Version: 9.2
 -- [ main/info ] --
-local LastUpdate="Last Update: July 29, 2024";
+function LoLLyPoPHuB()
+local LastUpdate="Last Update: Aug 1, 2024";
 local Vv="9.2";
 local exploit=identifyexecutor();
 
@@ -627,17 +628,19 @@ game:GetService("RunService").RenderStepped:Connect(function()
     end
 end)
 
+infiniteJumpEnabled = false
 --infjump.Konnekt
-SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(toggled)
-if toggled then
-getgenv().InfJump = true
-spawn(function()
-while getgenv().InfJump == true do
-uis.JumpRequest:connect(function()
-if getgenv().InfJump == true then
-niggas:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping");end;end);wait();end;end)
-else
-getgenv().InfJump = false; end;
+SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(on)  --you dont need "arg" for a button
+infiniteJumpEnabled = on
+        if infiniteJumpEnabled then
+game:GetService("UserInputService").JumpRequest:connect(function()
+if infiniteJumpEnabled then
+game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+                end
+            end)
+        else
+    infiniteJumpEnabled = false
+        end
 end)
 --infjump.Diskonnekt
 
@@ -997,35 +1000,38 @@ loadstring(game:HttpGet("https://pastebin.com/raw/7K1Jhmck"))();
 end;
 end)
 
-SkriptsSection:NewDropdown("Exekutors", "DropdownInf", {"ArkeusX - Exekutors", "Neptune - Exekutors", "FluxusKoral remake - Exekutors", "KRNL - Exekutors", "Rc7 (old) - Exekutors", "Rc7 (newer version) - Exekutors", "Rc7 II - Exekutors", "Synapse X (old) - Exekutors", "Shadow X - Exekutors", "Synapse X rework - Exekutors",}, function(x)
-if x == "ArkeusX - Exekutors" then
+SkriptsSection:NewDropdown("Exekutors", "exploit guis", {"Vega X", "ArkeusX", "Neptune", "FluxusKoral remake", "KRNL", "Rc7 (old)", "Rc7 (newer version)", "Rc7 II", "Synapse X (old)", "Shadow X", "Synapse X rework",}, function(x)
+if x == "ArkeusX" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))();
 
-elseif x == "FluxusKoral remake - Exekutors" then
+elseif x == "Vega X" then
+loadstring(game:HttpGet("https://pastecode.dev/raw/m08bh0gu/vegaXexekutor.jar",true))();
+
+elseif x == "FluxusKoral remake" then
 loadstring(game:HttpGet("https://pastecode.dev/raw/DhToGLHKE9/fluxusExekutor_lulaslollipopAnya",true))();
 
-elseif x == "KRNL - Exekutors" then
+elseif x == "KRNL" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))();
 
-elseif x == "Neptune - Exekutors" then
+elseif x == "Neptune" then
 loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))();
 
-elseif x == "Rc7 (old) - Exekutors" then
+elseif x == "Rc7 (old)" then
 loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Project-RC7-6752"))();
 
-elseif x == "Rc7 (newer version) - Exekutors" then
+elseif x == "Rc7 (newer version)" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7"))() 
 
-elseif x == "Rc7 II - Exekutors" then
+elseif x == "Rc7 II" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx"))()
 
-elseif x == "Synapse X (old) - Exekutors" then
+elseif x == "Synapse X (old)" then
 loadstring(game:HttpGet("https://pastebin.com/raw/1fAnGAA0"))()
 
-elseif x == "Shadow X - Exekutors" then
+elseif x == "Shadow X" then
 loadstring(game:HttpGet("https://pastebin.com/raw/2qjBZB1Y"))()
 
-elseif x == "Synapse X rework - Exekutors" then
+elseif x == "Synapse X rework" then
 loadstring(game:HttpGet("https://pastebin.com/raw/tWGxhNq0"))();
 end;
 end)
@@ -1076,6 +1082,7 @@ end)
 
 --[mobile keyboard]--
 SkriptsSection:NewLabel("Mobile Keyboard")
+
 SkriptsSection:NewButton("Mobile Keyboard", "its a mobile keyboard",
 function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
@@ -1099,6 +1106,8 @@ end)
 {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"},
 {"Ctrl", "Win", "Alt", "Space", "Alt", "Menu", "Ctrl"}
 ]]
+SkriptsSection:NewButton("(new) MOBILE MOUSE KURSOR REMAKE", "by Im Patrixk", function() loadstring(game:HttpGet("https://pastecode.dev/raw/hmpcsg2u/mobilekursorrm.xlsx",true))();
+end)
 SkriptsSection:NewButton("MOUSE KURSOR", "gives u a mouse kursor touxh",
 function()
 loadstring(game:HttpGet(('https://pastefy.app/58d8d52G/raw'),true))()
@@ -1643,16 +1652,17 @@ AdminSection:NewButton("(NEW) Nameless Admin v2.19", "udpated nameless", functio
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source"))();
 end)
 
-AdminSection:NewButton("Infinite Yield (original)", "type the kommand in the kommand bar", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
+AdminSection:NewButton(" ROchips Admin panel v6.8", "impatrixk", function()
+spawn(function()
+loadstring(game:HttpGet("https://pastefy.app/yumu499O/raw",true))();
+end)
 end)
 
---[[
-AdminSection:NewButton("Infinite Yield (kustom)", "edited by me with added kommands", function()
---Infiniteyield kustom
-loadstring(game:HttpGet("https://pastecode.dev/raw/vls9b2lm/infiniteyield-EdgeIY",true))()
-end) 
-]]
+AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
+pcall(function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
+end)
+end)
 
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
@@ -4423,12 +4433,34 @@ end)
 local Fe = Window:NewTab("FE")
 local FeSection = Fe:NewSection("FE Skripts")
 
-FeSection:NewButton("FE SAD BOY (R6 only)", "Fe sad boyKREDS TO OWNER", function()
+FeSection:NewLabel("(NEW) FE REANIMATION skripts (erbody kan see)")
+
+FeSection:NewButton("FE ANIMATION MAN (kontrols: Z,X,C,N keys)", "🍭", function()
+loadstring(game:HttpGet("https://pastefy.app/ZWgckZdU/raw",true))();
+ end)
+
+FeSection:NewButton("FE HONORED", "🍭", function() loadstring(game:HttpGet("https://pastecode.dev/raw/rkef2tun/Fehonored-float.doc",true))();
+ end)
+
+
+FeSection:NewButton("FE KRYSTAL DANXE (R6)", "impatrixk", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/le3gs14c/Fekrystal.doc",true))();
+end)
+
+FeSection:NewButton("FE SAD BOY (R6)", "Fe sad boyKREDS TO OWNER", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/9lnysoai/FEsadboy.xls",true))();
 end)
 
-FeSection:NewButton("FE SONIK (fixed)", "FESONIK KREDS TO OWNER", function()
+FeSection:NewButton("FE ZOMBIE", "🍭", function() loadstring(game:HttpGet("https://pastecode.dev/raw/pk9iyn45/Fezombie.doc",true))();
+end)
+
+FeSection:NewButton("FE SONIK (R6)", "FESONIK KREDS TO OWNER", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/bkbnoqio/Fesonik.fixed.xls",true))();
+end)
+
+FeSection:NewLabel("more FE")
+
+FeSection:NewButton("FE illusion", "by X", function() loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-FE-Illusion-Script-12744"))()
 end)
 
 FeSection:NewButton("FE server browser ui", "list of servers ui", function()
@@ -4438,6 +4470,9 @@ end)
 FeSection:NewButton("FE Stop Time", "freeze in mid air or whatever", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
 end)
+
+FeSection:NewButton("FE pandora", "impatrixk", function() loadstring(game:HttpGet("https://pastebin.com/raw/zYTR38m5"))();
+ end)
 
 FeSection:NewButton("FE Fish", "(need hat) Parrot Fishfaxe", function()
 -- fe fish
@@ -5336,6 +5371,8 @@ task()
 kreatorAlert(); 
 
 LollypopHUB('Lollypop Hub '..Vv..' 100% 🍭')
+end;
+spawn(LoLLyPoPHuB);
 
 --[[
 -DandyIsMario nameless admin alr added(7/29)
