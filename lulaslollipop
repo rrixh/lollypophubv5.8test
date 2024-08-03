@@ -1514,8 +1514,10 @@ end)
 local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands")
 
-AdminSection:NewButton("(NEW) Nameless Admin v2.19", "udpated nameless", function()  
+AdminSection:NewButton("(NEW) Nameless Admin v2.19", "udpated nameless", function()
+pcall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source"))();
+end)
 end)
 
 AdminSection:NewButton(" ROchips Admin panel v6.8", "impatrixk", function()
@@ -1653,25 +1655,15 @@ FunSection:NewButton("KraxkHead walking", "turn into a krakhead", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/w5QIzqKn/kraxkhead_lulaslollipop",true))()
 end)
 
-FunSection:NewDropdown("LOL", "LOL skripts", {"loljump", "lolballs"}, function(x)
-if x == "loljump" then  
-loadstring(game:HttpGet("https://pastecode.dev/raw/4j0ik4qm/loljump_rrixh.ppt",true))();
-
-elseif x == "lolballs" then loadstring(game:HttpGet("https://pastecode.dev/raw/49plbocy/lolballs_rrixh.ppt",true))();
-
-elseif x == "skript3" then
-print'hi'
-
-end  
-end)
-
 FunSection:NewButton("Jump to flip", "keybind Jump", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/7nZso3Lj/jumpToFlip_lulaslollipop",true))()
 end)
 
+--[[
 FunSection:NewButton("XD", "XDDDDDDD", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
 end)
+
 
 FunSection:NewLabel("FX/Partikles/Assets")
 
@@ -1682,6 +1674,7 @@ emit.Texture = "http://www.roblox.com/asset/?id="..assetId;
 emit.VelocitySpread = 20;
 end;
 end)
+]]--
 
 local FunSection = Fun:NewSection("Message Fun")
 
