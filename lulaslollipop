@@ -1,19 +1,15 @@
---main v9.2 LOLLYPOP HUB BAXKUP
--- Version: 9.2
+--main v9.3 LOLLYPOP HUB BAXKUP
+-- Version: 9.3
 -- [ main/info ] --
-if _G.lollypophubloaded == true then
-print'🍭hub already loaded';end;
-_G.lollypophubloaded = true
 
-local LastUpdate="Last Update: Aug 11, 2024";
-local Vv="9.2";
+local LastUpdate="Last Update: Aug 18, 2024";
+local Vv="9.3";
 local exploit=identifyexecutor() or "Unknown";
 -- [ 🛠️ main vars 🛠️ ] --
-game=game
 local lulas=game;
-local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))();local Notify=RRixh1.Notify;
+game=lulas
+local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify=RRixh1.Notify;
 holup=wait;task=task.wait;_0=print;LollypopHUB=print;
-local niggas=game;
 local ava=game.Players.LocalPlayer.Character;
 local hum = ava.Humanoid;
 
@@ -25,7 +21,7 @@ local lightgrey=Color3.fromRGB(100,100,100);
 local Rainbow = Color3.fromRGB(math.random(),math.random(),math.random());
 
 --[[ KUSTOM FUNKTIONS ]]--
-
+-- Make GUI Draggable
 local function bNotify(dur,btn,text)
 game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Lollypop Hub 🍭", Duration = dur, Button1 = btn, Callback = function()print('btn')end, Text = text});
 end;ok=bNotify;n=bNotify;
@@ -116,47 +112,24 @@ wait(0.07)-- speed
 end;
 
 loadingText.Text = "Suxxessfully Loaded 😛"
-wait(0.40)
+wait(0.1)
 loadingSkreen:Destroy(); --[[end1]]
 
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
-local user=niggas.Players.LocalPlayer.Name
-local display=niggas.Players.LocalPlayer.DisplayName;
+local user=game.Players.LocalPlayer.Name
+local display=game.Players.LocalPlayer.DisplayName;
 local lulaslollipop=3001347724;
 local cheru=4406450103;
-local plrId = niggas.Players.LocalPlayer.UserId;
+local plrId = game.Players.LocalPlayer.UserId;
 local garamondfont=Enum.Font.Garamond;
 local arialfont=Enum.Font.Arial;
-
-if type(lulaslollipop) == "number" and type(cheru) == "number" then do
-
-if plrId == lulaslollipop then
-print("OH shit 👑lulaslollipop👑 is here⭐️🍭")
-elseif plrId == cheru then
-print("OH shit 👑chelulu👑 is here")
-end;
-end;
-else 
-if plrId == lulaslollipop then
-
-game.Players.LocalPlayer.Chatted:Connect(function(m)
-if m == "/e pg" then
-loadstring(game:HttpGet("https://pastecode.dev/raw/ujudunfb/prtGrabber_rrixh.xlsx", true))()
-end
-end)
-print("🍭konnekted xhat kommands PrtGrabber")
-
-elseif plrId == cheru then
-print("OH shit 👑chelulu👑 is here") 
-end;
-end;
 
 local _1 ="[Lollypop Hub v"..Vv.."] Welkome to Lollypop Hub, "..display.."! (@"..user..")\nSkript by @lulaslollipop🍭 on Roblox👺";
 
 local _2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript\n(5/13/24)🍎 APPLE WARE iOS IS FINALLY OUT!!!!";
 local limegreen=Color3.fromRGB(0,255,0);
 
-niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
 Text = _1,
 Color = limegreen,
 Font = garamondfont,
@@ -164,7 +137,7 @@ FontSize = Enum.FontSize.Size24
 });
 local redorange=Color3.fromRGB(278,75,43);
 wait(1)
-niggas.StarterGui:SetCore("ChatMakeSystemMessage", {
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
 Text = _2,
 Color = redorange,
 Font = arialfont,
@@ -173,7 +146,7 @@ FontSize = Enum.FontSize.Size24
 end; --218,133,65=orange...0,255,0=green...278,75,43=red/orange...
 
 -- [ 📱💻PLATFORM / DEVIXE🖥️🎮 ] --
-local uis = niggas:GetService("UserInputService")
+local uis = game:GetService("UserInputService")
 local platform=uis:GetPlatform();
 local niggaIsUsing = table.find({Enum.Platform.IOS, Enum.Platform.Android}, platform)
 local devixe_name
@@ -213,11 +186,11 @@ local defaultKolor = Color3.fromRGB(192,192,192);
 
 --game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
 
-local lollypophub=loadstring(niggas:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
+local lollypophub=loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
 
 lollypophub.DefaultColor = defaultKolor
 lollypophub:Notification({
-Text = "🍭 Welkome to Lollypop Hub, "..niggas.Players.LocalPlayer.Name.."!🍭", Duration = 8});
+Text = "🍭 Welkome to Lollypop Hub, "..game.Players.LocalPlayer.Name.."!🍭", Duration = 8});
 
 lollypophub.DefaultColor = defaultKolor
 lollypophub:Notification({
@@ -229,7 +202,9 @@ lollypophub:Notification({
 Text = "🍎 APPLEWARE FOR iOS RELEASED!!!! (5/13/24)",
 Duration = 7});
 
+pcall(function()
 e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();
+        end)
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
@@ -248,8 +223,8 @@ e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydj
 local kount = #game.Players:GetPlayers();
 
 
-local kavo = loadstring(game:HttpGet("https://pastecode.dev/raw/MsVeci5gQG/kavomobileUi",true))()
-local lollypopHub = "Lollypop Hub🍭 | V" ..Vv.. " | " ..exploit.. " | " ..LastUpdate;
+local kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
+local lollypopHub = "Lollypop Hub🍭 | V" ..Vv.. " | " ..exploit.. " | " ..LastUpdate.. ""
 
 local Window = kavo.CreateLib(lollypopHub)
 -- themes:
@@ -266,16 +241,16 @@ local Window = kavo.CreateLib(lollypopHub)
 --lulaTheme
 -- tools1134,skripts35,game1443,games2450
 
-local function skriptLoaded()
+local function mememememememememememememememememeemememememememememmemeemememmemeememmeemememmee()
 print("@lulaslollipop🍭 on Roblox // @rrixh diskord // @siipped on Telegram")
-end;spawn(skriptLoaded)
+end;local spawn=spawn;spawn(mememememememememememememememememeemememememememememmemeemememmemeememmeemememmee)
 
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skripthub by @lulaslollipop on Roblox🍭😋")
-local Players = niggas:GetService("Players")
-local RunService = niggas:GetService("RunService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 local plr = Players.LocalPlayer
-local maxplrs = niggas.Players.MaxPlayers
+local maxplrs = game.Players.MaxPlayers
 local serversize = SkriptsSection:NewLabel("Server Size: "..kount.."/"..maxplrs)
 
 getgenv().Enabled = false
@@ -317,11 +292,12 @@ local todays_date = os.date("Today's Date: %A | %B %d, %Y");
 --⏰////%I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year\\\\⏰
 
 time:UpdateLabel("[" ..formatted_time.."]\n ["..todays_date.."]")
-wait(0.02)
+wait(0.2)
 end
 end
 
-spawn(updatetimelabel);
+spawn(function()
+updatetimelabel();end)
 -- [ END UPDATE TIME ] --
 
 --  "NEWDROPDOWNHERE", 
@@ -340,8 +316,7 @@ n(7, "aight", "skript wont work in my hub, paste the kopied link in a browser to
 elseif req == "Jailbird - ESP,FPS,Bring Players (Thesesettingsaregod)" then
 setclipboard("https://pastebin.com/nfQHwQBq");
 n(5, "aight", "kopied skript link: pastebin.com/nfQHwQBq✅")
-n(5, "aight", "skript wont work in my hub, paste the kopied link in a browser to get separate skript")
-
+n(5, "aight", "skript wont work in my hub, paste the kopied link in a browser to get separate skript");
 
 elseif req == "BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)" then
 loadstring(game:HttpGet("https://pastecode.dev/raw/fgbyc1yq/vektorhub-bloxfruits",true))();
@@ -359,46 +334,42 @@ elseif req=="99% fail obby - original Memory skript (AzuryCelestial)" then
 loadstring(game:HttpGet("https://rentry.co/memoryskript-original/raw",true))();
 
 elseif req == "FLY GUI V3 (AzuryCelestial)" then
-loadstring(niggas:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))();
 
 elseif req == "IGNORE TOUXH INTERESTS - zephyr (AzuryCelestial)" then
-loadstring(niggas:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))();
 
 elseif req=="IGNORE TOUXH INTERESTS gui - 🍭 (AzuryCelestial)" then
-loadstring(niggas:HttpGet("https://pastecode.dev/raw/hlfyh7fp/ignoreTouxhInterests_lulaslollipop.ppt.xlsx",true))();
+loadstring(game:HttpGet("https://pastecode.dev/raw/hlfyh7fp/ignoreTouxhInterests_lulaslollipop.ppt.xlsx",true))();
 
 elseif req == "DAHOOD - OSIRIS (ichmagmeinesisndd)" then
-loadstring(niggas:HttpGet("https://pastecode.dev/raw/5320ldxp/osirisdahood",true))();
+loadstring(game:HttpGet("https://pastecode.dev/raw/5320ldxp/osirisdahood",true))();
 
 elseif req=="HOOD KUSTOMS- FREEZENOVA GUI(ichmagmeinesisndd)" then
-loadstring(niggas:HttpGet("https://pastecode.dev/raw/u3mheabl/hoodkustoms-FREEZENOVAgui.ppt",true))();
+loadstring(game:HttpGet("https://pastecode.dev/raw/u3mheabl/hoodkustoms-FREEZENOVAgui.ppt",true))();
 
 elseif req=="DAHOOD - SwagMode (ichmagmeinesisndd)" then
-loadstring(niggas:HttpGet('https://raw.githubusercontent.com/lerkermer/lua-projects/master/SwagModeV002'))();
+loadstring(game:HttpGet('https://raw.githubusercontent.com/lerkermer/lua-projects/master/SwagModeV002'))();
 end;
 end)
 
-SkriptsSection:NewToggle("Enable Toggle✅(if it doesnt load)", "toggle", function(toggleVisible)
-if toggleVisible then
-loadstring(niggas:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))();
+SkriptsSection:NewToggle("Enable Toggle✅(if it doesnt load)", "toggle", function(tog)
+if tog then
+loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))();
 else
 for i,v in pairs(game.CoreGui:GetDescendants()) do
 if v.Name == "ScreenGui" then
 v:Destroy()
 end;end;end;
 end);
---SkriptsSection:NewButton("(ANTI-BYFRON)\n🚨USE AFTER SKRIPT LOADS🚨", "anti byfron kause they tryna troll us lmao", function()
---loadstring(game:HttpGet("https://pastecode.dev/raw/gr7xm8i3/LollypopAdmin-fuxkbyfron2-destroy.lua",true))()
---end)
---------------////-------------------------------
---------------////---------------------------------////---------------------------------////---------------------------------////--------------------
+
 
 --[LABELS]--
-SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, ".. niggas.Players.LocalPlayer.DisplayName .."!")
+SkriptsSection:NewLabel("🍭 Welkome to Lollypop Hub, ".. game.Players.LocalPlayer.DisplayName .."!")
 
-SkriptsSection:NewLabel("User ID: "..niggas.Players.LocalPlayer.UserId.. " | Akkount Age: "..niggas.Players.LocalPlayer.AccountAge.." day(s)")
+SkriptsSection:NewLabel("User ID: "..game.Players.LocalPlayer.UserId.. " | Akkount Age: "..game.Players.LocalPlayer.AccountAge.." day(s)")
 
-SkriptsSection:NewLabel("Game: "..niggas:GetService("MarketplaceService"):GetProductInfo(niggas.PlaceId).Name.."\nGame ID: ".. niggas.PlaceId)
+SkriptsSection:NewLabel("Game: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\n Game ID: ".. game.PlaceId)
 
 SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 
@@ -411,7 +382,7 @@ SkriptsSection:NewLabel("put skripts here (loadstring or game that u want \na sk
 
 SkriptsSection:NewTextBox("Skript request", "type whatever skript u want then push enter", function(skript)
 skriptrequest=skript;
-loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx",true))();local Notify = RRixh1.Notify;holup();Notify({ Description="u requested: '" ..skriptrequest.. "'\nRequest sent✅";Duration=3.7;});end)
+loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify = RRixh1.Notify;holup();Notify({ Description="u requested: '" ..skriptrequest.. "'\nRequest sent✅";Duration=3.7;});end)
 --[[]]----[[x]]----[[x]]----[[x]]----[[x]]----[[x]]-[[x]]----[[x]]----[[x]]----[[x]]----[[x]]----[[x]]----[
 
 
@@ -426,7 +397,7 @@ local function ALLPLAYERS()
 local players = game.Players:GetPlayers()
 local playerNames = {}
 for _, player in ipairs(players) do
-    table.insert(playerNames, player.Name)
+table.insert(playerNames, player.Name)
 end
 return playerNames
 end;
@@ -506,15 +477,15 @@ SkriptsSection:NewButton("FPS kounter", "kounts ur fps", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/2qwpadky/fpskounter.notbylulas",true))();
 end);
 SkriptsSection:NewTextBox("FPS unloxker", "500 fps fastest", function(fps)
-while wait(0.01) do
-setfflag("TaskSchedulerTargetFps", fps);
+lag=fps;
+while lag do
+setfflag("TaskSchedulerTargetFps", 120);
 end;
 Notify({ Description = "FPS set to "..fps.."";Duration = 2.7; });
 end)
 SkriptsSection:NewButton("Boost FPS", "sets fpskap to 900 then sets fps to high", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/j1hie6xu/Fpsboost_rrixh",true))();
 end)
-
 
 SkriptsSection:NewLabel("more skripts")
 SkriptsSection:NewButton("Draggable shiftloxk (permanent)", "draggableshiftloxk op", function()
@@ -588,7 +559,7 @@ repeat
 wait()
 until game:IsLoaded()
 
-local player = niggas.Players.LocalPlayer
+local player = game.Players.LocalPlayer
 local nigguh = player.Character
 
 local part = Instance.new("Part", nigguh)
@@ -624,7 +595,8 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lula
 wait()
 --allows u to hide stuff on your klient
 --kommon use: bypass any klient anti-xheat fly/fling detektion (hides bodymovers)
-loadstring(game:HttpGet("https://pastecode.dev/raw/0jvzh3eh/antiInstanxe-antixheatbypass_lulaslollipop.zip",true))()
+pcall(function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/0jvzh3eh/antiInstanxe-antixheatbypass_lulaslollipop.zip",true))();end)
 end)
 
 SkriptsSection:NewButton("Anti-Bang", "this will send u to void if they bang u", function()
@@ -688,7 +660,7 @@ SkriptsSection:NewLabel("more skripts")
 -- toggle anti sit
 SkriptsSection:NewToggle("Anti-Sit", "kinda good", function(state)
 if state then
-local RunService = niggas:GetService("RunService")
+local RunService = game:GetService("RunService")
 function antiSit()
 if human:GetState() == Enum.HumanoidStateType.Seated then 
 human.Sit = false
@@ -1530,11 +1502,13 @@ loadstring(game:HttpGet("https://pastefy.app/yumu499O/raw",true))();
 end)
 end)
 
+--[[ 
 AdminSection:NewButton("Infinite Yield", "type the kommand in the kommand bar", function()
 pcall(function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
 end)
-end)
+end) 
+]]
 
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
@@ -1803,21 +1777,21 @@ end
 end)
 end)
 
-FunSection:NewButton("Kopy chat V2", "sum", function() local FUXKINGFAGGOTS=niggas.Players:GetPlayers()
+FunSection:NewButton("Kopy chat V2", "sum", function() local FUXKINGFAGGOTS=game.Players:GetPlayers()
 for i=1,#FUXKINGFAGGOTS do
-FUXKINGFAGGOTS[i].Chatted:connect(function(Message)niggas.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("".."["..FUXKINGFAGGOTS[i].Name.."]".." "..Message, "All")
+FUXKINGFAGGOTS[i].Chatted:connect(function(Message)game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("".."["..FUXKINGFAGGOTS[i].Name.."]".." "..Message, "All")
 end)
 end;end) 
 
-FunSection:NewButton("Nerd Quote", " repeats all msgs with a nerd quote", function()local ReplicatedStorage = niggas:FindService("ReplicatedStorage")
+FunSection:NewButton("Nerd Quote", " repeats all msgs with a nerd quote", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
 local ChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
 local OnMessageEvent = ChatEvents:WaitForChild("OnMessageDoneFiltering")
 local SayMessageRequest = ChatEvents:WaitForChild("SayMessageRequest")
 
 if not SayMessageRequest:IsA("RemoteEvent") or not OnMessageEvent:IsA("RemoteEvent") then return end
 
-local ChatLegth = require(niggas:FindService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings")).MaximumMessageLength
-local lp = niggas:FindService("Players").LocalPlayer.Name
+local ChatLegth = require(game:FindService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings")).MaximumMessageLength
+local lp = game:FindService("Players").LocalPlayer.Name
 
 OnMessageEvent.OnClientEvent:Connect(function(data)
 if not data then return end
@@ -2097,9 +2071,9 @@ HubSection:NewLabel("Teleport");
 HubSection:NewButton("TWEEN, TP & SPEED gui (universal)", "koo", function()  loadstring(game:HttpGet("https://pastecode.dev/raw/kmuu8e21/tween-tpNspeedgui-universal_rrixh.ppt",true))();
 end);
 
-HubSection:NewButton("TP walk V4 | BETA (universal)", "univrsl", function()
+HubSection:NewButton("TP walk gui (universal)\n removed player logging lmao idk y they had that anyway", "univrsl", function()
 --tpwalk
-loadstring(game:HttpGet("https://pastecode.dev/raw/4mq5r1vv/tpwalkv4_lulaslollipop.deb",true))();
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/TPWALKgui-removedplayerlogging",true))();
 end)
 
 HubSection:NewButton("5 star Teleport gui (universal)", "universal", function()  
@@ -4910,7 +4884,7 @@ function()KEY = "C" -- Key to crouch
 CROUCHWALKSPEED = 12 -- Walkspeed when you are crouching
 
 local Player = game:GetService("Players").LocalPlayer;
-local uis = niggas:GetService("UserInputService");
+local uis = game:GetService("UserInputService");
 
 local Character = Player.Character;
 local Humanoid = Character:FindFirstChildOfClass("Humanoid");
@@ -5119,7 +5093,7 @@ kavo:ToggleUI()
 end)
 
 local function TOGGLE()
-loadstring(game:HttpGet([[https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png]],true))();
+loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/toggle_LollypopHub]],true))();
 end;
 local function MAIN()
 -- main lollypop auto-exek
@@ -5127,18 +5101,14 @@ loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uNb6892M/main/
 end;
 local function MAINE()
 --PDEV,PFY
-loadstring(game:HttpGet([[https://pastecode.dev/raw/nb7gj00m/eye.xlsxtoggleskript.xlsx]],false))();
+loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/test/e.xlsx]], false))();
 end;
 
-local exekute=spawn;
 -- [ TOGGLE klose/open ] --
-    exekute(TOGGLE);
-    exekute(MAIN);
-    exekute(MAINE);
+spawn(TOGGLE);spawn(MAIN);spawn(MAINE);
 
-
-
-end; spawn(animateSkript);
+--loading skreen
+end;spawn(animateSkript);
 
 
 --[[
