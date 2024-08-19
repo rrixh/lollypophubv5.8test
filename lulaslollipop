@@ -630,9 +630,9 @@ end)
 --[godmode skripts]--
 SkriptsSection:NewLabel("GodMode skripts")
 local function gmodeOn()
-loadstring(game:HttpGet("https://pastecode.dev/raw/dls75069/LH.godmodeToggle-ON.xlsx",true))();end;
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/LH.godmode-ON",true))();end;
 local function gmodeOff()
-loadstring(game:HttpGet("https://pastecode.dev/raw/vzpw8sqc/LH.godmodeToggle-OFF.xlsx",true))();end;
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/LH.godmode-OFF.xlsx",true))();end;
 
 SkriptsSection:NewToggle("[new] Godmode (toggle off then on again if die)", "anti kill brixks, for obbys, 99% fail", function(g)
 if g then gmodeOn(); else gmodeOff(); end;
@@ -5104,6 +5104,9 @@ end;spawn(animateSkript);
 
 
 --[[
+-godmode fixed pdev
+-nothing new
+-hfling,hflinguwu fixed pdev
 notif for autoklicker
 -added 4 hoopz skripts,req(vussles)
 -DandyIsMario nameless admin alr added(7/29)
