@@ -2,14 +2,15 @@
 -- Version: 9.3
 -- [ main/info ] --
 
-local LastUpdate="Last Update: Aug 18, 2024";
+local LastUpdate="Last Update: Aug 19, 2024";
 local Vv="9.3";
 local exploit=identifyexecutor() or "Unknown";
 -- [ 🛠️ main vars 🛠️ ] --
 local lulas=game;
 game=lulas
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify=RRixh1.Notify;
-holup=wait;task=task.wait;_0=print;LollypopHUB=print;
+holup=wait;task=task.wait;_0=print;
+LollypopHUB=print;
 local ava=game.Players.LocalPlayer.Character;
 local hum = ava.Humanoid;
 
@@ -306,7 +307,7 @@ SkriptsSection:NewDropdown("[NEW] 🚪DOORS skript - BlaxkKing hub (new ver.)", 
 print((...))
 end)
 
-SkriptsSection:NewDropdown("requested skripts (press to exekute)", "xhoose a skript u requested", {"HOOPZ (vussles)", "Jailbird - ESP,FPS,Bring Players (Thesesettingsaregod)", "BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)", "BLOXFRUITS - NEW JAYCY (killerbro9898)", "BLOXFRUITS - Sea 3 Hub (killerbro9898)", "Lunar vip (pwoepa28)", "99% fail obby - original Memory skript (AzuryCelestial)", "FLY GUI V3 (AzuryCelestial)", "IGNORE TOUXH INTERESTS (AzuryCelestial)", "IGNORE TOUXH INTERESTS gui - 🍭 (AzuryCelestial)", "DAHOOD - OSIRIS (ichmagmeinesisndd)", "HOOD KUSTOMS- FREEZENOVA GUI(ichmagmeinesisndd)", "DAHOOD - SwagMode (ichmagmeinesisndd)"}, function(req)
+SkriptsSection:NewDropdown("requested skripts (press to exekute)", "xhoose a skript u requested", {"HOOPZ (vussles)", "Jailbird - ESP,FPS,Bring Players (Thesesettingsaregod)", "BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)", "BLOXFRUITS - NEW JAYCY (killerbro9898)", "BLOXFRUITS - Sea 3 Hub (killerbro9898)", "Lunar vip (pwoepa28)", "99% fail obby - original Memory skript (AzuryCelestial)", "FLY GUI V3 (AzuryCelestial)", "IGNORE TOUXH INTERESTS gui - 🍭 (AzuryCelestial)", "DAHOOD - OSIRIS (ichmagmeinesisndd)", "HOOD KUSTOMS- FREEZENOVA GUI(ichmagmeinesisndd)", "DAHOOD - SwagMode (ichmagmeinesisndd)"}, function(req)
 if req == "HOOPZ (vussles)" then
 local skript="https://pastebin.com/jw8kdV5U"
 setclipboard(tostring(skript))
@@ -319,7 +320,7 @@ n(5, "aight", "kopied skript link: pastebin.com/nfQHwQBq✅")
 n(5, "aight", "skript wont work in my hub, paste the kopied link in a browser to get separate skript");
 
 elseif req == "BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)" then
-loadstring(game:HttpGet("https://pastecode.dev/raw/fgbyc1yq/vektorhub-bloxfruits",true))();
+loadstring(game:HttpGet("https://pastefy.app/JvZzrMjv/raw",true))();
 
 elseif req== "BLOXFRUITS - NEW JAYCY (killerbro9898)" then
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Script-Blox/Script/main/N-Ja.Lua'))();
@@ -328,7 +329,7 @@ elseif req == "BLOXFRUITS - Sea 3 Hub (killerbro9898)" then
 loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-Blox-Fruits-Sea-3-Hub-15542'))();
 
 elseif req =="Lunar vip (pwoepa28)" then
-loadstring(game:HttpGet("https://pastecode.dev/raw/wqb7slsx/lunarLoxk", true))();
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/lunarloxk.vip",true))();
 
 elseif req=="99% fail obby - original Memory skript (AzuryCelestial)" then
 loadstring(game:HttpGet("https://rentry.co/memoryskript-original/raw",true))();
@@ -338,9 +339,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/
 
 elseif req == "IGNORE TOUXH INTERESTS - zephyr (AzuryCelestial)" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))();
-
-elseif req=="IGNORE TOUXH INTERESTS gui - 🍭 (AzuryCelestial)" then
-loadstring(game:HttpGet("https://pastecode.dev/raw/hlfyh7fp/ignoreTouxhInterests_lulaslollipop.ppt.xlsx",true))();
 
 elseif req == "DAHOOD - OSIRIS (ichmagmeinesisndd)" then
 loadstring(game:HttpGet("https://pastecode.dev/raw/5320ldxp/osirisdahood",true))();
@@ -473,18 +471,19 @@ performanxe
 
 ]]--
 SkriptsSection:NewLabel("Performanxe")
-SkriptsSection:NewButton("FPS kounter", "kounts ur fps", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/2qwpadky/fpskounter.notbylulas",true))();
+SkriptsSection:NewButton("FPS kounter (say /nofps to kill gui)", "kounts ur fps", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/fpskounter.ipa",true))();
 end);
 SkriptsSection:NewTextBox("FPS unloxker", "500 fps fastest", function(fps)
-lag=fps;
-while lag do
-setfflag("TaskSchedulerTargetFps", 120);
+while wait(0.5) do
+setfflag("TaskSchedulerTargetFps", fps);
 end;
 Notify({ Description = "FPS set to "..fps.."";Duration = 2.7; });
 end)
-SkriptsSection:NewButton("Boost FPS", "sets fpskap to 900 then sets fps to high", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/j1hie6xu/Fpsboost_rrixh",true))();
+SkriptsSection:NewButton("Boost FPS", "sets fps to 160 konstantly", function()
+while wait(0.5) do
+setfflag("TaskSchedulerTargetFps", 160);
+end;
 end)
 
 SkriptsSection:NewLabel("more skripts")
