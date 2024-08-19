@@ -2,6 +2,7 @@
 -- Version: 9.3
 -- [ main/info ] --
 
+
 local LastUpdate="Last Update: Aug 19, 2024";
 local Vv="9.3";
 local exploit=identifyexecutor() or "Unknown";
@@ -22,11 +23,9 @@ local lightgrey=Color3.fromRGB(100,100,100);
 local Rainbow = Color3.fromRGB(math.random(),math.random(),math.random());
 
 --[[ KUSTOM FUNKTIONS ]]--
--- Make GUI Draggable
 local function bNotify(dur,btn,text)
 game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Lollypop Hub 🍭", Duration = dur, Button1 = btn, Callback = function()print('btn')end, Text = text});
 end;ok=bNotify;n=bNotify;
-
 
 local function alert(msg,sekonds)
 local notifikation = Instance.new("Message");
@@ -198,14 +197,8 @@ lollypophub:Notification({
 Text = "V"..Vv.."🍭😋",
 Duration = 7});
 
-lollypophub.DefaultColor = defaultKolor
-lollypophub:Notification({
-Text = "🍎 APPLEWARE FOR iOS RELEASED!!!! (5/13/24)",
-Duration = 7});
-
 pcall(function()
-e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();
-        end)
+e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();end)
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211
@@ -225,7 +218,7 @@ local kount = #game.Players:GetPlayers();
 
 
 local kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
-local lollypopHub = "Lollypop Hub🍭 | V" ..Vv.. " | " ..exploit.. " | " ..LastUpdate.. ""
+local lollypopHub = "Lollypop Hub🍭 | V" ..Vv..    " | " ..exploit.. " | " ..LastUpdate
 
 local Window = kavo.CreateLib(lollypopHub)
 -- themes:
@@ -492,19 +485,19 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/d0zzkkxr/permSLoxk.xlsx",true
 end)
 
 SkriptsSection:NewButton("See whispers 👁️💬", "see whispers", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/iri1urz1/xhatspy-v3._rrixh.xlsx",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/xhatspyV3.html",true))();
 end)
 
 SkriptsSection:NewToggle("HiddenFling", "fling", function(x)
 if x then
-loadstring(game:HttpGet("https://pastecode.dev/raw/w4g226cm/hiddenfling-toggle.deb",true))();
+loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/hiddenfling.html]],true))();
 else
 hiddenfling=false
 end;
 end);
 
 SkriptsSection:NewButton("HiddenFling (in a ui)", "🍭 all day", function() 
-loadstring(game:HttpGet("https://pastecode.dev/raw/jq7a89o4/hiddenflinguwu.docx",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/hiddenflinguwu.html",true))();
 end);
 
 local autoJumpEnabled = false;
@@ -538,9 +531,9 @@ end)
 
 
 SkriptsSection:NewButton("🍭🍭🍭Lollypops (R6 only)", "🍭 all day", function()
-for i, v in pairs(game.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Torso; 
+for i, v in pairs(game.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Head; 
 emit.Texture = "http://www.roblox.com/asset/?id=17767487755"; 
-emit.VelocitySpread = 8;
+emit.VelocitySpread = 3;
 end;
 end);
 
@@ -590,7 +583,7 @@ loadstring(game:HttpGet("https://pastecode.dev/raw/tarixx9o/lulas-antiban.jar",t
 end)
 
 SkriptsSection:NewButton("Anti-Xheat bypass\nUse: bypass any klient fly/fling detektion", "allows u to hide stuff on your klient", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 wait()
 --allows u to hide stuff on your klient
 --kommon use: bypass any klient anti-xheat fly/fling detektion (hides bodymovers)
@@ -600,7 +593,7 @@ end)
 
 SkriptsSection:NewButton("Anti-Bang", "this will send u to void if they bang u", function()
 -- anti bang exekuted
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 -- this will tp u to the void killing people who use bang on u if they dont use workspace.FallenPartsDestroyHeight = 0/0 to bypass void limit
 loadstring(game:HttpGet("https://pastecode.dev/raw/wz0rgb10/antibang_lulaslollipop.mp3",true))()--antibang
 end)
@@ -610,7 +603,7 @@ function()
 -- anti fall
 loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
 wait(0.01)
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 SkriptsSection:NewButton("Anti Fog", "no fog", function()
@@ -761,7 +754,7 @@ function()local ohInstance1 = game.Players.LocalPlayer.Character.Humanoid
 
 game:GetService("ReplicatedStorage").OnRagdoll:FireServer(ohInstance1)
 
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 SkriptsSection:NewButton("EXEKUTE SKRIPT FROM MESSAGES", "exekute a skript frm msg box",
@@ -783,7 +776,7 @@ end
 end
 end	
 
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 SkriptsSection:NewButton("less lag 2 (might dim brightness)", "less rendering", function()
@@ -806,7 +799,7 @@ end)
 SkriptsSection:NewButton("(R6) Klimb walls", "klimb on any walls", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/jLVhHEVW'))()
 
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 SkriptsSection:NewButton("chat Translator (see info)", "type >(language kode) to speak japan (eg. Japan = “>ja“) ",
@@ -817,13 +810,13 @@ SkriptsSection:NewButton("Drag & Resize chat", "lets u kontrol the xhat drag and
 -- drag &resize xhat
 loadstring(game:HttpGet("https://pastebin.com/raw/e3KhdyYS"))()
 
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 SkriptsSection:NewButton("walk on walls (R15 and R6)", "w.o.w", function()
 -- walk on walls
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/RY9cBbdG"))()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))();
+loadstring(game:HttpGetAsync("https://pastebin.com/raw/RY9cBbdG"))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 SkriptsSection:NewDropdown("ESPs", "PvP games", {"Minekraft ESP", "Usernames ESP", "Shadow ESP"}, function(x)
@@ -952,7 +945,7 @@ end)
 SkriptsSection:NewButton("MOUSE KURSOR", "gives u a mouse kursor touxh",
 function()
 loadstring(game:HttpGet(('https://pastefy.app/58d8d52G/raw'),true))()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 SkriptsSection:NewLabel("2016-17 roblox")
@@ -2719,7 +2712,7 @@ GamesSection:NewButton("KAT Aimbot (OP)", "shoots nearest player",
 function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))(); task.wait()
 Notify({ Description = "(KAT) Aimbot🟢";Duration = 4; });
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 GamesSection:NewToggle("Auto Jump", "auto jumps", function(state)
@@ -4309,7 +4302,7 @@ end)
 FeSection:NewButton("FE Orbit player", "spin em", function()--skrip
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Orbit%20GUI"))()
 --notif
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 FeSection:NewButton("FE 2007 animation", "baxk to the old days", function()
@@ -4752,7 +4745,7 @@ local MoreSection = More:NewSection("more skripts koming soon...🍭")
 MoreSection:NewButton("[NEW] DaHood*working,tested*\n Adonis anti-xheat bypass🟢", "an anti", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua",true))()
 wait()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 MoreSection:NewButton("EngoSpy", "see remotes", function()
@@ -4789,7 +4782,7 @@ updateKey('indexInstance')
 updateKey('namecallInstance')
 end;
 wait()
-loadstring(game:HttpGet("https://pastecode.dev/raw/nZaPtHFa5p/lollypop5ever_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
 
 MoreSection:NewButton("Adonis", "bypass", function() loadstring(game:HttpGet("https://pastecode.dev/raw/yld9n9zg/adonis",true))();end)
