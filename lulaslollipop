@@ -1,4 +1,4 @@
---main v9.3 LOLLYPOP HUB BAXKUP
+--main v9.3 LOLLYPOP HUB
 -- Version: 9.3
 -- [ main/info ] --
 
@@ -355,7 +355,7 @@ end)
 
 SkriptsSection:NewToggle("Enable Toggle✅(if it doesnt load)", "toggle", function(tog)
 if tog then
-loadstring(game:HttpGet("https://pastecode.dev/raw/9um0ynui/toggle_lulaslollipop.png", true))();
+loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/toggle_LollypopHub]],true))();
 else
 for i,v in pairs(game.CoreGui:GetDescendants()) do
 if v.Name == "ScreenGui" then
