@@ -1,19 +1,24 @@
---main v9.3 LOLLYPOP HUB 
-local LastUpdate="Last Update: Aug 25, 2024";
+--main v9.3.1 LOLLYPOP HUB 
+local LastUpdate="Last Update: Aug 26, 2024";
 local Vv= [[9.3.1]]
 getgenv().cheruimg = (17104316554)
 getgenv().hgimg= (15729672382)
 getgenv().lollypopimg = (17767487755)
-getgenv().togglesize = (90)
-getgenv().getImg = lollypopimg
+getgenv().LHlogo = (81697484807530)
+getgenv().togglesize = (123)
+getgenv().getImg = LHlogo
 --=================================--
-if getgenv().lhloaded==true then return end; 
+if getgenv().lhloaded==true then 
+local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Lollypop Hub🍭 already loaded! 👺";Duration = 3; }); return end; 
 getgenv().lhloaded=true
---=================================--
-local ava=game.Players.LocalPlayer.Character;
+--=============LOKALS==============--
+local Plrs = game:GetService[[Players]];
+local lp = Plrs.LocalPlayer
+local ava=lp.Character;
 local hum = ava.Humanoid;
+--=================================--
 pcall(function()
-game.Players.LocalPlayer.Chatted:Connect(function(m) 
+lp.Chatted:Connect(function(m) 
 local Lighting = game:GetService[[Lighting]];
 local day = (14);
 local night = (0);
@@ -26,9 +31,9 @@ Lighting.ClockTime = night
 elseif(m=='/e nofog')then
 Lighting.FogEnd = nofog
 for i,v in pairs(Lighting:GetDescendants()) do
-		if v:IsA("Atmosphere") then
-			v:Destroy()
-		end;end
+    if v:IsA("Atmosphere") then
+      v:Destroy()
+    end;end
 elseif(m=='/e noban')then
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/kredits-AnthonyIsntHere-antiban0antilogger.lua",true))();
 elseif(m=='/e re')then
@@ -69,6 +74,16 @@ local function bNotify(dur,btn,text)
 game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Lollypop Hub 🍭", Duration = dur, Button1 = btn, Callback = function()print('btn')end, Text = text});
 end;ok=bNotify;n=bNotify;
 
+local function write(msg,typingtime)
+spawn(function()
+local h=Instance.new("Hint");
+h.Parent = game.Workspace;
+local function typeMessage()
+for i=1,#msg do h.Text=string.sub(msg,1,i);
+wait(typingtime); end;end;
+typeMessage();wait(3.3);h:Destroy(); end)
+end;
+
 local function alert(msg,sekonds)
 local notifikation = Instance.new("Message");
 notifikation.Text = msg;
@@ -82,13 +97,13 @@ alert("hello", 5)
 ]]
 --[[x]]--[[x]]--[[x]]--[[x]]--[[x]]
 
-local function dekal()
+local function makedekal(DEKAL)
 detektion = Instance.new("Decal");
-detektion.Name = "LULASLOLLIPOPxxINJEKTED";
+detektion.Name = DEKAL
 detektion.Parent= game:GetService("ReplicatedStorage")
 print("DEKAL KREATED: "..detektion.Name.."✅")
 end;
-dekal();
+makedekal('LOLLYPOPHUBLOADED');
 
 
 -- [[ LOADING ]] --
@@ -166,35 +181,38 @@ local plrId = game.Players.LocalPlayer.UserId;
 local garamondfont=Enum.Font.Garamond;
 local arialfont=Enum.Font.Arial;
 local KodeFont=Enum.Font.Code
+local luxkiestguy=Enum.Font.LuckiestGuy
 
-local _1 ="[Lollypop Hub v"..Vv.."] Welkome to Lollypop Hub, "..display.."! (@"..user..")\nSkript by @lulaslollipop🍭 on Roblox👺";
+local welkome_1 ="[Lollypop Hub v"..Vv.."] Welkome to Lollypop Hub, "..display.."! (@"..user..")\nSkript by @lulaslollipop🍭 on Roblox👺";
 
-local _2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript\n (8/25/24)🥷🏿DELTA iOS RELEASE IS OUT!!!!🎉🎉";
+local mygoal_2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript\n (8/25/24)🥷🏿DELTA iOS RELEASE IS OUT!!!!🎉🎉";
 
-local _3 = "TALK TO ME USING ’feedbaxk’ in info/updates to tell me how u like the skript or say anything u want!!!!\nKommands:\n/e re, rj, exit, shop, shoplow, nofog, day, night\n (make sure to put “/e “ before saying it—example:\n “/e night“"
+local kmds_3 = "TALK TO ME USING “feedbaxk“ in “Updates/Extras“ to tell me how u like the skript or say anything u want!!!!\nKommands:\n/e re, rj, exit, shop, shoplow, nofog, day, night\n (make sure to put “/e “ before saying it—example:\n “/e night“"
 
 local limegreen=Color3.fromRGB(0,255,0);
 local redorange=Color3.fromRGB(278,75,43);
-local purple=Color3.fromRGB(235,0,235)
+local rred=Color3.fromRGB(255,0,0);
+local purple=Color3.fromRGB(255,0,255)
+local GOLD=Color3.fromRGB(255,215,0)
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
-Text = _1,
-Color = limegreen,
-Font = garamondfont,
-FontSize = Enum.FontSize.Size36
+Text = welkome_1,
+Color = GOLD,
+Font = luxkiestguy,
+FontSize = 8 --fontsize36
 });
 wait(1)
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
-Text = _2,
-Color = redorange,
+Text = mygoal_2,
+Color = rred,
 Font = arialfont,
-FontSize = Enum.FontSize.Size24
+FontSize = 7 --24fontsize
 })
 wait(0.5)
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
-Text = _3,
+Text = kmds_3,
 Color = purple,
 Font = KodeFont,
-FontSize = Enum.FontSize.Size28
+FontSize = 9
 });
 end; --218,133,65=orange...0,255,0=green...278,75,43=red/orange...
 
@@ -417,43 +435,6 @@ local SkriptsSection = Skripts:NewSection("Skripts:")
 --////---------------------------------
 SkriptsSection:NewLabel("Players");
 --------------////-------------------
-SkriptsSection:NewDropdown("Exekutors", "exploit guis", {"Vega X", "ArkeusX", "Neptune", "FluxusKoral remake", "KRNL", "Rc7 (old)", "Rc7 (newer version)", "Rc7 II", "Synapse X (old)", "Shadow X", "Synapse X rework",}, function(x)
-if x == "ArkeusX" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))();
-
-elseif x == "Vega X" then
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/skripts/vegaXexekutor-haha.docx",true))();
-
-elseif x == "FluxusKoral remake" then
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/exekutor/fluxuskoralremake.docx",true))();
-
-elseif x == "KRNL" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))();
-
-elseif x == "Neptune" then
-loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))();
-
-elseif x == "Rc7 (old)" then
-loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Project-RC7-6752"))();
-
-elseif x == "Rc7 (newer version)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7"))() 
-
-elseif x == "Rc7 II" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx"))()
-
-elseif x == "Synapse X (old)" then
-loadstring(game:HttpGet("https://pastebin.com/raw/1fAnGAA0"))()
-
-elseif x == "Shadow X" then
-loadstring(game:HttpGet("https://pastebin.com/raw/2qjBZB1Y"))()
-
-elseif x == "Synapse X rework" then
-loadstring(game:HttpGet("https://pastebin.com/raw/tWGxhNq0"))();
-end;
-end)
-
-
 local selektedPlayerName = nil;
 local function ALLPLAYERS()
 local players = game.Players:GetPlayers()
@@ -550,18 +531,50 @@ setfflag("TaskSchedulerTargetFps", 160);
 end;
 end)
 
-SkriptsSection:NewLabel("more skripts")
+SkriptsSection:NewLabel("more skripts");
+
+SkriptsSection:NewToggle("Enable chat bubbles", "🍭", function(bubbles)
+plr = game:GetService("Chat")
+if bubbles then plr.BubbleChatEnabled = true;
+else plr.BubbleChatEnabled = false; end;
+end)
+
+SkriptsSection:NewDropdown("Exekutor gui", "exploit guis", {"Vega X", "ArkeusX", "Neptune", "FluxusKoral remake", "KRNL", "Rc7 (old)", "Rc7 (newer version)", "Rc7 II", "Synapse X (old)", "Shadow X", "Synapse X rework",}, function(x)
+if x == "ArkeusX" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))();
+elseif x == "Vega X" then
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/skripts/vegaX",false))();
+elseif x == "FluxusKoral remake" then
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/exekutor/fluxuskoralremake.docx",true))();
+elseif x == "KRNL" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))();
+elseif x == "Neptune" then
+loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))();
+elseif x == "Rc7 (old)" then
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Project-RC7-6752"))();
+elseif x == "Rc7 (newer version)" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7"))() 
+elseif x == "Rc7 II" then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx"))()
+elseif x == "Synapse X (old)" then
+loadstring(game:HttpGet("https://pastebin.com/raw/1fAnGAA0"))()
+elseif x == "Shadow X" then
+loadstring(game:HttpGet("https://pastebin.com/raw/2qjBZB1Y"))();
+elseif x == "Synapse X rework" then
+loadstring(game:HttpGet("https://pastebin.com/raw/tWGxhNq0"))();
+end;
+end)
 
 SkriptsSection:NewButton("Draggable shiftloxk (permanent)", "draggableshiftloxk op", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/permanentshiftloxk-mobile.doc",true))();
 end)
 
-SkriptsSection:NewButton("See whispers 👁️💬", "see whispers", function()
+SkriptsSection:NewButton("{SPY} See whispers 👁️💬", "see whispers", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/xhatspyV3.html",true))();
 end)
 
-SkriptsSection:NewToggle("HiddenFling", "fling", function(x)
-if x then
+SkriptsSection:NewToggle("HiddenFling", "fling", function(...)
+if (...) then
 loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/hiddenfling.html]],true))();
 else
 hiddenfling=false
@@ -587,7 +600,7 @@ end)
 
 infiniteJumpEnabled = false
 --infjump.Konnekt
-SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(on)  --you dont need "arg" for a button
+SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(on)
 infiniteJumpEnabled = on
     if infiniteJumpEnabled then
 game:GetService("UserInputService").JumpRequest:connect(function()
@@ -704,7 +717,7 @@ SkriptsSection:NewLabel("GodMode skripts")
 local function gmodeOn()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/LH.godmode-ON",true))();end;
 local function gmodeOff()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/LH.godmode-OFF.xlsx",true))();end;
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/LH.godmode-OFF",true))();end;
 
 SkriptsSection:NewToggle("[new] Godmode (toggle off then on again if die)", "anti kill brixks, for obbys, 99% fail", function(g)
 if g then gmodeOn(); else gmodeOff(); end;
@@ -976,12 +989,14 @@ end)
 {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"},
 {"Ctrl", "Win", "Alt", "Space", "Alt", "Menu", "Ctrl"}
 ]]
-SkriptsSection:NewButton("(new) MOBILE MOUSE KURSOR REMAKE", "by Im Patrixk", function() loadstring(game:HttpGet("https://pastecode.dev/raw/hmpcsg2u/mobilekursorrm.xlsx",true))();
+SkriptsSection:NewButton("(new) MOBILE MOUSE KURSOR REMAKE", "by Im Patrixk", function()
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/skripts/mousekursor",true))();
 end)
 SkriptsSection:NewButton("MOUSE KURSOR", "gives u a mouse kursor touxh",
 function()
-loadstring(game:HttpGet(('https://pastefy.app/58d8d52G/raw'),true))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
+loadstring(game:HttpGet(('https://pastefy.app/58d8d52G/raw'),true))();
+task.spawn(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))(); end)
 end)
 
 SkriptsSection:NewLabel("2016-17 roblox")
@@ -1542,7 +1557,7 @@ AdminSection:NewButton("Fates Admin", "default prefix :", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
 end)
 AdminSection:NewButton("Brixk Admin(fixed ;animbuff)\n makes anims faster[;animbuff (num)]", "brixk admin updatd", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/6kgkcr3a/BrixkAdmin_lulaslollipop.jar",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/brixkadmin",true))();
 end)
 AdminSection:NewButton("Reviz Admin", "default prefix ; say ;cmds", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RqaZUrBZ"))()
@@ -1559,15 +1574,10 @@ Iv admin v3
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BloodyBurns/Hex/main/Iv%20Admin%20v3.lua"))()
 end)
 AdminSection:NewButton("IV Admin", "admin kommands", function()
---[[
-Iv admin
-]]
-loadstring(game:HttpGet("https://pastecode.dev/raw/yX8bQ6ZgUe/ivadmin",true))()
+-- iv admin Hex
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BloodyBurns/Hex/main/Iv%20Admin%20v3.lua"))();
 end)
-AdminSection:NewButton("Hextus Admin", "admin logs", function()
---[[
-hextux admin 1.0.2
-]]
+AdminSection:NewButton("Hextus Admin 1.0.2", "admin logs", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BonBonTheDev/Hextus/main/Hextus.lua",true))()
 end)
 AdminSection:NewButton("Vortex Admin", "admin", function()
@@ -1633,10 +1643,11 @@ local Fun = Window:NewTab("Fun")
 local FunSection = Fun:NewSection("Animations")
 
 FunSection:NewButton("OP OP NAM Gangnam Style", "work r15 and r6", function()
-if game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
+if ava:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
 bNotify(5,"o aight", "MUST be R6 to do this");
+return
 else
-loadstring(game:HttpGet("https://pastecode.dev/raw/r0fh285z/gangnam_rrixh.docx",true))();
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/opnamgangnam",true))();
 end;
 end)
 
@@ -1658,11 +1669,11 @@ function()loadstring(game:HttpGet('https://pastebin.com/raw/sZMn81tZ'))()
 end)
 
 FunSection:NewButton("KraxkHead walking", "turn into a krakhead", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/w5QIzqKn/kraxkhead_lulaslollipop",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/kraxkheadwalk",true))();
 end)
 
 FunSection:NewButton("Jump to flip", "keybind Jump", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/7nZso3Lj/jumpToFlip_lulaslollipop",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/gymnastiks.mov",true))();
 end)
 
 --[[
@@ -1684,11 +1695,22 @@ end)
 
 local FunSection = Fun:NewSection("Message Fun")
 
-SkriptsSection:NewTextBox("📢Send a server alert", "lets u send msg to server not fe", function(...)
-local m = Instance.new("Message")
-m.Parent = Workspace
-m.Text = ...
+--[bypasses]--
+FunSection:NewLabel("chat Bypasses (100% safe)")
+
+FunSection:NewButton([[Bubblechat Bypasser (100% safe & fun)]], [[🍭👺safe enjoy]], function()  loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/homegirl-xhatbypsr]],false))();
 end)
+
+FunSection:NewButton("Simple Bypass (safe)", "🍭", function() loadstring(game:HttpGet("https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua"))(); end)
+
+FunSection:NewButton("Spell kursewords (use L to toggle) \n(100% safe)", "use L tool to open/klose gui", function()
+-- spell out kurse word
+loadstring(game:HttpGet("https://pastebin.com/raw/xinPiBSU"))()
+loadstring(game:HttpGet("https://pastebin.com/raw/QzxqjgSf"))()
+end)
+
+
+SkriptsSection:NewLabel("Trolling");
 
 FunSection:NewButton("Fake Data Leaker", "leak data troll", function()
 --dataleak
@@ -1709,61 +1731,13 @@ FunSection:NewButton("Diskord Emojis [example: :angry:]", "type the emoji name i
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
 end)
 
---[bypasses]--
-FunSection:NewLabel("Xhat Bypasses (100% safe)")
-
-FunSection:NewButton([[BubbleXhat Bypasset (100% safe & fun)]], [[🍭👺safe enjoy]], function()  loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/homegirl-xhatbypsr]],false))();
-end)
-
-FunSection:NewButton("Simple Bypass (safe)", "🍭", function() loadstring(game:HttpGet("https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua"))(); end)
-
-FunSection:NewButton("(NEW) BetterBypasser✅use ur own exekutor kuz\n it wont work here idk y", "idk y it wont work but heres skript", function()  
-local betterbypasserURL = "https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/loader.lua"
-local skript = 'loadstring(game:HttpGet("' .. betterbypasserURL .. '",true))()'
-setclipboard(skript);
-local RRixh1 = loadstring(game:HttpGet("https://pastecode.dev/raw/xhglimlq/lakayli_lulaslollipopnotif.xl9.x7s.xls.xlsx", true))()
-local Notify = RRixh1.Notify
-Notify({ Description = "kopied: "..skript; Duration = 3; })
-end)
-
-
 --[[
-not working:
-FunSection:NewButton("Explikit Bypasser🔞(100% safe)", "has an antilogger so u will not be banned", function()
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50);
-Library:Notification({
-Text = "Loading Explikit Bypasser...",
-Duration = 3.2
-});
-
---explikitbypasser🔞+
-loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'a'..'B'..'i'..'X'..'w'..'6'..'R'..'C'..'/'..'r'..'a'..'w'), true))()
-
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-Text = "loaded! have fun nigger",
-Duration = 3
-})--hookinside
-end)
-FunSection:NewButton("NGA Bypasser(100% safe)", "has an antilogger so u will not be banned", function()--ngabypasser
-loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'J'..'h'..'8'..'r'..'s'..'l'..'a'..'5'..'/'..'r'..'a'..'w'), true))()
-end)
-
-FunSection:NewButton("V3rge Bypasser(100% safe)", "kredits to owner", function()
---v3rge
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BakaPraselol/bypass/main/OrionHub.dev"))()
+SkriptsSection:NewTextBox("📢Send a server alert", "lets u send msg to server not fe", function(...)
+local m = Instance.new("Message")
+m.Parent = Workspace
+m.Text = ...
 end)
 ]]--
-
-FunSection:NewButton("Spell kursewords (use L to toggle) \n(100% safe)", "use L tool to open/klose gui", function()
--- spell out kurse word
-loadstring(game:HttpGet("https://pastebin.com/raw/xinPiBSU"))()
-loadstring(game:HttpGet("https://pastebin.com/raw/QzxqjgSf"))()
-end)
-
 
 
 FunSection:NewLabel("Kompliments")
@@ -1832,75 +1806,42 @@ end
 end)
 end)
 
-FunSection:NewButton("Rainbow bubble Messages", "enables xhat bubble and see msg frm far away", function()
+FunSection:NewButton("Rainbow xhat (enables xhat Bubbles)", "enables xhat bubble and see msg frm far away", function()
 --enables bubble chat also
-
 textcolour = Color3.new(0,0,0)
-
-game:GetService("Chat").BubbleChatEnabled = true
-
+game:GetService("Chat").BubbleChatEnabled = true;
 coroutine.wrap(function()
-
 while wait() do
-
 for i = 0,255,10 do
-
 textcolour = Color3.new(255/255,i/255,0/255)
-
 wait()
-
 end
-
 for i = 255,0,-10 do
-
 textcolour = Color3.new(i/255,255/255,0/255)
-
 wait()
-
-end
-
+end;
 for i = 0,255,10 do
-
 textcolour = Color3.new(0/255,255/255,i/255)
-
 wait()
-
-end
-
+end;
 for i = 255,0,-10 do
-
 textcolour = Color3.new(0/255,i/255,255/255)
-
 wait()
-
-end
-
+end;
 for i = 0,255,10 do
-
 textcolour = Color3.new(i/255,0/255,255/255)
-
 wait()
-
-end
-
+end;
 for i = 255,0,-10 do
-
 textcolour = Color3.new(255/255,0/255,i/255)
-
 wait()
-
-end
-
-end
-
-end)()
-
+end;
+end;
+end)();
 local settings = {
 
 }
-
 while wait() do
-
 pcall(function()
 game:GetService("Chat"):SetBubbleChatSettings({
 TextColor3 = textcolour,
@@ -1920,11 +1861,9 @@ BubblesSpacing = 3,
 -- the distanxe that bubble turn to a single bubble
 MinimizeDistance = 250,
 -- max dist bubbles shown
-MaxDistance = 2222,
+MaxDistance = 2300,
 });
-
-end)
-
+end);
 end
 end)
 
@@ -4409,13 +4348,14 @@ end)
 
 e:NewLabel("- made a better toggle for the ui & draggable(🍭)•(8/25/24)") 
 e:NewLabel("- u kan now use kommands,they will start with “/e “ \n so ppl wont see ")
-e:NewLabel('Kommands: /e day, night, nofog, noban, re, rj, exit, shop');
+e:NewLabel('Kommands: /e day, night, nofog, noban, re, rj, exit, shop,\n shoplow');
 e:NewLabel("type in »feedbaxk« if u want more kmds or sum else");
 
 
 
-local exSection = ex:NewSection("99% fail impossible obby teleportation")
+local exSection = ex:NewSection("99% Fail Obby teleportation")
 
+--[[
 exSection:NewButton("Teleport on  Treasure Box", "teleport to the xhest",
 function()-- teleport to xhest
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-351.3232421875, 2006.439453125, -150.55206298828125)
@@ -4469,21 +4409,7 @@ function()-- teleport to hidden 3
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(291.8058776855469, 17003.28125, 165.9874267578125)
 end)
 --[endTP]--
-
-exSection:NewLabel("Teleport To Game")
-exSection:NewLabel("ask for more game teleports if your game is not here🍭")
-
-exSection:NewButton("Teleport to 99% fail impossible obby", "no info", function()-- tp to 99
-local PlaceId = 7584496019 -- gameID
-
-game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
-
-exSection:NewButton("Teleport to Zombie Attaxk", "no info", function()-- tp to zombie atk
-local PlaceId = 1240123653 -- gameID
-
-game:GetService("TeleportService"):Teleport(PlaceId, game:GetService("Players").LocalPlayer)
-end)
+]]--
 
 local exSection = ex:NewSection("Troll")
 
@@ -4610,12 +4536,12 @@ local HomeSection = Home:NewSection("Home")
 HomeSection:NewButton("🔎 Skript", "look up any skript", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/ScriptSearcher"))()
 end)
-]]
 
 HomeSection:NewButton("Dev Konsole", "see roblox dev konsole",
 function()
-keypress(120);
+keypress(120)
 end)
+]]
 
 HomeSection:NewButton("Rejoin", "rejoins the same lobby",
 function()
@@ -4639,11 +4565,11 @@ local Notify = AkaliNotif.Notify;
 wait();
 Notify({
 Description = "Finding smallest server...";
-Title = "Lollypop Admin🍭";
+Title = "Lollypop Hub🍭";
 Duration = 5;
 });
 end)
-HomeSection:NewButton("Exit", "leave the game",
+HomeSection:NewButton("Exit Game", "leave the game",
 function()game:Shutdown()
 end)
 
@@ -4674,15 +4600,15 @@ end)
 --loadstring(game:HttpGet("https://pastebin.com/raw/2Vxg0a72"))()
 --end)
 
-HomeSection:NewButton("Get Koords", "x,y,z finder say /console", function()
+HomeSection:NewButton("Get Koordinates", "x,y,z finder say /console", function()
 setclipboard(tostring(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position));
 wait()
 local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
 local Notify = AkaliNotif.Notify;
 Notify({
 Description = "koordinates kopied to klipboard";
-Title = "Lollypop Admin🍭";
-Duration = 5;
+Title = "Lollypop Hub🍭";
+Duration = 3.5;
 });
 end)
 HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakes", function()
@@ -5177,12 +5103,12 @@ if not uis.TouchEnabled then
   end;
 end;--togglelollypop funk
 
-local function draggableToggle()
+local function KUSTOMTOGGLE()
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.CoreGui
 screenGui.IgnoreGuiInset = true
 local removeborder = 0
-local overlayAllGui = 2
+local overlayAllGui = 3
 local roundButton = Instance.new("ImageButton")
 roundButton.Parent = screenGui
 roundButton.Size = UDim2.new(0, togglesize, 0, togglesize)
@@ -5194,17 +5120,13 @@ roundButton.ScaleType = Enum.ScaleType.Fit
 roundButton.BorderSizePixel = removeborder
 roundButton.ZIndex = overlayAllGui
 
--- Make the button round
+--roundbtn
 local uiCorner = Instance.new("UICorner")
 uiCorner.CornerRadius = UDim.new(1, 0)
-uiCorner.Parent = roundButton
+uiCorner.Parent = roundButton;
+local function toggleKavo() KAVO:ToggleUI();end
 
--- Toggle function
-local function toggleKavo()
-    KAVO:ToggleUI()
-end
-
--- Variables for dragging
+-- dragging
 local dragging = false
 local dragInput, mousePos, framePos
 local dragThreshold = 5 -- Distance in pixels to distinguish drag from click
@@ -5224,7 +5146,7 @@ roundButton.InputBegan:Connect(function(input)
         hasMoved = false
         mousePos = input.Position
         framePos = roundButton.Position
-        
+
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
                 dragging = false
@@ -5250,57 +5172,19 @@ roundButton.MouseButton1Click:Connect(function()
     if not hasMoved then
         toggleKavo()
     end
-end)
+ end)
+end
 
--- so it won't run on non-mobile devices
+-- so it wont run on non-mobile devices
+--[[
 local uis = game:GetService("UserInputService")
 if not uis.TouchEnabled then
     roundButton.Visible = true
    end
-end
+]]--
 
-pcall(draggableToggle)
---pcall(TOGGLE2);
+pcall(KUSTOMTOGGLE);
 pcall(MAIN);pcall(MAINE);
 
 --loading skreen
 end;spawn(animateSkript);
-
-
---[[
--godmode fixed pdev
--nothing new
--hfling,hflinguwu fixed pdev
-notif for autoklicker
--added 4 hoopz skripts,req(vussles)
--DandyIsMario nameless admin alr added(7/29)
--dahood silent aim TBO
--fe sad boy
--fe sonik (fixed)
--new ugx game: launxh party:7277488595
--fixed hiddenfling in ui
--fixed send chat 6:40pm
--added send chat 5:22pm
--added dekal
--fixed ui half loading: (GamesSection in SkriptsSection)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]
