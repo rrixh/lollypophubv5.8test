@@ -1,12 +1,12 @@
 --main v9.3.2 LOLLYPOP HUB 
-local LastUpdate="Last Update: Aug 26, 2024";
+local LastUpdate="Last Update: Aug 27, 2024";
 local Vv= [[9.3.2]]
 getgenv().cheruimg = (17104316554)
 getgenv().hgimg= (15729672382)
 getgenv().lollypopimg = (17767487755)
-getgenv().LHlogo = (81697484807530)
+getgenv().hublogo = (81697484807530)
 getgenv().togglesize = (123)
-getgenv().getImg = LHlogo
+getgenv().getImg = hublogo
 --=================================--
 if getgenv().lhloaded==true then 
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Lollypop Hub🍭 already loaded! 👺";Duration = 3; }); return end; 
@@ -293,13 +293,15 @@ local kount = #game.Players:GetPlayers();
 
 
 local KAVO = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
-local lollypopHub = "Lollypop Hub🍭 | V" ..Vv..    " | " ..exploit.. " | " ..LastUpdate
+local lollypopHub = "Lollypop Hub🍭 | V" ..Vv..    " | " ..exploit.. " | " ..LastUpdate;
 
-local Window = KAVO.CreateLib(lollypopHub)
+local Window = KAVO.CreateLib(lollypopHub, "LulaTheme")
+
 -- themes:
 ---//yum lollypop hub\\--
 -- LightTheme
--- DarkTheme
+-- PinkyTheme
+--LulaTheme
 -- GrapeTheme
 -- BloodTheme
 -- Ocean
@@ -307,7 +309,6 @@ local Window = KAVO.CreateLib(lollypopHub)
 -- Sentinel
 -- Synapse
 -- Serpent(new)
---lulaTheme
 -- tools1134,skripts35,game1443,games2450
 
 local function mememememememememememememememememeemememememememememmemeemememmemeememmeemememmee()
@@ -422,7 +423,7 @@ SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 
 
 --[[📝 SKRIPT REQUESTS 📝]]--
-SkriptsSection:NewLabel("put skripts here (loadstring or game that u want \na skript for)")
+SkriptsSection:NewLabel("put skripts here (loadstring or game that u want\n a skript for)")
 
 SkriptsSection:NewTextBox("Skript request", "type whatever skript u want then push enter", function(skript)
 skriptrequest=skript;
