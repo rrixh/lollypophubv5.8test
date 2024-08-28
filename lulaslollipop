@@ -1,13 +1,14 @@
 --main v9.3.2 LOLLYPOP HUB 
-local LastUpdate="Last Update: Aug 27, 2024";
+local LastUpdate="Last Update: Aug 28, 2024";
 local Vv= [[9.3.2]]
+--=============IMAGE===============--
 getgenv().cheruimg = (17104316554)
 getgenv().hgimg= (15729672382)
 getgenv().lollypopimg = (17767487755)
 getgenv().hublogo = (81697484807530)
-getgenv().togglesize = (100)
+getgenv().togglesize = (105)
 getgenv().getImg = hublogo
---=================================--
+--===========HUB LOADED============--
 if getgenv().lhloaded==true then 
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Lollypop Hub🍭 already loaded! 👺";Duration = 3; }); return end; 
 getgenv().lhloaded=true
@@ -46,8 +47,6 @@ elseif(m=='/e shop')then
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/serverhop",true))();
 elseif(m=='/e shoplow')then
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/joinsmallestserver",true))();
-elseif(m=='')then
-
     end; 
 end)
 
@@ -182,6 +181,10 @@ local garamondfont=Enum.Font.Garamond;
 local arialfont=Enum.Font.Arial;
 local KodeFont=Enum.Font.Code
 local luxkiestguy=Enum.Font.LuckiestGuy
+local Denk=Enum.Font.DenkOne
+local Fredoka=Enum.Font.FredokaOne
+local jura=Enum.Font.Jura
+local kalam=Enum.Font.Kalam
 
 local welkome_1 ="[Lollypop Hub v"..Vv.."] Welkome to Lollypop Hub, "..display.."! (@"..user..")\nSkript by @lulaslollipop🍭 on Roblox👺";
 
@@ -191,7 +194,7 @@ local kmds_3 = "TALK TO ME USING “feedbaxk“ in “Updates/Extras“ to tell 
 
 local limegreen=Color3.fromRGB(0,255,0);
 local redorange=Color3.fromRGB(278,75,43);
-local rred=Color3.fromRGB(255,0,0);
+local rred=Color3.fromRGB(245,0,0);
 local purple=Color3.fromRGB(255,0,255)
 local GOLD=Color3.fromRGB(255,215,0)
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
@@ -204,14 +207,20 @@ wait(1)
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
 Text = mygoal_2,
 Color = rred,
-Font = arialfont,
+Font = Fredoka,
 FontSize = 7 --24fontsize
 })
 wait(0.5)
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
 Text = kmds_3,
-Color = purple,
-Font = KodeFont,
+Color = limegreen,
+Font = Fredoka,
+FontSize = 9
+});
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
+Text = [[🍭 say “/e toggle“ if you lose the toggle and need a new one]],
+Color = Color3.fromRGB(255,255,0),
+Font = Fredoka,
 FontSize = 9
 });
 end; --218,133,65=orange...0,255,0=green...278,75,43=red/orange...
@@ -5102,9 +5111,11 @@ local uis=game:GetService("UserInputService")
 if not uis.TouchEnabled then
   roundButton.Visible = true
   end;
-end;--togglelollypop funk
+end;--togglelollypop funk(not using)
 
+--===========LH TOGGLE==============--
 local function KUSTOMTOGGLE()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.CoreGui
 screenGui.IgnoreGuiInset = true
@@ -5119,19 +5130,20 @@ roundButton.BackgroundTransparency = 1
 roundButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
 roundButton.ScaleType = Enum.ScaleType.Fit
 roundButton.BorderSizePixel = removeborder
-roundButton.ZIndex = overlayAllGui
-
+roundButton.ZIndex = overlayAllGui;
 --roundbtn
 local uiCorner = Instance.new("UICorner")
 uiCorner.CornerRadius = UDim.new(1, 0)
 uiCorner.Parent = roundButton;
-local function toggleKavo() KAVO:ToggleUI();end
+local function toggleKavo() 
+KAVO:ToggleUI();
+end
 
 -- dragging
 local dragging = false
 local dragInput, mousePos, framePos
-local dragThreshold = 5 -- Distance in pixels to distinguish drag from click
-local hasMoved = false
+local dragThreshold = 5 --wont tap by mistake
+local hasMoved = false;
 
 local function update(input)
     local delta = input.Position - mousePos
@@ -5139,14 +5151,14 @@ local function update(input)
         hasMoved = true
         roundButton.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
     end
-end
+end;
 
 roundButton.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         hasMoved = false
         mousePos = input.Position
-        framePos = roundButton.Position
+        framePos = roundButton.Position;
 
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
@@ -5154,28 +5166,24 @@ roundButton.InputBegan:Connect(function(input)
             end
         end)
     end
-end)
-
+end);
 roundButton.InputChanged:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
         dragInput = input
     end
-end)
-
+end);
 game:GetService("UserInputService").InputChanged:Connect(function(input)
     if input == dragInput and dragging then
         update(input)
     end
-end)
-
--- Mouse button click event with drag check
+end);
+-- wont tap if dragging
 roundButton.MouseButton1Click:Connect(function()
     if not hasMoved then
         toggleKavo()
     end
  end)
-end
-
+end;--end KUSTOM TOGGLE FUNK
 -- so it wont run on non-mobile devices
 --[[
 local uis = game:GetService("UserInputService")
@@ -5184,8 +5192,16 @@ if not uis.TouchEnabled then
    end
 ]]--
 
-pcall(KUSTOMTOGGLE);
+game.Players.LocalPlayer.Chatted:Connect(function(...)
+if (...) == '/e toggle' then
+KUSTOMTOGGLE()
+end
+end)
+--============END TOGGLE===========--
+
+
+spawn(KUSTOMTOGGLE);
 pcall(MAIN);pcall(MAINE);
 
 --loading skreen
-end;spawn(animateSkript);
+end; spawn(animateSkript);
