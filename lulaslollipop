@@ -5,7 +5,7 @@ getgenv().cheruimg = (17104316554)
 getgenv().hgimg= (15729672382)
 getgenv().lollypopimg = (17767487755)
 getgenv().hublogo = (81697484807530)
-getgenv().togglesize = (123)
+getgenv().togglesize = (100)
 getgenv().getImg = hublogo
 --=================================--
 if getgenv().lhloaded==true then 
@@ -5109,7 +5109,7 @@ local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.CoreGui
 screenGui.IgnoreGuiInset = true
 local removeborder = 0
-local overlayAllGui = 3
+local overlayAllGui = 5
 local roundButton = Instance.new("ImageButton")
 roundButton.Parent = screenGui
 roundButton.Size = UDim2.new(0, togglesize, 0, togglesize)
