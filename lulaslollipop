@@ -7,7 +7,7 @@ getgenv().hgimg= (15729672382)
 getgenv().lollypopimg = (17767487755)
 getgenv().hublogo = (81697484807530)
 getgenv().togglesize = (105)
-getgenv().getImg = hublogo
+getgenv().getImg = (hublogo)
 --===========HUB LOADED============--
 if getgenv().lhloaded==true then 
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Lollypop Hub🍭 already loaded! 👺";Duration = 3; }); return end; 
@@ -218,7 +218,7 @@ Font = Fredoka,
 FontSize = 9
 });
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
-Text = [[🍭 say “/e toggle“ if you lose the toggle and need a new one]],
+Text = "default toggle size is "..getgenv().togglesize.."\n🍭 say “/e toggle“ if you lose the toggle and need a new one",
 Color = Color3.fromRGB(255,255,0),
 Font = Fredoka,
 FontSize = 9
@@ -384,6 +384,87 @@ SkriptsSection:NewDropdown("[NEW] added better UI toggle🍭(draggable)\n see mo
 print((...))
 end)
 
+SkriptsSection:NewTextBox("Toggle Button Size", "🍭", function(toggleSize)
+local foundToggle = game.CoreGui:FindFirstChild[[KustomToggle]]
+if foundToggle then foundToggle:Destroy(); end;
+getgenv().updateSize = toggleSize;
+
+local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Toggle Size Updated to: "..toggleSize.."\n(default "..getgenv().togglesize..")";Duration = 3; });
+local function UPDATEKUSTOMTOGGLE()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.CoreGui
+screenGui.Name = "KustomToggle"
+screenGui.IgnoreGuiInset = true
+local removeborder = 0
+local overlayAllGui = 5
+local roundButton = Instance.new("ImageButton")
+roundButton.Parent = screenGui
+roundButton.Size = UDim2.new(0, updateSize, 0, updateSize)
+roundButton.Position = UDim2.new(1, -110, 0, 25)
+roundButton.Image = "http://www.roblox.com/asset/?id="..getImg
+roundButton.BackgroundTransparency = 1
+roundButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
+roundButton.ScaleType = Enum.ScaleType.Fit
+roundButton.BorderSizePixel = removeborder
+roundButton.ZIndex = overlayAllGui;
+--roundbtn
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(1, 0)
+uiCorner.Parent = roundButton;
+local function toggleKavo() 
+KAVO:ToggleUI();
+end
+
+-- dragging
+local dragging = false
+local dragInput, mousePos, framePos
+local dragThreshold = 5 --wont tap by mistake
+local hasMoved = false;
+
+local function update(input)
+    local delta = input.Position - mousePos
+    if math.abs(delta.X) > dragThreshold or math.abs(delta.Y) > dragThreshold then
+        hasMoved = true
+        roundButton.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+    end
+end;
+
+roundButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        hasMoved = false
+        mousePos = input.Position
+        framePos = roundButton.Position;
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end);
+roundButton.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end);
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end);
+-- wont tap if dragging
+roundButton.MouseButton1Click:Connect(function()
+    if not hasMoved then
+        toggleKavo()
+    end
+ end)
+end;--end KUSTOM TOGGLE FUNK
+UPDATEKUSTOMTOGGLE();
+end)
+
+
 SkriptsSection:NewDropdown("requested skripts (press to exekute)", "xhoose a skript u requested", {"BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)", "BLOXFRUITS - NEW JAYCY (killerbro9898)", "BLOXFRUITS - Sea 3 Hub (killerbro9898)", "Lunar vip (pwoepa28)", "99% fail obby - original Memory skript (AzuryCelestial)", "FLY GUI V3 (AzuryCelestial)", "IGNORE TOUXH INTERESTS gui - 🍭 (AzuryCelestial)", "DAHOOD - SwagMode (ichmagmeinesisndd)"}, function(req)
 if req == "Jailbird - ESP,FPS,Bring Players (Thesesettingsaregod)" then
 setclipboard("https://pastebin.com/nfQHwQBq");
@@ -432,7 +513,7 @@ SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 
 
 --[[📝 SKRIPT REQUESTS 📝]]--
-SkriptsSection:NewLabel("put skripts here (loadstring or game that u want\n a skript for)")
+SkriptsSection:NewLabel("put skripts here (loadstring or game that u want \n a skript for)")
 
 SkriptsSection:NewTextBox("Skript request", "type whatever skript u want then push enter", function(skript)
 skriptrequest=skript;
@@ -5117,6 +5198,7 @@ end;--togglelollypop funk(not using)
 local function KUSTOMTOGGLE()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
 local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "KustomToggle"
 screenGui.Parent = game.CoreGui
 screenGui.IgnoreGuiInset = true
 local removeborder = 0
