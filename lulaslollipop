@@ -389,7 +389,7 @@ local foundToggle = game.CoreGui:FindFirstChild[[KustomToggle]]
 if foundToggle then foundToggle:Destroy(); end;
 getgenv().updateSize = toggleSize;
 
-local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Toggle Size Updated to: "..toggleSize.."\n(default "..getgenv().togglesize..")";Duration = 3; });
+local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Toggle Size Updated to: "..toggleSize;Duration = 3; });
 local function UPDATEKUSTOMTOGGLE()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
 local screenGui = Instance.new("ScreenGui")
