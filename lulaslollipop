@@ -8,6 +8,9 @@ getgenv().lollypopimg = (17767487755)
 getgenv().hublogo = (81697484807530)
 getgenv().togglesize = (105)
 getgenv().getImg = (hublogo)
+pcall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua",false))()
+end)
 --===========HUB LOADED============--
 if getgenv().lhloaded==true then 
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Lollypop Hub🍭 already loaded! 👺";Duration = 3; }); return end; 
@@ -4803,7 +4806,9 @@ local More = Window:NewTab("Bypasses & More")
 local MoreSection = More:NewSection("more skripts koming soon...🍭")
 
 MoreSection:NewButton("[NEW] DaHood*working,tested*\n Adonis anti-xheat bypass🟢", "an anti", function()
+pcall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua",true))()
+end)
 wait()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
