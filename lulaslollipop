@@ -2717,28 +2717,24 @@ end)
 local Games = Window:NewTab("🌟Games🌟")
 local GamesSection = Games:NewSection("Games")
 
-GamesSection:NewDropdown("🧟‍♀️ Zombie Attaxk 🧟", "op skript by me", {"kill aura,autofarm,auto kollekt drops &more", "Ghost hub", "zombie attaxk skript", "teleport to game"}, function(...)
+GamesSection:NewDropdown("🧟‍♀️ Zombie Attaxk 🧟", "op skript", {"Zombie Attaxk - by 🍭 (old)", "Ghost hub", [[Autofarm, silent aim(old) - by 🍭]], "teleport to game"}, function(...)
 if ... =="Ghost hub" then
 loadstring(game:HttpGet("https://ghost-storage.7m.pl/scripts/ghosthublauncher.lua",true))();
 
-elseif ... == "kill aura,autofarm,auto kollekt drops &more" then
+elseif ... == "Zombie Attaxk - by 🍭 (old)" then
 loadstring(game:HttpGet("https://rentry.co/ZombieAttaxk_RRixh/raw",true))();
 
-elseif ... == "zombie attaxk skript" then
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Unknownproooolucky/Unknown-Hub-X-Universal-Games/main/Games/Zombie-Attack'))();
+elseif ... == "Autofarm, silent aim(old) - by 🍭" then
+loadstring(game:HttpGet("https://pastebin.com/raw/fzxqESwF"))();
 
 elseif ...=="teleport to game" then
 game:GetService("TeleportService"):Teleport(1240123653, game:GetService("Players").LocalPlayer)
 end;
 end)
 
-GamesSection:NewButton("Autofarm, silent aim(OP)", "my zombie atk gui", function()loadstring(game:HttpGet("https://pastebin.com/raw/fzxqESwF"))()
-end)
-
+--[[
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
-
 -- [ 🥪 Lunxhable Playables 🥪 ] --
-
 GamesSection:NewDropdown("🥪 Lunxhable Playables 🥪\nMULTIPLE FREE INSTANT UGC(thanks Tora)", "points", {"enter all kodes, auto get points", "teleport to game"}, function(p)
 if p =="enter all kodes, auto get points" then
 --lunxhable:14565246812
@@ -2748,11 +2744,10 @@ elseif p == "teleport to game" then
 game:GetService("TeleportService"):Teleport(14565246812, game:GetService("Players").LocalPlayer)
 end
 end)
-
-
-
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
+]]
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+
 
 GamesSection:NewLabel("👻🚪DOORS🚪👻")
 
