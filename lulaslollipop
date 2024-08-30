@@ -1815,7 +1815,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/QzxqjgSf"))()
 end)
 
 
-SkriptsSection:NewLabel("Trolling");
+FunSection:NewLabel("Trolling");
 
 FunSection:NewButton("Fake Data Leaker", "leak data troll", function()
 --dataleak
@@ -4262,7 +4262,7 @@ end)
 local Fe = Window:NewTab("FE")
 local FeSection = Fe:NewSection("FE Skripts")
 
-SkriptsSection:NewButton("FE chill", "chill", function()
+FeSection:NewButton("FE chill", "chill", function()
 wait()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-FE-Chill-14288"))();
 end)
