@@ -1,19 +1,22 @@
 --main v9.3.2 LOLLYPOP HUB 
-local LastUpdate="Last Update: Aug 28, 2024";
+local LastUpdate="Last Update: Aug 29, 2024";
 local Vv= [[9.3.2]]
 --=============IMAGE===============--
 getgenv().cheruimg = (17104316554)
 getgenv().hgimg= (15729672382)
 getgenv().lollypopimg = (17767487755)
 getgenv().hublogo = (81697484807530)
+getgenv().qlogo = (83208221166718)
+getgenv().nekogirls = (99387651581628)
+getgenv().nekogirlsfull = (129450989114634)
+getgenv().animekatgirl = (18817519330)
 getgenv().togglesize = (105)
 getgenv().getImg = (hublogo)
 pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua",false))()
-end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/adonisbypass-kredits_pixeluted",true))(); end)
 --===========HUB LOADED============--
-if getgenv().lhloaded==true then 
-local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Lollypop Hub🍭 already loaded! 👺";Duration = 3; }); return end; 
+if getgenv().lhloaded==true then
+local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Lollypop Hub🍭 already loaded! 👺";Duration = 3; }); return end;
 getgenv().lhloaded=true
 --=============LOKALS==============--
 local Plrs = game:GetService[[Players]];
@@ -50,10 +53,16 @@ elseif(m=='/e shop')then
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/serverhop",true))();
 elseif(m=='/e shoplow')then
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/joinsmallestserver",true))();
-    end; 
-end)
+elseif(m=='/e reload')then
+local toggle = game.CoreGui:FindFirstChild[[KustomToggle]];
+if toggle then toggle:Destroy();
+getgenv().lhloaded=false;
+local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify = RRixh1.Notify;wait();Notify({ Description = "u kan now klose and reload the skript";Duration=3;});
+    end;
 
-end)
+end--start "if"
+end)--plr xhatted
+end)--pcall
 --=================================--
 local exploit=identifyexecutor() or "Unknown";
 -- [ 🛠️ main vars 🛠️ ] --
@@ -390,7 +399,7 @@ end)
 SkriptsSection:NewTextBox("Toggle Button Size", "🍭", function(toggleSize)
 local foundToggle = game.CoreGui:FindFirstChild[[KustomToggle]]
 if foundToggle then foundToggle:Destroy(); end;
-getgenv().updateSize = toggleSize;
+getgenv().updatedSize = toggleSize;
 
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Toggle Size Updated to: "..toggleSize;Duration = 3; });
 local function UPDATEKUSTOMTOGGLE()
@@ -403,7 +412,7 @@ local removeborder = 0
 local overlayAllGui = 5
 local roundButton = Instance.new("ImageButton")
 roundButton.Parent = screenGui
-roundButton.Size = UDim2.new(0, updateSize, 0, updateSize)
+roundButton.Size = UDim2.new(0, updatedSize, 0, updatedSize)
 roundButton.Position = UDim2.new(1, -110, 0, 25)
 roundButton.Image = "http://www.roblox.com/asset/?id="..getImg
 roundButton.BackgroundTransparency = 1
@@ -1792,7 +1801,9 @@ local FunSection = Fun:NewSection("Message Fun")
 --[bypasses]--
 FunSection:NewLabel("chat Bypasses (100% safe)")
 
-FunSection:NewButton([[Bubblechat Bypasser (100% safe & fun)]], [[🍭👺safe enjoy]], function()  loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/homegirl-xhatbypsr]],false))();
+FunSection:NewButton([[Bubblechat Bypasser (100% safe & fun)]], [[🍭👺safe enjoy]], function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/AntiChatLogger.lua"))();
+loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/homegirl-xhatbypsr]],false))();
 end)
 
 FunSection:NewButton("Simple Bypass (safe)", "🍭", function() loadstring(game:HttpGet("https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua"))(); end)
@@ -1808,10 +1819,11 @@ SkriptsSection:NewLabel("Trolling");
 
 FunSection:NewButton("Fake Data Leaker", "leak data troll", function()
 --dataleak
-loadstring(game:HttpGet("https://pastecode.dev/raw/px2detsx/fakedataleak_lulaslollipop.jpg",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fakedataleaker",true))();
 end)
 
-FunSection:NewButton("Rizzer", "rizz", function()loadstring(game:HttpGet("https://pastecode.dev/raw/K1EI6AwS/rizzer_lulaslollipop",true))()
+FunSection:NewButton("Rizzer", "rizz", function()
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/rizzer",true))();
 end)
 
 FunSection:NewButton("Fake Message Troll", "type for others", function()
@@ -1847,9 +1859,6 @@ FunSection:NewButton("Auto Exkuse", "auto msg wen u die", function()
 getgenv().dmsgs = {
 deathmessages = {"i was lagging", "that wasnt fair", "bruh", "dude", "i was doing something", "whyyyyy", "that wasnt fair", "wow"}
 }
---[[
-Auto-Exkuse
-]]--
 loadstring(game:HttpGet("https://raw.githubusercontent.com/goldmoments/auto-excuse/main/Script"))("Auto-Exkuse Script | lulaslollipoo#0140") 
 end)
 FunSection:NewButton("Kopy Server Messages", "repeats all players messages", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
@@ -1873,9 +1882,11 @@ end
 end)
 end)
 
-FunSection:NewButton("Kopy chat V2", "sum", function() local FUXKINGFAGGOTS=game.Players:GetPlayers()
+FunSection:NewButton("Kopy chat V2", "sum", function()
+local FUXKINGFAGGOTS=game.Players:GetPlayers()
 for i=1,#FUXKINGFAGGOTS do
-FUXKINGFAGGOTS[i].Chatted:connect(function(Message)game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("".."["..FUXKINGFAGGOTS[i].Name.."]".." "..Message, "All")
+FUXKINGFAGGOTS[i].Chatted:connect(function(Message)
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("".."["..FUXKINGFAGGOTS[i].Name.."]".." "..Message, "All")
 end)
 end;end) 
 
@@ -4251,38 +4262,42 @@ end)
 local Fe = Window:NewTab("FE")
 local FeSection = Fe:NewSection("FE Skripts")
 
-FeSection:NewLabel("(NEW) FE REANIMATION skripts (erbody kan see)")
+SkriptsSection:NewButton("FE chill", "chill", function()
+wait()
+loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-FE-Chill-14288"))();
+end)
 
 FeSection:NewButton("FE ANIMATION MAN (kontrols: Z,X,C,N keys)", "🍭", function()
 loadstring(game:HttpGet("https://pastefy.app/ZWgckZdU/raw",true))();
 end)
 
-FeSection:NewButton("FE HONORED", "🍭", function() loadstring(game:HttpGet("https://pastecode.dev/raw/rkef2tun/Fehonored-float.doc",true))();
+FeSection:NewButton("FE HONORED", "🍭", function()
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fehonored",true))();
 end)
 
 
 FeSection:NewButton("FE KRYSTAL DANXE (R6)", "impatrixk", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/le3gs14c/Fekrystal.doc",true))();
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fekrystaldanxe",true))();
 end)
 
 FeSection:NewButton("FE SAD BOY (R6)", "Fe sad boyKREDS TO OWNER", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/9lnysoai/FEsadboy.xls",true))();
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fesadboy",true))();
 end)
 
-FeSection:NewButton("FE ZOMBIE", "🍭", function() loadstring(game:HttpGet("https://pastecode.dev/raw/pk9iyn45/Fezombie.doc",true))();
+FeSection:NewButton("FE ZOMBIE", "🍭", function()
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fezombie",true))();
 end)
 
 FeSection:NewButton("FE SONIK (R6)", "FESONIK KREDS TO OWNER", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/bkbnoqio/Fesonik.fixed.xls",true))();
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fesonik",true))();
 end)
 
-FeSection:NewLabel("more FE")
-
-FeSection:NewButton("FE illusion", "by X", function() loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-FE-Illusion-Script-12744"))()
+FeSection:NewButton("FE illusion", "by X", function()
+loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-FE-Illusion-Script-12744"))()
 end)
 
 FeSection:NewButton("FE server browser ui", "list of servers ui", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/l83qm3as/FEserver-browser90_lulaslollipop",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fe-serverbrowser",true))();
 end)
 
 FeSection:NewButton("FE Stop Time", "freeze in mid air or whatever", function()
@@ -4299,10 +4314,11 @@ end)
 
 FeSection:NewButton("FE Teleknesis V3", "troll", function()
 --fe telek v3
-loadstring(game:HttpGet("https://pastecode.dev/raw/8472d704/FEteleknesisv3_lulaslollipop.mp3",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fe-teleknesisV3",true))();
 end)
 
-FeSection:NewButton("FE Ragdoll Yourself", "reset or die to disable", function()loadstring(game:HttpGet("https://pastebin.com/raw/VY5d58xz"))()
+FeSection:NewButton("FE Ragdoll Yourself", "reset or die to disable", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/VY5d58xz"))()
 end)
 
 FeSection:NewButton("FE Korblox", "need korblox rekolor for 65 robux, R15", function()
@@ -4319,24 +4335,10 @@ loadstring(game:HttpGet(('https://pastefy.app/yrp6En96/raw'),true))()
 end)
 
 FeSection:NewButton("FE Time Reverse", "reverses what u do", function()
+wait(0.1)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
 Library.DefaultColor = Color3.fromRGB(0,255,0)
-
-Library:Notification({
-Text = "provided by lulaslollipop",
-Duration = 4
-})
-
-wait (2)
-
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(0,255,0)
-
-Library:Notification({
-Text = "SKRIPT EXEKUTED 🍭🍭🍭🍭",
-Duration = 4
-})
-
+Library:Notification({Text = "skript exekuted 🍭", Duration = 4 });
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/L"))()
 end)
 
@@ -4349,7 +4351,6 @@ FeSection:NewButton("FE Ghost", "fling a player by walking into them", function(
 --FE GHOST SKRIPT
 --WORKS ON R6
 --KREDITS TO THE OWNER
-
 loadstring(game:HttpGet("https://pastebin.com/raw/uUtRsAX5"))()
 end)
 
@@ -4360,7 +4361,7 @@ end)
 
 FeSection:NewButton("FE bring gui (kollision games only)", "kollision games only", function()
 --febringgui
-loadstring(game:HttpGet("https://pastecode.dev/raw/yd80ly8m/FEbringgui_lulaslollipop",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fe-bringgui",true))();
 end)
 
 FeSection:NewButton("FE Orbit player", "spin em", function()--skrip
@@ -4381,13 +4382,14 @@ FeSection:NewButton("FE Headless", "yellow grey", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/Fp0GgURD"))()
 end)
 
+--[[
 FeSection:NewButton("FE WAR ENDER", "warendergod", function()
 loadstring(game:HttpGet("https://textbin.net/raw/nos6oilby7"))()
-end)
-
+end);
 FeSection:NewButton("FE Krazy", "by dark", function()
 loadstring(game:HttpGet("https://textbin.net/raw/rdssq0b2em"))()
-end)
+end);
+]]--
 
 FeSection:NewButton("FE Kreepy Krawler", "turns u into kreepy krawler", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/rzcFPsLn"))()
@@ -4395,10 +4397,6 @@ end)
 
 FeSection:NewButton("FE Avatar Kreator", "move your axxessories anywhere", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/TTQn3RDk"))()
-end)
-
-FeSection:NewButton("FE Kamera Slider", "yeah", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rouxhaver/scripts-2/main/Camera%20Sliders.lua"))()
 end)
 
 FeSection:NewButton("FE Mimik GUI", "kopy users messages", function()
@@ -4409,14 +4407,16 @@ FeSection:NewButton("FE Mimik GUI 2 (no username)", "kopy users messages", funct
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe./8fb5ed20fb168d1ae3044ede45b90f67e3fb37a2/file'),true))()
 end)
 
-FeSection:NewButton("FE Message Art", "turn text into art", function()
-loadstring(game:HttpGet("https://textbin.net/raw/hmtw3zllmp",true))()
+FeSection:NewButton("FE chat drawing", "🍭", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/q6WWVCKC'))()
+end)
+
+FeSection:NewButton("FE Kamera Slider", "yeah", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rouxhaver/scripts-2/main/Camera%20Sliders.lua"))()
 end)
 
 FeSection:NewButton("FE break arms", "break arms duh", function()-- break arms FE
-loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Wow'))()
-
-loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Wow%202'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Wow%202',true))()
 end)
 
 FeSection:NewButton("FE Invisible & Teleport GUI", "any game *op*", function()-- FE Invisible GUI & Teleport R15/R6 | ANY GAME *OP*
@@ -4426,7 +4426,7 @@ end)
 
 --// more skripts \\--
 local ex = Window:NewTab("Updates/Extras")
-local exSection = ex:NewSection("V"..Vv.." updates:");
+local exSection = ex:NewSection("THIS IS WHERE U KAN SEE UPDATE/cHANGE LOGS");
 e=exSection;
 
 e:NewLabel("👺 this hub is mainly made for mobile 📲");
@@ -4434,17 +4434,21 @@ exSection:NewTextBox("feedbaxk", "tell me whatever u want n push enter", functio
 plrMsg=skript;
 loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify = RRixh1.Notify;holup();Notify({ Description= "your message: “" ..plrMsg.. "“\nhas been sent💬"; Duration=4;});
 end)
+e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("u kan say /e reload if u need to shut and\ nrestart the gui");
+e:NewLabel("added FE chill (8/29/24)");
+e:NewLabel("updated FE skripts—site went down so had to move all fe skripts");
+e:NewLabel("added toggle button size feature for your satisfaktion");
 e:NewLabel("- made a better toggle for the ui & draggable(🍭)•(8/25/24)") 
 e:NewLabel("- u kan now use kommands,they will start with “/e “ \n so ppl wont see ")
 e:NewLabel('Kommands: /e day, night, nofog, noban, re, rj, exit, shop,\n shoplow');
 e:NewLabel("type in »feedbaxk« if u want more kmds or sum else");
 
 
-
+--[[
 local exSection = ex:NewSection("99% Fail Obby teleportation")
 
---[[
 exSection:NewButton("Teleport on  Treasure Box", "teleport to the xhest",
 function()-- teleport to xhest
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-351.3232421875, 2006.439453125, -150.55206298828125)
@@ -4500,7 +4504,7 @@ end)
 --[endTP]--
 ]]--
 
-local exSection = ex:NewSection("Troll")
+local exSection = ex:NewSection("TROLL/VERY OLD SKRIPTS")
 
 exSection:NewButton("Non-FE Hub (old)", "some dont work", function()-- NONFE HUB
 loadstring(game:HttpGet("https://pastebin.com/raw/mjPzCChH"))()
@@ -5171,7 +5175,7 @@ local roundButton = Instance.new("ImageButton")
 roundButton.Parent = screenGui
 roundButton.Size = UDim2.new(0, togglesize, 0, togglesize) -- Set the size of the button
 roundButton.Position = UDim2.new(1, -110, 0, 25) -- Position on the upper right (110 pixels left from the right edge, 10 pixels down from the top)
-roundButton.Image = "http://www.roblox.com/asset/?id="..getImg
+roundButton.Image = "http://www.roblox.com/asset/?id="..getgenv().getImg
 roundButton.BackgroundTransparency = 1 -- Set transparency so only the image is shown
 roundButton.ImageColor3 = Color3.fromRGB(255, 255, 255) -- Set image color
 roundButton.ScaleType = Enum.ScaleType.Fit;
