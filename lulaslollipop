@@ -1,5 +1,5 @@
 --main v9.3.2 LOLLYPOP HUB 
-local LastUpdate="Last Update: Sep 4, 2024";
+local LastUpdate="Last Update: Sep 5, 2024";
 local Date = ''
 local Vv= [[9.3.2]]
 --=============IMAGE===============--
@@ -389,8 +389,7 @@ time:UpdateLabel("[" ..formatted_time.."]\n ["..todays_date.."]")
 end
 end
 
-spawn(function()
-updatetimelabel();end)
+spawn(updatetimelabel)
 -- [ END UPDATE TIME ] --
 
 --  "NEWDROPDOWNHERE", 
@@ -2760,6 +2759,9 @@ GamesSection:NewLabel("🏋STRONGMAN SIMUALTOR🏋️‍♀️")
 GamesSection:NewButton("OP AUTOFARM , AUTO REBIRTH & more", "best autofarm requested by kevin_mm272", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua",true))();
 end);
+GamesSection:NewButton("teleport to game", "teleportstrongman", function()
+game:GetService("TeleportService"):Teleport(6766156863, game:GetService("Players").LocalPlayer)
+end)
 
 --[[ NO WORK GOOD: 
 GamesSection:NewButton("Strongman Simulator Autofarm GUI (key)", "gui",
