@@ -2762,8 +2762,13 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 GamesSection:NewLabel("🏋STRONGMAN SIMUALTOR🏋️‍♀️")
 
 GamesSection:NewButton("OP AUTOFARM , AUTO REBIRTH & more", "best autofarm requested by kevin_mm272", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua",true))();
+spawn(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua",true))(); end)
 end);
+GamesSection:NewButton("Kopy skript (if it dont work, paste it in your exekutor)", "gameInfo", function()
+setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua',true))()")
+ok(4, "prexiate it 👺", "Strongman Simulator skript kopied to klipboard")
+end)
 GamesSection:NewButton("teleport to game", "teleportstrongman", function()
 game:GetService("TeleportService"):Teleport(6766156863, game:GetService("Players").LocalPlayer)
 end)
@@ -4467,6 +4472,7 @@ end)
 e:NewLabel("V"..Vv.." updates: ");
 
 e:NewLabel("- added 📲 Mobile Keybind generator (Tools) (9/6/24)");
+e:NewLabel("strongman simulator might not work so i added feature to Kopy skript");
 e:NewLabel("- add Strongman simulator autofarm gui (skript request) (9/4/24)");
 e:NewLabel("added hitbox expander/esp (has invis hitbox) (hubs & gui)");
 e:NewLabel("OP autofarm for ”Swordmaster Simulator“ (Games)");
