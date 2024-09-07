@@ -1,5 +1,5 @@
 --main v9.3.2 LOLLYPOP HUB 
-local LastUpdate="Last Update: Sep 5, 2024";
+local LastUpdate="Last Update: Sep 6, 2024";
 local Date = ''
 local Vv= [[9.3.2]]
 --=============IMAGE===============--
@@ -2007,6 +2007,11 @@ local ToolsSection = Tools:NewSection("Tools")
 
 ToolsSection:NewButton("Tween Teleport", "rekreated by me sinxe no one has it🍭", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/TweenTP.tool-rekreated_lulaslollipop",true))();
+end)
+
+ToolsSection:NewTextBox("⌨️ Mobile Keybind Gen ", "keybindgennbyme", function(key)
+getgenv().keykode = key
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/kustomskript/v2.KAS-keybindgen",true))();
 end)
 
 ToolsSection:NewButton("BTools", "building tools", function()
@@ -4461,6 +4466,7 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("- added 📲 Mobile Keybind generator (Tools) (9/6/24)");
 e:NewLabel("- add Strongman simulator autofarm gui (skript request) (9/4/24)");
 e:NewLabel("added hitbox expander/esp (has invis hitbox) (hubs & gui)");
 e:NewLabel("OP autofarm for ”Swordmaster Simulator“ (Games)");
@@ -4843,7 +4849,7 @@ end)
 
 MoreSection:NewButton("EngoSpy", "see remotes", function()
 --engospy
-loadstring(game:HttpGet('h'..'t'..'t'..'p'..'s'..':'..'/'..'/'..'p'..'a'..'s'..'t'..'e'..'c'..'o'..'d'..'e'..'.'..'d'..'e'..'v'..'/'..'r'..'a'..'w'..'/'..'l'..'h'..'r'..'7'..'k'..'i'..'v'..'4'..'/'..'e'..'n'..'g'..'o'..'S'..'p'..'y'..'_'..'l'..'u'..'l'..'a'..'s'..'l'..'o'..'ll'..'i'..'p'..'o'..'p'..'.'..'d'..'e'..'b',true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/engospy",true))();
 end)
 
 MoreSection:NewButton("Anti for jumppower", "nojumpkooldown", function()
