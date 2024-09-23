@@ -2762,6 +2762,10 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 
 GamesSection:NewLabel("😤 99% FAIL OBBY😤 ")
 
+GamesSection:NewButton("Troll gui 😈 (fling, godmode, tp)...(ragdoll required to fling)", "fling, godmode n more", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/kustomskript/99%25failObby-Trollgui",true))();
+end)
+
 GamesSection:NewButton("Kombine Avatars gui (easier way to do the respawn glitch)", "easy respawn glitxh", function()  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/kustomskript/KombineAvatars-99failobby.LH",true))();
 end)
@@ -4458,6 +4462,7 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("added Troll gui • 99% fail obby (Games)");
 e:NewLabel(" added Kombine Avatars • 99% fail obby (Games)");
 e:NewLabel("- (Fun) add chat Spammer (skript request) (9/10/24)");
 e:NewLabel("- added 📲 Mobile Keybind generator (Tools) (9/6/24)");
