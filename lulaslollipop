@@ -14,6 +14,7 @@ getgenv().animekatgirl = (18817519330)
 --=========TOGGLEPROPS============--
 getgenv().togglesize = (100)
 getgenv().getImg = (lollypopimg)
+local uiTheme = "LulaTheme"
 pcall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/adonisbypass-kredits_pixeluted",true))(); end)
 --===========HUB LOADED============--
@@ -319,7 +320,7 @@ local kount = #game.Players:GetPlayers();
 local KAVO = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
 local lollypopHub = "Lollypop Hub🍭 | V" ..Vv..    " | " ..exploit.. " | " ..LastUpdate;
 
-local Window = KAVO.CreateLib(lollypopHub, "LulaTheme")
+local Window = KAVO.CreateLib(lollypopHub, uiTheme)
 
 -- themes:
 ---//yum lollypop hub\\--
@@ -2185,6 +2186,10 @@ end);
 
 -- [ OTHER GUIS HUBSEKTION ] --
 HubSection:NewLabel("Other guis")
+
+HubSection:NewButton("ScriptHub V3 (hella games,useful)", "scripthubv3", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scripthubekitten/SCRIPTHUBV3/main/SCRIPTHUBV3",true))();
+end)
 
 HubSection:NewButton("(new) Tiger X hub v3.5", "🍭", function() loadstring(game:HttpGet("https://raw.githubusercontent.com/balintTheDevX/Tiger-X-V3/main/Tiger%20X%20V3.5%20Fixed"))()
  end)
@@ -4462,6 +4467,8 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
+
+e:NewLabel[[ added ScriptHub V3 (100+ games,useful) ]]
 e:NewLabel("added Troll gui • 99% fail obby (Games)");
 e:NewLabel(" added Kombine Avatars • 99% fail obby (Games)");
 e:NewLabel("- (Fun) add chat Spammer (skript request) (9/10/24)");
