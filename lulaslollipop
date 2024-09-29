@@ -4449,12 +4449,12 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
-e:NewLabel[[ kant add Tha Bronx 2 its harder thats why its usually paid (D3v1nw) ]]
-e:NewLabel[[ (req)added Traxk & Field Infinite - speed gui (Games)\n for 0002002009008002004Q ]]
-e:NewLabel[[ added Rochips Admin Panel (universal) ]]
-e:NewLabel[[ (req)added SALVATORE Hub - Brookhaven RP🏡 (Games) ]]
-e:NewLabel[[ (req)added Imperial Hub v2.1 - Brookhaven RP🏡 (Games)\n for Aretm_290 & rivaldy83 ]]
-e:NewLabel[[ added ScriptHub V3 (100+ games,useful) ]]
+e:NewLabel("kant add Tha Bronx 2 its harder thats why its usually paid (D3v1nw)")
+e:NewLabel("(req)added Traxk & Field Infinite - speed gui (Games) \n for 0002002009008002004Q")
+e:NewLabel("added Rochips Admin Panel (universal)")
+e:NewLabel("(req)added SALVATORE Hub - Brookhaven RP🏡 (Games)")
+e:NewLabel("(req)added Imperial Hub v2.1 - Brookhaven RP🏡 (Games) \n for Aretm_290 & rivaldy83")
+e:NewLabel("added ScriptHub V3 (100+ games,useful)")
 e:NewLabel("added Troll gui • 99% fail obby (Games)");
 e:NewLabel(" added Kombine Avatars • 99% fail obby (Games)");
 e:NewLabel("- (Fun) add chat Spammer (skript request) (9/10/24)");
