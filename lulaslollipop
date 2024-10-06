@@ -2034,14 +2034,15 @@ end)--end.kopytool
 --end btools.Tools tab
 ToolsSection:NewButton("Flashlight🔦(good for horror or dark games)", "use this is dark horror games(rekommend)", function()
 --flashlight/FE torxh
-loadstring(game:HttpGet("https://pastecode.dev/raw/7o10k3hq/flashlightLS_lulaslollipop",true))()
+spawn(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/flashlight",true))();end)
 end)
 ToolsSection:NewButton("Free Gear Tools 🧨", "💣⚙️👊🏽⛓️fun", function()
 loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
 end)
 ToolsSection:NewButton("Klone Tool (not fe)", "lego", function()
 --klonez
-loadstring(game:HttpGet("https://pastecode.dev/raw/m4u6g9j1/klonesnotfe",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/KloneTool",true))();
 end)
 ToolsSection:NewButton("F3X", "f3x building",
 function()
@@ -2130,7 +2131,7 @@ HubSection:NewLabel("🆓 FREE Items GUIs:")
 
 HubSection:NewButton("🎶🎤 24kGoldn Koncert Experienxe 🎤🎶\n(free 24kgoldn shades)", "24kgoldn shades", function()
 --24kgoldn obf
-loadstring(game:HttpGet("https://pastecode.dev/raw/oas3bnqw/24kGoldn-findMiks_lulaslollipop.zip",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/Kustom/24kGoldn-koncert", true))();
 end)
 
 HubSection:NewButton("Roblox Innovation Rewards\n(kollekt badges/items)", "autokollekt badges/kubes", function()
@@ -2146,15 +2147,17 @@ loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/k
 end)
 
 HubSection:NewButton("AutoKlicker (made for MOBILE only) ❌🖥️💻❌", "auto taps the skreen as if u are tapping it", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/471fvesp/autoklixker-mobile_rrixh.xlsx",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/autoklicker-mobile_lulaslollipop",true))();
 end)
 
 HubSection:NewLabel("🔞🔞🔞🔞");
-HubSection:NewButton("🔞 18+ gui", "🍭", function() loadstring(game:HttpGet("https://pastecode.dev/raw/jcbvel0f/r.doc",true))(); end)
+HubSection:NewButton("🔞 18+ gui", "🍭", function() loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/Kustom/🔞gui", true))();
+end)
 
 HubSection:NewLabel("Teleport guis");
 
-HubSection:NewButton("TWEEN, TP & SPEED gui (universal)", "koo", function()  loadstring(game:HttpGet("https://pastecode.dev/raw/kmuu8e21/tween-tpNspeedgui-universal_rrixh.ppt",true))();
+HubSection:NewButton("TWEEN, TP & SPEED gui (universal)", "koo", function()  
+loadstring(game:HttpGet("https://pastefy.app/lsktl2uQ/raw",true))();
 end);
 
 HubSection:NewButton("TP walk gui (universal)\n removed player logging lmao idk y they had that anyway", "univrsl", function()
@@ -2163,7 +2166,7 @@ loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/TPWALK
 end)
 
 HubSection:NewButton("5 star Teleport gui (universal)", "universal", function()  
-loadstring(game:HttpGet("https://pastecode.dev/raw/qzjega7r/teleportGui_lulaslollipop.deb",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/skripts/5star-teleportgui",true))();
 end)
 
 HubSection:NewButton("Tiny TP gui (rekommended)", "small like zuki", function()
@@ -2180,7 +2183,7 @@ function()loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/m
 end)
 
 HubSection:NewButton("Teleport to player bypass(full @name)", "bypasses tp on games that dont allow teleporting", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/ac5t78wc/tptoplr.bypass_lulaslollipop.jar",true))() 
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/skripts/tptoplayer-bypass",true))();
 end);
 
 
@@ -2243,7 +2246,7 @@ end)
 
 HubSection:NewButton("Fates ESP(modified) | owner:(fate#5647)", "kreds: fate#5647", function()
 --fates esp edited to my liking
-loadstring(game:HttpGet("https://pastecode.dev/raw/09oan2u9/fuxkinFatesESP.KREDtoOWNER_lulaslollipop",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/skripts/fuxkin-fatesESP.mobile",true))();
 end);
 
 HubSection:NewButton("k00pkid gui (Reupload)", "k000000000pppppppp", function()
@@ -2816,11 +2819,8 @@ end);
 
 GamesSection:NewButton("Heaven Map", "reduxe lag also", function()
 --heaven map skript
-loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))();
-wait(0.000001)
-pcall(function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/27r0btda/wHook-.-.-99failobby_lulaslollipop.deb", true))();
-end);end);
+loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))(); wait()
+end);
 
 --GamesSection:NewLabel("🥷 Ninja Legends 🥷")
 
