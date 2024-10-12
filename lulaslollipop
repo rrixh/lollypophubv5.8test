@@ -1,5 +1,5 @@
 --main v9.3.2 LOLLYPOP HUB 
-local LastUpdate="Last Update: Oct 5, 2024";
+local LastUpdate="Last Update: Oct 12, 2024";
 local Date = ''
 local Vv= [[9.3.2]]
 --=============IMAGE===============--
@@ -1745,6 +1745,11 @@ end)
 local Fun = Window:NewTab("Fun")
 local FunSection = Fun:NewSection("Animations")
 
+FunSection:NewButton("Mimic A Players Movement (just like the \"sync\" kommand)\n (kopy skript)", "easily kopy a players movement like /sync", function()
+setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/draggable-mobile-button/Sync.Player.Movement', true))();")
+ok(4, "bet", "Mimic Player skript kopied to klipboard✅, paste in your exekutor")
+end)
+
 FunSection:NewButton("OP OP NAM Gangnam Style", "work r15 and r6", function()
 if ava:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
 bNotify(5,"o aight", "MUST be R6 to do this");
@@ -2171,7 +2176,7 @@ end)
 
 HubSection:NewButton("Tiny TP gui (rekommended)", "small like zuki", function()
 --tpgui
-loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))()
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/kustomskript/tinyTPgui.mobile",true))();
 end)
 
 HubSection:NewButton("BETTER Teleport To Player GUI", "V2",
@@ -2767,6 +2772,12 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+--[[
+GamesSection:NewLabel("👊🏽THE STRONGEST BATTLEGROUNDS👊🏽")
+GamesSection:NewButton("CHILD EMPEROR (OP)", "op skript", function() 
+loadstring(game:HttpGet('https://pastebin.com/raw/CaXFZ2S2', true))();
+end)
+]]--
 
 GamesSection:NewLabel("👊💥 HAZE PIECE 💥👊")
 
