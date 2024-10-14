@@ -1,5 +1,5 @@
 --main v9.3.2 LOLLYPOP HUB 
-local LastUpdate="Last Update: Oct 12, 2024";
+local LastUpdate="Last Update: Oct 14, 2024";
 local Date = ''
 local Vv= [[9.3.2]]
 --=============IMAGE===============--
@@ -14,7 +14,7 @@ getgenv().animekatgirl = (18817519330)
 --=========TOGGLEPROPS============--
 getgenv().togglesize = (100)
 getgenv().getImg = (lollypopimg)
-local uiTheme = "LulaTheme"
+local uiTheme = "Serpent"
 pcall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/adonisbypass-kredits_pixeluted",true))(); end)
 --===========HUB LOADED============--
@@ -62,6 +62,8 @@ if toggle then toggle:Destroy();
 getgenv().lhloaded=false;
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify = RRixh1.Notify;wait();Notify({ Description = "u kan now klose and reload the skript";Duration=3;});
     end;
+elseif(m=='/e tp')then
+loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))();
 
 
 end-- if
@@ -1745,6 +1747,18 @@ end)
 local Fun = Window:NewTab("Fun")
 local FunSection = Fun:NewSection("Animations")
 
+FunSection:NewButton("R15 Animations/Emotes V2", "emotesv2", function() 
+setclipboard("loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-AFEM-14048'))();")
+wait()
+ok(4, "prexiate it", "R15 animation V2 kopied to klipboard✅, paste in your exekutor")
+end)
+
+FunSection:NewButton("YARHM HUB v2", "v2 better", function()
+setclipboard("loadstring(game:HttpGet('https://yarhm.goteamst.com/scr', false))()")
+wait()
+ok(4, "prexiate it", "YARHM HUB V2 kopied to klipboard✅, paste in your exekutor")
+end)
+
 FunSection:NewButton("Mimic A Players Movement (just like the \"sync\" kommand)\n (kopy skript)", "easily kopy a players movement like /sync", function()
 setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/draggable-mobile-button/Sync.Player.Movement', true))();")
 ok(4, "bet", "Mimic Player skript kopied to klipboard✅, paste in your exekutor")
@@ -2176,7 +2190,8 @@ end)
 
 HubSection:NewButton("Tiny TP gui (rekommended)", "small like zuki", function()
 --tpgui
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/kustomskript/tinyTPgui.mobile",true))();
+setclipboard("loadstring(game:HttpGet('https://github.com/rrixh/uwuware/raw/refs/heads/main/kustomskript/tinyTPgui.mobile',true))();")
+ok(3, "k", "hey im cherushi and i wanted this skript")
 end)
 
 HubSection:NewButton("BETTER Teleport To Player GUI", "V2",
@@ -4468,6 +4483,8 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("added YARHM hub v2 [universal] (Fun)")
+e:NewLabel("added FREE R15 Emotes gui V2 (Fun)")
 e:NewLabel("(req) added 👊HAZE PIECE👊 skript - (Games) for: alexnoobp09")
 e:NewLabel("kant add Tha Bronx 2 its harder thats why its usually paid (D3v1nw)")
 e:NewLabel("(req) added Traxk & Field Infinite - speed gui (Games)\n for: 0002002009008002004Q")
