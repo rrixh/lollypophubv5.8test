@@ -4820,10 +4820,6 @@ HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakes", funct
 loadstring(game:HttpGet("https://pastecode.dev/raw/yealugpt/koordsgui.kxls.xlsk.xls",true))()
 end)
 
-HomeSection:NewButton("SimpleSpy V2.2 💻Komputer", "for seeing remotes and fired events", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/3y74x19q/simplespy2.2rrixh.zip",true))();
-end)
-
 HomeSection:NewButton("BaxkDoorFinder", "finds a baxkdoor for admin or additional skripts", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
 end)
@@ -4864,13 +4860,16 @@ _G.posX = 0.405
 _G.posY = 0.9
 _G.searchButton = ";"
 _G.commandPrefix = "/"
-
 spawn(loadstring(game:HttpGet('https://raw.githubusercontent.com/alvin677/search/main/search.lua'))())
 end)
 
 HomeSection:NewButton("SimpleSpy v2.2 📱 Mobile", "mobileskript", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/REDzHUB/RS/main/SimpleSpyMobile'))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/SimpleSpyMobile2.2",true))();
 -- SimpleSpy mobile
+end)
+
+HomeSection:NewButton("SimpleSpy v2.2 💻Komputer", "for seeing remotes and fired events", function()
+loadstring(game:HttpGet("https://pastecode.dev/raw/3y74x19q/simplespy2.2rrixh.zip",true))();
 end)
 
 HomeSection:NewButton("Hydroxide mobile fix", "mobileskript", function()
