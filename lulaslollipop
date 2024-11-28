@@ -1,8 +1,9 @@
 --main v9.3.3 LOLLYPOP HUB 
-local LastUpdate = "Last Update: Nov 19, 2024 🦃";
+local LastUpdate = "Last Update: Nov 28, 2024 🦃";
 local Date = ''
-local HOLIDAY = "\n🦃THANKSGIVING SOON 🦃"
+local HOLIDAY = "\n🦃HAPPY THANKSGIVING🦃"
 local Vv= '9.3.3'
+local loadSpeed = 4.5
 --=============IMAGE===============--
 getgenv().cheruimg = (17104316554)
 getgenv().hgimg = (15729672382)
@@ -12,9 +13,10 @@ getgenv().qlogo = (83208221166718)
 getgenv().nekogirls = (99387651581628)
 getgenv().nekogirlsfull = (129450989114634)
 getgenv().animekatgirl = (18817519330)
+getgenv().thanksgiving = (124622552375747)
 --=========TOGGLEPROPS============--
-getgenv().togglesize = (100)
-getgenv().getImg = (lollypopimg)
+getgenv().togglesize = (60)
+getgenv().getImg = (thanksgiving)
 local uiTheme = "LulaTheme"
     spawn(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/adonisbypass-kredits_pixeluted",true))(); 
@@ -87,6 +89,7 @@ local YELLOWAF=Color3.fromRGB(255, 165, 0);
 local lightgrey=Color3.fromRGB(100,100,100);
 local Purple = Color3.fromRGB(128,0,128)
 local LPurple = Color3.fromRGB(166, 71, 214)
+local thanksgivingRed = Color3.fromRGB(181, 71, 48)
 local Rainbow = Color3.fromRGB(math.random(),math.random(),math.random());
 
 --[[ KUSTOM FUNKTIONS ]]--
@@ -155,7 +158,7 @@ tt.Parent = frame
 local loadingBar = Instance.new("Frame");
 loadingBar.Size = UDim2.new(0, 0, 0.2, 0)
 loadingBar.Position = UDim2.new(0.02, 0, 0.7, 0)
-loadingBar.BackgroundColor3 = LPurple; --💒KOLOR💒]
+loadingBar.BackgroundColor3 = thanksgivingRed; --💒KOLOR💒]
 loadingBar.Parent = frame;
 --uikorner loading bar frame
 local korner_2 = Instance.new("UICorner");
@@ -183,7 +186,7 @@ end;
 local function animateSkript()
 local kookie=0;
 while kookie < 100 do
-kookie = kookie + 4.5
+kookie = kookie + loadSpeed
 milk(kookie)
 wait(0.07)-- speed
 end;
@@ -283,7 +286,8 @@ else
 devixe_name = "Unknown Devixe📵"
 end
 end;
-local defaultKolor = Color3.fromRGB(128,0,128); --192,192,192
+local defaultKolor = thanksgivingRed
+local darkpurp=Color3.fromRGB(128,0,128);
 
 --game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
 
@@ -300,7 +304,7 @@ Duration = 7});
 
 lollypophub.DefaultColor = defaultKolor
 lollypophub:Notification({
-Text = "DELTA iOS RELEASED (8/25/24)🎉🎉!!!!!!!", Duration = 8});
+Text = "HAPPY THANKSGIVING 🤎🦃", Duration = 8});
 
 pcall(function()
 e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();end)
@@ -4525,6 +4529,7 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("🦃🤎 HAPPY THANKSGIVING 2024 🤎🦃")
 e:NewLabel("(req) Bike of Hell 🚴🏽‍♂️(Games) for: dinodeptrai12345 [11/19/24]")
 e:NewLabel("(req) Kolor or Die 🎨(Games) for: dinodeptrai12345 [11/19/24]")
 e:NewLabel("(req) Ghub v14 (Hubs & gui) for: migelito06577 [11/19/24]")
