@@ -1,4 +1,4 @@
---main v9.3.3 LOLLYPOP HUB 
+-- [[ main v9.3.3 LOLLYPOP HUB 🍭 ]] --
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS'))();
 local LollypopHub_Theme = "LulaTheme"
 local Vv = '9.3.3'
@@ -25,7 +25,7 @@ local function getEasterDate(year)
     return month, day
 end
 
--- Meeus/Jones/Butcher algorithm
+-- Meeus/Jones/Butcher algorithm Passover
 local function getPassoverDate(year)
     local g = year % 19
     local c = math.floor(year / 100)
@@ -47,8 +47,8 @@ local getHoliday = function()
     local easterMonth, easterDay = getEasterDate(Year)
     local passoverMonth, passoverDay = getPassoverDate(Year)
     local currentDate = os.date("*t")
-   -- print("Easter "..Year.." is: ".. easterMonth.."/"..easterDay)
-   -- print("Passover "..Year.." is:", passoverMonth, passoverDay)
+   print("Easter "..Year.." is: ".. easterMonth.."/"..easterDay)
+   print("Passover "..Year.." is:", passoverMonth, passoverDay)
 
     local HOLIDAY;
     if getdate(1, 1) then
@@ -56,9 +56,9 @@ local getHoliday = function()
 elseif getdate(2,13) then
 HOLIDAY = "\nVALENTINES TOMORROW💝"
     elseif getdate(2, 14) then
-        HOLIDAY = "HAPPY VALENTINE'S DAY 💝🍫\n"..Year
+        HOLIDAY = "\nHAPPY VALENTINES💝🍫\n"..Year
     elseif getdate(3, 17) then
-        HOLIDAY = "HAPPY ST. PATRIXKS DAY ☘️\n"..Year
+        HOLIDAY = "\nST. PATRIXKS DAY☘️\n"..Year
 elseif getdate(3, 30) then
 HOLIDAY = "\nAPRIL FOOLS TOMORROW🤡"
     elseif getdate(4, 1) then
@@ -66,7 +66,7 @@ HOLIDAY = "\nAPRIL FOOLS TOMORROW🤡"
     elseif getdate(5, 5) then
 HOLIDAY = "\n🇲🇽 CINCO DE MAYO 🇲🇽\n"..Year
     elseif getdate(6, 2) then
-        HOLIDAY = "LULAS🍭 BIRTHDAY 🥳🎂"
+        HOLIDAY = "\nLULAS🍭 BDAY 🥳🎂"
     elseif getdate(7, 4) then
         HOLIDAY = "\nINDEPENDENCE DAY!🎆\n".. Year
     elseif getdate(easterMonth, easterDay) then
@@ -76,7 +76,7 @@ HOLIDAY = "\n🇲🇽 CINCO DE MAYO 🇲🇽\n"..Year
 elseif getdate(10, 25) or getdate(10, 26) or getdate(10, 27) or getdate(10, 28) or getdate(10, 29) or getdate(10, 30) then
 HOLIDAY = "\n👻TRIXK OR TREAT...🎃"
     elseif getdate(10, 31) then
-HOLIDAY = "🎃HAPPY HALLOWEEN👻" .. Year
+HOLIDAY = "\n🎃HAPPY HALLOWEEN👻" .. Year
 elseif getdate(11, 20) or getdate(11, 21) or getdate(11, 22) or getdate(11, 23) or getdate(11, 24) or getdate(11, 25) or getdate(11, 26) then 
 HOLIDAY = "\nTHANKSGIVING SOON🦃\nKLUK-KLUK"
 elseif getdate(11,27) then
