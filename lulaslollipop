@@ -1,13 +1,15 @@
 -- [[ main v9.3.3 LOLLYPOP HUB 🍭 ]] --
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS'))();
-local LollypopHub_Theme = "LulaTheme"
-local Vv = '9.3.3'
-local LastUPDATE = "Last Update: Nov 30, 2024 "
+local NEWLINE = ("\n");
+local SPAXE = (" ")
+local LollypopHub_Theme = ("LulaTheme")
+local Vv = ('9.3.3')
+local LastUPDATE = "Last Update: Dec 4, 2024" .. SPAXE
 local Date = [[]]
 -- [[ KALK HOLIDAY ]] --
 local Year = os.date("%Y")
 -- Gauss's Algorithm
-local function getEasterDate(year)
+local getEasterDate = function(year)
     local a = year % 19
     local b = math.floor(year / 100)
     local c = year % 100
@@ -49,49 +51,52 @@ local getHoliday = function()
     local currentDate = os.date("*t")
    print("Easter "..Year.." is: ".. easterMonth.."/"..easterDay)
    print("Passover "..Year.." is:", passoverMonth, passoverDay)
+local find = table.find;
 
     local HOLIDAY;
     if getdate(1, 1) then
-        HOLIDAY = "HAPPY NEW YEARZ 🎉🎆🎇\n" .. Year
+        HOLIDAY = NEWLINE.."HAPPY NEW YEARZ 🎉🎆🎇\n" .. Year
 elseif getdate(2,13) then
-HOLIDAY = "\nVALENTINES TOMORROW💝"
+HOLIDAY = NEWLINE.."VALENTINES TOMORROW💝"
     elseif getdate(2, 14) then
-        HOLIDAY = "\nHAPPY VALENTINES💝🍫\n"..Year
+        HOLIDAY = NEWLINE.."HAPPY VALENTINES💝🍫\n"..Year
     elseif getdate(3, 17) then
-        HOLIDAY = "\nST. PATRIXKS DAY☘️\n"..Year
+        HOLIDAY = NEWLINE.."ST. PATRIXKS DAY☘️\n"..Year
 elseif getdate(3, 30) then
-HOLIDAY = "\nAPRIL FOOLS TOMORROW🤡"
+HOLIDAY = NEWLINE.."APRIL FOOLS TOMORROW🤡"
     elseif getdate(4, 1) then
-        HOLIDAY = "\n🤡HAPPY APRIL FOOLS🤡\n"..Year
+        HOLIDAY = NEWLINE.."HAPPY APRIL FOOLS🤡\n"..Year
     elseif getdate(5, 5) then
-HOLIDAY = "\n🇲🇽 CINCO DE MAYO 🇲🇽\n"..Year
+HOLIDAY = NEWLINE.."🇲🇽 CINCO DE MAYO 🇲🇽\n"..Year
     elseif getdate(6, 2) then
-        HOLIDAY = "\nLULAS🍭 BDAY 🥳🎂"
+        HOLIDAY = NEWLINE.."LULAS🍭 BDAY 🥳🎂"
     elseif getdate(7, 4) then
-        HOLIDAY = "\nINDEPENDENCE DAY!🎆\n".. Year
+        HOLIDAY = NEWLINE.."INDEPENDENCE DAY!🎆\n".. Year
     elseif getdate(easterMonth, easterDay) then
-        HOLIDAY = "\n🐰HAPPY EASTER!🥚" .. Year
+        HOLIDAY = NEWLINE.."🐰HAPPY EASTER!🥚" .. Year
     elseif getdate(passoverMonth, passoverDay) then
-        HOLIDAY = "\nHAPPY PASSOVER✡️"
-elseif getdate(10, 25) or getdate(10, 26) or getdate(10, 27) or getdate(10, 28) or getdate(10, 29) or getdate(10, 30) then
-HOLIDAY = "\n👻TRIXK OR TREAT...🎃"
+        HOLIDAY = NEWLINE.."HAPPY PASSOVER✡️"
+elseif getdate(10, 25) or getdate(10, 26) or getdate(10, 27) or getdate(10, 28) or getdate(10, 29) then
+HOLIDAY = NEWLINE.."👻TRIXK OR TREAT...🎃"
+elseif getdate(10,30) then
+HOLIDAY = NEWLINE.."HALLOWEEN TMRW🎃"
     elseif getdate(10, 31) then
-HOLIDAY = "\n🎃HAPPY HALLOWEEN👻" .. Year
+HOLIDAY = NEWLINE.."🎃HAPPY HALLOWEEN👻" .. Year
 elseif getdate(11, 20) or getdate(11, 21) or getdate(11, 22) or getdate(11, 23) or getdate(11, 24) or getdate(11, 25) or getdate(11, 26) then 
-HOLIDAY = "\nTHANKSGIVING SOON🦃\nKLUK-KLUK"
+HOLIDAY = NEWLINE.."THANKSGIVING SOON🦃\nKLUK-KLUK"
 elseif getdate(11,27) then
-HOLIDAY = "\nTHANKSGIVING IS TOMORROW🤎"
+HOLIDAY = NEWLINE.."THANKSGIVING IS TOMORROW🤎"
     elseif getdate(11, 28) or getdate(11, 29) or getdate(11, 30) then
-        HOLIDAY = "\nHAPPY THANKSGIVING🦃" .. Year
-elseif getdate(12, 16) or getdate(12,17) or getdate(12, 18) or getdate(12, 19) or getdate(12, 20) or getdate(12, 21) or getdate(12,22) or getdate(12,23) then
-HOLIDAY = "\n🎄XMAS SOON 🎄"
+        HOLIDAY = NEWLINE.."HAPPY THANKSGIVING🦃" .. Year
+elseif getdate(12, 14) or getdate(12, 15) or getdate(12, 16) or getdate(12,17) or getdate(12, 18) or getdate(12, 19) or getdate(12, 20) or getdate(12, 21) or getdate(12,22) or getdate(12,23) then
+HOLIDAY = NEWLINE.."🎄XMAS SOON 🎄"
 elseif getdate(12,24) then
-HOLIDAY = "\nMERRY XMAS EVE " .. Year .. "🎁"
+HOLIDAY = NEWLINE.."MERRY XMAS EVE " .. Year .. "🎁"
     elseif getdate(12, 25) then
-       HOLIDAY = "\n🎄🎁 MERRY XMAS 🎁🎄" .. Year
+       HOLIDAY = NEWLINE.."🎄🎁 MERRY XMAS 🎁🎄" .. Year
     else
 local plr = game.Players.LocalPlayer.Name
-        HOLIDAY = "\nHi, ".. _G.plr.Name .. " 🍬"
+HOLIDAY = NEWLINE.."Hi, " .. _G.plr.Name .. " 🍬"
     end;
     return HOLIDAY;
 end;
@@ -99,7 +104,7 @@ end;
 local getHolidayLogo = function()
   local month, day = os.date("*t").month, os.date("*t").day
 
-  if month == 12 and (day >= 16 and day <= 25) then  -- Christmas (Dec 16-25)
+  if month == 12 and (day >= 5 and day <= 26) then  -- Christmas (Dec 5-26)
     holidayLogo = "🎄"
   elseif month == 11 and (day >= 20 and day <= 30) then -- Thanksgiving (Nov 20-30)
     holidayLogo = "🦃"
@@ -135,6 +140,7 @@ local APRIL_FOOLS = 135050118610638
 
 local getToggleLogo = function()
   local logo = getHolidayLogo()
+local toglogo;
   if logo == "🎄" then toglogo = XMAS
   elseif logo == "🦃" then toglogo = THANKSGIVING
   elseif logo == "🎃" then toglogo = HALLOWEEN
@@ -323,7 +329,7 @@ tt.BackgroundTransparency = 1
 tt.TextColor3 = Color3.new(1, 1, 1)
 tt.TextSize = 25
 tt.Font = Enum.Font.SourceSansBold
-tt.Text = "Lollypop Hub V"..Vv.."🍭"..Holiday
+tt.Text = NEWLINE.."Lollypop Hub V"..Vv.."🍭"..Holiday
 tt.Parent = frame
 --load bar frame
 local loadingBar = Instance.new("Frame");
@@ -462,6 +468,14 @@ local darkpurp=Color3.fromRGB(128,0,128);
 
 --game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
 
+
+local lollyhub = function(txt, dur)
+local lollypophub = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
+lollypophub.DefaultColor = defaultKolor
+lollypophub:Notification({
+Text = txt, Duration = dur or 8});
+end;
+
 local lollypophub=loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
 
 lollypophub.DefaultColor = defaultKolor
@@ -473,9 +487,23 @@ lollypophub:Notification({
 Text = "V"..Vv.."🍭😋",
 Duration = 7});
 
-lollypophub.DefaultColor = defaultKolor
-lollypophub:Notification({
-Text = "HAPPY THANKSGIVING 🤎🦃", Duration = 8});
+if getdate(11, 28) then
+lollyhub("HAPPY THANKSGIVING 🦃")
+elseif getdate(10,30) then
+lollyhub("HALLOWEEN TOMORROW🎃")
+elseif getdate(10,31) then
+lollyhub("🍬HAPPY HALLOWEEN🎃")
+elseif getdate(2,13) then
+lollyhub("FIND YOUR BALENTINES💝")
+elseif getdate(2,14) then
+lollyhub("HAPPY BALENTINES DAY🍫💝")
+elseif getdate(12,31) or getdate(12,3) then
+lollyhub("READY FOR ", Year, "???")
+elseif getdate(1,1) then
+lollyhub("🎉HAPPY NEW YEARS 🎇")
+else
+lollyhub("🍬", 4)
+  end;
 
 pcall(function()
 e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();end)
@@ -2993,6 +3021,11 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+GamesSection:NewLabel("T-Titans Battlegrounds")
+GamesSection:NewButton("Aimbot (nearest player)", "makes projektiles go to nearest player", function()
+loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
+end);
+
 
 GamesSection:NewLabel("🚴🏽‍♂️ Bike of Hell🚴🏼‍♀️")
 GamesSection:NewButton("instant win, auto checkpoints", "requested by dinodeptrai12345", function()
@@ -4700,6 +4733,8 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("CraziiTrouble(Sakai) fling skripts in \"Hubs & gui\" and \"Skripts\" tab")
+e:NewLabel("Limon4ik5_5Top4ik(Suttes) there is permanent shiftloxk in \"Skripts\" tab")
 e:NewLabel("🦃🤎 HAPPY THANKSGIVING 2024 🤎🦃")
 e:NewLabel("(req) Bike of Hell 🚴🏽‍♂️(Games) for: dinodeptrai12345 [11/19/24]")
 e:NewLabel("(req) Kolor or Die 🎨(Games) for: dinodeptrai12345 [11/19/24]")
@@ -5582,4 +5617,4 @@ end)
 
 --loading skreen
 end; 
-spawn(animateSkript);
+				spawn(animateSkript);
