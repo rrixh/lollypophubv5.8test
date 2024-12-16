@@ -1,11 +1,13 @@
--- [[ main v9.3.3 LOLLYPOP HUB 🍭 ]] --
+--main v9.3.3 LOLLYPOP HUb
+local perfekthub, err = pcall(function()
+
 -- PreppyutahGirl4 baddies hitbox
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS'))();
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local LollypopHub_Theme = ("BloodTheme")
 local Vv = ('9.3.3')
-local LastUPDATE = "Last Update: Dec 14, 2024" .. SPAXE
+local LastUPDATE = "Last Update: Dec 16, 2024" .. SPAXE
 local Date = [[]]
 -- [[ KALK HOLIDAY ]] --
 local Year = os.date("%Y")
@@ -259,6 +261,10 @@ game=lulas
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify=RRixh1.Notify;
 holup=wait;task=task.wait;_0=print;
 LollypopHUB=print;
+
+local speedhub=function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua'))();
+end;
 
 --[[ KOLORS ]]--
 local MAGENTA=Color3.fromRGB(20, 0, 21)
@@ -3006,6 +3012,7 @@ end)
 -- game skripts
 local Games = Window:NewTab("🌟Games🌟")
 local GamesSection = Games:NewSection("Games")
+local games = GamesSection;
 
 --[[
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
@@ -3022,29 +3029,36 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
-games = GamesSection;
 
-games:NewLabel("🎣 Fisch 🐟")
-games:NewButton("Speed hub X (keyless)", "keyless", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua', true))();
+games:NewLabel("🎣 Fisch, 🍊BloxFruits, 🐶PS99, 💥TSB, 🐕Pet GO, 💪Muscle Legends");
+
+games:NewButton("Speed hub X (keyless) (universal)", "keyless", function()
+speedhub();
+end);
+
+games:NewButton("kopy SpeedHubX skript (if not working paste in your executor)", "keyless", function()
+speedhub = [[loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua',true))()]]
+_G.kopy(speedhub)
 wait()
--- ok(4, "bet", "Script Kopied✅, paste in your executor")
+ok(5, "bet", "Skript Kopied: ", speedhub)
 end)
 
-games:NewButton("Speed hub X (kopy skript if doesnt work)", "keyless", function()
-_G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua', true))();")
-wait()
-ok(5, "bet", "Skript Kopied✅, paste in your executor")
-end)
-
-games:NewButton("teleport to Fisch", "", function() 
-fisxh = 16732694052
+GamesSection:NewDropdown("teleport to games", "speedhubX games support", {"teleport to Fisch", "teleport to BloxFruit Sea 1", "teleport to BloxFruit Sea 2", "teleport to BloxFruit Sea 3", "teleport to PS99 world 1", "teleport to PS99 world 2", "teleport to PS99 world 3", "teleport to The Strongest Battlegrounds", "teleport to Pet GO", "teleport to Muscle Legends"}, function(...)
+local fisxh = 16732694052; local petgo=18901165922; local tsb=10449761463; ps3=17503543197; ps2=16498369169; ps1 = 8737899170; musxle=3623096087; bf3 = 7449423635; bf2=4442272183; bf1=2753915549;
+if ... == "teleport to Fisch" then
 _G.goto(fisxh)
-end)
-
-games:NewLabel("🎖 Military Tycoon 🎖")
-games:NewButton("Autofarm", "for jhayceetheg (jayyy)", function()
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/games/militarytykoon",true))(); 
+elseif ... == "teleport to BloxFruit Sea 1" then _G.goto(bf1)
+elseif ...== "teleport to BloxFruit Sea 2" then _G.goto(bf2)
+elseif ...=="teleport to BloxFruit Sea 3" then _G.goto(bf3)
+elseif ...== "teleport to PS99 world 1" then _G.goto(ps1)
+elseif ...=="teleport to PS99 world 2" then
+_G.goto(ps2)
+elseif ...=="teleport to PS99 world 3" then
+_G.goto(ps3) 
+elseif ...== "teleport to The Strongest Battlegrounds" then _G.goto(tsb)
+elseif ...== "teleport to Pet GO" then _G.goto(petgo) 
+elseif ...== "teleport to Muscle Legends" then _G.goto(musxles)
+  end;
 end)
 
 GamesSection:NewLabel("💅🏽Baddies 💅🏽")
@@ -3053,6 +3067,11 @@ _G.AdminKommands = true; loadstring(game:HttpGet("https://raw.githubusercontent.
 end)
 games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
+end)
+
+games:NewLabel("🎖 Military Tycoon 🎖")
+games:NewButton("Autofarm", "for jhayceetheg (jayyy)", function()
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/games/militarytykoon",true))(); 
 end)
 
 GamesSection:NewLabel("T-Titans Battlegrounds")
@@ -3446,11 +3465,8 @@ GamesSection:NewButton("teleport to game", "ro ghoul tp", function()   game:GetS
 
 GamesSection:NewLabel("🐶🐹 PET SIMULATOR 99 🐰🐇")
 
-GamesSection:NewDropdown("🐰🐹 PS99 skripts 🐹🐰", "ps99", {"Hugegames.io - autorank", "Fake Lollypop", "Gem Spoof", "Fluent hub", "dupe skript", "PS99 - Zaphub", "PS99 - Syrex hub", "SPEED HUB X", "teleport to game"}, function(x)
-if x == "SPEED HUB X" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SpeedHubX"))();
-
-elseif x == "Hugegames.io - autorank" then  
+GamesSection:NewDropdown("🐰🐹 PS99 skripts 🐹🐰", "ps99", {"Hugegames.io - autorank", "Fake Lollypop", "Gem Spoof", "Fluent hub", "dupe skript", "PS99 - Zaphub", "PS99 - Syrex hub", "teleport to game"}, function(x)
+if x == "Hugegames.io - autorank" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/zerqhy/petsim99/main/hugesgames.io"))();
 
 elseif x == "Fake Lollypop" then 
@@ -4055,35 +4071,9 @@ GamesSection:NewButton("Alxhemy Hubv2 (OP)", "bladeball", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/g3fz5w4s/alxhemyhubv2-bladeball",true))()
 end)
 
-GamesSection:NewButton("autoparry easy on/off gui", "bladeball", function()--bladeball auto on/off
-loadstring(game:HttpGet("https://paste.gg/p/anonymous/1734a4ee207844b994df2f36157afacd/files/1e79ac12fc8a47ef8263d5e9d43b7137/raw"))()
-end)
---yes
-GamesSection:NewButton("bladeball", "bladeball", function()
---bladeball holdbloxkbutton
-game:GetService("StarterGui"):SetCore("SendNotification",{
-Title = "skript by Hosvile",
-Text = "hold bloxk button to spam",
-Duration = 5
-})
-
-getgenv().SpamSpeed = 8 -- 1-25
-
-if not getgenv().exeSpam then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3ABlade%20Ball%20Spam",true))()
-end
-
-getgenv().exeSpam = true
-end)
-
 GamesSection:NewButton("Auto Klixker", "bladeball", function()
 --bladeball Autoklixker
 loadstring(game:HttpGet("https://rawscripts.net/raw/Blade-Ball-RGB-manual-spam-ui-9386", true))()
-end)
-
-GamesSection:NewButton("autoparry, autowin, autospam, etx.", "bladeball", function()
---bladeball autoparry,autowin,autospam,etx
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Neoncat765/Neon.C-Hub-X/main/UnknownVersion"))();
 end)
 
 GamesSection:NewButton("autoparry,spamparry & more - VixkzinJs", "bladeball", function()
@@ -4111,91 +4101,15 @@ GamesSection:NewButton("AUTO BLOXK", "auto bloxk for bladeball", function()--aut
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/AutoBlock"))()
 end)
 
-GamesSection:NewButton("Insurgent Hub", "bladeball", function()--insurgenthub
-loadstring(game:HttpGet('https://raw.githubusercontent.com/InsurgenceHub/IncurgenceHub.github.io/main/InsurgentHubOfficial'))()
-end)
-GamesSection:NewButton("Lumin Hub V4", "bladeball", function()--luminhubv4
-loadstring(game:HttpGet('https://raw.githubusercontent.com/No6No6No7yt/Lumin-Hub/main/BladeV4.lua'))();
-end)
-GamesSection:NewButton("Baller Hub", "bladeball", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/Blade231/main/Baller"))()
-end)
-GamesSection:NewButton("Bladeball Hub", "bladeball", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/SourceLua/main/Blade_Ball.lua"))()
-end)
-GamesSection:NewButton("R3THPRIV Hub", "bladeball", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/R3TH-PRIV/R3THPRIV/main/loader.lua'))()
-end)
-GamesSection:NewButton("ImNotFat Hub", "bladeball", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ImNotFatBitch/LoaderScripts/main/LoaderScripts"))()
-end)
-GamesSection:NewButton("MalixiousDev Hub", "bladeball", function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/malicious-dev/RobloxScripting/main/bladeball.lua'),true))()
-end)
-GamesSection:NewButton("bladeball skript", "bladeball", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Godyulikkjos/goolisn0/main/obf_iv59yI506e9j5Vx44SXUtCC0V1TdwuDipkiHVh2OcN7ntzT8Y8j89cWv39yJ22k5.lua'))()
-end)
-
-GamesSection:NewLabel("[🐇Pet Simulator X🐩]")
-
-GamesSection:NewButton("koming soon...🍭", "", function()
---soon
-end)
-
+-- GamesSection:NewLabel("[🐇Pet Simulator X🐩]")
 
 --BLOXFRUIT
 GamesSection:NewLabel("[🍒🍊BLOX FRUITS🍇🍎]")
 
-GamesSection:NewButton("HiruHub", "B L O X F R U I T S", function()
-getgenv().Fix_Lag = true
-getgenv().Auto_Execute = true
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NGUYENVUDUY1/Beta/main/HiruHub.lua"))();
+GamesSection:NewButton("Speed hub X", "universal hub", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))();
 end)
 
-GamesSection:NewButton("VectorHub", "requested by MRSHAHAB123", function()  loadstring(game:HttpGet("https://pastecode.dev/raw/fgbyc1yq/vektorhub-bloxfruits",true))();
-end)
-
-GamesSection:NewButton("❄️Winterhub v2", "bloxhub", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/Yatsuraa/Yuri/main/Winterhub_V2.lua"))();
-end)
-
-GamesSection:NewButton("#1 AIMBOT - Autoaim, aimloxk EZ PVP", "op", function()  
-_G.Aimbot = true
-loadstring(game:HttpGet("https://luable.top/acm"))();
-end)
-GamesSection:NewButton("REDz Hub - Blox fruit", "redzhub", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
-end)
-GamesSection:NewButton("AUTO FARM [KITSUNE EVENT] - RAXEV4, AUTO RAID(no key)", "gameInfo", function()  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tienvn123tkvn/Test/main/ZINERHUB.lua"))();
-end);
-GamesSection:NewButton("🍌 Banana Hub", "nghia11n", function()  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nghia11n/Banana-Hub/main/bananahub.lua"))();
-end);
-GamesSection:NewButton("speedHub X", "blox", function()
--- Blox Fruits
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SpeedHubX", true))()
-end)
-
-GamesSection:NewButton("Fiend1sh Hub", "fruits", function()
--- Blox Fruit
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Fiend1sh/FiendMain/main/ReinLoader'))()
-end)
-
-GamesSection:NewButton("mbmxHub (no key)", "bloxfruits", function()
--- blox fruits no key
-loadstring(game:HttpGet("https://raw.githubusercontent.com/m1M-Plqer819/any/main/mbmxhub/beta"))()
-end)
-GamesSection:NewButton("SepuhHub", "bloxfruit", function()loadstring(game:HttpGet("https://isnahamzahpastebin.tech/sepuh/puh_007.lua"))()
-end)
-GamesSection:NewButton("MTriet Hub", "bloxfruits", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
-end)
-GamesSection:NewButton("BloxFruits btteam", "bloxfruits", function()
-loadstring(game:HttpGet('https://btteam.net/scripts-auth/', true))()
-end)
-GamesSection:NewButton("NEVAHub", "bloxfruits", function()loadstring(game:HttpGet('https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2'))()
-end)
-GamesSection:NewButton("malfume Lair Hub", "bloxfruits", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/malfume/Lair/main/(BT)%F0%9F%8D%8A%E2%9B%B5"))()
-end)
 
 GamesSection:NewLabel("[👧🏽Rate My Avatar👦🏼]")
 
@@ -5648,3 +5562,8 @@ end)
 --loading skreen
 end; 
 spawn(animateSkript);
+
+end)
+
+if not perfekthub then print("the error is: ", err)
+end;
