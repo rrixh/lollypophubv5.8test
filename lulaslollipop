@@ -3082,8 +3082,10 @@ elseif ...== "teleport to Muscle Legends" then _G.goto(musxles)
 end)
 
 GamesSection:NewLabel("💅🏽Baddies 💅🏽")
-GamesSection:NewButton("Auto Kill players etc. (OP)", "🍬", function()
-_G.AdminKommands = true; loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽",true))(); 
+GamesSection:NewButton("Auto Kill, Annoy players etc. (OP)\n [request more features if needed]", "🍬", function()
+spawn(function()
+getgenv().Version = "new";
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
 end)
 games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
@@ -4697,6 +4699,7 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("Baddies 💅🏽 V2 (new ui &  added 'Auto Kill target') now supports Solara (Games)")
 e:NewLabel("- private chat spy is already in \"Skripts\" tab as \"See whispers\" ")
 e:NewLabel("(req) 🪖 Military Tycoon (Games) - autofarm gui | for: Jhayceetheg (Jayyy)")
 e:NewLabel("CraziiTrouble(Sakai) fling skripts in \"Hubs & gui\" and \"Skripts\" tab")
