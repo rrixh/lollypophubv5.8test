@@ -99,7 +99,7 @@ elseif getdate(12, 14) or getdate(12, 15) or getdate(12, 16) or getdate(12,17) o
 HOLIDAY = NEWLINE.."🎄XMAS SOON 🎄"
 elseif getdate(12,22) then
 HOLIDAY = NEWLINE.."3 DAYS TIL XMAS🎄"
-elseif gatedate(12,23) then
+elseif getdate(12,23) then
 HOLIDAY = NEWLINE.."XMAS EVE TOMORROW🎄" 
 elseif getdate(12,24) then
 HOLIDAY = NEWLINE.."MERRY XMAS EVE " .. Year .. "🎁"
