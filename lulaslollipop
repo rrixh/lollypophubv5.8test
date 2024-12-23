@@ -11,7 +11,7 @@ local LollypopHub_Theme = ("LulaTheme")
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Dec 22, 2024" .. SPAXE)
+local LastUPDATE = ("Last Update: Dec 23, 2024" .. SPAXE)
 local Date = [[]]
 -- [[ KALK HOLIDAY ]] --
 local Year = os.date("%Y")
@@ -99,6 +99,8 @@ elseif getdate(12, 14) or getdate(12, 15) or getdate(12, 16) or getdate(12,17) o
 HOLIDAY = NEWLINE.."🎄XMAS SOON 🎄"
 elseif getdate(12,22) then
 HOLIDAY = NEWLINE.."3 DAYS TIL XMAS🎄"
+elseif gatedate(12,23) then
+HOLIDAY = NEWLINE.."XMAS EVE TOMORROW🎄" 
 elseif getdate(12,24) then
 HOLIDAY = NEWLINE.."MERRY XMAS EVE " .. Year .. "🎁"
     elseif getdate(12, 25) then
