@@ -5546,5 +5546,5 @@ spawn(animateSkript);
 end)
 
 if not perfekthub then 
-warn("Error Okkured: ", err)
+warn("Error Okkured:", err)
 end;
