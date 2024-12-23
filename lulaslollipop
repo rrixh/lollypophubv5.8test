@@ -2,10 +2,14 @@
 local perfekthub, err = pcall(function()
 
 -- PreppyutahGirl4 baddies hitbox
+getgenv().kolors=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
+
+getgenv().LollypopTheme = _G.eggplant
+local LollypopHub_Theme = ("LulaTheme")
+
 local NEWLINE = ("\n");
 local SPAXE = (" ")
-local LollypopHub_Theme = ("BloodTheme")
 local Vv = ('9.3.3')
 local LastUPDATE = ("Last Update: Dec 22, 2024" .. SPAXE)
 local Date = [[]]
@@ -201,7 +205,7 @@ getgenv().togglesize = getToggleSize()
 getgenv().getImg = getToggleLogo()
 local uiTheme = LollypopHub_Theme
     spawn(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/adonisbypass-kredits_pixeluted",true))(); 
+print""
     end);
 --===========HUB LOADED============--
 if getgenv().lhloaded==true then
@@ -321,6 +325,16 @@ print(detektion.Name)
 end;
 makedekal('LOLLYPOP HUB LOADED🍭');
 
+
+ -- 🫂notify users of skripts requests 🫂--
+spawn(function()
+if username == "ROKET176" then 
+ok(10, "thanks", "🔔 ROKET167 - Private Chat Spy is already in the \"Skripts\" tab named 'See whispers' ") 
+elseif
+username == "kh3we" or username == "baddiesgirls350" then
+ok(10, "🔔baddiesgirls350 - ill add Speed for baddies soon❣️"); end;
+end);
+-- 🫂 notifying users 🫂 --
 
 -- [[ LOADING ]] --
 local loadingSkreen = Instance.new("ScreenGui");
@@ -542,7 +556,7 @@ e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydj
 local kount = #game.Players:GetPlayers();
 
 
-local KAVO = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
+local KAVO = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.lula",true))();
 local lollypopHub = "Lollypop Hub🍭 | V" ..Vv..    " | " ..exploit.. " | " ..LastUpdate;
 
 local Window = KAVO.CreateLib(lollypopHub, uiTheme)
@@ -634,7 +648,7 @@ getgenv().updatedSize = toggleSize;
 
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Toggle Size Updated to: "..toggleSize;Duration = 3; });
 local function UPDATEKUSTOMTOGGLE()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.lula",true))();
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.CoreGui
 screenGui.Name = "KustomToggle"
@@ -2530,11 +2544,6 @@ HubSection:NewButton("Fates ESP(modified) | owner:(fate#5647)", "kreds: fate#564
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/skripts/fuxkin-fatesESP.mobile",true))();
 end);
 
-HubSection:NewButton("k00pkid gui (Reupload)", "k000000000pppppppp", function()
---k00p revival skript 
-loadstring(game:HttpGet("https://pastecode.dev/raw/tb4x2127/k00pkidRevival_lulaslollipop.mp3",true))()
-end)
-
 HubSection:NewLabel("Fling")
 HubSection:NewButton("Funeral home fling gui", "kixk gui", function()
 --funeralhomekixkgui
@@ -3032,7 +3041,7 @@ end)
 -- game skripts
 local Games = Window:NewTab("🌟Games🌟")
 local GamesSection = Games:NewSection("Games")
-local games = GamesSection;
+games=GamesSection;
 
 --[[
 GamesSection:NewLabel("⭐️ 2024 FREE UGc ⭐️")
@@ -3049,6 +3058,15 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+games:NewLabel("💅🏽 Baddies 💅🏽");
+games:NewButton("Auto Kill, Annoy players etc. (OP)\n [request more features if needed]", "🍬", function()
+spawn(function()
+getgenv().Version = "new";
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
+end)
+games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
+end)
 
 games:NewLabel("🎣 Fisch, 🍊BloxFruits, 🐶PS99, 💥TSB, 🐕Pet GO, 💪Muscle Legends");
 
@@ -3079,16 +3097,6 @@ elseif ...== "teleport to The Strongest Battlegrounds" then _G.goto(tsb)
 elseif ...== "teleport to Pet GO" then _G.goto(petgo) 
 elseif ...== "teleport to Muscle Legends" then _G.goto(musxles)
   end;
-end)
-
-GamesSection:NewLabel("💅🏽Baddies 💅🏽")
-GamesSection:NewButton("Auto Kill, Annoy players etc. (OP)\n [request more features if needed]", "🍬", function()
-spawn(function()
-getgenv().Version = "new";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
-end)
-games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
 end)
 
 games:NewLabel("🎖 Military Tycoon 🎖")
@@ -3250,9 +3258,6 @@ GamesSection:NewButton("[new] FFJ hub\nitem esp, faster run, 3 anti's, event (OP
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FFJ1/Roblox-Exploits/main/scripts/Loader.lua"))()
 end)
 
-GamesSection:NewButton("ESP&more", "doors skript ", function()  
-loadstring(game:HttpGet("https://pastecode.dev/raw/4rv9np5f/doors",true))()
-end) 
 GamesSection:NewButton("Doors -Awesome Hub gui", "awesomehubgui",
 function()-- doors awesome skript
 loadstring(game:HttpGet("https://rawscripts.net/raw/DOORS-awesome-script-11450"))()
@@ -3371,13 +3376,6 @@ if x == "ANTI DEAD, KILL PLAYER, AUTO SKILLS(Tora)" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/cf2e1f49a880e326c1bd0a18340a0fef27ecc6f3/RogueNinja",true))();
 
 elseif x == "to game" then game:GetService("TeleportService"):Teleport(14206055326, game:GetService("Players").LocalPlayer)  end  end)
-
-GamesSection:NewDropdown("🌀 AURA KRAFT 🌀", "OP skript 🍭", {"get all aura🌀 (OP) 🍭", "to game"}, function(x) 
-if x == "get all aura🌀 (OP) 🍭" then
---op get all aura by🍭
-loadstring(game:HttpGet("https://pastecode.dev/raw/jbke82z9/AURAKRAFT-getAllAura_lulaslollipop.xls",true))();
-
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(17298589168, game:GetService("Players").LocalPlayer)  end  end)
 
 GamesSection:NewDropdown("💥 Anime Realms Simulator 💥", "best auto farm by tora", {"anime realms - best auto farm", "to game"}, function(x) 
 if x == "anime realms - best auto farm" then  
@@ -3584,11 +3582,6 @@ GamesSection:NewButton("Blue Red hub", "unvrsl", function()
 loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-BlueRed-Hub-V11-12372'))()
 end)
 
-
-GamesSection:NewButton("Osiris gui", "osiris shit talk blah more", function()  
-loadstring(game:HttpGet("https://pastecode.dev/raw/j3dc9a2r/osiris",true))()
-end)
-
 GamesSection:NewButton("Rainbow Sunshine Aimloxk(OP,paid)\ntype >enable inventory<if tool not visible", "type >enable inventory<if tool not visible", function()  
 --rainbow loxk 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealXORA/Roblox-Scripts/main/Rainbow%20Sunshine%20Aimlock.lua", true))()
@@ -3597,10 +3590,14 @@ GamesSection:NewButton("FUXK AURA X FUXK DH", "FUXK DH HEAVILY SKID", function()
 --FUXK AURA X REMAKE FUXK DAHOOD
 loadstring(game:HttpGet(string.char(104,116,116,112,115,58,47,47,112,97,115,116,101,99,111,100,101,46,100,101,118,47,114,97,119,47,105,100,52,104,57,112,107,119,47,114,114,105,120,104), true))()
 end)
+
+--[[
 GamesSection:NewButton("FUXK AZURE", "fuxk azure", function()
 --FUXK AZURe too
 loadstring(game:HttpGet("https://pastecode.dev/raw/sar2waj1/fuxkazurefuxktykusionWhatever.that.nigga.name.is.........----..-.-.....-.-...-...-.zip",true))()
 end)
+]]--
+
 GamesSection:NewButton("tp walk (universal but i put it here)", "it aint jus for dh", function()
 --tpwalk
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/TPWALKgui-removedplayerlogging",true))();
@@ -3627,9 +3624,11 @@ GamesSection:NewButton("Aimloxk (use Q tool)", "Q tool", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/DYZ2fug0",true))()
 end)
 
+--[[
 GamesSection:NewButton("any tool -dahood", "any tool pixker for dahood", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/7PZTHFQZwr/DaHoodanytool",true))()
 end)
+]]--
 
 GamesSection:NewButton("DaHood Reborn Aim", "dahood aimloxk", function()loadstring(game:HttpGet("https://pastebin.com/raw/iNd3xTPv"))()
 end)
@@ -3682,14 +3681,6 @@ for i,b in pairs (v.Backpack:GetChildren()) do
 b.Parent = game.Players.LocalPlayer.Backpack
 end
 end
-end)
-
-GamesSection:NewButton("Tiger Admin (REVAMPED, fix)", "tiger admin revamp",
-function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/qb10tlse/tigeradminRevamped_lulaslollipop",true))()
-
--- loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-TIGER-ADMIN-REVAMPED-7593"))()
---Tiger admin revamped new version
 end)
 
 GamesSection:NewButton("Prison life admin hub", "adminHub",
@@ -3940,36 +3931,6 @@ game:GetService("TeleportService"):Teleport(13910706751, game:GetService("Player
 end
 end)
 
--- [ ⭐️🛼ULTA VERSE 🛼⭐️ ] --
-
-GamesSection:NewLabel("🛹ULTAVERSE⛸️UGC")
-
-GamesSection:NewButton("3 - inf points, auto krystal", "raxer helm free ugx", function()
---ugx 3 ultaverse raxer
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Qrto1/Ultaverse/main/AutoFarm"))();
-end)
-
-GamesSection:NewButton("start", "free ugx", function()
---start area inf to work
-loadstring(game:HttpGet("https://pastecode.dev/raw/yybqw7w5/startInfPoints-ultaverse_lulaslollipop.jpg",true))()
-end)
-
-GamesSection:NewButton("NEW FREE UGX 2nd drop", "2nd drop free ugx", function()--ultaverse 2
-loadstring(game:HttpGet(('https://pastefy.app/XeQUxiD1/raw'),true))()
-end)
-
-GamesSection:NewButton("inf points (skript by Tora)\n(no key,easy)", "free ugx", function()--inf points
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/Ultaverse",true))()
-end)
-GamesSection:NewButton("inf points (skript by Bacon)\n(key,Toras might not work idk)", "free ugx", function()--ultaverse inf pt
-loadstring(game:HttpGet("https://pastefy.app/nSUUKWrJ/raw",true))()
-end)
-GamesSection:NewButton("teleport to game", "free ugx", function()
---tp to ultaverse
-game:GetService("TeleportService"):Teleport(8980446061, game:GetService("Players").LocalPlayer)
-end)
-
-
 GamesSection:NewLabel("[🖍️Find The Markers🖍️]")
 GamesSection:NewButton("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
 end)
@@ -3993,9 +3954,8 @@ end)
 GamesSection:NewLabel("🟨 Luxky Bloxk Battlegrounds 🟨") 
 GamesSection:NewButton("get tools ui", "get bloxks", function()
 --luxkybloxk 
-loadstring(game:HttpGet("https://pastecode.dev/raw/f9g8ybyk/LuxkyBloxksBattlegrounds_lulaslollipop.jar",true))()
+loadstring(game:HttpGet("https://paste-drop.com/save/yDHPkhWwg2",true))(); 
 end) 
-
 
 GamesSection:NewLabel("✋🏽🛑 Simon Says 🚥✋🏽") 
 GamesSection:NewButton("kommand spam abuse", "simonsays", function()  
@@ -4088,10 +4048,12 @@ GamesSection:NewButton("bladeball- Darkrai Hub V2", "bladeball", function()--Bla
 loadstring(game:HttpGet("https://pastefy.app/y3MGGd9n/raw"))()
 end)
 
+--[[
 GamesSection:NewButton("Alxhemy Hubv2 (OP)", "bladeball", function()
 --bladeball alxhemyhubv2
 loadstring(game:HttpGet("https://pastecode.dev/raw/g3fz5w4s/alxhemyhubv2-bladeball",true))()
 end)
+]]--
 
 GamesSection:NewButton("Auto Klixker", "bladeball", function()
 --bladeball Autoklixker
@@ -4459,15 +4421,6 @@ GamesSection:NewButton("laziumHub", "lazium", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NUTellaVING/LaziumHub/main/ToiletTowerDefense.lua"))()
 end)
 
-
-local GamesSection = Games:NewSection("[Sakura Stand]")
---Sakura Stand
-
-GamesSection:NewButton("sakura Stand", "direkt exekute", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/I0KOXXRe/sakuraStand.direktExekute",true))()
-end)
-
-
 local GamesSection = Games:NewSection("[👹Demon Fall👹]")
 
 GamesSection:NewButton("sakura Stand", "direkt exekute", function()
@@ -4699,7 +4652,8 @@ local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uw
 end)
 e:NewLabel("V"..Vv.." updates: ");
 
-e:NewLabel("Baddies 💅🏽 V2 (new ui &  added 'Auto Kill target') now supports Solara (Games)")
+e:NewLabel("MY SIS BDAY🥹💚💕🎉🥳🎂HAPPY BIRTHDAY CHERUSSI🍭 [dec23]")
+e:NewLabel("Baddies 💅🏽 V2 (new ui &  added 'Auto Kill target') now supports Solara\n (Games)")
 e:NewLabel("- private chat spy is already in \"Skripts\" tab as \"See whispers\" ")
 e:NewLabel("(req) 🪖 Military Tycoon (Games) - autofarm gui | for: Jhayceetheg (Jayyy)")
 e:NewLabel("CraziiTrouble(Sakai) fling skripts in \"Hubs & gui\" and \"Skripts\" tab")
@@ -4987,7 +4941,7 @@ end)
 --end)
 
 HomeSection:NewButton("Get Koordinates", "x,y,z finder say /console", function()
-setclipboard(tostring(Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position));
+setclipboard("game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new("..tostring(_G.hrp.Position)..")");
 wait()
 local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
 local Notify = AkaliNotif.Notify;
@@ -4997,8 +4951,8 @@ Title = "Lollypop Hub🍭";
 Duration = 3.5;
 });
 end)
-HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakes", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/yealugpt/koordsgui.kxls.xlsk.xls",true))()
+HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakers", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/%23lula/koordgrabber.ppt",true))();
 end)
 
 HomeSection:NewButton("BaxkDoorFinder", "finds a baxkdoor for admin or additional skripts", function()
@@ -5050,7 +5004,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/he
 end)
 
 HomeSection:NewButton("SimpleSpy v2.2 💻PC", "for seeing remotes and fired events", function()
-loadstring(game:HttpGet("https://pastecode.dev/raw/3y74x19q/simplespy2.2rrixh.zip",true))();
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/skripts/simplespy2.2rrixh.zip",true))(); 
 end)
 
 HomeSection:NewButton("Hydroxide mobile fix", "mobileskript", function()
@@ -5141,10 +5095,6 @@ end;
 wait()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end)
-
-MoreSection:NewButton("Adonis", "bypass", function() loadstring(game:HttpGet("https://pastecode.dev/raw/yld9n9zg/adonis",true))();end)
-
-MoreSection:NewButton("🏏Bladeball anti-cheat bypass", "sum", function() loadstring(game:HttpGet("https://pastecode.dev/raw/pf45h4w7/bladeball-antixheatbypass_lulaslollipop.xlsx",true))();end)
 
 --[[
 MoreSection:NewButton("Protekt frm malixious skripts", "sum", function()
@@ -5450,10 +5400,12 @@ local function MAIN()
 -- main lollypop auto-exek
 loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M]],false))()
 end;
+--[[
 local function MAINE()
 --___--
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/test/e.xlsx', false))();
 end;
+]]--
 
 -- [ TOGGLE klose/open ] --
 local function TOGGLE2()
@@ -5493,7 +5445,7 @@ end;--togglelollypop funk(not using)
 
 --===========LH TOGGLE==============--
 local function KUSTOMTOGGLE()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.jpg",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.lula",true))();
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "KustomToggle"
 screenGui.Parent = game.CoreGui
@@ -5579,13 +5531,10 @@ end
 end)
 --============END TOGGLE===========--
 
-if username == "ROKET176" then 
-ok(10, "thanks", "🔔 ROKET167 - Private Chat Spy is already in the \"Skripts\" tab named 'See whispers' ") end;
-
-
 spawn(KUSTOMTOGGLE);
 spawn(function()
-pcall(MAIN); pcall(MAINE);
+pcall(MAIN); 
+-- pcall(MAINE);
 end)
 
 --loading skreen
@@ -5594,5 +5543,6 @@ spawn(animateSkript);
 
 end)
 
-if not perfekthub then print("Error Okkured: ", err)
+if not perfekthub then 
+warn("Error Okkured: ", err)
 end;
