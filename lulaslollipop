@@ -772,7 +772,7 @@ SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 
 
 --[[📝 SKRIPT REQUESTS 📝]]--
-SkriptsSection:NewLabel("request scripts here (the loadstring or SAY wat u want the script to do OR how the script\n should be) **BE SPECIFIC** or i kant make/add it")
+SkriptsSection:NewLabel("request scripts here (send the loadstring or SAY wat u want the script\n to do OR how it should work) **BE SPECIFIC** or i kant make it")
 
 local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif", true))(); local Notify = RRixh1.Notify;
 local banned = {"hhfhfhjjd3"}
