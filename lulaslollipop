@@ -2,8 +2,7 @@
 local OWNER = ("lulaslollipop")
 local perfekthub, err = pcall(function()
 
--- PreppyutahGirl4 baddies hitbox
-getgenv().kolors=(true);
+getgenv().kolors=true;
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
 
 getgenv().LollypopTheme = _G.eggplant
@@ -12,7 +11,7 @@ local LollypopHub_Theme = ("LulaTheme")
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Dec 23, 2024" .. SPAXE)
+local LastUPDATE = ("Last Update: Dec 24, 2024" .. SPAXE)
 local Date = [[]]
 -- [[ KALK HOLIDAY ]] --
 local Year = os.date("%Y")
@@ -64,6 +63,10 @@ local find = table.find;
     local HOLIDAY;
     if getdate(1, 1) then
         HOLIDAY = NEWLINE.."HAPPY NEW YEARZ 🎉🎆🎇\n" .. Year
+elseif getdate(1, 2) then
+HOLIDAY = NEWLINE.."HOW IS " ..Year.. "?? 🧨"
+elseif getdate(1, 3) then
+HOLIDAY = NEWLINE.."DAY 3 OF " ..Year.. "🥴"
 elseif getdate(2,13) then
 HOLIDAY = NEWLINE.."VALENTINES TOMORROW💝"
     elseif getdate(2, 14) then
@@ -74,10 +77,16 @@ elseif getdate(3, 30) then
 HOLIDAY = NEWLINE.."APRIL FOOLS TOMORROW🤡"
     elseif getdate(4, 1) then
         HOLIDAY = NEWLINE.."HAPPY APRIL FOOLS🤡\n"..Year
+elseif getdate(4, 20) then
+HOLIDAY = NEWLINE..("HAPPY 420 POTHEADZ 😋🍃🚬");
+elseif getdate(4, 21) then
+HOLIDAY = NEWLINE..("YALL NIGGAZ SMOKE ENUFF🍃 ?");
     elseif getdate(5, 5) then
-HOLIDAY = NEWLINE.."🇲🇽 CINCO DE MAYO 🇲🇽\n"..Year
+HOLIDAY = NEWLINE.."🇲🇽 CINCO DE MAYO 🇲🇽" ..Year.. ""
     elseif getdate(6, 2) then
-        HOLIDAY = NEWLINE.."LULAS🍭 BDAY 🥳🎂"
+ HOLIDAY = NEWLINE..("LULAS🍭 BDAY 🥳🎂");
+elseif getdate(9, 18) then
+HOLIDAY = NEWLINE..("HBD🎂 HG aka BIGSIS🥰😇");
     elseif getdate(7, 4) then
         HOLIDAY = NEWLINE.."INDEPENDENCE DAY!🎆\n".. Year
     elseif getdate(easterMonth, easterDay) then
@@ -106,6 +115,8 @@ elseif getdate(12,24) then
 HOLIDAY = NEWLINE.."MERRY XMAS EVE " .. Year .. "🎁"
     elseif getdate(12, 25) then
        HOLIDAY = NEWLINE.."🎄🎁 MERRY XMAS 🎁🎄" .. Year
+elseif getdate(12, 26) then
+HOLIDAY = NEWLINE.."HOPE U ENJOYED UR XMAS❤️"
     else
 local plr = game.Players.LocalPlayer.Name
 HOLIDAY = NEWLINE.."Hi, " .. _G.plr.Name .. " 🍬"
