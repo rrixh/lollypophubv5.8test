@@ -72,11 +72,11 @@ HOLIDAY = NEWLINE.."VALENTINES TOMORROW💝"
     elseif getdate(2, 14) then
         HOLIDAY = NEWLINE.."HAPPY VALENTINES💝🍫\n"..Year
     elseif getdate(3, 17) then
-        HOLIDAY = NEWLINE.."ST. PATRIXKS DAY☘️\n"..Year
+        HOLIDAY = NEWLINE.."ST. PATRIXKS DAY☘️"..Year
 elseif getdate(3, 30) then
 HOLIDAY = NEWLINE.."APRIL FOOLS TOMORROW🤡"
     elseif getdate(4, 1) then
-        HOLIDAY = NEWLINE.."HAPPY APRIL FOOLS🤡\n"..Year
+        HOLIDAY = NEWLINE.."HAPPY APRIL FOOLS🤡"..Year
 elseif getdate(4, 20) then
 HOLIDAY = NEWLINE..("HAPPY 420 POTHEADZ 😋🍃🚬");
 elseif getdate(4, 21) then
@@ -342,7 +342,6 @@ makedekal('LOLLYPOP HUB LOADED🍭');
 
  -- 🫂notify users of skripts requests 🫂--
 spawn(function()
-
 local username = (_G.user) or (_G.display)
 X=username;
 
@@ -353,7 +352,9 @@ if X == "baddiesgirls350" then
 _G.ok("🔔baddiesgirls350 - ill add Speed for baddies soon❣️", 13); 
 end; --✅
 if X == "JJKxCSM" then
-_G.ok("🔔JJKxCSM - the Universal Emote gui is in \"Fun\" & ill add the sex GUIs soon", 15); 
+_G.ok("🔔JJKxCSM - the Universal Emote gui is in \"Fun\" & ill add the sex GUIs soon", 15);
+end; -- ✅
+if(X=="Peakzzin")or(X==_G.lulas)then _G.ok("🔔Peakzzin - STEEP STEPS has anti-cheat for infjump & flying so i wont be able to make it", 22)
 end; --✅
 
 end);
