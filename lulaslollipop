@@ -1,4 +1,5 @@
 --main v9.3.3 LOLLYPOP HUB
+local OWNER = ("lulaslollipop")
 local perfekthub, err = pcall(function()
 
 -- PreppyutahGirl4 baddies hitbox
@@ -330,11 +331,18 @@ makedekal('LOLLYPOP HUB LOADED🍭');
 
  -- 🫂notify users of skripts requests 🫂--
 spawn(function()
-if username == "ROKET176" then 
-ok(10, "thanks", "🔔 ROKET167 - Private Chat Spy is already in the \"Skripts\" tab named 'See whispers' ") 
-elseif
-username == "kh3we" or username == "baddiesgirls350" then
-ok(10, "🔔baddiesgirls350 - ill add Speed for baddies soon❣️"); end;
+local username = (_G.user) or (_G.display)
+
+if username == "ROKET176" then
+_G.ok("🔔ROKET167 - Private Chat Spy is already in the \"Skripts\" tab named 'See whispers' ", 10); 
+end; --✅
+if username == "baddiesgirls350" then
+_G.ok("🔔baddiesgirls350 - ill add Speed for baddies soon❣️", 13); 
+end; --✅
+if username == "JJKxCSM" then
+_G.ok("🔔JJKxCSM - the Universal Emote gui is in \"Fun\" & ill add the sex GUIs soon", 10); 
+end; --✅
+
 end);
 -- 🫂 notifying users 🫂 --
 
@@ -5546,5 +5554,5 @@ spawn(animateSkript);
 end)
 
 if not perfekthub then 
-warn("Error Okkured:", err)
+warn("Error Okkured: ", err)
 end;
