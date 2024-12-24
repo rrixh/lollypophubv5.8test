@@ -326,20 +326,22 @@ detektion.Name = DEKAL
 detektion.Parent= game:GetService("ReplicatedStorage")
 print(detektion.Name)
 end;
+if(OWNER ~= _G.lulas)then warn([[OWNER is: 'lulaslollipop' retard]]) return end;
 makedekal('LOLLYPOP HUB LOADED🍭');
-
 
  -- 🫂notify users of skripts requests 🫂--
 spawn(function()
-local username = (_G.user) or (_G.display)
 
-if username == "ROKET176" then
-_G.ok("🔔ROKET167 - Private Chat Spy is already in the \"Skripts\" tab named 'See whispers' ", 11); 
+local username = (_G.user) or (_G.display)
+X=username;
+
+if X == "ROKET176" then
+_G.ok("🔔ROKET167 - Private Chat Spy is already in the \"Skripts\" tab named 'See whispers' ", 12); 
 end; --✅
-if username == "baddiesgirls350" then
+if X == "baddiesgirls350" then
 _G.ok("🔔baddiesgirls350 - ill add Speed for baddies soon❣️", 13); 
 end; --✅
-if username == "JJKxCSM" then
+if X == "JJKxCSM" then
 _G.ok("🔔JJKxCSM - the Universal Emote gui is in \"Fun\" & ill add the sex GUIs soon", 15); 
 end; --✅
 
@@ -4886,12 +4888,12 @@ home = HomeSection;
 HomeSection:NewButton("🔎 Skript", "look up any skript", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/ScriptSearcher"))()
 end)
+]]--
 
-HomeSection:NewButton("Dev Konsole", "see roblox dev konsole",
+HomeSection:NewButton("Open Dev Konsole", "see roblox dev konsole",
 function()
-keypress(120)
+_G.sgui:SetCore("DevConsoleVisible",true)
 end)
-]]
 
 HomeSection:NewButton("Rejoin", "rejoins the same lobby",
 function()
