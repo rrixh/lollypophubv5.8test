@@ -5069,12 +5069,38 @@ HomeSection:NewButton("ANTI()", "anti xhat logger & xhatbypass", function()
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/my%20skripts/antiban-xhelulusONLY",false))();
 end)
 
+-- KREDITS 2 ME --
+home:NewLabel("my soxials 📲");
 
+home:NewButton("My Roblox profile link", "kredits🍭", function()
+_G.kopy(_G.rbxlink)
+wait()
+_G.note("Kopied @lulaslollipop profile link") 
+end)
+
+home:NewButton("Diskord: @rrixh or @bommunity (main)", "kredits🍭", function()
+_G.kopy(_G.diskordlink)
+wait()
+_G.note("Kopied @bommunity diskord profile link")
+end)
+
+home:NewButton("YouTube: @rsgmj", "kredits🍭", function()
+_G.kopy(_G.ytlink)
+wait()
+_G.note("Kopied @rsgmj YouTube channel link")
+end)
+
+home:NewButton("Telegram: @siipped", "kredits🍭", function()
+_G.kopy(_G.telegramlink)
+wait()
+_G.note("Kopied telegram DM link")
+end)
 
 
 -- More.TabMy.Skrpts
 local More = Window:NewTab("Bypasses & More")
 local MoreSection = More:NewSection("more skripts koming soon...🍭")
+more = MoreSection;
 
 MoreSection:NewButton("[NEW] DaHood*working,tested*\n Adonis anti-xheat bypass🟢", "an anti", function()
 pcall(function()
@@ -5570,4 +5596,6 @@ end)
 
 if not perfekthub then 
 warn("Error Okkured: ", err)
+else
+print("if you see this i love you 🍭❤️")
 end;
