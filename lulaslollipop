@@ -56,8 +56,8 @@ local getHoliday = function()
     local easterMonth, easterDay = getEasterDate(Year)
     local passoverMonth, passoverDay = getPassoverDate(Year)
     local currentDate = os.date("*t")
-   print("Easter "..Year.." is: ".. easterMonth.."/"..easterDay)
-   print("Passover "..Year.." is:", passoverMonth, passoverDay)
+-- print("Easter "..Year.." is: ".. easterMonth.."/"..easterDay)
+-- print("Passover "..Year.." is:", passoverMonth, passoverDay)
 local find = table.find;
 
     local HOLIDAY;
@@ -223,7 +223,7 @@ print""
     end);
 --===========HUB LOADED============--
 if getgenv().lhloaded==true then
-local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Lollypop Hub🍭 already loaded! 👺 say \"/e reload\" if u want to reload the skript";Duration = 6; }); return end;
+_G.note("Lollypop Hub already loaded! 👺 say \"/e reload\" if u want to reload the skript", 5); return end;
 getgenv().lhloaded=true
 --=============LOKALS==============--
 local Plrs = game:GetService[[Players]];
@@ -267,7 +267,7 @@ elseif(m=='/e reload')then
 local toggle = game.CoreGui:FindFirstChild[[KustomToggle]];
 if toggle then toggle:Destroy();
 getgenv().lhloaded=false;
-local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify = RRixh1.Notify;wait();Notify({ Description = "u kan now klose and reload the skript";Duration=3;});
+_G.note("u kan now klose and reload the skript", 3)
     end;
 elseif(m=='/e tp')then
 loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))();
@@ -280,17 +280,12 @@ end)--pcall
 local exploit=identifyexecutor() or "Unknown";
 -- [ 🛠️ main vars 🛠️ ] --
 local lulas=game;
-game=lulas
-local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify=RRixh1.Notify;
+game=lulas;
 holup=wait;task=task.wait;_0=print;
 LollypopHUB=print;
 
-local speedhub=function()
+_G.speedhub=function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua'))();
-end;
-
-_G.rnote = function(msg)
-local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif", true))(); local Notify = RRixh1.Notify; Notify({Description = txt, Duration = 4});
 end;
 
 --[[ KOLORS ]]--
@@ -666,11 +661,15 @@ print((...))
 end)
 
 SkriptsSection:NewTextBox("Toggle Button Size", "🍭", function(toggleSize)
+local blank = {" ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          "};
+if _G.find(blank, toggleSize) then return end;
+getgenv().updatedSize = _G.num(toggleSize);
+if not updatedSize then return end;
+
 local foundToggle = game.CoreGui:FindFirstChild[[KustomToggle]]
 if foundToggle then foundToggle:Destroy(); end;
-getgenv().updatedSize = toggleSize;
+_G.note("Toggle Size updated to: "..updatedSize, 3)
 
-local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))(); local Notify = RRixh1.Notify; wait(); Notify({ Description = "Toggle Size Updated to: "..toggleSize;Duration = 3; });
 local function UPDATEKUSTOMTOGGLE()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.lula",true))();
 local screenGui = Instance.new("ScreenGui")
@@ -681,7 +680,7 @@ local removeborder = 0
 local overlayAllGui = 5
 local roundButton = Instance.new("ImageButton")
 roundButton.Parent = screenGui
-roundButton.Size = UDim2.new(0, updatedSize, 0, updatedSize)
+roundButton.Size = UDim2.new(0, getgenv().updatedSize, 0, getgenv().updatedSize)
 roundButton.Position = UDim2.new(1, -110, 0, 25)
 roundButton.Image = "http://www.roblox.com/asset/?id="..getImg
 roundButton.BackgroundTransparency = 1
@@ -795,18 +794,16 @@ SkriptsSection:NewLabel("Devixe: " ..devixe_name)
 
 --[[📝 SKRIPT REQUESTS 📝]]--
 SkriptsSection:NewLabel("request scripts here (send the loadstring or SAY wat u want the script\n to do OR how it should work) **BE SPECIFIC** or i kant make it")
-
-local RRixh1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif", true))(); local Notify = RRixh1.Notify;
 local banned = {"hhfhfhjjd3"}
 
 SkriptsSection:NewTextBox("Skript request", "type whatever skript u want then push enter", function(skript)
 if _G.find(banned, username) then
-Notify({Description = "stop spamming", Duration = 4}); return end;
+_G.note("stop spamming", 4); return end;
 
 skriptrequest=skript;
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/test/skriptreq1",true))();
 holup();
-Notify({Description = "u requested: ”" ..skriptrequest.. "“ \nRequest sent✅"; Duration = 3.7});
+_G.note("u requested: ”" ..skriptrequest.. "“ \nRequest sent✅", 3.7)
 end)
 
 --[[]]----[[x]]----[[x]]----[[x]]----[[x]]----[[x]]-[[x]]----[[x]]----[[x]]----[[x]]----[[x]]----[[x]]----[
@@ -3095,7 +3092,7 @@ end)
 games:NewLabel("🎣 Fisch, 🍊BloxFruits, 🐶PS99, 💥TSB, 🐕Pet GO, 💪Muscle Legends");
 
 games:NewButton("Speed hub X (keyless) (universal)", "keyless", function()
-speedhub();
+_G.speedhub();
 end);
 
 games:NewButton("kopy SpeedHubX skript (if not working paste in your executor)", "keyless", function()
@@ -4670,10 +4667,16 @@ e=exSection;
 
 e:NewLabel("👺 this hub is mainly made for mobile 📲");
 exSection:NewTextBox("FEEDBAXK", "tell me whatever u want n push enter", function(skript)
+local msgSent, msgFail = pcall(function()
 plrMsg=skript;
 loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();
-local RRixh1=loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/AkaliNotif",true))();local Notify = RRixh1.Notify;holup();Notify({ Description= "your message: “" ..plrMsg.. "“\nhas been sent✅"; Duration=4;});
-end)
+_G.note("your message: “" ..plrMsg.. "“ has been sent✅", 4);
+  end);
+
+if not msgSent then 
+_G.note("⚠️ Message Failed to Send. wait for fix"); return end;
+end);
+
 e:NewLabel("V"..Vv.." updates: ");
 
 e:NewLabel("(request) small Baddies UPDATE - added Speed (TP walk for bypassing)")
@@ -5449,7 +5452,7 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/Ku
 end;
 local function MAIN()
 -- main lollypop auto-exek
-loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M]],false))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M', true))()
 end;
 --[[
 local function MAINE()
