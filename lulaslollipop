@@ -8,10 +8,14 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/he
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
 
+--[[ 
+fav themes: eggplant, 
+ ]]--
+
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Dec 26, 2024" .. SPAXE)
+local LastUPDATE = ("Last Update: Dec 28, 2024" .. SPAXE)
 local Date = [[]]
 -- [[ KALK HOLIDAY ]] --
 local Year = os.date("%Y")
@@ -59,14 +63,26 @@ local getHoliday = function()
 -- print("Easter "..Year.." is: ".. easterMonth.."/"..easterDay)
 -- print("Passover "..Year.." is:", passoverMonth, passoverDay)
 local find = table.find;
+local NextYear = (Year + 1);
+-- local LastYear = (Year - 1);
 
     local HOLIDAY;
-    if getdate(1, 1) then
-        HOLIDAY = NEWLINE.."HAPPY NEW YEARZ 🎉🎆🎇\n" .. Year
+if getdate(12, 27) then
+HOLIDAY = NEWLINE..("READY FOR ")..NextYear..("🧨??!!?");
+elseif getdate(12, 28) then
+HOLIDAY = NEWLINE..("4 DAYS TIL NEW YEARZ 🎇");
+elseif getdate(12, 29) then
+HOLIDAY = NEWLINE.."3 DAYS TIL NEW YEARZ 🕛"
+elseif getdate(12, 30) then
+HOLIDAY = NEWLINE.."2 DAYS TIL NEW YEARZ 🎇🕚"
+elseif getdate(12, 31) then
+HOLIDAY = NEWLINE.."TOMORROW IS " .. NextYear .. "🎇!!"
+    elseif getdate(1, 1) then
+        HOLIDAY = NEWLINE..("HAPPY NEW YEARZ 🎉🎆🎇\n")..Year..("!!!!!")
 elseif getdate(1, 2) then
 HOLIDAY = NEWLINE.."HOW IS " ..Year.. "?? 🧨"
 elseif getdate(1, 3) then
-HOLIDAY = NEWLINE.."DAY 3 OF " ..Year.. "🥴"
+HOLIDAY = NEWLINE.."DAY 3 OF " ..Year.. "🍭"
 elseif getdate(2,13) then
 HOLIDAY = NEWLINE.."VALENTINES TOMORROW💝"
     elseif getdate(2, 14) then
@@ -170,7 +186,7 @@ local toglogo;
   elseif logo == "💝" then toglogo = VALENTINES
   elseif logo == "🍬" then toglogo = LOLLYPOP
   elseif logo == "🎆" then toglogo = NEWYEARS
-  elseif logo == "🇲🇽" then toglogo = CINCO_DE_MAYO
+  elseif logo == "🇲🇽" then toglogo = LOLLYPOP
   elseif logo == "🎂" then toglogo = LOLLYPOP
   elseif logo == "🤡" then toglogo = APRIL_FOOLS
   elseif logo == "🍀" then toglogo = STPATRICKS
@@ -187,7 +203,7 @@ local getToggleSize = function()
   elseif tog == HALLOWEEN then togsize = 70
   elseif tog == VALENTINES then togsize = 61
   elseif tog == LOLLYPOP then togsize = 100
-  elseif tog == NEWYEARS then togsize = 57
+  elseif tog == NEWYEARS then togsize = 59
   elseif tog == STPATRICKS then togsize = 76
   elseif tog == CINCO_DE_MAYO then togsize = 66
   elseif tog == BIRTHDAY then togsize = 100
@@ -219,7 +235,7 @@ getgenv().togglesize = getToggleSize()
 getgenv().getImg = getToggleLogo()
 local uiTheme = LollypopHub_Theme
     spawn(function()
-print""
+-- nothing
     end);
 --===========HUB LOADED============--
 if getgenv().lhloaded==true then
@@ -342,11 +358,14 @@ local username = (_G.user) or (_G.display)
 X=username;
 
 if(X=="Mcflurryshake")then
-_G.ok("🔔Mcflurryshake - hi💚 Auto fight as in Autofarm Fight+Auto Stomp? give me more explanation so i know exactly wat u want for Auto Fight", 20); 
+_G.note("🔔Mcflurryshake - hi💚 Auto fight as in Autofarm Fight+Auto Stomp? give me more explanation so i know exactly wat u want for Auto Fight", 12); 
 end; --✅
-if(X=="JJKxCSM")then
-_G.ok("🔔JJKxCSM - the Universal Emote gui is in \"Fun\" & ill add the sex GUIs soon", 15);
-end; -- ✅
+if(X=="elevenoncod")then
+_G.note("🔔elevenoncod (Connor) - added Fling for Baddies skript", 7)
+end;--✅
+if(X=="bryanloveroblox103")then
+_G.note("🔔@bryanloveroblox103 - wym by 'name me water'? name changer?", 8)
+end;--✅
 
 end); --protekt
 if not notifyPlrs then warn("uh -->", notSent); end;
@@ -3103,6 +3122,14 @@ games:NewButton("Speed hub X (keyless) (universal)", "keyless", function()
 _G.speedhub();
 end);
 
+games:NewButton("Pet Sim 99 - Fedzen (REDz hub)", "redzhub for ps99", function()
+spawn(function()
+ps=[[loadstring(game:HttpGet("https://raw.githubusercontent.com/Fedzen/script/refs/heads/main/.lua", true))();]]
+_G.kopy(ps); wait(); 
+_G.note("Kopied PS99\n"..ps)
+end);
+end)
+
 games:NewButton("kopy SpeedHubX skript (if not working paste in your executor)", "keyless", function()
 speedhub = [[loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua',true))()]]
 _G.kopy(speedhub)
@@ -3165,12 +3192,25 @@ GamesSection:NewButton("Speed gui (use .2155 speed for normal sprint)", "skriptr
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/TPWALKgui-removedplayerlogging",true))();
 end)
 
+--BLOXFRUIT
+GamesSection:NewLabel("[🍒🍊BLOX FRUITS🍇🍎]")
+
+GamesSection:NewButton("Speed hub X", "universal hub", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))();
+end)
+
+games:NewButton("blox fruits - REDz HUB fixed (kopy)", "redz hub for bloxfruits", function()
+redz=[[loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))()]];
+_G.kopy(redz)
+wait() _G.note("Kopied: "..redz)
+end)
+
 
 --BROOKHAVEN
 GamesSection:NewLabel("🏡Brookhaven RP🏡")
 
 GamesSection:NewButton("(new) Imperial Hub v2.1 (kopy skript)", "skriptreq uh", function()
-setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/Trev0rZ/LoaderM/main/ImperialHub-Working.lua'))();")
+_G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/Trev0rZ/LoaderM/main/ImperialHub-Working.lua'))();")
 ok(4,"bet", "Imperial Hub v2.1 kopied✅, paste in your exekutor")
 end)
 
@@ -4116,13 +4156,6 @@ end)
 
 -- GamesSection:NewLabel("[🐇Pet Simulator X🐩]")
 
---BLOXFRUIT
-GamesSection:NewLabel("[🍒🍊BLOX FRUITS🍇🍎]")
-
-GamesSection:NewButton("Speed hub X", "universal hub", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))();
-end)
-
 
 GamesSection:NewLabel("[👧🏽Rate My Avatar👦🏼]")
 
@@ -4687,7 +4720,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
-e:NewLabel("(request) added TSB - zygarde hub (Games) \nfor: ueeisuwwiwi")
+e:NewLabel("(request) added TSB - zygarde hub (Games) for: ueeisuwwiwi")
 e:NewLabel("(request) small Baddies UPDATE - added Speed (TP walk for bypassing)")
 e:NewLabel("MY SIS BDAY🥹💚💕🎉🥳🎂HAPPY BIRTHDAY CHERUSSI🍭 [dec23]")
 e:NewLabel("Baddies 💅🏽 V2 (new ui &  added 'Auto Kill target') now supports Solara\n (Games)")
@@ -5609,5 +5642,5 @@ end)
 if not perfekthub then 
 warn("Error Okkured: ", err)
 else
-print("thanks for using my hub (as keyless & free as possible) 🍭❤️")
+print("if u see this u gay as hell")
 end;
