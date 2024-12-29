@@ -4,6 +4,11 @@ local perfekthub, err = pcall(function()
 
 getgenv().kolors=true;
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
+local NEWLINE = ("\n");
+local SPAXE = (" ")
+local Date = [[]]
+local Vv = ('9.3.3')
+local LastUPDATE = ("Last Update: Dec 29, 2024" .. SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -12,11 +17,6 @@ local LollypopHub_Theme = ("LulaTheme")
 fav themes: eggplant, 
  ]]--
 
-local NEWLINE = ("\n");
-local SPAXE = (" ")
-local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Dec 28, 2024" .. SPAXE)
-local Date = [[]]
 -- [[ KALK HOLIDAY ]] --
 local Year = os.date("%Y")
 -- Gauss's Algorithm
@@ -981,7 +981,7 @@ SkriptsSection:NewButton("Draggable shiftloxk (permanent)", "draggableshiftloxk 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/permanentshiftloxk-mobile.doc",true))();
 end)
 
-SkriptsSection:NewButton("{SPY} See whispers 👁️💬", "see whispers", function()
+SkriptsSection:NewButton("{SPY} See everyones whispers 👁️💬", "see whispers", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/xhatspyV3.html",true))();
 end)
 
@@ -3096,24 +3096,22 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
-games:NewLabel("💥The Strongest Battlegrounds💥")
-
-games:NewButton("TSB - zygarde hub (kopy)", "request", function()
-tsb=[[loadstring(game:HttpGet('https://raw.githubusercontent.com/louismich4el/Zygarde/refs/heads/main/ZygardeV1.txt'))()]];
-_G.kopy(tsb); 
-wait(); 
-_G.note("Kopied: TSB - Zygarde Hub script\nPASTE IN YOUR EXECUTOR", 7)
-end)
-
-
 games:NewLabel("💅🏽 Baddies 💅🏽");
-games:NewButton("Auto Kill, Annoy players etc. (OP)\n [request more features if needed] {v2.1}", "🍬", function()
+games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.12}", "🍬", function()
 spawn(function()
 getgenv().Version = "new";
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
 end)
 games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
+end)
+
+games:NewLabel("💥The Strongest Battlegrounds💥")
+games:NewButton("TSB - zygarde hub (kopy)", "request", function()
+tsb=[[loadstring(game:HttpGet('https://raw.githubusercontent.com/louismich4el/Zygarde/refs/heads/main/ZygardeV1.txt'))()]];
+_G.kopy(tsb); 
+wait(); 
+_G.note("Kopied: TSB - Zygarde Hub script\nPASTE IN YOUR EXECUTOR", 7)
 end)
 
 games:NewLabel("🎣 Fisch, 🍊BloxFruits, 🐶PS99, 💥TSB, 🐕Pet GO, 💪Muscle Legends");
@@ -4720,8 +4718,9 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("(request) Baddies💅🏽 v2.12 UPDATE - added Fling & View target\n [12/29/24]")
 e:NewLabel("(request) added TSB - zygarde hub (Games) for: ueeisuwwiwi")
-e:NewLabel("(request) small Baddies UPDATE - added Speed (TP walk for bypassing)")
+e:NewLabel("(request) small Baddies UPDATE - added Speed (TP walk \n for bypassing)\n [12/22/24]")
 e:NewLabel("MY SIS BDAY🥹💚💕🎉🥳🎂HAPPY BIRTHDAY CHERUSSI🍭 [dec23]")
 e:NewLabel("Baddies 💅🏽 V2 (new ui &  added 'Auto Kill target') now supports Solara\n (Games)")
 e:NewLabel("- private chat spy is already in \"Skripts\" tab as \"See whispers\" ")
