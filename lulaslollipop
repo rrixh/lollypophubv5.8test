@@ -2,7 +2,8 @@
 local OWNER = ("lulaslollipop")
 local perfekthub, err = pcall(function()
 
-getgenv().kolors=true;
+getgenv().kolors=(true);
+getgenv().tpWalk=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
 local NEWLINE = ("\n");
 local SPAXE = (" ")
@@ -362,6 +363,9 @@ _G.note("🔔Mcflurryshake - hi💚 Auto fight as in Autofarm Fight+Auto Stomp? 
 end; --✅
 if(X=="elevenoncod")then
 _G.note("🔔elevenoncod (Connor) - added Fling for Baddies skript", 7)
+end;--✅
+if(X=="bryanloveroblox103")then
+_G.note("🔔@bryanloveroblox103 - wym by 'name me water'? name changer?", 8)
 end;--✅
 
 end); --protekt
@@ -939,13 +943,35 @@ end)
 
 SkriptsSection:NewLabel("more skripts");
 
+local tpwalk, speed, defaultSpeed = false, (1),(1)
+local tpwalking;
+spawn(function()
+_G.updateTPWalkSpeed(.80)
+end);
+
+SkriptsSection:NewToggle("TP Walk", "teleport work (bypasses walkspeed detektions)", function(val)
+spawn(function()
+_G.toggleTPWalk(val)
+  end);
+if not pressedAlready then _G.note("Bypasses walkspeed detections in games with Anti-walkspeed cheat", 6.3); else return end;
+pressedAlready = (true)
+end);
+
+SkriptsSection:NewTextBox("TP Walk Speed (default: .80)", "teleport walk speed", function(val)
+spawn(function()
+local newText = _G.updateTPWalkSpeed(val)
+val = newText
+    end);
+end)
+
+
 SkriptsSection:NewToggle("Enable chat bubbles", "🍭", function(bubbles)
-plr = game:GetService("Chat")
-if bubbles then 
-plr.BubbleChatEnabled = (true)
-else 
-plr.BubbleChatEnabled = (false)
-end;
+chat = game:GetService"Chat";
+  if bubbles then 
+chat.BubbleChatEnabled = (true)
+    else 
+chat.BubbleChatEnabled = (false)
+    end;
 end)
 
 SkriptsSection:NewDropdown("Exekutor gui", "exploit guis", {"Vega X", "ArkeusX", "Neptune", "FluxusKoral remake", "KRNL", "Rc7 (old)", "Rc7 (newer version)", "Rc7 II", "Synapse X (old)", "Shadow X", "Synapse X rework",}, function(x)
@@ -3103,6 +3129,18 @@ games:NewButton("Hitbox Expander [default size: 6] (universal)", "for Preppyutah
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
 end)
 
+games:NewLabel("🏏 Bladeball (2)")
+games:NewButton("Plutonium hub (universal)", "might inklude more games", function()
+local yes,no=pcall(function()
+pluto=[[loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))();]]
+_G.kopy(pluto);
+   end);
+if no then _G.note("⚠️ Error: " ..no); 
+    else
+_G.note("Kopied: "..pluto)
+     end;
+end)
+
 games:NewLabel("💥The Strongest Battlegrounds💥")
 games:NewButton("TSB - zygarde hub (kopy)", "request", function()
 tsb=[[loadstring(game:HttpGet('https://raw.githubusercontent.com/louismich4el/Zygarde/refs/heads/main/ZygardeV1.txt'))()]];
@@ -4715,9 +4753,10 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("added TP Walk in \"Skripts\" tab (bypasses walkspeed detektions)")
 e:NewLabel("(request) Baddies💅🏽 v2.12 UPDATE - added Fling & View target\n [12/29/24]")
 e:NewLabel("(request) added TSB - zygarde hub (Games) for: ueeisuwwiwi")
-e:NewLabel("(request) small Baddies UPDATE - added Speed (TP walk \n for bypassing)\n [12/22/24]")
+e:NewLabel("(request) small Baddies UPDATE - added Speed (TP walk \n for bypassing) {v2.11} [12/22/24]")
 e:NewLabel("MY SIS BDAY🥹💚💕🎉🥳🎂HAPPY BIRTHDAY CHERUSSI🍭 [dec23]")
 e:NewLabel("Baddies 💅🏽 V2 (new ui &  added 'Auto Kill target') now supports Solara\n (Games)")
 e:NewLabel("- private chat spy is already in \"Skripts\" tab as \"See whispers\" ")
@@ -5636,7 +5675,7 @@ spawn(animateSkript);
 end)
 
 if not perfekthub then 
-warn("Error Okkured: ", err)
+_G.note("Error Okkured: " ..err)
 else
 print("if u see this u gay as hell")
-end;
+end;zzz
