@@ -359,17 +359,17 @@ local username = (_G.user) or (_G.display)
 X=username;
 
 if(X=="Mcflurryshake")then
-_G.note("🔔Mcflurryshake - hi💚 Auto fight as in Autofarm Fight+Auto Stomp? give me more explanation so i know exactly wat u want for Auto Fight", 12); 
-end; --✅
+ _G.note("🔔Mcflurryshake - hi💚 Auto fight as in Autofarm Fight+Auto Stomp? give me more explanation so i know exactly wat u want for Auto Fight", 12);
+end; -- ✅
 if(X=="elevenoncod")then
 _G.note("🔔elevenoncod (Connor) - added Fling for Baddies skript", 7)
 end;--✅
 if(X=="bryanloveroblox103")then
-_G.note("🔔@bryanloveroblox103 - wym by 'name me water'? name changer?", 8)
+_G.note("🔔@bryanloveroblox103 - making a display/user name changer gui for you wen i wake up—it will be in 'Fun' tab", 10)
 end;--✅
 
 end); --protekt
-if not notifyPlrs then warn("uh -->", notSent); end;
+if not notifyPlrs then _G.note("⚠️Messages not sent to players. Error: "..notSent); end;
 end); --spawn pcall
 -- 🫂 notifying users 🫂 --
 
@@ -5675,7 +5675,8 @@ spawn(animateSkript);
 end)
 
 if not perfekthub then 
-_G.note("Error Okkured: " ..err)
+warn("Error Okkured: ", err);
+_G.note("Error Okkured: " ..err);
 else
 print("if u see this u gay as hell")
-end;zzz
+end;
