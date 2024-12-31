@@ -18,8 +18,11 @@ local LollypopHub_Theme = ("LulaTheme")
 fav themes: eggplant, 
  ]]--
 
--- [[ KALK HOLIDAY ]] --
 local Year = os.date("%Y")
+local NextYear = (Year + 1);
+local LastYear = (Year - 1);
+
+-- [[ KALK HOLIDAY ]] --
 -- Gauss's Algorithm
 local getEasterDate = function(year)
     local a = year % 19
@@ -350,7 +353,7 @@ detektion.Parent= game:GetService("ReplicatedStorage")
 print(detektion.Name)
 end;
 if(OWNER ~= _G.lulas)then warn([[OWNER is: 'lulaslollipop' retard]]) return end;
-makedekal('LOLLYPOP HUB LOADED🍭');
+makedekal('LOLLYPOP HUB DEKAL🍭');
 
  -- 🫂notify users of skripts requests 🫂--
 spawn(function()
@@ -453,7 +456,7 @@ local kalam=Enum.Font.Kalam
 
 local welkome_1 ="[Lollypop Hub v"..Vv.."] Welkome to Lollypop Hub, "..display.."! (@"..user..")\nSkript by @lulaslollipop🍭 on Roblox👺";
 
-local mygoal_2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript\n (8/25/24)🥷🏿DELTA iOS RELEASE IS OUT!!!!🎉🎉";
+local mygoal_2 ="🔔my goal is to make this the most free/keyless hub for every living nigga or female using my skript\n ";
 
 local kmds_3 = "TALK TO ME USING “feedbaxk“ in “Updates/Extras“ to tell me how u like the skript or say anything u want!!!!\nKommands:\n/e re, rj, exit, shop, shoplow, nofog, day, night\n (make sure to put “/e “ before saying it—example:\n “/e night“"
 
@@ -552,6 +555,8 @@ lollypophub:Notification({
 Text = "V"..Vv.."🍭😋",
 Duration = 7});
 
+local notifsLoaded, notifsError = pcall(function()
+
 if getdate(11, 28) then
 lollyhub("HAPPY THANKSGIVING 🦃")
 elseif getdate(10,30) then
@@ -562,13 +567,18 @@ elseif getdate(2,13) then
 lollyhub("FIND YOUR BALENTINES💝")
 elseif getdate(2,14) then
 lollyhub("HAPPY BALENTINES DAY🍫💝")
-elseif getdate(12,31) or getdate(12,3) then
-lollyhub("READY FOR ", Year, "???")
+elseif getdate(12, 31) then
+lollyhub("READY FOR "..NextYear.."🧨🎆???")
 elseif getdate(1,1) then
 lollyhub("🎉HAPPY NEW YEARS 🎇")
 else
 lollyhub("🍬", 4)
   end;
+end);
+if notifsError then 
+warn("notifs error:", notifsError)
+else print("notifs loaded:",notifsLoaded)
+end;
 
 pcall(function()
 e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();end)
@@ -5534,7 +5544,8 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/Ku
 end;
 local function MAIN()
 -- main lollypop auto-exek
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M', true))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M', true))();
+warn("MAIN()")
 end;
 --[[
 local function MAINE()
@@ -5668,10 +5679,11 @@ end)
 --============END TOGGLE===========--
 
 spawn(KUSTOMTOGGLE);
-spawn(function()
-pcall(MAIN); 
--- pcall(MAINE);
-end)
+spawn(MAIN);
+
+-- spawn(MAINE)
+
+
 
 --loading skreen
 end;
@@ -5680,7 +5692,9 @@ spawn(animateSkript);
 end)
 
 if not perfekthub then 
-warn("Error Okkured: ", err)
+warn("Lollypop Hub🍭 | Error Okkured: ", err)
 else
-print("if u see this u gay as hell")
+print("Lollypop Hub🍭 loaded in "..tick().." sekonds✅")
 end;
+
+_G.note("🚨SKRIPT REQUESTS - just know that i read everyones skript request but im only 1 person so dont expect them be made fast since im trying to make skripts for everyone😅....❤️ u guys", 15)
