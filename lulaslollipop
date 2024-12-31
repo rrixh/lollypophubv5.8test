@@ -9,7 +9,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Dec 29, 2024" .. SPAXE)
+local LastUPDATE = ("Last Update: Dec 30, 2024" .. SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
