@@ -9,7 +9,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Dec 30, 2024" .. SPAXE)
+local LastUPDATE = ("Last Update: Dec 31, 2024" .. SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -306,6 +306,9 @@ LollypopHUB=print;
 
 _G.speedhub=function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua'))();
+end;
+_G.sg=function()
+loadstring(game:HttpGet("https".."://".."raw"..".".."g".."ithubuserc".."onte".."nt.".."com/".."rrixh/".."uwu".."ware".."/refs/h".."ead".."s/main/ga".."mes/R".."LGL".."🚦🦑squid".."gam".."es", true))();
 end;
 
 --[[ KOLORS ]]--
@@ -3126,12 +3129,8 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
-_G.sg=function()
-loadstring(game:HttpGet("https".."://".."raw"..".".."g".."ithubuserc".."onte".."nt.".."com/".."rrixh/".."uwu".."ware".."/refs/h".."ead".."s/main/ga".."mes/R".."LGL".."🚦🦑squid".."gam".."es", true))();
-end;
 
 games:NewLabel("🚦 RED LIGHT, GREEN LIGHT (Squid Games) 🦑")
-
 games:NewButton("Easy Wins, Troll, Auto pull etc. (all games except Marbles)", "OP auto wins", _G.sg)
 
 games:NewLabel("💅🏽 Baddies 💅🏽");
@@ -4768,6 +4767,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("RED LIGHT GREEN LIGHT (SquidGames)🦑🚦- Easy Wins gui (Games)")
 e:NewLabel("added TP Walk in \"Skripts\" tab (bypasses walkspeed detektions)")
 e:NewLabel("(request) Baddies💅🏽 v2.12 UPDATE - added Fling & View target\n [12/29/24]")
 e:NewLabel("(request) added TSB - zygarde hub (Games) for: ueeisuwwiwi")
@@ -5697,4 +5697,4 @@ else
 print("Lollypop Hub🍭 loaded in "..tick().." sekonds✅")
 end;
 
-_G.note("🚨SKRIPT REQUESTS - just know that i read everyones skript request but im only 1 person so dont expect them be made fast since im trying to make skripts for everyone😅....❤️ u guys", 21)
+_G.note("🚨SKRIPT REQUESTS - just know that i read everyones skript request but im only 1 person so dont expect them be made fast since im trying to make skripts for everyone😅....❤️ u guys", 18)
