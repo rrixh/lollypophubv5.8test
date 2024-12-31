@@ -541,19 +541,19 @@ local lollyhub = function(txt, dur)
 local lollypophub = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
 lollypophub.DefaultColor = defaultKolor
 lollypophub:Notification({
-Text = txt, Duration = dur or 8});
+Text = txt, Duration = dur or 6});
 end;
 
 local lollypophub=loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
 
 lollypophub.DefaultColor = defaultKolor
 lollypophub:Notification({
-Text = "🍭 Welkome to Lollypop Hub, "..game.Players.LocalPlayer.Name.."!🍭", Duration = 8});
+Text = "🍭 Welkome to Lollypop Hub, "..game.Players.LocalPlayer.Name.."!🍭", Duration = 5});
 
 lollypophub.DefaultColor = defaultKolor
 lollypophub:Notification({
 Text = "V"..Vv.."🍭😋",
-Duration = 7});
+Duration = 5.5});
 
 local notifsLoaded, notifsError = pcall(function()
 
@@ -5697,4 +5697,4 @@ else
 print("Lollypop Hub🍭 loaded in "..tick().." sekonds✅")
 end;
 
-_G.note("🚨SKRIPT REQUESTS - just know that i read everyones skript request but im only 1 person so dont expect them be made fast since im trying to make skripts for everyone😅....❤️ u guys", 15)
+_G.note("🚨SKRIPT REQUESTS - just know that i read everyones skript request but im only 1 person so dont expect them be made fast since im trying to make skripts for everyone😅....❤️ u guys", 18)
