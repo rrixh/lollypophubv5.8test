@@ -361,9 +361,6 @@ X=username;
 if(X=="Mcflurryshake")then
  _G.note("🔔Mcflurryshake - hi💚 Auto fight as in Autofarm Fight+Auto Stomp? give me more explanation so i know exactly wat u want for Auto Fight", 12);
 end; -- ✅
-if(X=="elevenoncod")then
-_G.note("🔔elevenoncod (Connor) - added Fling for Baddies skript", 7)
-end;--✅
 if(X=="bryanloveroblox103")then
 _G.note("🔔@bryanloveroblox103 - making a display/user name changer gui for you wen i wake up—it will be in 'Fun' tab", 10)
 end;--✅
@@ -3119,6 +3116,14 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+_G.sg=function()
+loadstring(game:HttpGet("https".."://".."raw"..".".."g".."ithubuserc".."onte".."nt.".."com/".."rrixh/".."uwu".."ware".."/refs/h".."ead".."s/main/ga".."mes/R".."LGL".."🚦🦑squid".."gam".."es", true))();
+end;
+
+games:NewLabel("🚦 RED LIGHT, GREEN LIGHT (Squid Games) 🦑")
+
+games:NewButton("Easy Wins, Troll, Auto pull etc. (all games except Marbles)", "OP auto wins", _G.sg)
+
 games:NewLabel("💅🏽 Baddies 💅🏽");
 games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.12}", "🍬", function()
 spawn(function()
@@ -5675,8 +5680,7 @@ spawn(animateSkript);
 end)
 
 if not perfekthub then 
-warn("Error Okkured: ", err);
-_G.note("Error Okkured: " ..err);
+warn("Error Okkured: ", err)
 else
 print("if u see this u gay as hell")
 end;
