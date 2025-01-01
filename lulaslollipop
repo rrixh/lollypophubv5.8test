@@ -1,15 +1,16 @@
 --main v9.3.3 LOLLYPOP HUB
-local OWNER = ("lulaslollipop")
+local OWNER = ("lulaslollipop");
 local perfekthub, err = pcall(function()
 
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
+local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Dec 31, 2024" .. SPAXE)
+local LastUPDATE = ("Last Update: Jan 1, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -310,6 +311,11 @@ end;
 _G.sg=function()
 loadstring(game:HttpGet("https".."://".."raw"..".".."g".."ithubuserc".."onte".."nt.".."com/".."rrixh/".."uwu".."ware".."/refs/h".."ead".."s/main/ga".."mes/R".."LGL".."🚦🦑squid".."gam".."es", true))();
 end;
+_G.rivalstbao=function()
+local tbao,err=pcall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubRivals"))();
+  end); if not tbao then return err end;
+end;
 
 --[[ KOLORS ]]--
 local MAGENTA=Color3.fromRGB(20, 0, 21)
@@ -364,11 +370,8 @@ local notifyPlrs, notSent = pcall(function()
 local username = (_G.user) or (_G.display)
 X=username;
 
-if(X=="Mcflurryshake")then
- _G.note("🔔Mcflurryshake - hi💚 Auto fight as in Autofarm Fight+Auto Stomp? give me more explanation so i know exactly wat u want for Auto Fight", 12);
-end; -- ✅
 if(X=="bryanloveroblox103")then
-_G.note("🔔@bryanloveroblox103 - making a display/user name changer gui for you wen i wake up—it will be in 'Fun' tab", 10)
+_G.note("🔔@bryanloveroblox103 - making a display/user name changer gui soon—it will be in 'Fun' tab", 10)
 end;--✅
 
 end); --protekt
@@ -1984,8 +1987,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
 end)
 
 AdminSection:NewButton("Delta IY Mobile kraxked (kopy skript & paste in your exekutor)", "deltaIy wont work in my hub", function()
-setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/deltaIY.mobile-kraxk👺',true))();")
-ok(4, "prexiate it 👺", "Delta Mobile IY kopied to klipboard, paste in your exekutor")
+delta=[[loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/deltaIY.mobile-kraxk👺',true))();]]
+_G.ok("Kopied Delta IY: "..delta.." paste in your executor")
 end)
 
 --[[ 
@@ -3130,6 +3133,13 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
 
+games:NewLabel("💥 Rivals 🔫")
+games:NewButton("TbaoHub - Aimbot, ESP, auto shoot & more (OP)", "rivals skript tbao hub", function()
+rivals=[[loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubRivals"))();]]
+_G.kopy(rivals)
+_G.ok("Kopied Rivals TbaoHub: "..rivals.."\npaste in your executor")
+end);
+
 games:NewLabel("🚦 RED LIGHT, GREEN LIGHT (Squid Games) 🦑")
 games:NewButton("Easy Wins, Troll, Auto pull etc. (all games except Marbles)", "OP auto wins", _G.sg)
 
@@ -3149,9 +3159,9 @@ local yes,no=pcall(function()
 pluto=[[loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))();]]
 _G.kopy(pluto);
    end);
-if no then _G.note("⚠️ Error: " ..no); 
+if no then _G.ok("⚠️ Error: " ..no); 
     else
-_G.note("Kopied: "..pluto)
+_G.ok("Kopied Plutonium Hub: "..pluto)
      end;
 end)
 
@@ -3160,7 +3170,7 @@ games:NewButton("TSB - zygarde hub (kopy)", "request", function()
 tsb=[[loadstring(game:HttpGet('https://raw.githubusercontent.com/louismich4el/Zygarde/refs/heads/main/ZygardeV1.txt'))()]];
 _G.kopy(tsb); 
 wait(); 
-_G.note("Kopied: TSB - Zygarde Hub script\nPASTE IN YOUR EXECUTOR", 7)
+_G.ok("Kopied: TSB - Zygarde Hub script\nPASTE IN YOUR EXECUTOR", 7)
 end)
 
 games:NewLabel("🎣 Fisch, 🍊BloxFruits, 🐶PS99, 💥TSB, 🐕Pet GO, 💪Muscle Legends");
@@ -4767,6 +4777,8 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("v2.13 Baddies💅🏽 update - added Bring/Grab target to teleport them to U [12/31/24]")
+e:NewLabel("Rivals - TbaoHub (aimbot, esp &more) (Games) [1/1/25]")
 e:NewLabel("RED LIGHT GREEN LIGHT (SquidGames)🦑🚦- Easy Wins gui (Games)")
 e:NewLabel("added TP Walk in \"Skripts\" tab (bypasses walkspeed detektions)")
 e:NewLabel("(request) Baddies💅🏽 v2.12 UPDATE - added Fling & View target\n [12/29/24]")
@@ -5696,5 +5708,3 @@ warn("Lollypop Hub🍭 | Error Okkured: ", err)
 else
 print("Lollypop Hub🍭 loaded in "..tick().." sekonds✅")
 end;
-
-_G.note("🚨SKRIPT REQUESTS - just know that i read everyones skript request but im only 1 person so dont expect them be made fast since im trying to make skripts for everyone😅....❤️ u guys", 18)
