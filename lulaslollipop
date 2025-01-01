@@ -4,6 +4,7 @@ local perfekthub, err = pcall(function()
 
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
+getgenv().globalz=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
