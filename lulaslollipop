@@ -937,6 +937,7 @@ end;
 end)
 
 SkriptsSection:NewToggle("Boost FPS", "konstantly sets fps high", function()
+if not setfflag then _G.note("your executor doesnt support setfflag for FPS boosting") return end;
 if boostfps == true then
  boostfps = false 
 else 
