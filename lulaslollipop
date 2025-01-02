@@ -936,22 +936,23 @@ setfflag("TaskSchedulerTargetFps", fps);
 end;
 end)
 
-local boostingFPS = (false);
-local boostKonnekt
+SkriptsSection:NewToggle("Boost FPS", "konstantly sets fps high", function()
+if boostfps == true then
+ boostfps = false 
+else 
+boostfps = true; 
+end;
 
-SkriptsSection:NewToggle("Boost FPS", "konstantly sets fps high", function(toggle)
-boostingFPS = toggle;
-if toggle then
-boostKonnekt = RunService.RenderStepped:Connect(function()
+if boostfps == true then
+_G.boost = _G.hb:connect(function()
 setfflag("TaskSchedulerTargetFps", 125);
-     end);
-ok(3, "k", "boosting FPS")
-  else
-if boostKonnekt then boostKonnekt:Disconnect()
-boostKonnekt = nil
-ok(3, "k", "stopped boosting FPS")
-                        end
-  end;
+end)
+_G.note("boosting fps", 2)
+            end;
+if boostfps == false then
+_G.boost:Disconnect(); _G.boost=nil;
+_G.note("stopped boosting fps", 2)
+           end;
 end)
 
 SkriptsSection:NewLabel("more skripts");
