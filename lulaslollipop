@@ -4,14 +4,13 @@ local perfekthub, err = pcall(function()
 
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
-getgenv().globalz=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Jan 1, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Jan 2, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -372,7 +371,7 @@ local username = (_G.user) or (_G.display)
 X=username;
 
 if(X=="bryanloveroblox103")then
-_G.note("🔔@bryanloveroblox103 - making a display/user name changer gui soon—it will be in 'Fun' tab", 10)
+_G.note("🔔@bryanloveroblox103 - added Funky Friday: Auto Player", 6)
 end;--✅
 
 end); --protekt
@@ -670,11 +669,11 @@ end)
 
 
 -- [ UPDATE TIME ] --
-local time = SkriptsSection:NewLabel("🔴 Live Time: [00:00:00]");
+local time = SkriptsSection:NewLabel("🕰 Live Time: [00:00:00]");
 
 local function updatetimelabel()
 while true and wait(0.2) do
-local formatted_time = os.date("🔴Live Time: %I:%M:%S %p")
+local formatted_time = os.date("🕰 Live Time: %I:%M:%S %p")
 local todays_date = os.date("Today's Date: %A | %B %d, %Y");
 
 --⏰////%I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year\\\\⏰
@@ -3133,6 +3132,30 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+games:NewLabel("🕺🏾 FUNKY FRIDAY 💃🏽")
+games:NewButton("sexy AutoPlayer (sixk chance, miss chance, etc.) (has legit \n options) (very OP)", "(request) bot for funky friday (OP)", function()
+oldbot=[[
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/OldBot.lua'))();
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
+_G.note("Loaded sexy AutoPlayer... enjoy!", 7)
+_G.sgui:SetCore("DevConsoleVisible",false);_G.sgui:SetCore("DevConsoleVisible",false);
+task.wait(2); _G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();")
+]]
+_G.kopy(oldbot); wait();
+_G.note("Kopied: Funky Friday AutoPlayer\npaste in your executor", 4.5)
+end);
+
+games:NewButton("💃🏽 only Autoplayer (very OP) (takes 1m30s to load Lmao)", "autoplay", function()
+autoplr=[[
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Nadir3709/RandomScript/main/FunkyFridayMobile'))();
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
+_G.note("Autoplayer loaded!")
+task.wait(2)
+_G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();")
+]]
+_G.kopy(autoplr); wait() 
+_G.note("Paste in your executor & wait for Funky Friday Autoplayer gui to load", 7); 
+end)
 
 games:NewLabel("💥 Rivals 🔫")
 games:NewButton("TbaoHub - Aimbot, ESP, auto shoot & more (OP)", "rivals skript tbao hub", function()
@@ -3145,7 +3168,7 @@ games:NewLabel("🚦 RED LIGHT, GREEN LIGHT (Squid Games) 🦑")
 games:NewButton("Easy Wins, Troll, Auto pull etc. (all games except Marbles)", "OP auto wins", _G.sg)
 
 games:NewLabel("💅🏽 Baddies 💅🏽");
-games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.12}", "🍬", function()
+games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.13}", "🍬", function()
 spawn(function()
 getgenv().Version = "new";
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
@@ -3921,13 +3944,6 @@ GamesSection:NewButton("[🥚THE HUNT: First Edition 2024🥚]\n(60+ GAMES SUPPO
 --THE HUNT SKRIPTLOADER(60+GAME SUPPORT)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptloader/main/60plusGames_lulaslollipop",true))()
 --[made by lulaslollipop🍭]--
-end)
-
-
-GamesSection:NewLabel("🕺🏾 FUNKY FRIDAY 💃🏽") 
-GamesSection:NewButton("🕺🏾💃🏽 Autoplayer", "autoplay", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nadir3709/RandomScript/main/FunkyFridayMobile"))()
---autoplay
 end)
 
 GamesSection:NewLabel("👋 Slap Battles 👋")
@@ -4778,6 +4794,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("(request) added 2 Funky Friday skripts (Auto Player, 100% never miss, very OP) for: bryanloveroblox103")
 e:NewLabel("v2.13 Baddies💅🏽 update - added Bring/Grab target to teleport them to U [12/31/24]")
 e:NewLabel("Rivals - TbaoHub (aimbot, esp &more) (Games) [1/1/25]")
 e:NewLabel("RED LIGHT GREEN LIGHT (SquidGames)🦑🚦- Easy Wins gui (Games)")
