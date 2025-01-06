@@ -10,7 +10,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Jan 2, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Jan 6, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -2490,16 +2490,21 @@ end)
 -- hubs and gui
 local Hub = Window:NewTab("Hubs & GUIs")
 local HubSection = Hub:NewSection("erthang u need🍭");
-local hub, hubs = HubSection;
+hubs=HubSection;hub=HubSection;
 
 HubSection:NewLabel("🆓 FREE Items GUIs:")
 
-HubSection:NewButton("🎶🎤 24kGoldn Koncert Experienxe 🎤🎶\n(free 24kgoldn shades)", "24kgoldn shades", function()
+hubs:NewLabel("Beat The Scammers")
+hubs:NewButton("auto komplete tasks (Shield item)", "easy", function()
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/ugc/BeatTheskammas",true))()
+end)
+
+HubSection:NewButton("🎶🎤 24kGoldn Koncert Experienxe (free 24kgoldn shades)", "24kgoldn shades", function()
 --24kgoldn obf
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/Kustom/24kGoldn-koncert", true))();
 end)
 
-HubSection:NewButton("Roblox Innovation Rewards\n(kollekt badges/items)", "autokollekt badges/kubes", function()
+HubSection:NewButton("Roblox Innovation Rewards (kollect badges/items)", "autokollekt badges/kubes", function()
 --voting hub skript 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/innovationawards/main/autokollekt/votinghub_lulaslollipop",true))()
 end)
@@ -3143,6 +3148,22 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
 
+games:NewLabel("💅🏽 Baddies 💅🏽");
+games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.13}", "🍬", function()
+spawn(function()
+getgenv().Version = "new";
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
+end)
+
+games:NewButton("Baddies 💅🏽 v1 (old ver)", "req by Cateatsfood_BBB", function()
+v1=[[_G.AdminKommands = (true); loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽",true))();]]
+_G.kopy(v1); wait() _G.note("Kopied BaddiesV1 script")
+end)
+
+games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
+end)
+
 games:NewLabel("Games Hub (supports a lot of games—mainly for DaHood players)")
 games:NewButton("skripthub v3.1", "support 50+ games", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/scripthubekitten/SCRIPTHUBV3/main/SCRIPTHUBV3", true))()
@@ -3184,16 +3205,6 @@ end);
 
 games:NewLabel("🚦 RED LIGHT, GREEN LIGHT (Squid Games) 🦑")
 games:NewButton("Easy Wins, Troll, Auto pull etc. (all games except Marbles)", "OP auto wins", _G.sg)
-
-games:NewLabel("💅🏽 Baddies 💅🏽");
-games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.13}", "🍬", function()
-spawn(function()
-getgenv().Version = "new";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
-end)
-games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
-end)
 
 games:NewLabel("🏏 Bladeball (2)")
 games:NewButton("Plutonium hub (universal)", "might inklude more games", function()
@@ -4817,6 +4828,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("(req) added BaddiesV1 💅🏽 skript - for: Cateatsfood_BBB")
 e:NewLabel("(req) added Ghost Hub in (Hubs & gui) for: cikoo134")
 e:NewLabel("added 'FE Jerk off' in (FE)")
 e:NewLabel("(request) added 2 Funky Friday skripts \n(Auto Player, 100% never miss, very OP) for: bryanloveroblox103 [1/2/25]")
@@ -5252,12 +5264,16 @@ local More = Window:NewTab("Bypasses & More")
 local MoreSection = More:NewSection("more skripts koming soon...🍭")
 more = MoreSection;
 
-MoreSection:NewButton("[NEW] DaHood*working,tested*\n Adonis anti-xheat bypass🟢", "an anti", function()
-pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua",true))()
-end)
-wait()
+MoreSection:NewButton("[NEW] DaHood Anti-cheat bypasses etc. (Debugger hub)", "an anti", function()
+debug=[[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/debugnation/main/decompilers%20and%20debugging/Debuggers.txt"))();
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
+task.wait(1)
+_G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))()")
+]]
+_G.kopy(debug); _G.note("Kopied Debugger hub, paste in your executor")
+wait()
 end)
 
 MoreSection:NewButton("EngoSpy", "see remotes", function()
