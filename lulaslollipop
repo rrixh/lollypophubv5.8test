@@ -1,6 +1,7 @@
 --main v9.3.3 LOLLYPOP HUB
 local OWNER = ("lulaslollipop");
 local perfekthub, err = pcall(function()
+local startT = tick();
 
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
@@ -590,7 +591,7 @@ pcall(function()
 e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();end)
 
 -- local red = 192,192,192
---light gray/light grey	=	211,211,211
+--light gray/light grey	=	211,211,211 
 -- local brightred	=	255,105,180
 -- slateblue =	106,90,205
 -- mediumorchid	=	186,85,211
@@ -1064,6 +1065,28 @@ infiniteJumpEnabled = false
 end)
 --infjump.Diskonnekt
 
+SkriptsSection:NewLabel("Mobile Fly")
+
+SkriptsSection:NewButton("Fly GUI V2", "mobile fly gui",
+function()-- arkeus fly mobile
+loadstring(game:HttpGet("https://pastebin.com/raw/Kq7cPe3C"))()
+end)
+SkriptsSection:NewButton("Fly GUI V3", "fly for mobile",
+function()-- v3 fly
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/mobileflygui/main/v3_lulaslollipop",true))()
+end)
+SkriptsSection:NewButton("Mobile Fly GUI B&W", "modded",
+function()--b&w fly gui mobile
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/mobilefly/b&w-flygui",true))();
+end)
+SkriptsSection:NewButton("Mobile FLY HD ADMIN", "mobile fly HD ADMIN version",
+function()-- FLY HD ADMIN
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/Ignore-00000/main/Ignore"))()
+end)
+SkriptsSection:NewButton("Mobile Universal Fly GUI", "speed setter",
+function()loadstring(game:HttpGet("https://pastebin.com/raw/YvKv4AuY"))()
+end)
+
 
 SkriptsSection:NewButton("🍭🍭🍭Lollypops (R6 only)", "🍭 all day", function()
 for i, v in pairs(game.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Head; 
@@ -1161,6 +1184,8 @@ Text = "anti afk enabled🍭",
 Duration = 5
 })
 end)
+
+
 
 --[godmode skripts]--
 SkriptsSection:NewLabel("GodMode skripts")
@@ -1367,28 +1392,6 @@ loadstring(game:HttpGet("https://pastebin.com/raw/QQqiFGTE"))()
 elseif x == "Purple ESP" then
 loadstring(game:HttpGet("https://pastebin.com/raw/7K1Jhmck"))();
 end;
-end)
-
-SkriptsSection:NewLabel("Mobile Fly")
-
-SkriptsSection:NewButton("Fly GUI V2", "mobile fly gui",
-function()-- arkeus fly mobile
-loadstring(game:HttpGet("https://pastebin.com/raw/Kq7cPe3C"))()
-end)
-SkriptsSection:NewButton("Fly GUI V3", "fly for mobile",
-function()-- v3 fly
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/mobileflygui/main/v3_lulaslollipop",true))()
-end)
-SkriptsSection:NewButton("Mobile Fly GUI B&W", "modded",
-function()--b&w fly gui mobile
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/mobilefly/b&w-flygui",true))();
-end)
-SkriptsSection:NewButton("Mobile FLY HD ADMIN", "mobile fly HD ADMIN version",
-function()-- FLY HD ADMIN
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TakeModzz/Ignore-00000/main/Ignore"))()
-end)
-SkriptsSection:NewButton("Mobile Universal Fly GUI", "speed setter",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/YvKv4AuY"))()
 end)
 
 --[keybind gens]--
@@ -4699,7 +4702,7 @@ end)
 
 FeSection:NewButton("FE Fish", "(need hat) Parrot Fishfaxe", function()
 -- fe fish
-loadstring(game:HttpGet(('https://pastefy.app/yrp6En96/raw'),true))()
+loadstring(game:HttpGet('https://pastefy.app/yrp6En96/raw',true))()
 end)
 
 FeSection:NewButton("FE Teleknesis V3", "troll", function()
@@ -5761,9 +5764,10 @@ end;
 spawn(animateSkript);
 
 end)
-
+local endT = tick();
+local tL = startT - endT
 if not perfekthub then 
 warn("Lollypop Hub🍭 | Error Okkured: ", err)
 else
-print("Lollypop Hub🍭 loaded in "..tick().." sekonds✅")
+print("Lollypop Hub🍭 loaded in "..tL.." sekonds✅")
 end;
