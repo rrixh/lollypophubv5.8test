@@ -1,7 +1,6 @@
 --main v9.3.3 LOLLYPOP HUB
 local OWNER = ("lulaslollipop");
 local perfekthub, err = pcall(function()
-
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
@@ -3347,7 +3346,7 @@ GamesSection:NewButton("Kombine Avatars gui (easier way to do the respawn glitch
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/kustomskript/KombineAvatars-99failobby.LH",true))();
 end)
 
-GamesSection:NewButton("🏃🏽‍♂️💨😩99% FAIL OBBY 🏃🏽‍♂️💨😩", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥", function()
+GamesSection:NewButton("99% FAIL OBBY ", "purple = ✅, red = ❌, green = ✅, tile broke, or 🔥", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/99failobby.new_lulaslollipop"))();
 wait(0.000001)
 end);
@@ -3366,7 +3365,7 @@ end);
 -- [ ⭐️🏋STRONGMAN SIMUALTOR🏋️‍♀️⭐️ ] --
 GamesSection:NewLabel("🏋STRONGMAN SIMUALTOR🏋️‍♀️")
 
-GamesSection:NewButton("OP AUTOFARM , AUTO REBIRTH & more", "best autofarm requested by kevin_mm272", function()
+GamesSection:NewButton("Destiny - OP AUTOFARM , AUTO REBIRTH & more", "best autofarm requested by kevin_mm272", function()
 spawn(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Destiny/main/loader.lua",true))(); end)
 end);
