@@ -1,6 +1,8 @@
 --main v9.3.3 LOLLYPOP HUB
 local OWNER = ("lulaslollipop");
 local perfekthub, err = pcall(function()
+local sT=tick();
+
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
@@ -1084,7 +1086,7 @@ SkriptsSection:NewButton("Mobile Universal Fly GUI", "speed setter",
 function()loadstring(game:HttpGet("https://pastebin.com/raw/YvKv4AuY"))()
 end)
 
-skripts:NewLabel("more skripts")
+SkriptsSection:NewLabel("more skripts")
 
 SkriptsSection:NewButton("🍭🍭🍭Lollypops (R6 only)", "🍭 all day", function()
 for i, v in pairs(game.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Head; 
@@ -5762,9 +5764,10 @@ end;
 spawn(animateSkript);
 
 end)
-
+local eT=tick();
+local tL = sT-eT;
 if not perfekthub then 
 warn("Lollypop Hub🍭 | Error Okkured: ", err)
 else
-print("Lollypop Hub🍭 loaded in "..tick().." sekonds✅")
+print("Lollypop Hub🍭 loaded in "..tL.." sekonds✅")
 end;
