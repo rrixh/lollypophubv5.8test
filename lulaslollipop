@@ -1,7 +1,7 @@
 --main v9.3.3 LOLLYPOP HUB
 local OWNER = ("lulaslollipop");
 local perfekthub, err = pcall(function()
-local sT=tick();
+local START=tick();
 
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
@@ -11,7 +11,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Jan 12, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Jan 20, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -371,8 +371,8 @@ local notifyPlrs, notSent = pcall(function()
 local username = (_G.user) or (_G.display)
 X=username;
 
-if(X=="bryanloveroblox103")then
-_G.note("🔔@bryanloveroblox103 - added Funky Friday: Auto Player", 6)
+if(X=="IMALEGEND_thanis")then
+_G.note("🔔@IMALEGEND_thanis - GHOST HUB is already in 'Hubs & Guis' ", 6)
 end;--✅
 
 end); --protekt
@@ -2517,10 +2517,10 @@ end)
 
 HubSection:NewLabel("Hubs")
 
-HubSection:NewButton("(UNIVERSAL) GHOST HUB", "🍭", function()
+HubSection:NewButton("(UNIVERSAL) GHOST HUB 👻", "🍭", function()
 ghosthub=[[
 loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))();
-task.wait(.7)
+task.wait(5)
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
 _G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))()")
 ]]
@@ -5764,10 +5764,10 @@ end;
 spawn(animateSkript);
 
 end)
-local eT=tick();
-local tL = sT-eT;
+local ENDING=tick();
+local LOADED = ENDING-START
 if not perfekthub then 
 warn("Lollypop Hub🍭 | Error Okkured: ", err)
 else
-print("Lollypop Hub🍭 loaded in "..tL.." sekonds✅")
+print("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
 end;
