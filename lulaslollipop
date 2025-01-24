@@ -1,5 +1,6 @@
 --main v9.3.3 LOLLYPOP HUB
 local OWNER = ("lulaslollipop");
+local START = tick();
 local perfekthub, err = pcall(function()
 local START=tick();
 
@@ -18,7 +19,7 @@ local LollypopHub_Theme = ("LulaTheme")
 
 --[[ 
 fav themes: eggplant, 
- ]]--
+]]--
 
 local Year = os.date("%Y")
 local NextYear = (Year + 1);
@@ -27,52 +28,52 @@ local LastYear = (Year - 1);
 -- [[ KALK HOLIDAY ]] --
 -- Gauss's Algorithm
 local getEasterDate = function(year)
-    local a = year % 19
-    local b = math.floor(year / 100)
-    local c = year % 100
-    local d = math.floor(b / 4)
-    local e = b % 4
-    local f = math.floor((b + 8) / 25)
-    local g = math.floor((b - f + 1) / 3)
-    local h = (19 * a + b - d - g + 15) % 30
-    local i = math.floor(c / 4)
-    local k = c % 4
-    local l = (32 + 2 * e + 2 * i - h - k) % 7
-    local m = math.floor((a + 11 * h + 22 * l) / 451)
-    local month = math.floor((h + l - 7 * m + 114) / 31)
-    local day = ((h + l - 7 * m + 114) % 31) + 1
-    return month, day
+local a = year % 19
+local b = math.floor(year / 100)
+local c = year % 100
+local d = math.floor(b / 4)
+local e = b % 4
+local f = math.floor((b + 8) / 25)
+local g = math.floor((b - f + 1) / 3)
+local h = (19 * a + b - d - g + 15) % 30
+local i = math.floor(c / 4)
+local k = c % 4
+local l = (32 + 2 * e + 2 * i - h - k) % 7
+local m = math.floor((a + 11 * h + 22 * l) / 451)
+local month = math.floor((h + l - 7 * m + 114) / 31)
+local day = ((h + l - 7 * m + 114) % 31) + 1
+return month, day
 end
 
 -- Meeus/Jones/Butcher algorithm Passover
 local function getPassoverDate(year)
-    local g = year % 19
-    local c = math.floor(year / 100)
-    local x = math.floor(3 * c / 4) - 12 * math.floor(c / 100) + math.floor(8 * c / 25) + 19 * g + 15
-    local i = x % 30
-    local j = year + math.floor(year / 4) - math.floor(year / 100) + math.floor(year / 400)
-    local l = j % 7
-    local m = 20 + 7 * l - 11 * i
-    local month = math.floor((m + 30) / 30) + 3
-    local day = m - 30 * math.floor((m - 1) / 30)
-    return month, day
+local g = year % 19
+local c = math.floor(year / 100)
+local x = math.floor(3 * c / 4) - 12 * math.floor(c / 100) + math.floor(8 * c / 25) + 19 * g + 15
+local i = x % 30
+local j = year + math.floor(year / 4) - math.floor(year / 100) + math.floor(year / 400)
+local l = j % 7
+local m = 20 + 7 * l - 11 * i
+local month = math.floor((m + 30) / 30) + 3
+local day = m - 30 * math.floor((m - 1) / 30)
+return month, day
 end;
 local function getdate(month, day)
-    local currentDate = os.date("*t")
-    return currentDate.month == month and currentDate.day == day
+local currentDate = os.date("*t")
+return currentDate.month == month and currentDate.day == day
 end;
 
 local getHoliday = function()
-    local easterMonth, easterDay = getEasterDate(Year)
-    local passoverMonth, passoverDay = getPassoverDate(Year)
-    local currentDate = os.date("*t")
+local easterMonth, easterDay = getEasterDate(Year)
+local passoverMonth, passoverDay = getPassoverDate(Year)
+local currentDate = os.date("*t")
 -- print("Easter "..Year.." is: ".. easterMonth.."/"..easterDay)
 -- print("Passover "..Year.." is:", passoverMonth, passoverDay)
 local find = table.find;
 local NextYear = (Year + 1);
 -- local LastYear = (Year - 1);
 
-    local HOLIDAY;
+local HOLIDAY;
 if getdate(12, 27) then
 HOLIDAY = NEWLINE..("READY FOR ")..NextYear..("🧨??!!?");
 elseif getdate(12, 28) then
@@ -83,50 +84,50 @@ elseif getdate(12, 30) then
 HOLIDAY = NEWLINE.."2 DAYS TIL NEW YEARZ 🎇🕚"
 elseif getdate(12, 31) then
 HOLIDAY = NEWLINE.."TOMORROW IS " .. NextYear .. "🎇!!"
-    elseif getdate(1, 1) then
-        HOLIDAY = NEWLINE..("HAPPY NEW YEARZ 🎉🎆🎇\n")..Year..("!!!!!")
+elseif getdate(1, 1) then
+    HOLIDAY = NEWLINE..("HAPPY NEW YEARZ 🎉🎆🎇\n")..Year..("!!!!!")
 elseif getdate(1, 2) then
 HOLIDAY = NEWLINE.."HOW IS " ..Year.. "?? 🧨"
 elseif getdate(1, 3) then
 HOLIDAY = NEWLINE.."DAY 3 OF " ..Year.. "🍭"
 elseif getdate(2,13) then
 HOLIDAY = NEWLINE.."VALENTINES TOMORROW💝"
-    elseif getdate(2, 14) then
-        HOLIDAY = NEWLINE.."HAPPY VALENTINES💝🍫\n"..Year
-    elseif getdate(3, 17) then
-        HOLIDAY = NEWLINE.."ST. PATRIXKS DAY☘️"..Year
+elseif getdate(2, 14) then
+    HOLIDAY = NEWLINE.."HAPPY VALENTINES💝🍫\n"..Year
+elseif getdate(3, 17) then
+    HOLIDAY = NEWLINE.."ST. PATRIXKS DAY☘️"..Year
 elseif getdate(3, 30) then
 HOLIDAY = NEWLINE.."APRIL FOOLS TOMORROW🤡"
-    elseif getdate(4, 1) then
-        HOLIDAY = NEWLINE.."HAPPY APRIL FOOLS🤡"..Year
+elseif getdate(4, 1) then
+    HOLIDAY = NEWLINE.."HAPPY APRIL FOOLS🤡"..Year
 elseif getdate(4, 20) then
 HOLIDAY = NEWLINE..("HAPPY 420 POTHEADZ 😋🍃🚬");
 elseif getdate(4, 21) then
 HOLIDAY = NEWLINE..("YALL NIGGAZ SMOKE ENUFF🍃 ?");
-    elseif getdate(5, 5) then
+elseif getdate(5, 5) then
 HOLIDAY = NEWLINE.."🇲🇽 CINCO DE MAYO 🇲🇽" ..Year.. ""
-    elseif getdate(6, 2) then
- HOLIDAY = NEWLINE..("LULAS🍭 BDAY 🥳🎂");
+elseif getdate(6, 2) then
+HOLIDAY = NEWLINE..("LULAS🍭 BDAY 🥳🎂");
 elseif getdate(9, 18) then
 HOLIDAY = NEWLINE..("HBD🎂 HG aka BIGSIS🥰😇");
-    elseif getdate(7, 4) then
-        HOLIDAY = NEWLINE.."INDEPENDENCE DAY!🎆\n".. Year
-    elseif getdate(easterMonth, easterDay) then
-        HOLIDAY = NEWLINE.."🐰HAPPY EASTER!🥚" .. Year
-    elseif getdate(passoverMonth, passoverDay) then
-        HOLIDAY = NEWLINE.."HAPPY PASSOVER✡️"
+elseif getdate(7, 4) then
+    HOLIDAY = NEWLINE.."INDEPENDENCE DAY!🎆\n".. Year
+elseif getdate(easterMonth, easterDay) then
+    HOLIDAY = NEWLINE.."🐰HAPPY EASTER!🥚" .. Year
+elseif getdate(passoverMonth, passoverDay) then
+    HOLIDAY = NEWLINE.."HAPPY PASSOVER✡️"
 elseif getdate(10, 25) or getdate(10, 26) or getdate(10, 27) or getdate(10, 28) or getdate(10, 29) then
 HOLIDAY = NEWLINE.."👻TRIXK OR TREAT...🎃"
 elseif getdate(10,30) then
 HOLIDAY = NEWLINE.."HALLOWEEN TMRW🎃"
-    elseif getdate(10, 31) then
+elseif getdate(10, 31) then
 HOLIDAY = NEWLINE.."🎃HAPPY HALLOWEEN👻" .. Year
 elseif getdate(11, 20) or getdate(11, 21) or getdate(11, 22) or getdate(11, 23) or getdate(11, 24) or getdate(11, 25) or getdate(11, 26) then 
 HOLIDAY = NEWLINE.."THANKSGIVING SOON🦃\nKLUK-KLUK"
 elseif getdate(11,27) then
 HOLIDAY = NEWLINE.."THANKSGIVING IS TOMORROW🤎"
-    elseif getdate(11, 28) or getdate(11, 29) or getdate(11, 30) then
-        HOLIDAY = NEWLINE.."HAPPY THANKSGIVING🦃" .. Year
+elseif getdate(11, 28) or getdate(11, 29) or getdate(11, 30) then
+    HOLIDAY = NEWLINE.."HAPPY THANKSGIVING🦃" .. Year
 elseif getdate(12, 14) or getdate(12, 15) or getdate(12, 16) or getdate(12,17) or getdate(12, 18) or getdate(12, 19) or getdate(12, 20) or getdate(12, 21) then
 HOLIDAY = NEWLINE.."🎄XMAS SOON 🎄"
 elseif getdate(12,22) then
@@ -135,42 +136,42 @@ elseif getdate(12,23) then
 HOLIDAY = NEWLINE.."XMAS EVE TOMORROW🎄" 
 elseif getdate(12,24) then
 HOLIDAY = NEWLINE.."MERRY XMAS EVE " .. Year .. "🎁"
-    elseif getdate(12, 25) then
-       HOLIDAY = NEWLINE.."🎄🎁 MERRY XMAS 🎁🎄" .. Year
+elseif getdate(12, 25) then
+   HOLIDAY = NEWLINE.."🎄🎁 MERRY XMAS 🎁🎄" .. Year
 elseif getdate(12, 26) then
 HOLIDAY = NEWLINE.."HOPE U ENJOYED UR XMAS❤️"
-    else
+else
 local plr = game.Players.LocalPlayer.Name
 HOLIDAY = NEWLINE.."Hi, " .. _G.plr.Name .. " 🍬"
-    end;
-    return HOLIDAY;
+end;
+return HOLIDAY;
 end;
 
 local getHolidayLogo = function()
-  local month, day = os.date("*t").month, os.date("*t").day
+local month, day = os.date("*t").month, os.date("*t").day
 
-  if month == 12 and (day >= 5 and day <= 26) then  -- Christmas (Dec 5-26)
-    holidayLogo = "🎄"
-  elseif month == 11 and (day >= 20 and day <= 30) then -- Thanksgiving (Nov 20-30)
-    holidayLogo = "🦃"
-  elseif month == 10 and (day >= 20 and day <= 31) then -- Halloween (Oct 24-31)
-    holidayLogo = "🎃"
-  elseif (month == 2 and day == 14) or (month == 2 and (day >= 7 and day <= 14)) then -- Valentine's Day
-    holidayLogo = "💝"
-  elseif (month == 1 and day == 1) or (month == 12 and (day >= 26 and day <= 31)) then -- New Year's (Jan 1, Dec 26-31)
-    holidayLogo = "🎆"
-  elseif month == 3 and (day >= 9 and day <= 17) then -- St. Patrick's Day (Mar 11-17)
-    holidayLogo = "🍀"
-  elseif month == 5 and (day >= 1 and day <= 5) then -- Cinco de Mayo (May 1-5)
-    holidayLogo = "🇲🇽"
-  elseif month == 6 and day == 2 then -- Birthday
-    holidayLogo = "🎂"
-  elseif (month == 4 and day == 1) or (month == 3 and (day >= 26 and day <= 30)) then
-    holidayLogo = "🤡"
-  else
-    holidayLogo = "🍬"
-  end
-  return holidayLogo
+if month == 12 and (day >= 5 and day <= 26) then  -- Christmas (Dec 5-26)
+holidayLogo = "🎄"
+elseif month == 11 and (day >= 20 and day <= 30) then -- Thanksgiving (Nov 20-30)
+holidayLogo = "🦃"
+elseif month == 10 and (day >= 20 and day <= 31) then -- Halloween (Oct 24-31)
+holidayLogo = "🎃"
+elseif (month == 2 and day == 14) or (month == 2 and (day >= 7 and day <= 14)) then -- Valentine's Day
+holidayLogo = "💝"
+elseif (month == 1 and day == 1) or (month == 12 and (day >= 26 and day <= 31)) then -- New Year's (Jan 1, Dec 26-31)
+holidayLogo = "🎆"
+elseif month == 3 and (day >= 9 and day <= 17) then -- St. Patrick's Day (Mar 11-17)
+holidayLogo = "🍀"
+elseif month == 5 and (day >= 1 and day <= 5) then -- Cinco de Mayo (May 1-5)
+holidayLogo = "🇲🇽"
+elseif month == 6 and day == 2 then -- Birthday
+holidayLogo = "🎂"
+elseif (month == 4 and day == 1) or (month == 3 and (day >= 26 and day <= 30)) then
+holidayLogo = "🤡"
+else
+holidayLogo = "🍬"
+end
+return holidayLogo
 end;
 
 local XMAS = 83624080780174
@@ -184,39 +185,39 @@ local CINCO_DE_MAYO = 75654509883757
 local APRIL_FOOLS = 135050118610638
 
 local getToggleLogo = function()
-  local logo = getHolidayLogo()
+local logo = getHolidayLogo()
 local toglogo;
-  if logo == "🎄" then toglogo = XMAS
-  elseif logo == "🦃" then toglogo = THANKSGIVING
-  elseif logo == "🎃" then toglogo = HALLOWEEN
-  elseif logo == "💝" then toglogo = VALENTINES
-  elseif logo == "🍬" then toglogo = LOLLYPOP
-  elseif logo == "🎆" then toglogo = NEWYEARS
-  elseif logo == "🇲🇽" then toglogo = LOLLYPOP
-  elseif logo == "🎂" then toglogo = LOLLYPOP
-  elseif logo == "🤡" then toglogo = APRIL_FOOLS
-  elseif logo == "🍀" then toglogo = STPATRICKS
+if logo == "🎄" then toglogo = XMAS
+elseif logo == "🦃" then toglogo = THANKSGIVING
+elseif logo == "🎃" then toglogo = HALLOWEEN
+elseif logo == "💝" then toglogo = VALENTINES
+elseif logo == "🍬" then toglogo = LOLLYPOP
+elseif logo == "🎆" then toglogo = NEWYEARS
+elseif logo == "🇲🇽" then toglogo = LOLLYPOP
+elseif logo == "🎂" then toglogo = LOLLYPOP
+elseif logo == "🤡" then toglogo = APRIL_FOOLS
+elseif logo == "🍀" then toglogo = STPATRICKS
 else toglogo = LOLLYPOP;
-  end;
-  return toglogo;
+end;
+return toglogo;
 end;
 
 local getToggleSize = function()
-  local tog = getToggleLogo()
-  local togsize
-  if tog == XMAS then togsize = 83
-  elseif tog == THANKSGIVING then togsize = 60
-  elseif tog == HALLOWEEN then togsize = 70
-  elseif tog == VALENTINES then togsize = 61
-  elseif tog == LOLLYPOP then togsize = 100
-  elseif tog == NEWYEARS then togsize = 59
-  elseif tog == STPATRICKS then togsize = 76
-  elseif tog == CINCO_DE_MAYO then togsize = 66
-  elseif tog == BIRTHDAY then togsize = 100
-  elseif tog == APRIL_FOOLS then togsize = 87
-  else togsize = 100
-  end;
-  return togsize;
+local tog = getToggleLogo()
+local togsize
+if tog == XMAS then togsize = 83
+elseif tog == THANKSGIVING then togsize = 60
+elseif tog == HALLOWEEN then togsize = 70
+elseif tog == VALENTINES then togsize = 61
+elseif tog == LOLLYPOP then togsize = 100
+elseif tog == NEWYEARS then togsize = 59
+elseif tog == STPATRICKS then togsize = 76
+elseif tog == CINCO_DE_MAYO then togsize = 66
+elseif tog == BIRTHDAY then togsize = 100
+elseif tog == APRIL_FOOLS then togsize = 87
+else togsize = 100
+end;
+return togsize;
 end;
 -- [[ END KALK HOLIDAY ]] --
 
@@ -240,9 +241,9 @@ _G.xmas = (83624080780174)
 getgenv().togglesize = getToggleSize()
 getgenv().getImg = getToggleLogo()
 local uiTheme = LollypopHub_Theme
-    spawn(function()
+spawn(function()
 -- nothing
-    end);
+end);
 --===========HUB LOADED============--
 if getgenv().lhloaded==true then
 _G.note("Lollypop Hub already loaded! 👺 say \"/e reload\" if u want to reload the skript", 5); return end;
@@ -270,9 +271,9 @@ Lighting.ClockTime = night
 elseif(m=='/e nofog')then
 Lighting.FogEnd = nofog
 for i,v in pairs(Lighting:GetDescendants()) do
-    if v:IsA("Atmosphere") then
-      v:Destroy()
-    end;end
+if v:IsA("Atmosphere") then
+  v:Destroy()
+end;end
 elseif(m=='/e noban')then
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/kredits-AnthonyIsntHere-antiban0antilogger.lua",true))();
 elseif(m=='/e re')then
@@ -290,7 +291,7 @@ local toggle = game.CoreGui:FindFirstChild[[KustomToggle]];
 if toggle then toggle:Destroy();
 getgenv().lhloaded=false;
 _G.note("u kan now klose and reload the skript", 3)
-    end;
+end;
 elseif(m=='/e tp')then
 loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))();
 
@@ -315,7 +316,7 @@ end;
 _G.rivalstbao=function()
 local tbao,err=pcall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubRivals"))();
-  end); if not tbao then return err end;
+end); if not tbao then return err end;
 end;
 
 --[[ KOLORS ]]--
@@ -365,7 +366,7 @@ end;
 if(OWNER ~= _G.lulas)then warn([[OWNER is: 'lulaslollipop' retard]]) return end;
 makedekal('LOLLYPOP HUB DEKAL🍭');
 
- -- 🫂notify users of skripts requests 🫂--
+-- 🫂notify users of skripts requests 🫂--
 spawn(function()
 local notifyPlrs, notSent = pcall(function()
 local username = (_G.user) or (_G.display)
@@ -580,7 +581,7 @@ elseif getdate(1,1) then
 lollyhub("🎉HAPPY NEW YEARS 🎇")
 else
 lollyhub("🍬", 4)
-  end;
+end;
 end);
 if notifsError then 
 warn("notifs error:", notifsError)
@@ -738,43 +739,43 @@ local dragThreshold = 5 --wont tap by mistake
 local hasMoved = false;
 
 local function update(input)
-    local delta = input.Position - mousePos
-    if math.abs(delta.X) > dragThreshold or math.abs(delta.Y) > dragThreshold then
-        hasMoved = true
-        roundButton.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
-    end
+local delta = input.Position - mousePos
+if math.abs(delta.X) > dragThreshold or math.abs(delta.Y) > dragThreshold then
+    hasMoved = true
+    roundButton.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+end
 end;
 
 roundButton.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = true
-        hasMoved = false
-        mousePos = input.Position
-        framePos = roundButton.Position;
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+    dragging = true
+    hasMoved = false
+    mousePos = input.Position
+    framePos = roundButton.Position;
 
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
+    input.Changed:Connect(function()
+        if input.UserInputState == Enum.UserInputState.End then
+            dragging = false
+        end
+    end)
+end
 end);
 roundButton.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInput = input
-    end
+if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+    dragInput = input
+end
 end);
 game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        update(input)
-    end
+if input == dragInput and dragging then
+    update(input)
+end
 end);
 -- wont tap if dragging
 roundButton.MouseButton1Click:Connect(function()
-    if not hasMoved then
-        toggleKavo()
-    end
- end)
+if not hasMoved then
+    toggleKavo()
+end
+end)
 end;--end KUSTOM TOGGLE FUNK
 UPDATEKUSTOMTOGGLE();
 end)
@@ -872,20 +873,20 @@ game.Players.PlayerRemoving:Connect(updatePlayerList);
 SkriptsSection:NewButton("Teleport to Selekted Player", "tp to player", function()
 if selektedPlayerName then
 local player = game.Players.LocalPlayer
-    local targetPlayer = game.Players:FindFirstChild(selektedPlayerName);
-    if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
-        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+local targetPlayer = game.Players:FindFirstChild(selektedPlayerName);
+if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+    local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 player.Character.HumanoidRootPart.CFrame = CFrame.new(targetPosition)
-            print("“"..selektedPlayerName.."“")
-        else
-            bNotif(3, "ok", "Player or HumanoidRootPart not found")
-        end
+        print("“"..selektedPlayerName.."“")
     else
-        bNotif(3, "aight", "Player or their HumanoidRootPart not found")
+        bNotif(3, "ok", "Player or HumanoidRootPart not found")
     end
 else
-    bNotif(3, "oh", "No player selekted")
+    bNotif(3, "aight", "Player or their HumanoidRootPart not found")
+end
+else
+bNotif(3, "oh", "No player selekted")
 end;
 end)
 
@@ -894,26 +895,26 @@ local TweenService = game:GetService("TweenService")
 SkriptsSection:NewButton("Tween to Selekted Player", "tp to player", function()
 if selektedPlayerName then
 local player = game.Players.LocalPlayer
-    local targetPlayer = game.Players:FindFirstChild(selektedPlayerName)
-    if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
-        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-            local humanoidRootPart = player.Character.HumanoidRootPart
-            local targetCFrame = CFrame.new(targetPosition)
-            local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-            local tween = TweenService:Create(humanoidRootPart, tweenInfo, {CFrame = targetCFrame})
-            tween:Play()
-            tween.Completed:Connect(function()
+local targetPlayer = game.Players:FindFirstChild(selektedPlayerName)
+if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+    local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        local humanoidRootPart = player.Character.HumanoidRootPart
+        local targetCFrame = CFrame.new(targetPosition)
+        local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+        local tween = TweenService:Create(humanoidRootPart, tweenInfo, {CFrame = targetCFrame})
+        tween:Play()
+        tween.Completed:Connect(function()
 print("“"..selektedPlayerName.."“")
-            end)
-        else
-            bNotif(3, "aight", "Player or HumanoidRootPart not found.")
-        end
+        end)
     else
-        bNotif(3, "aight", "Player or their HumanoidRootPart not found")
+        bNotif(3, "aight", "Player or HumanoidRootPart not found.")
     end
 else
-    bNotif(2, "oops im dumb", "No player selekted")
+    bNotif(3, "aight", "Player or their HumanoidRootPart not found")
+end
+else
+bNotif(2, "oops im dumb", "No player selekted")
 end;
 end)
 
@@ -942,7 +943,7 @@ end)
 SkriptsSection:NewToggle("Boost FPS", "konstantly sets fps high", function()
 if not setfflag then _G.note("your executor doesnt support setfflag for FPS boosting") return end;
 if boostfps == true then
- boostfps = false 
+boostfps = false 
 else 
 boostfps = true; 
 end;
@@ -952,11 +953,11 @@ _G.boost = _G.hb:connect(function()
 setfflag("TaskSchedulerTargetFps", 125);
 end)
 _G.note("boosting fps", 2)
-            end;
+        end;
 if boostfps == false then
 _G.boost:Disconnect(); _G.boost=nil;
 _G.note("stopped boosting fps", 2)
-           end;
+       end;
 end)
 
 SkriptsSection:NewLabel("more skripts");
@@ -970,7 +971,7 @@ end);
 SkriptsSection:NewToggle("TP Walk", "teleport work (bypasses walkspeed detektions)", function(val)
 spawn(function()
 _G.toggleTPWalk(val)
-  end);
+end);
 if not pressedAlready then _G.note("Bypasses walkspeed detections in games with Anti-walkspeed cheat", 6.3); else return end;
 pressedAlready = (true)
 end);
@@ -979,17 +980,17 @@ SkriptsSection:NewTextBox("TP Walk Speed (default: .80)", "teleport walk speed",
 spawn(function()
 local newText = _G.updateTPWalkSpeed(val)
 val = newText
-    end);
+end);
 end)
 
 
 SkriptsSection:NewToggle("Enable chat bubbles", "🍭", function(bubbles)
 chat = game:GetService"Chat";
-  if bubbles then 
+if bubbles then 
 chat.BubbleChatEnabled = (true)
-    else 
+else 
 chat.BubbleChatEnabled = (false)
-    end;
+end;
 end)
 
 SkriptsSection:NewDropdown("Exekutor gui", "exploit guis", {"Vega X", "ArkeusX", "Neptune", "FluxusKoral remake", "KRNL", "Rc7 (old)", "Rc7 (newer version)", "Rc7 II", "Synapse X (old)", "Shadow X", "Synapse X rework",}, function(x)
@@ -1044,10 +1045,10 @@ autoJumpEnabled = state
 end);
 game:GetService("RunService").RenderStepped:Connect(function()
 if autoJumpEnabled then
-    local player = game.Players.LocalPlayer
-    if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
-        player.Character.Humanoid.Jump = true
-    end
+local player = game.Players.LocalPlayer
+if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+    player.Character.Humanoid.Jump = true
+end
 end
 end)
 
@@ -1055,15 +1056,15 @@ infiniteJumpEnabled = false
 --infjump.Konnekt
 SkriptsSection:NewToggle("Infinite jump", "no jump limit", function(on)
 infiniteJumpEnabled = on
-    if infiniteJumpEnabled then
+if infiniteJumpEnabled then
 game:GetService("UserInputService").JumpRequest:connect(function()
 if infiniteJumpEnabled then
 game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-            end
-        end)
-    else
+        end
+    end)
+else
 infiniteJumpEnabled = false
-    end
+end
 end)
 --infjump.Diskonnekt
 
@@ -1174,7 +1175,7 @@ end)
 SkriptsSection:NewButton("ANTI-AFK 2", "selfe",
 function()
 --anti afk
- getconnections=getconnections
+getconnections=getconnections
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
 v:Disable()
 end
@@ -2091,6 +2092,7 @@ AdminSection:NewButton("Simple Admin", "type .cmds, say (.set prefix ;) to set ;
 end)
 
 
+local Fun = Window:NewTab("Fun")
 
 local FunSection = Fun:NewSection("Requests");
 fun = FunSection;
@@ -2099,51 +2101,51 @@ local adminTag = nil
 local characterAddedConnection = nil
 
 local function createAdminTag(character)
-    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-    -- Create a BillboardGui for the name tag
-    local billboardGui = Instance.new("BillboardGui")
-    billboardGui.Adornee = humanoidRootPart * Vector3.new(0,5,0)
-    billboardGui.Size = UDim2.new(0, 100, 0, 50)
-    billboardGui.StudsOffset = Vector3.new(0, 3, 0)
-    billboardGui.Parent = workspace
+-- Create a BillboardGui for the name tag
+local billboardGui = Instance.new("BillboardGui")
+billboardGui.Adornee = humanoidRootPart * Vector3.new(0,5,0)
+billboardGui.Size = UDim2.new(0, 100, 0, 50)
+billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+billboardGui.Parent = workspace
 
-    local textLabel = Instance.new("TextLabel")
-    textLabel.Size = UDim2.new(1, 0, 1, 0)
-    textLabel.BackgroundTransparency = 1
-    textLabel.Text = "ADMIN ⭐️"
-    textLabel.TextColor3 = Color3.new(.8, .01, .01)
-    textLabel.Font = Enum.Font.LuckiestGuy
-    textLabel.TextSize = 30
-    textLabel.Parent = billboardGui
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 1, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "ADMIN ⭐️"
+textLabel.TextColor3 = Color3.new(.8, .01, .01)
+textLabel.Font = Enum.Font.LuckiestGuy
+textLabel.TextSize = 30
+textLabel.Parent = billboardGui
 
-    adminTag = billboardGui -- Store reference to the admin tag
+adminTag = billboardGui -- Store reference to the admin tag
 end
 
 FunSection:NewButton("Admin ⭐️ name tag", "makes admin tag above u", function()
-    local player = game.Players.LocalPlayer
+local player = game.Players.LocalPlayer
 
-    if not adminTag then
-        createAdminTag(player.Character or player.CharacterAdded:Wait())
+if not adminTag then
+    createAdminTag(player.Character or player.CharacterAdded:Wait())
 
-        -- Handle respawn to maintain the tag
-        characterAddedConnection = player.CharacterAdded:Connect(function(character)
-            createAdminTag(character)
-        end)
-    end
+    -- Handle respawn to maintain the tag
+    characterAddedConnection = player.CharacterAdded:Connect(function(character)
+        createAdminTag(character)
+    end)
+end
 end)
 
 FunSection:NewButton("Destroy Admin ⭐️ name tag", "destroys the admin tag above you", function()
-    if adminTag then
-        adminTag:Destroy()
-        adminTag = nil -- Clear the reference
+if adminTag then
+    adminTag:Destroy()
+    adminTag = nil -- Clear the reference
 
-        -- Disconnect the CharacterAdded connection
-        if characterAddedConnection then
-            characterAddedConnection:Disconnect()
-            characterAddedConnection = nil
-        end
+    -- Disconnect the CharacterAdded connection
+    if characterAddedConnection then
+        characterAddedConnection:Disconnect()
+        characterAddedConnection = nil
     end
+end
 end)
 
 FunSection:NewLabel("Animations")
@@ -2640,7 +2642,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/scripthubekitten/SCRI
 end)
 
 HubSection:NewButton("(new) Tiger X hub v3.5", "🍭", function() loadstring(game:HttpGet("https://raw.githubusercontent.com/balintTheDevX/Tiger-X-V3/main/Tiger%20X%20V3.5%20Fixed"))()
- end)
+end)
 
 HubSection:NewButton("K00lkid revival", "🍭", function() 
 loadstring(game:GetObjects("rbxassetid://16742906657")[1].Source)()
@@ -3268,11 +3270,11 @@ games:NewButton("Plutonium hub (universal)", "might inklude more games", functio
 local yes,no=pcall(function()
 pluto=[[loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))();]]
 _G.kopy(pluto);
-   end);
+end);
 if no then _G.ok("⚠️ Error: " ..no); 
-    else
+else
 _G.ok("Kopied Plutonium Hub: "..pluto)
-     end;
+ end;
 end)
 
 games:NewLabel("💥The Strongest Battlegrounds💥")
@@ -3306,6 +3308,7 @@ end)
 
 GamesSection:NewDropdown("teleport to games", "speedhubX games support", {"teleport to Fisch", "teleport to BloxFruit Sea 1", "teleport to BloxFruit Sea 2", "teleport to BloxFruit Sea 3", "teleport to PS99 world 1", "teleport to PS99 world 2", "teleport to PS99 world 3", "teleport to The Strongest Battlegrounds", "teleport to Pet GO", "teleport to Muscle Legends"}, function(...)
 local fisxh = 16732694052; local petgo=18901165922; local tsb=10449761463; ps3=17503543197; ps2=16498369169; ps1 = 8737899170; musxle=3623096087; bf3 = 7449423635; bf2=4442272183; bf1=2753915549;
+        --[[
 if ... == "teleport to Fisch" then
 _G.goto(fisxh)
 elseif ... == "teleport to BloxFruit Sea 1" then _G.goto(bf1)
@@ -3319,7 +3322,8 @@ _G.goto(ps3)
 elseif ...== "teleport to The Strongest Battlegrounds" then _G.goto(tsb)
 elseif ...== "teleport to Pet GO" then _G.goto(petgo) 
 elseif ...== "teleport to Muscle Legends" then _G.goto(musxles)
-  end;
+end;
+        ]]--
 end)
 
 games:NewLabel("🎖 Military Tycoon 🎖")
@@ -4877,7 +4881,7 @@ local msgSent, msgFail = pcall(function()
 plrMsg=skript;
 loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();
 _G.note("your message: “" ..plrMsg.. "“ has been sent✅", 4);
-  end);
+end);
 
 if not msgSent then 
 _G.note("⚠️ Message Failed to Send. wait for fix"); return end;
@@ -5272,7 +5276,7 @@ local lula, tysuki, asian, kh3we = 3001347724, 2913898154, 4406450103, 488563109
 local whitelisted = {lula, tysuki, asian, kh3we};
 for _, playerid in ipairs(whitelisted) do
 if userid == playerid then
-    plrWhitelisted = true; 
+plrWhitelisted = true; 
 break 
 end; 
 end;
@@ -5687,7 +5691,7 @@ local function TOGGLE2()
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.CoreGui
 screenGui.IgnoreGuiInset = true
-  local removeborder = 0
+local removeborder = 0
 local overlayAllGui = 2
 local roundButton = Instance.new("ImageButton")
 roundButton.Parent = screenGui
@@ -5709,11 +5713,11 @@ KAVO:ToggleUI()
 end;
 --wen pressed will toggle ui
 roundButton.MouseButton1Click:Connect(toggleKavo);
-  -- so it wont run on non mobile devixe
+-- so it wont run on non mobile devixe
 local uis=game:GetService("UserInputService")
 if not uis.TouchEnabled then
-  roundButton.Visible = true
-  end;
+roundButton.Visible = true
+end;
 end;--togglelollypop funk(not using)
 
 --===========LH TOGGLE==============--
@@ -5751,50 +5755,50 @@ local dragThreshold = 5 --wont tap by mistake
 local hasMoved = false;
 
 local function update(input)
-    local delta = input.Position - mousePos
-    if math.abs(delta.X) > dragThreshold or math.abs(delta.Y) > dragThreshold then
-        hasMoved = true
-        roundButton.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
-    end
+local delta = input.Position - mousePos
+if math.abs(delta.X) > dragThreshold or math.abs(delta.Y) > dragThreshold then
+    hasMoved = true
+    roundButton.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+end
 end;
 
 roundButton.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = true
-        hasMoved = false
-        mousePos = input.Position
-        framePos = roundButton.Position;
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+    dragging = true
+    hasMoved = false
+    mousePos = input.Position
+    framePos = roundButton.Position;
 
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
+    input.Changed:Connect(function()
+        if input.UserInputState == Enum.UserInputState.End then
+            dragging = false
+        end
+    end)
+end
 end);
 roundButton.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInput = input
-    end
+if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+    dragInput = input
+end
 end);
 game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        update(input)
-    end
+if input == dragInput and dragging then
+    update(input)
+end
 end);
 -- wont tap if dragging
 roundButton.MouseButton1Click:Connect(function()
-    if not hasMoved then
-        toggleKavo()
-    end
- end)
+if not hasMoved then
+    toggleKavo()
+end
+end)
 end;--end KUSTOM TOGGLE FUNK
 -- so it wont run on non-mobile devices
 --[[
 local uis = game:GetService("UserInputService")
 if not uis.TouchEnabled then
-    roundButton.Visible = true
-   end
+roundButton.Visible = true
+end
 ]]--
 
 game.Players.LocalPlayer.Chatted:Connect(function(...)
