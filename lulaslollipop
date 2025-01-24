@@ -5120,6 +5120,7 @@ end)
 local Home = Window:NewTab("Home")
 local HomeSection = Home:NewSection("Home")
 home = HomeSection;
+Home=HomeSection;
 
 --[[
 HomeSection:NewButton("🔎 Skript", "look up any skript", function()
@@ -5287,20 +5288,19 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/mai
 Notify("🔒", "No Access", 5);
 ]]--
 end);
-local Home=HomeSection;
 
-Home:NewButton("🍭 FE Obfuskator v2 (LUA/JAVA/CSS/PYTHON)", "obfuskates kode", function()
+HomeSection:NewButton("🍭 FE Obfuskator v2 (LUA/JAVA/CSS/PYTHON)", "obfuskates kode", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/FEobfuskator-v2", true))()
 end)
 
-Home:NewLabel("other")
+HomeSection:NewLabel("other")
 HomeSection:NewButton("ANTI()", "anti xhat logger & xhatbypass", function()
 -- anti xhatlog/xhatbypass
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/my%20skripts/antiban-xhelulusONLY",false))();
 end)
 
 -- KREDITS 2 ME --
-home:NewLabel("my soxials 📲");
+HomeSection:NewLabel("my soxials 📲");
 
 home:NewButton("My Roblox profile link", "kredits🍭", function()
 _G.kopy(_G.rbxlink)
