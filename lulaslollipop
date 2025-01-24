@@ -2,7 +2,6 @@
 local OWNER = ("lulaslollipop");
 local START = tick();
 local perfekthub, err = pcall(function()
-local START=tick();
 
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
@@ -4889,6 +4888,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("- added 🍭 'FE Obfuskator gui V2' (Home) protekt your skripts")
 e:NewLabel("(req) Admin Nametag (Fun) for @mystery_17954")
 e:NewLabel("(req) added BaddiesV1 💅🏽 skript - for: Cateatsfood_BBB")
 e:NewLabel("(req) added Ghost Hub in (Hubs & gui) for: cikoo134")
@@ -5239,6 +5239,7 @@ getgenv().Key = "Bash"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3AIY%20Dex",true))()
 end)
 
+--[[
 HomeSection:NewButton("/cmds", "type '.' into the searxh bar to view all skripts", function()
 _G.posX = 0.405
 _G.posY = 0.9
@@ -5246,6 +5247,7 @@ _G.searchButton = ";"
 _G.commandPrefix = "/"
 spawn(loadstring(game:HttpGet('https://raw.githubusercontent.com/alvin677/search/main/search.lua'))())
 end)
+]]--
 
 HomeSection:NewButton("SimpleSpy v2.2 📱 Mobile", "mobileskript", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/SimpleSpyMobile2.2",true))();
@@ -5265,8 +5267,8 @@ HomeSection:NewButton("Message Logs", "see xhatlogs gui", function()
 loadstring(game:GetObjects("rbxassetid://1295331911")[1].Source)()
 end)
 
-
-HomeSection:NewButton("obf", "no info", function()
+Home:NewLabel("PROTEKT YOUR SKRIPTS") 
+HomeSection:NewButton("FE Obfuskator (protekt your skripts)", "no info", function()
 -- obFEskator
 _=loadstring;__=game;_(__:HttpGet([[https]]..[[://gi]]..[[thub.com/]]..[[rrixh/]]..[[skripts/raw/main/my%20skripts/]]..[[obFEskator.]]..[[yml]],false))();
 --[[
@@ -5284,8 +5286,14 @@ if plrWhitelisted then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/kustomnotif/main/notifikation_lulaslollipop", true))()
 Notify("🔒", "No Access", 5);
 ]]--
+end);
+local Home=HomeSection;
+
+Home:NewButton("🍭 FE Obfuskator v2 (LUA/JAVA/CSS/PYTHON)", "obfuskates kode", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/FEobfuskator-v2", true))()
 end)
 
+Home:NewLabel("other")
 HomeSection:NewButton("ANTI()", "anti xhat logger & xhatbypass", function()
 -- anti xhatlog/xhatbypass
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/my%20skripts/antiban-xhelulusONLY",false))();
