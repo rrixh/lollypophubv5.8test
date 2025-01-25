@@ -3335,22 +3335,20 @@ end)
 
 GamesSection:NewDropdown("teleport to games", "speedhubX games support", {"teleport to Fisch", "teleport to BloxFruit Sea 1", "teleport to BloxFruit Sea 2", "teleport to BloxFruit Sea 3", "teleport to PS99 world 1", "teleport to PS99 world 2", "teleport to PS99 world 3", "teleport to The Strongest Battlegrounds", "teleport to Pet GO", "teleport to Muscle Legends"}, function(...)
 local fisxh = 16732694052; local petgo=18901165922; local tsb=10449761463; ps3=17503543197; ps2=16498369169; ps1 = 8737899170; musxle=3623096087; bf3 = 7449423635; bf2=4442272183; bf1=2753915549;
-        --[[
 if ... == "teleport to Fisch" then
-_G.goto(fisxh)
-elseif ... == "teleport to BloxFruit Sea 1" then _G.goto(bf1)
-elseif ...== "teleport to BloxFruit Sea 2" then _G.goto(bf2)
-elseif ...=="teleport to BloxFruit Sea 3" then _G.goto(bf3)
-elseif ...== "teleport to PS99 world 1" then _G.goto(ps1)
+_G.tpto(fisxh)
+elseif ... == "teleport to BloxFruit Sea 1" then _G.tpto(bf1)
+elseif ...== "teleport to BloxFruit Sea 2" then _G.tpto(bf2)
+elseif ...=="teleport to BloxFruit Sea 3" then _G.tpto(bf3)
+elseif ...== "teleport to PS99 world 1" then _G.tpto(ps1)
 elseif ...=="teleport to PS99 world 2" then
-_G.goto(ps2)
+_G.tpto(ps2)
 elseif ...=="teleport to PS99 world 3" then
-_G.goto(ps3) 
+_G.tpto(ps3) 
 elseif ...== "teleport to The Strongest Battlegrounds" then _G.goto(tsb)
-elseif ...== "teleport to Pet GO" then _G.goto(petgo) 
-elseif ...== "teleport to Muscle Legends" then _G.goto(musxles)
+elseif ...== "teleport to Pet GO" then _G.tpto(petgo) 
+elseif ...== "teleport to Muscle Legends" then _G.tpto(musxles)
 end;
-        ]]--
 end)
 
 GamesSection:NewLabel("T-Titans Battlegrounds")
