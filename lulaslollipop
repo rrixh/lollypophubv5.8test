@@ -11,7 +11,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Jan 24, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Jan 25, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -3205,6 +3205,34 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+_G.sanderX = function()
+setclipboard([[
+loadstring(game:HttpGet('https://raw.githubusercontent.com/kigredns/SanderXV4.2.2/refs/heads/main/NormalSS.lua'))();
+task.wait(2)
+setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();")
+]]);
+_G.note("Kopied SanderX hub, paste in your executor")
+end;
+
+--BROOKHAVEN
+GamesSection:NewLabel("🏡Brookhaven RP🏡")
+
+games:NewButton("SanderX hub (OP) (new)", "", _G.sanderX)
+
+GamesSection:NewButton("(new) Imperial Hub v2.1 (kopy skript)", "skriptreq uh", function()
+_G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/Trev0rZ/LoaderM/main/ImperialHub-Working.lua'))();")
+ok(4,"bet", "Imperial Hub v2.1 kopied✅, paste in your exekutor")
+end)
+
+GamesSection:NewButton("SALVATORE Hub (kopy) (5s to load gui)", "brook", function()
+setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/RFR-R1CH4RD/Loader/main/Salvatore.lua'))()")
+ok(4, "bet", "SALVATORE hub kopied✅, paste in your exekutor")
+end)
+
+GamesSection:NewButton("Rochips admin panel (kopy)", "skriptreq bhaven", function()
+_G.kopy("loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-rochips-universal-18294'))()")
+ok(4, "bet", "Rochips Admin Panel kopied✅, paste in your exekutor")
+end)
 
 games:NewLabel("💅🏽 Baddies 💅🏽");
 games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.13}", "🍬", function()
@@ -3325,11 +3353,6 @@ end;
         ]]--
 end)
 
-games:NewLabel("🎖 Military Tycoon 🎖")
-games:NewButton("Autofarm", "for jhayceetheg (jayyy)", function()
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/games/militarytykoon",true))(); 
-end)
-
 GamesSection:NewLabel("T-Titans Battlegrounds")
 GamesSection:NewButton("Aimbot (nearest player)", "makes projektiles go to nearest player", function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
@@ -3374,26 +3397,6 @@ redz=[[loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxF
 _G.kopy(redz)
 wait() _G.note("Kopied: "..redz)
 end)
-
-
---BROOKHAVEN
-GamesSection:NewLabel("🏡Brookhaven RP🏡")
-
-GamesSection:NewButton("(new) Imperial Hub v2.1 (kopy skript)", "skriptreq uh", function()
-_G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/Trev0rZ/LoaderM/main/ImperialHub-Working.lua'))();")
-ok(4,"bet", "Imperial Hub v2.1 kopied✅, paste in your exekutor")
-end)
-
-GamesSection:NewButton("SALVATORE Hub (kopy skript) (5s to load gui)", "brook", function()
-setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/RFR-R1CH4RD/Loader/main/Salvatore.lua'))()")
-ok(4, "bet", "SALVATORE hub kopied✅, paste in your exekutor")
-end)
-
-GamesSection:NewButton("Rochips admin panel (kopy skript)", "skriptreq bhaven", function()
-setclipboard("loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-rochips-universal-18294'))()")
-ok(4, "bet", "Rochips Admin Panel kopied✅, paste in your exekutor")
-end)
-
 
 GamesSection:NewLabel("😤 99% FAIL OBBY😤 ")
 
@@ -4888,6 +4891,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("- added 🏡Brookhaven RP - [SanderX hub] (Games)")
 e:NewLabel("- added 🍭 'FE Obfuskator gui V2' (Home) protekt your skripts")
 e:NewLabel("(req) Admin Nametag (Fun) for @mystery_17954")
 e:NewLabel("(req) added BaddiesV1 💅🏽 skript - for: Cateatsfood_BBB")
