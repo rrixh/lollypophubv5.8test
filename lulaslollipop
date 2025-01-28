@@ -11,7 +11,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Jan 25, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Jan 27, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -371,8 +371,8 @@ local notifyPlrs, notSent = pcall(function()
 local username = (_G.user) or (_G.display)
 X=username;
 
-if(X=="mystery_17954")then
-_G.note("🔔@mystery_17954 - (request added) Admin Nametag in 'Fun' ", 6)
+if(X=="Urmamhasafatpoosa")then
+_G.note("🔔@Urmamhasafatpoosa - (request added) Shrimp Game 🍤 & Squid Game X 🦑 skript in 'Games' ", 7)
 end;--✅
 
 end); --protekt
@@ -3205,6 +3205,13 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+
+games:NewLabel("🦑 Squid Game X, Shrimp Game 🍤 & more (universal)");
+games:NewButton("RIP HUB [V2]", "", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/SquidGameX.lua"))();
+end);
+
+
 _G.sanderX = function()
 setclipboard([[
 loadstring(game:HttpGet('https://raw.githubusercontent.com/kigredns/SanderXV4.2.2/refs/heads/main/NormalSS.lua'))();
@@ -4889,7 +4896,8 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
-e:NewLabel("- added 🏡Brookhaven RP - [SanderX hub] (Games)")
+e:NewLabel("RIP HUB {V2} universal (Games)")
+e:NewLabel("added 🏡Brookhaven RP - [SanderX hub] (Games) [1/25/25]")
 e:NewLabel("- added 🍭 'FE Obfuskator gui V2' (Home) protekt your skripts")
 e:NewLabel("(req) Admin Nametag (Fun) for @mystery_17954")
 e:NewLabel("(req) added BaddiesV1 💅🏽 skript - for: Cateatsfood_BBB")
