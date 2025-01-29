@@ -11,7 +11,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Jan 27, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Jan 29, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -3232,6 +3232,24 @@ setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/l
 _G.note("Kopied Glass Bridge skript, paste in your executor")
 end)
 
+games:NewLabel("💅🏽 Baddies 💅🏽");
+games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [req features if needed] {v2.21} fixed 1/29/25", "🍬", function()
+setclipboard([[
+getgenv().Version = "new";
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))();
+]])
+_G.note("kopied Baddies 💅🏻 skript, paste in your executor")
+end)
+
+games:NewButton("Baddies 💅🏽 v1 (old ver)", "req by Cateatsfood_BBB", function()
+v1=[[_G.AdminKommands = (true); loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽",true))();]]
+_G.kopy(v1); wait() _G.note("Kopied BaddiesV1 script")
+end)
+
+games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
+end)
+
 _G.sanderX = function()
 setclipboard([[
 loadstring(game:HttpGet('https://raw.githubusercontent.com/kigredns/SanderXV4.2.2/refs/heads/main/NormalSS.lua'))();
@@ -3259,22 +3277,6 @@ end)
 GamesSection:NewButton("Rochips admin panel (kopy)", "skriptreq bhaven", function()
 _G.kopy("loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-rochips-universal-18294'))()")
 ok(4, "bet", "Rochips Admin Panel kopied✅, paste in your exekutor")
-end)
-
-games:NewLabel("💅🏽 Baddies 💅🏽");
-games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.2}", "🍬", function()
-spawn(function()
-getgenv().Version = "new";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
-end)
-
-games:NewButton("Baddies 💅🏽 v1 (old ver)", "req by Cateatsfood_BBB", function()
-v1=[[_G.AdminKommands = (true); loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽",true))();]]
-_G.kopy(v1); wait() _G.note("Kopied BaddiesV1 script")
-end)
-
-games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
 end)
 
 games:NewLabel("Games Hub (supports a lot of games—mainly for DaHood players)")
@@ -4916,6 +4918,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("fixed baddies 💅🏻 skript not loading [1/29/25]")
 e:NewLabel("added 'Glass Bridge' [Reveal path, tp to end] (Games)")
 e:NewLabel("🦑Impossible Squid Game! Glass Bridge skript [reveal path & more] (Games)")
 e:NewLabel("Baddies 💅🏻 update {v2.2} (strong melee, dropdown list)")
