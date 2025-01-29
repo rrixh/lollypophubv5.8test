@@ -2,10 +2,10 @@
 local OWNER = ("lulaslollipop");
 local START = tick();
 local perfekthub, err = pcall(function()
-
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
+
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local SPAXE = (" ")
@@ -3211,6 +3211,26 @@ games:NewButton("RIP HUB [V2]", "", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/SquidGameX.lua"))();
 end);
 
+games:NewLabel("🦑Impossible Squid Game! Glass Bridge 2")
+
+games:NewButton("Reveal Path, inf money, autofarm wins", "", function()
+setclipboard([[
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/games/impossibleglass2(uwu)",true))()
+task.wait(2)
+setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();")
+]]);
+_G.note("Kopied 🦑Impossible Squid Game! Glass Bridge skript, paste in your executor")
+end)
+
+games:NewLabel("Glass Bridge");
+games:NewButton("Reveal korrect path, tp to end", "", function()
+setclipboard([[
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/games/GlassBridge"))();
+task.wait(2)
+setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();")
+]]);
+_G.note("Kopied Glass Bridge skript, paste in your executor")
+end)
 
 _G.sanderX = function()
 setclipboard([[
@@ -3242,7 +3262,7 @@ ok(4, "bet", "Rochips Admin Panel kopied✅, paste in your exekutor")
 end)
 
 games:NewLabel("💅🏽 Baddies 💅🏽");
-games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.13}", "🍬", function()
+games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [request more features if needed] {v2.2}", "🍬", function()
 spawn(function()
 getgenv().Version = "new";
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))(); end);
@@ -4896,6 +4916,9 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("added 'Glass Bridge' [Reveal path, tp to end] (Games)")
+e:NewLabel("🦑Impossible Squid Game! Glass Bridge skript [reveal path & more] (Games)")
+e:NewLabel("Baddies 💅🏻 update {v2.2} (strong melee, dropdown list)")
 e:NewLabel("RIP HUB {V2} universal (Games)")
 e:NewLabel("added 🏡Brookhaven RP - [SanderX hub] (Games) [1/25/25]")
 e:NewLabel("- added 🍭 'FE Obfuskator gui V2' (Home) protekt your skripts")
