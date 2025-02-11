@@ -10,7 +10,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Feb 3, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Feb 11, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.eggplant
 local LollypopHub_Theme = ("LulaTheme")
@@ -299,6 +299,16 @@ end)--plr xhatted
 end)--pcall
 --=================================--
 local exploit=identifyexecutor() or "Unknown";
+
+getgenv().rbxnote = function(title,txt,dur,img)
+game:GetService("StarterGui"):SetCore("SendNotification",{
+Title = title or "add title nigga",
+Text = text or "add text fag",
+Duration = 6 or dur,
+Icon = "rbxassetid://".._G.lollypop
+})
+end;
+
 -- [ 🛠️ main vars 🛠️ ] --
 local lulas=game;
 game=lulas;
@@ -636,6 +646,22 @@ local skripts, skript = SkriptsSection;
 SkriptsSection:NewToggle("Auto-Execute when teleporting/server-hopping", "executes lollypophub wen u serverhop", function(...)
 _G.qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))()", ...)
 end)
+
+SkriptsSection:NewTextBox("Mini Executor", "paste your skript and press enter", function(skript)
+    _G.inputScript = skript
+if _G.inputScript then
+        local success, err = pcall(function()
+            loadstring(_G.inputScript)();
+                  _G.inputScript = ""
+        end)
+        if not success then
+_G.note("❌ Error executing skript: "..err, 3)
+        end
+    else
+        _G.note("⚠️ No skript to execute", 3)
+    end
+end)
+
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -2092,58 +2118,38 @@ end)
 
 local Fun = Window:NewTab("Fun")
 
-local FunSection = Fun:NewSection("Requests");
-fun = FunSection;
+local FunSection = Fun:NewSection("Player skripts");
+local fun = FunSection;
 
-local adminTag = nil
-local characterAddedConnection = nil
-
-local function createAdminTag(character)
-local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
--- Create a BillboardGui for the name tag
-local billboardGui = Instance.new("BillboardGui")
-billboardGui.Adornee = humanoidRootPart * Vector3.new(0,5,0)
-billboardGui.Size = UDim2.new(0, 100, 0, 50)
-billboardGui.StudsOffset = Vector3.new(0, 3, 0)
-billboardGui.Parent = workspace
-
-local textLabel = Instance.new("TextLabel")
-textLabel.Size = UDim2.new(1, 0, 1, 0)
-textLabel.BackgroundTransparency = 1
-textLabel.Text = "ADMIN ⭐️"
-textLabel.TextColor3 = Color3.new(.8, .01, .01)
-textLabel.Font = Enum.Font.LuckiestGuy
-textLabel.TextSize = 30
-textLabel.Parent = billboardGui
-
-adminTag = billboardGui -- Store reference to the admin tag
-end
-
-FunSection:NewButton("Admin ⭐️ name tag", "makes admin tag above u", function()
-local player = game.Players.LocalPlayer
-
-if not adminTag then
-    createAdminTag(player.Character or player.CharacterAdded:Wait())
-
-    -- Handle respawn to maintain the tag
-    characterAddedConnection = player.CharacterAdded:Connect(function(character)
-        createAdminTag(character)
-    end)
-end
+fun:NewButton("Kopy Avatars", "kredits to ghost", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Copy%20Avatar'))();
 end)
 
-FunSection:NewButton("Destroy Admin ⭐️ name tag", "destroys the admin tag above you", function()
-if adminTag then
-    adminTag:Destroy()
-    adminTag = nil -- Clear the reference
+fun:NewButton("Set Emote List", "kreds to ghost", function()
+--save emotes
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script19");
+end)
 
-    -- Disconnect the CharacterAdded connection
-    if characterAddedConnection then
-        characterAddedConnection:Disconnect()
-        characterAddedConnection = nil
-    end
-end
+fun:NewButton("Your Avatar Outfits (change avatar in game)", "kreds to ghost", function()
+--ur ava fits
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script18");
+end)
+
+fun:NewButton("Save Servers", "kreds to ghost", function()
+--save server
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script17");
+end)
+
+fun:NewButton("skript 12", "kreds to ghost", function()
+--save server
+local num = "12"
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script"..num);
+end)
+
+fun:NewButton("13 skript", "kreds to ghost", function()
+--save server
+local num = "13"
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script"..num);
 end)
 
 FunSection:NewLabel("Animations")
@@ -3231,6 +3237,13 @@ setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/l
 _G.note("Kopied Glass Bridge skript, paste in your executor")
 end)
 
+games:NewLabel("✖️➕Math Boxing ➗🥊")
+games:NewButton("autofarm", " ", function()
+--math boxing
+local num = "16"
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script"..num);
+end)
+
 games:NewLabel("💅🏽 Baddies 💅🏽");
 games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [req features if needed] {v2.21} fixed 1/29/25", "🍬", function()
 setclipboard([[
@@ -3373,7 +3386,7 @@ elseif ...=="teleport to PS99 world 2" then
 _G.tpto(ps2)
 elseif ...=="teleport to PS99 world 3" then
 _G.tpto(ps3) 
-elseif ...== "teleport to The Strongest Battlegrounds" then _G.goto(tsb)
+elseif ...== "teleport to The Strongest Battlegrounds" then _G.tpto(tsb)
 elseif ...== "teleport to Pet GO" then _G.tpto(petgo) 
 elseif ...== "teleport to Muscle Legends" then _G.tpto(musxles)
 end;
