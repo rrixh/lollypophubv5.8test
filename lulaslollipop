@@ -2592,6 +2592,10 @@ end);
 
 HubSection:NewLabel("useful guis 🍭")
 
+HubSection:NewButton("speed gui", "tpwalk & walkspeed", function()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/speedl".."s"))()
+end)
+
 HubSection:NewButton("Universal hitbox expander & ESP (invis hitbox)", "🍭", function() 
 loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp]],true))();
 end)
@@ -4943,10 +4947,10 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
-e:NewLabel("added: “⚽️Blue Lock: Rivals” script - Auto grab, auto goal etc. (Games) [2/18/25]")
+e:NewLabel("added: “⚽️Blue Lock: Rivals” script - Auto grab, auto goal etc. (Games)\n [2/18/25]")
 e:NewLabel("fixed baddies 💅🏻 skript not loading [1/29/25]")
 e:NewLabel("added 'Glass Bridge' [Reveal path, tp to end] (Games)")
-e:NewLabel("🦑Impossible Squid Game! Glass Bridge skript [reveal path & more] (Games)")
+e:NewLabel("🦑Impossible Squid Game! Glass Bridge skript\n [reveal path & more] (Games)")
 e:NewLabel("Baddies 💅🏻 update {v2.2} (strong melee, dropdown list)")
 e:NewLabel("RIP HUB {V2} universal (Games)")
 e:NewLabel("added 🏡Brookhaven RP - [SanderX hub] (Games) [1/25/25]")
@@ -5353,7 +5357,7 @@ Notify("🔒", "No Access", 5);
 ]]--
 end);
 
-HomeSection:NewButton("🍭 FE Obfuskator v2 (LUA/JAVA/CSS/PYTHON)", "obfuskates kode", function()
+HomeSection:NewButton("🍭 FE Obfuskator v2 (ASS method)", "obfuskates kode", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/FEobfuskator-v2", true))()
 end)
 
@@ -5892,8 +5896,8 @@ end;
 spawn(animateSkript);
 
 local LOADED = tick()-START
-getgenv().LoLLyPoP=true
+LoLLyPoP=true
 task.wait()
-if getgenv().LoLLyPoP then
+if LoLLyPoP then
 print("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
 end;
