@@ -10,13 +10,13 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Feb 18, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Mar 4, "..YR..""..SPAXE)
 
-getgenv().LollypopTheme = _G.eggplant
+getgenv().LollypopTheme = _G.denim
 local LollypopHub_Theme = ("LulaTheme")
 
 --[[ 
-fav themes: eggplant, 
+fav themes: eggplant, iris, denim
 ]]--
 
 local Year = os.date("%Y")
@@ -41,7 +41,7 @@ local m = math.floor((a + 11 * h + 22 * l) / 451)
 local month = math.floor((h + l - 7 * m + 114) / 31)
 local day = ((h + l - 7 * m + 114) % 31) + 1
 return month, day
-end
+end;
 
 -- Meeus/Jones/Butcher algorithm Passover
 local function getPassoverDate(year)
@@ -99,9 +99,9 @@ HOLIDAY = NEWLINE.."APRIL FOOLS TOMORROW🤡"
 elseif getdate(4, 1) then
     HOLIDAY = NEWLINE.."HAPPY APRIL FOOLS🤡"..Year
 elseif getdate(4, 20) then
-HOLIDAY = NEWLINE..("HAPPY 420 POTHEADZ 😋🍃🚬");
+HOLIDAY = NEWLINE..("HAPPY 420 pothead🍃🚬");
 elseif getdate(4, 21) then
-HOLIDAY = NEWLINE..("YALL NIGGAZ SMOKE ENUFF🍃 ?");
+HOLIDAY = NEWLINE..("YALL NIGGAZ SMOKE ENUFF🍃");
 elseif getdate(5, 5) then
 HOLIDAY = NEWLINE.."🇲🇽 CINCO DE MAYO 🇲🇽" ..Year.. ""
 elseif getdate(6, 2) then
@@ -221,7 +221,7 @@ end;
 
 Holiday = getHoliday()
 holidayEmoji = getHolidayLogo()
-local LastUpdate = LastUPDATE..""..holidayEmoji
+local LastUpdate = LastUPDATE..holidayEmoji
 local loadSpeed = 4.5
 
 --============IMAGE===========--
@@ -259,7 +259,7 @@ pcall(function()
 lp.Chatted:Connect(function(m) 
 local Lighting = game:GetService"Lighting";
 local day = (14);
-local night = (4);
+local night = (0);
 local nofog=(100000)
 --=================================--
 if(m=='/e day')then
@@ -275,7 +275,7 @@ end;end
 elseif(m=='/e noban')then
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/kredits-AnthonyIsntHere-antiban0antilogger.lua",true))();
 elseif(m=='/e re')then
-hum.Health=(0);
+char:BreakJoints();
 elseif(m=='/e rj')then
 loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/skripts/main/rejoin]],true))();
 elseif(m=='/e exit')then
@@ -298,7 +298,7 @@ end-- if
 end)--plr xhatted
 end)--pcall
 --=================================--
-local exploit=identifyexecutor() or "Unknown";
+getgenv().exploit=identifyexecutor() or "Unknown";
 
 getgenv().rbxnote = function(title,txt,dur,img)
 game:GetService("StarterGui"):SetCore("SendNotification",{
@@ -307,6 +307,13 @@ Text = text or "add text fag",
 Duration = 6 or dur,
 Icon = "rbxassetid://".._G.lollypop
 })
+end;
+
+getgenv().revnote = function(txt,dur)
+local LIB = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant"))();
+LIB.DefaultColor = getgenv().LollypopTheme or Color3.fromRGB(50,205,50)
+LIB:Notification({Text = txt or "🍭text here",
+Duration = dur or 5})
 end;
 
 -- [ 🛠️ main vars 🛠️ ] --
@@ -338,11 +345,19 @@ local thanksgivingRed = Color3.fromRGB(181, 71, 48)
 local Rainbow = Color3.fromRGB(math.random(),math.random(),math.random());
 
 --[[ KUSTOM FUNKTIONS ]]--
-local function bNotify(dur,btn,text)
+getgenv().kall=function(func)
+local suxxess,err = pcall(func)
+if not suxxess then
+windowErrorOk("Whoops! Something went wrong [Lollypop Hub]", err)
+    end;
+    return suxxess, err
+end;
+
+getgenv().bNotify = function(dur,btn,text)
 game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Lollypop Hub 🍭", Duration = 4.5 or dur, Button1 = "bet" or btn, Callback = function()print('btn')end, Text = text});
 end;ok=bNotify;n=bNotify;
 
-local function write(msg,typingtime)
+getgenv().write=function(msg,typingtime)
 spawn(function()
 local h=Instance.new("Hint");
 h.Parent = game.Workspace;
@@ -352,7 +367,7 @@ wait(typingtime); end;end;
 typeMessage();wait(3.3);h:Destroy(); end)
 end;
 
-local function alert(msg,sekonds)
+getgenv().alert = function(msg,sekonds)
 local notifikation = Instance.new("Message");
 notifikation.Text = msg;
 local lollypops=lulas.Workspace;
@@ -369,10 +384,11 @@ local function makedekal(DEKAL)
 detektion = Instance.new("Decal");
 detektion.Name = DEKAL
 detektion.Parent= game:GetService("ReplicatedStorage")
-print(detektion.Name)
+print(detektion.Name.." 🍭")
 end;
-if(OWNER ~= _G.lulas)then warn([[OWNER is: 'lulaslollipop' retard]]) return end;
-makedekal('LOLLYPOP HUB DEKAL🍭');
+if(OWNER~=_G.lulas)then 
+warn([[OWNER is: 'lulaslollipop' retard]]) return end;
+makedekal('lollypophub');
 
 -- 🫂notify users of skripts requests 🫂--
 spawn(function()
@@ -418,7 +434,7 @@ tt.Parent = frame
 local loadingBar = Instance.new("Frame");
 loadingBar.Size = UDim2.new(0, 0, 0.2, 0)
 loadingBar.Position = UDim2.new(0.02, 0, 0.7, 0)
-loadingBar.BackgroundColor3 = thanksgivingRed; --💒KOLOR💒]
+loadingBar.BackgroundColor3 = getgenv().LollypopTheme; --💒KOLOR💒]
 loadingBar.Parent = frame;
 --uikorner loading bar frame
 local korner_2 = Instance.new("UICorner");
@@ -555,18 +571,18 @@ local darkpurp=Color3.fromRGB(128,0,128);
 
 local lollyhub = function(txt, dur)
 local lollypophub = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
-lollypophub.DefaultColor = defaultKolor
+lollypophub.DefaultColor = getgenv().LollypopTheme
 lollypophub:Notification({
 Text = txt, Duration = dur or 6});
 end;
 
 local lollypophub=loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
 
-lollypophub.DefaultColor = defaultKolor
+lollypophub.DefaultColor = getgenv().LollypopTheme
 lollypophub:Notification({
 Text = "🍭 Welkome to Lollypop Hub, "..game.Players.LocalPlayer.Name.."!🍭", Duration = 5});
 
-lollypophub.DefaultColor = defaultKolor
+lollypophub.DefaultColor = getgenv().LollypopTheme
 lollypophub:Notification({
 Text = "V"..Vv.."🍭😋",
 Duration = 5.5});
@@ -2449,16 +2465,18 @@ b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
 b.BinType = 4 --del
 c = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
 c.BinType = 3 --kopy
-end)--kopy&del
+end)
+
 ToolsSection:NewButton("Delete Tool", "the Delete building tool", function()
 b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
 b.BinType = 4 
-end)--end.deletetool
+end)
+
 ToolsSection:NewButton("Kopy Tool", "the Kopy building tool", function()
 b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
 b.BinType = 3
-end)--end.kopytool
---end btools.Tools tab
+end)
+
 ToolsSection:NewButton("Flashlight🔦(good for horror or dark games)", "use this is dark horror games(rekommend)", function()
 --flashlight/FE torxh
 spawn(function()
@@ -2477,7 +2495,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 Library.DefaultColor = Color3.fromRGB(50,205,50)
 
 Library:Notification({
-Text = "f3x tools sinxe u wna be bob the builder",
+Text = "f3x tools",
 Duration = 5
 })
 --tools
@@ -4935,14 +4953,11 @@ e=exSection;
 
 e:NewLabel("👺 this hub is mainly made for mobile 📲");
 exSection:NewTextBox("FEEDBAXK", "tell me whatever u want n push enter", function(skript)
-local msgSent, msgFail = pcall(function()
+kall(function()
 plrMsg=skript;
 loadstring(game:HttpGet("https://rentry.co/skriptrequest_rrixh/raw",true))();
 _G.note("your message: “" ..plrMsg.. "“ has been sent✅", 4);
-end);
-
-if not msgSent then 
-_G.note("⚠️ Message Failed to Send. wait for fix"); return end;
+    end)
 end);
 
 e:NewLabel("V"..Vv.." updates: ");
@@ -5363,8 +5378,13 @@ end)
 
 HomeSection:NewLabel("other")
 HomeSection:NewButton("ANTI()", "anti xhat logger & xhatbypass", function()
+local suc,err=pcall(function()
 -- anti xhatlog/xhatbypass
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/my%20skripts/antiban-xhelulusONLY",false))();
+  end); 
+if not suc then 
+windowErrorOk("Whoops! Error Okkured", err)
+ end;
 end)
 
 -- KREDITS 2 ME --
@@ -5899,5 +5919,5 @@ local LOADED = tick()-START
 LoLLyPoP=true
 task.wait()
 if LoLLyPoP then
-print("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
+warn("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
 end;
