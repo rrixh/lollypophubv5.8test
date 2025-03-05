@@ -2035,9 +2035,10 @@ AdminSection:NewButton("(NEW) Nameless Admin v2.2", "udpated nameless", function
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source"))();
 end)
 
-AdminSection:NewButton("Delta IY Mobile kraxked (kopy skript & paste in your exekutor)", "deltaIy wont work in my hub", function()
+AdminSection:NewButton("Delta IY Mobile kraxked", "works now jus paste in your executor", function()
 delta=[[loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/deltaIY.mobile-kraxk👺',true))();]]
-_G.ok("Kopied Delta IY: "..delta.." paste in your executor")
+setclipboard(delta)
+windowNotif("[Delta IY] Script Kopied", "execute it in your executor")
 end)
 
 --[[ 
@@ -2046,14 +2047,20 @@ pcall(function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
 end)
 end) 
-]]
+]]--
 
 AdminSection:NewButton("Fates Admin", "default prefix :", function()
+   kall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
+  end)
 end)
+
 AdminSection:NewButton("Brixk Admin(fixed ;animbuff)\n makes anims faster[;animbuff (num)]", "brixk admin updatd", function()
+kall(function()
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/brixkadmin",true))();
+    end)
 end)
+
 AdminSection:NewButton("Reviz Admin", "default prefix ; say ;cmds", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RqaZUrBZ"))()
 end)
@@ -2063,62 +2070,68 @@ AdminSection:NewButton("Universal Admin Panel", "admin panel", function()
 loadstring(game:HttpGet(('https://pastefy.app/Oic24KzG/raw'),true))()
 end)
 AdminSection:NewButton("IV Admin v3", "admin kommands", function()
---[[
-Iv admin v3
-]]
+kall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BloodyBurns/Hex/main/Iv%20Admin%20v3.lua"))()
+  end);
 end)
 AdminSection:NewButton("IV Admin", "admin kommands", function()
--- iv admin Hex
+kall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BloodyBurns/Hex/main/Iv%20Admin%20v3.lua"))();
+   end)
 end)
+
 AdminSection:NewButton("Hextus Admin 1.0.2", "admin logs", function()
+   kall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BonBonTheDev/Hextus/main/Hextus.lua",true))()
+   end);
 end)
+
 AdminSection:NewButton("Vortex Admin", "admin", function()
+kall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sidhsksjsjsh/Fe-Vortex-admin-V2/main/VortexCompany/C4/Discord.lua"))() 
--- fe vortex admin
+     end);
 end)
+
 AdminSection:NewButton("Gx Admin", "gx admin", function()
+   kall(function()
 loadstring(game:HttpGet("https://pastebin.com/raw/v6E9BmFK",true))();
--- Gx admin
+   end);
 end)
+
 AdminSection:NewButton("Homebrew Admin", "admin", function()
+  kall(function()
 loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-or-FE-Homebrew-Admin-3106"))()
--- Homebrew admin
+    end);
 end)
+
 AdminSection:NewButton("Property Admin", "property", function()
---[[
-property admin
-]]
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Copinface/MainSource/main/PropertyAdmin"))()
+kall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Copinface/MainSource/main/PropertyAdmin"))();
+   end);
 end)
+
 AdminSection:NewButton("Lion Admin", "property", function()
---[[
-lion admin
-]]
+   kall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/WCodesEz/Lion-Admin/main/v1.lua"))()
+  end);
 end)
+
 AdminSection:NewButton("Unknown Admin", "hmm", function()
---[[
-unknown admin
-]]
+  kall(function()
 loadstring(game:HttpGet("https://gist.github.com/someunknowndude/38cecea5be9d75cb743eac8b1eaf6758/raw"))()
--- someunknowndude Admin 
+     end);
 end)
+
 AdminSection:NewButton("Legs Admin v2", "leg day", function()
---[[
-legs admin v2
-]]
+  kall(function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/leg1337/legadmv2/main/legadminv2.lua'))()
--- Legs admin v2 
+   end);
 end)
+
 AdminSection:NewButton("ShatterVast Admin", "shattervast old", function()
---[[
-shattervast admin
-]]
+kall(function()
 loadstring(game:HttpGet("https://pastebin.com/raw/m66HEHFu"))()
--- ShatterVast admin
+  end);
 end)
 
 -- OTHER ADMINS
@@ -2126,9 +2139,15 @@ end)
 local AdminSection = Admin:NewSection("Troll Admin")
 
 AdminSection:NewButton("Annoying Admin", "type .cmds and then /console to see kmd list", function()
+  kall(function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/TheMightySource/FE-Annoying-Admin/main/Main.lua'),true))()
+  end);
 end)
-AdminSection:NewButton("Simple Admin", "type .cmds, say (.set prefix ;) to set ; instead of .", function()loadstring(game:HttpGet('https://pastebin.com/raw/3hDQcTaD'))()
+
+AdminSection:NewButton("Simple Admin", "type .cmds, say (.set prefix ;) to set ; instead of .", function()
+kall(function()
+loadstring(game:HttpGet('https://pastebin.com/raw/3hDQcTaD'))()
+ end);
 end)
 
 
@@ -5919,5 +5938,5 @@ local LOADED = tick()-START
 LoLLyPoP=true
 task.wait()
 if LoLLyPoP then
-warn("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
+print("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
 end;
