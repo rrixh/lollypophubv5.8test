@@ -9,8 +9,8 @@ local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
-local Vv = ('9.3.3')
-local LastUPDATE = ("Last Update: Mar 4, "..YR..""..SPAXE)
+local Vv = ('9.3.4')
+local LastUPDATE = ("Last Update: Mar 5, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.denim
 local LollypopHub_Theme = ("LulaTheme")
