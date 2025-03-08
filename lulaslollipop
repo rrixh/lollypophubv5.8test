@@ -1,16 +1,31 @@
---main v9.3.3 LOLLYPOP HUB
+--main v9.3.4 LOLLYPOP HUB
+
+if(getgenv().lhloaded)then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/lib/notifikation/windows10ui"))().show({
+Position = UDim2.new(0.5, 0, 0.5, 0), 
+Text = "Whoops! Lollypop Hub already loaded! 👺", 
+Description = "say \"/e reload\" if you want to reload the skript", 
+        MessageBoxIcon = "Error", 
+        MessageBoxButtons = "OK"})
+return 
+end;
+
 local OWNER = ("lulaslollipop");
 local START = tick();
 getgenv().kolors=(true);
 getgenv().tpWalk=(true);
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
-
+-----
+env.startLH = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();
+end;
+-----
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.4')
-local LastUPDATE = ("Last Update: Mar 5, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Mar 8, "..YR..""..SPAXE)
 
 getgenv().LollypopTheme = _G.denim
 local LollypopHub_Theme = ("LulaTheme")
@@ -242,10 +257,16 @@ local uiTheme = LollypopHub_Theme
 spawn(function()
 -- nothing
 end);
+env.destroyLollypopHub = function()
+for i,gui in ipairs(game.CoreGui:GetChildren()) do
+if gui:FindFirstChild("Main") then
+gui.Main:Destroy()
+    end
+    end
+end;
 --===========HUB LOADED============--
-if getgenv().lhloaded==true then
-_G.note("Lollypop Hub already loaded! 👺 say \"/e reload\" if u want to reload the skript", 5); return end;
-getgenv().lhloaded=true
+
+env.lhloaded=true
 --=============LOKALS==============--
 local Plrs = game:GetService[[Players]];
 local lp = Plrs.LocalPlayer
@@ -288,7 +309,9 @@ elseif(m=='/e reload')then
 local toggle = game.CoreGui:FindFirstChild[[KustomToggle]];
 if toggle then toggle:Destroy();
 getgenv().lhloaded=false;
-_G.note("u kan now klose and reload the skript", 3)
+destroyLollypopHub();
+-- _G.note("You kan now klose and reload the skript", 3)
+windowErrorOk("Lollypop Hub reloaded", "You kan now klose and reload the skript")
 end;
 elseif(m=='/e tp')then
 loadstring(game:HttpGet("https://pastebin.com/raw/kfwV9ciu",true))();
@@ -391,8 +414,7 @@ warn([[OWNER is: 'lulaslollipop' retard]]) return end;
 makedekal('lollypophub');
 
 -- 🫂notify users of skripts requests 🫂--
-spawn(function()
-local notifyPlrs, notSent = pcall(function()
+kall(function()
 local username = (_G.user) or (_G.display)
 X=username;
 
@@ -401,8 +423,6 @@ _G.note("🔔@Urmamhasafatpoosa - (request added) Shrimp Game 🍤 & Squid Game 
 end;--✅
 
 end); --protekt
-if not notifyPlrs then _G.note("⚠️Messages not sent to players. Error: "..notSent); end;
-end); --spawn pcall
 -- 🫂 notifying users 🫂 --
 
 -- [[ LOADING ]] --
@@ -587,8 +607,7 @@ lollypophub:Notification({
 Text = "V"..Vv.."🍭😋",
 Duration = 5.5});
 
-local notifsLoaded, notifsError = pcall(function()
-
+kall(function()
 if getdate(11, 28) then
 lollyhub("HAPPY THANKSGIVING 🦃")
 elseif getdate(10,30) then
@@ -607,10 +626,6 @@ else
 lollyhub("🍬", 4)
 end;
 end);
-if notifsError then 
-warn("notifs error:", notifsError)
-else print("notifs loaded:",notifsLoaded)
-end;
 
 pcall(function()
 e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();end)
@@ -2637,7 +2652,7 @@ HubSection:NewButton("Universal hitbox expander & ESP (invis hitbox)", "🍭", f
 loadstring(game:HttpGet([[https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp]],true))();
 end)
 
-HubSection:NewButton("AutoKlicker (made for MOBILE only) ❌🖥️💻❌", "auto taps the skreen as if u are tapping it", function()
+HubSection:NewButton("AutoKlicker (screen tap) [MOBILE] 📲", "auto taps the skreen as if u are tapping it", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/autoklicker-mobile_lulaslollipop",true))();
 end)
 
@@ -5279,11 +5294,6 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
 
-HomeSection:NewButton("za tagapagpatupad", "xherushutup", function()
---zombie attaxk hidden
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Unknownproootest/Unknown-ZombieAttack/main/Gui.lua'))();
-end)
-
 HomeSection:NewButton("Ping Kounter", "see ping", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MvKKJ331"))()
 end)
@@ -5303,19 +5313,27 @@ Title = "Lollypop Hub🍭";
 Duration = 3.5;
 });
 end)
+
 HomeSection:NewButton("Koord Grabber (for making skripts)", "skriptmakers", function()
+kall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/%23lula/koordgrabber.ppt",true))();
+   end);
 end)
 
 HomeSection:NewButton("BaxkDoorFinder", "finds a baxkdoor for admin or additional skripts", function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
+kall(function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))();
+  end);
 end)
 
 HomeSection:NewButton("Harked Reborn V2 (leaked)", "only in sekret games", function()
-loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Harked-Skript-6804"))()
+kall(function()
+loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Harked-Skript-6804"))();
+   end);
 end)
-HomeSection:NewButton("Anti AFK", "disables afk limit", function()
 
+HomeSection:NewButton("Anti AFK", "disables afk limit", function()
+kall(function()
 wait(0.5)local ba=Instance.new("ScreenGui")
 local ca=Instance.new("TextLabel")local da=Instance.new("Frame")
 local _b=Instance.new("TextLabel")local ab=Instance.new("TextLabel")ba.Parent=game.CoreGui
@@ -5335,26 +5353,33 @@ ab.TextColor3=Color3.new(0,1,1)ab.TextSize=20;local bb=game:service'VirtualUser'
 game:service'Players'.LocalPlayer.Idled:connect(function()
 bb:CaptureController()bb:ClickButton2(Vector2.new())
 ab.Text="Roblox tried to kixk u but i kixked him instead"wait(2)ab.Text="Status : Aktive"end)
+  end);
 end)
 
 HomeSection:NewButton("Dark Dex mobile", "darkdex for mobile", function()--dark dex mobile
+kall(function()
 getgenv().Key = "Bash"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3AIY%20Dex",true))()
+   end)
 end)
 
 --[[
 HomeSection:NewButton("/cmds", "type '.' into the searxh bar to view all skripts", function()
+kall(function()
 _G.posX = 0.405
 _G.posY = 0.9
 _G.searchButton = ";"
 _G.commandPrefix = "/"
-spawn(loadstring(game:HttpGet('https://raw.githubusercontent.com/alvin677/search/main/search.lua'))())
+spawn(function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/alvin677/search/main/search.lua'))();end)
 end)
 ]]--
 
 HomeSection:NewButton("SimpleSpy v2.2 📱 Mobile", "mobileskript", function()
+kall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/SimpleSpyMobile2.2",true))();
 -- SimpleSpy mobile
+    end)
 end)
 
 HomeSection:NewButton("SimpleSpy v2.2 💻PC", "for seeing remotes and fired events", function()
@@ -5362,8 +5387,10 @@ loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/sk
 end)
 
 HomeSection:NewButton("Hydroxide mobile fix", "mobileskript", function()
+kall(function()
 loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Hydroxide-mobile-fix-8688"))()
 -- Hydroxide mobile fix
+ end);
 end)
 
 HomeSection:NewButton("Message Logs", "see xhatlogs gui", function()
@@ -5397,13 +5424,10 @@ end)
 
 HomeSection:NewLabel("other")
 HomeSection:NewButton("ANTI()", "anti xhat logger & xhatbypass", function()
-local suc,err=pcall(function()
+kall(function()
 -- anti xhatlog/xhatbypass
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/my%20skripts/antiban-xhelulusONLY",false))();
   end); 
-if not suc then 
-windowErrorOk("Whoops! Error Okkured", err)
- end;
 end)
 
 -- KREDITS 2 ME --
@@ -5440,6 +5464,7 @@ local MoreSection = More:NewSection("more skripts koming soon...🍭")
 more = MoreSection;
 
 MoreSection:NewButton("[NEW] DaHood Anti-cheat bypasses etc. (Debugger hub)", "an anti", function()
+kall(function()
 debug=[[
 loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/debugnation/main/decompilers%20and%20debugging/Debuggers.txt"))();
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
@@ -5449,14 +5474,18 @@ _G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulasl
 ]]
 _G.kopy(debug); _G.note("Kopied Debugger hub, paste in your executor")
 wait()
+   end);
 end)
 
 MoreSection:NewButton("EngoSpy", "see remotes", function()
+kall(function()
 --engospy
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/engospy",true))();
+   end);
 end)
 
 MoreSection:NewButton("Anti for jumppower", "nojumpkooldown", function()
+kall(function()
 local IsA = game.IsA
 local newindex = nil
 
@@ -5466,6 +5495,7 @@ return
 end
 return newindex(self, Index, Value)
 end)
+  end);
 end)
 
 MoreSection:NewButton("Anti *InvokeServer()*", "sum", function() 
@@ -5527,23 +5557,32 @@ loadstring(game:HttpGet("https://pastebin.com/raw/DH4b3T5S"))();
 end)
 
 MoreSection:NewButton("Kopy Avatars (IY)", "use infinite yield 'copyid (playername)'",
-function()-- kopy avatar skript loadstring
-loadstring(game:HttpGet("https://pastebin.com/raw/9Tmvpzn4"))()
+function()
+--kopy avatar skript loadstring
+kall(function()
+loadstring(game:HttpGet("https://pastebin.com/raw/9Tmvpzn4"))();
+  end);
 end)
 
 
 --buttons.MoreSektion
 MoreSection:NewButton("Auto Grammar V2", "type with good punkuation(not that good so what)",
-function()shared.CustomCorrections = {
+function()
+kall(function()
+shared.CustomCorrections = {
 ["examplething12"] = "hello" -- if you say "examplething12" it will become hello
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/eosuwu/boblox/main/autogremer.lua"))()
+    end);
 end)
 
 MoreSection:NewButton("Auto Klixker", "mighty klixker",
-function()-- mighty klixker
+function()
+kall(function()
+-- mighty klixker
 getgenv().key = "Hostile"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/The-telligence/main/MC%20KSystem%202"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/The-telligence/main/MC%20KSystem%202"))();
+   end);
 end)
 
 MoreSection:NewButton("Anti Sit", "jumps if u sit",
@@ -5935,8 +5974,8 @@ end;
 spawn(animateSkript);
 
 local LOADED = tick()-START
-LoLLyPoP=true
-task.wait()
-if LoLLyPoP then
+local LoLLyPoP=""
+
+if(LoLLyPoP~=nil)then
 print("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
 end;
