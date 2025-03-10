@@ -19,14 +19,23 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/he
 env.startLH = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();
 end;
------
+------element properties------
+getgenv().TitleSize = 16.5
+getgenv().TabsTextSize = 16
+getgenv().SektionTextSize = 18.5
+getgenv().LabelTextSize = 17.7
+getgenv().TextBoxTextSize = 16
+getgenv().ButtonTextSize = 27.3
+getgenv().RainbowTextSize = 26
+getgenv().ToggleTextSize = 17
+---------------------------------
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.4')
-local LastUPDATE = ("Last Update: Mar 8, "..YR..""..SPAXE)
-
+local LastUPDATE = ("Last Update: Mar 10, "..YR..""..SPAXE)
+------------------
 getgenv().LollypopTheme = _G.denim
 local LollypopHub_Theme = ("LulaTheme")
 
@@ -411,7 +420,9 @@ print(detektion.Name.." 🍭")
 end;
 if(OWNER~=_G.lulas)then 
 warn([[OWNER is: 'lulaslollipop' retard]]) return end;
-makedekal('lollypophub');
+-- makedekal('lollypophub');
+
+getgenv().workspace = game:service("Workspace")
 
 -- 🫂notify users of skripts requests 🫂--
 kall(function()
@@ -628,7 +639,8 @@ end;
 end);
 
 pcall(function()
-e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();end)
+e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();
+end)
 
 -- local red = 192,192,192
 --light gray/light grey	=	211,211,211 
@@ -648,6 +660,7 @@ local kount = #game.Players:GetPlayers();
 
 
 local KAVO = loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.lula",true))();
+
 local lollypopHub = "Lollypop Hub🍭 | V" ..Vv..    " | " ..exploit.. " | " ..LastUpdate;
 
 local Window = KAVO.CreateLib(lollypopHub, uiTheme)
@@ -1038,6 +1051,24 @@ val = newText
 end);
 end)
 
+SkriptsSection:NewSlider("Walk Speed", "", 16, 400, function(speed)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed=speed;
+end)
+
+SkriptsSection:NewSlider("Jump Power", "", 50, 400, function(jp)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower=jp;
+if not jumpk then
+
+   end;
+end)
+
+SkriptsSection:NewSlider("Gravity", "", 1, 1000, function(grav)
+workspace.Gravity=grav;
+end)
+
+SkriptsSection:NewButton("Reset Gravity", "resets gravity", function()
+worspace.Gravity=196.2
+end)
 
 SkriptsSection:NewToggle("Enable chat bubbles", "🍭", function(bubbles)
 chat = game:GetService"Chat";
@@ -1406,7 +1437,7 @@ SkriptsSection:NewButton("WALKSPEED GUI", "+ -", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/2gGvc9ya"))()
 end)
 
-SkriptsSection:NewButton("Mood Switxher (yellow/gray)", "yellow grey", function()
+SkriptsSection:NewButton("Time Stop", "yellow grey", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/djAd7g2W'))()
 end)
 
@@ -4996,6 +5027,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("fixed sliders & kolor picker support for mobile [3/7/25]")
 e:NewLabel("added: “⚽️Blue Lock: Rivals” script - Auto grab, auto goal etc. (Games)\n [2/18/25]")
 e:NewLabel("fixed baddies 💅🏻 skript not loading [1/29/25]")
 e:NewLabel("added 'Glass Bridge' [Reveal path, tp to end] (Games)")
@@ -5280,10 +5312,13 @@ HomeSection:NewButton("Exit Game", "leave the game",
 function()game:Shutdown()
 end)
 
-HomeSection:NewTextBox("Walkspeed","xhanges the walkspeed", function(speed)game.Players.LocalPlayer.Character.Humanoid.WalkSpeed=speed;
+HomeSection:NewTextBox("Walkspeed","xhanges the walkspeed", function(speed)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed=speed;
 end)
 
-HomeSection:NewTextBox("Jump Power","xhanges the jumppower", function(jp)game.Players.LocalPlayer.Character.Humanoid.JumpHeight=jp
+HomeSection:NewTextBox("Jump Power","xhanges the jumppower", function(jp)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower=jp
+-- jumpheight
 end)
 
 HomeSection:NewButton("Reset Walkspeed","reset walkspeed to default", function()game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
