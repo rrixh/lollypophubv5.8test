@@ -34,7 +34,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.4')
-local LastUPDATE = ("Last Update: Mar 10, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Mar 14, "..YR..""..SPAXE)
 ------------------
 getgenv().LollypopTheme = _G.denim
 local LollypopHub_Theme = ("LulaTheme")
@@ -3297,6 +3297,59 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+games:NewLabel("🌟THE HUNT: MEGA EDITION 🌟 (2025)")
+
+games:NewButton("Eat the World😋🌎 (Auto farm)", "", function()
+loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/07ee809700198dbba75a7ae31b5c1188ec476e7d/TheHuntEattheWorld",true))()
+end);
+
+games:NewButton("World Zero⚔️ (Auto kill mobs etc.)", "", function()
+-- world zero
+loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/baabf06a83f7bedffa4f9a4ad4b974414d8f9d6c/TheHuntWorldZero",true))() 
+end)
+
+games:NewButton("Blade League🗡️ (Auto score)", "", function()
+-- blade league
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/BladeLeague"))()
+end)
+
+games:NewButton("Basketball Legends ⛹🏾‍♀️ (Auto perfekt shot)", "", function()
+-- basketball legends
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vnausea/absence-mini/refs/heads/main/absencemini.lua"))()
+end)
+
+games:NewButton("Natural Disaster Survival (go to safe zone)", "", function()
+-- natural disaster
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Spawns.SpawnLocation.CFrame;
+end)
+
+games:NewButton("Infection Gunfight 🧟‍♀️ (Auto quest)", "", function()
+-- infektion gunfight 
+loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/bfcef07a41c01b7e8234fcb74dc0029fcf868b97/InfectionGunfight",true))()
+end)
+
+games:NewButton("Bayside Highschool (krossy roads - destroy kars + auto win)", "", function()
+-- bayside
+loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/637e5d22ae066ebbd90dec75b7fa7206496699fc/Bayside",true))()
+end)
+
+games:NewButton("Metro Life (teleport all locations)", "", function()
+-- metro life
+loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/a7997eb8c71f4491c088d69d900f8fbb4ed1182c/MetroLife",true))() 
+end)
+
+games:NewButton("A dusty trip (godmode, speed etc.)", "", function()
+-- a dusty trip 
+loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/38045ff3c8ad91c050d73d67adab8768e61e1a48/adustytrip",true))()
+end)
+
+games:NewButton("Drive World 🚘 (instant finish all obbys)", "", function()
+-- drive world ✅
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/7d7c817e660e89560d28589bf8cea80af8f5221c/DriveWorld",true))();
+end)
+
+---------
+
 games:NewLabel("⚽️ 🥅 Blue Loxk: Rivals 🥅 ⚽️")
 games:NewButton("Auto grab ball, Auto goal, speed (OP) by Tora", "", function()
 loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/d7b7245abfbcd385f9c7c3812118db55780a10d6/BlueLock"))()
@@ -3505,7 +3558,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/he
 end)
 
 GamesSection:NewLabel("🎨 Color or Die 🖌")
-GamesSection:NewButton("Nut Hub (teleport to any tool,paintbrush,door etc.)", "requested by dinodeptrai12345", function()
+GamesSection:NewButton("Nut Hub (teleport to any tool,paintbrush,dooretc.)", "requested by dinodeptrai12345", function()
 -- dinodeptrai12345
 loadstring(game:HttpGet("https://raw.githubusercontent.com/01iq/me/refs/heads/main/ColorNH.txt",true))()
 end)
@@ -5027,6 +5080,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("🌟THE HUNT: MEGA EDITION🌟 2025")
 e:NewLabel("fixed sliders & kolor picker support for mobile [3/7/25]")
 e:NewLabel("added: “⚽️Blue Lock: Rivals” script - Auto grab, auto goal etc. (Games)\n [2/18/25]")
 e:NewLabel("fixed baddies 💅🏻 skript not loading [1/29/25]")
@@ -6001,7 +6055,6 @@ spawn(KUSTOMTOGGLE);
 spawn(MAIN);
 
 -- spawn(MAINE)
-
 
 
 --loading skreen
