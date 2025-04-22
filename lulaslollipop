@@ -34,9 +34,9 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.4')
-local LastUPDATE = ("Last Update: Mar 14, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Apr 21, "..YR..""..SPAXE)
 ------------------
-getgenv().LollypopTheme = _G.denim
+getgenv().LollypopTheme = _G.iris
 local LollypopHub_Theme = ("LulaTheme")
 
 --[[ 
@@ -125,7 +125,7 @@ elseif getdate(4, 1) then
 elseif getdate(4, 20) then
 HOLIDAY = NEWLINE..("HAPPY 420 pothead🍃🚬");
 elseif getdate(4, 21) then
-HOLIDAY = NEWLINE..("YALL NIGGAZ SMOKE ENUFF🍃");
+HOLIDAY = NEWLINE..("YALL NIGGAZ SMOKE ENUFF?🍃");
 elseif getdate(5, 5) then
 HOLIDAY = NEWLINE.."🇲🇽 CINCO DE MAYO 🇲🇽" ..Year.. ""
 elseif getdate(6, 2) then
@@ -190,6 +190,8 @@ elseif month == 6 and day == 2 then -- Birthday
 holidayLogo = "🎂"
 elseif (month == 4 and day == 1) or (month == 3 and (day >= 26 and day <= 30)) then
 holidayLogo = "🤡"
+elseif (month == 4 and day == 20) then
+holidayLogo = "🍃"
 else
 holidayLogo = "🍬"
 end
@@ -915,11 +917,88 @@ end)
 
 --[ ALL SKRIPTS ]--
 local SkriptsSection = Skripts:NewSection("Skripts:")
+
+
+--[[ test ]]--
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local function ALLPLRS()
+    local players = game.Players:GetPlayers()
+    local playerNames = {}
+    for _, player in ipairs(players) do
+        table.insert(playerNames, player.Name)
+    end
+    return playerNames
+end
+
+local function GetToolsForPlayer(playerName)
+    local selectedPlayer = Players:FindFirstChild(playerName)
+    if not selectedPlayer then
+        return {}
+    end
+
+    local backpack = selectedPlayer:FindFirstChildOfClass("Backpack")
+    if not backpack then
+        return {}
+    end
+
+    local toolOptions = {}
+    for _, tool in pairs(backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+            table.insert(toolOptions, "@" .. selectedPlayer.Name .. " / " .. (selectedPlayer.DisplayName or selectedPlayer.Name) .. ": (" .. tool.Name .. ")")
+        end
+    end
+    return toolOptions
+end
+
+local playerToolStealer = SkriptsSection:NewDropdown("Backpack Tool Stealer", "Choose a player from the list and select your desired tool", ALLPLRS(), function(selectedPlayerName)
+    if not selectedPlayerName then
+        return
+    end
+
+    local selectedPlayer = Players:FindFirstChild(selectedPlayerName)
+    if not selectedPlayer then
+        return
+    end
+
+    local backpack = selectedPlayer:FindFirstChildOfClass("Backpack")
+    if not backpack then
+        return
+    end
+    
+    local toolDropdown
+    
+    local function updateToolList()
+        local toolOptions = GetToolsForPlayer(selectedPlayerName)
+        toolDropdown = SkriptsSection:NewDropdown("Select Tool", "Choose a tool to steal", toolOptions, function(selectedToolText)
+            if selectedToolText then
+                local toolName = string.match(selectedToolText, "%((.*)%)")
+                if toolName then
+                    for _, tool in pairs(selectedPlayer.Backpack:GetChildren()) do
+                        if tool:IsA("Tool") and tool.Name == toolName then
+                            tool.Parent = LocalPlayer.Backpack
+                            break
+                        end
+                    end
+                end
+            end
+        end)
+    end
+    
+    updateToolList()
+
+    backpack.ChildAdded:Connect(updateToolList)
+    backpack.ChildRemoved:Connect(updateToolList)
+end)
+
+--[[test]]--
+
 --////---------------------------------
 SkriptsSection:NewLabel("Players");
 --------------////-------------------
 local selektedPlayerName = nil;
-local function ALLPLAYERS()
+local function ALLPLRS()
 local players = game.Players:GetPlayers()
 local playerNames = {}
 for _, player in ipairs(players) do
@@ -928,15 +1007,18 @@ end
 return playerNames
 end;
 
-local playersInServer = SkriptsSection:NewDropdown("Selekt Player", "xhoose a player from the list", ALLPLAYERS(), function(selektedPlayer)
+local playersInServer = SkriptsSection:NewDropdown("Selekt Player", "xhoose a player from the list", ALLPLRS(), function(selektedPlayer)
 selektedPlayerName = selektedPlayer
 end);
 
 local function updatePlayerList()
-playersInServer:Refresh(ALLPLAYERS())
+playersInServer:Refresh(ALLPLRS())
+playerToolStealer:Refresh(ALLPLRS())
 end;
-game.Players.PlayerAdded:Connect(updatePlayerList)
-game.Players.PlayerRemoving:Connect(updatePlayerList);
+
+--handle plrs  being added and removed
+game.Players.PlayerAdded:connect(updatePlayerList)
+game.Players.PlayerRemoving:connect(updatePlayerList);
 
 SkriptsSection:NewButton("Teleport to Selekted Player", "tp to player", function()
 if selektedPlayerName then
@@ -989,7 +1071,7 @@ end)
 SkriptsSection:NewToggle("Highlight All Players", "esp players", function(...)
 getgenv().Enabled = (...)
 end);
-SkriptsSection:NewColorPicker("Highlight Kolor (see info for mobile)", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(255,255,255), function(kolor)
+SkriptsSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(255,255,255), function(kolor)
 getgenv().espstuff = kolor
 end);
 --[[
@@ -2516,6 +2598,19 @@ local Tools = Window:NewTab("Tools")
 local ToolsSection = Tools:NewSection("Tools")
 toolz=ToolsSection;
 
+toolz:NewButton("Backpack Tool Stealer", "use tools frm players", function()
+getgenv().ToggleButton = true
+owner = "rrixh"
+repo = "uwuware"
+branxhk = (branxhk ~= nil and branxhk ~= "") or "main"
+getgenv().webimport=function(file)
+url=string.format("https://raw.githubusercontent.com/%s/%s/%s/%s", owner, repo, branxhk, file)
+    skript=game:HttpGet(url)
+    return loadstring(skript,file)()
+end;
+webimport("kustomskript/baxkpaxktool")
+end)
+
 ToolsSection:NewButton("Tween Teleport", "rekreated by me sinxe no one has it🍭", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/TweenTP.tool-rekreated_lulaslollipop",true))();
 end)
@@ -3297,55 +3392,36 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
-games:NewLabel("🌟THE HUNT: MEGA EDITION 🌟 (2025)")
+games:NewLabel("💅🏽 Baddies 💅🏽");
 
-games:NewButton("Eat the World😋🌎 (Auto farm)", "", function()
-loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/07ee809700198dbba75a7ae31b5c1188ec476e7d/TheHuntEattheWorld",true))()
-end);
-
-games:NewButton("World Zero⚔️ (Auto kill mobs etc.)", "", function()
--- world zero
-loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/baabf06a83f7bedffa4f9a4ad4b974414d8f9d6c/TheHuntWorldZero",true))() 
+games:NewButton("Backpack Tool", "not all FE", function()
+getgenv().ToggleButton = true
+owner = "rrixh"
+repo = "uwuware"
+branxhk = (branxhk ~= nil and branxhk ~= "") or "main"
+getgenv().webimport=function(file)
+url=string.format("https://raw.githubusercontent.com/%s/%s/%s/%s", owner, repo, branxhk, file)
+    skript=game:HttpGet(url)
+    return loadstring(skript,file)()
+end;
+webimport("kustomskript/baxkpaxktool")
 end)
 
-games:NewButton("Blade League🗡️ (Auto score)", "", function()
--- blade league
-loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/BladeLeague"))()
+games:NewButton("Baddies💅🏻v2 (newest ver)\n[req features if needed] {v2.21} fixed 1/29/25", "🍬", function()
+setclipboard([[
+getgenv().Version = "new";
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))();
+]])
+_G.note("kopied Baddies 💅🏻 skript, paste in your executor")
 end)
 
-games:NewButton("Basketball Legends ⛹🏾‍♀️ (Auto perfekt shot)", "", function()
--- basketball legends
-loadstring(game:HttpGet("https://raw.githubusercontent.com/vnausea/absence-mini/refs/heads/main/absencemini.lua"))()
+games:NewButton("Baddies 💅🏽 v1 (old ver)", "req by Cateatsfood_BBB", function()
+v1=[[_G.AdminKommands = (true); loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽",true))();]]
+_G.kopy(v1); wait() _G.note("Kopied BaddiesV1 script")
 end)
 
-games:NewButton("Natural Disaster Survival (go to safe zone)", "", function()
--- natural disaster
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Spawns.SpawnLocation.CFrame;
-end)
-
-games:NewButton("Infection Gunfight 🧟‍♀️ (Auto quest)", "", function()
--- infektion gunfight 
-loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/bfcef07a41c01b7e8234fcb74dc0029fcf868b97/InfectionGunfight",true))()
-end)
-
-games:NewButton("Bayside Highschool (krossy roads - destroy kars + auto win)", "", function()
--- bayside
-loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/637e5d22ae066ebbd90dec75b7fa7206496699fc/Bayside",true))()
-end)
-
-games:NewButton("Metro Life (teleport all locations)", "", function()
--- metro life
-loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/a7997eb8c71f4491c088d69d900f8fbb4ed1182c/MetroLife",true))() 
-end)
-
-games:NewButton("A dusty trip (godmode, speed etc.)", "", function()
--- a dusty trip 
-loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/38045ff3c8ad91c050d73d67adab8768e61e1a48/adustytrip",true))()
-end)
-
-games:NewButton("Drive World 🚘 (instant finish all obbys)", "", function()
--- drive world ✅
-loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/7d7c817e660e89560d28589bf8cea80af8f5221c/DriveWorld",true))();
+games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
 end)
 
 ---------
@@ -3395,24 +3471,6 @@ games:NewButton("autofarm", " ", function()
 --math boxing
 local num = "16"
 loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script"..num);
-end)
-
-games:NewLabel("💅🏽 Baddies 💅🏽");
-games:NewButton("Auto Kill, Annoy players, View target etc. (OP)\n [req features if needed] {v2.21} fixed 1/29/25", "🍬", function()
-setclipboard([[
-getgenv().Version = "new";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽v2-NEWui",true))();
-]])
-_G.note("kopied Baddies 💅🏻 skript, paste in your executor")
-end)
-
-games:NewButton("Baddies 💅🏽 v1 (old ver)", "req by Cateatsfood_BBB", function()
-v1=[[_G.AdminKommands = (true); loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BADDIES💅🏽",true))();]]
-_G.kopy(v1); wait() _G.note("Kopied BaddiesV1 script")
-end)
-
-games:NewButton("Hitbox Expander [default size: 6] (universal)", "for PreppyutahGirl4", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/hitboxexpander-esp'))();
 end)
 
 _G.sanderX = function()
@@ -3725,7 +3783,7 @@ end)
 GamesSection:NewToggle("Highlight Playerz", "esp players", function(...)
 getgenv().Enabled = ...
 end)
-GamesSection:NewColorPicker("Highlight Kolor (see info if mobile)", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(0,0,255), function(kolor)
+GamesSection:NewColorPicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(0,0,255), function(kolor)
 getgenv().espstuff = kolor
 end);
 
@@ -5080,7 +5138,8 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
-e:NewLabel("🌟THE HUNT: MEGA EDITION🌟 2025")
+e:NewLabel("added 'Backpack Tool Stealer' (Games & Tools)")
+e:NewLabel("🌟THE HUNT: MEGA EDITION🌟 3/10/2025")
 e:NewLabel("fixed sliders & kolor picker support for mobile [3/7/25]")
 e:NewLabel("added: “⚽️Blue Lock: Rivals” script - Auto grab, auto goal etc. (Games)\n [2/18/25]")
 e:NewLabel("fixed baddies 💅🏻 skript not loading [1/29/25]")
