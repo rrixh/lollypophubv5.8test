@@ -917,83 +917,6 @@ end)
 
 --[ ALL SKRIPTS ]--
 local SkriptsSection = Skripts:NewSection("Skripts:")
-
-
---[[ test ]]--
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-local function ALLPLRS()
-    local players = game.Players:GetPlayers()
-    local playerNames = {}
-    for _, player in ipairs(players) do
-        table.insert(playerNames, player.Name)
-    end
-    return playerNames
-end
-
-local function GetToolsForPlayer(playerName)
-    local selectedPlayer = Players:FindFirstChild(playerName)
-    if not selectedPlayer then
-        return {}
-    end
-
-    local backpack = selectedPlayer:FindFirstChildOfClass("Backpack")
-    if not backpack then
-        return {}
-    end
-
-    local toolOptions = {}
-    for _, tool in pairs(backpack:GetChildren()) do
-        if tool:IsA("Tool") then
-            table.insert(toolOptions, "@" .. selectedPlayer.Name .. " / " .. (selectedPlayer.DisplayName or selectedPlayer.Name) .. ": (" .. tool.Name .. ")")
-        end
-    end
-    return toolOptions
-end
-
-local playerToolStealer = SkriptsSection:NewDropdown("Backpack Tool Stealer", "Choose a player from the list and select your desired tool", ALLPLRS(), function(selectedPlayerName)
-    if not selectedPlayerName then
-        return
-    end
-
-    local selectedPlayer = Players:FindFirstChild(selectedPlayerName)
-    if not selectedPlayer then
-        return
-    end
-
-    local backpack = selectedPlayer:FindFirstChildOfClass("Backpack")
-    if not backpack then
-        return
-    end
-    
-    local toolDropdown
-    
-    local function updateToolList()
-        local toolOptions = GetToolsForPlayer(selectedPlayerName)
-        toolDropdown = SkriptsSection:NewDropdown("Select Tool", "Choose a tool to steal", toolOptions, function(selectedToolText)
-            if selectedToolText then
-                local toolName = string.match(selectedToolText, "%((.*)%)")
-                if toolName then
-                    for _, tool in pairs(selectedPlayer.Backpack:GetChildren()) do
-                        if tool:IsA("Tool") and tool.Name == toolName then
-                            tool.Parent = LocalPlayer.Backpack
-                            break
-                        end
-                    end
-                end
-            end
-        end)
-    end
-    
-    updateToolList()
-
-    backpack.ChildAdded:Connect(updateToolList)
-    backpack.ChildRemoved:Connect(updateToolList)
-end)
-
---[[test]]--
-
 --////---------------------------------
 SkriptsSection:NewLabel("Players");
 --------------////-------------------
@@ -2598,7 +2521,8 @@ local Tools = Window:NewTab("Tools")
 local ToolsSection = Tools:NewSection("Tools")
 toolz=ToolsSection;
 
-toolz:NewButton("Backpack Tool Stealer", "use tools frm players", function()
+toolz:NewButton("Backpack Tool", "use tools frm players", function()
+setclipboard([[
 getgenv().ToggleButton = true
 owner = "rrixh"
 repo = "uwuware"
@@ -2608,7 +2532,11 @@ url=string.format("https://raw.githubusercontent.com/%s/%s/%s/%s", owner, repo, 
     skript=game:HttpGet(url)
     return loadstring(skript,file)()
 end;
-webimport("kustomskript/baxkpaxktool")
+webimport("kustomskript/Baxkpaxktool.lua")
+task.wait(1)
+setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();")
+]])
+rnote("Lollypop Hub 🍭\nKopied Backpack Tool skript, paste in your executor")
 end)
 
 ToolsSection:NewButton("Tween Teleport", "rekreated by me sinxe no one has it🍭", function()
@@ -3395,6 +3323,7 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 games:NewLabel("💅🏽 Baddies 💅🏽");
 
 games:NewButton("Backpack Tool", "not all FE", function()
+setclipboard([[
 getgenv().ToggleButton = true
 owner = "rrixh"
 repo = "uwuware"
@@ -3404,7 +3333,11 @@ url=string.format("https://raw.githubusercontent.com/%s/%s/%s/%s", owner, repo, 
     skript=game:HttpGet(url)
     return loadstring(skript,file)()
 end;
-webimport("kustomskript/baxkpaxktool")
+webimport("kustomskript/Baxkpaxktool.lua")
+task.wait(1)
+setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();")
+]])
+rnote("Lollypop Hub 🍭\nKopied Backpack Tool skript, paste in your executor")
 end)
 
 games:NewButton("Baddies💅🏻v2 (newest ver)\n[req features if needed] {v2.21} fixed 1/29/25", "🍬", function()
@@ -6114,7 +6047,6 @@ spawn(KUSTOMTOGGLE);
 spawn(MAIN);
 
 -- spawn(MAINE)
-
 
 --loading skreen
 end;
