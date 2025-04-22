@@ -34,7 +34,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.4')
-local LastUPDATE = ("Last Update: Apr 21, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: Apr 22, "..YR..""..SPAXE)
 ------------------
 getgenv().LollypopTheme = _G.iris
 local LollypopHub_Theme = ("LulaTheme")
