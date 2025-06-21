@@ -7,7 +7,7 @@ Text = "Whoops! Lollypop Hub already loaded! 👺",
 Description = "say \"/e reload\" if you want to reload the skript", 
         MessageBoxIcon = "Error", 
         MessageBoxButtons = "OK"})
-return 
+   return 
 end;
 
 local OWNER = ("lulaslollipop");
@@ -34,7 +34,7 @@ local NEWLINE = ("\n");
 local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.4')
-local LastUPDATE = ("Last Update: Apr 22, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: June 20, "..YR..""..SPAXE)
 ------------------
 getgenv().LollypopTheme = _G.iris
 local LollypopHub_Theme = ("LulaTheme")
@@ -3320,6 +3320,19 @@ end)
 GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
+
+games:NewLabel("🌱 Grow A Garden 🌱")
+games:NewButton("NATHUB v0.4.4 - Autofarm, Auto harvest, Auto trowel,\n(AFK 20mins disabled)", "", function()
+--nathub gag
+pcall(function()
+klip([[
+loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-NATHUB-KEYLESS-42525'))();
+]])
+end)
+---
+rnote("Kopied: NATHUB - KEYLESS skript, paste in your executor")
+end)
+
 games:NewLabel("💅🏽 Baddies 💅🏽");
 
 games:NewButton("Backpack Tool", "not all FE", function()
@@ -5071,6 +5084,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("🌱Grow A Garden - NATHUB (OP) lots of features (Games)")
 e:NewLabel("added 'Backpack Tool Stealer' (Games & Tools)")
 e:NewLabel("🌟THE HUNT: MEGA EDITION🌟 3/10/2025")
 e:NewLabel("fixed sliders & kolor picker support for mobile [3/7/25]")
@@ -6053,8 +6067,10 @@ end;
 spawn(animateSkript);
 
 local LOADED = tick()-START
-local LoLLyPoP=""
+local LoLLyPoP=true
+
+repeat wait() until(LoLLyPoP~=nil)
 
 if(LoLLyPoP~=nil)then
-print("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
+warn("Lollypop Hub🍭 loaded in "..string.format("%.2f", LOADED).." sekonds✅")
 end;
