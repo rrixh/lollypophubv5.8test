@@ -1,10 +1,11 @@
 --main v9.3.4 LOLLYPOP HUB
+date = ("August 29")
 
 if(getgenv().lhloaded)then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/lib/notifikation/windows10ui"))().show({
 Position = UDim2.new(0.5, 0, 0.5, 0), 
 Text = "Whoops! Lollypop Hub already loaded! 👺", 
-Description = "say \"/e reload\" if you want to reload the skript", 
+Description = "say \"/e reload\" if you want to reload Lollypop Hub 🍭", 
         MessageBoxIcon = "Error", 
         MessageBoxButtons = "OK"})
    return 
@@ -12,17 +13,18 @@ end;
 
 local OWNER = ("lulaslollipop");
 local START = tick();
-getgenv().kolors=(true);
-getgenv().tpWalk=(true);
+getgenv().kolors=true
+getgenv().tpWalk=true
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
+repeat wait() until game:IsLoaded()
 -----
-env.startLH = function()
+env.loadhub = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();
 end;
 ------element properties------
-getgenv().TitleSize = 16.5
-getgenv().TabsTextSize = 16
-getgenv().SektionTextSize = 18.5
+env.TitleSize = 16.5
+env.TabsTextSize = 16
+env.SektionTextSize = 18.5
 getgenv().LabelTextSize = 17.7
 getgenv().TextBoxTextSize = 16
 getgenv().ButtonTextSize = 27.3
@@ -31,10 +33,9 @@ getgenv().ToggleTextSize = 17
 ---------------------------------
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
-local SPAXE = (" ")
 local Date = [[]]
 local Vv = ('9.3.4')
-local LastUPDATE = ("Last Update: June 20, "..YR..""..SPAXE)
+local LastUPDATE = ("Last Update: "..date..", "..YR..spaxe)
 ------------------
 getgenv().LollypopTheme = _G.iris
 local LollypopHub_Theme = ("LulaTheme")
@@ -418,11 +419,13 @@ local function makedekal(DEKAL)
 detektion = Instance.new("Decal");
 detektion.Name = DEKAL
 detektion.Parent= game:GetService("ReplicatedStorage")
-print(detektion.Name.." 🍭")
+-- print(detektion.Name.." 🍭")
 end;
-if(OWNER~=_G.lulas)then 
+
+if(OWNER~=getgenv().lulas)then 
 warn([[OWNER is: 'lulaslollipop' retard]]) return end;
--- makedekal('lollypophub');
+
+makedekal('lollypophub');
 
 getgenv().workspace = game:service("Workspace")
 
@@ -688,6 +691,44 @@ end;local spawn=spawn;spawn(mememememememememememememememememeememememememememem
 local Skripts = Window:NewTab("Skripts")
 local SkriptsSection = Skripts:NewSection("Skripthub by @lulaslollipop on Roblox🍭😋")
 local skripts, skript = SkriptsSection;
+
+local stationaryRespawn, needsRespawning, hasPosition = false, false,false;
+
+local spawnPosition, spawnK, xharK;
+
+SkriptsSection:NewButton("Set Respawn Lokation", "sets your respawn location", function()
+repeat wait() until gethrp and getchar;
+
+if spawnK then spawnK:Disconnect() end;
+if xharK then xharK:Disconnect() end;
+
+-- lo set 
+    if (getchar() and gethrp(getchar())) then
+        spawnPosition = gethrp(getchar()).CFrame
+ok("Spawn Position Set", 3);
+        hasPosition = true
+        stationaryRespawn = true
+    end
+
+    local function handleRespawn()
+        if (stationaryRespawn and gethum() and Health == 0) then
+            needsRespawning = true
+        end;
+
+if (needsRespawning and getchar() and gethrp(getchar())) then
+gethrp(getchar()).CFrame = spawnPosition
+            needsRespawning = false
+        end;
+    end
+
+spawnK = stepped:connect(handleRespawn)
+
+    xharK = plr.CharacterAdded:connect(function()
+        task.wait(1)
+        needsRespawning = false
+        hasPosition = false
+    end)
+end)
 
 SkriptsSection:NewToggle("Auto-Execute when teleporting/server-hopping", "executes lollypophub wen u serverhop", function(...)
 _G.qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))()", ...)
@@ -2082,8 +2123,11 @@ local Admin = Window:NewTab("Admin")
 local AdminSection = Admin:NewSection("Admin Kommands");
 admin = AdminSection;
 
-AdminSection:NewButton("(NEW) Nameless Admin v2.2", "udpated nameless", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source"))();
+AdminSection:NewButton(" Nameless Admin (redesigned)", "udpated nameless", function()
+local y,n = pcall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"))()
+  end)
+if n then warn(n) end
 end)
 
 AdminSection:NewButton("Delta IY Mobile kraxked", "works now jus paste in your executor", function()
@@ -3321,15 +3365,26 @@ GamesSection:NewLabel("🏁END OF FREE UGX🏁")
 ]]--
 -- [ 🏁⭐️END OF FREE UGX⭐️🏁 ] --
 
+games:NewLabel("🦑 Squid Game X, Shrimp Game 🍤 & more (universal)");
+games:NewButton("RIP HUB [V2]", "", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/SquidGameX.lua"))();
+end);
+
+games:NewButton("lula kustom script", "kustom", function()
+pcall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/saba", true))()
+  end);
+end)
+
 games:NewLabel("🌱 Grow A Garden 🌱")
-games:NewButton("NATHUB v0.4.4 - Autofarm, Auto harvest, Auto trowel,\n(AFK 20mins disabled)", "", function()
+games:NewButton("NATHUB - Autofarm, Auto harvest, Auto trowel,\n(Anti-AFK auto enabled, updates often)", "", function()
 --nathub gag
 pcall(function()
 klip([[
 loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-NATHUB-KEYLESS-42525'))();
 ]])
 end)
----
+-----
 rnote("Kopied: NATHUB - KEYLESS skript, paste in your executor")
 end)
 
@@ -3385,11 +3440,6 @@ task.wait(1)
 ]])
 _G.ok("Kopied Blue Loxk: Rivals script: "..blrivals, 6)
 end)
-
-games:NewLabel("🦑 Squid Game X, Shrimp Game 🍤 & more (universal)");
-games:NewButton("RIP HUB [V2]", "", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/SquidGameX.lua"))();
-end);
 
 games:NewLabel("🦑Impossible Squid Game! Glass Bridge 2")
 
@@ -5084,6 +5134,7 @@ end);
 
 e:NewLabel("V"..Vv.." updates: ");
 
+e:NewLabel("Squid Game X 🦑 kustom skript (Games)")
 e:NewLabel("🌱Grow A Garden - NATHUB (OP) lots of features (Games)")
 e:NewLabel("added 'Backpack Tool Stealer' (Games & Tools)")
 e:NewLabel("🌟THE HUNT: MEGA EDITION🌟 3/10/2025")
@@ -5567,7 +5618,8 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/he
 task.wait(1)
 _G.kopy("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))()")
 ]]
-_G.kopy(debug); _G.note("Kopied Debugger hub, paste in your executor")
+_G.kopy(debug);
+ _G.note("Kopied Debugger hub, paste in your executor")
 wait()
    end);
 end)
@@ -5575,7 +5627,7 @@ end)
 MoreSection:NewButton("EngoSpy", "see remotes", function()
 kall(function()
 --engospy
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/engospy",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/engospy", true))();
    end);
 end)
 
@@ -6068,6 +6120,7 @@ spawn(animateSkript);
 
 local LOADED = tick()-START
 local LoLLyPoP=true
+        LOADED = LOADED + 1.00
 
 repeat wait() until(LoLLyPoP~=nil)
 
