@@ -422,7 +422,7 @@ detektion.Parent= game:GetService("ReplicatedStorage")
 -- print(detektion.Name.." 🍭")
 end;
 
-if(OWNER~=getgenv().lulas)then 
+if(OWNER~=getgenv().lulas or OWNER~="lulaslollipop")then 
 warn([[OWNER is: 'lulaslollipop' retard]]) return end;
 
 makedekal('lollypophub');
