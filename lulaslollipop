@@ -1,5 +1,5 @@
 --main v9.3.4 LOLLYPOP HUB
-date = ("August 29")
+date = ("August 29, 2025")
 
 if(getgenv().lhloaded)then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/lib/notifikation/windows10ui"))().show({
@@ -35,7 +35,7 @@ local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
 local Vv = ('9.3.4')
-local LastUPDATE = ("Last Update: "..date..", "..YR..spaxe)
+local LastUPDATE = "Last Update: "..date
 ------------------
 getgenv().LollypopTheme = _G.iris
 local LollypopHub_Theme = ("LulaTheme")
