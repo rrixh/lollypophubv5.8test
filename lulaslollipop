@@ -1,10 +1,8 @@
 --main v10 LOLLYPOP HUB
+
 date = "July 31"..", "..tostring(os.date("%Y"))
 
--- ASCII-safe, readable Unicode table.
--- Use names such as emoji.lollipop, emoji.fireworks, emoji.red_heart, and emoji.camera.
--- Every value remains utf.char(...) so executors cannot corrupt the source into malformed bytes.
-local utf = utf8
+local utf = utf8;
 local emoji = {
     japanese_goblin = utf.char(0x1F47A),
     lollipop = utf.char(0x1F36D),
@@ -361,6 +359,8 @@ env.LHSettings = env.LHSettings or {
     ReducedMotion = false,
     LowPerformance = false,
     DragLocked = false,
+    ToggleDragLocked = false,
+    AdminButtonDragLocked = false,
     EdgeSnap = true,
     GlassBlur = false,
     CustomCursor = false,
@@ -395,6 +395,8 @@ local LH_UI_DEFAULTS = {
     ReducedMotion = false,
     LowPerformance = false,
     DragLocked = false,
+    ToggleDragLocked = false,
+    AdminButtonDragLocked = false,
     EdgeSnap = false,
     GlassBlur = false,
     CustomCursor = false,
@@ -408,19 +410,20 @@ local LH_UI_DEFAULTS = {
     OpeningSound = true,
 }
 
--- One-time migration: this build starts notifications muted for existing users too.
 if env.LHSettings.NotificationMuteDefaultV36 ~= true then
     env.LHSettings.NotificationMuted = true
     env.LHSettings.NotificationMuteDefaultV36 = true
 end
 
--- Kavo klassik-look build uses solid panels only.
+-- false = solid panels , true = glass panels
 env.LHSettings.GlassBlur = false
 
 env.LHUISettings = env.LHUISettings or {}
 env.LHUISettings.ReducedMotion = env.LHSettings.ReducedMotion
 env.LHUISettings.LowPerformance = env.LHSettings.LowPerformance
 env.LHUISettings.DragLocked = env.LHSettings.DragLocked
+env.LHUISettings.ToggleDragLocked = env.LHSettings.ToggleDragLocked
+env.LHUISettings.AdminButtonDragLocked = env.LHSettings.AdminButtonDragLocked
 env.LHUISettings.EdgeSnap = env.LHSettings.EdgeSnap
 env.LHUISettings.ScaleMode = env.LHSettings.ScaleMode
 env.LHUISettings.GlassBlur = env.LHSettings.GlassBlur
@@ -701,7 +704,8 @@ _G.animekatgirl = (18817519330)
 _G.thanksgiving = (124622552375747)
 _G.xmas = (83624080780174)
 --======TOGGLEPROPS=========--
-getgenv().togglesize = 47
+local toggleButtonSize = 47
+pcall(function() getgenv().togglesize = toggleButtonSize end)
 getgenv().getImg = getToggleLogo()
 
 local uiTheme = LollypopHub_Theme;
@@ -1071,6 +1075,8 @@ function LHRuntime:ApplySettings()
     env.LHUISettings.ReducedMotion = env.LHSettings.ReducedMotion
     env.LHUISettings.LowPerformance = env.LHSettings.LowPerformance
     env.LHUISettings.DragLocked = env.LHSettings.DragLocked
+    env.LHUISettings.ToggleDragLocked = env.LHSettings.ToggleDragLocked
+    env.LHUISettings.AdminButtonDragLocked = env.LHSettings.AdminButtonDragLocked
     env.LHUISettings.EdgeSnap = env.LHSettings.EdgeSnap
     env.LHUISettings.ScaleMode = env.LHSettings.ScaleMode
     env.LHUISettings.GlassBlur = env.LHSettings.GlassBlur
@@ -1421,10 +1427,23 @@ faktText.BackgroundTransparency = 1
 faktText.TextColor3 = Color3.fromRGB(198, 183, 208)
 faktText.TextSize = 12
 faktText.Font = Enum.Font.Gotham
-faktText.Text = nextRandomFakt() .. "\n" .. ([[say "/e toggle" if you lose the Lollypop Hub toggle]])
+faktText.Text = nextRandomFakt()
 faktText.TextWrapped = true
 faktText.TextYAlignment = Enum.TextYAlignment.Top
 faktText.Parent = frame
+
+local toggleTip = Instance.new("TextLabel")
+toggleTip.Size = UDim2.new(1, -38, 0, 30)
+toggleTip.Position = UDim2.fromOffset(19, 153)
+toggleTip.BackgroundTransparency = 1
+toggleTip.TextColor3 = Color3.fromRGB(255, 220, 92)
+toggleTip.TextSize = 11
+toggleTip.Font = Enum.Font.GothamBold
+toggleTip.RichText = true
+toggleTip.Text = '<b>Tip:</b> say "/e toggle" in chat to reload the Lollypop toggle if you lose it.'
+toggleTip.TextWrapped = true
+toggleTip.TextYAlignment = Enum.TextYAlignment.Top
+toggleTip.Parent = frame
 
 local barBack = Instance.new("Frame")
 barBack.Size = UDim2.new(1, -38, 0, 10)
@@ -1489,7 +1508,7 @@ loadingText.Parent = frame
 
 local particles = {}
 
-tt.ZIndex, faktText.ZIndex, logo.ZIndex, barBack.ZIndex, loadingText.ZIndex = 2, 2, 2, 2, 2
+tt.ZIndex, faktText.ZIndex, toggleTip.ZIndex, logo.ZIndex, barBack.ZIndex, loadingText.ZIndex = 2, 2, 2, 2, 2, 2
 
 local openingSound
 if env.LHSettings.OpeningSound and not env.LHSettings.NotificationMuted then
@@ -1618,7 +1637,7 @@ Font = Fredoka,
 FontSize = 9
 });
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
-Text = "default toggle size is "..getgenv().togglesize..("\n"..emoji.lollipop.." say "..emoji.left_double_quote.."/e toggle"..emoji.left_double_quote.." if you lose the toggle and need a new one"),
+Text = "default toggle size is "..tostring(toggleButtonSize)..("\nTip: "..emoji.lollipop.." say "..emoji.left_double_quote.."/e toggle"..emoji.left_double_quote.." if you lose the toggle and need a new one"),
 Color = Color3.fromRGB(255,255,0),
 Font = Fredoka,
 FontSize = 9
@@ -1836,10 +1855,10 @@ local function buildHub(window)
         ["Hubs & GUIs"] = 6,
         [emoji.glowing_star.."Games"..emoji.glowing_star] = 7,
         ["FE"] = 8,
-        ["Ui Kustomization"] = 9,
+        ["Updates/Extras"] = 9,
         ["Bypasses & More"] = 10,
         ["Notifications"] = 11,
-        ["Updates/Extras"] = 999,
+        ["Ui Kustomization"] = 999,
     }
     table.sort(tabOrder, function(a, b)
         local ai = requestedOrder[a._name] or 500
@@ -1872,6 +1891,7 @@ local function buildHub(window)
                     elseif item.kind == "paragraph" and realSection.NewParagraph then ui = realSection:NewParagraph(item.title,item.text)
                     elseif item.kind == "kredits" and realSection.NewKreditsCard then ui = realSection:NewKreditsCard(item.config) end
                     item._ui = ui
+                    if item.resetDefault ~= nil and ui and ui.SetResetDefault then ui:SetResetDefault(item.resetDefault) end
                     if item.visible == false and ui and ui.SetVisible then ui:SetVisible(false) end
                 end
             end
@@ -2222,7 +2242,7 @@ LHRuntime:RegisterCommand("rejoin", {"rj"}, "Rejoins the current server.", "rejo
     game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
 end)
 
-LHRuntime:RegisterCommand("palette", {"cmdbar"}, "Opens the kommand palette.", "palette", function()
+LHRuntime:RegisterCommand("palette", {"cmdbar", "kmds", "kmd"}, "Opens the kommand palette.", "palette", function()
     if env.LHOpenPalette then env.LHOpenPalette() end
 end)
 
@@ -2664,6 +2684,7 @@ getgenv().LHNamelessCommandReference = NamelessCommandReference
 local NAMELESS_ADMIN_URL = env.LH_NAMELESS_ADMIN_URL or "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"
 local namelessLoading = false
 local namelessOwnedGuis = setmetatable({}, {__mode = "k"})
+local namelessGuiLocks = setmetatable({}, {__mode = "k"})
 
 local function getAdminGuiRoots()
     local roots = {game:GetService("CoreGui"), game.Players.LocalPlayer:WaitForChild("PlayerGui")}
@@ -2686,6 +2707,19 @@ local function hideBackendGui(gui)
             screen.DisplayOrder = -100000
             screen.Name = "LollypopAdminBackendHidden"
         end)
+        if not namelessGuiLocks[screen] then
+            local ok, connection = pcall(function()
+                return screen:GetPropertyChangedSignal("Enabled"):Connect(function()
+                    if screen and screen.Parent and screen.Enabled then
+                        screen.Enabled = false
+                    end
+                end)
+            end)
+            if ok and connection then
+                namelessGuiLocks[screen] = connection
+                LHRuntime:Track(connection)
+            end
+        end
     end
 end
 
@@ -2716,23 +2750,20 @@ end
 
 local function makeNamelessSourceHeadless(source)
     source = tostring(source or "")
+    -- Preserve Nameless command kode exactly; only force hidden startup and silence its own notifications.
     source = source:gsub("NALoadingStartMinimized%s*=%s*false", "NALoadingStartMinimized = true")
     source = source:gsub("NAHideStartup%s*=%s*false", "NAHideStartup = true")
-    source = source:gsub('NAHideStartup%s*=%s*NAmanage%.NASettingsGet%("hideStartup"%)%s*==%s*true', "NAHideStartup = true")
-    source = source:gsub('NALoadingStartMinimized%s*=%s*NAmanage%.NASettingsGet%("loadingStartMinimized"%)', "NALoadingStartMinimized = true")
     source = source:gsub(
-        'Notify%s*=%s*NAStuff%.Notification%.Notify%s*\nWindow%s*=%s*NAStuff%.Notification%.Window%s*\nPopup%s*=%s*NAStuff%.Notification%.Popup',
-        'Notify = function() end\nWindow = function() end\nPopup = function() end\nNAStuff.Notification = {Notify = Notify, Window = Window, Popup = Popup}',
-        1
+        'NAHideStartup%s*=%s*NAmanage%.NASettingsGet%("hideStartup"%)%s*==%s*true',
+        "NAHideStartup = true"
     )
     source = source:gsub(
-        'NAStartupUI%("TopbarInit",%s*0%.2,%s*function%(%)',
-        'NAmanage.Topbar_Init = function() return nil end\nNAmanage.SideSwipe_Init = function() return nil end\nNAStuff.Notification = {Notify = function() end, Window = function() end, Popup = function() end}\nNotify = function() end\nWindow = function() end\nPopup = function() end\nNAStartupUI("TopbarInit", 0.2, function()',
-        1
+        'NALoadingStartMinimized%s*=%s*NAmanage%.NASettingsGet%("loadingStartMinimized"%)',
+        "NALoadingStartMinimized = true"
     )
     source = source:gsub(
-        'if NAStuff%.uiBootHidden and NAStuff%.NASCREENGUI and NAStuff%.NASCREENGUI:IsA%("ScreenGui"%) then%s*pcall%(function%(%)%s*NAStuff%.NASCREENGUI%.Enabled = true%s*end%)%s*NAStuff%.uiBootHidden = false%s*end',
-        'if NAStuff and NAStuff.NASCREENGUI then pcall(function() NAStuff.NASCREENGUI.Enabled = false end) end\nNAStuff.uiBootHidden = true',
+        "Notify%s*=%s*NAStuff%.Notification%.Notify%s*\nWindow%s*=%s*NAStuff%.Notification%.Window%s*\nPopup%s*=%s*NAStuff%.Notification%.Popup",
+        "Notify = function() end\nWindow = function() end\nPopup = function() end",
         1
     )
     return source
@@ -2842,7 +2873,9 @@ for commandName, data in pairs(NamelessCommandReference) do
             if not runner then error("Nameless Admin backend could not be loaded.") end
             local commandText = commandName
             if #args > 0 then commandText = commandText .. " " .. table.concat(args, " ") end
+            hideNamelessAdminUI()
             local ok, result = pcall(runner, commandText)
+            hideNamelessAdminUI()
             if not ok then error(result) end
             if type(result) == "table" and result.ok == false then error(result.error or "Nameless command failed") end
             return result
@@ -2967,7 +3000,14 @@ do
         local query = string.lower(box.Text:gsub("^%s*[>!]%s*", "")):match("^(%S*)") or ""
         local shown = 0
         for _, command in ipairs(LHRuntime.CommandOrder) do
-            if query == "" or string.find(command.Name, query, 1, true) == 1 then
+            local aliasMatch = false
+            for _, alias in ipairs(command.Aliases or {}) do
+                if string.find(string.lower(tostring(alias)), query, 1, true) == 1 then
+                    aliasMatch = true
+                    break
+                end
+            end
+            if query == "" or string.find(command.Name, query, 1, true) == 1 or aliasMatch then
                 shown = shown + 1
                 local button = Instance.new("TextButton")
                 button.Size = UDim2.new(1, 0, 0, 30)
@@ -2979,7 +3019,8 @@ do
                 button.TextSize = 12
                 button.TextColor3 = Color3.fromRGB(245, 245, 248)
                 button.TextXAlignment = Enum.TextXAlignment.Left
-                button.Text = "  > " .. command.Name .. "  -  " .. command.Description
+                local aliasText = (#(command.Aliases or {}) > 0) and ("  [" .. table.concat(command.Aliases, ", ") .. "]") or ""
+                button.Text = "  > " .. command.Name .. aliasText .. "  -  " .. command.Description
                 button.Parent = suggestions
                 LHRuntime:AddButtonPressEffect(button)
                 LHRuntime:Track(button.MouseButton1Click:Connect(function()
@@ -3050,6 +3091,7 @@ do
         local dragging, dragInput, dragStart, startPosition, moved = false, nil, nil, nil, false
         local clickThreshold = 7
         LHRuntime:Track(mobileOpen.InputBegan:Connect(function(inputObject)
+            if env.LHSettings.AdminButtonDragLocked then return end
             if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
                 dragging = true
                 moved = false
@@ -3059,7 +3101,7 @@ do
             end
         end))
         LHRuntime:Track(game:GetService("UserInputService").InputChanged:Connect(function(inputObject)
-            if not dragging then return end
+            if not dragging or env.LHSettings.AdminButtonDragLocked then return end
             if inputObject == dragInput or inputObject.UserInputType == Enum.UserInputType.MouseMovement or inputObject.UserInputType == Enum.UserInputType.Touch then
                 local delta = inputObject.Position - dragStart
                 if math.abs(delta.X) > clickThreshold or math.abs(delta.Y) > clickThreshold then
@@ -3105,6 +3147,23 @@ local uiSettingControls = {}
 local themeChoices = {"Kandy", "Dark", "Blood", "Sakura", "Neon", "Minimal"}
 local fontChoices = (KAVO.GetFontNames and KAVO:GetFontNames()) or {"Gotham", "GothamBold", "SourceSans", "Code"}
 
+local dragLockSection = section(settingsTab, "Drag Locks", {})
+uiSettingControls.ToggleDragLocked = add(dragLockSection, toggle("Lock toggle position (stops \"" .. emoji.lollipop .. "\" from dragging)", "stops the Lollypop open/klose button from moving", function(value)
+    env.LHSettings.ToggleDragLocked = value
+    LHRuntime:SettingChanged()
+end, env.LHSettings.ToggleDragLocked))
+
+uiSettingControls.DragLocked = add(dragLockSection, toggle("Lock hub position (stops ui from dragging)", "prevents accidental hub movement and resizing", function(value)
+    env.LHSettings.DragLocked = value
+    KAVO:SetDragLocked(value)
+    LHRuntime:SettingChanged()
+end, env.LHSettings.DragLocked))
+
+uiSettingControls.AdminButtonDragLocked = add(dragLockSection, toggle("Lock Lollypop Admin button position", "locks the draggable goblin admin button in its kurrent position", function(value)
+    env.LHSettings.AdminButtonDragLocked = value
+    LHRuntime:SettingChanged()
+end, env.LHSettings.AdminButtonDragLocked))
+
 local appearanceSection = section(settingsTab, "Theme & Font", {})
 uiSettingControls.Theme = add(appearanceSection, dropdown("Theme Selector", "Changes the live Lollypop Hub theme.", themeChoices, function(selected)
     env.LHSettings.Theme = selected
@@ -3147,12 +3206,6 @@ uiSettingControls.LowPerformance = add(motionSection, toggle("Low-Performance Mo
     KAVO:SetLowPerformance(value)
     LHRuntime:SettingChanged()
 end, env.LHSettings.LowPerformance))
-
-uiSettingControls.DragLocked = add(motionSection, toggle("Drag Lock", "Prevents accidental main UI movement and resizing.", function(value)
-    env.LHSettings.DragLocked = value
-    KAVO:SetDragLocked(value)
-    LHRuntime:SettingChanged()
-end, env.LHSettings.DragLocked))
 
 uiSettingControls.CustomCursor = add(motionSection, toggle("Lollypop Mouse Icon", "Desktop-only kustom cursor.", function(value)
     env.LHSettings.CustomCursor = value
@@ -3203,6 +3256,29 @@ end))
 add(commandSection, button("Open Kommand Palette", "Opens the goblin kommand palette.", function() env.LHOpenPalette() end))
 add(commandSection, button("Show All Kommands", "Displays every built-in kommand.", function() LHRuntime:ExecuteCommand(LHRuntime.Prefix .. "help", "hub") end))
 
+local uiFactoryResetDefaults = {
+    Theme = LH_UI_DEFAULTS.Theme,
+    UIFont = LH_UI_DEFAULTS.UIFont,
+    Accent = Color3.fromRGB(table.unpack(LH_UI_DEFAULTS.Accent)),
+    ScaleMode = LH_UI_DEFAULTS.ScaleMode,
+    ReducedMotion = LH_UI_DEFAULTS.ReducedMotion,
+    LowPerformance = LH_UI_DEFAULTS.LowPerformance,
+    DragLocked = LH_UI_DEFAULTS.DragLocked,
+    ToggleDragLocked = LH_UI_DEFAULTS.ToggleDragLocked,
+    AdminButtonDragLocked = LH_UI_DEFAULTS.AdminButtonDragLocked,
+    CustomCursor = LH_UI_DEFAULTS.CustomCursor,
+    SeasonalTheme = LH_UI_DEFAULTS.SeasonalTheme,
+    OpeningSound = LH_UI_DEFAULTS.OpeningSound,
+    NotificationMuted = LH_UI_DEFAULTS.NotificationMuted,
+    NotificationVolume = LH_UI_DEFAULTS.NotificationVolume * 100,
+    CommandPrefix = LH_UI_DEFAULTS.CommandPrefix,
+}
+for settingName, resetDefault in pairs(uiFactoryResetDefaults) do
+    if uiSettingControls[settingName] then
+        uiSettingControls[settingName].resetDefault = resetDefault
+    end
+end
+
 local performanceSection = section(settingsTab, "Performance & Status", {})
 local performanceLabel = add(performanceSection, label("FPS: 0 | Memory: 0 MB"))
 add(performanceSection, label("Game PlaceId: " .. tostring(game.PlaceId) .. " | GameId: " .. tostring(game.GameId)))
@@ -3226,6 +3302,83 @@ LHRuntime:Track(task.spawn(function()
         task.wait(1)
     end
 end))
+
+env.LHConfirmReset = function(messageText, onConfirm)
+    local parent = game:GetService("CoreGui")
+    pcall(function() if gethui then parent = gethui() end end)
+    local old = parent:FindFirstChild("LHSingleSettingResetConfirmation")
+    if old then old:Destroy() end
+
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "LHSingleSettingResetConfirmation"
+    gui.IgnoreGuiInset = true
+    gui.ResetOnSpawn = false
+    gui.DisplayOrder = 1000003
+    gui.Parent = parent
+
+    local dim = Instance.new("Frame")
+    dim.Size = UDim2.fromScale(1, 1)
+    dim.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    dim.BackgroundTransparency = 0.48
+    dim.BorderSizePixel = 0
+    dim.Parent = gui
+
+    local card = Instance.new("Frame")
+    card.AnchorPoint = Vector2.new(0.5, 0.5)
+    card.Position = UDim2.fromScale(0.5, 0.5)
+    card.Size = UDim2.fromOffset(390, 170)
+    card.BackgroundColor3 = Color3.fromRGB(18, 14, 22)
+    card.BorderSizePixel = 0
+    card.Parent = gui
+    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 14)
+    local stroke = Instance.new("UIStroke", card)
+    stroke.Color = getgenv().LollypopTheme
+    stroke.Transparency = 0.15
+
+    local message = Instance.new("TextLabel")
+    message.Position = UDim2.fromOffset(18, 22)
+    message.Size = UDim2.new(1, -36, 0, 62)
+    message.BackgroundTransparency = 1
+    message.Font = Enum.Font.GothamBold
+    message.TextSize = 16
+    message.TextColor3 = Color3.fromRGB(255, 255, 255)
+    message.TextWrapped = true
+    message.Text = tostring(messageText or "Are you sure you want to reset this setting to default?")
+    message.Parent = card
+
+    local yes = Instance.new("TextButton")
+    yes.Position = UDim2.new(0.5, -142, 1, -62)
+    yes.Size = UDim2.fromOffset(130, 38)
+    yes.BackgroundColor3 = Color3.fromRGB(40, 177, 91)
+    yes.BorderSizePixel = 0
+    yes.Font = Enum.Font.GothamBold
+    yes.Text = "Yes"
+    yes.TextColor3 = Color3.fromRGB(255, 255, 255)
+    yes.TextSize = 14
+    yes.Parent = card
+    LHRuntime:AddButtonPressEffect(yes)
+    Instance.new("UICorner", yes).CornerRadius = UDim.new(0, 8)
+
+    local no = Instance.new("TextButton")
+    no.Position = UDim2.new(0.5, 12, 1, -62)
+    no.Size = UDim2.fromOffset(130, 38)
+    no.BackgroundColor3 = Color3.fromRGB(210, 48, 65)
+    no.BorderSizePixel = 0
+    no.Font = Enum.Font.GothamBold
+    no.Text = "No"
+    no.TextColor3 = Color3.fromRGB(255, 255, 255)
+    no.TextSize = 14
+    no.Parent = card
+    LHRuntime:AddButtonPressEffect(no)
+    Instance.new("UICorner", no).CornerRadius = UDim.new(0, 8)
+
+    LHRuntime:Track(no.MouseButton1Click:Connect(function() gui:Destroy() end))
+    LHRuntime:Track(yes.MouseButton1Click:Connect(function()
+        gui:Destroy()
+        if type(onConfirm) == "function" then onConfirm() end
+        LHRuntime:Notify("success", "Setting Reset", "The setting was reset to default.", 3, nil, true)
+    end))
+end
 
 local function applyDefaultUISettings()
     for key in pairs(env.LHSettings) do
@@ -3253,6 +3406,8 @@ local function applyDefaultUISettings()
     if uiSettingControls.ReducedMotion then uiSettingControls.ReducedMotion._ui:SetValue(env.LHSettings.ReducedMotion, false) end
     if uiSettingControls.LowPerformance then uiSettingControls.LowPerformance._ui:SetValue(env.LHSettings.LowPerformance, false) end
     if uiSettingControls.DragLocked then uiSettingControls.DragLocked._ui:SetValue(env.LHSettings.DragLocked, false) end
+    if uiSettingControls.ToggleDragLocked then uiSettingControls.ToggleDragLocked._ui:SetValue(env.LHSettings.ToggleDragLocked, false) end
+    if uiSettingControls.AdminButtonDragLocked then uiSettingControls.AdminButtonDragLocked._ui:SetValue(env.LHSettings.AdminButtonDragLocked, false) end
     if uiSettingControls.CustomCursor then uiSettingControls.CustomCursor._ui:SetValue(env.LHSettings.CustomCursor, false) end
     if uiSettingControls.SeasonalTheme then uiSettingControls.SeasonalTheme._ui:SetValue(env.LHSettings.SeasonalTheme, false) end
     if uiSettingControls.OpeningSound then uiSettingControls.OpeningSound._ui:SetValue(env.LHSettings.OpeningSound, false) end
@@ -3482,8 +3637,12 @@ local plr = Players.LocalPlayer
 local maxplrs = game.Players.MaxPlayers
 local serversize = add(SkriptsSection, label("Server Size: "..kount.."/"..maxplrs))
 
-getgenv().Enabled = false
-getgenv().espstuff =Color3.fromRGB(0,255,0)
+-- Keep ESP state in a normal mutable Lua table. Some executors expose a readonly getgenv table.
+local HighlightState = {
+    Enabled = false,
+    Kolor = Color3.fromRGB(0, 255, 0),
+}
+env.LHHighlightState = HighlightState
 
 local function enablestuff()
 for i,v in pairs(Players:GetPlayers()) do
@@ -3492,14 +3651,14 @@ if not v.Character:FindFirstChild('ESP') then
 local highlight = Instance.new('Highlight')
 highlight.Name = 'ESP'
 highlight.Parent = v.Character
-highlight.Enabled = getgenv().Enabled
-highlight.FillColor = getgenv().espstuff
-highlight.OutlineColor = getgenv().espstuff
+highlight.Enabled = HighlightState.Enabled
+highlight.FillColor = HighlightState.Kolor
+highlight.OutlineColor = HighlightState.Kolor
 else
 local highlight = v.Character:FindFirstChild('ESP')
-highlight.Enabled = getgenv().Enabled
-highlight.FillColor = getgenv().espstuff
-highlight.OutlineColor = getgenv().espstuff
+highlight.Enabled = HighlightState.Enabled
+highlight.FillColor = HighlightState.Kolor
+highlight.OutlineColor = HighlightState.Kolor
 end
 end
 end
@@ -3510,22 +3669,7 @@ if not LHRuntime.Unloading then enablestuff() end
 end))
 
 
--- [ UPDATE TIME ] --
-local time = add(SkriptsSection, label((emoji.mantelpiece_clock.." Live Time: [00:00:00]")));
-
-local function updatetimelabel()
-while not LHRuntime.Unloading and wait(0.2) do
-local formatted_time = os.date((emoji.mantelpiece_clock.." Live Time: %I:%M:%S %p"))
-local todays_date = os.date("Today's Date: %A | %B %d, %Y");
-
---<U_23F0>////%I=12 Hour; %M=Minute; %S=Second; %p=AM/PM; %A=Day of week; %d=Day of month; %m=Month; %Y=Year\\\\<U_23F0>
-
-time:UpdateLabel("[" ..formatted_time.."]\n ["..todays_date.."]")
-end
-end
-
-spawn(updatetimelabel)
--- [ END UPDATE TIME ] --
+-- Live time/date are already displayed inside the Home avatar kredits kard. --
 
 --  "NEWDROPDOWNHERE", 
 
@@ -3533,10 +3677,11 @@ add(SkriptsSection, dropdown(("[NEW] added new skript req"..emoji.check_mark_but
 print((...))
 end))
 
-add(SkriptsSection, textbox("Toggle Button Size", "Changes the draggable LH toggle size.", function(toggleSize)
-    local updatedSize = math.clamp(tonumber(toggleSize) or togglesize, 38, 160)
-    getgenv().updatedSize = updatedSize
-    getgenv().togglesize = updatedSize
+add(SkriptsSection, kounter("Toggle Button Size", "Changes the draggable Lollypop button size.", 1, function(toggleSize)
+    local updatedSize = math.clamp(tonumber(toggleSize) or toggleButtonSize, 28, 160)
+    toggleButtonSize = updatedSize
+    pcall(function() getgenv().updatedSize = updatedSize end)
+    pcall(function() getgenv().togglesize = updatedSize end)
     local parent = game:GetService("CoreGui")
     pcall(function() if gethui then parent = gethui() end end)
     local gui = parent:FindFirstChild("KustomToggle")
@@ -3546,8 +3691,7 @@ add(SkriptsSection, textbox("Toggle Button Size", "Changes the draggable LH togg
     elseif env.LHRebuildToggle then
         env.LHRebuildToggle()
     end
-    LHRuntime:Notify("success", "Toggle Size", "Updated to " .. tostring(updatedSize), 4)
-end, "38-160", tostring(togglesize)))
+end, tonumber(toggleButtonSize) or 47, 28, 160))
 
 
 add(SkriptsSection, dropdown("requested skripts (press to exekute)", "xhoose a skript u requested", {"BLOXFRUITS - VEKTOR HUB (MRSHAHAB123)", "BLOXFRUITS - NEW JAYCY (killerbro9898)", "BLOXFRUITS - Sea 3 Hub (killerbro9898)", "Lunar vip (pwoepa28)", "99% fail obby - original Memory skript (AzuryCelestial)", "FLY GUI V3 (AzuryCelestial)", ("IGNORE TOUXH INTERESTS gui - "..emoji.lollipop.." (AzuryCelestial)"), "DAHOOD - SwagMode (ichmagmeinesisndd)"}, function(req)
@@ -3585,8 +3729,6 @@ end))
 --removed enable toggle<U_1F7E2>
 
 --[LABELS]--
-add(SkriptsSection, label((emoji.lollipop.." Welkome to Lollypop Hub, ").. displayname .."!"))
-
 add(SkriptsSection, label("User ID: "..userid.. " | Akkount Age: "..lp.AccountAge.." day(s)"))
 
 add(SkriptsSection, label("Game: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\n Game ID: ".. game.PlaceId))
@@ -3615,8 +3757,8 @@ end))
 
 
 --[ ALL SKRIPTS ]--
-skripts["Skripts:"] = skripts["Skripts:"] or {}
-local SkriptsSection = section(skripts, "Skripts:", skripts["Skripts:"])
+skripts["Skripts"] = skripts["Skripts"] or {}
+local SkriptsSection = section(skripts, "Skripts", skripts["Skripts"])
 --////---------------------------------
 add(SkriptsSection, label("Players"));
 --------------////-------------------
@@ -3691,11 +3833,11 @@ bNotify(2, "oops im dumb", "No player selekted")
 end;
 end))
 
-add(SkriptsSection, toggle("Highlight All Players (ESP)", "esp players", function(...)
-getgenv().Enabled = (...)
+add(SkriptsSection, toggle("Highlight All Players (ESP)", "esp players", function(enabled)
+HighlightState.Enabled = enabled == true
 end));
-add(SkriptsSection, colorpicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(255,255,255), function(kolor)
-getgenv().espstuff = kolor
+add(SkriptsSection, colorpicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", HighlightState.Kolor, function(kolor)
+if typeof(kolor) == "Color3" then HighlightState.Kolor = kolor end
 end))
 --[[
 performanxe
@@ -4765,15 +4907,20 @@ admin["Admin Kommands"] = admin["Admin Kommands"] or {}
 local AdminSection = section(admin, "Admin Kommands", admin["Admin Kommands"]);
 -- section alias removed by table refactor
 
-add(AdminSection, toggle("Lollypop Admin Kommands [BETA]", "Enables LH chat kommands and the draggable goblin kommand button.", function(enabled)
+add(AdminSection, toggle("Lollypop Admin Kommands [BETA]", "Enables LH chat kommands and the draggable goblin kommand button. Kommand names and functionality kredits: Nameless Admin.", function(enabled)
     env.LHAdminKommandsEnabled = enabled == true
+
+    -- Show/hide the LH goblin and activate built-in kommands immediately.
+    if type(env.LHSetAdminKommandsEnabled) == "function" then
+        env.LHSetAdminKommandsEnabled(env.LHAdminKommandsEnabled)
+    end
+
+    -- Load the hidden Nameless backend after the LH kontrol is already responsive.
     if env.LHAdminKommandsEnabled then
         task.spawn(function()
             ensureNamelessBackend()
+            hideNamelessAdminUI()
         end)
-    end
-    if type(env.LHSetAdminKommandsEnabled) == "function" then
-        env.LHSetAdminKommandsEnabled(env.LHAdminKommandsEnabled)
     end
 end, env.LHAdminKommandsEnabled))
 
@@ -6294,11 +6441,11 @@ add(GamesSection, toggle("Auto Jump", "auto jumps", function(state)
 autoJumpEnabled = state
 end))
 
-add(GamesSection, toggle("Highlight Playerz", "esp players", function(...)
-getgenv().Enabled = ...
+add(GamesSection, toggle("Highlight Playerz", "esp players", function(enabled)
+HighlightState.Enabled = enabled == true
 end))
-add(GamesSection, colorpicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", Color3.fromRGB(0,0,255), function(kolor)
-getgenv().espstuff = kolor
+add(GamesSection, colorpicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", HighlightState.Kolor, function(kolor)
+if typeof(kolor) == "Color3" then HighlightState.Kolor = kolor end
 end))
 
 add(GamesSection, button("OwlHub", "op", function()
@@ -7557,72 +7704,81 @@ _G.note(("your message: "..emoji.left_double_quote) ..plrMsg.. (emoji.left_doubl
     end)
 end));
 
-add(exSection, label(emoji.lollipop.." Hub updates: "));
+local UpdatesLog = {
+    emoji.lollipop.." V10 updates: ",
 
-add(exSection, label("FULL UI UPGRADE (v10) [07/31/2026]"))
-add(exSection, label(("Squid Game X "..emoji.squid.." kustom skript (Games)")))
-add(exSection, label((emoji.seedling.."Grow A Garden - NATHUB (OP) lots of features (Games)")))
-add(exSection, label("added 'Backpack Tool Stealer' (Games & Tools)"))
-add(exSection, label((emoji.glowing_star.."THE HUNT: MEGA EDITION"..emoji.glowing_star.." 3/10/2025")))
-add(exSection, label("fixed sliders & kolor picker support for mobile [3/7/25]"))
-add(exSection, label(("added: "..emoji.left_double_quote..emoji.soccer_ball.."Blue Lock: Rivals"..emoji.right_double_quote.." script - Auto grab, auto goal etc. (Games)\n [2/18/25]")))
-add(exSection, label(("fixed baddies "..emoji.nail_polish_light_skin_tone.." skript not loading [1/29/25]")))
-add(exSection, label("added 'Glass Bridge' [Reveal path, tp to end] (Games)"))
-add(exSection, label((emoji.squid.."Impossible Squid Game! Glass Bridge skript\n [reveal path & more] (Games)")))
-add(exSection, label(("Baddies "..emoji.nail_polish_light_skin_tone.." update {v2.2} (strong melee, dropdown list)")))
-add(exSection, label("RIP HUB {V2} universal (Games)"))
-add(exSection, label(("added "..emoji.house_with_garden.."Brookhaven RP - [SanderX hub] (Games) [1/25/25]")))
-add(exSection, label(("- added "..emoji.lollipop.." 'FE Obfuskator gui V2' (Home) protekt your skripts")))
-add(exSection, label("(req) Admin Nametag (Fun) for @mystery_17954"))
-add(exSection, label(("(req) added BaddiesV1 "..emoji.nail_polish_medium_skin_tone.." skript - for: Cateatsfood_BBB")))
-add(exSection, label("(req) added Ghost Hub in (Hubs & gui) for: cikoo134"))
-add(exSection, label("added 'FE Jerk off' in (FE)"))
-add(exSection, label("(request) added 2 Funky Friday skripts \n(Auto Player, 100% never miss, very OP) for: bryanloveroblox103 [1/2/25]"))
-add(exSection, label(("v2.13 Baddies"..emoji.nail_polish_medium_skin_tone.." update - added Bring/Grab target to teleport them to U\n [12/31/24]")))
-add(exSection, label("Rivals - TbaoHub (aimbot, esp &more) (Games) [1/1/25]"))
-add(exSection, label(("RED LIGHT GREEN LIGHT (SquidGames)"..emoji.squid..emoji.vertical_traffic_light.."- Easy Wins gui (Games)")))
-add(exSection, label("added TP Walk in \"Skripts\" tab (bypasses walkspeed detektions)"))
-add(exSection, label(("(request) Baddies"..emoji.nail_polish_medium_skin_tone.." v2.12 UPDATE - added Fling & View target\n [12/29/24]")))
-add(exSection, label("(request) added TSB - zygarde hub (Games) for: ueeisuwwiwi"))
-add(exSection, label("(request) small Baddies UPDATE - added Speed (TP walk \n for bypassing) {v2.11} [12/22/24]"))
-add(exSection, label(("MY SIS BDAY"..emoji.face_holding_back_tears..emoji.green_heart..emoji.two_hearts..emoji.party_popper..emoji.partying_face..emoji.birthday_cake.."HAPPY BIRTHDAY CHERUSSI"..emoji.lollipop.." [dec23]")))
-add(exSection, label(("Baddies "..emoji.nail_polish_medium_skin_tone.." V2 (new ui &  added 'Auto Kill target') now supports Solara\n (Games)")))
-add(exSection, label("- private chat spy is already in \"Skripts\" tab as \"See whispers\" "))
-add(exSection, label(("(req) "..emoji.military_helmet.." Military Tycoon (Games) - autofarm gui | for: Jhayceetheg (Jayyy)")))
-add(exSection, label("CraziiTrouble(Sakai) fling skripts in \"Hubs & gui\" and \"Skripts\" tab"))
-add(exSection, label("Limon4ik5_5Top4ik(Suttes) there is permanent shiftloxk in \"Skripts\" tab"))
-add(exSection, label((emoji.turkey..emoji.brown_heart.." HAPPY THANKSGIVING 2024 "..emoji.brown_heart..emoji.turkey)))
-add(exSection, label(("(req) Bike of Hell "..emoji.man_biking_medium_skin_tone.."(Games) for: dinodeptrai12345 [11/19/24]")))
-add(exSection, label(("(req) Kolor or Die "..emoji.artist_palette.."(Games) for: dinodeptrai12345 [11/19/24]")))
-add(exSection, label("(req) Ghub v14 (Hubs & gui) for: migelito06577 [11/19/24]"))
-add(exSection, label(("(req) "..emoji.nail_polish_medium_skin_tone.." BADDIES SKRIPT - Auto Kill players &more (Games)\n for: Najia(Nottakenbye)")))
-add(exSection, label((emoji.jack_o_lantern..emoji.black_heart..emoji.orange_heart.." HAPPY HALLOWEEN 2024 "..emoji.jack_o_lantern..emoji.black_heart..emoji.orange_heart)))
-add(exSection, label("added YARHM hub v2 [universal] (Fun)"))
-add(exSection, label("added FREE R15 Emotes gui V2 (Fun)"))
-add(exSection, label(("(req) added "..emoji.oncoming_fist.."HAZE PIECE"..emoji.oncoming_fist.." skript - (Games) for: alexnoobp09")))
-add(exSection, label("kant add Tha Bronx 2 its harder thats why its usually paid (D3v1nw)"))
-add(exSection, label("(req) added Traxk & Field Infinite - speed gui (Games)\n for: 0002002009008002004Q"))
-add(exSection, label("added Rochips Admin Panel (universal)"))
-add(exSection, label(("(req)added SALVATORE Hub - Brookhaven RP"..emoji.house_with_garden.." (Games)")))
-add(exSection, label(("(req)added Imperial Hub v2.1 - Brookhaven RP"..emoji.house_with_garden.." (Games) \n for: Aretm_290 & rivaldy83")))
-add(exSection, label("added ScriptHub V3 (100+ games,useful)"))
-add(exSection, label(("added Troll gui "..emoji.bullet.." 99% fail obby (Games)")));
-add(exSection, label((" added Kombine Avatars "..emoji.bullet.." 99% fail obby (Games)")));
-add(exSection, label("- (Fun) add chat Spammer (skript request) (9/10/24)"));
-add(exSection, label(("- added "..emoji.mobile_phone_with_arrow.." Mobile Keybind generator (Tools) (9/6/24)")));
-add(exSection, label("strongman simulator might not work so i added feature to Kopy skript"));
-add(exSection, label("- add Strongman simulator autofarm gui (skript request) (9/4/24)"));
-add(exSection, label("added hitbox expander/esp (has invis hitbox) (hubs & gui)"));
-add(exSection, label(("OP autofarm for "..emoji.right_double_quote.."Swordmaster Simulator"..emoji.left_double_quote.." (Games)")));
-add(exSection, label("updated Tiger X Hub  (v3.5) (hubs & gui)"));
-add(exSection, label(("u kan say "..emoji.left_double_quote.."/e reload"..emoji.right_double_quote.." if u need to shut or restart the gui")));
-add(exSection, label("FE chill (8/29/24) (FE Skripts)"));
-add(exSection, label(("updated FE skripts"..emoji.em_dash.."site went down so had to move all fe skripts")));
-add(exSection, label("added toggle button size feature for your satisfaktion"));
-add(exSection, label(("made a better toggle for the ui & draggable("..emoji.lollipop..")"..emoji.bullet.."(8/25/24)"))) 
-add(exSection, label(("u kan now use kommands,they will start with "..emoji.left_double_quote.."/e "..emoji.left_double_quote.." \n so ppl wont see ")))
-add(exSection, label('Kommands: /e day, night, nofog, noban, re, rj, exit, shop,\n shoplow'));
-add(exSection, label(("type in "..emoji.right_guillemet.."feedbaxk"..emoji.left_guillemet.." if u want more kmds or sum else")));
+"\"Admin\" Lollypop Admin (400+ kommands) kredits to Nameless Admin (enable to use kommands)",
+"FULL UI UPGRADE / NEW LOOK [July 30, 2026 update]",
+
+emoji.lollipop.." V9.3.4 updates: ",
+    ("Squid Game X "..emoji.squid.." kustom skript (Games)"),
+    (emoji.seedling.."Grow A Garden - NATHUB (OP) lots of features (Games)"),
+    "added 'Backpack Tool Stealer' (Games & Tools)",
+    (emoji.glowing_star.."THE HUNT: MEGA EDITION"..emoji.glowing_star.." 3/10/2025"),
+    "fixed sliders & kolor picker support for mobile [3/7/25]",
+    ("added: "..emoji.left_double_quote..emoji.soccer_ball.."Blue Lock: Rivals"..emoji.right_double_quote.." script - Auto grab, auto goal etc. (Games)\n [2/18/25]"),
+    ("fixed baddies "..emoji.nail_polish_light_skin_tone.." skript not loading [1/29/25]"),
+    "added 'Glass Bridge' [Reveal path, tp to end] (Games)",
+    (emoji.squid.."Impossible Squid Game! Glass Bridge skript\n [reveal path & more] (Games)"),
+    ("Baddies "..emoji.nail_polish_light_skin_tone.." update {v2.2} (strong melee, dropdown list)"),
+    "RIP HUB {V2} universal (Games)",
+    ("added "..emoji.house_with_garden.."Brookhaven RP - [SanderX hub] (Games) [1/25/25]"),
+    ("- added "..emoji.lollipop.." 'FE Obfuskator gui V2' (Home) protekt your skripts"),
+    "(req) Admin Nametag (Fun) for @mystery_17954",
+    ("(req) added BaddiesV1 "..emoji.nail_polish_medium_skin_tone.." skript - for: Cateatsfood_BBB"),
+    "(req) added Ghost Hub in (Hubs & gui) for: cikoo134",
+    "added 'FE Jerk off' in (FE)",
+    "(request) added 2 Funky Friday skripts \n(Auto Player, 100% never miss, very OP) for: bryanloveroblox103 [1/2/25]",
+    ("v2.13 Baddies"..emoji.nail_polish_medium_skin_tone.." update - added Bring/Grab target to teleport them to U\n [12/31/24]"),
+    "Rivals - TbaoHub (aimbot, esp &more) (Games) [1/1/25]",
+    ("RED LIGHT GREEN LIGHT (SquidGames)"..emoji.squid..emoji.vertical_traffic_light.."- Easy Wins gui (Games)"),
+    "added TP Walk in \"Skripts\" tab (bypasses walkspeed detektions)",
+    ("(request) Baddies"..emoji.nail_polish_medium_skin_tone.." v2.12 UPDATE - added Fling & View target\n [12/29/24]"),
+    "(request) added TSB - zygarde hub (Games) for: ueeisuwwiwi",
+    "(request) small Baddies UPDATE - added Speed (TP walk \n for bypassing) {v2.11} [12/22/24]",
+    ("MY SIS BDAY"..emoji.face_holding_back_tears..emoji.green_heart..emoji.two_hearts..emoji.party_popper..emoji.partying_face..emoji.birthday_cake.."HAPPY BIRTHDAY CHERUSSI"..emoji.lollipop.." [dec23]"),
+    ("Baddies "..emoji.nail_polish_medium_skin_tone.." V2 (new ui &  added 'Auto Kill target') now supports Solara\n (Games)"),
+    "- private chat spy is already in \"Skripts\" tab as \"See whispers\" ",
+    ("(req) "..emoji.military_helmet.." Military Tycoon (Games) - autofarm gui | for: Jhayceetheg (Jayyy)"),
+    "CraziiTrouble(Sakai) fling skripts in \"Hubs & gui\" and \"Skripts\" tab",
+    "Limon4ik5_5Top4ik(Suttes) there is permanent shiftloxk in \"Skripts\" tab",
+    (emoji.turkey..emoji.brown_heart.." HAPPY THANKSGIVING 2024 "..emoji.brown_heart..emoji.turkey),
+    ("(req) Bike of Hell "..emoji.man_biking_medium_skin_tone.."(Games) for: dinodeptrai12345 [11/19/24]"),
+    ("(req) Kolor or Die "..emoji.artist_palette.."(Games) for: dinodeptrai12345 [11/19/24]"),
+    "(req) Ghub v14 (Hubs & gui) for: migelito06577 [11/19/24]",
+    ("(req) "..emoji.nail_polish_medium_skin_tone.." BADDIES SKRIPT - Auto Kill players &more (Games)\n for: Najia(Nottakenbye)"),
+    (emoji.jack_o_lantern..emoji.black_heart..emoji.orange_heart.." HAPPY HALLOWEEN 2024 "..emoji.jack_o_lantern..emoji.black_heart..emoji.orange_heart),
+    "added YARHM hub v2 [universal] (Fun)",
+    "added FREE R15 Emotes gui V2 (Fun)",
+    ("(req) added "..emoji.oncoming_fist.."HAZE PIECE"..emoji.oncoming_fist.." skript - (Games) for: alexnoobp09"),
+    "kant add Tha Bronx 2 its harder thats why its usually paid (D3v1nw)",
+    "(req) added Traxk & Field Infinite - speed gui (Games)\n for: 0002002009008002004Q",
+    "added Rochips Admin Panel (universal)",
+    ("(req)added SALVATORE Hub - Brookhaven RP"..emoji.house_with_garden.." (Games)"),
+    ("(req)added Imperial Hub v2.1 - Brookhaven RP"..emoji.house_with_garden.." (Games) \n for: Aretm_290 & rivaldy83"),
+    "added ScriptHub V3 (100+ games,useful)",
+    ("added Troll gui "..emoji.bullet.." 99% fail obby (Games)"),
+    (" added Kombine Avatars "..emoji.bullet.." 99% fail obby (Games)"),
+    "- (Fun) add chat Spammer (skript request) (9/10/24)",
+    ("- added "..emoji.mobile_phone_with_arrow.." Mobile Keybind generator (Tools) (9/6/24)"),
+    "strongman simulator might not work so i added feature to Kopy skript",
+    "- add Strongman simulator autofarm gui (skript request) (9/4/24)",
+    "added hitbox expander/esp (has invis hitbox) (hubs & gui)",
+    ("OP autofarm for "..emoji.right_double_quote.."Swordmaster Simulator"..emoji.left_double_quote.." (Games)"),
+    "updated Tiger X Hub  (v3.5) (hubs & gui)",
+    ("u kan say "..emoji.left_double_quote.."/e reload"..emoji.right_double_quote.." if u need to shut or restart the gui"),
+    "FE chill (8/29/24) (FE Skripts)",
+    ("updated FE skripts"..emoji.em_dash.."site went down so had to move all fe skripts"),
+    "added toggle button size feature for your satisfaktion",
+    ("made a better toggle for the ui & draggable("..emoji.lollipop..")"..emoji.bullet.."(8/25/24)"),
+    ("u kan now use kommands,they will start with "..emoji.left_double_quote.."/e "..emoji.left_double_quote.." \n so ppl wont see "),
+    'Kommands: /e day, night, nofog, noban, re, rj, exit, shop,\n shoplow',
+    ("type in "..emoji.right_guillemet.."feedbaxk"..emoji.left_guillemet.." if u want more kmds or sum else"),
+}
+
+for _, updateText in ipairs(UpdatesLog) do
+    add(exSection, label(updateText))
+end
 
 
 --[[
@@ -7829,14 +7985,6 @@ local character = game.Players.LocalPlayer.Character
 local humanoid = character and character:FindFirstChildOfClass("Humanoid")
 if humanoid then humanoid.JumpPower = jp end
 end, 50, 0, 500))
-
-add(HomeSection, button("Reset Walkspeed","reset walkspeed to default", function()game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-end))
-
-add(HomeSection, button("Reset Walkspeed/Jumppower", "resets Walkspeed and jumpPower to default", function()
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-end))
 
 add(HomeSection, button("Ping Kounter", "see ping", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MvKKJ331"))()
@@ -8385,7 +8533,7 @@ local removeborder = 0
 local overlayAllGui = 2
 local roundButton = Instance.new("ImageButton")
 roundButton.Parent = screenGui
-roundButton.Size = UDim2.new(0, togglesize, 0, togglesize) -- Set the size of the button
+roundButton.Size = UDim2.new(0, toggleButtonSize, 0, toggleButtonSize) -- Set the size of the button
 roundButton.Position = UDim2.new(1, -110, 0, 25) -- Position on the upper right (110 pixels left from the right edge, 10 pixels down from the top)
 roundButton.Image = "http://www.roblox.com/asset/?id="..getgenv().getImg
 roundButton.BackgroundTransparency = 1 -- Set transparency so only the image is shown
@@ -8426,7 +8574,7 @@ local function KUSTOMTOGGLE()
 
     local roundButton = Instance.new("TextButton")
     roundButton.Name = "LollypopToggle"
-    roundButton.Size = UDim2.fromOffset(togglesize, togglesize)
+    roundButton.Size = UDim2.fromOffset(toggleButtonSize, toggleButtonSize)
     roundButton.Position = UDim2.new(1, -110, 0, 25)
     roundButton.BackgroundTransparency = 1
     roundButton.Text = emoji.lollipop
@@ -8442,12 +8590,18 @@ local function KUSTOMTOGGLE()
     local threshold = 6
     LHRuntime:Track(roundButton.InputBegan:Connect(function(inputObject)
         if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
-            dragging, moved = true, false
+            -- Always reset click state. A locked button must still toggle the hub.
+            moved = false
+            if env.LHSettings.ToggleDragLocked then
+                dragging = false
+                return
+            end
+            dragging = true
             dragInput, mousePos, framePos = inputObject, inputObject.Position, roundButton.Position
         end
     end))
     LHRuntime:Track(game:GetService("UserInputService").InputChanged:Connect(function(inputObject)
-        if not dragging then return end
+        if not dragging or env.LHSettings.ToggleDragLocked then return end
         if inputObject == dragInput or inputObject.UserInputType == Enum.UserInputType.MouseMovement or inputObject.UserInputType == Enum.UserInputType.Touch then
             local delta = inputObject.Position - mousePos
             if math.abs(delta.X) > threshold or math.abs(delta.Y) > threshold then
@@ -8462,7 +8616,11 @@ local function KUSTOMTOGGLE()
         end
     end))
     LHRuntime:Track(roundButton.MouseButton1Click:Connect(function()
-        if not moved then KAVO:ToggleUI() end
+        if moved then
+            moved = false
+            return
+        end
+        KAVO:ToggleUI()
     end))
 end
 env.LHRebuildToggle = KUSTOMTOGGLE
@@ -8497,7 +8655,7 @@ local LOADED = tick()-START
 local LoLLyPoP=true
         LOADED = LOADED + 1.00
 
-repeat wait() until(LoLLyPoP~=nil)
+repeat wait() until(LoLLyPoP)
 
 if(LoLLyPoP~=nil)then
 warn(("Lollypop Hub"..emoji.lollipop.." loaded in ")..string.format("%.2f", LOADED)..(" sekonds"..emoji.check_mark_button))
