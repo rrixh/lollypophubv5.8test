@@ -5774,8 +5774,6 @@ add(HubSection, button("Giga Hub", "hella skripts", function()-- Giga xhad hub
 loadstring(game:HttpGet('https://raw.githubusercontent.com/OWJBWKQLAISH/GigaChad-Hub/main/Version%20V3.5'))()
 end))
 
--- Removed discontinued loader: Ez Hub
--- See patch notes for URL and HTTP result.
 
 add(HubSection, button("Heart Ui", "heart hub", function()loadstring(game:GetObjects("rbxassetid://1313915586")[1].Source)()
 end))
@@ -7745,10 +7743,17 @@ _G.note(("your message: "..emoji.left_double_quote) ..plrMsg.. (emoji.left_doubl
     end)
 end));
 
-local UpdatesLog = {
-    emoji.lollipop.." V10 updates: ",
+local LOLLY;
+LOLLY = emoji.lollipop;
 
+local UpdatesLog = {
+    emoji.lollipop.." V10.0.0 updates: ",
+
+"[NEW FEATURE] hold the \""..LOLLY.."\" to access the quick actions panel",
+"[NEW FEATURE] added search bars for each tab to easily look-up your favorite skripts",
 "\"Admin\" Lollypop Admin (400+ kommands) kredits to Nameless Admin (enable to use kommands)",
+"[NEW FEATURE] easily change the kolor of the hub by accessing the new \"Ui Kustomization\" tab",
+"[NEW] \"Save Settings\" option added to \"Ui Kustomization\" tab to easily save your edits u made in the hub",
 "FULL UI UPGRADE / NEW LOOK [July 30, 2026 update]",
 
 emoji.lollipop.." V9.3.4 updates: ",
