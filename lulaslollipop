@@ -347,6 +347,7 @@ emoji.search = emoji.magnifying_glass_left
 emoji.music = emoji.musical_note
 emoji.phone = emoji.mobile_phone
 emoji.warning_sign = emoji.warning
+emoji.light_bulb = utf.char(0x1F4A1)
 local env = (getgenv and getgenv()) or _G
 env.LHEmoji = emoji
 local HttpService = game:GetService("HttpService")
@@ -444,6 +445,7 @@ end;
 
 local OWNER = ("lulaslollipop");
 local START = tick();
+env.LHSessionStart = START
 getgenv().kolors=true
 getgenv().tpWalk=true
 local RobloxTask = task
@@ -765,15 +767,50 @@ function LHRuntime:AddButtonPressEffect(button)
     if not button or not button:IsA("GuiButton") then return end
     if button:GetAttribute("LHPressEffectBound") then return end
     button:SetAttribute("LHPressEffectBound", true)
+    button.ClipsDescendants = true
     local pressTweenService = game:GetService("TweenService")
     local scaleObject = button:FindFirstChild("LHPressScale") or Instance.new("UIScale")
     scaleObject.Name = "LHPressScale"
     scaleObject.Scale = 1
     scaleObject.Parent = button
     local pressing = false
+
+    local function ripple(inputObject)
+        if env.LHSettings.ReducedMotion or env.LHSettings.LowPerformance or not button.Parent then return end
+        local absoluteSize = button.AbsoluteSize
+        if absoluteSize.X <= 0 or absoluteSize.Y <= 0 then return end
+        local absolutePosition = button.AbsolutePosition
+        local point = inputObject and inputObject.Position or Vector3.new(
+            absolutePosition.X + (absoluteSize.X * 0.5),
+            absolutePosition.Y + (absoluteSize.Y * 0.5),
+            0
+        )
+        local diameter = math.max(absoluteSize.X, absoluteSize.Y) * 2.25
+        local circle = Instance.new("Frame")
+        circle.Name = "LHRipple"
+        circle.AnchorPoint = Vector2.new(0.5, 0.5)
+        circle.Position = UDim2.fromOffset(point.X - absolutePosition.X, point.Y - absolutePosition.Y)
+        circle.Size = UDim2.fromOffset(0, 0)
+        circle.BackgroundColor3 = getgenv().LollypopTheme or Color3.fromRGB(255, 72, 176)
+        circle.BackgroundTransparency = 0.52
+        circle.BorderSizePixel = 0
+        circle.Active = false
+        circle.ZIndex = math.max(1, button.ZIndex)
+        circle.Parent = button
+        Instance.new("UICorner", circle).CornerRadius = UDim.new(1, 0)
+        pressTweenService:Create(circle, TweenInfo.new(0.34, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = UDim2.fromOffset(diameter, diameter),
+            BackgroundTransparency = 1,
+        }):Play()
+        task.delay(0.38, function()
+            if circle then pcall(function() circle:Destroy() end) end
+        end)
+    end
+
     self:Track(button.InputBegan:Connect(function(inputObject)
         if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
             pressing = true
+            ripple(inputObject)
             pressTweenService:Create(scaleObject, TweenInfo.new(0.06, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Scale = 0.95}):Play()
         end
     end))
@@ -1122,7 +1159,8 @@ function LHRuntime:Unload(reason)
             for _, gui in ipairs(parent:GetChildren()) do
                 if gui:IsA("ScreenGui") and (
                     gui.Name == "KustomToggle" or gui.Name == "CustomLoader" or
-                    gui.Name == "LHCommandPalette" or gui.Name == "LHCloseConfirmation" or gui.Name:match("^LollypopHubUI_")
+                    gui.Name == "LHCommandPalette" or gui.Name == "LHCloseConfirmation" or
+                    gui.Name == "LHQuickExecutor" or gui.Name:match("^LollypopHubUI_")
                 ) then
                     pcall(function() gui:Destroy() end)
                 end
@@ -1136,7 +1174,7 @@ function LHRuntime:Unload(reason)
                     local lowered = string.lower(tostring(object.Name or ""))
                     if lowered:find("lollypop", 1, true) or lowered:find("lhcommand", 1, true) or
                        lowered:find("adminkommand", 1, true) or lowered:find("admincommand", 1, true) or
-                       lowered == "kustomtoggle" or lowered == "customloader" then
+                       lowered == "kustomtoggle" or lowered == "customloader" or lowered:find("lhquick", 1, true) then
                         pcall(function() object:Destroy() end)
                     end
                 end
@@ -1145,6 +1183,8 @@ function LHRuntime:Unload(reason)
     end)
     env.LHOpenPalette = nil
     env.LHClosePalette = nil
+    env.LHOpenQuickActions = nil
+    env.LHCloseQuickActions = nil
     env.LHSetAdminKommandsEnabled = nil
     env.LHRequestClose = nil
     env.LHAdminKommandsEnabled = false
@@ -1385,7 +1425,7 @@ loadingSkreen.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 local frame = Instance.new("Frame")
 frame.AnchorPoint = Vector2.new(0.5, 0.5)
 frame.Position = UDim2.fromScale(0.5, 0.5)
-frame.Size = UDim2.fromOffset(390, 230)
+frame.Size = UDim2.fromOffset(390, 255)
 frame.BackgroundColor3 = Color3.fromRGB(10, 7, 14)
 frame.BackgroundTransparency = 0.06
 frame.BorderSizePixel = 0
@@ -1398,7 +1438,7 @@ frameStroke.Thickness = 1
 
 local loaderScale = Instance.new("UIScale", frame)
 local view = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
-loaderScale.Scale = math.max(0.7, math.min(1, (view.X - 20) / 410, (view.Y - 70) / 250))
+loaderScale.Scale = math.max(0.7, math.min(1, (view.X - 20) / 410, (view.Y - 70) / 275))
 
 local logo = Instance.new("ImageLabel")
 logo.AnchorPoint = Vector2.new(0.5, 0)
@@ -1421,20 +1461,20 @@ tt.TextWrapped = true
 tt.Parent = frame
 
 local faktText = Instance.new("TextLabel")
-faktText.Size = UDim2.new(1, -38, 0, 58)
+faktText.Size = UDim2.new(1, -38, 0, 40)
 faktText.Position = UDim2.fromOffset(19, 117)
 faktText.BackgroundTransparency = 1
 faktText.TextColor3 = Color3.fromRGB(198, 183, 208)
 faktText.TextSize = 12
 faktText.Font = Enum.Font.Gotham
-faktText.Text = nextRandomFakt()
+faktText.Text = emoji.light_bulb .. " Tip: " .. nextRandomFakt()
 faktText.TextWrapped = true
 faktText.TextYAlignment = Enum.TextYAlignment.Top
 faktText.Parent = frame
 
 local toggleTip = Instance.new("TextLabel")
 toggleTip.Size = UDim2.new(1, -38, 0, 30)
-toggleTip.Position = UDim2.fromOffset(19, 153)
+toggleTip.Position = UDim2.fromOffset(19, 160)
 toggleTip.BackgroundTransparency = 1
 toggleTip.TextColor3 = Color3.fromRGB(255, 220, 92)
 toggleTip.TextSize = 11
@@ -3294,7 +3334,7 @@ add(performanceSection, button("Check for LH Update", "Uses getgenv().LH_VERSION
     if latest == Vv then LHRuntime:Notify("success", "Update Checker", "LH is current: v" .. Vv, 3)
     else LHRuntime:Notify("warning", "Update Available", "Current v" .. Vv .. " | Latest v" .. tostring(latest), 3) end
 end))
-add(performanceSection, paragraph("v9.4.0 Upgrade Changelog", "Klassik Kavo look, phone scaling, resizing, drag lock, unlimited scrollable tabs, safer buttons, named emojis, kounters, UI font kustomization, hidden admin kommand backend, and full unload cleanup."))
+add(performanceSection, paragraph("v9.4.0 Upgrade Changelog", "Klassik ui look, phone scaling, resizing, drag lock, unlimited scrollable tabs, safer buttons, named emojis, kounters, UI font kustomization, hidden admin kommand backend, and full unload cleanup."))
 
 LHRuntime:Track(task.spawn(function()
     while not LHRuntime.Unloading do
@@ -3566,6 +3606,7 @@ add(HomeIntroSection, kredits({
     Username = "lulaslollipop",
     DisplayName = displayname,
     UserId = 3001347724,
+    SessionStarted = env.LHSessionStart,
     LastOnline = "Today", -- edit manually if needed
     OnlineStatus = "Online", -- change to "Offline" when needed
 }))
@@ -8559,9 +8600,173 @@ end;
 end;--togglelollypop funk(not using)
 
 --===========LH TOGGLE==============--
-local function KUSTOMTOGGLE()
+local function quickActionParent()
     local parent = game:GetService("CoreGui")
     pcall(function() if gethui then parent = gethui() end end)
+    return parent
+end
+
+local function showQuickExecutor()
+    local parent = quickActionParent()
+    local old = parent:FindFirstChild("LHQuickExecutor")
+    if old then old:Destroy() end
+
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "LHQuickExecutor"
+    gui.IgnoreGuiInset = true
+    gui.ResetOnSpawn = false
+    gui.DisplayOrder = 999999
+    gui.Parent = parent
+
+    local shade = Instance.new("TextButton")
+    shade.Size = UDim2.fromScale(1, 1)
+    shade.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    shade.BackgroundTransparency = 0.42
+    shade.BorderSizePixel = 0
+    shade.Text = ""
+    shade.AutoButtonColor = false
+    shade.Parent = gui
+
+    local panel = Instance.new("Frame")
+    panel.AnchorPoint = Vector2.new(0.5, 0.5)
+    panel.Position = UDim2.fromScale(0.5, 0.5)
+    panel.Size = UDim2.fromOffset(440, 300)
+    panel.BackgroundColor3 = Color3.fromRGB(13, 10, 18)
+    panel.BackgroundTransparency = 0.03
+    panel.BorderSizePixel = 0
+    panel.Parent = gui
+    Instance.new("UICorner", panel).CornerRadius = UDim.new(0, 14)
+    local stroke = Instance.new("UIStroke", panel)
+    stroke.Color = getgenv().LollypopTheme
+    stroke.Transparency = 0.18
+
+    local scale = Instance.new("UIScale", panel)
+    local viewport = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
+    scale.Scale = math.max(0.68, math.min(1, (viewport.X - 20) / 460, (viewport.Y - 80) / 320))
+
+    local title = Instance.new("TextLabel")
+    title.Position = UDim2.fromOffset(14, 8)
+    title.Size = UDim2.new(1, -58, 0, 30)
+    title.BackgroundTransparency = 1
+    title.Font = Enum.Font.GothamBold
+    title.Text = "Quick Executor"
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 17
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Parent = panel
+
+    local close = Instance.new("TextButton")
+    close.AnchorPoint = Vector2.new(1, 0)
+    close.Position = UDim2.new(1, -9, 0, 8)
+    close.Size = UDim2.fromOffset(31, 31)
+    close.BackgroundColor3 = Color3.fromRGB(214, 48, 65)
+    close.BorderSizePixel = 0
+    close.AutoButtonColor = false
+    close.Font = Enum.Font.GothamBold
+    close.Text = "X"
+    close.TextColor3 = Color3.fromRGB(255, 255, 255)
+    close.TextSize = 13
+    close.Parent = panel
+    Instance.new("UICorner", close).CornerRadius = UDim.new(0, 8)
+    LHRuntime:AddButtonPressEffect(close)
+
+    local editor = Instance.new("TextBox")
+    editor.Position = UDim2.fromOffset(12, 47)
+    editor.Size = UDim2.new(1, -24, 1, -99)
+    editor.BackgroundColor3 = Color3.fromRGB(24, 19, 31)
+    editor.BackgroundTransparency = 0.02
+    editor.BorderSizePixel = 0
+    editor.ClearTextOnFocus = false
+    editor.MultiLine = true
+    editor.TextEditable = true
+    editor.Font = Enum.Font.Code
+    editor.TextSize = 14
+    editor.TextColor3 = Color3.fromRGB(245, 245, 248)
+    editor.PlaceholderColor3 = Color3.fromRGB(145, 134, 155)
+    editor.PlaceholderText = "-- paste your skript here"
+    editor.Text = ""
+    editor.TextXAlignment = Enum.TextXAlignment.Left
+    editor.TextYAlignment = Enum.TextYAlignment.Top
+    editor.Parent = panel
+    Instance.new("UICorner", editor).CornerRadius = UDim.new(0, 9)
+    local padding = Instance.new("UIPadding", editor)
+    padding.PaddingLeft = UDim.new(0, 9)
+    padding.PaddingRight = UDim.new(0, 9)
+    padding.PaddingTop = UDim.new(0, 8)
+    padding.PaddingBottom = UDim.new(0, 8)
+
+    local function makeBottomButton(text, position, kolor)
+        local button = Instance.new("TextButton")
+        button.Position = position
+        button.Size = UDim2.new(0.5, -18, 0, 36)
+        button.BackgroundColor3 = kolor
+        button.BackgroundTransparency = 0.03
+        button.BorderSizePixel = 0
+        button.AutoButtonColor = false
+        button.Font = Enum.Font.GothamBold
+        button.Text = text
+        button.TextColor3 = Color3.fromRGB(255, 255, 255)
+        button.TextSize = 14
+        button.Parent = panel
+        Instance.new("UICorner", button).CornerRadius = UDim.new(0, 9)
+        LHRuntime:AddButtonPressEffect(button)
+        return button
+    end
+
+    local run = makeBottomButton("Run", UDim2.new(0, 12, 1, -43), getgenv().LollypopTheme)
+    local clear = makeBottomButton("Clear", UDim2.new(0.5, 6, 1, -43), Color3.fromRGB(65, 57, 76))
+
+    local function closeExecutor()
+        if gui then gui:Destroy() end
+    end
+    LHRuntime:Track(close.MouseButton1Click:Connect(closeExecutor))
+    LHRuntime:Track(shade.MouseButton1Click:Connect(closeExecutor))
+    LHRuntime:Track(clear.MouseButton1Click:Connect(function() editor.Text = "" end))
+    LHRuntime:Track(run.MouseButton1Click:Connect(function()
+        local source = tostring(editor.Text or "")
+        if source:gsub("%s", "") == "" then
+            LHRuntime:Notify("warning", "Quick Executor", "Paste a skript first.", 3, nil, true)
+            return
+        end
+        local ok = LHRuntime:Safe("Quick Executor", function()
+            local compiled, compileError = loadstring(source)
+            if not compiled then error(compileError or "The skript could not be compiled.") end
+            return compiled()
+        end)
+        if ok then LHRuntime:Notify("success", "Quick Executor", "Skript executed.", 3, nil, true) end
+    end))
+    task.defer(function() if editor.Parent then editor:CaptureFocus() end end)
+end
+
+local function performQuickAction(actionName)
+    if actionName == "Executor" then
+        showQuickExecutor()
+    elseif actionName == "Rejoin" then
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
+    elseif actionName == "Server Hop" then
+        loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/serverhop", true))()
+    elseif actionName == "Shut Down" then
+        game:Shutdown()
+    elseif actionName == "Reload Hub" then
+        local reloadHub = env.loadhub
+        task.spawn(function()
+            LHRuntime:Unload("quick action reload")
+            task.wait(0.2)
+            if type(reloadHub) == "function" then reloadHub() end
+        end)
+    elseif actionName == "Admin Palette" then
+        if env.LHAdminKommandsEnabled and type(env.LHOpenPalette) == "function" then
+            env.LHOpenPalette()
+        else
+            pcall(function() KAVO:SetUIVisible(true) end)
+            pcall(function() Window:SelectTab("Admin") end)
+            LHRuntime:Notify("warning", "Admin Palette", "Enable Lollypop Admin Kommands [BETA] first.", 4, nil, true)
+        end
+    end
+end
+
+local function KUSTOMTOGGLE()
+    local parent = quickActionParent()
     local old = parent:FindFirstChild("KustomToggle")
     if old then old:Destroy() end
 
@@ -8586,38 +8791,201 @@ local function KUSTOMTOGGLE()
     roundButton.Parent = screenGui
     LHRuntime:AddButtonPressEffect(roundButton)
 
+    local ringOverlay = nil
+    local ringOpen = false
+    local function closeRing()
+        ringOpen = false
+        if ringOverlay then
+            ringOverlay:Destroy()
+            ringOverlay = nil
+        end
+    end
+
+    local function openRing()
+        closeRing()
+        ringOpen = true
+
+        local viewport = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
+        local compact = viewport.X < 650 or viewport.Y < 430
+        local itemSize = compact and 62 or 70
+        local radius = compact and 88 or 108
+        local absolutePosition = roundButton.AbsolutePosition
+        local absoluteSize = roundButton.AbsoluteSize
+        local centerX = absolutePosition.X + (absoluteSize.X * 0.5)
+        local centerY = absolutePosition.Y + (absoluteSize.Y * 0.5)
+        local safe = radius + (itemSize * 0.5) + 8
+        centerX = math.clamp(centerX, safe, math.max(safe, viewport.X - safe))
+        centerY = math.clamp(centerY, safe, math.max(safe, viewport.Y - safe))
+
+        ringOverlay = Instance.new("CanvasGroup")
+        ringOverlay.Name = "LHQuickActions"
+        ringOverlay.Size = UDim2.fromScale(1, 1)
+        ringOverlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        ringOverlay.BackgroundTransparency = 0.56
+        ringOverlay.BorderSizePixel = 0
+        ringOverlay.GroupTransparency = 1
+        ringOverlay.ZIndex = 20
+        ringOverlay.Parent = screenGui
+
+        local dismiss = Instance.new("TextButton")
+        dismiss.Size = UDim2.fromScale(1, 1)
+        dismiss.BackgroundTransparency = 1
+        dismiss.Text = ""
+        dismiss.AutoButtonColor = false
+        dismiss.ZIndex = 20
+        dismiss.Parent = ringOverlay
+        LHRuntime:Track(dismiss.MouseButton1Click:Connect(closeRing))
+
+        local center = Instance.new("TextButton")
+        center.Name = "QuickActionsCenter"
+        center.AnchorPoint = Vector2.new(0.5, 0.5)
+        center.Position = UDim2.fromOffset(centerX, centerY)
+        center.Size = UDim2.fromOffset(itemSize - 6, itemSize - 6)
+        center.BackgroundColor3 = Color3.fromRGB(18, 13, 24)
+        center.BackgroundTransparency = 0.02
+        center.BorderSizePixel = 0
+        center.AutoButtonColor = false
+        center.Text = emoji.lollipop
+        center.TextColor3 = Color3.fromRGB(255, 255, 255)
+        center.TextScaled = true
+        center.Font = Enum.Font.GothamBold
+        center.ZIndex = 23
+        center.Parent = ringOverlay
+        Instance.new("UICorner", center).CornerRadius = UDim.new(1, 0)
+        local centerStroke = Instance.new("UIStroke", center)
+        centerStroke.Color = getgenv().LollypopTheme
+        centerStroke.Transparency = 0.12
+        LHRuntime:AddButtonPressEffect(center)
+        LHRuntime:Track(center.MouseButton1Click:Connect(closeRing))
+
+        local actions = {
+            {Name = "Executor", Icon = emoji.laptop},
+            {Name = "Rejoin", Icon = emoji.cyclone},
+            {Name = "Server Hop", Icon = emoji.rocket},
+            {Name = "Shut Down", Icon = emoji.cross_mark},
+            {Name = "Reload Hub", Icon = emoji.lollipop},
+            {Name = "Admin Palette", Icon = emoji.japanese_goblin},
+        }
+
+        for index, action in ipairs(actions) do
+            local actionName = action.Name
+            local actionIcon = action.Icon
+            local angle = math.rad(-90 + ((index - 1) * (360 / #actions)))
+            local x = centerX + math.cos(angle) * radius
+            local y = centerY + math.sin(angle) * radius
+            local button = Instance.new("TextButton")
+            button.Name = "QuickAction_" .. actionName:gsub("%s+", "")
+            button.AnchorPoint = Vector2.new(0.5, 0.5)
+            button.Position = UDim2.fromOffset(x, y)
+            button.Size = UDim2.fromOffset(itemSize, itemSize)
+            button.BackgroundColor3 = Color3.fromRGB(25, 19, 33)
+            button.BackgroundTransparency = 0.03
+            button.BorderSizePixel = 0
+            button.AutoButtonColor = false
+            button.Text = ""
+            button.ZIndex = 22
+            button.Parent = ringOverlay
+            Instance.new("UICorner", button).CornerRadius = UDim.new(1, 0)
+            local actionStroke = Instance.new("UIStroke", button)
+            actionStroke.Color = getgenv().LollypopTheme
+            actionStroke.Transparency = 0.22
+            LHRuntime:AddButtonPressEffect(button)
+
+            local icon = Instance.new("TextLabel")
+            icon.Position = UDim2.new(0, 0, 0, 5)
+            icon.Size = UDim2.new(1, 0, 0.58, 0)
+            icon.BackgroundTransparency = 1
+            icon.Font = Enum.Font.GothamBold
+            icon.Text = actionIcon
+            icon.TextColor3 = Color3.fromRGB(255, 255, 255)
+            icon.TextScaled = true
+            icon.ZIndex = 23
+            icon.Parent = button
+
+            local caption = Instance.new("TextLabel")
+            caption.Position = UDim2.new(0, 3, 0.61, 0)
+            caption.Size = UDim2.new(1, -6, 0.31, 0)
+            caption.BackgroundTransparency = 1
+            caption.Font = Enum.Font.GothamBold
+            caption.Text = actionName
+            caption.TextColor3 = Color3.fromRGB(238, 232, 242)
+            caption.TextScaled = true
+            caption.TextWrapped = true
+            caption.ZIndex = 23
+            caption.Parent = button
+
+            LHRuntime:Track(button.MouseButton1Click:Connect(function()
+                closeRing()
+                task.defer(function()
+                    LHRuntime:Safe("Quick Action " .. actionName, performQuickAction, actionName)
+                end)
+            end))
+        end
+
+        game:GetService("TweenService"):Create(ringOverlay, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            GroupTransparency = 0,
+        }):Play()
+    end
+
+    env.LHOpenQuickActions = openRing
+    env.LHCloseQuickActions = closeRing
+
     local dragging, dragInput, mousePos, framePos, moved = false, nil, nil, nil, false
     local threshold = 6
+    local holdToken = 0
+    local heldOpen = false
+
     LHRuntime:Track(roundButton.InputBegan:Connect(function(inputObject)
         if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
-            -- Always reset click state. A locked button must still toggle the hub.
             moved = false
-            if env.LHSettings.ToggleDragLocked then
-                dragging = false
-                return
-            end
-            dragging = true
-            dragInput, mousePos, framePos = inputObject, inputObject.Position, roundButton.Position
+            heldOpen = false
+            holdToken = holdToken + 1
+            local mine = holdToken
+            mousePos = inputObject.Position
+            framePos = roundButton.Position
+            dragInput = inputObject
+            dragging = not env.LHSettings.ToggleDragLocked
+
+            task.delay(0.5, function()
+                if holdToken == mine and not moved and roundButton.Parent and not ringOpen then
+                    heldOpen = true
+                    dragging = false
+                    openRing()
+                end
+            end)
         end
     end))
+
     LHRuntime:Track(game:GetService("UserInputService").InputChanged:Connect(function(inputObject)
         if not dragging or env.LHSettings.ToggleDragLocked then return end
         if inputObject == dragInput or inputObject.UserInputType == Enum.UserInputType.MouseMovement or inputObject.UserInputType == Enum.UserInputType.Touch then
             local delta = inputObject.Position - mousePos
             if math.abs(delta.X) > threshold or math.abs(delta.Y) > threshold then
                 moved = true
+                holdToken = holdToken + 1
                 roundButton.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
             end
         end
     end))
+
     LHRuntime:Track(game:GetService("UserInputService").InputEnded:Connect(function(inputObject)
         if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
             dragging = false
+            holdToken = holdToken + 1
         end
     end))
+
     LHRuntime:Track(roundButton.MouseButton1Click:Connect(function()
+        if heldOpen then
+            heldOpen = false
+            return
+        end
         if moved then
             moved = false
+            return
+        end
+        if ringOpen then
+            closeRing()
             return
         end
         KAVO:ToggleUI()
