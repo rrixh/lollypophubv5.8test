@@ -1,6 +1,6 @@
 --main v10 LOLLYPOP HUB
 
-date = "August 1"..", "..tostring(os.date("%Y"))
+date = "August 2"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -357,6 +357,8 @@ local LH_SETTINGS_FILE = LH_SETTINGS_FOLDER .. "/settings.json"
 env.LHSettings = env.LHSettings or {
     Theme = "Blood",
     Accent = {181, 71, 48},
+    TextColor = {245, 245, 248},
+    AutoSaveEdits = false,
     ReducedMotion = false,
     LowPerformance = false,
     DragLocked = false,
@@ -393,6 +395,8 @@ end)
 local LH_UI_DEFAULTS = {
     Theme = "Blood",
     Accent = {181, 71, 48},
+    TextColor = {245, 245, 248},
+    AutoSaveEdits = false,
     ReducedMotion = false,
     LowPerformance = false,
     DragLocked = false,
@@ -432,6 +436,12 @@ env.LHUISettings.CustomCursor = env.LHSettings.CustomCursor
 env.LHUISettings.NotificationMuted = env.LHSettings.NotificationMuted
 env.LHUISettings.NotificationVolume = env.LHSettings.NotificationVolume
 env.LHUISettings.UIFont = env.LHSettings.UIFont
+
+if env.LHSettings.TextColor == nil then env.LHSettings.TextColor = {245, 245, 248} end
+if env.LHSettings.AutoSaveEdits == nil then env.LHSettings.AutoSaveEdits = false end
+
+env.LHUISettings.TextColor = env.LHSettings.TextColor
+env.LHUISettings.AutoSaveEdits = env.LHSettings.AutoSaveEdits
 
 if(getgenv().lhloaded)then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/lib/notifikation/windows10ui"))().show({
@@ -874,6 +884,15 @@ end
 
 function LHRuntime:SettingChanged()
     self.SettingsDirty = true
+    self.AutoSaveRevision = (self.AutoSaveRevision or 0) + 1
+    if not env.LHSettings.AutoSaveEdits then return end
+
+    local revision = self.AutoSaveRevision
+    task.delay(0.65, function()
+        if self.Unloading or revision ~= self.AutoSaveRevision or not env.LHSettings.AutoSaveEdits then return end
+        local ok = self:SaveSettings()
+        if ok then self.SettingsDirty = false end
+    end)
 end
 
 local function ensureConfigFolder()
@@ -1121,6 +1140,8 @@ function LHRuntime:ApplySettings()
     env.LHUISettings.NotificationMuted = env.LHSettings.NotificationMuted
     env.LHUISettings.NotificationVolume = env.LHSettings.NotificationVolume
     env.LHUISettings.UIFont = env.LHSettings.UIFont or "Gotham"
+    env.LHUISettings.TextColor = env.LHSettings.TextColor
+    env.LHUISettings.AutoSaveEdits = env.LHSettings.AutoSaveEdits
     if env.LHKavo then
         pcall(function() env.LHKavo:SetReducedMotion(env.LHSettings.ReducedMotion) end)
         pcall(function() env.LHKavo:SetLowPerformance(env.LHSettings.LowPerformance) end)
@@ -1134,6 +1155,19 @@ function LHRuntime:ApplySettings()
         local accent = env.LHSettings.Accent
         if type(accent) == "table" and #accent >= 3 then
             pcall(function() env.LHKavo:ChangeColor("SchemeColor", Color3.fromRGB(accent[1], accent[2], accent[3])) end)
+        end
+        local textColor = env.LHSettings.TextColor
+        if type(textColor) == "table" and #textColor >= 3 and env.LHKavo.SetTextColor then
+            pcall(function()
+                local safe = env.LHKavo:SetTextColor(Color3.fromRGB(textColor[1], textColor[2], textColor[3]))
+                if typeof(safe) == "Color3" then
+                    env.LHSettings.TextColor = {
+                        math.floor(safe.R * 255 + 0.5),
+                        math.floor(safe.G * 255 + 0.5),
+                        math.floor(safe.B * 255 + 0.5),
+                    }
+                end
+            end)
         end
     end
 end
@@ -1182,6 +1216,7 @@ function LHRuntime:Unload(reason)
         end
     end)
     env.LHOpenPalette = nil
+    env.LHTogglePalette = nil
     env.LHClosePalette = nil
     env.LHOpenQuickActions = nil
     env.LHCloseQuickActions = nil
@@ -1827,13 +1862,24 @@ local function newTab(name)
     return data
 end
 
+-- Easy section format:
+-- local GamesSection = section(games, "Game Name")
+-- No duplicate games["Game Name"] line or third argument is needed anymore.
 local function section(tabData, name, items, hidden)
-    items = items or {}
-    items._name = tostring(name)
+    if type(items) == "boolean" and hidden == nil then
+        hidden = items
+        items = nil
+    end
+    items = type(items) == "table" and items or {}
+    local cleanName = tostring(name or "Section")
+    cleanName = cleanName:gsub("^%s*%[+%s*", ""):gsub("%s*%]+%s*$", "")
+    items._name = cleanName
     items._tab = tabData
     items._hidden = hidden == true
+    tabData[tostring(name or cleanName)] = items
+    tabData[cleanName] = items
     table.insert(tabData._sections, items)
-    table.insert(tabData._sectionOrder, tostring(name))
+    table.insert(tabData._sectionOrder, cleanName)
     return items
 end
 
@@ -1888,17 +1934,17 @@ local function add(sectionData, item) table.insert(sectionData, item); return it
 local function buildHub(window)
     local requestedOrder = {
         ["Home"] = 1,
-        ["Server"] = 2,
-        ["Tools"] = 3,
-        ["Admin"] = 4,
-        ["Fun"] = 5,
-        ["Hubs & GUIs"] = 6,
-        [emoji.glowing_star.."Games"..emoji.glowing_star] = 7,
-        ["FE"] = 8,
-        ["Updates/Extras"] = 9,
-        ["Bypasses & More"] = 10,
+        ["Tools"] = 2,
+        ["Admin"] = 3,
+        ["Fun"] = 4,
+        ["Hubs & GUIs"] = 5,
+        [emoji.glowing_star.."Games"..emoji.glowing_star] = 6,
+        ["FE"] = 7,
+        ["Updates/Extras"] = 8,
+        ["Server"] = 10,
         ["Notifications"] = 11,
         ["Ui Kustomization"] = 999,
+        ["Bypasses & More"] = 1000,
     }
     table.sort(tabOrder, function(a, b)
         local ai = requestedOrder[a._name] or 500
@@ -2741,6 +2787,12 @@ local function hideBackendGui(gui)
     if typeof(gui) ~= "Instance" then return end
     local screen = gui:IsA("ScreenGui") and gui or gui:FindFirstAncestorWhichIsA("ScreenGui")
     if screen then
+        local screenName = tostring(screen.Name or "")
+        if screen:GetAttribute("LHProtectedUI") or screenName == "LHCommandPalette" or
+           screenName == "LHAdminButton" or screenName == "KustomToggle" or
+           screenName:match("^LollypopHubUI_") then
+            return
+        end
         namelessOwnedGuis[screen] = true
         pcall(function()
             screen.Enabled = false
@@ -2939,6 +2991,8 @@ do
     paletteGui.IgnoreGuiInset = true
     paletteGui.ResetOnSpawn = false
     paletteGui.DisplayOrder = 999998
+    paletteGui.Enabled = true
+    paletteGui:SetAttribute("LHProtectedUI", true)
     paletteGui.Parent = parent
 
     local panel = Instance.new("Frame")
@@ -3011,6 +3065,7 @@ do
 
     local history, historyIndex = {}, 0
     local opened = false
+    local mobileOpen
     local function closePalette()
         opened = false
         panel.Visible = false
@@ -3020,8 +3075,11 @@ do
 
     local function openPalette()
         if LHRuntime.Unloading or not env.LHAdminKommandsEnabled then return end
+        paletteGui.Enabled = true
+        paletteGui.DisplayOrder = 999998
         opened = true
         panel.Visible = true
+        if mobileOpen then mobileOpen.Visible = true end
         box:CaptureFocus()
         box.CursorPosition = #box.Text + 1
     end
@@ -3030,7 +3088,10 @@ do
             LHRuntime:Notify("warning", "Admin Kommands", "Enable Lollypop Admin Kommands [BETA] in the Admin tab first.", 4)
             return
         end
-        if opened then closePalette() else openPalette() end
+        openPalette()
+    end
+    env.LHTogglePalette = function()
+        if opened then closePalette() else env.LHOpenPalette() end
     end
 
     local function rebuildSuggestions()
@@ -3106,7 +3167,6 @@ do
         end
     end))
 
-    local mobileOpen
     if game:GetService("UserInputService").TouchEnabled then
         mobileOpen = Instance.new("TextButton")
         mobileOpen.Name = "PaletteMobileButton"
@@ -3121,6 +3181,7 @@ do
         mobileOpen.TextSize = 20
         mobileOpen.Font = Enum.Font.GothamBold
         mobileOpen.Visible = env.LHAdminKommandsEnabled
+        mobileOpen.ZIndex = 200
         mobileOpen.Parent = paletteGui
         LHRuntime:AddButtonPressEffect(mobileOpen)
         Instance.new("UICorner", mobileOpen).CornerRadius = UDim.new(1, 0)
@@ -3156,13 +3217,18 @@ do
             end
         end))
         LHRuntime:Track(mobileOpen.MouseButton1Click:Connect(function()
-            if moved then return end
-            env.LHOpenPalette()
+            if moved then
+                moved = false
+                return
+            end
+            env.LHTogglePalette()
         end))
     end
 
     env.LHSetAdminKommandsEnabled = function(enabled)
         env.LHAdminKommandsEnabled = enabled == true
+        paletteGui.Enabled = true
+        paletteGui.DisplayOrder = 999998
         if mobileOpen then
             mobileOpen.Visible = env.LHAdminKommandsEnabled
         end
@@ -3170,6 +3236,25 @@ do
             closePalette()
         end
     end
+
+    -- Self-heal the palette and goblin button if another admin backend tries to hide them.
+    LHRuntime:Track(task.spawn(function()
+        while not LHRuntime.Unloading and paletteGui do
+            pcall(function()
+                if not paletteGui.Parent then paletteGui.Parent = parent end
+                paletteGui.Name = "LHCommandPalette"
+                paletteGui.Enabled = true
+                paletteGui.DisplayOrder = 999998
+                if mobileOpen then
+                    if not mobileOpen.Parent then mobileOpen.Parent = paletteGui end
+                    mobileOpen.Visible = env.LHAdminKommandsEnabled
+                    mobileOpen.ZIndex = 200
+                end
+                if opened then panel.Visible = true end
+            end)
+            task.wait(0.75)
+        end
+    end))
 end
 
 -- Chat kommands. Default prefix is ! and it can be changed in Ui Kustomization.
@@ -3184,8 +3269,29 @@ end))
 --==================================================
 local settingsTab = newTab("Ui Kustomization")
 local uiSettingControls = {}
-local themeChoices = {"Kandy", "Dark", "Blood", "Sakura", "Neon", "Minimal"}
+local themeChoices = (KAVO.GetThemeNames and KAVO:GetThemeNames()) or {
+    "Kandy", "Dark", "Blood", "Sakura", "Neon", "Minimal", "Grape", "Ocean",
+    "Midnight", "Sentinel", "Synapse", "Serpent", "Light", "Sunset", "Galaxy",
+    "Royal", "Cyber", "Mint", "Rose Gold", "Blueberry", "Orange Cream", "Lavender",
+    "Ice", "Forest", "Lava", "Bubblegum", "Gold", "Aqua", "Peach", "Cotton Candy",
+    "Espresso", "Storm", "Emerald",
+}
 local fontChoices = (KAVO.GetFontNames and KAVO:GetFontNames()) or {"Gotham", "GothamBold", "SourceSans", "Code"}
+
+local function settingColor(value, fallback)
+    if type(value) == "table" and #value >= 3 then
+        return Color3.fromRGB(tonumber(value[1]) or 255, tonumber(value[2]) or 255, tonumber(value[3]) or 255)
+    end
+    return fallback
+end
+
+local function saveColorSetting(key, color)
+    env.LHSettings[key] = {
+        math.floor(color.R * 255 + 0.5),
+        math.floor(color.G * 255 + 0.5),
+        math.floor(color.B * 255 + 0.5),
+    }
+end
 
 local dragLockSection = section(settingsTab, "Drag Locks", {})
 uiSettingControls.ToggleDragLocked = add(dragLockSection, toggle("Lock toggle position (stops \"" .. emoji.lollipop .. "\" from dragging)", "stops the Lollypop open/klose button from moving", function(value)
@@ -3208,6 +3314,13 @@ local appearanceSection = section(settingsTab, "Theme & Font", {})
 uiSettingControls.Theme = add(appearanceSection, dropdown("Theme Selector", "Changes the live Lollypop Hub theme.", themeChoices, function(selected)
     env.LHSettings.Theme = selected
     KAVO:SetTheme(selected)
+    local accent = settingColor(env.LHSettings.Accent, getgenv().LollypopTheme)
+    KAVO:ChangeColor("SchemeColor", accent)
+    local requestedText = settingColor(env.LHSettings.TextColor, Color3.fromRGB(245, 245, 248))
+    if KAVO.SetTextColor then
+        local safeText = KAVO:SetTextColor(requestedText)
+        if typeof(safeText) == "Color3" then saveColorSetting("TextColor", safeText) end
+    end
     LHRuntime:SettingChanged()
 end, env.LHSettings.Theme))
 
@@ -3219,12 +3332,15 @@ uiSettingControls.UIFont = add(appearanceSection, dropdown("UI Font", "Includes 
 end, env.LHSettings.UIFont or "Gotham"))
 
 uiSettingControls.Accent = add(appearanceSection, colorpicker("Kustom Accent Kolor", "Changes the accent kolor live.", getgenv().LollypopTheme, function(color)
-    env.LHSettings.Accent = {
-        math.floor(color.R * 255 + 0.5),
-        math.floor(color.G * 255 + 0.5),
-        math.floor(color.B * 255 + 0.5),
-    }
+    saveColorSetting("Accent", color)
     KAVO:ChangeColor("SchemeColor", color)
+    LHRuntime:SettingChanged()
+end))
+
+uiSettingControls.TextColor = add(appearanceSection, colorpicker("Kustom Text Kolor", "Changes text kolor live. Unreadable or pure-black choices are automatically made visible.", settingColor(env.LHSettings.TextColor, Color3.fromRGB(245, 245, 248)), function(color)
+    local safeColor = KAVO.SetTextColor and KAVO:SetTextColor(color) or color
+    if typeof(safeColor) ~= "Color3" then safeColor = Color3.fromRGB(245, 245, 248) end
+    saveColorSetting("TextColor", safeColor)
     LHRuntime:SettingChanged()
 end))
 
@@ -3276,6 +3392,14 @@ uiSettingControls.NotificationVolume = add(notificationSettingsSection, slider("
     LHRuntime:SettingChanged()
 end, math.floor((env.LHSettings.NotificationVolume or 0.45) * 100)))
 
+local saveBehaviorSection = section(settingsTab, "Save Behavior", {})
+uiSettingControls.AutoSaveEdits = add(saveBehaviorSection, toggle("Auto Save Edits", "Automatically saves UI edits after each change so they survive a klose, krash, or dead phone.", function(value)
+    env.LHSettings.AutoSaveEdits = value == true
+    LHRuntime:SettingChanged()
+    local ok = LHRuntime:SaveSettings()
+    if ok then LHRuntime.SettingsDirty = false end
+end, env.LHSettings.AutoSaveEdits))
+
 local commandSection = section(settingsTab, "Kommand Settings", {})
 uiSettingControls.CommandPrefix = add(commandSection, textbox("Chat Kommand Prefix", "Press Return to save the prefix. Default is !.", function(value)
     value = tostring(value or "")
@@ -3300,6 +3424,8 @@ local uiFactoryResetDefaults = {
     Theme = LH_UI_DEFAULTS.Theme,
     UIFont = LH_UI_DEFAULTS.UIFont,
     Accent = Color3.fromRGB(table.unpack(LH_UI_DEFAULTS.Accent)),
+    TextColor = Color3.fromRGB(table.unpack(LH_UI_DEFAULTS.TextColor)),
+    AutoSaveEdits = LH_UI_DEFAULTS.AutoSaveEdits,
     ScaleMode = LH_UI_DEFAULTS.ScaleMode,
     ReducedMotion = LH_UI_DEFAULTS.ReducedMotion,
     LowPerformance = LH_UI_DEFAULTS.LowPerformance,
@@ -3441,6 +3567,8 @@ local function applyDefaultUISettings()
 
     if uiSettingControls.Theme then uiSettingControls.Theme._ui:SetValue(env.LHSettings.Theme, false) end
     if uiSettingControls.Accent then uiSettingControls.Accent._ui:SetValue(Color3.fromRGB(table.unpack(env.LHSettings.Accent)), false) end
+    if uiSettingControls.TextColor then uiSettingControls.TextColor._ui:SetValue(Color3.fromRGB(table.unpack(env.LHSettings.TextColor)), false) end
+    if uiSettingControls.AutoSaveEdits then uiSettingControls.AutoSaveEdits._ui:SetValue(env.LHSettings.AutoSaveEdits, false) end
     if uiSettingControls.UIFont then uiSettingControls.UIFont._ui:SetValue(env.LHSettings.UIFont, false) end
     if uiSettingControls.ScaleMode then uiSettingControls.ScaleMode._ui:SetValue(env.LHSettings.ScaleMode, false) end
     if uiSettingControls.ReducedMotion then uiSettingControls.ReducedMotion._ui:SetValue(env.LHSettings.ReducedMotion, false) end
@@ -5414,6 +5542,7 @@ add(FunSection, toggle("Jump to flip", "changes your jump to a flip", function(e
         end;
 end));
 
+
 add(FunSection, button("R15 Animations/Emotes V2", "emotesv2", function() 
 loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-AFEM-14048'))();
 wait()
@@ -5427,8 +5556,7 @@ ok(4, "prexiate it", ("YARHM HUB V2 kopied to klipboard"..emoji.check_mark_butto
 end))
 
 add(FunSection, button("Mimic A Players Movement (just like the \"sync\" kommand)\n (kopy skript)", "easily kopy a players movement like /sync", function()
-setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/draggable-mobile-button/Sync.Player.Movement', true))();")
-ok(4, "bet", ("Mimic Player skript kopied to klipboard"..emoji.check_mark_button..", paste in your exekutor"))
+loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/draggable-mobile-button/Sync.Player.Movement', true))();
 end))
 
 add(FunSection, button("OP OP NAM Gangnam Style", "work r15 and r6", function()
@@ -5846,7 +5974,6 @@ end))
 local hubs = newTab("Hubs & GUIs")
 hubs[("erthang u need"..emoji.lollipop)] = hubs[("erthang u need"..emoji.lollipop)] or {}
 local HubSection = section(hubs, ("erthang u need"..emoji.lollipop), hubs[("erthang u need"..emoji.lollipop)]);
--- section alias removed by table refactor
 
 add(HubSection, label((emoji.free_button.." FREE Items GUIs:")))
 
@@ -7573,15 +7700,8 @@ local GamesSection = section(games, ("[Survive & Kill The Killers in AREA 51"..e
 games[("["..emoji.rainbow.."Rainbow Friends 2"..emoji.performing_arts.."]")] = games[("["..emoji.rainbow.."Rainbow Friends 2"..emoji.performing_arts.."]")] or {}
 local GamesSection = section(games, ("["..emoji.rainbow.."Rainbow Friends 2"..emoji.performing_arts.."]"), games[("["..emoji.rainbow.."Rainbow Friends 2"..emoji.performing_arts.."]")])
 
--- Removed discontinued loader: OP Rainbow Friends GUI
--- See patch notes for URL and HTTP result.
-
-games[("["..emoji.rabbit.."Adopt Me"..emoji.horse_face.."]")] = games[("["..emoji.rabbit.."Adopt Me"..emoji.horse_face.."]")] or {}
-local GamesSection = section(games, ("["..emoji.rabbit.."Adopt Me"..emoji.horse_face.."]"), games[("["..emoji.rabbit.."Adopt Me"..emoji.horse_face.."]")])
-
--- Removed discontinued loader: Fly Ride Pets
--- See patch notes for URL and HTTP result.
-
+games["Adopt Me"] = games["Adopt Me"] or {}
+local GamesSection = section(games, ("["..emoji.rabbit.."Adopt Me"..emoji.horse_face.."]"), games["Adopt Me"])
 
 games[("["..emoji.women_with_bunny_ears.." YEET A FRIEND "..emoji.women_with_bunny_ears.."]")] = games[("["..emoji.women_with_bunny_ears.." YEET A FRIEND "..emoji.women_with_bunny_ears.."]")] or {}
 local GamesSection = section(games, ("["..emoji.women_with_bunny_ears.." YEET A FRIEND "..emoji.women_with_bunny_ears.."]"), games[("["..emoji.women_with_bunny_ears.." YEET A FRIEND "..emoji.women_with_bunny_ears.."]")])
@@ -7889,6 +8009,9 @@ fe["FE Skripts"] = fe["FE Skripts"] or {}
 local FeSection = section(fe, "FE Skripts", fe["FE Skripts"]);
 -- section aliases removed by table refactor
 
+add(FeSection, button("FE dropkick fling", "fling", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/stormzdev/universal/refs/heads/main/dropkick.lua"))()
+end))
 
 add(FeSection, button("FE Jerk off", "sex", function()
 local jerkoff,err=pcall(function()
@@ -8083,6 +8206,17 @@ LOLLY = emoji.lollipop;
 local UpdatesLog = {
     emoji.lollipop.." V10.0.0 updates: ",
 
+"[FIXED] Lollypop Admin goblin button and kommand palette now stay visible and self-heal",
+"[NEW] 33 UI themes added to Theme Selector",
+"[NEW] Kustom Text Kolor editor with automatic readability protection",
+"[NEW] Auto Save Edits toggle saves changes after every edit",
+"[NEW] Save Settings added to the quick actions panel",
+"[NEW] accent glow around the hub while dragging and white glow around the Lollypop toggle",
+"[NEW] original Lollypop action icon replaced the basic pointer-finger icon",
+"[UI] section titles no longer have brackets and section(tab, \"Name\") is now the easy format",
+"[UI] Server moved to the old Bypasses & More spot; Bypasses & More moved to the bottom",
+"[UI] Quick Executor renamed to Lollypop Exekutor "..LOLLY,
+"[FIXED] Online Status text always stays white",
 "[NEW FEATURE] hold the \""..LOLLY.."\" to access the quick actions panel",
 "[NEW FEATURE] added search bars for each tab to easily look-up your favorite skripts",
 "\"Admin\" Lollypop Admin (400+ kommands) kredits to Nameless Admin (enable to use kommands)",
@@ -8945,6 +9079,8 @@ local function quickActionParent()
     return parent
 end
 
+local QUICK_EXECUTOR_NAME = "Lollypop Exekutor " .. emoji.lollipop
+
 local function showQuickExecutor()
     local parent = quickActionParent()
     local old = parent:FindFirstChild("LHQuickExecutor")
@@ -8988,7 +9124,7 @@ local function showQuickExecutor()
     title.Size = UDim2.new(1, -58, 0, 30)
     title.BackgroundTransparency = 1
     title.Font = Enum.Font.GothamBold
-    title.Text = "Quick Executor"
+    title.Text = QUICK_EXECUTOR_NAME
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextSize = 17
     title.TextXAlignment = Enum.TextXAlignment.Left
@@ -9064,15 +9200,15 @@ local function showQuickExecutor()
     LHRuntime:Track(run.MouseButton1Click:Connect(function()
         local source = tostring(editor.Text or "")
         if source:gsub("%s", "") == "" then
-            LHRuntime:Notify("warning", "Quick Executor", "Paste a skript first.", 3, nil, true)
+            LHRuntime:Notify("warning", QUICK_EXECUTOR_NAME, "Paste a skript first.", 3, nil, true)
             return
         end
-        local ok = LHRuntime:Safe("Quick Executor", function()
+        local ok = LHRuntime:Safe(QUICK_EXECUTOR_NAME, function()
             local compiled, compileError = loadstring(source)
             if not compiled then error(compileError or "The skript could not be compiled.") end
             return compiled()
         end)
-        if ok then LHRuntime:Notify("success", "Quick Executor", "Skript executed.", 3, nil, true) end
+        if ok then LHRuntime:Notify("success", QUICK_EXECUTOR_NAME, "Skript executed.", 3, nil, true) end
     end))
     task.defer(function() if editor.Parent then editor:CaptureFocus() end end)
 end
@@ -9093,6 +9229,14 @@ local function performQuickAction(actionName)
             task.wait(0.2)
             if type(reloadHub) == "function" then reloadHub() end
         end)
+    elseif actionName == "Save Settings" then
+        local ok, err = LHRuntime:SaveSettings()
+        if ok then
+            LHRuntime.SettingsDirty = false
+            LHRuntime:Notify("success", "Settings Saved", "Your UI edits were saved.", 3, nil, true)
+        else
+            LHRuntime:Notify("error", "Settings Save Failed", tostring(err), 4, nil, true)
+        end
     elseif actionName == "Admin Palette" then
         if env.LHAdminKommandsEnabled and type(env.LHOpenPalette) == "function" then
             env.LHOpenPalette()
@@ -9128,7 +9272,20 @@ local function KUSTOMTOGGLE()
     roundButton.AutoButtonColor = false
     roundButton.ZIndex = 5
     roundButton.Parent = screenGui
+    Instance.new("UICorner", roundButton).CornerRadius = UDim.new(1, 0)
+    local toggleDragGlow = Instance.new("UIStroke", roundButton)
+    toggleDragGlow.Name = "WhiteDragGlow"
+    toggleDragGlow.Color = Color3.fromRGB(255, 255, 255)
+    toggleDragGlow.Thickness = 4.5
+    toggleDragGlow.Transparency = 1
     LHRuntime:AddButtonPressEffect(roundButton)
+
+    local function setToggleDragGlow(enabled)
+        game:GetService("TweenService"):Create(toggleDragGlow, TweenInfo.new(enabled and 0.08 or 0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Transparency = enabled and 0.12 or 1,
+            Thickness = enabled and 5.2 or 4.5,
+        }):Play()
+    end
 
     local ringOverlay = nil
     local ringOpen = false
@@ -9203,6 +9360,7 @@ local function KUSTOMTOGGLE()
             {Name = "Server Hop", Icon = emoji.rocket},
             {Name = "Exit Game", Icon = emoji.cross_mark},
             {Name = "Reload Hub", Icon = emoji.lollipop},
+            {Name = "Save Settings", Icon = emoji.gear},
             {Name = "Admin Palette", Icon = emoji.japanese_goblin},
         }
 
@@ -9284,11 +9442,13 @@ local function KUSTOMTOGGLE()
             framePos = roundButton.Position
             dragInput = inputObject
             dragging = not env.LHSettings.ToggleDragLocked
+            if dragging then setToggleDragGlow(true) end
 
             task.delay(0.5, function()
                 if holdToken == mine and not moved and roundButton.Parent and not ringOpen then
                     heldOpen = true
                     dragging = false
+                    setToggleDragGlow(false)
                     openRing()
                 end
             end)
@@ -9310,6 +9470,7 @@ local function KUSTOMTOGGLE()
     LHRuntime:Track(game:GetService("UserInputService").InputEnded:Connect(function(inputObject)
         if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
             dragging = false
+            setToggleDragGlow(false)
             holdToken = holdToken + 1
         end
     end))
