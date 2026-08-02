@@ -1,6 +1,6 @@
 --main v10 LOLLYPOP HUB
 
-date = "July 31"..", "..tostring(os.date("%Y"))
+date = "August 1"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -5057,59 +5057,367 @@ end))
 admin["Troll Admin"] = admin["Troll Admin"] or {}
 local AdminSection = section(admin, "Troll Admin", admin["Troll Admin"])
 
-add(AdminSection, button("Annoying Admin", "type .cmds and then /console to see kmd list", function()
+add(AdminSection, button("Annoying Admin", "type .cmds and then /console to see kommands list", function()
   kall(function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/TheMightySource/FE-Annoying-Admin/main/Main.lua'),true))()
   end);
 end))
-
--- Removed discontinued loader: Simple Admin
--- See patch notes for URL and HTTP result.
 
 
 local fun = newTab("Fun")
 
 fun["Player skripts"] = fun["Player skripts"] or {}
 local FunSection = section(fun, "Player skripts", fun["Player skripts"]);
--- section alias removed by table refactor
-
-add(FunSection, button("Kopy Avatars", "kredits to ghost", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Copy%20Avatar'))();
-end))
-
-add(FunSection, button("Set Emote List", "kreds to ghost", function()
---save emotes
-loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script19");
-end))
-
-add(FunSection, button("Your Avatar Outfits (change avatar in game)", "kreds to ghost", function()
---ur ava fits
-loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script18");
-end))
-
-add(FunSection, button("Save Servers", "kreds to ghost", function()
---save server
-loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script17");
-end))
-
-add(FunSection, button("skript 12", "kreds to ghost", function()
---save server
-local num = "12"
-loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script"..num);
-end))
-
-add(FunSection, button("13 skript", "kreds to ghost", function()
---save server
-local num = "13"
-loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script"..num);
-end))
 
 add(FunSection, label("Animations"))
 
+local eighteenPlus = emoji.no_one_under_eighteen;
+
+add(FunSection, button(eighteenPlus.." FREEaky Emotes Hub"..emoji.lollipop, "kredits to me "..emoji.lollipop, function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/kustomskript/freemoteshub_lulaslollipop.png", true))()
+end))
+
+local KrackheadWalk = {
+    Enabled = false,
+    RunningConnection = nil,
+    CharacterConnection = nil,
+    Spin = nil
+}
+
+local function disconnectKrackheadWalkConnection(name)
+    local connection = KrackheadWalk[name]
+
+    if connection then
+        pcall(function()
+            connection:Disconnect()
+        end)
+
+        KrackheadWalk[name] = nil
+    end
+end
+
+local function removeKrackheadSpin()
+    if KrackheadWalk.Spin then
+        pcall(function()
+            KrackheadWalk.Spin:Destroy()
+        end)
+
+        KrackheadWalk.Spin = nil
+    end
+
+    local character = game.Players.LocalPlayer.Character
+    local rootPart = character
+        and character:FindFirstChild("HumanoidRootPart")
+
+    if rootPart then
+        for _, object in ipairs(rootPart:GetChildren()) do
+            if object.Name == "Spinning" then
+                object:Destroy()
+            end
+        end
+    end
+end
+
+local function disableKrackheadWalk()
+    KrackheadWalk.Enabled = false
+
+    disconnectKrackheadWalkConnection("RunningConnection")
+    disconnectKrackheadWalkConnection("CharacterConnection")
+
+    removeKrackheadSpin()
+end
+
+local function setupKrackheadWalk(character)
+    disconnectKrackheadWalkConnection("RunningConnection")
+    removeKrackheadSpin()
+
+    if not KrackheadWalk.Enabled then
+        return
+    end
+
+    local humanoid = character:WaitForChild("Humanoid")
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+
+    KrackheadWalk.RunningConnection =
+        humanoid.Running:Connect(function(speed)
+            if not KrackheadWalk.Enabled then
+                removeKrackheadSpin()
+                return
+            end
+
+            if speed > 0 then
+                if not KrackheadWalk.Spin
+                    or not KrackheadWalk.Spin.Parent then
+
+                    local spin = Instance.new("BodyAngularVelocity")
+                    spin.Name = "Spinning"
+                    spin.MaxTorque = Vector3.new(
+                        math.huge,
+                        math.huge,
+                        math.huge
+                    )
+                    spin.AngularVelocity = Vector3.new(0, 10, 0)
+                    spin.Parent = rootPart
+
+                    KrackheadWalk.Spin = spin
+                end
+            else
+                removeKrackheadSpin()
+            end
+        end)
+end
+
+add(FunSection, toggle("Krackhead walk", "spin walking", function(enabled)
+        if enabled then
+            disableKrackheadWalk()
+            KrackheadWalk.Enabled = true;
+            local player = game.Players.LocalPlayer
+            local character = player.Character
+                or player.CharacterAdded:Wait()
+
+            setupKrackheadWalk(character)
+
+            KrackheadWalk.CharacterConnection =
+                player.CharacterAdded:Connect(function(newCharacter)
+                    if KrackheadWalk.Enabled then
+                        setupKrackheadWalk(newCharacter)
+                    end
+                end)
+        else
+            disableKrackheadWalk()
+        end;
+end))
+
+local JumpFlip = {
+    Enabled = false,
+    Token = 0,
+    JumpConnection = nil,
+    CharacterConnection = nil,
+    Humanoid = nil,
+    Sound = nil,
+    Spins = {},
+    OriginalGravity = nil,
+    FallingDownEnabled = true,
+    RagdollEnabled = true
+}
+
+local function disconnectJumpFlipConnection(connectionName)
+    local connection = JumpFlip[connectionName]
+
+    if connection then
+        pcall(function()
+            connection:Disconnect()
+        end)
+
+        JumpFlip[connectionName] = nil
+    end
+end
+
+local function destroySpin(spin)
+    if spin then
+        JumpFlip.Spins[spin] = nil
+
+        pcall(function()
+            spin:Destroy()
+        end)
+    end
+end
+
+local function destroyAllJumpFlipSpins()
+    for spin in pairs(JumpFlip.Spins) do
+        destroySpin(spin)
+    end
+
+    table.clear(JumpFlip.Spins)
+end
+
+local function restoreJumpFlipHumanoid()
+    local humanoid = JumpFlip.Humanoid
+
+    if humanoid and humanoid.Parent then
+        pcall(function()
+            humanoid:SetStateEnabled(
+                Enum.HumanoidStateType.FallingDown,
+                JumpFlip.FallingDownEnabled
+            )
+
+            humanoid:SetStateEnabled(
+                Enum.HumanoidStateType.Ragdoll,
+                JumpFlip.RagdollEnabled
+            )
+        end)
+    end
+
+    JumpFlip.Humanoid = nil
+end
+
+local function clearJumpFlipCharacter()
+    JumpFlip.Token = JumpFlip.Token + 1
+
+    disconnectJumpFlipConnection("JumpConnection")
+    destroyAllJumpFlipSpins()
+    restoreJumpFlipHumanoid()
+
+    if JumpFlip.Sound then
+        pcall(function()
+            JumpFlip.Sound:Stop()
+            JumpFlip.Sound:Destroy()
+        end)
+
+        JumpFlip.Sound = nil
+    end
+
+    if JumpFlip.OriginalGravity then
+        game.Workspace.Gravity = JumpFlip.OriginalGravity
+    end
+end
+
+local function disableJumpFlip()
+    JumpFlip.Enabled = false
+    JumpFlip.Token = JumpFlip.Token + 1
+
+    disconnectJumpFlipConnection("JumpConnection")
+    disconnectJumpFlipConnection("CharacterConnection")
+
+    destroyAllJumpFlipSpins()
+
+    if JumpFlip.Sound then
+        pcall(function()
+            JumpFlip.Sound:Stop()
+            JumpFlip.Sound:Destroy()
+        end)
+
+        JumpFlip.Sound = nil
+    end
+
+    if JumpFlip.OriginalGravity then
+        game.Workspace.Gravity = JumpFlip.OriginalGravity
+    end
+
+    restoreJumpFlipHumanoid()
+end
+
+local function setupJumpFlip(character)
+    clearJumpFlipCharacter()
+
+    if not JumpFlip.Enabled then
+        return
+    end
+
+    local humanoid = character:WaitForChild("Humanoid")
+    local head = character:WaitForChild("Head")
+
+    JumpFlip.Humanoid = humanoid
+
+    JumpFlip.FallingDownEnabled = humanoid:GetStateEnabled(
+        Enum.HumanoidStateType.FallingDown
+    )
+
+    JumpFlip.RagdollEnabled = humanoid:GetStateEnabled(
+        Enum.HumanoidStateType.Ragdoll
+    )
+
+    humanoid:SetStateEnabled(
+        Enum.HumanoidStateType.FallingDown,
+        false
+    )
+
+    humanoid:SetStateEnabled(
+        Enum.HumanoidStateType.Ragdoll,
+        false
+    )
+
+    local sound = Instance.new("Sound")
+    sound.Name = "JumpFlipSound"
+    sound.SoundId = "rbxassetid://4911756917"
+    sound.Volume = 5
+    sound.Looped = false
+    sound.Archivable = false
+    sound.Parent = game.Workspace
+
+    JumpFlip.Sound = sound
+
+    JumpFlip.JumpConnection = humanoid
+        :GetPropertyChangedSignal("Jump")
+        :Connect(function()
+            if not JumpFlip.Enabled or not humanoid.Jump then
+                return
+            end
+
+            local flipToken = JumpFlip.Token
+
+            task.spawn(function()
+                if not JumpFlip.Enabled
+                    or flipToken ~= JumpFlip.Token
+                    or not head.Parent then
+                    return
+                end
+
+                if JumpFlip.Sound then
+                    pcall(function()
+                        JumpFlip.Sound.TimePosition = 0.6
+                        JumpFlip.Sound:Play()
+                    end)
+                end
+
+                local spin = Instance.new("BodyAngularVelocity")
+                spin.Name = "flipping"
+                spin.MaxTorque = Vector3.new(
+                    math.huge,
+                    math.huge,
+                    math.huge
+                )
+                spin.AngularVelocity = Vector3.new(10, 0, 0)
+                spin.Parent = head
+
+                JumpFlip.Spins[spin] = true
+
+                task.wait(0.5)
+
+                if not JumpFlip.Enabled
+                    or flipToken ~= JumpFlip.Token then
+                    destroySpin(spin)
+                    return
+                end
+
+                game.Workspace.Gravity = 1000
+                task.wait()
+
+                if JumpFlip.OriginalGravity then
+                    game.Workspace.Gravity = JumpFlip.OriginalGravity
+                end
+
+                destroySpin(spin)
+            end)
+        end)
+end
+
+add(FunSection, toggle("Jump to flip", "changes your jump to a flip", function(enabled)
+        if enabled then
+            disableJumpFlip();
+            JumpFlip.Enabled = true
+            JumpFlip.OriginalGravity = game.Workspace.Gravity;
+            local player = game.Players.LocalPlayer
+            local character = player.Character
+                or player.CharacterAdded:Wait()
+
+            setupJumpFlip(character)
+
+            JumpFlip.CharacterConnection =
+                player.CharacterAdded:Connect(function(newCharacter)
+                    if JumpFlip.Enabled then
+                        setupJumpFlip(newCharacter)
+                    end
+                end)
+        else
+            disableJumpFlip()
+        end;
+end));
+
 add(FunSection, button("R15 Animations/Emotes V2", "emotesv2", function() 
-setclipboard("loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-AFEM-14048'))();")
+loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-AFEM-14048'))();
 wait()
-ok(4, "prexiate it", ("R15 animation V2 kopied to klipboard"..emoji.check_mark_button..", paste in your exekutor"))
+-- ok(4, "prexiate it", ("R15 animation V2 kopied to klipboard"..emoji.check_mark_button..", paste in your exekutor"))
 end))
 
 add(FunSection, button("YARHM HUB v2", "v2 better", function()
@@ -5137,33 +5445,38 @@ end))
 add(FunSection, button("Lolly Animations", "work r15 and r6", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/yeerma/1/main/the_greatest_script_ever_made'))()
 end))
-add(FunSection, button("Energyze Animations", "work r15 and r6", function()loadstring(game:HttpGet(('https://pastebin.com/raw/1p6xnBNf'),true))()
+
+add(FunSection, button("Energyze Animations", "work r15 and r6", function()
+loadstring(game:HttpGet(('https://pastebin.com/raw/1p6xnBNf'),true))()
 end))
+
 -- Removed discontinued loader: Be A Helikopter
--- See patch notes for URL and HTTP result.
+
+
 add(FunSection, button("Krawl", "simple krawl gui", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt'))()
 end))
--- Removed discontinued loader: R6 pose gui
--- See patch notes for URL and HTTP result.
 
-add(FunSection, button("KraxkHead walking", "turn into a krakhead", function()
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/kraxkheadwalk",true))();
-end))
+--[[
+add(FunSection, button("Krackhead walking", "turn into a krakhead", function()
+loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/kraxkheadwalk",true))()
+end));
 
 add(FunSection, button("Jump to flip", "keybind Jump", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/gymnastiks.mov",true))();
-end))
+end));
+]]--
+
 
 --[[
 add(FunSection, button("XD", "XDDDDDDD", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
 end))
 
-
 add(FunSection, label("FX/Partikles/Assets"))
 
-add(FunSection, textbox("Enter item/asset ID: ", "enter an asset id from roblox shop(any item)", function(assetId)  
+add(FunSection, textbox("Enter item/asset ID: ", "enter an asset id from roblox shop(any item)", function(assetId)
+if not tonumber(assetId) then return end;
 for i, v in pairs(lp:GetChildren()) do 
 local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Torso; 
 emit.Texture = "http://www.roblox.com/asset/?id="..assetId; 
@@ -5172,30 +5485,63 @@ end;
 end))
 ]]--
 
+add(FunSection, button("Kopy Avatars", "kredits to ghost", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Copy%20Avatar'))();
+end))
+
+add(FunSection, button("Set Emote List", "kreds to ghost", function()
+--save emotes
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script19");
+end))
+
+add(FunSection, button("Your Avatar Outfits (change avatar in game)", "kreds to ghost", function()
+--ur ava fits
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script18");
+end))
+
+add(FunSection, button("Save Servers", "kreds to ghost", function()
+--save server
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script17");
+end))
+
+--[[
+add(FunSection, button("skript 12", "kreds to ghost", function()
+--save server
+local num = "12"
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script"..num);
+end))
+
+add(FunSection, button("13 skript", "kreds to ghost", function()
+--save server
+local num = "13"
+loadstring(game:HttpGet('https://pastefy.app/S7xNJSXX/raw'))()execute("Script"..num);
+end))
+]]--
+
 fun["Message Fun"] = fun["Message Fun"] or {}
 local FunSection = section(fun, "Message Fun", fun["Message Fun"])
 
+--[[
 add(FunSection, button("chat Spammer (KustomSpammer)", "requested by cl4wbyt3z", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/xhatspammer", true))();
 end))
 
---[bypasses]--
+
+--[[
 add(FunSection, label("chat Bypasses (100% safe)"))
 
-add(FunSection, button([[Bubblechat Bypasser (100% safe & fun)]], (emoji.lollipop..emoji.japanese_goblin..[[safe enjoy]]), function()
+add(FunSection, button("Bubblechat Bypasser (100% safe & fun)", (emoji.lollipop..emoji.japanese_goblin.."safe enjoy"), function()
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/refs/heads/main/AnthonyIsHere-antiban"))();
 wait(0.0001)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/kustomskript/homegirl-xhatbypsr"))();
 end))
 
 add(FunSection, button("Simple Bypass (safe)", (emoji.lollipop), function() loadstring(game:HttpGet("https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua"))(); end))
-
--- Removed discontinued loader: Spell kursewords (use L to toggle) \n(100% safe)
--- See patch notes for URL and HTTP result.
-
+]]--
 
 add(FunSection, label("Trolling"));
 
+--[[
 add(FunSection, button("Fake Data Leaker", "leak data troll", function()
 --dataleak
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/fakedataleaker",true))();
@@ -5205,9 +5551,6 @@ add(FunSection, button("Rizzer", "rizz", function()
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/rizzer",true))();
 end))
 
--- Removed discontinued loader: Fake Message Troll
--- See patch notes for URL and HTTP result.
-
 add(FunSection, button(("Fake boot Players"..emoji.leg_medium_skin_tone..emoji.clown_face), "pretends to kixk a player wen they leave", function()loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/fakeboot-lulaslollipop/main/fakebootanigga",true))()
 end))
 
@@ -5215,24 +5558,16 @@ add(FunSection, button("Diskord Emojis [example: :angry:]", "type the emoji name
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/diskord_emojis/main/emojis_lulaslollipop",true))()
 end))
 
---[[
-add(SkriptsSection, textbox("<U_1F4E2>Send a server alert", "lets u send msg to server not fe", function(...)
+add(SkriptsSection, textbox("Send a server alert", "lets u send msg to server not fe", function(...)
 local m = Instance.new("Message")
 m.Parent = Workspace
 m.Text = ...
 end))
-]]--
-
 
 add(FunSection, label("Kompliments"))
--- Removed discontinued loader: Kompliment Random Player
--- See patch notes for URL and HTTP result.
--- Removed discontinued loader: Kompliment V2
--- See patch notes for URL and HTTP result.
 
 add(FunSection, label("Others"))
--- Removed discontinued loader: Auto Exkuse
--- See patch notes for URL and HTTP result.
+
 add(FunSection, button("Kopy Server Messages", "repeats all players messages", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
 local ChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
 local OnMessageEvent = ChatEvents:WaitForChild("OnMessageDoneFiltering")
@@ -5260,7 +5595,8 @@ for i=1,#FUXKINGFAGGOTS do
 FUXKINGFAGGOTS[i].Chatted:connect(function(Message)
 game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("".."["..FUXKINGFAGGOTS[i].Name.."]".." "..Message, "All")
 end)
-end;end)) 
+end;
+end)) 
 
 add(FunSection, button("Nerd Quote", " repeats all msgs with a nerd quote", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
 local ChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
@@ -5282,6 +5618,7 @@ SayMessageRequest:FireServer(('\"%s\"%s'):format(message,(emoji.nerd_face)),tost
 end
 end)
 end))
+]]--
 
 add(FunSection, button("Rainbow xhat (enables xhat Bubbles)", "enables xhat bubble and see msg frm far away", function()
 --enables bubble chat also
@@ -5344,6 +5681,7 @@ end);
 end
 end))
 
+--[[
 add(FunSection, label("singing/spam"))
 add(FunSection, button("SpamHub", "sing songs etx.", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/ColdStep2/Chatdestroyer-Hub-V1/main/Chatdestroyer%20Hub%20V1'),true))()
@@ -5359,7 +5697,7 @@ Duration = 7
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/lyricsBot/main/singer.lua"))()
 end))
-
+]]--
 
 fun["Humanoid"] = fun["Humanoid"] or {}
 local FunSection = section(fun, "Humanoid", fun["Humanoid"])
@@ -6012,8 +6350,7 @@ add(HubSection, button("VersionHub V2.3.1", "a hub", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ScripterGamerBobux/VersionHub/main/V2.3.1.lua.txt",true))()
 -- Version hub
 end))
--- Removed discontinued loader: Versus hub (LoaderV2)
--- See patch notes for URL and HTTP result.
+
 add(HubSection, button("Dex skripthub", "binarydex", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryDex/DexHub/main/Init"))()
 --Dex hub
@@ -6075,11 +6412,11 @@ local GamesSection = section(games, "Games", games["Games"])
 -- section alias removed by table refactor
 
 --[[
-add(GamesSection, label("<U_2B50_FE0F> 2024 FREE UGc <U_2B50_FE0F>"))
--- [ <U_1F96A> Lunxhable Playables <U_1F96A> ] --
--- Removed discontinued loader: <U_1F96A> Lunxhable Playables <U_1F96A>\nMULTIPLE FREE INSTANT UGC(thanks Tora)
--- See patch notes for URL and HTTP result.
-add(GamesSection, label("<U_1F3C1>END OF FREE UGX<U_1F3C1>"))
+add(GamesSection, label("2024 FREE UGc "))
+-- [ Lunxhable Playables ] --
+
+
+add(GamesSection, label("END OF FREE UGc"))
 ]]--
 -- [ <U_1F3C1><U_2B50_FE0F>END OF FREE UGX<U_2B50_FE0F><U_1F3C1> ] --
 
@@ -7110,9 +7447,6 @@ add(GamesSection, button("teleport to game", "FREE ugx", function()
 --tp to animeraxing
 game:GetService("TeleportService"):Teleport(16712648821, game:GetService("Players").LocalPlayer)
 end))
-
--- Removed discontinued loader: <U_1F6BD><U_1F9FB> Toilet Battle Simulator <U_1F9FB><U_1F6BD>
--- See patch notes for URL and HTTP result.
 
 games[("["..emoji.pancakes.."Pankake Empire Tykoon"..emoji.pancakes.."]")] = games[("["..emoji.pancakes.."Pankake Empire Tykoon"..emoji.pancakes.."]")] or {}
 local GamesSection = section(games, ("["..emoji.pancakes.."Pankake Empire Tykoon"..emoji.pancakes.."]"), games[("["..emoji.pancakes.."Pankake Empire Tykoon"..emoji.pancakes.."]")])
@@ -8750,7 +9084,7 @@ local function performQuickAction(actionName)
         game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
     elseif actionName == "Server Hop" then
         loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/serverhop", true))()
-    elseif actionName == "Shut Down" then
+    elseif actionName == "Exit Game" then
         game:Shutdown()
     elseif actionName == "Reload Hub" then
         local reloadHub = env.loadhub
@@ -8867,7 +9201,7 @@ local function KUSTOMTOGGLE()
             {Name = "Executor", Icon = emoji.laptop},
             {Name = "Rejoin", Icon = emoji.cyclone},
             {Name = "Server Hop", Icon = emoji.rocket},
-            {Name = "Shut Down", Icon = emoji.cross_mark},
+            {Name = "Exit Game", Icon = emoji.cross_mark},
             {Name = "Reload Hub", Icon = emoji.lollipop},
             {Name = "Admin Palette", Icon = emoji.japanese_goblin},
         }
