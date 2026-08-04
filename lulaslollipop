@@ -10167,21 +10167,49 @@ end))
 buildHub(Window)
 
 -- Marketplace V4 is created natively inside the existing Kavo/LH tab system.
+-- Give every stored tab an explicit sidebar order so special Kavo pages can be
+-- inserted exactly where LH wants them without changing their creation/runtime order.
+local funSidebarOrder = nil
+for tabIndex, tabData in ipairs(tabOrder) do
+    local tabUi = tabData and tabData._ui
+    local tabButton = tabUi and tabUi.Button
+    local sidebarOrder = tabIndex * 10
+    if tabButton then
+        tabButton.LayoutOrder = sidebarOrder
+    end
+    if tabData and tabData._name == "Fun" then
+        funSidebarOrder = sidebarOrder
+    end
+end
+funSidebarOrder = funSidebarOrder or 40
+
+local animationBundlesTab = nil
 if Window.EnableAnimationBundles then
-    local animationTabOk, animationTabError = pcall(function()
-        Window:EnableAnimationBundles("Animation Bundles")
+    local animationTabOk, animationTabResult = pcall(function()
+        return Window:EnableAnimationBundles("Animation Bundles")
     end)
-    if not animationTabOk then
-        warn("[Lollypop Hub Animation Marketplace V4] " .. tostring(animationTabError))
+    if animationTabOk then
+        animationBundlesTab = animationTabResult
+        if animationBundlesTab and animationBundlesTab.Button then
+            animationBundlesTab.Button.LayoutOrder = funSidebarOrder + 1
+        end
+    else
+        warn("[Lollypop Hub Animation Marketplace V4] " .. tostring(animationTabResult))
         if LHRuntime and LHRuntime.Notify then
-            pcall(function() LHRuntime:Notify("error", "Animation Bundles", "Marketplace V4 could not initialize: " .. tostring(animationTabError), 7, nil, true) end)
+            pcall(function() LHRuntime:Notify("error", "Animation Bundles", "Marketplace V4 could not initialize: " .. tostring(animationTabResult), 7, nil, true) end)
         end
     end
 else
     warn("[Lollypop Hub Animation Marketplace V4] Loaded Kavo does not expose EnableAnimationBundles.")
 end
 
-if Window.EnablePersonalShelf then Window:EnablePersonalShelf("My Shelf") end
+local personalShelfTab = nil
+if Window.EnablePersonalShelf then
+    personalShelfTab = Window:EnablePersonalShelf("My Shelf")
+    if personalShelfTab and personalShelfTab.Button then
+        personalShelfTab.Button.LayoutOrder = funSidebarOrder + 2
+    end
+end
 
 env.lhloaded = true
 env.LHBooting = false
