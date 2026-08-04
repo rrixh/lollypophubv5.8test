@@ -1,6 +1,6 @@
---main v10 LOLLYPOP HUB
+--main v10.5.5 LOLLYPOP HUB 
 
-date = "August 2"..", "..tostring(os.date("%Y"))
+date = "August 4"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -348,11 +348,272 @@ emoji.music = emoji.musical_note
 emoji.phone = emoji.mobile_phone
 emoji.warning_sign = emoji.warning
 emoji.light_bulb = utf.char(0x1F4A1)
-local env = (getgenv and getgenv()) or _G
+local env = (type(getgenv) == "function" and getgenv()) or _G
+-- Several older/sandboxed executors omit getgenv even though the rest of LH can still run.
+-- Install one stable fallback before any legacy LH kode calls getgenv().
+if type(getgenv) ~= "function" then
+    env.getgenv = function() return env end
+end
 env.LHEmoji = emoji
+
+--  AVA DANCE SETTINGS
+env.LH_OWNER_KREDITS_ANIMATION_ID = 85612839739153 
+-- ateez say my name
+env.LH_MY_SHELF_ANIMATION_ID = 113164397821194 
+-- wys lil uzi vert
+
 local HttpService = game:GetService("HttpService")
 local LH_SETTINGS_FOLDER = "LollypopHub"
 local LH_SETTINGS_FILE = LH_SETTINGS_FOLDER .. "/settings.json"
+local LH_SESSION_FILE = LH_SETTINGS_FOLDER .. "/session_v10.json"
+local LH_SESSION_BACKUP_FILE = LH_SETTINGS_FOLDER .. "/session_v10.backup.json"
+
+--==================================================
+-- MULTI-EXECUTOR KOMPATIBILITY LAYER
+--==================================================
+local function envValue(name)
+    local ok, value = pcall(function() return rawget(env, name) end)
+    if ok then return value end
+    return nil
+end
+
+local function firstFunction(...)
+    for index = 1, select("#", ...) do
+        local candidate = select(index, ...)
+        if type(candidate) == "function" then return candidate end
+    end
+    return nil
+end
+
+local synTable = type(envValue("syn")) == "table" and envValue("syn") or (type(syn) == "table" and syn or nil)
+local clipboardTable = type(envValue("Clipboard")) == "table" and envValue("Clipboard") or nil
+local fluxusTable = type(envValue("fluxus")) == "table" and envValue("fluxus") or nil
+
+local LHCompat = {
+    Native = {},
+    Executor = "Unknown",
+}
+env.LHCompat = LHCompat
+
+LHCompat.Native.SetClipboard = firstFunction(
+    envValue("setclipboard"), envValue("toclipboard"), envValue("set_clipboard"),
+    clipboardTable and clipboardTable.set,
+    synTable and synTable.write_clipboard
+)
+LHCompat.Native.ReadFile = firstFunction(envValue("readfile"), envValue("read_file"))
+LHCompat.Native.WriteFile = firstFunction(envValue("writefile"), envValue("write_file"))
+LHCompat.Native.IsFile = firstFunction(envValue("isfile"), envValue("is_file"))
+LHCompat.Native.DeleteFile = firstFunction(envValue("delfile"), envValue("deletefile"), envValue("delete_file"))
+LHCompat.Native.MakeFolder = firstFunction(envValue("makefolder"), envValue("make_folder"))
+LHCompat.Native.IsFolder = firstFunction(envValue("isfolder"), envValue("is_folder"))
+LHCompat.Native.ListFiles = firstFunction(envValue("listfiles"), envValue("list_files"))
+LHCompat.Native.Request = firstFunction(
+    envValue("request"), envValue("http_request"),
+    synTable and synTable.request,
+    fluxusTable and fluxusTable.request
+)
+LHCompat.Native.QueueOnTeleport = firstFunction(
+    envValue("queue_on_teleport"), envValue("queueonteleport"),
+    synTable and synTable.queue_on_teleport
+)
+LHCompat.Native.ProtectGui = firstFunction(
+    envValue("protectgui"), envValue("protect_gui"),
+    synTable and synTable.protect_gui
+)
+LHCompat.Native.GetHui = firstFunction(envValue("gethui"), envValue("get_hidden_gui"))
+LHCompat.Native.CloneRef = firstFunction(envValue("cloneref"), envValue("clone_ref"))
+LHCompat.Native.SetFpsCap = firstFunction(envValue("setfpscap"), envValue("set_fps_cap"))
+LHCompat.Native.GetExecutorName = firstFunction(envValue("getexecutorname"), envValue("identifyexecutor"))
+
+pcall(function()
+    if LHCompat.Native.GetExecutorName then
+        local name, version = LHCompat.Native.GetExecutorName()
+        LHCompat.Executor = tostring(name or "Unknown") .. (version and (" " .. tostring(version)) or "")
+    end
+end)
+
+function LHCompat.Supports(name)
+    return type(LHCompat.Native[tostring(name)]) == "function"
+end
+
+function LHCompat.SetClipboard(text)
+    local fn = LHCompat.Native.SetClipboard
+    if not fn then return false, "klipboard is not supported by this executor" end
+    text = tostring(text or "")
+    local ok, err = pcall(fn, text)
+    if not ok and clipboardTable and fn == clipboardTable.set then
+        ok, err = pcall(fn, clipboardTable, text)
+    end
+    return ok, err
+end
+
+function LHCompat.GetHui()
+    if LHCompat.Native.GetHui then
+        local ok, result = pcall(LHCompat.Native.GetHui)
+        if ok and result then return result end
+    end
+    return game:GetService("CoreGui")
+end
+
+function LHCompat.ParentGui(gui)
+    if not gui then return false, "missing gui" end
+    local parents = {
+        LHCompat.GetHui(),
+        game:GetService("CoreGui"),
+        game:GetService("Players").LocalPlayer and game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui"),
+    }
+    for _, parent in ipairs(parents) do
+        if parent then
+            local ok = pcall(function() gui.Parent = parent end)
+            if ok and gui.Parent then return true, parent end
+        end
+    end
+    return false, "no supported gui parent"
+end
+
+function LHCompat.CloneRef(object)
+    if LHCompat.Native.CloneRef then
+        local ok, result = pcall(LHCompat.Native.CloneRef, object)
+        if ok and result then return result end
+    end
+    return object
+end
+
+function LHCompat.QueueOnTeleport(source)
+    if not LHCompat.Native.QueueOnTeleport then return false, "queue-on-teleport is unavailable" end
+    local ok, err = pcall(LHCompat.Native.QueueOnTeleport, tostring(source or ""))
+    return ok, err
+end
+
+function LHCompat.HttpGet(url, useCache)
+    url = tostring(url or "")
+    if url == "" then return false, "missing URL" end
+    local failures = {}
+
+    if LHCompat.Native.Request then
+        local requestOk, response = pcall(LHCompat.Native.Request, {
+            Url = url,
+            Method = "GET",
+            Headers = {
+                ["Accept"] = "*/*",
+                ["User-Agent"] = "Roblox/LollypopHub-10.5.5",
+            },
+        })
+        if requestOk and type(response) == "table" then
+            local status = tonumber(response.StatusCode or response.Status or response.status_code or 0) or 0
+            local body = response.Body or response.body
+            if status >= 200 and status < 300 and type(body) == "string" and #body > 0 then
+                return true, body, status
+            end
+            table.insert(failures, "request HTTP " .. tostring(status > 0 and status or "unknown"))
+        elseif not requestOk then
+            table.insert(failures, "request error: " .. tostring(response))
+        end
+    end
+
+    local gameOk, body = pcall(function() return game:HttpGet(url, useCache ~= false) end)
+    if gameOk and type(body) == "string" and #body > 0 then return true, body, 200 end
+    if not gameOk then table.insert(failures, "game:HttpGet error: " .. tostring(body)) end
+    return false, (#failures > 0 and table.concat(failures, "; ") or "empty HTTP response")
+end
+
+function LHCompat.LoadRemote(url, chunkName, optional)
+    local ok, sourceOrError = LHCompat.HttpGet(url, true)
+    if not ok then
+        local message = "HTTP load failed for " .. tostring(url) .. ": " .. tostring(sourceOrError)
+        if optional then warn("[Lollypop Hub Optional] " .. message); return false, message end
+        return false, message
+    end
+    local compiler, compileError = loadstring(sourceOrError, chunkName or tostring(url))
+    if not compiler then
+        local message = "compile failed for " .. tostring(chunkName or url) .. ": " .. tostring(compileError)
+        if optional then warn("[Lollypop Hub Optional] " .. message); return false, message end
+        return false, message
+    end
+    local runOk, result = pcall(compiler)
+    if not runOk then
+        local message = "runtime failed for " .. tostring(chunkName or url) .. ": " .. tostring(result)
+        if optional then warn("[Lollypop Hub Optional] " .. message); return false, message end
+        return false, message
+    end
+    return true, result
+end
+
+function LHCompat.EnsureFolder(folder)
+    if not LHCompat.Native.MakeFolder then return false end
+    if LHCompat.Native.IsFolder then
+        local ok, exists = pcall(LHCompat.Native.IsFolder, folder)
+        if ok and exists then return true end
+    end
+    local ok = pcall(LHCompat.Native.MakeFolder, folder)
+    return ok
+end
+
+function LHCompat.ReadText(path)
+    if not LHCompat.Native.ReadFile then return false, "readfile unavailable" end
+    if LHCompat.Native.IsFile then
+        local okFile, exists = pcall(LHCompat.Native.IsFile, path)
+        if not okFile or not exists then return false, "file not found" end
+    end
+    local ok, result = pcall(LHCompat.Native.ReadFile, path)
+    return ok, result
+end
+
+function LHCompat.WriteText(path, text)
+    if not LHCompat.Native.WriteFile then return false, "writefile unavailable" end
+    LHCompat.EnsureFolder(LH_SETTINGS_FOLDER)
+    local ok, err = pcall(LHCompat.Native.WriteFile, path, tostring(text or ""))
+    return ok, err
+end
+
+function LHCompat.ReadJson(path)
+    local ok, text = LHCompat.ReadText(path)
+    if not ok then return false, text end
+    local decodedOk, decoded = pcall(function() return HttpService:JSONDecode(text) end)
+    if not decodedOk or type(decoded) ~= "table" then return false, decoded end
+    return true, decoded
+end
+
+function LHCompat.WriteJsonAtomic(path, value, backupPath)
+    if not LHCompat.Native.WriteFile then return false, "writefile unavailable" end
+    LHCompat.EnsureFolder(LH_SETTINGS_FOLDER)
+    local encodedOk, encoded = pcall(function() return HttpService:JSONEncode(value) end)
+    if not encodedOk then return false, encoded end
+
+    if backupPath then
+        local oldOk, oldText = LHCompat.ReadText(path)
+        if oldOk and type(oldText) == "string" then pcall(LHCompat.Native.WriteFile, backupPath, oldText) end
+    end
+
+    local tempPath = path .. ".tmp"
+    local tempOk, tempErr = pcall(LHCompat.Native.WriteFile, tempPath, encoded)
+    if not tempOk then return false, tempErr end
+    local verifyOk, verifyText = LHCompat.ReadText(tempPath)
+    if not verifyOk or verifyText ~= encoded then return false, "temporary save verification failed" end
+    local writeOk, writeErr = pcall(LHCompat.Native.WriteFile, path, encoded)
+    if LHCompat.Native.DeleteFile then pcall(LHCompat.Native.DeleteFile, tempPath) end
+    return writeOk, writeErr
+end
+
+function LHCompat.FilesAvailable()
+    return LHCompat.Native.ReadFile ~= nil and LHCompat.Native.WriteFile ~= nil
+end
+
+-- Safe aliases only. Native functions are captured before aliases are assigned, preventing recursion.
+if type(envValue("cloneref")) ~= "function" then env.cloneref = LHCompat.CloneRef end
+if type(envValue("gethui")) ~= "function" then env.gethui = LHCompat.GetHui end
+if type(envValue("setclipboard")) ~= "function" then env.setclipboard = LHCompat.SetClipboard end
+if type(envValue("toclipboard")) ~= "function" then env.toclipboard = LHCompat.SetClipboard end
+if type(envValue("request")) ~= "function" and LHCompat.Native.Request then env.request = LHCompat.Native.Request end
+if type(envValue("queue_on_teleport")) ~= "function" and LHCompat.Native.QueueOnTeleport then env.queue_on_teleport = LHCompat.QueueOnTeleport end
+if type(envValue("readfile")) ~= "function" and LHCompat.Native.ReadFile then env.readfile = LHCompat.Native.ReadFile end
+if type(envValue("writefile")) ~= "function" and LHCompat.Native.WriteFile then env.writefile = LHCompat.Native.WriteFile end
+if type(envValue("isfile")) ~= "function" and LHCompat.Native.IsFile then env.isfile = LHCompat.Native.IsFile end
+if type(envValue("delfile")) ~= "function" and LHCompat.Native.DeleteFile then env.delfile = LHCompat.Native.DeleteFile end
+if type(envValue("makefolder")) ~= "function" and LHCompat.Native.MakeFolder then env.makefolder = LHCompat.Native.MakeFolder end
+if type(envValue("isfolder")) ~= "function" and LHCompat.Native.IsFolder then env.isfolder = LHCompat.Native.IsFolder end
+if type(envValue("listfiles")) ~= "function" and LHCompat.Native.ListFiles then env.listfiles = LHCompat.Native.ListFiles end
+if type(envValue("setfpscap")) ~= "function" and LHCompat.Native.SetFpsCap then env.setfpscap = LHCompat.Native.SetFpsCap end
 
 env.LHSettings = env.LHSettings or {
     Theme = "Blood",
@@ -375,6 +636,12 @@ env.LHSettings = env.LHSettings or {
     AutoSavePerGame = false,
     SeasonalTheme = true,
     OpeningSound = true,
+    PersonalShelf = {},
+    ShelfEnabled = true,
+    ShelfAutoSave = false,
+    AppearanceMode = "Dark",
+    UniversalJumpPower = 50,
+    SessionRestore = true,
 }
 
 local function mergeSettings(target, source)
@@ -386,10 +653,8 @@ local function mergeSettings(target, source)
 end
 
 pcall(function()
-    if isfile and readfile and isfile(LH_SETTINGS_FILE) then
-        local decoded = HttpService:JSONDecode(readfile(LH_SETTINGS_FILE))
-        mergeSettings(env.LHSettings, decoded)
-    end
+    local ok, decoded = LHCompat.ReadJson(LH_SETTINGS_FILE)
+    if ok then mergeSettings(env.LHSettings, decoded) end
 end)
 
 local LH_UI_DEFAULTS = {
@@ -413,6 +678,12 @@ local LH_UI_DEFAULTS = {
     AutoSavePerGame = false,
     SeasonalTheme = true,
     OpeningSound = true,
+    PersonalShelf = {},
+    ShelfEnabled = true,
+    ShelfAutoSave = false,
+    AppearanceMode = "Dark",
+    UniversalJumpPower = 50,
+    SessionRestore = true,
 }
 
 if env.LHSettings.NotificationMuteDefaultV36 ~= true then
@@ -442,16 +713,46 @@ if env.LHSettings.AutoSaveEdits == nil then env.LHSettings.AutoSaveEdits = false
 
 env.LHUISettings.TextColor = env.LHSettings.TextColor
 env.LHUISettings.AutoSaveEdits = env.LHSettings.AutoSaveEdits
+env.LHUISettings.PersonalShelf = env.LHSettings.PersonalShelf
+env.LHUISettings.ShelfEnabled = env.LHSettings.ShelfEnabled ~= false
+env.LHUISettings.ShelfAutoSave = env.LHSettings.ShelfAutoSave == true
+env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
 
-if(getgenv().lhloaded)then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/lib/notifikation/windows10ui"))().show({
-Position = UDim2.new(0.5, 0, 0.5, 0), 
-Text = ("Whoops! Lollypop Hub already loaded! "..emoji.japanese_goblin), 
-Description = ("say \"/e reload\" if you want to reload Lollypop Hub "..emoji.lollipop), 
-        MessageBoxIcon = "Error", 
-        MessageBoxButtons = "OK"})
-   return 
-end;
+local LH_PREVIOUS_SESSION = nil
+do
+    local ok, previous = LHCompat.ReadJson(LH_SESSION_FILE)
+    if ok and type(previous) == "table" then LH_PREVIOUS_SESSION = previous end
+end
+
+local function localStartupNotify(title, text, durationValue)
+    title = tostring(title or "Lollypop Hub")
+    text = tostring(text or "")
+    local runtime = rawget(env, "LHRuntime")
+    if type(runtime) == "table" and type(runtime.Notify) == "function" then
+        local ok = pcall(function() runtime:Notify("warning", title, text, durationValue or 5, nil, true) end)
+        if ok then return true end
+    end
+    return pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = durationValue or 5,
+            Icon = "rbxassetid://" .. tostring(_G.lollypopimg or 17767487755),
+        })
+    end)
+end
+
+if env.lhloaded == true or env.LHBooting == true then
+    localStartupNotify(
+        "Lollypop Hub already loaded",
+        "say \"/e reload\" if you want to reload Lollypop Hub " .. emoji.lollipop,
+        6
+    )
+    return
+end
+
+env.LHBooting = true
+env.lhloaded = false
 
 local OWNER = ("lulaslollipop");
 local START = tick();
@@ -459,11 +760,21 @@ env.LHSessionStart = START
 getgenv().kolors=true
 getgenv().tpWalk=true
 local RobloxTask = task
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS', true))();
-repeat wait() until game:IsLoaded()
+
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local GLOBALS_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS"
+local globalsOk, globalsError = LHCompat.LoadRemote(GLOBALS_URL, "LH globaLS", true)
+if not globalsOk then warn("[Lollypop Hub] Optional globaLS skipped: " .. tostring(globalsError)) end
 -----
 env.loadhub = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))();
+    local ok, result = LHCompat.LoadRemote(
+        "https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2",
+        "Lollypop Hub Mobile Loader",
+        false
+    )
+    if not ok then error(result) end
+    return result
 end;
 ------element properties------
 env.TitleSize = 16.5
@@ -478,7 +789,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10')
+local Vv = ('10.5.5')
 local LastUPDATE = "Last Update: "..date
 ------------------
 local savedAccent = env.LHSettings.Accent
@@ -738,10 +1049,12 @@ env.destroyLollypopHub = function()
         end
     end
     env.lhloaded = false
+    env.LHBooting = false
 end;
 --===========HUB LOADED============--
 
-env.lhloaded=true
+env.lhloaded=false
+-- The loaded sentinel is set only after Kavo and every LH tab finish building.
 --=============LOKALS==============--
 local Plrs = game:GetService[[Players]];
 local lp = Plrs.LocalPlayer
@@ -765,12 +1078,28 @@ local LHRuntime = {
     FPS = 0,
     MemoryMB = 0,
     FlightCleanup = nil,
+    CleanupCallbacks = {},
+    SessionWindow = nil,
+    SessionWriteRevision = 0,
+    SessionSupported = LHCompat.FilesAvailable(),
 }
 env.LHRuntime = LHRuntime
 
 function LHRuntime:Track(connection)
     if connection then table.insert(self.Connections, connection) end
     return connection
+end
+
+function LHRuntime:AddCleanup(callback)
+    if type(callback) == "function" then table.insert(self.CleanupCallbacks, callback) end
+    return callback
+end
+
+function LHRuntime:ShowIsland(titleText, bodyText, options)
+    if env.LHKavo and type(env.LHKavo.ShowIsland) == "function" then
+        return env.LHKavo:ShowIsland(titleText, bodyText, options)
+    end
+    return nil
 end
 
 function LHRuntime:AddButtonPressEffect(button)
@@ -874,12 +1203,62 @@ end
 
 function LHRuntime:SaveSettings()
     env.LHSettings.CommandPrefix = self.Prefix
-    if not (writefile and makefolder) then return false, "file functions unavailable" end
-    local ok, err = pcall(function()
-        if isfolder and not isfolder(LH_SETTINGS_FOLDER) then makefolder(LH_SETTINGS_FOLDER) end
-        writefile(LH_SETTINGS_FILE, HttpService:JSONEncode(env.LHSettings))
-    end)
+    local ok, err = LHCompat.WriteJsonAtomic(LH_SETTINGS_FILE, env.LHSettings, LH_SETTINGS_FILE .. ".backup")
     return ok, err
+end
+
+function LHRuntime:WriteSession(cleanShutdown)
+    if not self.SessionSupported or not self.SessionWindow then return false, "session files unavailable" end
+    local state = nil
+    pcall(function() state = self.SessionWindow:GetUIState() end)
+
+    -- Avoid hammering slower mobile executors with identical file writes. A changed tab,
+    -- search, window position, or scroll position still produces a fresh snapshot.
+    local stateFingerprint = nil
+    pcall(function() stateFingerprint = HttpService:JSONEncode(state or {}) end)
+    if cleanShutdown ~= true and stateFingerprint and stateFingerprint == self.LastSessionFingerprint then
+        return true, "unchanged"
+    end
+
+    local payload = {
+        Version = 3,
+        HubVersion = Vv,
+        Running = cleanShutdown ~= true,
+        CleanShutdown = cleanShutdown == true,
+        SavedAt = os.time(),
+        PlaceId = game.PlaceId,
+        JobId = tostring(game.JobId or ""),
+        State = state,
+    }
+    local ok, err = LHCompat.WriteJsonAtomic(LH_SESSION_FILE, payload, LH_SESSION_BACKUP_FILE)
+    if ok then
+        self.LastSessionWrite = os.clock()
+        self.LastSessionFingerprint = stateFingerprint
+    end
+    return ok, err
+end
+
+function LHRuntime:StartSessionPersistence(window)
+    self.SessionWindow = window
+    if not self.SessionSupported then return false end
+    self.SessionWriteRevision = self.SessionWriteRevision + 1
+    local revision = self.SessionWriteRevision
+    self:WriteSession(false)
+    task.spawn(function()
+        while not self.Unloading and revision == self.SessionWriteRevision and self.SessionWindow == window do
+            task.wait(1.25)
+            if not self.Unloading then self:WriteSession(false) end
+        end
+    end)
+    return true
+end
+
+function LHRuntime:MarkSessionClean()
+    self.SessionWriteRevision = self.SessionWriteRevision + 1
+    if self.SessionWindow and self.SessionSupported then
+        return self:WriteSession(true)
+    end
+    return false
 end
 
 function LHRuntime:SettingChanged()
@@ -985,8 +1364,301 @@ function LHRuntime:GetRoot(character)
     return character and (character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso"))
 end
 
+--==================================================
+-- RESPAWN-SAFE UNIVERSAL FEATURE MANAGER
+--==================================================
+local LHFeatures = {
+    Character = nil,
+    Humanoid = nil,
+    Root = nil,
+    CharacterDiedConnection = nil,
+    Dead = false,
+    NoClipEnabled = false,
+    InfiniteJumpEnabled = false,
+    AntiSitEnabled = false,
+    JumpLimitBypassEnabled = false,
+    ProximityAutoJumpEnabled = false,
+    ProximityDistance = 7.5,
+    ProximityTargetUserId = 0,
+    ProximityAccumulator = 0,
+    LastProximityJump = 0,
+    UniversalJumpPower = tonumber(env.LHSettings.UniversalJumpPower) or 50,
+    NoClipOriginal = setmetatable({}, {__mode = "k"}),
+    JumpModeOriginal = setmetatable({}, {__mode = "k"}),
+    JumpLimitTargets = setmetatable({}, {__mode = "k"}),
+}
+env.LHFeatures = LHFeatures
+
+function LHFeatures:GetHumanoid()
+    if self.Humanoid and self.Humanoid.Parent then return self.Humanoid end
+    local character = lp.Character
+    self.Humanoid = character and character:FindFirstChildOfClass("Humanoid") or nil
+    return self.Humanoid
+end
+
+function LHFeatures:GetRoot()
+    if self.Root and self.Root.Parent then return self.Root end
+    local character = lp.Character
+    self.Root = character and (character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")) or nil
+    return self.Root
+end
+
+function LHFeatures:CaptureJumpLimitValues(humanoid)
+    humanoid = humanoid or self:GetHumanoid()
+    if not humanoid or not humanoid.Parent then return nil end
+
+    local target = {Humanoid = humanoid}
+    local okMode, useJumpPower = pcall(function() return humanoid.UseJumpPower end)
+    if okMode then
+        target.HasUseJumpPower = true
+        target.UseJumpPower = useJumpPower == true
+    end
+
+    local okPower, jumpPower = pcall(function() return humanoid.JumpPower end)
+    if okPower and type(jumpPower) == "number" then
+        target.HasJumpPower = true
+        target.JumpPower = jumpPower
+        self.UniversalJumpPower = jumpPower
+        env.LHSettings.UniversalJumpPower = jumpPower
+    end
+
+    local okHeight, jumpHeight = pcall(function() return humanoid.JumpHeight end)
+    if okHeight and type(jumpHeight) == "number" then
+        target.HasJumpHeight = true
+        target.JumpHeight = jumpHeight
+    end
+
+    self.JumpLimitTargets[humanoid] = target
+    return target
+end
+
+function LHFeatures:ApplyJumpLimitValues(humanoid)
+    humanoid = humanoid or self:GetHumanoid()
+    if not humanoid or humanoid.Health <= 0 then return false end
+
+    local target = self.JumpLimitTargets[humanoid] or self:CaptureJumpLimitValues(humanoid)
+    if not target then return false end
+
+    -- Do not force UseJumpPower. Changing the Humanoid jump mode can make the
+    -- player jump much higher than the game intended. Preserve and enforce the
+    -- values that were already active when the bypass was enabled.
+    if target.HasJumpPower then
+        pcall(function() humanoid.JumpPower = target.JumpPower end)
+    end
+    if target.HasJumpHeight then
+        pcall(function() humanoid.JumpHeight = target.JumpHeight end)
+    end
+    return true
+end
+
+function LHFeatures:ClearJumpLimitTargets()
+    self.JumpLimitTargets = setmetatable({}, {__mode = "k"})
+end
+
+function LHFeatures:RestoreNoClip()
+    for part, original in pairs(self.NoClipOriginal) do
+        if part and part.Parent and part:IsA("BasePart") then
+            pcall(function() part.CanCollide = original end)
+        end
+        self.NoClipOriginal[part] = nil
+    end
+end
+
+function LHFeatures:BindCharacter(character)
+    if self.CharacterDiedConnection then
+        pcall(function() self.CharacterDiedConnection:Disconnect() end)
+        self.CharacterDiedConnection = nil
+    end
+    self:RestoreNoClip()
+    self.Character = character
+    self.Humanoid = nil
+    self.Root = nil
+    self.Dead = false
+    if not character then return end
+
+    task.spawn(function()
+        local humanoid = character:FindFirstChildOfClass("Humanoid") or character:WaitForChild("Humanoid", 10)
+        local root = character:FindFirstChild("HumanoidRootPart") or character:WaitForChild("HumanoidRootPart", 10)
+        if self.Character ~= character then return end
+        self.Humanoid = humanoid
+        self.Root = root or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+        if humanoid then
+            self.Dead = humanoid.Health <= 0
+            self.CharacterDiedConnection = humanoid.Died:Connect(function()
+                if self.Character == character then self.Dead = true end
+            end)
+            if self.JumpLimitBypassEnabled then
+                self:CaptureJumpLimitValues(humanoid)
+            end
+        end
+    end)
+end
+
+function LHFeatures:SetJumpPower(value)
+    value = math.clamp(tonumber(value) or self.UniversalJumpPower or 50, 0, 500)
+    self.UniversalJumpPower = value
+    env.LHSettings.UniversalJumpPower = value
+    local humanoid = self:GetHumanoid()
+    if humanoid then
+        pcall(function() humanoid.JumpPower = value end)
+        if self.JumpLimitBypassEnabled then
+            local target = self.JumpLimitTargets[humanoid] or self:CaptureJumpLimitValues(humanoid)
+            if target then
+                target.HasJumpPower = true
+                target.JumpPower = value
+            end
+        end
+    end
+    if LHRuntime and not LHRuntime.Unloading then LHRuntime:SettingChanged() end
+    return value
+end
+
+function LHFeatures:SetNoClip(enabled)
+    self.NoClipEnabled = enabled == true
+    if not self.NoClipEnabled then self:RestoreNoClip() end
+end
+
+function LHFeatures:SetInfiniteJump(enabled)
+    self.InfiniteJumpEnabled = enabled == true
+end
+
+function LHFeatures:SetAntiSit(enabled)
+    self.AntiSitEnabled = enabled == true
+end
+
+function LHFeatures:RestoreJumpMode()
+    for humanoid, original in pairs(self.JumpModeOriginal) do
+        if humanoid and humanoid.Parent then
+            pcall(function() humanoid.UseJumpPower = original end)
+        end
+        self.JumpModeOriginal[humanoid] = nil
+    end
+    self:ClearJumpLimitTargets()
+end
+
+function LHFeatures:SetJumpLimitBypass(enabled)
+    self.JumpLimitBypassEnabled = enabled == true
+    if self.JumpLimitBypassEnabled then
+        -- Capture the current Humanoid values before the loop starts. This keeps
+        -- the player's normal jump exactly where the game or LH setter already
+        -- placed it instead of forcing a hardcoded JumpPower or jump mode.
+        self:ClearJumpLimitTargets()
+        self:CaptureJumpLimitValues(self:GetHumanoid())
+    else
+        self:RestoreJumpMode()
+    end
+end
+
+function LHFeatures:SetProximityAutoJump(enabled)
+    self.ProximityAutoJumpEnabled = enabled == true
+    self.ProximityAccumulator = 0
+end
+
+function LHFeatures:SetProximityDistance(value)
+    self.ProximityDistance = math.clamp(tonumber(value) or 7.5, 1, 100)
+    return self.ProximityDistance
+end
+
+function LHFeatures:SetProximityTarget(userId)
+    self.ProximityTargetUserId = math.max(0, tonumber(userId) or 0)
+end
+
+function LHFeatures:Cleanup()
+    self.NoClipEnabled = false
+    self.InfiniteJumpEnabled = false
+    self.AntiSitEnabled = false
+    self.JumpLimitBypassEnabled = false
+    self.ProximityAutoJumpEnabled = false
+    self:RestoreNoClip()
+    self:RestoreJumpMode()
+    if self.CharacterDiedConnection then pcall(function() self.CharacterDiedConnection:Disconnect() end) end
+    self.CharacterDiedConnection = nil
+end
+
+LHFeatures:BindCharacter(lp.Character or lp.CharacterAdded:Wait())
+LHRuntime:Track(lp.CharacterAdded:Connect(function(character) LHFeatures:BindCharacter(character) end))
+LHRuntime:Track(lp.CharacterRemoving:Connect(function(character)
+    if LHFeatures.Character == character then
+        LHFeatures:RestoreNoClip()
+        LHFeatures.Character = nil
+        LHFeatures.Humanoid = nil
+        LHFeatures.Root = nil
+        LHFeatures.Dead = true
+    end
+end))
+
+LHRuntime:Track(game:GetService("UserInputService").JumpRequest:Connect(function()
+    if not LHFeatures.InfiniteJumpEnabled or LHRuntime.Unloading then return end
+    local humanoid = LHFeatures:GetHumanoid()
+    if humanoid and humanoid.Health > 0 then
+        pcall(function()
+            humanoid.Jump = true
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end)
+    end
+end))
+
+LHRuntime:Track(game:GetService("RunService").Stepped:Connect(function(_, delta)
+    if LHRuntime.Unloading then return end
+    local character = LHFeatures.Character or lp.Character
+    local humanoid = LHFeatures:GetHumanoid()
+
+    if LHFeatures.NoClipEnabled and character then
+        for _, object in ipairs(character:GetDescendants()) do
+            if object:IsA("BasePart") then
+                if LHFeatures.NoClipOriginal[object] == nil then LHFeatures.NoClipOriginal[object] = object.CanCollide end
+                if object.CanCollide then object.CanCollide = false end
+            end
+        end
+    end
+
+    if humanoid and humanoid.Health > 0 then
+        if LHFeatures.AntiSitEnabled and (humanoid.Sit or humanoid:GetState() == Enum.HumanoidStateType.Seated) then
+            humanoid.Sit = false
+            pcall(function() humanoid:ChangeState(Enum.HumanoidStateType.GettingUp) end)
+        end
+        if LHFeatures.JumpLimitBypassEnabled then
+            LHFeatures:ApplyJumpLimitValues(humanoid)
+        end
+    end
+
+    if LHFeatures.ProximityAutoJumpEnabled and humanoid and humanoid.Health > 0 then
+        LHFeatures.ProximityAccumulator = LHFeatures.ProximityAccumulator + (tonumber(delta) or 0.03)
+        if LHFeatures.ProximityAccumulator >= 0.08 then
+            LHFeatures.ProximityAccumulator = 0
+            local localRoot = LHFeatures:GetRoot()
+            local nearby = false
+            if localRoot then
+                for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                    if player ~= lp and (LHFeatures.ProximityTargetUserId == 0 or player.UserId == LHFeatures.ProximityTargetUserId) then
+                        local targetCharacter = player.Character
+                        local targetRoot = targetCharacter and (targetCharacter:FindFirstChild("HumanoidRootPart") or targetCharacter:FindFirstChild("Torso") or targetCharacter:FindFirstChild("UpperTorso"))
+                        if targetRoot and (targetRoot.Position - localRoot.Position).Magnitude <= LHFeatures.ProximityDistance then
+                            nearby = true
+                            break
+                        end
+                    end
+                end
+            end
+            if nearby and os.clock() - LHFeatures.LastProximityJump >= 0.48 then
+                LHFeatures.LastProximityJump = os.clock()
+                pcall(function()
+                    humanoid.Jump = true
+                    humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                end)
+            end
+        end
+    end
+end))
+
+LHRuntime:AddCleanup(function() LHFeatures:Cleanup() end)
+
 local function normalizeName(text)
-    return string.lower(tostring(text or "")):gsub("^@", ""):gsub("%s+", "")
+    text = tostring(text or "")
+    -- Shelf/player dropdown text can be formatted as "@Username | DisplayName".
+    local usernamePart = text:match("^%s*@?([^|]+)%s*|")
+    if usernamePart and usernamePart ~= "" then text = usernamePart end
+    return string.lower(text):gsub("^%s*@", ""):gsub("%s+", "")
 end
 
 function LHRuntime:FindPlayer(query)
@@ -995,10 +1667,17 @@ function LHRuntime:FindPlayer(query)
     local players = game:GetService("Players"):GetPlayers()
     local localRoot = self:GetRoot()
 
+    local numericUserId = tonumber(query)
+    if numericUserId then
+        for _, player in ipairs(players) do
+            if player.UserId == numericUserId then return player end
+        end
+    end
+
     if query == "random" then
         local choices = {}
         for _, player in ipairs(players) do
-            if player ~= lp and self:GetRoot(player.Character) then table.insert(choices, player) end
+            if player ~= lp then table.insert(choices, player) end
         end
         return #choices > 0 and choices[math.random(1, #choices)] or nil
     end
@@ -1008,7 +1687,8 @@ function LHRuntime:FindPlayer(query)
         local chosen, chosenDistance = nil, nil
         for _, player in ipairs(players) do
             if player ~= lp then
-                local root = self:GetRoot(player.Character)
+                local character = player.Character
+                local root = character and (character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso"))
                 if root then
                     local distance = (root.Position - localRoot.Position).Magnitude
                     if not chosenDistance or (query == "nearest" and distance < chosenDistance) or (query == "furthest" and distance > chosenDistance) then
@@ -1033,33 +1713,103 @@ function LHRuntime:FindPlayer(query)
         end
     end
     local list = #exact > 0 and exact or (#starts > 0 and starts or contains)
-    table.sort(list, function(a, b) return #a.Name < #b.Name end)
+    table.sort(list, function(a, b)
+        local aExact = normalizeName(a.Name) == query or normalizeName(a.DisplayName) == query
+        local bExact = normalizeName(b.Name) == query or normalizeName(b.DisplayName) == query
+        if aExact ~= bExact then return aExact end
+        return #a.Name < #b.Name
+    end)
     return list[1]
+end
+
+function LHRuntime:WaitForRoot(player, timeout)
+    player = player or lp
+    timeout = math.max(0.1, tonumber(timeout) or 3.5)
+    local deadline = os.clock() + timeout
+    repeat
+        if not player or not player.Parent then return nil end
+        -- Do not call GetRoot(nil) for another player: GetRoot(nil) correctly
+        -- means the LocalPlayer, which previously caused missing targets to
+        -- resolve to our own HumanoidRootPart.
+        local character = player.Character
+        local root = character and (character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso"))
+        if root then return root end
+        task.wait(0.05)
+    until os.clock() >= deadline
+    return nil
+end
+
+function LHRuntime:TeleportToPlayer(target)
+    if not target or target == lp then return false, "invalid target" end
+    local localRoot = self:WaitForRoot(lp, 4)
+    local targetRoot = self:WaitForRoot(target, 4)
+    if not localRoot or not targetRoot then return false, "A character root did not load in time" end
+
+    local humanoid = self:GetHumanoid(lp.Character)
+    if humanoid then
+        pcall(function()
+            humanoid.Sit = false
+            humanoid.PlatformStand = false
+            humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+        end)
+    end
+
+    local moved = false
+    local lastError = nil
+    for _ = 1, 5 do
+        if not target.Parent then return false, "Target left the server" end
+        if not localRoot.Parent then localRoot = self:WaitForRoot(lp, 1.5) end
+        if not targetRoot.Parent then targetRoot = self:WaitForRoot(target, 1.5) end
+        if not localRoot or not targetRoot then break end
+
+        local destination = targetRoot.CFrame * CFrame.new(0, 0.25, 3)
+        local ok, err = pcall(function()
+            localRoot.AssemblyLinearVelocity = Vector3.zero
+            localRoot.AssemblyAngularVelocity = Vector3.zero
+            local character = lp.Character
+            local pivoted = false
+            if character and character.Parent then
+                pivoted = pcall(function() character:PivotTo(destination) end)
+            end
+            if not pivoted then localRoot.CFrame = destination end
+        end)
+        if ok then
+            moved = true
+            if (localRoot.Position - targetRoot.Position).Magnitude <= 12 then break end
+        else
+            lastError = tostring(err)
+        end
+        task.wait(0.06)
+    end
+
+    if not moved then return false, lastError or "Teleport could not move your character" end
+    return true
 end
 
 function LHRuntime:ExecuteRemote(url, label)
     label = tostring(label or "Remote skript")
-    local progress = self:Notify("info", label, "Downloading...", 10, 12)
+    local island = self:ShowIsland(label, "Downloading...", {Progress = 12})
     local okDownload, source = pcall(function() return game:HttpGet(tostring(url), true) end)
     if not okDownload then
-        if progress and progress.Close then progress:Close() end
+        if island and island.Close then island:Close() end
         self:Notify("error", label, "Download failed: " .. tostring(source), 7)
         return false, source
     end
-    if progress and progress.SetProgress then progress:SetProgress(55, "Kompiling...") end
+    if island and island.SetProgress then island:SetProgress(55, "Kompiling...") end
     local chunk, compileError = loadstring(source)
     if not chunk then
-        if progress and progress.Close then progress:Close() end
+        if island and island.Close then island:Close() end
         self:Notify("error", label, "Kompile failed: " .. tostring(compileError), 8)
         return false, compileError
     end
-    if progress and progress.SetProgress then progress:SetProgress(82, "Starting...") end
+    if island and island.SetProgress then island:SetProgress(82, "Starting...") end
     local okRun, runError = xpcall(chunk, function(err) return debug.traceback(tostring(err), 2) end)
-    if progress and progress.Close then progress:Close() end
     if not okRun then
+        if island and island.Close then island:Close() end
         self:Notify("error", label, "Runtime failed: " .. tostring(runError), 8)
         return false, runError
     end
+    if island and island.Update then island:Update(label, "Started suxxessfully.", 100); task.delay(1.2, function() island:Close() end) end
     self:Notify("success", label, "Started suxxessfully.", 4)
     return true
 end
@@ -1095,7 +1845,15 @@ function LHRuntime:RegisterCommand(name, aliases, description, usage, callback)
     }
     self.Commands[name] = command
     table.insert(self.CommandOrder, command)
-    for _, alias in ipairs(command.Aliases) do self.Commands[string.lower(tostring(alias))] = command end
+    -- Earlier LH-native kommands keep priority over later backend aliases.
+    -- This prevents Nameless Admin aliases such as "to" and "tp" from
+    -- replacing LH's reliable player resolver/teleport implementation.
+    for _, alias in ipairs(command.Aliases) do
+        local aliasName = string.lower(tostring(alias))
+        if aliasName ~= "" and self.Commands[aliasName] == nil then
+            self.Commands[aliasName] = command
+        end
+    end
     return command
 end
 
@@ -1142,6 +1900,9 @@ function LHRuntime:ApplySettings()
     env.LHUISettings.UIFont = env.LHSettings.UIFont or "Gotham"
     env.LHUISettings.TextColor = env.LHSettings.TextColor
     env.LHUISettings.AutoSaveEdits = env.LHSettings.AutoSaveEdits
+    env.LHUISettings.ShelfEnabled = env.LHSettings.ShelfEnabled ~= false
+    env.LHUISettings.ShelfAutoSave = env.LHSettings.ShelfAutoSave == true
+    env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
     if env.LHKavo then
         pcall(function() env.LHKavo:SetReducedMotion(env.LHSettings.ReducedMotion) end)
         pcall(function() env.LHKavo:SetLowPerformance(env.LHSettings.LowPerformance) end)
@@ -1150,6 +1911,7 @@ function LHRuntime:ApplySettings()
         pcall(function() env.LHKavo:SetScaleMode(env.LHSettings.ScaleMode) end)
         pcall(function() env.LHKavo:SetGlassBlur(env.LHSettings.GlassBlur) end)
         pcall(function() env.LHKavo:SetCustomCursor(env.LHSettings.CustomCursor) end)
+        if env.LHKavo.SetAppearanceMode then pcall(function() env.LHKavo:SetAppearanceMode(env.LHSettings.AppearanceMode or "Dark") end) end
         pcall(function() env.LHKavo:SetTheme(env.LHSettings.Theme) end)
         pcall(function() env.LHKavo:SetFont(env.LHSettings.UIFont or "Gotham") end)
         local accent = env.LHSettings.Accent
@@ -1174,7 +1936,13 @@ end
 
 function LHRuntime:Unload(reason)
     if self.Unloading then return end
+    self:MarkSessionClean()
     self.Unloading = true
+    if env.LHKavo and env.LHKavo.CloseIsland then pcall(function() env.LHKavo:CloseIsland() end) end
+    for index = #self.CleanupCallbacks, 1, -1 do
+        pcall(self.CleanupCallbacks[index])
+        self.CleanupCallbacks[index] = nil
+    end
     if self.FlightCleanup then pcall(self.FlightCleanup); self.FlightCleanup = nil end
     for index = #self.Connections, 1, -1 do
         local connection = self.Connections[index]
@@ -1194,7 +1962,7 @@ function LHRuntime:Unload(reason)
                 if gui:IsA("ScreenGui") and (
                     gui.Name == "KustomToggle" or gui.Name == "CustomLoader" or
                     gui.Name == "LHCommandPalette" or gui.Name == "LHCloseConfirmation" or
-                    gui.Name == "LHQuickExecutor" or gui.Name:match("^LollypopHubUI_")
+                    gui.Name == "LHQuickExecutor" or gui.Name == "LHSessionRestorePrompt" or gui.Name:match("^LollypopHubUI_")
                 ) then
                     pcall(function() gui:Destroy() end)
                 end
@@ -1224,9 +1992,11 @@ function LHRuntime:Unload(reason)
     env.LHRequestClose = nil
     env.LHAdminKommandsEnabled = false
     env.LHNotify = nil
+    env.LHFeatures = nil
     env.LHKavo = nil
     env.AdminKommands = nil
     env.lhloaded = false
+    env.LHBooting = false
     env.LHRuntime = nil
     warn("Lollypop Hub unloaded: " .. tostring(reason or "manual"))
 end
@@ -1282,6 +2052,7 @@ elseif(m=='/e reload')then
 local toggle = game.CoreGui:FindFirstChild[[KustomToggle]];
 if toggle then toggle:Destroy();
 getgenv().lhloaded=false;
+env.LHBooting=false;
 destroyLollypopHub();
 -- _G.note("You kan now klose and reload the skript", 3)
 windowErrorOk("Lollypop Hub reloaded", "You kan now klose and reload the skript")
@@ -1308,10 +2079,12 @@ end;
 
 getgenv().revnote = function(txt,dur)
 if env.LHSettings.NotificationMuted then return end
-local LIB = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant"))();
-LIB.DefaultColor = getgenv().LollypopTheme or Color3.fromRGB(50,205,50)
-LIB:Notification({Text = txt or (emoji.lollipop.."text here"),
-Duration = dur or 5})
+local message = txt or (emoji.lollipop.."text here")
+if env.LHRuntime and env.LHRuntime.Notify then
+    pcall(function() env.LHRuntime:Notify("info", "Lollypop Hub", tostring(message), dur or 5, nil, true) end)
+else
+    localStartupNotify("Lollypop Hub", tostring(message), dur or 5)
+end
 end;
 
 -- [ <U_1F6E0_FE0F> main vars <U_1F6E0_FE0F> ] --
@@ -1455,7 +2228,12 @@ loadingSkreen.Name = "CustomLoader"
 loadingSkreen.IgnoreGuiInset = true
 loadingSkreen.ResetOnSpawn = false
 loadingSkreen.DisplayOrder = 999999
-loadingSkreen.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local loadingParented, loadingParentError = LHCompat.ParentGui(loadingSkreen)
+if not loadingParented then
+    env.lhloaded = false
+    env.LHBooting = false
+    error("Could not parent the LH loading screen: " .. tostring(loadingParentError))
+end
 
 local frame = Instance.new("Frame")
 frame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -1765,21 +2543,17 @@ local darkpurp=Color3.fromRGB(128,0,128);
 
 local lollyhub = function(txt, dur)
 if env.LHSettings.NotificationMuted then return end
-local lollypophub = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
-lollypophub.DefaultColor = getgenv().LollypopTheme
-lollypophub:Notification({
-Text = txt, Duration = dur or 6});
+local message = tostring(txt or "")
+if env.LHRuntime and env.LHRuntime.Notify then
+    pcall(function() env.LHRuntime:Notify("info", "Lollypop Hub", message, dur or 6, nil, true) end)
+else
+    localStartupNotify("Lollypop Hub", message, dur or 6)
+end
 end;
 
 if not env.LHSettings.NotificationMuted then
-    local lollypophub = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))();
-    lollypophub.DefaultColor = getgenv().LollypopTheme
-    lollypophub:Notification({
-        Text = (emoji.lollipop.." Welkome to Lollypop Hub, ")..game.Players.LocalPlayer.Name..("!"..emoji.lollipop), Duration = 3});
-    lollypophub.DefaultColor = getgenv().LollypopTheme
-    lollypophub:Notification({
-        Text = "V"..Vv..(emoji.lollipop..emoji.face_savoring_food),
-        Duration = 3});
+    lollyhub((emoji.lollipop.." Welkome to Lollypop Hub, ")..game.Players.LocalPlayer.Name..("!"..emoji.lollipop), 3)
+    lollyhub("V"..Vv..(emoji.lollipop..emoji.face_savoring_food), 3)
 end
 
 kall(function()
@@ -1899,6 +2673,22 @@ local function descriptor(kind, data)
         self.visible = value and true or false
         if self._ui and self._ui.SetVisible then self._ui:SetVisible(self.visible) end
     end
+    function data:SetValue(value, fire)
+        if self._ui and self._ui.SetValue then return self._ui:SetValue(value, fire) end
+        self.default = value
+        self._currentValue = value
+    end
+    function data:GetValue()
+        if self._ui and self._ui.GetValue then return self._ui:GetValue() end
+        return self._currentValue ~= nil and self._currentValue or self.default
+    end
+    function data:Reset()
+        if self._ui and self._ui.Reset then return self._ui:Reset() end
+    end
+    function data:Fire()
+        if self._ui and self._ui.Fire then return self._ui:Fire() end
+        if type(self.callback) == "function" then return self.callback() end
+    end
     return data
 end
 
@@ -1929,7 +2719,16 @@ end
 local function label(text) return descriptor("label", {text=text}) end
 local function paragraph(title, text) return descriptor("paragraph", {title=title,text=text}) end
 local function kredits(config) return descriptor("kredits", {config=config}) end
-local function add(sectionData, item) table.insert(sectionData, item); return item end
+local function add(sectionData, item)
+    sectionData._idCounts = sectionData._idCounts or {}
+    local displayName = tostring(item.name or item.title or item.text or item.kind or "kontrol")
+    local key = tostring(item.kind or "kontrol") .. "::" .. displayName
+    sectionData._idCounts[key] = (sectionData._idCounts[key] or 0) + 1
+    item.id = item.id or (tostring(sectionData._tab and sectionData._tab._name or "Tab") .. "::" .. tostring(sectionData._name or "Section") .. "::" .. key .. "::" .. tostring(sectionData._idCounts[key]))
+    item.displayName = displayName
+    table.insert(sectionData, item)
+    return item
+end
 
 local function buildHub(window)
     local requestedOrder = {
@@ -1965,18 +2764,64 @@ local function buildHub(window)
                 sectionData._ui = realSection
                 for _, item in ipairs(sectionData) do
                     local ui
-                    if item.kind == "button" then ui = realSection:NewButton(item.name,item.tip,item.callback)
-                    elseif item.kind == "toggle" then ui = realSection:NewToggle(item.name,item.tip,item.callback,item.default)
-                    elseif item.kind == "textbox" then ui = realSection:NewTextBox(item.name,item.tip,item.callback,item.placeholder,item.default)
-                    elseif item.kind == "slider" then ui = realSection:NewSlider(item.name,item.tip,item.min,item.max,item.callback,item.default)
-                    elseif item.kind == "dropdown" then ui = realSection:NewDropdown(item.name,item.tip,item.options,item.callback,item.default)
-                    elseif item.kind == "keybind" then ui = realSection:NewKeybind(item.name,item.tip,item.key,item.callback)
-                    elseif item.kind == "colorpicker" then ui = realSection:NewColorPicker(item.name,item.tip,item.default,item.callback)
-                    elseif item.kind == "counter" and realSection.NewCounter then ui = realSection:NewCounter(item.name,item.tip,item.step,item.callback,item.default,item.min,item.max)
+                    local callback = item.callback
+                    if item.kind == "button" and type(callback) == "function" then
+                        local rawButtonCallback = callback
+                        callback = function(...)
+                            -- Auto-close is a failsafe for loaders that yield, error, or never return.
+                            local island = LHRuntime:ShowIsland(item.displayName, "Running...", {Duration = 4})
+                            local results = table.pack(rawButtonCallback(...))
+                            if island and island.Update then
+                                island:Update(item.displayName, "Done.", 100)
+                                task.delay(0.65, function() island:Close() end)
+                            end
+                            return table.unpack(results, 1, results.n)
+                        end
+                    end
+                    local reversible = item.kind == "toggle" or item.kind == "textbox" or item.kind == "slider" or item.kind == "dropdown" or item.kind == "colorpicker" or item.kind == "counter"
+                    if reversible and type(callback) == "function" then
+                        if item._currentValue == nil then
+                            if item.kind == "dropdown" then item._currentValue = item.default ~= nil and item.default or (item.options and item.options[1])
+                            elseif item.kind == "toggle" then item._currentValue = item.default == true
+                            else item._currentValue = item.default end
+                        end
+                        callback = function(value, ...)
+                            local oldValue = item._currentValue
+                            item._currentValue = value
+                            if not item._suppressUndo and item._ui and KAVO and type(KAVO.RecordUndo) == "function" and oldValue ~= value then
+                                local previous = oldValue
+                                KAVO:RecordUndo(item.id, item.displayName, oldValue, value, function()
+                                    if not item._ui or not item._ui.SetValue then return end
+                                    item._suppressUndo = true
+                                    item._ui:SetValue(previous, true)
+                                    item._suppressUndo = false
+                                end)
+                            end
+                            return item.callback(value, ...)
+                        end
+                    end
+                    if item.kind == "button" then ui = realSection:NewButton(item.name,item.tip,callback)
+                    elseif item.kind == "toggle" then ui = realSection:NewToggle(item.name,item.tip,callback,item.default)
+                    elseif item.kind == "textbox" then ui = realSection:NewTextBox(item.name,item.tip,callback,item.placeholder,item.default)
+                    elseif item.kind == "slider" then ui = realSection:NewSlider(item.name,item.tip,item.min,item.max,callback,item.default)
+                    elseif item.kind == "dropdown" then ui = realSection:NewDropdown(item.name,item.tip,item.options,callback,item.default)
+                    elseif item.kind == "keybind" then ui = realSection:NewKeybind(item.name,item.tip,item.key,callback)
+                    elseif item.kind == "colorpicker" then ui = realSection:NewColorPicker(item.name,item.tip,item.default,callback)
+                    elseif item.kind == "counter" and realSection.NewCounter then ui = realSection:NewCounter(item.name,item.tip,item.step,callback,item.default,item.min,item.max)
                     elseif item.kind == "label" then ui = realSection:NewLabel(item.text)
                     elseif item.kind == "paragraph" and realSection.NewParagraph then ui = realSection:NewParagraph(item.title,item.text)
                     elseif item.kind == "kredits" and realSection.NewKreditsCard then ui = realSection:NewKreditsCard(item.config) end
                     item._ui = ui
+                    if ui and ui.SetMetadata then
+                        ui:SetMetadata({
+                            ControlId = item.id,
+                            DisplayName = item.displayName,
+                            Kind = item.kind,
+                            Tip = item.tip or item.text or "",
+                            TabName = tabData._name,
+                            SectionName = sectionData._name,
+                        })
+                    end
                     if item.resetDefault ~= nil and ui and ui.SetResetDefault then ui:SetResetDefault(item.resetDefault) end
                     if item.visible == false and ui and ui.SetVisible then ui:SetVisible(false) end
                 end
@@ -1987,8 +2832,68 @@ local function buildHub(window)
 end
 
 local KAVO_URL = env.LH_KAVO_URL or "https://raw.githubusercontent.com/rrixh/uwuware/main/lib/kavomobile.lula"
-local KAVO = loadstring(game:HttpGet(KAVO_URL, true))();
+local KAVO_SOURCE = env.LH_KAVO_SOURCE
+local KAVO
+
+local function compileAndRunKavo(source, chunkName)
+    local compiler, compileError = loadstring(source, chunkName or "LH KAVO UI")
+    if not compiler then return false, "compile error: " .. tostring(compileError) end
+    local runOk, result = pcall(compiler)
+    if not runOk then return false, "runtime error: " .. tostring(result) end
+    if type(result) ~= "table" or type(result.CreateLib) ~= "function" then
+        return false, "Kavo source did not return a valid UI library"
+    end
+    return true, result
+end
+
+local function loadKavoWithFallbacks()
+    local failures = {}
+    if type(KAVO_SOURCE) == "string" and KAVO_SOURCE ~= "" then
+        local ok, result = compileAndRunKavo(KAVO_SOURCE, "LH KAVO UI [env source]")
+        if ok then return result, "env.LH_KAVO_SOURCE" end
+        table.insert(failures, "env source: " .. tostring(result))
+    end
+
+    if type(env.LHKavo) == "table" and type(env.LHKavo.CreateLib) == "function" then
+        return env.LHKavo, "existing env.LHKavo"
+    end
+
+    local candidates = {
+        KAVO_URL,
+        "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/lib/kavomobile.lula",
+    }
+    local seen = {}
+    for _, url in ipairs(candidates) do
+        if type(url) == "string" and url ~= "" and not seen[url] then
+            seen[url] = true
+            local httpOk, sourceOrError = LHCompat.HttpGet(url, true)
+            if httpOk then
+                local runOk, result = compileAndRunKavo(sourceOrError, "LH KAVO UI [" .. url .. "]")
+                if runOk then return result, url end
+                table.insert(failures, url .. " -> " .. tostring(result))
+            else
+                table.insert(failures, url .. " -> " .. tostring(sourceOrError))
+            end
+        end
+    end
+    error("Kavo failed every startup branch: " .. table.concat(failures, " | "))
+end
+
+local kavoOk, kavoResult, kavoSource = xpcall(loadKavoWithFallbacks, function(message)
+    return debug and debug.traceback and debug.traceback(tostring(message), 2) or tostring(message)
+end)
+if not kavoOk then
+    env.lhloaded = false
+    env.LHBooting = false
+    localStartupNotify("Lollypop Hub Startup Failed", "Kavo could not load. The loaded flag was reset.", 7)
+    error(kavoResult)
+end
+KAVO = kavoResult
 env.LHKavo = KAVO
+env.LHKavoLoadedFrom = kavoSource
+if tonumber(KAVO.AnimationMarketplaceVersion or 0) < 4 then
+    warn("[Lollypop Hub] Kavo loaded without the Marketplace V4 marker. Upload the patched Kavo file to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
+end
 
 local lollypopHub = ("Lollypop Hub"..emoji.lollipop.." | V") ..Vv.. " | " ..exploit.. " | " ..LastUpdate;
 
@@ -2192,12 +3097,26 @@ end)
 LHRuntime:RegisterCommand("to", {"tp", "goto"}, "Teleports to a player, random, nearest, or furthest.", "to lolli", function(args)
     local query = table.concat(args, " ")
     if query == "" then error("Use: " .. LHRuntime.Prefix .. "to player/random/nearest/furthest") end
-    local target = LHRuntime:FindPlayer(query)
+
+    local target
+    for _ = 1, 20 do
+        target = LHRuntime:FindPlayer(query)
+        if target then break end
+        task.wait(0.05)
+    end
     if not target then error("Player not found: " .. query) end
-    local localRoot, targetRoot = LHRuntime:GetRoot(), LHRuntime:GetRoot(target.Character)
-    if not localRoot or not targetRoot then error("A character root is missing") end
-    localRoot.CFrame = targetRoot.CFrame * CFrame.new(0, 0, 3)
-    LHRuntime:Notify("success", "Teleported", "Moved to @" .. target.Name, 4)
+
+    local ok, err = LHRuntime:TeleportToPlayer(target)
+    if not ok and normalizeName(query) == "random" then
+        -- A random player can leave while the kommand is executing. Try one fresh target.
+        local replacement = LHRuntime:FindPlayer("random")
+        if replacement and replacement ~= target then
+            target = replacement
+            ok, err = LHRuntime:TeleportToPlayer(target)
+        end
+    end
+    if not ok then error(err or "Teleport failed") end
+    LHRuntime:Notify("success", "Teleported", "Moved to @" .. target.Name .. " | " .. target.DisplayName, 4)
 end)
 
 LHRuntime:RegisterCommand("sit", {"seat"}, "Sits locally or sits on a target player's head.", "sit lolli", function(args)
@@ -2225,18 +3144,173 @@ LHRuntime:RegisterCommand("kick", {"leave"}, "Kicks only your local player with 
     lp:Kick(message)
 end)
 
-LHRuntime:RegisterCommand("fly", {"mobilefly", "mfly"}, "Uses the hidden mobile flight kommand backend.", "fly [speed]", function(args)
-    local runner = findNamelessRunner and findNamelessRunner() or nil
-    if not runner and ensureNamelessBackend then
-        ensureNamelessBackend()
-        runner = findNamelessRunner and findNamelessRunner() or nil
+local LHFlight = {
+    Enabled = false,
+    Speed = 50,
+    Up = false,
+    Down = false,
+    NextBindAttempt = 0,
+    CharacterConnection = nil,
+    RenderConnection = nil,
+    Humanoid = nil,
+    Root = nil,
+    BodyVelocity = nil,
+    BodyGyro = nil,
+    OriginalPlatformStand = false,
+    OriginalAutoRotate = true,
+}
+
+function LHFlight:ClearCharacter()
+    if self.BodyVelocity then pcall(function() self.BodyVelocity:Destroy() end) end
+    if self.BodyGyro then pcall(function() self.BodyGyro:Destroy() end) end
+    if self.Humanoid then
+        pcall(function()
+            self.Humanoid.PlatformStand = self.OriginalPlatformStand == true
+            self.Humanoid.AutoRotate = self.OriginalAutoRotate ~= false
+            self.Humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+        end)
     end
-    if not runner then error("Lollypop Admin kommand backend is unavailable.") end
-    local commandText = "mobilefly"
-    if #args > 0 then commandText = commandText .. " " .. table.concat(args, " ") end
-    local ok, result = pcall(runner, commandText)
-    if not ok then error(result) end
-    if type(result) == "table" and result.ok == false then error(result.error or "Mobile fly failed") end
+    if self.Root then
+        pcall(function()
+            self.Root.AssemblyLinearVelocity = Vector3.zero
+            self.Root.AssemblyAngularVelocity = Vector3.zero
+        end)
+    end
+    self.Humanoid, self.Root, self.BodyVelocity, self.BodyGyro = nil, nil, nil, nil
+end
+
+function LHFlight:BindCharacter()
+    self:ClearCharacter()
+    if not self.Enabled then return false end
+    -- Never wait/yield from RenderStepped while the player is respawning.
+    -- CharacterAdded handles the normal rebind and this method safely returns
+    -- when the new character is not fully constructed yet.
+    local character = lp.Character
+    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+    local root = character and (character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso"))
+    if not humanoid or not root then return false end
+
+    self.Humanoid = humanoid
+    self.Root = root
+    self.OriginalPlatformStand = humanoid.PlatformStand
+    self.OriginalAutoRotate = humanoid.AutoRotate
+
+    for _, objectName in ipairs({"LHFlightVelocity", "LHFlightGyro"}) do
+        local old = root:FindFirstChild(objectName)
+        if old then old:Destroy() end
+    end
+
+    local velocity = Instance.new("BodyVelocity")
+    velocity.Name = "LHFlightVelocity"
+    velocity.MaxForce = Vector3.new(1e9, 1e9, 1e9)
+    velocity.P = 1600
+    velocity.Velocity = Vector3.zero
+    velocity.Parent = root
+
+    local gyro = Instance.new("BodyGyro")
+    gyro.Name = "LHFlightGyro"
+    gyro.MaxTorque = Vector3.new(1e9, 1e9, 1e9)
+    gyro.P = 90000
+    gyro.D = 1100
+    gyro.CFrame = root.CFrame
+    gyro.Parent = root
+
+    self.BodyVelocity = velocity
+    self.BodyGyro = gyro
+    humanoid.PlatformStand = true
+    humanoid.AutoRotate = false
+    return true
+end
+
+function LHFlight:SetVertical(actionName, inputState)
+    local enabled = inputState == Enum.UserInputState.Begin or inputState == Enum.UserInputState.Change
+    if actionName == "LHFlyUp" then self.Up = enabled end
+    if actionName == "LHFlyDown" then self.Down = enabled end
+    return Enum.ContextActionResult.Sink
+end
+
+function LHFlight:Enable(speed)
+    speed = tonumber(speed)
+    if speed then self.Speed = math.clamp(speed, 5, 500) end
+    if self.Enabled then
+        LHRuntime:Notify("success", "Fly", "Fly speed updated to " .. tostring(self.Speed), 3)
+        return true
+    end
+
+    self.Enabled = true
+    local ContextActionService = game:GetService("ContextActionService")
+    ContextActionService:BindAction("LHFlyUp", function(name, state)
+        return self:SetVertical(name, state)
+    end, game:GetService("UserInputService").TouchEnabled, Enum.KeyCode.Space, Enum.KeyCode.E)
+    ContextActionService:BindAction("LHFlyDown", function(name, state)
+        return self:SetVertical(name, state)
+    end, game:GetService("UserInputService").TouchEnabled, Enum.KeyCode.LeftControl, Enum.KeyCode.Q)
+    pcall(function()
+        ContextActionService:SetTitle("LHFlyUp", "UP")
+        ContextActionService:SetTitle("LHFlyDown", "DOWN")
+        ContextActionService:SetPosition("LHFlyUp", UDim2.new(1, -160, 1, -180))
+        ContextActionService:SetPosition("LHFlyDown", UDim2.new(1, -95, 1, -180))
+    end)
+
+    self.CharacterConnection = lp.CharacterAdded:Connect(function()
+        task.wait(0.35)
+        if self.Enabled then self:BindCharacter() end
+    end)
+    self:BindCharacter()
+
+    self.RenderConnection = game:GetService("RunService").RenderStepped:Connect(function()
+        if not self.Enabled then return end
+        if not self.Root or not self.Root.Parent or not self.Humanoid or self.Humanoid.Health <= 0 then
+            if os.clock() >= (self.NextBindAttempt or 0) then
+                self.NextBindAttempt = os.clock() + 0.45
+                self:BindCharacter()
+            end
+            return
+        end
+        local move = self.Humanoid.MoveDirection
+        local vertical = (self.Up and 1 or 0) - (self.Down and 1 or 0)
+        local velocity = move * self.Speed + Vector3.new(0, vertical * self.Speed, 0)
+        self.BodyVelocity.Velocity = velocity
+        self.Humanoid.PlatformStand = true
+        self.Humanoid.AutoRotate = false
+
+        local camera = workspace.CurrentCamera
+        if camera then
+            local look = Vector3.new(camera.CFrame.LookVector.X, 0, camera.CFrame.LookVector.Z)
+            if look.Magnitude > 0.001 then
+                self.BodyGyro.CFrame = CFrame.lookAt(self.Root.Position, self.Root.Position + look.Unit)
+            end
+        end
+    end)
+
+    LHRuntime:Notify("success", "Fly", "Fly enabled at speed " .. tostring(self.Speed) .. ". Use the UP/DOWN buttons on mobile.", 4)
+    return true
+end
+
+function LHFlight:Disable()
+    if not self.Enabled then return false end
+    self.Enabled = false
+    self.Up, self.Down = false, false
+    if self.CharacterConnection then self.CharacterConnection:Disconnect(); self.CharacterConnection = nil end
+    if self.RenderConnection then self.RenderConnection:Disconnect(); self.RenderConnection = nil end
+    pcall(function()
+        local ContextActionService = game:GetService("ContextActionService")
+        ContextActionService:UnbindAction("LHFlyUp")
+        ContextActionService:UnbindAction("LHFlyDown")
+    end)
+    self:ClearCharacter()
+    LHRuntime:Notify("success", "Fly", "Fly disabled.", 3)
+    return true
+end
+
+LHRuntime:AddCleanup(function() LHFlight:Disable() end)
+
+LHRuntime:RegisterCommand("fly", {"mobilefly", "mfly"}, "Enables the built-in respawn-safe mobile and desktop fly.", "fly [speed]", function(args)
+    LHFlight:Enable(tonumber(args[1]) or LHFlight.Speed)
+end)
+
+LHRuntime:RegisterCommand("unfly", {"unmobilefly", "unmfly", "nofly"}, "Disables the built-in fly.", "unfly", function()
+    LHFlight:Disable()
 end)
 
 LHRuntime:RegisterCommand("tpwalk", {"tpw", "tw"}, "Toggles TP Walk; optionally sets its speed.", "tpwalk [speed|on|off]", function(args)
@@ -2251,6 +3325,19 @@ LHRuntime:RegisterCommand("tpwalk", {"tpw", "tw"}, "Toggles TP Walk; optionally 
     if type(_G.toggleTPWalk) ~= "function" then error("TP Walk is not ready yet.") end
     _G.toggleTPWalk(enabled)
     getgenv().tpWalk = enabled
+end)
+
+LHRuntime:RegisterCommand("untpwalk", {"untpw", "untw"}, "Disables TP Walk.", "untpwalk", function()
+    if type(_G.toggleTPWalk) == "function" then _G.toggleTPWalk(false) end
+    getgenv().tpWalk = false
+    LHRuntime:Notify("success", "TP Walk", "TP Walk disabled.", 3)
+end)
+
+LHRuntime:RegisterCommand("unspeed", {"us", "unws", "defaultspeed"}, "Restores the normal WalkSpeed.", "unspeed", function()
+    local humanoid = LHRuntime:GetHumanoid()
+    if not humanoid then error("Humanoid not found") end
+    humanoid.WalkSpeed = 16
+    LHRuntime:Notify("success", "Speed", "WalkSpeed restored to 16.", 3)
 end)
 
 LHRuntime:RegisterCommand("settings", {"setting", "options"}, "Opens Ui Kustomization.", "settings", function()
@@ -2478,7 +3565,7 @@ local NamelessCommandReference = {
     ["username"] = {{"name"}, "username <name>", "changes your Username to any name you enter"},
     ["synapsedex"] = {{"sdex"}, "synapsedex (sdex)", "Loads SynapseX's dex explorer"},
     ["antifling"] = {{}, "antifling", "makes other players non-collidable with you"},
-    ["unantifling"] = {{}, "unantifling", "restores collision for other players"},
+    ["unantifling"] = {{"uaf", "noantifling", "unaf"}, "unantifling (uaf,noantifling,unaf)", "restores collision for other players"},
     ["antiflingparts"] = {{"antiunanchoredfling", "afparts"}, "antiflingparts [linearVelocity] [angularVelocity]", "Disables collision on nearby unanchored non-player parts above the velocity threshold"},
     ["unantiflingparts"] = {{"unantiunanchoredfling", "unafparts"}, "unantiflingparts", "Restores collision for unanchored parts changed by antiflingparts"},
     ["gravitygun"] = {{}, "gravitygun", "Probably the best gravity gun script thats fe"},
@@ -2535,7 +3622,7 @@ local NamelessCommandReference = {
     ["cframefly"] = {{"cfly"}, "cframefly [speed] (cfly)", "Enable CFrame-based flight with respawn-safe cleanup"},
     ["uncframefly"] = {{"uncfly"}, "uncfly", "Disable CFrame-based flight"},
     ["tfly"] = {{"tweenfly"}, "tfly [speed] (tweenfly)", "Enables smooth flying"},
-    ["untfly"] = {{"untweenfly"}, "untfly", "Disables tween flying"},
+    ["untfly"] = {{"untweenfly", "utf", "notfly"}, "untfly (untweenfly,utf,notfly)", "Disables tween flying"},
     ["noclip"] = {{"nclip", "nc"}, "noclip", "Disable your player's collision"},
     ["clip"] = {{"unnoclip", "stopclip", "unnclip", "unnc"}, "clip", "Enable your player's collision"},
     ["antianchor"] = {{"aa"}, "antianchor", "Prevent your parts from being anchored"},
@@ -3257,12 +4344,25 @@ do
     end))
 end
 
--- Chat kommands. Default prefix is ! and it can be changed in Ui Kustomization.
-LHRuntime:Track(lp.Chatted:Connect(function(message)
-    if env.LHAdminKommandsEnabled and LHRuntime.Prefix ~= "" and tostring(message):sub(1, #LHRuntime.Prefix) == LHRuntime.Prefix then
-        LHRuntime:ExecuteCommand(message, "chat")
-    end
-end))
+-- Chat kommands. Player.Chatted is kept for older chat while TextChatService
+-- covers newer Roblox chat clients. Duplicate delivery is suppressed.
+local lastLocalCommandText, lastLocalCommandTime = nil, 0
+local function runLocalChatCommand(message)
+    message = tostring(message or "")
+    if not env.LHAdminKommandsEnabled or LHRuntime.Prefix == "" or message:sub(1, #LHRuntime.Prefix) ~= LHRuntime.Prefix then return end
+    local now = os.clock()
+    if message == lastLocalCommandText and now - lastLocalCommandTime < 0.45 then return end
+    lastLocalCommandText, lastLocalCommandTime = message, now
+    LHRuntime:ExecuteCommand(message, "chat")
+end
+LHRuntime:Track(lp.Chatted:Connect(runLocalChatCommand))
+pcall(function()
+    local TextChatService = game:GetService("TextChatService")
+    LHRuntime:Track(TextChatService.MessageReceived:Connect(function(message)
+        local source = message.TextSource
+        if source and source.UserId == lp.UserId then runLocalChatCommand(message.Text) end
+    end))
+end)
 
 --==================================================
 -- UI SETTINGS / NOTIFICATIONS / KONFIGS
@@ -3323,6 +4423,22 @@ uiSettingControls.Theme = add(appearanceSection, dropdown("Theme Selector", "Cha
     end
     LHRuntime:SettingChanged()
 end, env.LHSettings.Theme))
+
+uiSettingControls.AppearanceMode = add(appearanceSection, dropdown("Light / Dark Mode", "Dark keeps the selected kolor rich and easier to see without becoming too bright. Light keeps the same theme identity with bright panels and readable text.", {"Dark", "Light"}, function(selected)
+    selected = string.lower(tostring(selected or "Dark")) == "light" and "Light" or "Dark"
+    env.LHSettings.AppearanceMode = selected
+    env.LHUISettings.AppearanceMode = selected
+    if KAVO.SetAppearanceMode then KAVO:SetAppearanceMode(selected) end
+    KAVO:SetTheme(env.LHSettings.Theme)
+    local accent = settingColor(env.LHSettings.Accent, getgenv().LollypopTheme)
+    KAVO:ChangeColor("SchemeColor", accent)
+    local requestedText = settingColor(env.LHSettings.TextColor, selected == "Light" and Color3.fromRGB(39, 40, 48) or Color3.fromRGB(245, 245, 248))
+    if KAVO.SetTextColor then
+        local safeText = KAVO:SetTextColor(requestedText)
+        if typeof(safeText) == "Color3" then saveColorSetting("TextColor", safeText) end
+    end
+    LHRuntime:SettingChanged()
+end, env.LHSettings.AppearanceMode or "Dark"))
 
 uiSettingControls.UIFont = add(appearanceSection, dropdown("UI Font", "Includes every Enum.Font available in your Roblox klient.", fontChoices, function(selected)
     env.LHSettings.UIFont = tostring(selected or "Gotham")
@@ -3422,6 +4538,7 @@ add(commandSection, button("Show All Kommands", "Displays every built-in kommand
 
 local uiFactoryResetDefaults = {
     Theme = LH_UI_DEFAULTS.Theme,
+    AppearanceMode = LH_UI_DEFAULTS.AppearanceMode,
     UIFont = LH_UI_DEFAULTS.UIFont,
     Accent = Color3.fromRGB(table.unpack(LH_UI_DEFAULTS.Accent)),
     TextColor = Color3.fromRGB(table.unpack(LH_UI_DEFAULTS.TextColor)),
@@ -3566,6 +4683,7 @@ local function applyDefaultUISettings()
     LHRuntime.SettingsDirty = false
 
     if uiSettingControls.Theme then uiSettingControls.Theme._ui:SetValue(env.LHSettings.Theme, false) end
+    if uiSettingControls.AppearanceMode then uiSettingControls.AppearanceMode._ui:SetValue(env.LHSettings.AppearanceMode or "Dark", false) end
     if uiSettingControls.Accent then uiSettingControls.Accent._ui:SetValue(Color3.fromRGB(table.unpack(env.LHSettings.Accent)), false) end
     if uiSettingControls.TextColor then uiSettingControls.TextColor._ui:SetValue(Color3.fromRGB(table.unpack(env.LHSettings.TextColor)), false) end
     if uiSettingControls.AutoSaveEdits then uiSettingControls.AutoSaveEdits._ui:SetValue(env.LHSettings.AutoSaveEdits, false) end
@@ -3737,6 +4855,7 @@ add(HomeIntroSection, kredits({
     SessionStarted = env.LHSessionStart,
     LastOnline = "Today", -- edit manually if needed
     OnlineStatus = "Online", -- change to "Offline" when needed
+    AnimationId = env.LH_OWNER_KREDITS_ANIMATION_ID,
 }))
 skripts["Skripts"] = skripts["Skripts"] or {}
 local SkriptsSection = section(skripts, "Skripts", skripts["Skripts"])
@@ -4073,11 +5192,12 @@ local humanoid = character and character:FindFirstChildOfClass("Humanoid")
 if humanoid then humanoid.WalkSpeed = speed end
 end, 16, 0, 400))
 
-add(SkriptsSection, slider("Jump Power", "", 50, 400, function(jp)
-game.Players.LocalPlayer.Character.Humanoid.JumpPower=jp;
-if not jumpk then
+add(SkriptsSection, slider("Jump Power", "Uses the universal LH JumpPower value.", 0, 400, function(jp)
+LHFeatures:SetJumpPower(jp)
+end, LHFeatures.UniversalJumpPower))
 
-   end;
+add(SkriptsSection, toggle("No Klip", "Walk through kollidable parts. Stays enabled after death and respawn.", function(enabled)
+LHFeatures:SetNoClip(enabled)
 end))
 
 add(SkriptsSection, slider("Gravity", "", 1, 1000, function(grav)
@@ -4157,21 +5277,73 @@ end
 end
 end))
 
-infiniteJumpEnabled = false
---infjump.Konnekt
-add(SkriptsSection, toggle("Infinite jump", "no jump limit", function(on)
-infiniteJumpEnabled = on
-if infiniteJumpEnabled then
-game:GetService("UserInputService").JumpRequest:connect(function()
-if infiniteJumpEnabled then
-game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-        end
-    end)
-else
-infiniteJumpEnabled = false
-end
+add(SkriptsSection, toggle("Infinite Jump", "Jump again while airborne. Uses one JumpRequest konnection and survives respawns.", function(enabled)
+LHFeatures:SetInfiniteJump(enabled)
 end))
---infjump.Diskonnekt
+
+add(SkriptsSection, toggle("Jump Limit Bypass", "Good for obbies & games with limited jumps. Kontinuously enforces your universal LH JumpPower.", function(enabled)
+LHFeatures:SetJumpLimitBypass(enabled)
+end))
+
+local proximityTargetLabels = {}
+local proximityTargetUserIds = {All = 0}
+local selectedProximityTarget = "All"
+local proximityTargetDropdown
+
+local function buildProximityTargets(excludedPlayer)
+    local labels = {"All"}
+    local ids = {All = 0}
+    local players = game:GetService("Players"):GetPlayers()
+    table.sort(players, function(a, b) return string.lower(a.Name) < string.lower(b.Name) end)
+    for _, player in ipairs(players) do
+        if player ~= lp and player ~= excludedPlayer then
+            local labelText = "@" .. tostring(player.Name) .. " | " .. tostring(player.DisplayName)
+            table.insert(labels, labelText)
+            ids[labelText] = player.UserId
+        end
+    end
+    proximityTargetLabels = labels
+    proximityTargetUserIds = ids
+    return labels
+end
+
+add(SkriptsSection, toggle("Proximity Auto Jump", "Automatically jumps when selected players enter your range.", function(enabled)
+LHFeatures:SetProximityAutoJump(enabled)
+end))
+
+add(SkriptsSection, kounter("Proximity Distance", "Distance in studs. Reset returns this to 7.5 studs.", 0.5, function(distance)
+LHFeatures:SetProximityDistance(distance)
+end, 7.5, 1, 100))
+
+proximityTargetDropdown = add(SkriptsSection, dropdown("Proximity Target", "All works for every player, or selekt one player by username and display name.", buildProximityTargets(), function(labelText)
+selectedProximityTarget = tostring(labelText or "All")
+LHFeatures:SetProximityTarget(proximityTargetUserIds[selectedProximityTarget] or 0)
+end, "All"))
+
+local function refreshProximityTargets(leavingPlayer)
+    local previousUserId = LHFeatures.ProximityTargetUserId
+    proximityTargetDropdown:Refresh(buildProximityTargets(leavingPlayer))
+    if previousUserId ~= 0 then
+        local foundLabel = nil
+        for labelText, userId in pairs(proximityTargetUserIds) do
+            if userId == previousUserId then foundLabel = labelText; break end
+        end
+        if foundLabel then
+            selectedProximityTarget = foundLabel
+            proximityTargetDropdown:SetValue(foundLabel, false)
+        else
+            selectedProximityTarget = "All"
+            LHFeatures:SetProximityTarget(0)
+            proximityTargetDropdown:SetValue("All", false)
+            if leavingPlayer then
+                LHRuntime:Notify("info", "Proximity Target", "Target left. Selekted All players.", 3)
+            end
+        end
+    end
+end
+
+LHRuntime:Track(game:GetService("Players").PlayerAdded:Connect(function() task.defer(refreshProximityTargets) end))
+LHRuntime:Track(game:GetService("Players").PlayerRemoving:Connect(function(player) task.defer(refreshProximityTargets, player) end))
 
 add(SkriptsSection, label("Mobile Fly"))
 
@@ -4282,13 +5454,7 @@ for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) d
 v:Disable()
 end
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-Text = ("anti afk enabled"..emoji.lollipop),
-Duration = 5
-})
+lollyhub(("anti afk enabled"..emoji.lollipop), 5)
 end))
 
 
@@ -4315,42 +5481,10 @@ end))
 
 add(SkriptsSection, label("more skripts"))
 
--- toggle anti sit
-add(SkriptsSection, toggle("Anti-Sit", "kinda good", function(state)
-if state then
-local RunService = game:GetService("RunService")
-function antiSit()
-local human = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-if human and human:GetState() == Enum.HumanoidStateType.Seated then 
-human.Sit = false
-end
-end
-RunService:BindToRenderStep("tempBinding", 1000, antiSit)
-
-game:GetService("StarterGui"):SetCore("SendNotification",{ 	
-Title = ("Anti-Sit"..emoji.check_mark_button),  	
-Text = "on",
-
-Duration = 3
-})
-else
-local RunService = game:GetService("RunService")
-function antiSit()
-if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
-game.Players.LocalPlayer.Character.Humanoid.Sit = true
-end
-end
-RunService:BindToRenderStep("tempBinding", 1000, antiSit)
-
-game:GetService("StarterGui"):SetCore("SendNotification",{ 	
-Title = ("Anti-Sit"..emoji.cross_mark),  	
-Text = "off",
-
-Duration = 3
-})
-end
+-- Respawn-safe Anti Sit. The shared feature loop stops immediately when toggled off.
+add(SkriptsSection, toggle("Anti Sit", "Prevents forced sitting and keeps working after death or respawn.", function(enabled)
+LHFeatures:SetAntiSit(enabled)
 end))
---end toggle antisit
 
 
 add(SkriptsSection, button("Aimbot(R6 only)", "simple aimbot skript by me", function()
@@ -4624,7 +5758,7 @@ end))
 
 add(SkriptsSection, button("KLEAR MESSAGES TROLL", "prints a huge text msg",
 function()
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer((" "..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash..emoji.three_em_dash), "All")
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(" " .. string.rep(emoji.three_em_dash, 195), "All")
 end))
 
 -- Removed discontinued loader: Parkour Run
@@ -4634,9 +5768,7 @@ add(SkriptsSection, button("R15 to R6", "only work if u are r15",
 function()loadstring(game:HttpGet("https://raw.githubusercontent.com/Imagnir/r6_anims_for_r15/main/r6_anims.lua", true))()
 end))
 
-add(SkriptsSection, button("Noklip", "go thru walls",
-function()loadstring(game:HttpGet("https://pastebin.com/raw/3wf2wpBW"))()
-end))
+-- Replaced the old one-shot Noklip loader with the respawn-safe No Klip toggle above.
 
 add(SkriptsSection, button("Klone script", "klones ur avatar not fe", function()
 loadstring(game:GetObjects('rbxassetid://7339698872')[1].Source)()
@@ -5815,13 +6947,7 @@ add(FunSection, button("SpamHub", "sing songs etx.", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/ColdStep2/Chatdestroyer-Hub-V1/main/Chatdestroyer%20Hub%20V1'),true))()
 end))
 add(FunSection, button("Lyrik Bot \n(type >lyrics SongName by ArtistName)", "sing songs requested by other users", function()
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-Text = ">lyrics SongName by AristName (doesnt work for urself)",
-Duration = 7
-})
+lollyhub(">lyrics SongName by AristName (doesnt work for urself)", 7)
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/lyricsBot/main/singer.lua"))()
 end))
@@ -5902,13 +7028,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/he
 end))
 add(ToolsSection, button("F3X", "f3x building",
 function()
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-Text = "f3x tools",
-Duration = 5
-})
+lollyhub("f3x tools", 5)
 --tools
 loadstring(game:GetObjects("rbxassetid://6695644299")[1].Source)()
 --F3X skript
@@ -7072,13 +8192,7 @@ add(GamesSection, button(("Kopy >OP MM2 GUI 2< "..emoji.key), "key: mTAgLLFQJazw
 function()
 setclipboard("mTAgLLFQJazwRWGh")
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-Text = ("kopied 'OP MM2 GUI 2' "..emoji.key),
-Duration = 3.5
-})
+lollyhub(("kopied 'OP MM2 GUI 2' "..emoji.key), 3.5)
 end))
 
 add(GamesSection, button("Symphony Hub (OP!)", "op asf",
@@ -7096,13 +8210,7 @@ add(GamesSection, button(("Kopy > TheHanki < "..emoji.key), "key: hawkhubneverdi
 function()
 setclipboard("hawkhubneverdies")
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(50,205,50)
-
-Library:Notification({
-Text = ("kopied 'TheHanki' "..emoji.key),
-Duration = 3.5
-})
+lollyhub(("kopied 'TheHanki' "..emoji.key), 3.5)
 end))
 
 add(GamesSection, label((emoji.desert_island..emoji.farmer.." ISLANDS "..emoji.farmer..emoji.desert_island)))
@@ -8106,9 +9214,7 @@ end))
 
 add(FeSection, button("FE Time Reverse", "reverses what u do", function()
 wait(0.1)
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(0,255,0)
-Library:Notification({Text = ("skript exekuted "..emoji.lollipop), Duration = 4 });
+lollyhub(("skript exekuted "..emoji.lollipop), 4);
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/L"))()
 end))
 
@@ -8204,6 +9310,57 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.5 updates: ",
+    "[FIXED] Jump Limit Bypass now captures the local Humanoid's current JumpPower and JumpHeight before enforcing either property",
+    "[FIXED] Jump Limit Bypass no longer forces UseJumpPower or a hardcoded value, preventing the unexpected high-jump bug",
+    "[FIXED] changing the LH Jump Power slider while the bypass is enabled updates the captured JumpPower target safely",
+    "[UI] saved toggle skripts in My Shelf now use red while OFF and green while ON instead of adding [OFF] or [ON] to their names",
+    "[UI] Shelf Hold Menu now uses its red / green button kolor instead of ON / OFF text",
+    "[FIXED] Delete All confirmation now only asks whether the user wants to delete every skript in My Shelf",
+    "[NEW] Delete All creates a 7-second in-Shelf Undo Delete All button with a close X and restores the complete previous Shelf order",
+    "[FIXED] all V10.5 UI additions and bug fixes are included in this UpdatesLog table",
+
+    emoji.lollipop.." V10.4 updates: ",
+    "[FIXED] the main UI drag glow is permanently white in every theme and Light / Dark mode",
+    "[FIXED] changing themes while dragging can no longer recolor the white drag glow",
+    "[UI] every normal toggle switch is red while OFF and green while ON for immediate visibility",
+    "[UI] My Shelf Auto Save and Rearrange compact toggles now use the same red OFF / green ON kolors",
+    "[UI] the Shelf Hold Menu indicator is red while disabled and green while enabled",
+    "[FIXED] removed dim gray and black-looking toggle states that were hard to see",
+    "[FIXED] all V10.4 UI additions and bug fixes are included in this UpdatesLog table",
+
+    emoji.lollipop.." V10.3 updates: ",
+    "[FIXED] My Shelf full avatar now faces the user instead of showing its back",
+    "[NEW] separate easy AnimationId variables for the owner Kredits dance and every user's My Shelf dance",
+    "[NEW] owner Kredits now uses a slightly larger full-body animated avatar with a thumbnail fallback",
+    "[FIXED] My Shelf Rearrange disables Shelf scrolling during a drag, locks movement vertically, follows the exact touch, and saves the final order cleanly",
+    "[FIXED] Rearrange no longer ends from a different finger or random InputEnded event",
+    "[UI] reordered Shelf items swap through a visible placeholder pulse and return to normal browsing when editing ends",
+    "[FIXED] Dynamic Island and notification cards now follow the current Light / Dark theme instead of staying black",
+    "[FIXED] notification titles and body text use matching readable theme kolors",
+    "[UI] Dark mode panels, headers, backgrounds, accents, and muted text are brighter without becoming a white theme",
+    "[FIXED] owner Online Status now reads its config value and stays readable in both Light and Dark mode",
+    "[FIXED] all V10.3 UI additions and bug fixes are included in this UpdatesLog table",
+
+    emoji.lollipop.." V10.2 updates: ",
+    "[NEW] My Shelf now has a personalized profile page with the local player's full avatar, display name, username, user ID, account age, and page info",
+    "[NEW] My Shelf avatar preview uses a full-body ViewportFrame and plays a dance animation with a safe thumbnail fallback",
+    "[NEW] Shelf Hold Menu toggle disables accidental hold-to-add pop-ups while browsing",
+    "[NEW] compact My Shelf top controls: independent Auto Save, Delete All with confirmation, and Rearrange editing mode",
+    "[NEW] Rearrange mode adds a kustom crossed-tools icon, 'in Editing Mode' status, three-line drag handles, and draggable Shelf ordering",
+    "[NEW] deleting a Shelf skript shows a stackable 4-second Undo notification; Undo restores it to its previous position",
+    "[NEW] Shelf Auto Save is OFF by default and remembers its own state without requiring Save Settings",
+    "[NEW] Light / Dark Mode keeps the selected theme identity while Light mode brightens panels, background, accents, and readable text",
+    "[FIXED] !fly and !mfly now use a built-in respawn-safe mobile/desktop flight controller; !unfly disables it",
+    "[NEW KOMMANDS] !untpwalk (!untpw,!untw) and !unspeed (!us,!unws,!defaultspeed)",
+    "[ALIASES] !unantifling now supports !uaf, !noantifling, and !unaf",
+    "[FIXED] !to random and !to user/display now wait for character roots, retry safely, clear velocity, and support modern TextChatService delivery",
+    "[FIXED] LH-native kommand aliases keep priority over backend aliases, so !to and !tp are no longer silently replaced by Nameless Admin's goto alias",
+    "[FIXED] target root lookup no longer falls back to the LocalPlayer when the target has not spawned yet",
+    "[FIXED] fly respawn rebinding is throttled and never waits inside RenderStepped, preventing stacked waiting threads",
+    "[FIXED] the full-avatar My Shelf preview anchors its root so dancing stays centered inside the profile circle",
+    "[FIXED] all V10.2 UI additions and bug fixes are included in this UpdatesLog table",
+
     emoji.lollipop.." V10.0.0 updates: ",
 
 "[FIXED] Lollypop Admin goblin button and kommand palette now stay visible and self-heal",
@@ -8494,11 +9651,9 @@ local humanoid = character and character:FindFirstChildOfClass("Humanoid")
 if humanoid then humanoid.WalkSpeed = speed end
 end, 16, 0, 400))
 
-add(HomeSection, kounter("Jump Power", "xhanges the jumppower", 1, function(jp)
-local character = game.Players.LocalPlayer.Character
-local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-if humanoid then humanoid.JumpPower = jp end
-end, 50, 0, 500))
+add(HomeSection, kounter("Jump Power", "xhanges the universal LH jumppower", 1, function(jp)
+LHFeatures:SetJumpPower(jp)
+end, LHFeatures.UniversalJumpPower, 0, 500))
 
 add(HomeSection, button("Ping Kounter", "see ping", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MvKKJ331"))()
@@ -9010,6 +10165,26 @@ end))
 
 -- Build every stored kontrol once. Search only hides/shows existing rows.
 buildHub(Window)
+
+-- Marketplace V4 is created natively inside the existing Kavo/LH tab system.
+if Window.EnableAnimationBundles then
+    local animationTabOk, animationTabError = pcall(function()
+        Window:EnableAnimationBundles("Animation Bundles")
+    end)
+    if not animationTabOk then
+        warn("[Lollypop Hub Animation Marketplace V4] " .. tostring(animationTabError))
+        if LHRuntime and LHRuntime.Notify then
+            pcall(function() LHRuntime:Notify("error", "Animation Bundles", "Marketplace V4 could not initialize: " .. tostring(animationTabError), 7, nil, true) end)
+        end
+    end
+else
+    warn("[Lollypop Hub Animation Marketplace V4] Loaded Kavo does not expose EnableAnimationBundles.")
+end
+
+if Window.EnablePersonalShelf then Window:EnablePersonalShelf("My Shelf") end
+
+env.lhloaded = true
+env.LHBooting = false
 for _, guiRoot in pairs({game:GetService("CoreGui"), game.Players.LocalPlayer:FindFirstChildOfClass("PlayerGui")}) do
     if guiRoot then
         for _, object in pairs(guiRoot:GetDescendants()) do
@@ -9021,6 +10196,137 @@ for _, guiRoot in pairs({game:GetService("CoreGui"), game.Players.LocalPlayer:Fi
     end
 end
 Window:SelectTab("Home")
+
+local function startCurrentSession()
+    LHRuntime:StartSessionPersistence(Window)
+end
+
+local function showSessionRestorePrompt(previousSession)
+    local parent = LHCompat.GetHui()
+    local old = parent:FindFirstChild("LHSessionRestorePrompt")
+    if old then old:Destroy() end
+
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "LHSessionRestorePrompt"
+    gui.IgnoreGuiInset = true
+    gui.ResetOnSpawn = false
+    gui.DisplayOrder = 1000002
+    local parented = LHCompat.ParentGui(gui)
+    if not parented then
+        startCurrentSession()
+        return
+    end
+
+    local shade = Instance.new("TextButton")
+    shade.Size = UDim2.fromScale(1, 1)
+    shade.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    shade.BackgroundTransparency = 0.42
+    shade.BorderSizePixel = 0
+    shade.Text = ""
+    shade.AutoButtonColor = false
+    shade.Parent = gui
+
+    local card = Instance.new("Frame")
+    card.AnchorPoint = Vector2.new(0.5, 0.5)
+    card.Position = UDim2.fromScale(0.5, 0.5)
+    card.Size = UDim2.fromOffset(390, 215)
+    card.BackgroundColor3 = Color3.fromRGB(16, 12, 22)
+    card.BorderSizePixel = 0
+    card.Parent = gui
+    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 14)
+    local stroke = Instance.new("UIStroke", card)
+    stroke.Color = getgenv().LollypopTheme
+    stroke.Transparency = 0.12
+    stroke.Thickness = 1.2
+    local scale = Instance.new("UIScale", card)
+    local view = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
+    scale.Scale = math.max(0.72, math.min(1, (view.X - 24) / 410, (view.Y - 46) / 235))
+
+    local title = Instance.new("TextLabel")
+    title.Position = UDim2.fromOffset(18, 16)
+    title.Size = UDim2.new(1, -36, 0, 34)
+    title.BackgroundTransparency = 1
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 19
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.Text = "Restore previous session?"
+    title.Parent = card
+
+    local body = Instance.new("TextLabel")
+    body.Position = UDim2.fromOffset(18, 54)
+    body.Size = UDim2.new(1, -36, 0, 92)
+    body.BackgroundTransparency = 1
+    body.Font = Enum.Font.GothamMedium
+    body.TextSize = 13
+    body.TextColor3 = Color3.fromRGB(218, 210, 225)
+    body.TextWrapped = true
+    body.TextYAlignment = Enum.TextYAlignment.Top
+    local previousTab = previousSession.State and previousSession.State.SelectedTab or "your last page"
+    body.Text = "LH detected that Roblox or your executor klosed unexpectedly. Press Yes to return to " .. tostring(previousTab) .. " with the saved scroll position and navigation state. Press No to load normally with your kurrent saved settings."
+    body.Parent = card
+
+    local yes = Instance.new("TextButton")
+    yes.Position = UDim2.new(0, 18, 1, -52)
+    yes.Size = UDim2.new(0.5, -24, 0, 36)
+    yes.BackgroundColor3 = Color3.fromRGB(40, 185, 92)
+    yes.BorderSizePixel = 0
+    yes.Font = Enum.Font.GothamBold
+    yes.TextSize = 14
+    yes.TextColor3 = Color3.fromRGB(255, 255, 255)
+    yes.Text = "Yes, Restore"
+    yes.Parent = card
+    Instance.new("UICorner", yes).CornerRadius = UDim.new(0, 9)
+    LHRuntime:AddButtonPressEffect(yes)
+
+    local no = Instance.new("TextButton")
+    no.Position = UDim2.new(0.5, 6, 1, -52)
+    no.Size = UDim2.new(0.5, -24, 0, 36)
+    no.BackgroundColor3 = Color3.fromRGB(72, 63, 83)
+    no.BorderSizePixel = 0
+    no.Font = Enum.Font.GothamBold
+    no.TextSize = 14
+    no.TextColor3 = Color3.fromRGB(255, 255, 255)
+    no.Text = "No, Load Normal"
+    no.Parent = card
+    Instance.new("UICorner", no).CornerRadius = UDim.new(0, 9)
+    LHRuntime:AddButtonPressEffect(no)
+
+    local answered = false
+    local function finish(restore)
+        if answered then return end
+        answered = true
+        if gui.Parent then gui:Destroy() end
+        if restore and type(previousSession.State) == "table" and Window.RestoreUIState then
+            local ok, err = Window:RestoreUIState(previousSession.State)
+            if ok then
+                LHRuntime:ShowIsland("Session Restored", "Returned to your previous LH position.", {Duration = 3})
+            else
+                LHRuntime:Notify("error", "Session Restore", tostring(err), 5, nil, true)
+                Window:SelectTab("Home")
+            end
+        else
+            Window:SelectTab("Home")
+            LHRuntime:ShowIsland("Normal Start", "Saved settings loaded without the old session position.", {Duration = 2.6})
+        end
+        task.defer(startCurrentSession)
+    end
+
+    LHRuntime:Track(yes.MouseButton1Click:Connect(function() finish(true) end))
+    LHRuntime:Track(no.MouseButton1Click:Connect(function() finish(false) end))
+end
+
+local previousIsCrash = env.LHSettings.SessionRestore ~= false
+    and type(LH_PREVIOUS_SESSION) == "table"
+    and LH_PREVIOUS_SESSION.Running == true
+    and LH_PREVIOUS_SESSION.CleanShutdown ~= true
+    and type(LH_PREVIOUS_SESSION.State) == "table"
+    and (os.time() - (tonumber(LH_PREVIOUS_SESSION.SavedAt) or os.time())) <= (7 * 24 * 60 * 60)
+
+if previousIsCrash then
+    showSessionRestorePrompt(LH_PREVIOUS_SESSION)
+else
+    startCurrentSession()
+end
 
 local function TOGGLE()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/toggle_LollypopHub', false))();
@@ -9229,10 +10535,13 @@ local function performQuickAction(actionName)
             task.wait(0.2)
             if type(reloadHub) == "function" then reloadHub() end
         end)
+    elseif actionName == "Undo" then
+        if KAVO and KAVO.Undo then KAVO:Undo() end
     elseif actionName == "Save Settings" then
         local ok, err = LHRuntime:SaveSettings()
         if ok then
             LHRuntime.SettingsDirty = false
+            LHRuntime:ShowIsland("Settings Saved", "Your UI edits were saved.", {Duration = 2.5})
             LHRuntime:Notify("success", "Settings Saved", "Your UI edits were saved.", 3, nil, true)
         else
             LHRuntime:Notify("error", "Settings Save Failed", tostring(err), 4, nil, true)
@@ -9361,6 +10670,7 @@ local function KUSTOMTOGGLE()
             {Name = "Exit Game", Icon = emoji.cross_mark},
             {Name = "Reload Hub", Icon = emoji.lollipop},
             {Name = "Save Settings", Icon = emoji.gear},
+            {Name = "Undo", Icon = emoji.cyclone},
             {Name = "Admin Palette", Icon = emoji.japanese_goblin},
         }
 
@@ -9510,12 +10820,18 @@ spawn(function()
         return debug and debug.traceback and debug.traceback(tostring(message), 2) or tostring(message)
     end)
     if not ok then
+        env.lhloaded = false
+        env.LHBooting = false
         warn("[Lollypop Hub Loader] " .. tostring(err))
         pcall(function()
             if loadingSkreen and loadingSkreen.Parent then
                 loadingSkreen:Destroy()
             end
         end)
+        pcall(function()
+            if env.LHKavo and env.LHKavo.Destroy then env.LHKavo:Destroy() end
+        end)
+        localStartupNotify("Lollypop Hub Startup Failed", "Startup stopped safely and the loaded flag was reset. Check the developer console for the exact branch error.", 8)
     end
 end);
 
