@@ -1,6 +1,6 @@
---main v10.5.5 LOLLYPOP HUB 
+--main v10.1.5 LOLLYPOP HUB 
 
-date = "August 4"..", "..tostring(os.date("%Y"))
+date = "August 5"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -496,7 +496,7 @@ function LHCompat.HttpGet(url, useCache)
             Method = "GET",
             Headers = {
                 ["Accept"] = "*/*",
-                ["User-Agent"] = "Roblox/LollypopHub-10.5.5",
+                ["User-Agent"] = "Roblox/LollypopHub-10.5.7",
             },
         })
         if requestOk and type(response) == "table" then
@@ -639,6 +639,8 @@ env.LHSettings = env.LHSettings or {
     PersonalShelf = {},
     ShelfEnabled = true,
     ShelfAutoSave = false,
+    AnimationBundleFavorites = {},
+    AnimationBundleAutoSave = true,
     AppearanceMode = "Dark",
     UniversalJumpPower = 50,
     SessionRestore = true,
@@ -681,6 +683,8 @@ local LH_UI_DEFAULTS = {
     PersonalShelf = {},
     ShelfEnabled = true,
     ShelfAutoSave = false,
+    AnimationBundleFavorites = {},
+    AnimationBundleAutoSave = true,
     AppearanceMode = "Dark",
     UniversalJumpPower = 50,
     SessionRestore = true,
@@ -716,6 +720,10 @@ env.LHUISettings.AutoSaveEdits = env.LHSettings.AutoSaveEdits
 env.LHUISettings.PersonalShelf = env.LHSettings.PersonalShelf
 env.LHUISettings.ShelfEnabled = env.LHSettings.ShelfEnabled ~= false
 env.LHUISettings.ShelfAutoSave = env.LHSettings.ShelfAutoSave == true
+if type(env.LHSettings.AnimationBundleFavorites) ~= "table" then env.LHSettings.AnimationBundleFavorites = {} end
+if env.LHSettings.AnimationBundleAutoSave == nil then env.LHSettings.AnimationBundleAutoSave = true end
+env.LHUISettings.AnimationBundleFavorites = env.LHSettings.AnimationBundleFavorites
+env.LHUISettings.AnimationBundleAutoSave = env.LHSettings.AnimationBundleAutoSave ~= false
 env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
 
 local LH_PREVIOUS_SESSION = nil
@@ -789,7 +797,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.5.5')
+local Vv = ('10.1.5')
 local LastUPDATE = "Last Update: "..date
 ------------------
 local savedAccent = env.LHSettings.Accent
@@ -1205,6 +1213,30 @@ function LHRuntime:SaveSettings()
     env.LHSettings.CommandPrefix = self.Prefix
     local ok, err = LHCompat.WriteJsonAtomic(LH_SETTINGS_FILE, env.LHSettings, LH_SETTINGS_FILE .. ".backup")
     return ok, err
+end
+
+-- Run legacy remote entries without throwing HTTP/compile/runtime traces through
+-- Kavo's kontrol callbacks. A failed remote now becomes one readable LH notice.
+function LHRuntime:RunRemote(url, label)
+    label = tostring(label or "Remote Skript")
+    local httpOk, sourceOrError = LHCompat.HttpGet(url, true)
+    if not httpOk then
+        self:Notify("error", label, "Remote skript unavailable: " .. tostring(sourceOrError), 6, nil, true)
+        return false, sourceOrError
+    end
+
+    local compiler, compileError = loadstring(sourceOrError, "LH/" .. label)
+    if type(compiler) ~= "function" then
+        self:Notify("error", label, "Remote skript could not compile: " .. tostring(compileError), 6, nil, true)
+        return false, compileError
+    end
+
+    local runOk, result = pcall(compiler)
+    if not runOk then
+        self:Notify("error", label, "Remote skript failed: " .. tostring(result), 6, nil, true)
+        return false, result
+    end
+    return true, result
 end
 
 function LHRuntime:WriteSession(cleanShutdown)
@@ -1902,6 +1934,8 @@ function LHRuntime:ApplySettings()
     env.LHUISettings.AutoSaveEdits = env.LHSettings.AutoSaveEdits
     env.LHUISettings.ShelfEnabled = env.LHSettings.ShelfEnabled ~= false
     env.LHUISettings.ShelfAutoSave = env.LHSettings.ShelfAutoSave == true
+    env.LHUISettings.AnimationBundleFavorites = type(env.LHSettings.AnimationBundleFavorites) == "table" and env.LHSettings.AnimationBundleFavorites or {}
+    env.LHUISettings.AnimationBundleAutoSave = env.LHSettings.AnimationBundleAutoSave ~= false
     env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
     if env.LHKavo then
         pcall(function() env.LHKavo:SetReducedMotion(env.LHSettings.ReducedMotion) end)
@@ -5045,8 +5079,8 @@ end))
 
 
 --[ ALL SKRIPTS ]--
-skripts["Skripts"] = skripts["Skripts"] or {}
-local SkriptsSection = section(skripts, "Skripts", skripts["Skripts"])
+-- Kontinue using the original Home "Skripts" section. Re-registering the same
+-- backing table here made every Home kontrol appear twice.
 --////---------------------------------
 add(SkriptsSection, label("Players"));
 --------------////-------------------
@@ -5220,27 +5254,27 @@ end))
 
 add(SkriptsSection, dropdown("Exekutor gui", "exploit guis", {"Vega X", "ArkeusX", "Neptune", "FluxusKoral remake", "KRNL", "Rc7 (old)", "Rc7 (newer version)", "Rc7 II", "Synapse X (old)", "Shadow X", "Synapse X rework",}, function(x)
 if x == "ArkeusX" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))();
+LHRuntime:RunRemote("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3", "ArkeusX UI");
 elseif x == "Vega X" then
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/skripts/vegaX",false))();
+LHRuntime:RunRemote("https://github.com/rrixh/uwuware/raw/main/skripts/vegaX", "Vega X UI");
 elseif x == "FluxusKoral remake" then
-loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/exekutor/fluxuskoralremake.docx",true))();
+LHRuntime:RunRemote("https://github.com/rrixh/uwuware/raw/main/exekutor/fluxuskoralremake.docx", "Fluxus Koral Remake");
 elseif x == "KRNL" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua"))();
+LHRuntime:RunRemote("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/KRNL%20UI%20Remake.lua", "KRNL UI");
 elseif x == "Neptune" then
-loadstring(game:HttpGet('https://pastebin.com/raw/y3jhxS5r'))();
+LHRuntime:RunRemote("https://pastebin.com/raw/y3jhxS5r", "Neptune UI");
 elseif x == "Rc7 (old)" then
-loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Project-RC7-6752"))();
+LHRuntime:RunRemote("https://rawscripts.net/raw/Universal-Script-Project-RC7-6752", "RC7 Old UI");
 elseif x == "Rc7 (newer version)" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7"))() 
+LHRuntime:RunRemote("https://raw.githubusercontent.com/CoreGui/Scripts/main/RC7", "RC7 UI") 
 elseif x == "Rc7 II" then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx"))()
+LHRuntime:RunRemote("https://raw.githubusercontent.com/SyrixHax/RC7/Version/Rbx", "RC7 II")
 elseif x == "Synapse X (old)" then
-loadstring(game:HttpGet("https://pastebin.com/raw/1fAnGAA0"))()
+LHRuntime:RunRemote("https://pastebin.com/raw/1fAnGAA0", "Synapse X Old UI")
 elseif x == "Shadow X" then
-loadstring(game:HttpGet("https://pastebin.com/raw/2qjBZB1Y"))();
+LHRuntime:RunRemote("https://pastebin.com/raw/2qjBZB1Y", "Shadow X UI");
 elseif x == "Synapse X rework" then
-loadstring(game:HttpGet("https://pastebin.com/raw/tWGxhNq0"))();
+LHRuntime:RunRemote("https://pastebin.com/raw/tWGxhNq0", "Synapse X Rework");
 end;
 end))
 
@@ -5279,10 +5313,6 @@ end))
 
 add(SkriptsSection, toggle("Infinite Jump", "Jump again while airborne. Uses one JumpRequest konnection and survives respawns.", function(enabled)
 LHFeatures:SetInfiniteJump(enabled)
-end))
-
-add(SkriptsSection, toggle("Jump Limit Bypass", "Good for obbies & games with limited jumps. Kontinuously enforces your universal LH JumpPower.", function(enabled)
-LHFeatures:SetJumpLimitBypass(enabled)
 end))
 
 local proximityTargetLabels = {}
@@ -8006,13 +8036,13 @@ end))
 add(GamesSection, label((emoji.woman_zombie.." Zombie Attaxk "..emoji.woman_zombie)))
 add(GamesSection, dropdown((emoji.man_zombie.." skripts"), "op skript", {("Zombie Attaxk - by "..emoji.lollipop.." (old)"), "Ghost hub", ([[Autofarm, silent aim(old) - by ]]..emoji.lollipop), "teleport to game"}, function(...)
 if ... =="Ghost hub" then
-loadstring(game:HttpGet("https://ghost-storage.7m.pl/scripts/ghosthublauncher.lua",true))();
+LHRuntime:RunRemote("https://ghost-storage.7m.pl/scripts/ghosthublauncher.lua", "Zombie Attack Ghost Hub");
 
 elseif ... == ("Zombie Attaxk - by "..emoji.lollipop.." (old)") then
-loadstring(game:HttpGet("https://rentry.co/ZombieAttaxk_RRixh/raw",true))();
+LHRuntime:RunRemote("https://rentry.co/ZombieAttaxk_RRixh/raw", "Zombie Attack Old");
 
 elseif ... == ("Autofarm, silent aim(old) - by "..emoji.lollipop) then
-loadstring(game:HttpGet("https://pastebin.com/raw/fzxqESwF"))();
+LHRuntime:RunRemote("https://pastebin.com/raw/fzxqESwF", "Zombie Attack Autofarm");
 
 elseif ...=="teleport to game" then
 game:GetService("TeleportService"):Teleport(1240123653, game:GetService("Players").LocalPlayer)
@@ -8615,9 +8645,9 @@ end))
 
 add(GamesSection, dropdown((emoji.small_white_square.."Button Hell "..emoji.small_white_square), "bh", {"Button Hell", "Autopush buttons - bakon", "teleport to game"}, function(x)
 if x == "Button Hell" then 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/ButtonHell'))()
+LHRuntime:RunRemote("https://raw.githubusercontent.com/ToraScript/Script/main/ButtonHell", "Button Hell")
 elseif x == "Autopush buttons - bakon" then
-loadstring(game:HttpGet(('https://pastefy.app/68WYydeo/raw'),true))()
+LHRuntime:RunRemote("https://pastefy.app/68WYydeo/raw", "Button Hell Autopush")
 elseif x =="teleport to game" then
 game:GetService("TeleportService"):Teleport(14329385031, game:GetService("Players").LocalPlayer)
 end
@@ -9310,17 +9340,27 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
-    emoji.lollipop.." V10.5 updates: ",
-    "[FIXED] Jump Limit Bypass now captures the local Humanoid's current JumpPower and JumpHeight before enforcing either property",
-    "[FIXED] Jump Limit Bypass no longer forces UseJumpPower or a hardcoded value, preventing the unexpected high-jump bug",
-    "[FIXED] changing the LH Jump Power slider while the bypass is enabled updates the captured JumpPower target safely",
-    "[UI] saved toggle skripts in My Shelf now use red while OFF and green while ON instead of adding [OFF] or [ON] to their names",
-    "[UI] Shelf Hold Menu now uses its red / green button kolor instead of ON / OFF text",
-    "[FIXED] Delete All confirmation now only asks whether the user wants to delete every skript in My Shelf",
-    "[NEW] Delete All creates a 7-second in-Shelf Undo Delete All button with a close X and restores the complete previous Shelf order",
-    "[FIXED] all V10.5 UI additions and bug fixes are included in this UpdatesLog table",
+    emoji.lollipop.." V10.1.5 updates: ",
+    "[NEW] Anti-Pause keeps the Gameplay Paused message from appearing while it is enabled",
+    "[FIXED] Free Animation Packs Info buttons now open the full pack details reliably on phones and computers",
+    "[FIXED] removed the duplicated controls that appeared twice in the Home tab",
 
-    emoji.lollipop.." V10.4 updates: ",
+    emoji.lollipop.." V10.1.4 updates: ",
+    "[NEW] Free Animation Packs can search, preview, favorite, play, turn off, and restore Roblox animation packs",
+    "[NEW] animation favorites save automatically by default, with Save Favorites and Save Settings available for manual saving",
+    "[IMPROVED] a Loading Animation message appears while an animation pack is being prepared",
+    "[FIXED] saved dropdown choices no longer open scripts again when LH starts",
+    "[FIXED] unavailable scripts now show one clear error instead of filling the console",
+    "[FIXED] LH no longer gets stuck saying it is already loaded after a failed startup",
+    "[FIXED] Free Animation Packs now play correctly and keep working after respawning",
+
+    emoji.lollipop.." V10.1.3 updates: ",
+    "[FIXED] Bypass Jump Limit now keeps the jump strength already selected in LH instead of causing an unexpected high jump",
+    "[FIXED] changing Jump Power while Bypass Jump Limit is enabled updates it immediately and keeps working after respawning",
+    "[FIXED] Delete All now clearly asks before removing every skript from My Shelf",
+    "[NEW] Delete All includes a 7-second Undo button that restores the complete previous My Shelf order",
+
+    emoji.lollipop.." V10.1.2 updates: ",
     "[FIXED] the main UI drag glow is permanently white in every theme and Light / Dark mode",
     "[FIXED] changing themes while dragging can no longer recolor the white drag glow",
     "[UI] every normal toggle switch is red while OFF and green while ON for immediate visibility",
@@ -9329,7 +9369,7 @@ local UpdatesLog = {
     "[FIXED] removed dim gray and black-looking toggle states that were hard to see",
     "[FIXED] all V10.4 UI additions and bug fixes are included in this UpdatesLog table",
 
-    emoji.lollipop.." V10.3 updates: ",
+    emoji.lollipop.." V10.1.1 updates: ",
     "[FIXED] My Shelf full avatar now faces the user instead of showing its back",
     "[NEW] separate easy AnimationId variables for the owner Kredits dance and every user's My Shelf dance",
     "[NEW] owner Kredits now uses a slightly larger full-body animated avatar with a thumbnail fallback",
@@ -9342,7 +9382,7 @@ local UpdatesLog = {
     "[FIXED] owner Online Status now reads its config value and stays readable in both Light and Dark mode",
     "[FIXED] all V10.3 UI additions and bug fixes are included in this UpdatesLog table",
 
-    emoji.lollipop.." V10.2 updates: ",
+    emoji.lollipop.." V10.1.0 updates: ",
     "[NEW] My Shelf now has a personalized profile page with the local player's full avatar, display name, username, user ID, account age, and page info",
     "[NEW] My Shelf avatar preview uses a full-body ViewportFrame and plays a dance animation with a safe thumbnail fallback",
     "[NEW] Shelf Hold Menu toggle disables accidental hold-to-add pop-ups while browsing",
@@ -9817,11 +9857,53 @@ end))
 
 -- More.TabMy.Skrpts
 local more = newTab("Bypasses & More")
-more[("more skripts koming soon..."..emoji.lollipop)] = more[("more skripts koming soon..."..emoji.lollipop)] or {}
-local MoreSection = section(more, ("more skripts koming soon..."..emoji.lollipop), more[("more skripts koming soon..."..emoji.lollipop)])
+more["Bypasses"] = more["Bypasses"] or {}
+local MoreSection = section(more, "Bypasses", more["Bypasses"])
 -- section alias removed by table refactor
 
-add(MoreSection, button("[NEW] DaHood Anti-cheat bypasses etc. (Debugger hub)", "an anti", function()
+do
+local antiPausePropertyConnection = nil
+local antiPauseHeartbeatConnection = nil
+
+local function diskonnektAntiPause()
+if antiPausePropertyConnection then
+pcall(function() antiPausePropertyConnection:Disconnect() end)
+antiPausePropertyConnection = nil
+end
+if antiPauseHeartbeatConnection then
+pcall(function() antiPauseHeartbeatConnection:Disconnect() end)
+antiPauseHeartbeatConnection = nil
+end
+end
+
+add(MoreSection, toggle("Anti-Pause", "prevents \"Gameplay Paused\" from popping up", function(enabled)
+diskonnektAntiPause()
+if enabled ~= true then return end
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+if not LocalPlayer then return end
+
+local function klearGameplayPaused()
+if LocalPlayer.GameplayPaused then
+LocalPlayer.GameplayPaused = false
+end
+end
+
+antiPausePropertyConnection = LocalPlayer:GetPropertyChangedSignal("GameplayPaused"):Connect(klearGameplayPaused)
+antiPauseHeartbeatConnection = RunService.Heartbeat:Connect(klearGameplayPaused)
+LHRuntime:Track(antiPausePropertyConnection)
+LHRuntime:Track(antiPauseHeartbeatConnection)
+klearGameplayPaused()
+end, false))
+end
+
+add(MoreSection, toggle("Bypass Jump Limit", "Good for obbies and games with limited jumps. Uses the Jump Power selected in LH.", function(enabled)
+LHFeatures:SetJumpLimitBypass(enabled)
+end, false))
+
+add(MoreSection, button("DaHood Anti-cheat bypasses etc. (Debugger hub)", "an anti", function()
 kall(function()
 debug=[[
 loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/debugnation/main/decompilers%20and%20debugging/Debuggers.txt"))();
@@ -10186,7 +10268,7 @@ funSidebarOrder = funSidebarOrder or 40
 local animationBundlesTab = nil
 if Window.EnableAnimationBundles then
     local animationTabOk, animationTabResult = pcall(function()
-        return Window:EnableAnimationBundles("Animation Bundles")
+        return Window:EnableAnimationBundles("Free Animation Packs")
     end)
     if animationTabOk then
         animationBundlesTab = animationTabResult
@@ -10196,7 +10278,7 @@ if Window.EnableAnimationBundles then
     else
         warn("[Lollypop Hub Animation Marketplace V4] " .. tostring(animationTabResult))
         if LHRuntime and LHRuntime.Notify then
-            pcall(function() LHRuntime:Notify("error", "Animation Bundles", "Marketplace V4 could not initialize: " .. tostring(animationTabResult), 7, nil, true) end)
+            pcall(function() LHRuntime:Notify("error", "Free Animation Packs", "Marketplace V4 could not initialize: " .. tostring(animationTabResult), 7, nil, true) end)
         end
     end
 else
