@@ -1,4 +1,4 @@
---main v10.1.5 LOLLYPOP HUB 
+--main v10.1.7 LOLLYPOP HUB 
 
 date = "August 5"..", "..tostring(os.date("%Y"))
 
@@ -356,13 +356,46 @@ if type(getgenv) ~= "function" then
 end
 env.LHEmoji = emoji
 
+-- Central cloned-service access. Supports get.Players, get.ReplicatedStorage,
+-- get("Players"), get("ReplicatedStorage"), and every other Roblox service.
+get = rawget(env, "LHGetService")
+if type(get) ~= "table" then
+    local nativeCloneRef = rawget(env, "cloneref") or rawget(env, "clone_ref")
+    if type(nativeCloneRef) ~= "function" then
+        nativeCloneRef = function(object) return object end
+        rawset(env, "cloneref", nativeCloneRef)
+    end
+    local serviceCache = {}
+    local function resolveService(serviceName)
+        serviceName = tostring(serviceName or "")
+        if serviceName == "" then error("missing service name", 2) end
+        if serviceCache[serviceName] then return serviceCache[serviceName] end
+        local ok, service = pcall(game.GetService, game, serviceName)
+        if not ok then error(service, 2) end
+        local clonedOk, cloned = pcall(nativeCloneRef, service)
+        service = (clonedOk and cloned) or service
+        serviceCache[serviceName] = service
+        return service
+    end
+    get = setmetatable({}, {
+        __index = function(_, serviceName)
+            return resolveService(serviceName)
+        end,
+        __call = function(_, serviceName)
+            return resolveService(serviceName)
+        end,
+    })
+    rawset(env, "LHGetService", get)
+end
+rawset(env, "get", get)
+
 --  AVA DANCE SETTINGS
 env.LH_OWNER_KREDITS_ANIMATION_ID = 85612839739153 
 -- ateez say my name
 env.LH_MY_SHELF_ANIMATION_ID = 113164397821194 
 -- wys lil uzi vert
 
-local HttpService = game:GetService("HttpService")
+local HttpService = get.HttpService
 local LH_SETTINGS_FOLDER = "LollypopHub"
 local LH_SETTINGS_FILE = LH_SETTINGS_FOLDER .. "/settings.json"
 local LH_SESSION_FILE = LH_SETTINGS_FOLDER .. "/session_v10.json"
@@ -452,15 +485,15 @@ function LHCompat.GetHui()
         local ok, result = pcall(LHCompat.Native.GetHui)
         if ok and result then return result end
     end
-    return game:GetService("CoreGui")
+    return get.CoreGui
 end
 
 function LHCompat.ParentGui(gui)
     if not gui then return false, "missing gui" end
     local parents = {
         LHCompat.GetHui(),
-        game:GetService("CoreGui"),
-        game:GetService("Players").LocalPlayer and game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui"),
+        get.CoreGui,
+        get.Players.LocalPlayer and get.Players.LocalPlayer:FindFirstChildOfClass("PlayerGui"),
     }
     for _, parent in ipairs(parents) do
         if parent then
@@ -741,7 +774,7 @@ local function localStartupNotify(title, text, durationValue)
         if ok then return true end
     end
     return pcall(function()
-        game:GetService("StarterGui"):SetCore("SendNotification", {
+        get.StarterGui:SetCore("SendNotification", {
             Title = title,
             Text = text,
             Duration = durationValue or 5,
@@ -771,9 +804,28 @@ local RobloxTask = task
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
+env.LH_DEFAULT_GRAVITY = 196.2
+env.LHGravityStartupPending = true
+pcall(function()
+    if env.LHGravityStartupConnection and env.LHGravityStartupConnection.Connected then
+        env.LHGravityStartupConnection:Disconnect()
+    end
+    get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+    env.LHGravityStartupConnection = get.Workspace:GetPropertyChangedSignal("Gravity"):Connect(function()
+        if env.LHGravityStartupPending == true and math.abs(get.Workspace.Gravity - env.LH_DEFAULT_GRAVITY) > 0.001 then
+            get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+        end
+    end)
+end)
+
 local GLOBALS_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/skripts/globaLS"
 local globalsOk, globalsError = LHCompat.LoadRemote(GLOBALS_URL, "LH globaLS", true)
 if not globalsOk then warn("[Lollypop Hub] Optional globaLS skipped: " .. tostring(globalsError)) end
+pcall(function()
+    if env.LHGravityStartupPending == true then
+        get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+    end
+end)
 -----
 env.loadhub = function()
     local ok, result = LHCompat.LoadRemote(
@@ -797,7 +849,8 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.1.5')
+local Vv = ('10.1.7')
+env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local LastUPDATE = "Last Update: "..date
 ------------------
 local savedAccent = env.LHSettings.Accent
@@ -936,7 +989,7 @@ elseif getdate(12, 25) then
 elseif getdate(12, 26) then
 HOLIDAY = NEWLINE..("HOPE U ENJOYED UR XMAS"..emoji.red_heart)
 else
-local plr = game.Players.LocalPlayer
+local plr = get.Players.LocalPlayer
 HOLIDAY = NEWLINE.."Hi, " .. plr.Name .. (" "..emoji.candy)
 end;
 return HOLIDAY;
@@ -1064,7 +1117,7 @@ end;
 env.lhloaded=false
 -- The loaded sentinel is set only after Kavo and every LH tab finish building.
 --=============LOKALS==============--
-local Plrs = game:GetService[[Players]];
+local Plrs = get.Players;
 local lp = Plrs.LocalPlayer
 local ava = lp.Character or lp.CharacterAdded:Wait()
 local hum = ava:WaitForChild("Humanoid");
@@ -1115,7 +1168,7 @@ function LHRuntime:AddButtonPressEffect(button)
     if button:GetAttribute("LHPressEffectBound") then return end
     button:SetAttribute("LHPressEffectBound", true)
     button.ClipsDescendants = true
-    local pressTweenService = game:GetService("TweenService")
+    local pressTweenService = get.TweenService
     local scaleObject = button:FindFirstChild("LHPressScale") or Instance.new("UIScale")
     scaleObject.Name = "LHPressScale"
     scaleObject.Scale = 1
@@ -1196,7 +1249,7 @@ function LHRuntime:Notify(kind, titleText, bodyText, durationSeconds, progress, 
     end
     if env.LHSettings.NotificationMuted and force ~= true then return nil end
     pcall(function()
-        game:GetService("StarterGui"):SetCore("SendNotification", {
+        get.StarterGui:SetCore("SendNotification", {
             Title = tostring(titleText or "Lollypop Hub"),
             Text = tostring(bodyText or ""),
             Duration = tonumber(durationSeconds) or 5,
@@ -1619,7 +1672,7 @@ LHRuntime:Track(lp.CharacterRemoving:Connect(function(character)
     end
 end))
 
-LHRuntime:Track(game:GetService("UserInputService").JumpRequest:Connect(function()
+LHRuntime:Track(get.UserInputService.JumpRequest:Connect(function()
     if not LHFeatures.InfiniteJumpEnabled or LHRuntime.Unloading then return end
     local humanoid = LHFeatures:GetHumanoid()
     if humanoid and humanoid.Health > 0 then
@@ -1630,7 +1683,7 @@ LHRuntime:Track(game:GetService("UserInputService").JumpRequest:Connect(function
     end
 end))
 
-LHRuntime:Track(game:GetService("RunService").Stepped:Connect(function(_, delta)
+LHRuntime:Track(get.RunService.Stepped:Connect(function(_, delta)
     if LHRuntime.Unloading then return end
     local character = LHFeatures.Character or lp.Character
     local humanoid = LHFeatures:GetHumanoid()
@@ -1661,7 +1714,7 @@ LHRuntime:Track(game:GetService("RunService").Stepped:Connect(function(_, delta)
             local localRoot = LHFeatures:GetRoot()
             local nearby = false
             if localRoot then
-                for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                for _, player in ipairs(get.Players:GetPlayers()) do
                     if player ~= lp and (LHFeatures.ProximityTargetUserId == 0 or player.UserId == LHFeatures.ProximityTargetUserId) then
                         local targetCharacter = player.Character
                         local targetRoot = targetCharacter and (targetCharacter:FindFirstChild("HumanoidRootPart") or targetCharacter:FindFirstChild("Torso") or targetCharacter:FindFirstChild("UpperTorso"))
@@ -1696,7 +1749,7 @@ end
 function LHRuntime:FindPlayer(query)
     query = normalizeName(query)
     if query == "" or query == "me" or query == "self" then return lp end
-    local players = game:GetService("Players"):GetPlayers()
+    local players = get.Players:GetPlayers()
     local localRoot = self:GetRoot()
 
     local numericUserId = tonumber(query)
@@ -1985,12 +2038,12 @@ function LHRuntime:Unload(reason)
     end
     pcall(function() if env.LHKavo and env.LHKavo.Destroy then env.LHKavo:Destroy() end end)
     pcall(function()
-        local blur = game:GetService("Lighting"):FindFirstChild("LHGlassBlur")
+        local blur = get.Lighting:FindFirstChild("LHGlassBlur")
         if blur then blur:Destroy() end
-        local music = game:GetService("SoundService"):FindFirstChild("LHMusicPlayer")
+        local music = get.SoundService:FindFirstChild("LHMusicPlayer")
         if music then music:Destroy() end
     end)
-    for _, parent in ipairs({game:GetService("CoreGui"), lp:FindFirstChildOfClass("PlayerGui")}) do
+    for _, parent in ipairs({get.CoreGui, lp:FindFirstChildOfClass("PlayerGui")}) do
         if parent then
             for _, gui in ipairs(parent:GetChildren()) do
                 if gui:IsA("ScreenGui") and (
@@ -2004,7 +2057,7 @@ function LHRuntime:Unload(reason)
         end
     end
     pcall(function()
-        for _, parent in ipairs({game:GetService("CoreGui"), lp:FindFirstChildOfClass("PlayerGui"), game:GetService("SoundService")}) do
+        for _, parent in ipairs({get.CoreGui, lp:FindFirstChildOfClass("PlayerGui"), get.SoundService}) do
             if parent then
                 for _, object in ipairs(parent:GetDescendants()) do
                     local lowered = string.lower(tostring(object.Name or ""))
@@ -2038,13 +2091,13 @@ end
 -- Lightweight FPS and memory sampler.
 do
     local frames, elapsed = 0, 0
-    LHRuntime:Track(game:GetService("RunService").RenderStepped:Connect(function(delta)
+    LHRuntime:Track(get.RunService.RenderStepped:Connect(function(delta)
         frames = frames + 1
         elapsed = elapsed + delta
         if elapsed >= 1 then
             LHRuntime.FPS = math.floor(frames / elapsed + 0.5)
             frames, elapsed = 0, 0
-            local ok, memory = pcall(function() return game:GetService("Stats"):GetTotalMemoryUsageMb() end)
+            local ok, memory = pcall(function() return get.Stats:GetTotalMemoryUsageMb() end)
             if ok then LHRuntime.MemoryMB = math.floor(memory * 10 + 0.5) / 10 end
         end
     end))
@@ -2052,7 +2105,7 @@ end
 
 pcall(function()
 LHRuntime:Track(lp.Chatted:Connect(function(m) 
-local Lighting = game:GetService"Lighting";
+local Lighting = get.Lighting;
 local day = (14);
 local night = (0);
 local nofog=(100000)
@@ -2070,7 +2123,7 @@ end;end
 elseif(m=='/e noban')then
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/kredits-AnthonyIsntHere-antiban0antilogger.lua",true))();
 elseif(m=='/e re')then
-local char = game.Players.LocalPlayer.Character
+local char = get.Players.LocalPlayer.Character
 if char then
     char:BreakJoints();
 end
@@ -2103,7 +2156,7 @@ getgenv().exploit = (identifyexecutor and identifyexecutor()) or "Unknown";
 
 getgenv().rbxnote = function(title,txt,dur,img)
 if env.LHSettings.NotificationMuted then return end
-game:GetService("StarterGui"):SetCore("SendNotification",{
+get.StarterGui:SetCore("SendNotification",{
 Title = title or "add title nigga",
 Text = txt or "add text fag",
 Duration = dur or 6,
@@ -2162,13 +2215,13 @@ end;
 
 getgenv().bNotify = function(dur,btn,text)
 if env.LHSettings.NotificationMuted then return end
-game:GetService("StarterGui"):SetCore("SendNotification", {Title = ("Lollypop Hub "..emoji.lollipop), Duration = dur or 4.5, Button1 = btn or "bet", Callback = function() print("btn") end, Text = text});
+get.StarterGui:SetCore("SendNotification", {Title = ("Lollypop Hub "..emoji.lollipop), Duration = dur or 4.5, Button1 = btn or "bet", Callback = function() print("btn") end, Text = text});
 end;ok=bNotify;n=bNotify;
 
 getgenv().write=function(msg,typingtime)
 spawn(function()
 local h=Instance.new("Hint");
-h.Parent = game.Workspace;
+h.Parent = get.Workspace;
 local function typeMessage()
 for i=1,#msg do h.Text=string.sub(msg,1,i);
 wait(typingtime); end;end;
@@ -2191,7 +2244,7 @@ alert("hello", 5)
 local function makedekal(DEKAL)
 detektion = Instance.new("Decal");
 detektion.Name = DEKAL
-detektion.Parent= game:GetService("ReplicatedStorage")
+detektion.Parent= get.ReplicatedStorage
 -- print(detektion.Name.." <U_1F36D>")
 end;
 
@@ -2417,7 +2470,7 @@ local function milk(percent)
 end
 
 local function animateSkript()
-    local TweenService = game:GetService("TweenService")
+    local TweenService = get.TweenService
     local started = tick()
     local totalLoadTime = 5
     local lastPercent = -1
@@ -2478,11 +2531,11 @@ local function animateSkript()
     loadingSkreen:Destroy()
 
 local function e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud()
-local user=game.Players.LocalPlayer.Name
-local display=game.Players.LocalPlayer.DisplayName;
+local user=get.Players.LocalPlayer.Name
+local display=get.Players.LocalPlayer.DisplayName;
 local lulaslollipop=3001347724;
 local cheru=4406450103;
-local plrId = game.Players.LocalPlayer.UserId;
+local plrId = get.Players.LocalPlayer.UserId;
 local garamondfont=Enum.Font.Garamond;
 local arialfont=Enum.Font.Arial;
 local KodeFont=Enum.Font.Code
@@ -2503,27 +2556,27 @@ local redorange=Color3.fromRGB(255,75,43);
 local rred=Color3.fromRGB(245,0,0);
 local purple=Color3.fromRGB(255,0,255)
 local GOLD=Color3.fromRGB(255,215,0)
-game.StarterGui:SetCore("ChatMakeSystemMessage", {
+get.StarterGui:SetCore("ChatMakeSystemMessage", {
 Text = welkome_1,
 Color = GOLD,
 Font = luxkiestguy,
 FontSize = 8 --fontsize36
 });
 wait(1)
-game.StarterGui:SetCore("ChatMakeSystemMessage", {
+get.StarterGui:SetCore("ChatMakeSystemMessage", {
 Text = mygoal_2,
 Color = rred,
 Font = Fredoka,
 FontSize = 7 --24fontsize
 })
 wait(0.5)
-game.StarterGui:SetCore("ChatMakeSystemMessage", {
+get.StarterGui:SetCore("ChatMakeSystemMessage", {
 Text = kmds_3,
 Color = limegreen,
 Font = Fredoka,
 FontSize = 9
 });
-game.StarterGui:SetCore("ChatMakeSystemMessage", {
+get.StarterGui:SetCore("ChatMakeSystemMessage", {
 Text = "default toggle size is "..tostring(toggleButtonSize)..("\nTip: "..emoji.lollipop.." say "..emoji.left_double_quote.."/e toggle"..emoji.left_double_quote.." if you lose the toggle and need a new one"),
 Color = Color3.fromRGB(255,255,0),
 Font = Fredoka,
@@ -2532,7 +2585,7 @@ FontSize = 9
 end; --218,133,65=orange...0,255,0=green...278,75,43=red/orange...
 
 -- [ <U_1F4F1><U_1F4BB>PLATFORM / DEVIXE<U_1F5A5_FE0F><U_1F3AE> ] --
-local uis = game:GetService("UserInputService")
+local uis = get.UserInputService
 local platform=uis:GetPlatform();
 local niggaIsUsing = table.find({Enum.Platform.IOS, Enum.Platform.Android}, platform)
 local devixe_name
@@ -2572,7 +2625,7 @@ end;
 local defaultKolor = thanksgivingRed
 local darkpurp=Color3.fromRGB(128,0,128);
 
---game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
+--get.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "Devixe: [ "..devixe_name.." ]", Color = Color3.fromRGB(255,127,127), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 });
 
 
 local lollyhub = function(txt, dur)
@@ -2586,7 +2639,7 @@ end
 end;
 
 if not env.LHSettings.NotificationMuted then
-    lollyhub((emoji.lollipop.." Welkome to Lollypop Hub, ")..game.Players.LocalPlayer.Name..("!"..emoji.lollipop), 3)
+    lollyhub((emoji.lollipop.." Welkome to Lollypop Hub, ")..get.Players.LocalPlayer.Name..("!"..emoji.lollipop), 3)
     lollyhub("V"..Vv..(emoji.lollipop..emoji.face_savoring_food), 3)
 end
 
@@ -2628,7 +2681,7 @@ end)
 -- darkturquoise	=	0,206,209
 -- turquoise	=	64,224,208
 -- mediumturquoise = 72,209,204
-local kount = #game.Players:GetPlayers();
+local kount = #get.Players:GetPlayers();
 
 
 
@@ -2934,7 +2987,7 @@ local lollypopHub = ("Lollypop Hub"..emoji.lollipop.." | V") ..Vv.. " | " ..expl
 local Window = KAVO.CreateLib(lollypopHub, uiTheme)
 env.LHRequestClose = function()
     if LHRuntime.Unloading then return end
-    local parent = game:GetService("CoreGui")
+    local parent = get.CoreGui
     pcall(function() if gethui then parent = gethui() end end)
     local old = parent:FindFirstChild("LHCloseConfirmation")
     if old then old:Destroy() end
@@ -3031,7 +3084,7 @@ env.LHRequestClose = function()
     local alive = true
     local started = tick()
     local spin
-    spin = game:GetService("RunService").RenderStepped:Connect(function()
+    spin = get.RunService.RenderStepped:Connect(function()
         if not alive or not gui.Parent then
             if spin then spin:Disconnect() end
             return
@@ -3272,13 +3325,13 @@ function LHFlight:Enable(speed)
     end
 
     self.Enabled = true
-    local ContextActionService = game:GetService("ContextActionService")
+    local ContextActionService = get.ContextActionService
     ContextActionService:BindAction("LHFlyUp", function(name, state)
         return self:SetVertical(name, state)
-    end, game:GetService("UserInputService").TouchEnabled, Enum.KeyCode.Space, Enum.KeyCode.E)
+    end, get.UserInputService.TouchEnabled, Enum.KeyCode.Space, Enum.KeyCode.E)
     ContextActionService:BindAction("LHFlyDown", function(name, state)
         return self:SetVertical(name, state)
-    end, game:GetService("UserInputService").TouchEnabled, Enum.KeyCode.LeftControl, Enum.KeyCode.Q)
+    end, get.UserInputService.TouchEnabled, Enum.KeyCode.LeftControl, Enum.KeyCode.Q)
     pcall(function()
         ContextActionService:SetTitle("LHFlyUp", "UP")
         ContextActionService:SetTitle("LHFlyDown", "DOWN")
@@ -3292,7 +3345,7 @@ function LHFlight:Enable(speed)
     end)
     self:BindCharacter()
 
-    self.RenderConnection = game:GetService("RunService").RenderStepped:Connect(function()
+    self.RenderConnection = get.RunService.RenderStepped:Connect(function()
         if not self.Enabled then return end
         if not self.Root or not self.Root.Parent or not self.Humanoid or self.Humanoid.Health <= 0 then
             if os.clock() >= (self.NextBindAttempt or 0) then
@@ -3328,7 +3381,7 @@ function LHFlight:Disable()
     if self.CharacterConnection then self.CharacterConnection:Disconnect(); self.CharacterConnection = nil end
     if self.RenderConnection then self.RenderConnection:Disconnect(); self.RenderConnection = nil end
     pcall(function()
-        local ContextActionService = game:GetService("ContextActionService")
+        local ContextActionService = get.ContextActionService
         ContextActionService:UnbindAction("LHFlyUp")
         ContextActionService:UnbindAction("LHFlyDown")
     end)
@@ -3446,7 +3499,7 @@ LHRuntime:RegisterCommand("clearhistory", {"clearhistory"}, "Clears notification
 end)
 
 LHRuntime:RegisterCommand("rejoin", {"rj"}, "Rejoins the current server.", "rejoin", function()
-    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
+    get.TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
 end)
 
 LHRuntime:RegisterCommand("palette", {"cmdbar", "kmds", "kmd"}, "Opens the kommand palette.", "palette", function()
@@ -3894,7 +3947,7 @@ local namelessOwnedGuis = setmetatable({}, {__mode = "k"})
 local namelessGuiLocks = setmetatable({}, {__mode = "k"})
 
 local function getAdminGuiRoots()
-    local roots = {game:GetService("CoreGui"), game.Players.LocalPlayer:WaitForChild("PlayerGui")}
+    local roots = {get.CoreGui, get.Players.LocalPlayer:WaitForChild("PlayerGui")}
     pcall(function()
         if gethui then
             local hui = gethui()
@@ -4105,7 +4158,7 @@ env.LHClosePalette = nil
 
 -- Command palette UI.
 do
-    local parent = game:GetService("CoreGui")
+    local parent = get.CoreGui
     pcall(function() if gethui then parent = gethui() end end)
     local paletteGui = Instance.new("ScreenGui")
     paletteGui.Name = "LHCommandPalette"
@@ -4271,9 +4324,9 @@ do
             if ok then box.Text = ""; closePalette() else openPalette() end
         end
     end))
-    LHRuntime:Track(game:GetService("UserInputService").InputBegan:Connect(function(inputObject, processed)
+    LHRuntime:Track(get.UserInputService.InputBegan:Connect(function(inputObject, processed)
         if processed then return end
-        if inputObject.KeyCode == Enum.KeyCode.Semicolon and game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftShift) then
+        if inputObject.KeyCode == Enum.KeyCode.Semicolon and get.UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
             env.LHOpenPalette()
         elseif opened and inputObject.KeyCode == Enum.KeyCode.Escape then
             closePalette()
@@ -4288,7 +4341,7 @@ do
         end
     end))
 
-    if game:GetService("UserInputService").TouchEnabled then
+    if get.UserInputService.TouchEnabled then
         mobileOpen = Instance.new("TextButton")
         mobileOpen.Name = "PaletteMobileButton"
         mobileOpen.AnchorPoint = Vector2.new(0, 0.5)
@@ -4322,7 +4375,7 @@ do
                 startPosition = mobileOpen.Position
             end
         end))
-        LHRuntime:Track(game:GetService("UserInputService").InputChanged:Connect(function(inputObject)
+        LHRuntime:Track(get.UserInputService.InputChanged:Connect(function(inputObject)
             if not dragging or env.LHSettings.AdminButtonDragLocked then return end
             if inputObject == dragInput or inputObject.UserInputType == Enum.UserInputType.MouseMovement or inputObject.UserInputType == Enum.UserInputType.Touch then
                 local delta = inputObject.Position - dragStart
@@ -4332,7 +4385,7 @@ do
                 end
             end
         end))
-        LHRuntime:Track(game:GetService("UserInputService").InputEnded:Connect(function(inputObject)
+        LHRuntime:Track(get.UserInputService.InputEnded:Connect(function(inputObject)
             if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
                 dragging = false
             end
@@ -4391,7 +4444,7 @@ local function runLocalChatCommand(message)
 end
 LHRuntime:Track(lp.Chatted:Connect(runLocalChatCommand))
 pcall(function()
-    local TextChatService = game:GetService("TextChatService")
+    local TextChatService = get.TextChatService
     LHRuntime:Track(TextChatService.MessageReceived:Connect(function(message)
         local source = message.TextSource
         if source and source.UserId == lp.UserId then runLocalChatCommand(message.Text) end
@@ -4621,7 +4674,7 @@ LHRuntime:Track(task.spawn(function()
 end))
 
 env.LHConfirmReset = function(messageText, onConfirm)
-    local parent = game:GetService("CoreGui")
+    local parent = get.CoreGui
     pcall(function() if gethui then parent = gethui() end end)
     local old = parent:FindFirstChild("LHSingleSettingResetConfirmation")
     if old then old:Destroy() end
@@ -4737,7 +4790,7 @@ local function applyDefaultUISettings()
 end
 
 local function askResetAllSettings()
-    local parent = game:GetService("CoreGui")
+    local parent = get.CoreGui
     pcall(function() if gethui then parent = gethui() end end)
     local old = parent:FindFirstChild("LHResetSettingsConfirmation")
     if old then old:Destroy() end
@@ -4827,38 +4880,7 @@ add(emergencySection, button("EMERGENCY UNLOAD LH", "Disconnects tracked konnect
     LHRuntime:Unload("emergency button")
 end))
 
-local notificationTab = newTab("Notifications")
-local notificationControls = section(notificationTab, "Notification Center", {})
-local notificationHistoryLabel = add(notificationControls, label("Notification history is empty."))
-add(notificationControls, toggle("Mute All Notifications", "Stops visual and sound notifications while preserving history.", function(value)
-    env.LHSettings.NotificationMuted = value
-    env.LHUISettings.NotificationMuted = value
-    LHRuntime:SettingChanged()
-end, env.LHSettings.NotificationMuted))
-add(notificationControls, slider("Notification Volume", "Controls opening and notification sound volume.", 0, 100, function(value)
-    env.LHSettings.NotificationVolume = value / 100
-    env.LHUISettings.NotificationVolume = value / 100
-    LHRuntime:SettingChanged()
-end, math.floor((env.LHSettings.NotificationVolume or 0.45) * 100)))
-add(notificationControls, button("Clear Notification History", "Deletes saved notification history for this session.", function()
-    table.clear(env.LHNotificationHistory or {})
-    notificationHistoryLabel:UpdateLabel("Notification history is empty.")
-end))
-
-LHRuntime:Track(task.spawn(function()
-    while not LHRuntime.Unloading do
-        local history = env.LHNotificationHistory or {}
-        if #history > 0 then
-            local lines = {}
-            for index = 1, math.min(8, #history) do
-                local item = history[index]
-                table.insert(lines, tostring(item.Kind or "info") .. ": " .. tostring(item.Title or "") .. " - " .. tostring(item.Text or ""))
-            end
-            notificationHistoryLabel:UpdateLabel(table.concat(lines, "\n"))
-        end
-        task.wait(1.5)
-    end
-end))
+-- Notifications page is created by the Kavo notification center after the main tabs are built.
 
 
 -- themes:
@@ -4953,10 +4975,10 @@ _G.note((emoji.cross_mark.." Found error in skript: ")..err, 6)
 end))
 
 
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
+local Players = get.Players
+local RunService = get.RunService
 local plr = Players.LocalPlayer
-local maxplrs = game.Players.MaxPlayers
+local maxplrs = get.Players.MaxPlayers
 local serversize = add(SkriptsSection, label("Server Size: "..kount.."/"..maxplrs))
 
 -- Keep ESP state in a normal mutable Lua table. Some executors expose a readonly getgenv table.
@@ -5004,7 +5026,7 @@ add(SkriptsSection, kounter("Toggle Button Size", "Changes the draggable Lollypo
     toggleButtonSize = updatedSize
     pcall(function() getgenv().updatedSize = updatedSize end)
     pcall(function() getgenv().togglesize = updatedSize end)
-    local parent = game:GetService("CoreGui")
+    local parent = get.CoreGui
     pcall(function() if gethui then parent = gethui() end end)
     local gui = parent:FindFirstChild("KustomToggle")
     local buttonObject = gui and gui:FindFirstChild("LollypopToggle", true)
@@ -5053,7 +5075,7 @@ end))
 --[LABELS]--
 add(SkriptsSection, label("User ID: "..userid.. " | Akkount Age: "..lp.AccountAge.." day(s)"))
 
-add(SkriptsSection, label("Game: "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\n Game ID: ".. game.PlaceId))
+add(SkriptsSection, label("Game: "..get.MarketplaceService:GetProductInfo(game.PlaceId).Name.."\n Game ID: ".. game.PlaceId))
 
 add(SkriptsSection, label("Devixe: " ..devixe_name))
 
@@ -5066,6 +5088,8 @@ add(SkriptsSection, label("request scripts here (send the loadstring or SAY wat 
 local banned = {"hhfhfhjjd3"}
 
 add(SkriptsSection, textbox("Skript request", "type whatever skript u want then push enter", function(skript)
+skript = tostring(skript or "")
+if skript:match("^%s*$") then return end
 if _G.find(banned, username) then
 _G.note("stop spamming", 4); return end;
 
@@ -5086,7 +5110,7 @@ add(SkriptsSection, label("Players"));
 --------------////-------------------
 local selektedPlayerName = nil;
 local function ALLPLRS()
-local players = game.Players:GetPlayers()
+local players = get.Players:GetPlayers()
 local playerNames = {}
 for _, player in ipairs(players) do
 table.insert(playerNames, player.Name)
@@ -5104,13 +5128,13 @@ if playerToolStealer and playerToolStealer.Refresh then playerToolStealer:Refres
 end;
 
 --handle plrs  being added and removed
-LHRuntime:Track(game.Players.PlayerAdded:connect(updatePlayerList))
-LHRuntime:Track(game.Players.PlayerRemoving:connect(updatePlayerList));
+LHRuntime:Track(get.Players.PlayerAdded:connect(updatePlayerList))
+LHRuntime:Track(get.Players.PlayerRemoving:connect(updatePlayerList));
 
 add(SkriptsSection, button("Teleport to Selekted Player", "tp to player", function()
 if selektedPlayerName then
-local player = game.Players.LocalPlayer
-local targetPlayer = game.Players:FindFirstChild(selektedPlayerName);
+local player = get.Players.LocalPlayer
+local targetPlayer = get.Players:FindFirstChild(selektedPlayerName);
 if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
     local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
     if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -5127,12 +5151,12 @@ bNotify(3, "oh", "No player selekted")
 end;
 end))
 
-local TweenService = game:GetService("TweenService")
+local TweenService = get.TweenService
 
 add(SkriptsSection, button("Tween to Selekted Player", "tp to player", function()
 if selektedPlayerName then
-local player = game.Players.LocalPlayer
-local targetPlayer = game.Players:FindFirstChild(selektedPlayerName)
+local player = get.Players.LocalPlayer
+local targetPlayer = get.Players:FindFirstChild(selektedPlayerName)
 if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
     local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
     if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -5221,7 +5245,7 @@ end)
 end, 0.8, 0, 25))
 
 add(SkriptsSection, kounter("Walk Speed", "xhanges your WalkSpeed", 1, function(speed)
-local character = game.Players.LocalPlayer.Character
+local character = get.Players.LocalPlayer.Character
 local humanoid = character and character:FindFirstChildOfClass("Humanoid")
 if humanoid then humanoid.WalkSpeed = speed end
 end, 16, 0, 400))
@@ -5234,17 +5258,29 @@ add(SkriptsSection, toggle("No Klip", "Walk through kollidable parts. Stays enab
 LHFeatures:SetNoClip(enabled)
 end))
 
-add(SkriptsSection, slider("Gravity", "", 1, 1000, function(grav)
-workspace.Gravity=grav;
-end))
+add(SkriptsSection, slider("Gravity", "Kontrols world gravity. Normal Roblox gravity is 196.2.", 1, 1000, function(grav)
+env.LHGravityStartupPending = false
+pcall(function()
+    if env.LHGravityStartupConnection and env.LHGravityStartupConnection.Connected then
+        env.LHGravityStartupConnection:Disconnect()
+    end
+end)
+get.Workspace.Gravity = tonumber(grav) or env.LH_DEFAULT_GRAVITY
+end, env.LH_DEFAULT_GRAVITY))
 
-add(SkriptsSection, button("Reset Gravity", "resets gravity", function()
-workspace.Gravity = 196.2
+add(SkriptsSection, button("Reset Gravity", "Returns gravity to the normal Roblox value of 196.2.", function()
+env.LHGravityStartupPending = false
+pcall(function()
+    if env.LHGravityStartupConnection and env.LHGravityStartupConnection.Connected then
+        env.LHGravityStartupConnection:Disconnect()
+    end
+end)
+get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
 end))
 
 add(SkriptsSection, toggle("Enable chat bubbles", (emoji.lollipop), function(bubbles)
 local chat;
-chat = cloneref(game:GetService("Chat"));
+chat = cloneref(get.Chat);
 if bubbles then 
 chat.BubbleChatEnabled = (true)
 else 
@@ -5302,9 +5338,9 @@ local autoJumpEnabled = false;
 add(SkriptsSection, toggle("Auto Jump", "auto jumps", function(state)
 autoJumpEnabled = state
 end));
-LHRuntime:Track(cloneref(game:GetService("RunService")).RenderStepped:Connect(function()
+LHRuntime:Track(cloneref(get.RunService).RenderStepped:Connect(function()
 if autoJumpEnabled and not LHRuntime.Unloading then
-local player = game.Players.LocalPlayer
+local player = get.Players.LocalPlayer
 if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
     player.Character.Humanoid.Jump = true
 end
@@ -5323,7 +5359,7 @@ local proximityTargetDropdown
 local function buildProximityTargets(excludedPlayer)
     local labels = {"All"}
     local ids = {All = 0}
-    local players = game:GetService("Players"):GetPlayers()
+    local players = get.Players:GetPlayers()
     table.sort(players, function(a, b) return string.lower(a.Name) < string.lower(b.Name) end)
     for _, player in ipairs(players) do
         if player ~= lp and player ~= excludedPlayer then
@@ -5372,8 +5408,8 @@ local function refreshProximityTargets(leavingPlayer)
     end
 end
 
-LHRuntime:Track(game:GetService("Players").PlayerAdded:Connect(function() task.defer(refreshProximityTargets) end))
-LHRuntime:Track(game:GetService("Players").PlayerRemoving:Connect(function(player) task.defer(refreshProximityTargets, player) end))
+LHRuntime:Track(get.Players.PlayerAdded:Connect(function() task.defer(refreshProximityTargets) end))
+LHRuntime:Track(get.Players.PlayerRemoving:Connect(function(player) task.defer(refreshProximityTargets, player) end))
 
 add(SkriptsSection, label("Mobile Fly"))
 
@@ -5396,7 +5432,7 @@ end))
 add(SkriptsSection, label("more skripts"))
 
 add(SkriptsSection, button((emoji.lollipop..emoji.lollipop..emoji.lollipop.."Lollypops (R6 only)"), (emoji.lollipop.." all day"), function()
-for i, v in pairs(game.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Head; 
+for i, v in pairs(get.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Head; 
 emit.Texture = "http://www.roblox.com/asset/?id=17767487755"; 
 emit.VelocitySpread = 3;
 end;
@@ -5416,7 +5452,7 @@ repeat
 wait()
 until game:IsLoaded()
 
-local player = game.Players.LocalPlayer
+local player = get.Players.LocalPlayer
 local nigguh = player.Character
 
 local part = Instance.new("Part", nigguh)
@@ -5424,8 +5460,8 @@ part.Transparency = 1
 part.Anchored = true
 part.CanCollide = false
 
-local tweenService = game:GetService("TweenService")
-local runService = game:GetService("RunService")
+local tweenService = get.TweenService
+local runService = get.RunService
 local kamera = workspace.CurrentCamera
 
 kamera.CameraSubject = part
@@ -5480,7 +5516,7 @@ add(SkriptsSection, button("ANTI-AFK 2", "selfe",
 function()
 --anti afk
 getconnections=getconnections
-for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+for i,v in pairs(getconnections(get.Players.LocalPlayer.Idled)) do
 v:Disable()
 end
 
@@ -5530,21 +5566,21 @@ end))
 -- superhuman
 add(SkriptsSection, toggle("Super-Human", "boosts jumppower and speed", function(state)
 if state then
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 120
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = 120
+get.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 120
+get.Players.LocalPlayer.Character.Humanoid.JumpPower = 120
 else
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+get.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+get.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 end
 end))
 
 add(SkriptsSection, toggle("Sit", "sit/unsit", function(state)
 if state then
 -- sitTrue
-game.Players.LocalPlayer.Character.Humanoid.Sit = true
+get.Players.LocalPlayer.Character.Humanoid.Sit = true
 else
 -- sitFalse
-game.Players.LocalPlayer.Character.Humanoid.Sit = false
+get.Players.LocalPlayer.Character.Humanoid.Sit = false
 end
 end))
 
@@ -5569,13 +5605,13 @@ end))
 
 add(SkriptsSection, button("show msgs (for games without it)", "good for games like evade w no msg box",
 function()
-game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
+get.StarterGui:SetCoreGuiEnabled('Chat', true)
 end))
 
 add(SkriptsSection, button("Shy Animation (99% fail)", "for 99% fail impossible obby",
-function()local ohInstance1 = game.Players.LocalPlayer.Character.Humanoid
+function()local ohInstance1 = get.Players.LocalPlayer.Character.Humanoid
 
-game:GetService("ReplicatedStorage").OnRagdoll:FireServer(ohInstance1)
+get.ReplicatedStorage.OnRagdoll:FireServer(ohInstance1)
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();
 end))
@@ -5586,11 +5622,11 @@ end))
 
 add(SkriptsSection, button("Kredits", ("ty to me"..emoji.heart_eyes..emoji.lollipop), function()
 -- kredits to lulas
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(("LULASLOLLIPOP THE BEST"..emoji.lollipop..emoji.beating_heart..emoji.lollipop..emoji.beating_heart),"All")
+get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(("LULASLOLLIPOP THE BEST"..emoji.lollipop..emoji.beating_heart..emoji.lollipop..emoji.beating_heart),"All")
 end))
 
 add(SkriptsSection, button("less lag", "FX remover", function()
-for _, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+for _, v in pairs(get.Workspace:GetDescendants()) do
 if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
 v.Material = Enum.Material.SmoothPlastic
 if v:IsA("Texture") then
@@ -5771,7 +5807,7 @@ end)
 end))
 
 add(SkriptsSection, button("Never Ending Bloxk Spawner", "good for lagging servers",
-function()local player = game.Players.LocalPlayer
+function()local player = get.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local part = Instance.new("Part")
 part.BrickColor = BrickColor.new("Bright blue")
@@ -5788,7 +5824,7 @@ end))
 
 add(SkriptsSection, button("KLEAR MESSAGES TROLL", "prints a huge text msg",
 function()
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(" " .. string.rep(emoji.three_em_dash, 195), "All")
+get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(" " .. string.rep(emoji.three_em_dash, 195), "All")
 end))
 
 -- Removed discontinued loader: Parkour Run
@@ -5819,8 +5855,8 @@ local SkriptsSection = section(skripts, "R15 Animation", skripts["R15 Animation"
 add(SkriptsSection, button("Zombie Animation", "R15 animation", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616158929"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616160636"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
@@ -5828,15 +5864,15 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616161997"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616156119"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616157476"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
 add(SkriptsSection, button("Kartoony Animation", "R15 animation", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=742637544"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=742638445"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=742640026"
@@ -5844,7 +5880,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=742638842"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=742637942"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=742636889"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=742637151"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -5852,9 +5888,9 @@ end))
 add(SkriptsSection, button("Astronaut", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=891621366"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=891633237"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=891667138"
@@ -5862,7 +5898,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=891636393"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=891627522"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=891609353"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=891617961"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -5870,9 +5906,9 @@ end))
 add(SkriptsSection, button("Bubbly", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=910004836"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=910009958"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=910034870"
@@ -5881,7 +5917,7 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=910016857"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -5889,16 +5925,16 @@ end))
 add(SkriptsSection, button("Elder", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=845400520"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=845403856"
 Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=845386501"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=845398858"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=845392038"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=845396048"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end)) 
@@ -5906,9 +5942,9 @@ end))
 add(SkriptsSection, button("Knight", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
@@ -5916,7 +5952,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616010382"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616003713"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end 
 end))
@@ -5924,9 +5960,9 @@ end))
 add(SkriptsSection, button("Levitation", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=750781874"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=750782770"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=750785693"
@@ -5934,7 +5970,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=750783738"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=750782230"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=750779899"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=750780242"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -5942,9 +5978,9 @@ end))
 add(SkriptsSection, button("Mage", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=707742142"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=707855907"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=707897309"
@@ -5952,16 +5988,16 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=707861613"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=707853694"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=707826056"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=707829716"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
 add(SkriptsSection, button("Ninja", "lokal skripts", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=656117400"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=656118341"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=656121766"
@@ -5969,7 +6005,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=656118852"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=656117878"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=656114359"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=656115606"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -5977,9 +6013,9 @@ end))
 add(SkriptsSection, button("Pirate", "lokal skripts", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=750781874"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=750782770"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=750785693"
@@ -5987,7 +6023,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=750783738"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=750782230"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=750779899"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=750780242"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -5995,9 +6031,9 @@ end))
 add(SkriptsSection, button("Robot", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616088211"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616089559"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616095330"
@@ -6005,7 +6041,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616091570"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616090535"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616086039"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616087089"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6013,9 +6049,9 @@ end))
 add(SkriptsSection, button("Stylish", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616136790"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616138447"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616146177"
@@ -6023,7 +6059,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616140816"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616139451"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616133594"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616134815"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6031,9 +6067,9 @@ end))
 add(SkriptsSection, button("Superhero", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616111295"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616113536"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616122287"
@@ -6041,7 +6077,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616117076"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616115533"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616104706"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616108001"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end 
 end 
 end))
@@ -6049,9 +6085,9 @@ end))
 add(SkriptsSection, button("Toy", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=782843345"
@@ -6059,7 +6095,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=782842708"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=782847020"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=782843869"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=782846423"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6067,9 +6103,9 @@ end))
 add(SkriptsSection, button("Vampire", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083445855"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083450166"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1083473930"
@@ -6077,7 +6113,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1083462077"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083455352"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083439238"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1083443587"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6085,9 +6121,9 @@ end))
 add(SkriptsSection, button("Werewolf", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083195517"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083214717"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1083178339"
@@ -6095,7 +6131,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1083216690"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083218792"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083182000"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1083189019"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6103,9 +6139,9 @@ end))
 add(SkriptsSection, button("Patrol", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1149612882"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1150842221"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1151231493"
@@ -6113,7 +6149,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1150967949"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1148811837"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1148811837"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1148863382"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6121,9 +6157,9 @@ end))
 add(SkriptsSection, button("Konfident", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1069977950"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1069987858"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1070017263"
@@ -6131,7 +6167,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1070001516"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1069984524"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1069946257"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1069973677"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6139,9 +6175,9 @@ end))
 add(SkriptsSection, button("Ghost", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
@@ -6150,7 +6186,7 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=616012453"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=616011509"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6158,9 +6194,9 @@ end))
 add(SkriptsSection, button("Sneaky", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
@@ -6169,7 +6205,7 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=616012453"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=616011509"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6177,9 +6213,9 @@ end))
 add(SkriptsSection, button("Prinxess", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=941003647"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=941013098"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=941028902"
@@ -6187,7 +6223,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=941015281"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=941008832"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=940996062"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=941000007"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6195,9 +6231,9 @@ end))
 add(SkriptsSection, button("No Animation", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
@@ -6206,7 +6242,7 @@ Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
 Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6214,9 +6250,9 @@ end))
 add(SkriptsSection, button("Athro", "lokal skript", function()
 while true do
 wait(1)
-for i, player in ipairs(game.Players:GetChildren()) do
-local Animate = game.Players.LocalPlayer.Character.Animate
-local Animate = game.Players.LocalPlayer.Character.Animate
+for i, player in ipairs(get.Players:GetChildren()) do
+local Animate = get.Players.LocalPlayer.Character.Animate
+local Animate = get.Players.LocalPlayer.Character.Animate
 Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=2510196951"
 Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=2510197257"
 Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=2510202577"
@@ -6224,7 +6260,7 @@ Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=2510198475"
 Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
 Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
 Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
-game.Players.LocalPlayer.Character.Humanoid.Jump = false
+get.Players.LocalPlayer.Character.Humanoid.Jump = false
 end
 end
 end))
@@ -6395,7 +6431,7 @@ local function removeKrackheadSpin()
         KrackheadWalk.Spin = nil
     end
 
-    local character = game.Players.LocalPlayer.Character
+    local character = get.Players.LocalPlayer.Character
     local rootPart = character
         and character:FindFirstChild("HumanoidRootPart")
 
@@ -6461,7 +6497,7 @@ add(FunSection, toggle("Krackhead walk", "spin walking", function(enabled)
         if enabled then
             disableKrackheadWalk()
             KrackheadWalk.Enabled = true;
-            local player = game.Players.LocalPlayer
+            local player = get.Players.LocalPlayer
             local character = player.Character
                 or player.CharacterAdded:Wait()
 
@@ -6558,7 +6594,7 @@ local function clearJumpFlipCharacter()
     end
 
     if JumpFlip.OriginalGravity then
-        game.Workspace.Gravity = JumpFlip.OriginalGravity
+        get.Workspace.Gravity = JumpFlip.OriginalGravity
     end
 end
 
@@ -6581,7 +6617,7 @@ local function disableJumpFlip()
     end
 
     if JumpFlip.OriginalGravity then
-        game.Workspace.Gravity = JumpFlip.OriginalGravity
+        get.Workspace.Gravity = JumpFlip.OriginalGravity
     end
 
     restoreJumpFlipHumanoid()
@@ -6623,7 +6659,7 @@ local function setupJumpFlip(character)
     sound.Volume = 5
     sound.Looped = false
     sound.Archivable = false
-    sound.Parent = game.Workspace
+    sound.Parent = get.Workspace
 
     JumpFlip.Sound = sound
 
@@ -6670,11 +6706,11 @@ local function setupJumpFlip(character)
                     return
                 end
 
-                game.Workspace.Gravity = 1000
+                get.Workspace.Gravity = 1000
                 task.wait()
 
                 if JumpFlip.OriginalGravity then
-                    game.Workspace.Gravity = JumpFlip.OriginalGravity
+                    get.Workspace.Gravity = JumpFlip.OriginalGravity
                 end
 
                 destroySpin(spin)
@@ -6686,8 +6722,8 @@ add(FunSection, toggle("Jump to flip", "changes your jump to a flip", function(e
         if enabled then
             disableJumpFlip();
             JumpFlip.Enabled = true
-            JumpFlip.OriginalGravity = game.Workspace.Gravity;
-            local player = game.Players.LocalPlayer
+            JumpFlip.OriginalGravity = get.Workspace.Gravity;
+            local player = get.Players.LocalPlayer
             local character = player.Character
                 or player.CharacterAdded:Wait()
 
@@ -6730,7 +6766,7 @@ loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/opnamg
 end;
 end))
 
---game:GetService("Chat"):Chat(game.Players.LocalPlayer.Character.Head, "ok", "Red")
+--get.Chat:Chat(get.Players.LocalPlayer.Character.Head, "ok", "Red")
 
 add(FunSection, button("Lolly Animations", "work r15 and r6", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/yeerma/1/main/the_greatest_script_ever_made'))()
@@ -6880,10 +6916,10 @@ end)
 end))
 
 add(FunSection, button("Kopy chat V2", "sum", function()
-local FUXKINGFAGGOTS=game.Players:GetPlayers()
+local FUXKINGFAGGOTS=get.Players:GetPlayers()
 for i=1,#FUXKINGFAGGOTS do
 FUXKINGFAGGOTS[i].Chatted:connect(function(Message)
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("".."["..FUXKINGFAGGOTS[i].Name.."]".." "..Message, "All")
+get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("".."["..FUXKINGFAGGOTS[i].Name.."]".." "..Message, "All")
 end)
 end;
 end)) 
@@ -6913,7 +6949,7 @@ end))
 add(FunSection, button("Rainbow xhat (enables xhat Bubbles)", "enables xhat bubble and see msg frm far away", function()
 --enables bubble chat also
 textcolour = Color3.new(0,0,0)
-game:GetService("Chat").BubbleChatEnabled = true;
+get.Chat.BubbleChatEnabled = true;
 coroutine.wrap(function()
 while wait() do
 for i = 0,255,10 do
@@ -6947,7 +6983,7 @@ local settings = {
 }
 while wait() do
 pcall(function()
-game:GetService("Chat"):SetBubbleChatSettings({
+get.Chat:SetBubbleChatSettings({
 TextColor3 = textcolour,
 BubbleDuration = 20,
 MaxBubbles = 20,
@@ -7028,19 +7064,19 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/ku
 end))
 
 add(ToolsSection, button("BTools", "building tools", function()
-b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
+b = Instance.new("HopperBin", get.Players.LocalPlayer.Backpack)
 b.BinType = 4 --del
-c = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
+c = Instance.new("HopperBin", get.Players.LocalPlayer.Backpack)
 c.BinType = 3 --kopy
 end))
 
 add(ToolsSection, button("Delete Tool", "the Delete building tool", function()
-b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
+b = Instance.new("HopperBin", get.Players.LocalPlayer.Backpack)
 b.BinType = 4 
 end))
 
 add(ToolsSection, button("Kopy Tool", "the Kopy building tool", function()
-b = Instance.new("HopperBin", game.Players.LocalPlayer.Backpack)
+b = Instance.new("HopperBin", get.Players.LocalPlayer.Backpack)
 b.BinType = 3
 end))
 
@@ -7077,16 +7113,16 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe/main/Super%2
 end))
 
 add(ToolsSection, button("Tp Tool", "equip and press to tele anywhere", function()
-mouse = game.Players.LocalPlayer:GetMouse()
+mouse = get.Players.LocalPlayer:GetMouse()
 tool = Instance.new("Tool")
 tool.RequiresHandle = false
 tool.Name = "Equip to Klixk Tp"
 tool.Activated:connect(function()
 local pos = mouse.Hit+Vector3.new(0,2.5,0)
 pos = CFrame.new(pos.X,pos.Y,pos.Z)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+get.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
 end)
-tool.Parent = game.Players.LocalPlayer.Backpack
+tool.Parent = get.Players.LocalPlayer.Backpack
 end))
 
 -- Removed discontinued loader: Invisible Tool
@@ -8006,7 +8042,7 @@ setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/itsnoct
 ok(4, ("prexiate it "..emoji.japanese_goblin), "Strongman Simulator skript kopied to klipboard")
 end))
 add(GamesSection, button("teleport to game", "teleportstrongman", function()
-game:GetService("TeleportService"):Teleport(6766156863, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(6766156863, get.Players.LocalPlayer)
 end))
 
 --[[ NO WORK GOOD: 
@@ -8023,7 +8059,7 @@ loadstring(game:HttpGet("https://pastefy.app/TwNiYO5Y/raw",true))()
 end))
 add(GamesSection, button("teleport to game", "free ugx", function()
 --tp to strongman sim game
-game:GetService("TeleportService"):Teleport(6766156863, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(6766156863, get.Players.LocalPlayer)
 end))
 
 ]]--
@@ -8045,7 +8081,7 @@ elseif ... == ("Autofarm, silent aim(old) - by "..emoji.lollipop) then
 LHRuntime:RunRemote("https://pastebin.com/raw/fzxqESwF", "Zombie Attack Autofarm");
 
 elseif ...=="teleport to game" then
-game:GetService("TeleportService"):Teleport(1240123653, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(1240123653, get.Players.LocalPlayer)
 end;
 end))
 
@@ -8154,13 +8190,13 @@ end))
 add(GamesSection, label(("More Games "..emoji.down_arrow)))
 add(GamesSection, dropdown("Unnamed Shooter", "op skript by tora", {"AUTO KILL (op skript by tora)", "to game"}, function(x) if x == "AUTO KILL (op skript by tora)" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/e700beeb77025b72371b9383a4510f20cf438a4e/UnnamedShooter",true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(14202073004, game:GetService("Players").LocalPlayer)  end  end))
+elseif x == "to game" then get.TeleportService:Teleport(14202073004, get.Players.LocalPlayer)  end  end))
 
 add(GamesSection, dropdown((emoji.ogre.." Blaxk Grimoire: Odysse "..emoji.ogre), "op skript", {("bring monster, auto attaxk "..emoji.bacon), "to game"}, function(x) 
 if x == ("bring monster, auto attaxk "..emoji.bacon) then  
 loadstring(game:HttpGet(('https://pastefy.app/FaO6kj58/raw'),true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(7517764573, game:GetService("Players").LocalPlayer)  end  end))
+elseif x == "to game" then get.TeleportService:Teleport(7517764573, get.Players.LocalPlayer)  end  end))
 
 -- Removed discontinued loader: [<U_1F578_FE0F>UPDATE 1] <U_1F349><U_1F34E> Fruit Seas <U_1F34D><U_1F34A>
 -- See patch notes for URL and HTTP result.
@@ -8169,7 +8205,7 @@ add(GamesSection, dropdown((emoji.person_fencing.."One Piexe: East Blue Brawls [
 if x == "AUTO KILL MOBS - one piexe flag (Tora)" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/90da92ff473ba5b945eb696fd996199353b831bd/OnePiece",true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(16164895787, game:GetService("Players").LocalPlayer)  end  end))
+elseif x == "to game" then get.TeleportService:Teleport(16164895787, get.Players.LocalPlayer)  end  end))
 
 -- Removed discontinued loader: <U_1F977> [RELEASE] Rogue Ninja <U_1F977>
 -- See patch notes for URL and HTTP result.
@@ -8184,7 +8220,7 @@ add(GamesSection, label((emoji.crossed_swords.." Attaxk On Titan Revolution "..e
 add(GamesSection, button("auto kill titan", "by tora", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/568c5a426c639c9d3e15a6d9bee89893bc1081f2/AttackonTitan",true))(); 
 end))
-add(GamesSection, button("teleport to game", "anime realms tp", function()   game:GetService("TeleportService"):Teleport(13379208636, game:GetService("Players").LocalPlayer) end))
+add(GamesSection, button("teleport to game", "anime realms tp", function()   get.TeleportService:Teleport(13379208636, get.Players.LocalPlayer) end))
 
 add(GamesSection, label(("SOL'S RNG"..emoji.collision)))
 -- Removed discontinued loader: Just3itx - sols rng hub
@@ -8197,7 +8233,7 @@ if x == (emoji.egg.."AUTO EGG, ANTI AFK "..emoji.egg.." - MM2 "..emoji.bacon.."\
 --autoegg by bakon
 loadstring(game:HttpGet(('https://pastefy.app/nW6s0FAb/raw'),true))();
 
-elseif x == "teleport to Murder Mystery 2" then game:GetService("TeleportService"):Teleport(142823291, game:GetService("Players").LocalPlayer)  end  end))
+elseif x == "teleport to Murder Mystery 2" then get.TeleportService:Teleport(142823291, get.Players.LocalPlayer)  end  end))
 
 add(GamesSection, button("Kidaxhi hub (big) - koin farm, egg farm", "kidixhiHb", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/KidichiHB/Kidachi/main/Scripts/MM2", true))() end))
 
@@ -8247,13 +8283,13 @@ add(GamesSection, label((emoji.desert_island..emoji.farmer.." ISLANDS "..emoji.f
 add(GamesSection, button(("NO KEY,MANY FEAUTURES"..emoji.farmer.." (OP)"), "op skript", function()  
 loadstring(game:HttpGet('https://raw.githubusercontent.com/pascaldercoole1/Open-Source-Scripts/main/FreeIslands'))()
 end))
-add(GamesSection, button("teleport to game", "tp to islands", function()   game:GetService("TeleportService"):Teleport(4872321990, game:GetService("Players").LocalPlayer) end))
+add(GamesSection, button("teleport to game", "tp to islands", function()   get.TeleportService:Teleport(4872321990, get.Players.LocalPlayer) end))
 
 add(GamesSection, label("RO-GHOUL [ALPHA]")) 
 add(GamesSection, button("GET ALL KODES ,AUTOFARM - kreds: JRL scripts", "OP", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/JRL-lav/Main/main/Ro-Ghoul'))()
 end))
-add(GamesSection, button("teleport to game", "ro ghoul tp", function()   game:GetService("TeleportService"):Teleport(914010731, game:GetService("Players").LocalPlayer) end))
+add(GamesSection, button("teleport to game", "ro ghoul tp", function()   get.TeleportService:Teleport(914010731, get.Players.LocalPlayer) end))
 
 add(GamesSection, label((emoji.dog_face..emoji.hamster.." PET SIMULATOR 99 "..emoji.rabbit_face..emoji.rabbit)))
 
@@ -8285,7 +8321,7 @@ loadstring(game:HttpGet('https://rawscripts.net/raw/Pet-Simulator-99!-ZapHub-The
 elseif x == "PS99 - Syrex hub" then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gerisxx/ps99-Script/main/syrexhub",true))()
 
-elseif x == "teleport to game" then game:GetService("TeleportService"):Teleport(15502339080, game:GetService("Players").LocalPlayer)  
+elseif x == "teleport to game" then get.TeleportService:Teleport(15502339080, get.Players.LocalPlayer)  
 end;
 end))
 
@@ -8297,7 +8333,7 @@ loadstring(game:HttpGet("https://rentry.org/aquarius-hub/raw"))();
 elseif x == "op strongest battlegrounds skript\n<U_26A0_FE0F>test on alt idk if itll ban" then  
 loadstring(game:HttpGet("https://pastebin.com/raw/LBne5eKS",true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(10449761463, game:GetService("Players").LocalPlayer);
+elseif x == "to game" then get.TeleportService:Teleport(10449761463, get.Players.LocalPlayer);
 end;
 end))
 ]]--
@@ -8320,13 +8356,13 @@ loadstring(game:HttpGet("http://hexasptr.my.id/script/KingLegacy.lua"))();
 elseif x == "draxxskripts" then
 loadstring(game:HttpGet("https://pastebin.com/raw/SGJwY3bQ",true))();
 
-elseif x == "to game" then game:GetService("TeleportService"):Teleport(4520749081, game:GetService("Players").LocalPlayer)  end  end))
+elseif x == "to game" then get.TeleportService:Teleport(4520749081, get.Players.LocalPlayer)  end  end))
 
 add(GamesSection, dropdown((emoji.potable_water..emoji.toilet.." publik bathroom simulator "..emoji.toilet..emoji.potable_water), "stupid ahh game", {"skript (this game stupid but aight)", "teleport to game"}, function(x) 
 if x == "skript (this game stupid but aight)" then  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ADSKerOffical/Budgie-Hub/main/PublicBathroomSimulator"))();
 elseif x == "teleport to game" then
-game:GetService("TeleportService"):Teleport(1758401491, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(1758401491, get.Players.LocalPlayer)
 end;end))
 
 
@@ -8334,7 +8370,7 @@ add(GamesSection, dropdown((emoji.house_with_garden.." Ultimate Home Tykoon "..e
 if x == ("INF MONEY, AUTO BUILD (OP) "..emoji.bacon) then  
 loadstring(game:HttpGet(('https://pastefy.app/MApFyXkv/raw'),true))();
 
-elseif x == "teleport to game" then game:GetService("TeleportService"):Teleport(15352028692, game:GetService("Players").LocalPlayer)end;end))
+elseif x == "teleport to game" then get.TeleportService:Teleport(15352028692, get.Players.LocalPlayer)end;end))
 
 -- [ <U_1F3DA_FE0F><U_1F9F1> Da Hood <U_1F9F1><U_1F3DA_FE0F> ] --
 games[("["..emoji.derelict_house..emoji.pistol..emoji.brick.." Da Hood "..emoji.brick..emoji.pistol..emoji.derelict_house.."] (work for any dh game)")] = games[("["..emoji.derelict_house..emoji.pistol..emoji.brick.." Da Hood "..emoji.brick..emoji.pistol..emoji.derelict_house.."] (work for any dh game)")] or {}
@@ -8413,7 +8449,7 @@ end))
 -- end))
 
 add(GamesSection, button("Da Hood GodMode", "invinxibility", function()
-local p = game.Players.LocalPlayer;
+local p = get.Players.LocalPlayer;
 local ch = p.Character;
 ch.BodyEffects.Dead:Destroy()
 end))
@@ -8444,10 +8480,10 @@ function()loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-X-Rawn
 end))
 
 add(GamesSection, button("STEAL ALL TOOLS", "works if player has tools (tools=items)",
-function()for i,v in pairs (game.Players:GetChildren()) do
+function()for i,v in pairs (get.Players:GetChildren()) do
 wait()
 for i,b in pairs (v.Backpack:GetChildren()) do
-b.Parent = game.Players.LocalPlayer.Backpack
+b.Parent = get.Players.LocalPlayer.Backpack
 end
 end
 end))
@@ -8480,7 +8516,7 @@ add(GamesSection, button("Remove Trees", "self explanatory", function()
 --[[
 delete trees
 ]]
-game:GetService("Workspace").Trees:Destroy()
+get.Workspace.Trees:Destroy()
 end))
 
 add(GamesSection, button("FE sound for prison life", "fe sound", function()
@@ -8506,7 +8542,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/cee
 end))
 
 add(GamesSection, button("teleport to game", (emoji.microbe.."goto parasite"..emoji.microbe), function()  
-game:GetService("TeleportService"):Teleport(15549953224, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(15549953224, get.Players.LocalPlayer)
 end))
 
 -- Removed discontinued loader: sum gui idk(old)
@@ -8541,7 +8577,7 @@ add(GamesSection, button("(OP)kill all, hitbox expander &more", "op skript by to
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/8327fd2e016f4fbbd9578eb3dc627892a5e8775b/LegendsArena",true))()
 end))
 
-add(GamesSection, button("teleport to game", "goto legends arena", function()   game:GetService("TeleportService"):Teleport(15960924329, game:GetService("Players").LocalPlayer) end))
+add(GamesSection, button("teleport to game", "goto legends arena", function()   get.TeleportService:Teleport(15960924329, get.Players.LocalPlayer) end))
 
 -- [ THE HUNT SKRIPTLOADER ] --
 add(GamesSection, label((emoji.egg.."THE HUNT: First Edition 2024"..emoji.egg.." (event ended")))
@@ -8573,7 +8609,7 @@ add(GamesSection, button("(new) mob esp, get items, teleports & more", "good skr
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/the-maze/lulas/1t2o3msn0f3oa3im9ci_lulaslollipop",true))()
 end))
 add(GamesSection, button("teleport to game", "the maze", function()  
-game:GetService("TeleportService"):Teleport(730951264, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(730951264, get.Players.LocalPlayer)
 end))
 
 
@@ -8582,7 +8618,7 @@ add(GamesSection, label(("[Evade"..emoji.man_running_medium_skin_tone..emoji.das
 -- See patch notes for URL and HTTP result.
 add(GamesSection, button("show messages", "shows xhat kause evade dont allow it", function()
 --xhat on
-game:GetService("StarterGui"):SetCoreGuiEnabled('Chat', true)
+get.StarterGui:SetCoreGuiEnabled('Chat', true)
 end))
 add(GamesSection, button("AutoSpawn,godmode&more - TbaoHub", "good skript used myself", function()
 --evade autospawn,godmode(tbaoHub)
@@ -8604,7 +8640,7 @@ add(GamesSection, button("keybind gen 2// 'RightShift' to toggle\nwill freeze fo
 loadstring(game:HttpGet("https://gist.githubusercontent.com/RedZenXYZ/4d80bfd70ee27000660e4bfa7509c667/raw/da903c570249ab3c0c1a74f3467260972c3d87e6/KeyBoard%2520From%2520Ohio%2520Fr%2520Fr"))()
 end))
 add(GamesSection, button("teleport to game", "evade", function()  
-game:GetService("TeleportService"):Teleport(9872472334, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(9872472334, get.Players.LocalPlayer)
 end))
 
 add(GamesSection, label((emoji.grapes..emoji.red_apple.." FRUIT BATTLEGROUNDS "..emoji.strawberry..emoji.mango)))
@@ -8649,7 +8685,7 @@ LHRuntime:RunRemote("https://raw.githubusercontent.com/ToraScript/Script/main/Bu
 elseif x == "Autopush buttons - bakon" then
 LHRuntime:RunRemote("https://pastefy.app/68WYydeo/raw", "Button Hell Autopush")
 elseif x =="teleport to game" then
-game:GetService("TeleportService"):Teleport(14329385031, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(14329385031, get.Players.LocalPlayer)
 end
 end))
 
@@ -8670,7 +8706,7 @@ add(GamesSection, button("Reveal Path", "reveals all doors in lime green", funct
 getgenv().Door = true;
 while wait() do
 if getgenv().Door == true then
-for i,v in pairs(game.Workspace.Doors:GetChildren()) do
+for i,v in pairs(get.Workspace.Doors:GetChildren()) do
 for i,l in pairs(v:GetChildren()) do
 if l:FindFirstChild("???") then
 l.BrickColor = BrickColor.new("Lime green")
@@ -8710,7 +8746,7 @@ add(GamesSection, label((emoji.man_running_medium_skin_tone..emoji.dashing_away.
 
 add(GamesSection, button("teleport to game", "FREE ugx", function()
 --tp to animeraxing
-game:GetService("TeleportService"):Teleport(16712648821, game:GetService("Players").LocalPlayer)
+get.TeleportService:Teleport(16712648821, get.Players.LocalPlayer)
 end))
 
 games[("["..emoji.pancakes.."Pankake Empire Tykoon"..emoji.pancakes.."]")] = games[("["..emoji.pancakes.."Pankake Empire Tykoon"..emoji.pancakes.."]")] or {}
@@ -9120,7 +9156,7 @@ local GamesSection = section(games, ("["..emoji.honeybee.."Bee Swarm Simulator".
 
 add(GamesSection, button("item name,item kount", "bee swarm", function()
 --Bee Swarm Simulator
-game:GetService("ReplicatedStorage").Remotes.ModifyItemData:FireServer("Item Name", ItemCount)
+get.ReplicatedStorage.Remotes.ModifyItemData:FireServer("Item Name", ItemCount)
 end))
 -- Removed discontinued loader: Bee swarm sim skript
 -- See patch notes for URL and HTTP result.
@@ -9340,6 +9376,20 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.1.7 updates: ",
+    "[FIXED] gravity now finishes at the normal Roblox value of 196.2 after every LH startup loader is done",
+    "[IMPROVED] info buttons now show their explanation directly over the kontrol for 4 sekonds",
+    "[IMPROVED] removed the kolor outline from info buttons",
+
+    emoji.lollipop.." V10.1.6 updates: ",
+    "[FIXED] LH now keeps normal Roblox gravity at 196.2 when it opens",
+    "[FIXED] blank skript requests are ignored instead of being sent",
+    "[IMPROVED] every main kontrol now has a visible info button that explains wat it does",
+    "[IMPROVED] Notifications now stack in one page with a live item kount and Klear All Notifikations at the top",
+    "[IMPROVED] Free Animations is easier to read, clearly says the Marketplace animations are free, and reminds users to keep scrolling for more",
+    "[FIXED] TextBox kontrols no longer show a useless reset button",
+    "[IMPROVED] LH now opens more reliably across different executors",
+
     emoji.lollipop.." V10.1.5 updates: ",
     "[NEW] Anti-Pause keeps the Gameplay Paused message from appearing while it is enabled",
     "[FIXED] Free Animation Packs Info buttons now open the full pack details reliably on phones and computers",
@@ -9525,7 +9575,7 @@ function()-- sit in the offixe
 Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(259.6474304199219, 17004.259765625,
 162.38287353515625)
 -- sit while tp
-game.Players.LocalPlayer.Character.Humanoid.Sit = true
+get.Players.LocalPlayer.Character.Humanoid.Sit = true
 end))
 
 add(exSection, button("Teleport to Hidden Roof", "teleport to unknown area",
@@ -9656,8 +9706,8 @@ end))
 add(HomeSection, button("Rejoin", "rejoins the same lobby",
 function()
 --rejoin lobby
-local ts = game:GetService("TeleportService");
-local p = game:GetService("Players").LocalPlayer;
+local ts = get.TeleportService;
+local p = get.Players.LocalPlayer;
 --rj
 ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, p)
 end))
@@ -9686,7 +9736,7 @@ function()game:Shutdown()
 end))
 
 add(HomeSection, kounter("Walkspeed", "xhanges the walkspeed", 1, function(speed)
-local character = game.Players.LocalPlayer.Character
+local character = get.Players.LocalPlayer.Character
 local humanoid = character and character:FindFirstChildOfClass("Humanoid")
 if humanoid then humanoid.WalkSpeed = speed end
 end, 16, 0, 400))
@@ -9704,7 +9754,7 @@ end))
 --end))
 
 add(HomeSection, button("Get Koordinates", "x,y,z finder say /console", function()
-setclipboard("game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new("..tostring(_G.hrp.Position)..")");
+setclipboard("get.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new("..tostring(_G.hrp.Position)..")");
 wait()
 local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/NotificationUI"))();
 local Notify = AkaliNotif.Notify;
@@ -9799,7 +9849,7 @@ add(HomeSection, button("FE Obfuskator (protekt your skripts)", "no info", funct
 -- obFEskator
 _=loadstring;__=game;_(__:HttpGet([[https]]..[[://gi]]..[[thub.com/]]..[[rrixh/]]..[[skripts/raw/main/my%20skripts/]]..[[obFEskator.]]..[[yml]],false))();
 --[[
-local userid = game.Players.LocalPlayer.UserId;
+local userid = get.Players.LocalPlayer.UserId;
 local plrWhitelisted = false;
 local lula, tysuki, asian, kh3we = 3001347724, 2913898154, 4406450103, 4885631090
 local whitelisted = {lula, tysuki, asian, kh3we};
@@ -9880,8 +9930,8 @@ add(MoreSection, toggle("Anti-Pause", "prevents \"Gameplay Paused\" from popping
 diskonnektAntiPause()
 if enabled ~= true then return end
 
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
+local Players = get.Players
+local RunService = get.RunService
 local LocalPlayer = Players.LocalPlayer
 if not LocalPlayer then return end
 
@@ -9946,7 +9996,7 @@ if pcall(function() return rawget(key, instanceType) end) and typeof(rawget(key,
 key.tvk = {
 'kick',
 function() 
-return game.Workspace:WaitForChild('')
+return get.Workspace:WaitForChild('')
 end
 }
 end
@@ -9970,12 +10020,12 @@ end))
 ]]
 
 Players.ChildAdded:connect(function()
-local kount = #game.Players:GetPlayers()
+local kount = #get.Players:GetPlayers()
 serversize:UpdateLabel("Server Size: ".. kount .."/" .. maxplrs)
 end)
 
 Players.ChildRemoved:connect(function(child)
-local kount = #game.Players:GetPlayers()
+local kount = #get.Players:GetPlayers()
 serversize:UpdateLabel("Server Size: ".. kount .."/" .. maxplrs)
 end)
 
@@ -10025,7 +10075,7 @@ function()--Krouxh Animation ID: 287325678
 
 local Crouch = Instance.new("Animation")
 Crouch.AnimationId = "rbxassetid://287325678"
-local DoIt = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Crouch)
+local DoIt = get.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Crouch)
 DoIt:Play()
 end))
 
@@ -10034,8 +10084,8 @@ function()
 KEY = "C" or "c"
 CROUCHWALKSPEED = 12
 
-local Player = game:GetService("Players").LocalPlayer;
-local uis = game:GetService("UserInputService");
+local Player = get.Players.LocalPlayer;
+local uis = get.UserInputService;
 
 local Character = Player.Character;
 local Humanoid = Character:FindFirstChildOfClass("Humanoid");
@@ -10076,161 +10126,161 @@ end))
 add(MoreSection, label("Emojis"))
 -- emoji buttons
 add(MoreSection, button((emoji.beaming_face_with_smiling_eyes), "smiley", function()--player will say this
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.beaming_face_with_smiling_eyes),"All")
+get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.beaming_face_with_smiling_eyes),"All")
 end))
-add(MoreSection, button((emoji.grinning_squinting_face), "smiley", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.grinning_squinting_face),"All")
+add(MoreSection, button((emoji.grinning_squinting_face), "smiley", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.grinning_squinting_face),"All")
 end))
-add(MoreSection, button((emoji.smiling_face_with_smiling_eyes), "smiley", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_smiling_eyes),"All")
+add(MoreSection, button((emoji.smiling_face_with_smiling_eyes), "smiley", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_smiling_eyes),"All")
 end))
-add(MoreSection, button((emoji.lollipop), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop),"All")
+add(MoreSection, button((emoji.lollipop), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop),"All")
 end))
-add(MoreSection, button((emoji.lollipop..emoji.lollipop), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.lollipop),"All")
+add(MoreSection, button((emoji.lollipop..emoji.lollipop), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.lollipop),"All")
 end))
-add(MoreSection, button((emoji.lollipop..emoji.lollipop..emoji.lollipop), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.lollipop..emoji.lollipop),"All")
+add(MoreSection, button((emoji.lollipop..emoji.lollipop..emoji.lollipop), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.lollipop..emoji.lollipop),"All")
 end))
-add(MoreSection, button((emoji.lollipop..emoji.face_savoring_food), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.face_savoring_food),"All")
+add(MoreSection, button((emoji.lollipop..emoji.face_savoring_food), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.face_savoring_food),"All")
 end))
-add(MoreSection, button((emoji.heart_eyes), "heart eyes", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.heart_eyes),"All")
+add(MoreSection, button((emoji.heart_eyes), "heart eyes", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.heart_eyes),"All")
 end))
-add(MoreSection, button((emoji.two_hearts), "2 hearts", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.two_hearts),"All")
+add(MoreSection, button((emoji.two_hearts), "2 hearts", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.two_hearts),"All")
 end))
-add(MoreSection, button((emoji.red_heart), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.red_heart),"All")
+add(MoreSection, button((emoji.red_heart), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.red_heart),"All")
 end))
-add(MoreSection, button((emoji.red_heart..emoji.red_heart..emoji.red_heart), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.red_heart..emoji.red_heart..emoji.red_heart),"All")
+add(MoreSection, button((emoji.red_heart..emoji.red_heart..emoji.red_heart), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.red_heart..emoji.red_heart..emoji.red_heart),"All")
 end))
-add(MoreSection, button((emoji.rolling_on_the_floor_laughing), "rofl", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.rolling_on_the_floor_laughing),"All")
+add(MoreSection, button((emoji.rolling_on_the_floor_laughing), "rofl", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.rolling_on_the_floor_laughing),"All")
 end))
-add(MoreSection, button((emoji.rolling_on_the_floor_laughing..emoji.rolling_on_the_floor_laughing), "rofl 2x", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.rolling_on_the_floor_laughing..emoji.rolling_on_the_floor_laughing),"All")
+add(MoreSection, button((emoji.rolling_on_the_floor_laughing..emoji.rolling_on_the_floor_laughing), "rofl 2x", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.rolling_on_the_floor_laughing..emoji.rolling_on_the_floor_laughing),"All")
 end))
-add(MoreSection, button((emoji.face_blowing_a_kiss), "kiss emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_blowing_a_kiss),"All")
+add(MoreSection, button((emoji.face_blowing_a_kiss), "kiss emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_blowing_a_kiss),"All")
 end))
-add(MoreSection, button((emoji.face_with_tears_of_joy), "laugh", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_tears_of_joy),"All")
+add(MoreSection, button((emoji.face_with_tears_of_joy), "laugh", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_tears_of_joy),"All")
 end))
-add(MoreSection, button((emoji.face_with_tears_of_joy..emoji.face_with_tears_of_joy), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_tears_of_joy..emoji.face_with_tears_of_joy),"All")
+add(MoreSection, button((emoji.face_with_tears_of_joy..emoji.face_with_tears_of_joy), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_tears_of_joy..emoji.face_with_tears_of_joy),"All")
 end))
-add(MoreSection, button((emoji.smiling_face_with_hearts), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_hearts),"All")
+add(MoreSection, button((emoji.smiling_face_with_hearts), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_hearts),"All")
 end))
-add(MoreSection, button((emoji.smiling_face_with_hearts..emoji.smiling_face_with_hearts), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_hearts..emoji.smiling_face_with_hearts),"All")
+add(MoreSection, button((emoji.smiling_face_with_hearts..emoji.smiling_face_with_hearts), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_hearts..emoji.smiling_face_with_hearts),"All")
 end))
-add(MoreSection, button((emoji.smiling_face_with_smiling_eyes), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_smiling_eyes),"All")
+add(MoreSection, button((emoji.smiling_face_with_smiling_eyes), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_smiling_eyes),"All")
 end))
-add(MoreSection, button((emoji.face_savoring_food), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_savoring_food),"All")
+add(MoreSection, button((emoji.face_savoring_food), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_savoring_food),"All")
 end))
-add(MoreSection, button((emoji.face_savoring_food..emoji.face_savoring_food), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_savoring_food..emoji.face_savoring_food),"All")
+add(MoreSection, button((emoji.face_savoring_food..emoji.face_savoring_food), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_savoring_food..emoji.face_savoring_food),"All")
 end))
-add(MoreSection, button((emoji.smiling_face), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face),"All")
+add(MoreSection, button((emoji.smiling_face), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face),"All")
 end))
-add(MoreSection, button((emoji.zany_face), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.zany_face),"All")
+add(MoreSection, button((emoji.zany_face), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.zany_face),"All")
 end))
-add(MoreSection, button((emoji.face_with_tongue), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_tongue),"All")
+add(MoreSection, button((emoji.face_with_tongue), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_tongue),"All")
 end))
-add(MoreSection, button((emoji.smiling_face_with_sunglasses), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_sunglasses),"All")
+add(MoreSection, button((emoji.smiling_face_with_sunglasses), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_sunglasses),"All")
 end))
-add(MoreSection, button((emoji.smiling_face_with_halo), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_halo),"All")
+add(MoreSection, button((emoji.smiling_face_with_halo), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_halo),"All")
 end))
-add(MoreSection, button((emoji.smiling_face_with_halo..emoji.smiling_face_with_hearts), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_halo..emoji.smiling_face_with_hearts),"All")
+add(MoreSection, button((emoji.smiling_face_with_halo..emoji.smiling_face_with_hearts), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_halo..emoji.smiling_face_with_hearts),"All")
 end))
-add(MoreSection, button((emoji.crown), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.crown),"All")
+add(MoreSection, button((emoji.crown), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.crown),"All")
 end))
-add(MoreSection, button((emoji.cat), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.cat),"All")
+add(MoreSection, button((emoji.cat), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.cat),"All")
 end))
-add(MoreSection, button((emoji.face_exhaling), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_exhaling),"All")
+add(MoreSection, button((emoji.face_exhaling), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_exhaling),"All")
 end))
-add(MoreSection, button((emoji.face_with_rolling_eyes), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_rolling_eyes),"All")
+add(MoreSection, button((emoji.face_with_rolling_eyes), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_rolling_eyes),"All")
 end))
-add(MoreSection, button((emoji.eyes), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.eyes),"All")
+add(MoreSection, button((emoji.eyes), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.eyes),"All")
 end))
-add(MoreSection, button((emoji.loudly_crying_face), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.loudly_crying_face),"All")
+add(MoreSection, button((emoji.loudly_crying_face), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.loudly_crying_face),"All")
 end))
-add(MoreSection, button((emoji.thinking_face), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.thinking_face),"All")
+add(MoreSection, button((emoji.thinking_face), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.thinking_face),"All")
 end))
-add(MoreSection, button((emoji.camera), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.camera),"All")
+add(MoreSection, button((emoji.camera), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.camera),"All")
 end))
-add(MoreSection, button((emoji.camera_with_flash), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.camera_with_flash),"All")
+add(MoreSection, button((emoji.camera_with_flash), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.camera_with_flash),"All")
 end))
-add(MoreSection, button((emoji.pleading_face), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pleading_face),"All")
+add(MoreSection, button((emoji.pleading_face), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pleading_face),"All")
 end))
-add(MoreSection, button((emoji.woman_facepalming), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.woman_facepalming),"All")
+add(MoreSection, button((emoji.woman_facepalming), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.woman_facepalming),"All")
 end))
-add(MoreSection, button((emoji.broken_heart), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.broken_heart),"All")
+add(MoreSection, button((emoji.broken_heart), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.broken_heart),"All")
 end))
-add(MoreSection, button((emoji.heart_with_arrow), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.heart_with_arrow),"All")
+add(MoreSection, button((emoji.heart_with_arrow), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.heart_with_arrow),"All")
 end))
-add(MoreSection, button((emoji.watermelon), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.watermelon),"All")
+add(MoreSection, button((emoji.watermelon), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.watermelon),"All")
 end))
-add(MoreSection, button((emoji.smiling_face_with_horns), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_horns),"All")
+add(MoreSection, button((emoji.smiling_face_with_horns), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.smiling_face_with_horns),"All")
 end))
-add(MoreSection, button((emoji.black_heart), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.black_heart),"All")
+add(MoreSection, button((emoji.black_heart), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.black_heart),"All")
 end))
-add(MoreSection, button((emoji.face_screaming_in_fear), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_screaming_in_fear),"All")
+add(MoreSection, button((emoji.face_screaming_in_fear), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_screaming_in_fear),"All")
 end))
-add(MoreSection, button((emoji.pouting_face), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pouting_face),"All")
+add(MoreSection, button((emoji.pouting_face), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pouting_face),"All")
 end))
-add(MoreSection, button((emoji.angry_face), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.angry_face),"All")
+add(MoreSection, button((emoji.angry_face), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.angry_face),"All")
 end))
-add(MoreSection, button((emoji.face_with_steam_from_nose), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_steam_from_nose),"All")
+add(MoreSection, button((emoji.face_with_steam_from_nose), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_steam_from_nose),"All")
 end))
-add(MoreSection, button((emoji.woman_fairy), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.woman_fairy),"All")
+add(MoreSection, button((emoji.woman_fairy), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.woman_fairy),"All")
 end))
-add(MoreSection, button((emoji.pregnant_woman), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pregnant_woman),"All")
+add(MoreSection, button((emoji.pregnant_woman), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pregnant_woman),"All")
 end))
-add(MoreSection, button((emoji.woman_technologist), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.woman_technologist),"All")
+add(MoreSection, button((emoji.woman_technologist), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.woman_technologist),"All")
 end))
-add(MoreSection, button((emoji.folded_hands), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.folded_hands),"All")
+add(MoreSection, button((emoji.folded_hands), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.folded_hands),"All")
 end))
-add(MoreSection, button((emoji.zzz), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.zzz),"All")
+add(MoreSection, button((emoji.zzz), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.zzz),"All")
 end))
-add(MoreSection, button((emoji.hatching_chick), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.hatching_chick),"All")
+add(MoreSection, button((emoji.hatching_chick), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.hatching_chick),"All")
 end))
-add(MoreSection, button((emoji.baby_chick), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.baby_chick),"All")
+add(MoreSection, button((emoji.baby_chick), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.baby_chick),"All")
 end))
-add(MoreSection, button((emoji.front_facing_baby_chick), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.front_facing_baby_chick),"All")
+add(MoreSection, button((emoji.front_facing_baby_chick), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.front_facing_baby_chick),"All")
 end))
-add(MoreSection, button((emoji.butterfly), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.butterfly),"All")
+add(MoreSection, button((emoji.butterfly), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.butterfly),"All")
 end))
-add(MoreSection, button((emoji.face_with_steam_from_nose), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_steam_from_nose),"All")
+add(MoreSection, button((emoji.face_with_steam_from_nose), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.face_with_steam_from_nose),"All")
 end))
-add(MoreSection, button((emoji.skull_and_crossbones), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.skull_and_crossbones),"All")
+add(MoreSection, button((emoji.skull_and_crossbones), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.skull_and_crossbones),"All")
 end))
-add(MoreSection, button((emoji.rose), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.rose),"All")
+add(MoreSection, button((emoji.rose), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.rose),"All")
 end))
-add(MoreSection, button((emoji.hibiscus), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.hibiscus),"All")
+add(MoreSection, button((emoji.hibiscus), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.hibiscus),"All")
 end))
-add(MoreSection, button((emoji.duck), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.duck),"All")
+add(MoreSection, button((emoji.duck), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.duck),"All")
 end))
-add(MoreSection, button((emoji.popcorn), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.popcorn),"All")
+add(MoreSection, button((emoji.popcorn), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.popcorn),"All")
 end))
-add(MoreSection, button((emoji.pineapple), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pineapple),"All")
+add(MoreSection, button((emoji.pineapple), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pineapple),"All")
 end))
-add(MoreSection, button((emoji.hamburger), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.hamburger),"All")
+add(MoreSection, button((emoji.hamburger), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.hamburger),"All")
 end))
-add(MoreSection, button((emoji.pancakes), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pancakes),"All")
+add(MoreSection, button((emoji.pancakes), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.pancakes),"All")
 end))
-add(MoreSection, button((emoji.steaming_bowl), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.steaming_bowl),"All")
+add(MoreSection, button((emoji.steaming_bowl), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.steaming_bowl),"All")
 end))
-add(MoreSection, button((emoji.spaghetti), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.spaghetti),"All")
+add(MoreSection, button((emoji.spaghetti), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.spaghetti),"All")
 end))
-add(MoreSection, button((emoji.hot_beverage), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.hot_beverage),"All")
+add(MoreSection, button((emoji.hot_beverage), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.hot_beverage),"All")
 end))
-add(MoreSection, button((emoji.musical_notes), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.musical_notes),"All")
+add(MoreSection, button((emoji.musical_notes), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.musical_notes),"All")
 end))
-add(MoreSection, button((emoji.musical_note), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.musical_note),"All")
+add(MoreSection, button((emoji.musical_note), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.musical_note),"All")
 end))
-add(MoreSection, button((emoji.bubbles), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.bubbles),"All")
+add(MoreSection, button((emoji.bubbles), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.bubbles),"All")
 end))
-add(MoreSection, button((emoji.flag_burkina_faso), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_burkina_faso),"All")
+add(MoreSection, button((emoji.flag_burkina_faso), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_burkina_faso),"All")
 end))
-add(MoreSection, button((emoji.flag_japan), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_japan),"All")
+add(MoreSection, button((emoji.flag_japan), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_japan),"All")
 end))
-add(MoreSection, button((emoji.flag_france), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_france),"All")
+add(MoreSection, button((emoji.flag_france), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_france),"All")
 end))
-add(MoreSection, button((emoji.flag_south_korea), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_south_korea),"All")
+add(MoreSection, button((emoji.flag_south_korea), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_south_korea),"All")
 end))
-add(MoreSection, button((emoji.flag_portugal), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_portugal),"All")
+add(MoreSection, button((emoji.flag_portugal), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_portugal),"All")
 end))
-add(MoreSection, button((emoji.flag_portugal), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_portugal),"All")
+add(MoreSection, button((emoji.flag_portugal), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_portugal),"All")
 end))
-add(MoreSection, button((emoji.flag_france), "emoji", function()game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_france),"All")
+add(MoreSection, button((emoji.flag_france), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.flag_france),"All")
 end))
 
 
@@ -10265,10 +10315,27 @@ for tabIndex, tabData in ipairs(tabOrder) do
 end
 funSidebarOrder = funSidebarOrder or 40
 
+do
+    local notificationCenterTab = nil
+    if Window.EnableNotificationCenter then
+        local notificationOk, notificationResult = pcall(function()
+            return Window:EnableNotificationCenter("Notifications")
+        end)
+        if notificationOk then
+            notificationCenterTab = notificationResult
+            if notificationCenterTab and notificationCenterTab.Button then
+                notificationCenterTab.Button.LayoutOrder = 110
+            end
+        else
+            warn("[Lollypop Hub Notifications] " .. tostring(notificationResult))
+        end
+    end
+end
+
 local animationBundlesTab = nil
 if Window.EnableAnimationBundles then
     local animationTabOk, animationTabResult = pcall(function()
-        return Window:EnableAnimationBundles("Free Animation Packs")
+        return Window:EnableAnimationBundles("Free Animations")
     end)
     if animationTabOk then
         animationBundlesTab = animationTabResult
@@ -10278,7 +10345,7 @@ if Window.EnableAnimationBundles then
     else
         warn("[Lollypop Hub Animation Marketplace V4] " .. tostring(animationTabResult))
         if LHRuntime and LHRuntime.Notify then
-            pcall(function() LHRuntime:Notify("error", "Free Animation Packs", "Marketplace V4 could not initialize: " .. tostring(animationTabResult), 7, nil, true) end)
+            pcall(function() LHRuntime:Notify("error", "Free Animations", "Marketplace V4 could not initialize: " .. tostring(animationTabResult), 7, nil, true) end)
         end
     end
 else
@@ -10295,7 +10362,7 @@ end
 
 env.lhloaded = true
 env.LHBooting = false
-for _, guiRoot in pairs({game:GetService("CoreGui"), game.Players.LocalPlayer:FindFirstChildOfClass("PlayerGui")}) do
+for _, guiRoot in pairs({get.CoreGui, get.Players.LocalPlayer:FindFirstChildOfClass("PlayerGui")}) do
     if guiRoot then
         for _, object in pairs(guiRoot:GetDescendants()) do
             if object:IsA("TextBox") and object.Text == "TextBox" then
@@ -10443,7 +10510,19 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/main/Ku
 end;
 local function MAIN()
 -- main lollypop auto-exek
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M', true))();
+local ok, err = pcall(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uNb6892M/main/pastebin.com.uNb6892M', true))();
+end)
+pcall(function()
+    if env.LHGravityStartupPending == true then
+        get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+        env.LHGravityStartupPending = false
+    end
+    if env.LHGravityStartupConnection and env.LHGravityStartupConnection.Connected then
+        env.LHGravityStartupConnection:Disconnect()
+    end
+end)
+if not ok then error(err) end
 end;
 --[[
 local function MAINE()
@@ -10482,7 +10561,7 @@ end;
 --wen pressed will toggle ui
 roundButton.MouseButton1Click:Connect(toggleKavo);
 -- so it wont run on non mobile devixe
-local uis=game:GetService("UserInputService")
+local uis=get.UserInputService
 if not uis.TouchEnabled then
 roundButton.Visible = true
 end;
@@ -10490,7 +10569,7 @@ end;--togglelollypop funk(not using)
 
 --===========LH TOGGLE==============--
 local function quickActionParent()
-    local parent = game:GetService("CoreGui")
+    local parent = get.CoreGui
     pcall(function() if gethui then parent = gethui() end end)
     return parent
 end
@@ -10633,7 +10712,7 @@ local function performQuickAction(actionName)
     if actionName == "Executor" then
         showQuickExecutor()
     elseif actionName == "Rejoin" then
-        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
+        get.TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
     elseif actionName == "Server Hop" then
         loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/serverhop", true))()
     elseif actionName == "Exit Game" then
@@ -10700,7 +10779,7 @@ local function KUSTOMTOGGLE()
     LHRuntime:AddButtonPressEffect(roundButton)
 
     local function setToggleDragGlow(enabled)
-        game:GetService("TweenService"):Create(toggleDragGlow, TweenInfo.new(enabled and 0.08 or 0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        get.TweenService:Create(toggleDragGlow, TweenInfo.new(enabled and 0.08 or 0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
             Transparency = enabled and 0.12 or 1,
             Thickness = enabled and 5.2 or 4.5,
         }):Play()
@@ -10839,7 +10918,7 @@ local function KUSTOMTOGGLE()
             end))
         end
 
-        game:GetService("TweenService"):Create(ringOverlay, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        get.TweenService:Create(ringOverlay, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
             GroupTransparency = 0,
         }):Play()
     end
@@ -10875,7 +10954,7 @@ local function KUSTOMTOGGLE()
         end
     end))
 
-    LHRuntime:Track(game:GetService("UserInputService").InputChanged:Connect(function(inputObject)
+    LHRuntime:Track(get.UserInputService.InputChanged:Connect(function(inputObject)
         if not dragging or env.LHSettings.ToggleDragLocked then return end
         if inputObject == dragInput or inputObject.UserInputType == Enum.UserInputType.MouseMovement or inputObject.UserInputType == Enum.UserInputType.Touch then
             local delta = inputObject.Position - mousePos
@@ -10887,7 +10966,7 @@ local function KUSTOMTOGGLE()
         end
     end))
 
-    LHRuntime:Track(game:GetService("UserInputService").InputEnded:Connect(function(inputObject)
+    LHRuntime:Track(get.UserInputService.InputEnded:Connect(function(inputObject)
         if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
             dragging = false
             setToggleDragGlow(false)
