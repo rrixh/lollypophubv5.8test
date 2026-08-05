@@ -849,8 +849,30 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.1.7')
+local Vv = ('10.1.8')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
+local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
+local online_status = "Offline" -- local fallback if the online status file cannot load
+
+local function normalizeOnlineStatus(value)
+    if value == true then return "Online" end
+    local normalized = tostring(value or ""):match("^%s*(.-)%s*$"):lower()
+    return normalized == "online" and "Online" or "Offline"
+end
+
+local function refreshOnlineStatus()
+    local ok, remoteStatus = LHCompat.LoadRemote(ONLINE_STATUS_URL, "LH Online Status", true)
+    if ok then
+        online_status = normalizeOnlineStatus(remoteStatus)
+    else
+        online_status = normalizeOnlineStatus(env.LH_ONLINE_STATUS or online_status)
+    end
+    env.LH_ONLINE_STATUS = online_status
+    return online_status, ok
+end
+
+env.LHRefreshOnlineStatus = refreshOnlineStatus
+refreshOnlineStatus()
 local LastUPDATE = "Last Update: "..date
 ------------------
 local savedAccent = env.LHSettings.Accent
@@ -4910,7 +4932,7 @@ add(HomeIntroSection, kredits({
     UserId = 3001347724,
     SessionStarted = env.LHSessionStart,
     LastOnline = "Today", -- edit manually if needed
-    OnlineStatus = "Online", -- change to "Offline" when needed
+    OnlineStatus = env.LH_ONLINE_STATUS or online_status,
     AnimationId = env.LH_OWNER_KREDITS_ANIMATION_ID,
 }))
 skripts["Skripts"] = skripts["Skripts"] or {}
@@ -9376,6 +9398,10 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.1.8 updates: ",
+    "[IMPROVED] kontrol explanations now disappear as soon as you klik, skroll, type, drag, or use anything else",
+    "[IMPROVED] Online Status now reads from the separate LH/onlinestatus file and always shows Online or Offline correctly",
+
     emoji.lollipop.." V10.1.7 updates: ",
     "[FIXED] gravity now finishes at the normal Roblox value of 196.2 after every LH startup loader is done",
     "[IMPROVED] info buttons now show their explanation directly over the kontrol for 4 sekonds",
