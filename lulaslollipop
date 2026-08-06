@@ -1,4 +1,4 @@
---main v10.2.0 LOLLYPOP HUB 
+--main v10.2.1 LOLLYPOP HUB 
 
 date = "August 5"..", "..tostring(os.date("%Y"))
 
@@ -859,10 +859,10 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.2.0')
+local Vv = ('10.2.1')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
-local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
-local online_status = "Offline" -- local fallback if the online status file cannot load
+local ONLINE_STATUS_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
+local online_status = "Offline"
 
 local function normalizeOnlineStatus(value)
     if value == true then return "Online" end
@@ -9386,10 +9386,14 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+emoji.lollipop.." V10.2.1 updates: ",
+"[FIXED] Free Emotes: emotes stopping when walking, jumping, etc",
+"[IMPROVED] Free Emotes: added 'Load More' button to load more emotes",
     emoji.lollipop.." V10.2.0 updates: ",
     "[NEW TAB] Free Emotes: Look up & use your favorite emotes direktly from Roblox's Marketplace for free!]",
     "[FIXED] Free Emotes now use Roblox's korrekt Marketplace emote player instead of trying to play the katalog ID as a normal animation",
     "[FIXED] Free Emotes avatar previews now perform the selected emote instead of remaining as a still thumbnail",
+    "[FIXED] aktiv Free Emotes now keep looping while walking, running, jumping or falling and only stop when turned off or replaced",
     "[NEW] emote kards preview each emote on your own Roblox avatar before you play it",
     "[IMPROVED] emote speed has no limit and the plus or minus buttons keep changing speed while held",
     "[IMPROVED] Free Animations now has a Load More button and separate Marketplace and Favorites searches",
