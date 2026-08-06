@@ -861,8 +861,8 @@ local NEWLINE = ("\n");
 local Date = [[]]
 local Vv = ('10.2.1')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
-local ONLINE_STATUS_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
-local online_status = "Offline"
+local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
+local online_status = "Offline" -- local fallback if the online status file cannot load
 
 local function normalizeOnlineStatus(value)
     if value == true then return "Online" end
@@ -2827,6 +2827,35 @@ local function add(sectionData, item)
     return item
 end
 
+-- Update-version helpers stay outside buildHub because buildHub is already
+-- near Luau's local-variable ceiling.
+env.LHNormalizeVersion = function(value)
+    local text = tostring(value or "")
+    return text:match("(%d+%.%d+%.%d+)")
+        or text:match("(%d+%.%d+)")
+        or text:match("(%d+)")
+end
+
+env.LHCompareVersions = function(leftVersion, rightVersion)
+    local leftParts = {}
+    local rightParts = {}
+
+    for numberText in tostring(leftVersion or ""):gmatch("%d+") do
+        leftParts[#leftParts + 1] = tonumber(numberText) or 0
+    end
+    for numberText in tostring(rightVersion or ""):gmatch("%d+") do
+        rightParts[#rightParts + 1] = tonumber(numberText) or 0
+    end
+
+    for index = 1, math.max(#leftParts, #rightParts) do
+        local leftNumber = leftParts[index] or 0
+        local rightNumber = rightParts[index] or 0
+        if leftNumber > rightNumber then return 1 end
+        if leftNumber < rightNumber then return -1 end
+    end
+    return 0
+end
+
 local function buildHub(window)
     local requestedOrder = {
         ["Home"] = 1,
@@ -2865,6 +2894,12 @@ local function buildHub(window)
                     if item.kind == "button" and type(callback) == "function" then
                         local rawButtonCallback = callback
                         callback = function(...)
+                            -- This button already displays its own final version result.
+                            -- Skip the generic Running/Done island so only one message appears.
+                            if item.displayName == "Check for LH Update" then
+                                return rawButtonCallback(...)
+                            end
+
                             -- Auto-close is a failsafe for loaders that yield, error, or never return.
                             local island = LHRuntime:ShowIsland(item.displayName, "Running...", {Duration = 4})
                             local results = table.pack(rawButtonCallback(...))
@@ -4669,10 +4704,45 @@ add(performanceSection, button("Check for LH Update", "Uses getgenv().LH_VERSION
         LHRuntime:Notify("warning", "Update Checker", "Set getgenv().LH_VERSION_URL to your raw version file first.", 3)
         return
     end
-    local ok, latest = pcall(function() return game:HttpGet(versionUrl, true):gsub("%s+", "") end)
-    if not ok then error(latest) end
-    if latest == Vv then LHRuntime:Notify("success", "Update Checker", "LH is current: v" .. Vv, 3)
-    else LHRuntime:Notify("warning", "Update Available", "Current v" .. Vv .. " | Latest v" .. tostring(latest), 3) end
+
+    local ok, latest = pcall(function()
+        return game:HttpGet(versionUrl, true)
+    end)
+    if not ok then
+        LHRuntime:Notify("error", "Update Checker", "Kould not check the latest LH version.", 3)
+        return
+    end
+
+    latest = env.LHNormalizeVersion(latest)
+    versionUrl = env.LHNormalizeVersion(Vv)
+    if not latest or not versionUrl then
+        LHRuntime:Notify("error", "Update Checker", "The LH version file did not return a valid version.", 3)
+        return
+    end
+
+    ok = env.LHCompareVersions(versionUrl, latest)
+    if ok < 0 then
+        LHRuntime:Notify(
+            "warning",
+            "Update Available",
+            "Kurrent Version: v" .. versionUrl .. " | Latest Version: v" .. latest,
+            4
+        )
+    elseif ok > 0 then
+        LHRuntime:Notify(
+            "success",
+            "Kurrent Version",
+            "Kurrent Version: v" .. versionUrl .. " | Latest Version: v" .. latest,
+            4
+        )
+    else
+        LHRuntime:Notify(
+            "success",
+            "Kurrent Version",
+            "Kurrent Version: v" .. versionUrl,
+            3
+        )
+    end
 end))
 add(performanceSection, paragraph("v9.4.0 Upgrade Changelog", "Klassik ui look, phone scaling, resizing, drag lock, unlimited scrollable tabs, safer buttons, named emojis, kounters, UI font kustomization, hidden admin kommand backend, and full unload cleanup."))
 
@@ -9386,16 +9456,14 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
-emoji.lollipop.." V10.2.1 updates: ",
-"[FIXED] Free Emotes: emotes stopping when walking, jumping, etc",
-"[IMPROVED] Free Emotes: added 'Load More' button to load more emotes",
-    emoji.lollipop.." V10.2.0 updates: ",
-    "[NEW TAB] Free Emotes: Look up & use your favorite emotes direktly from Roblox's Marketplace for free!]",
-    "[FIXED] Free Emotes now use Roblox's korrekt Marketplace emote player instead of trying to play the katalog ID as a normal animation",
+    emoji.lollipop.." V10.2.1 updates: ",
+
+    "[FIXED] Free Emotes not playing now work korrectly",
     "[FIXED] Free Emotes avatar previews now perform the selected emote instead of remaining as a still thumbnail",
-    "[FIXED] aktiv Free Emotes now keep looping while walking, running, jumping or falling and only stop when turned off or replaced",
+    "[FIXED] Free Emotes now loop while walking, running, jumping or falling and only stop when turned off or replaced",
     "[NEW] emote kards preview each emote on your own Roblox avatar before you play it",
     "[IMPROVED] emote speed has no limit and the plus or minus buttons keep changing speed while held",
+    "[NEW TAB] Free Emotes: Look up & use your favorite emotes direktly from Roblox's Marketplace for free!]",
     "[IMPROVED] Free Animations now has a Load More button and separate Marketplace and Favorites searches",
     "[FIXED] repeated notifications are blocked; normal notifications stack at the top and Undo notifications stack at the bottom left",
     "[IMPROVED] Free Animations favorites now use instant filled or unfilled stars with the same notifications and Undo as Free Emotes",
@@ -10168,7 +10236,8 @@ add(MoreSection, button((emoji.lollipop..emoji.lollipop), "emoji", function()get
 end))
 add(MoreSection, button((emoji.lollipop..emoji.lollipop..emoji.lollipop), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.lollipop..emoji.lollipop),"All")
 end))
-add(MoreSection, button((emoji.lollipop..emoji.face_savoring_food), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.face_savoring_food),"All")
+add(MoreSection, 
+button((emoji.lollipop..emoji.face_savoring_food), "emoji", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.lollipop..emoji.face_savoring_food),"All")
 end))
 add(MoreSection, button((emoji.heart_eyes), "heart eyes", function()get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.heart_eyes),"All")
 end))
@@ -10792,7 +10861,6 @@ local function performQuickAction(actionName)
         if ok then
             LHRuntime.SettingsDirty = false
             LHRuntime:ShowIsland("Settings Saved", "Your UI edits were saved.", {Duration = 2.5})
-            LHRuntime:Notify("success", "Settings Saved", "Your UI edits were saved.", 3, nil, true)
         else
             LHRuntime:Notify("error", "Settings Save Failed", tostring(err), 4, nil, true)
         end
