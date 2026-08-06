@@ -1,4 +1,4 @@
---main v10.1.7 LOLLYPOP HUB 
+--main v10.2.0 LOLLYPOP HUB 
 
 date = "August 5"..", "..tostring(os.date("%Y"))
 
@@ -674,6 +674,9 @@ env.LHSettings = env.LHSettings or {
     ShelfAutoSave = false,
     AnimationBundleFavorites = {},
     AnimationBundleAutoSave = true,
+    FreeEmoteFavorites = {},
+    FreeEmoteAutoSave = true,
+    FreeEmoteSpeeds = {},
     AppearanceMode = "Dark",
     UniversalJumpPower = 50,
     SessionRestore = true,
@@ -718,6 +721,9 @@ local LH_UI_DEFAULTS = {
     ShelfAutoSave = false,
     AnimationBundleFavorites = {},
     AnimationBundleAutoSave = true,
+    FreeEmoteFavorites = {},
+    FreeEmoteAutoSave = true,
+    FreeEmoteSpeeds = {},
     AppearanceMode = "Dark",
     UniversalJumpPower = 50,
     SessionRestore = true,
@@ -757,6 +763,12 @@ if type(env.LHSettings.AnimationBundleFavorites) ~= "table" then env.LHSettings.
 if env.LHSettings.AnimationBundleAutoSave == nil then env.LHSettings.AnimationBundleAutoSave = true end
 env.LHUISettings.AnimationBundleFavorites = env.LHSettings.AnimationBundleFavorites
 env.LHUISettings.AnimationBundleAutoSave = env.LHSettings.AnimationBundleAutoSave ~= false
+if type(env.LHSettings.FreeEmoteFavorites) ~= "table" then env.LHSettings.FreeEmoteFavorites = {} end
+if env.LHSettings.FreeEmoteAutoSave == nil then env.LHSettings.FreeEmoteAutoSave = true end
+if type(env.LHSettings.FreeEmoteSpeeds) ~= "table" then env.LHSettings.FreeEmoteSpeeds = {} end
+env.LHUISettings.FreeEmoteFavorites = env.LHSettings.FreeEmoteFavorites
+env.LHUISettings.FreeEmoteAutoSave = env.LHSettings.FreeEmoteAutoSave ~= false
+env.LHUISettings.FreeEmoteSpeeds = env.LHSettings.FreeEmoteSpeeds
 env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
 
 local LH_PREVIOUS_SESSION = nil
@@ -769,18 +781,16 @@ local function localStartupNotify(title, text, durationValue)
     title = tostring(title or "Lollypop Hub")
     text = tostring(text or "")
     local runtime = rawget(env, "LHRuntime")
-    if type(runtime) == "table" and type(runtime.Notify) == "function" then
-        local ok = pcall(function() runtime:Notify("warning", title, text, durationValue or 5, nil, true) end)
+    if type(runtime) == "table"
+        and type(runtime.Notify) == "function"
+        and rawget(env, "LHKavo") ~= nil then
+        local ok = pcall(function()
+            runtime:Notify("warning", title, text, durationValue or 5, nil, true)
+        end)
         if ok then return true end
     end
-    return pcall(function()
-        get.StarterGui:SetCore("SendNotification", {
-            Title = title,
-            Text = text,
-            Duration = durationValue or 5,
-            Icon = "rbxassetid://" .. tostring(_G.lollypopimg or 17767487755),
-        })
-    end)
+    warn("[Lollypop Hub] " .. title .. ": " .. text)
+    return false
 end
 
 if env.lhloaded == true or env.LHBooting == true then
@@ -849,7 +859,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.1.8')
+local Vv = ('10.2.0')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -2011,6 +2021,9 @@ function LHRuntime:ApplySettings()
     env.LHUISettings.ShelfAutoSave = env.LHSettings.ShelfAutoSave == true
     env.LHUISettings.AnimationBundleFavorites = type(env.LHSettings.AnimationBundleFavorites) == "table" and env.LHSettings.AnimationBundleFavorites or {}
     env.LHUISettings.AnimationBundleAutoSave = env.LHSettings.AnimationBundleAutoSave ~= false
+    env.LHUISettings.FreeEmoteFavorites = type(env.LHSettings.FreeEmoteFavorites) == "table" and env.LHSettings.FreeEmoteFavorites or {}
+    env.LHUISettings.FreeEmoteAutoSave = env.LHSettings.FreeEmoteAutoSave ~= false
+    env.LHUISettings.FreeEmoteSpeeds = type(env.LHSettings.FreeEmoteSpeeds) == "table" and env.LHSettings.FreeEmoteSpeeds or {}
     env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
     if env.LHKavo then
         pcall(function() env.LHKavo:SetReducedMotion(env.LHSettings.ReducedMotion) end)
@@ -2659,31 +2672,6 @@ else
     localStartupNotify("Lollypop Hub", message, dur or 6)
 end
 end;
-
-if not env.LHSettings.NotificationMuted then
-    lollyhub((emoji.lollipop.." Welkome to Lollypop Hub, ")..get.Players.LocalPlayer.Name..("!"..emoji.lollipop), 3)
-    lollyhub("V"..Vv..(emoji.lollipop..emoji.face_savoring_food), 3)
-end
-
-kall(function()
-if getdate(11, 28) then
-lollyhub(("HAPPY THANKSGIVING "..emoji.turkey))
-elseif getdate(10,30) then
-lollyhub(("HALLOWEEN TOMORROW"..emoji.jack_o_lantern))
-elseif getdate(10,31) then
-lollyhub((emoji.candy.."HAPPY HALLOWEEN"..emoji.jack_o_lantern))
-elseif getdate(2,13) then
-lollyhub(("FIND YOUR BALENTINES"..emoji.heart_with_ribbon))
-elseif getdate(2,14) then
-lollyhub(("HAPPY BALENTINES DAY"..emoji.chocolate_bar..emoji.heart_with_ribbon))
-elseif getdate(12, 31) then
-lollyhub("READY FOR "..NextYear..(emoji.firecracker..emoji.fireworks.."???"))
-elseif getdate(1,1) then
-lollyhub((emoji.party_popper.."HAPPY NEW YEARS "..emoji.sparkler))
-else
-lollyhub((emoji.candy), 4)
-end;
-end);
 
 pcall(function()
 e65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude65q49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjude659863ppq49p4j5o9055c0zynnmkq8h72hwb872hnkwodihhwbksi726gbaj726uhdb766hd9hdhdu827gydjdifuwjb8738bubhsb1hbdyghjud();
@@ -9398,6 +9386,18 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.2.0 updates: ",
+    "[NEW TAB] Free Emotes: Look up & use your favorite emotes direktly from Roblox's Marketplace for free!]",
+    "[FIXED] Free Emotes now use Roblox's korrekt Marketplace emote player instead of trying to play the katalog ID as a normal animation",
+    "[FIXED] Free Emotes avatar previews now perform the selected emote instead of remaining as a still thumbnail",
+    "[NEW] emote kards preview each emote on your own Roblox avatar before you play it",
+    "[IMPROVED] emote speed has no limit and the plus or minus buttons keep changing speed while held",
+    "[IMPROVED] Free Animations now has a Load More button and separate Marketplace and Favorites searches",
+    "[FIXED] repeated notifications are blocked; normal notifications stack at the top and Undo notifications stack at the bottom left",
+    "[IMPROVED] Free Animations favorites now use instant filled or unfilled stars with the same notifications and Undo as Free Emotes",
+    "[IMPROVED] Free Animations Load More now reveals animation packs in batches like Free Emotes",
+    "[REMOVED] old Roblox startup notifications no longer appear while LH is loading",
+
     emoji.lollipop.." V10.1.8 updates: ",
     "[IMPROVED] kontrol explanations now disappear as soon as you klik, skroll, type, drag, or use anything else",
     "[IMPROVED] Online Status now reads from the separate LH/onlinestatus file and always shows Online or Offline correctly",
@@ -10324,22 +10324,81 @@ end))
 -- Build every stored kontrol once. Search only hides/shows existing rows.
 buildHub(Window)
 
--- Marketplace V4 is created natively inside the existing Kavo/LH tab system.
--- Give every stored tab an explicit sidebar order so special Kavo pages can be
--- inserted exactly where LH wants them without changing their creation/runtime order.
-local funSidebarOrder = nil
+-- Marketplace tabs are created natively inside the existing Kavo/LH tab system.
+-- Explicit sidebar order keeps Free Animations and Free Emotes together while
+-- Server stays direktly above Notifications at the bottom.
+local sidebarOrderByName = {
+    ["Ui Kustomization"] = 10,
+    ["Home"] = 20,
+    ["Admin"] = 30,
+    ["Fun"] = 40,
+    ["Tools"] = 50,
+    ["Hubs & GUIs"] = 60,
+    ["FE"] = 70,
+    ["Updates/Extras"] = 80,
+    ["Bypasses & More"] = 90,
+    ["Server"] = 100,
+}
+
 for tabIndex, tabData in ipairs(tabOrder) do
     local tabUi = tabData and tabData._ui
     local tabButton = tabUi and tabUi.Button
-    local sidebarOrder = tabIndex * 10
     if tabButton then
-        tabButton.LayoutOrder = sidebarOrder
-    end
-    if tabData and tabData._name == "Fun" then
-        funSidebarOrder = sidebarOrder
+        tabButton.LayoutOrder = sidebarOrderByName[tabData._name] or (tabIndex * 10)
     end
 end
-funSidebarOrder = funSidebarOrder or 40
+
+local animationBundlesTab = nil
+if Window.EnableAnimationBundles then
+    local animationTabOk, animationTabResult = pcall(function()
+        return Window:EnableAnimationBundles(utf.char(0x2605).." Free Animations")
+    end)
+    if animationTabOk then
+        animationBundlesTab = animationTabResult
+        if animationBundlesTab and animationBundlesTab.Button then
+            animationBundlesTab.Button.LayoutOrder = 41
+        end
+    else
+        warn("[Lollypop Hub Free Animations] " .. tostring(animationTabResult))
+        if LHRuntime and LHRuntime.Notify then
+            pcall(function()
+                LHRuntime:Notify("error", "Free Animations", "The Free Animations tab could not initialize: " .. tostring(animationTabResult), 7, nil, true)
+            end)
+        end
+    end
+else
+    warn("[Lollypop Hub Free Animations] Loaded Kavo does not expose EnableAnimationBundles.")
+end
+
+local freeEmotesTab = nil
+if Window.EnableFreeEmotes then
+    local emoteTabOk, emoteTabResult = pcall(function()
+        return Window:EnableFreeEmotes(utf.char(0x2605).." Free Emotes")
+    end)
+    if emoteTabOk then
+        freeEmotesTab = emoteTabResult
+        if freeEmotesTab and freeEmotesTab.Button then
+            freeEmotesTab.Button.LayoutOrder = 42
+        end
+    else
+        warn("[Lollypop Hub Free Emotes] " .. tostring(emoteTabResult))
+        if LHRuntime and LHRuntime.Notify then
+            pcall(function()
+                LHRuntime:Notify("error", "Free Emotes", "The Free Emotes tab could not initialize: " .. tostring(emoteTabResult), 7, nil, true)
+            end)
+        end
+    end
+else
+    warn("[Lollypop Hub Free Emotes] Loaded Kavo does not expose EnableFreeEmotes.")
+end
+
+local personalShelfTab = nil
+if Window.EnablePersonalShelf then
+    personalShelfTab = Window:EnablePersonalShelf("My Shelf")
+    if personalShelfTab and personalShelfTab.Button then
+        personalShelfTab.Button.LayoutOrder = 43
+    end
+end
 
 do
     local notificationCenterTab = nil
@@ -10355,34 +10414,6 @@ do
         else
             warn("[Lollypop Hub Notifications] " .. tostring(notificationResult))
         end
-    end
-end
-
-local animationBundlesTab = nil
-if Window.EnableAnimationBundles then
-    local animationTabOk, animationTabResult = pcall(function()
-        return Window:EnableAnimationBundles("Free Animations")
-    end)
-    if animationTabOk then
-        animationBundlesTab = animationTabResult
-        if animationBundlesTab and animationBundlesTab.Button then
-            animationBundlesTab.Button.LayoutOrder = funSidebarOrder + 1
-        end
-    else
-        warn("[Lollypop Hub Animation Marketplace V4] " .. tostring(animationTabResult))
-        if LHRuntime and LHRuntime.Notify then
-            pcall(function() LHRuntime:Notify("error", "Free Animations", "Marketplace V4 could not initialize: " .. tostring(animationTabResult), 7, nil, true) end)
-        end
-    end
-else
-    warn("[Lollypop Hub Animation Marketplace V4] Loaded Kavo does not expose EnableAnimationBundles.")
-end
-
-local personalShelfTab = nil
-if Window.EnablePersonalShelf then
-    personalShelfTab = Window:EnablePersonalShelf("My Shelf")
-    if personalShelfTab and personalShelfTab.Button then
-        personalShelfTab.Button.LayoutOrder = funSidebarOrder + 2
     end
 end
 
