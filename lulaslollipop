@@ -1,6 +1,6 @@
 --main v10.2.1 LOLLYPOP HUB 
 
-date = "August 5"..", "..tostring(os.date("%Y"))
+date = "August 6"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
