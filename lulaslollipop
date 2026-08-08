@@ -863,7 +863,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.2.2')
+local Vv = ('10.2.3')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -9464,14 +9464,15 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+"will add more features to Avatar Kreator  v10.2.4 next update",
+
     emoji.lollipop.." V10.2.3 updates: ",
-    "[IMPROVED] Avatar Kreator is now a starred special tab named Avatar Kreator and no longer enlarges the LH window",
-    "[IMPROVED] Avatar Katalog Kreator was resized for the normal LH view with cleaner two-column cards and three columns when enough room exists",
-    "[NEW] Avatar Kreator Favorites mode with star buttons on every Marketplace item and saved favorite searches",
-    "[NEW] Avatar Kreator search has an X clear button and results have a Back to Top button",
-    "[IMPROVED] Item Stacking, Load More, Back to Top, results text, and kategory controls no longer overlap",
-    "[IMPROVED] Try On and Take Off actions no longer spam success notifications",
-    "[NEW] Reset All now asks Are you sure you want to remove all klothing? before restoring the original outfit",
+
+    "[IMPROVED] Avatar Katalog Kreator was resized for the normal Lollypop Hub view ",
+    "[NEW] Avatar Kreator: Favorites mode with star buttons on every Marketplace item and saved favorite searches (Auto Saves)",
+    "[NEW] Avatar Kreator: search has an X klear button and added \"Back to Top\" button for easier returning to the searchbar",
+    "[IMPROVED] Item Stacking, Load More, Back to Top, results text, and kategory kontrols dont  overlap anymore",
+    "[REQUESTED/NEW] Reset All now asks "Are you sure you want to remove all klothing?" before restoring the original outfit",
 
     emoji.lollipop.." V10.2.2 updates: ",
 
