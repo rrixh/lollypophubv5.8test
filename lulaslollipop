@@ -1,6 +1,6 @@
---main v10.2.1 LOLLYPOP HUB 
+--main v10.2.3 LOLLYPOP HUB 
 
-date = "August 6"..", "..tostring(os.date("%Y"))
+date = "August 7"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -676,6 +676,7 @@ env.LHSettings = env.LHSettings or {
     AnimationBundleAutoSave = true,
     FreeEmoteFavorites = {},
     FreeEmoteAutoSave = true,
+    AvatarKreatorFavorites = {},
     FreeEmoteSpeeds = {},
     AppearanceMode = "Dark",
     UniversalJumpPower = 50,
@@ -699,14 +700,14 @@ local LH_UI_DEFAULTS = {
     Theme = "Blood",
     Accent = {181, 71, 48},
     TextColor = {245, 245, 248},
-    AutoSaveEdits = false,
+    AutoSaveEdits = true,
     ReducedMotion = false,
     LowPerformance = false,
     DragLocked = false,
     ToggleDragLocked = false,
     AdminButtonDragLocked = false,
     EdgeSnap = false,
-    GlassBlur = false,
+    GlassBlur = true,
     CustomCursor = false,
     ScaleMode = "Auto",
     NotificationMuted = true,
@@ -718,11 +719,12 @@ local LH_UI_DEFAULTS = {
     OpeningSound = true,
     PersonalShelf = {},
     ShelfEnabled = true,
-    ShelfAutoSave = false,
+    ShelfAutoSave = true,
     AnimationBundleFavorites = {},
     AnimationBundleAutoSave = true,
     FreeEmoteFavorites = {},
     FreeEmoteAutoSave = true,
+    AvatarKreatorFavorites = {},
     FreeEmoteSpeeds = {},
     AppearanceMode = "Dark",
     UniversalJumpPower = 50,
@@ -768,6 +770,8 @@ if env.LHSettings.FreeEmoteAutoSave == nil then env.LHSettings.FreeEmoteAutoSave
 if type(env.LHSettings.FreeEmoteSpeeds) ~= "table" then env.LHSettings.FreeEmoteSpeeds = {} end
 env.LHUISettings.FreeEmoteFavorites = env.LHSettings.FreeEmoteFavorites
 env.LHUISettings.FreeEmoteAutoSave = env.LHSettings.FreeEmoteAutoSave ~= false
+if type(env.LHSettings.AvatarKreatorFavorites) ~= "table" then env.LHSettings.AvatarKreatorFavorites = {} end
+env.LHUISettings.AvatarKreatorFavorites = env.LHSettings.AvatarKreatorFavorites
 env.LHUISettings.FreeEmoteSpeeds = env.LHSettings.FreeEmoteSpeeds
 env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
 
@@ -820,10 +824,10 @@ pcall(function()
     if env.LHGravityStartupConnection and env.LHGravityStartupConnection.Connected then
         env.LHGravityStartupConnection:Disconnect()
     end
-    get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+    get.Workspace.Gravity = 196.2
     env.LHGravityStartupConnection = get.Workspace:GetPropertyChangedSignal("Gravity"):Connect(function()
         if env.LHGravityStartupPending == true and math.abs(get.Workspace.Gravity - env.LH_DEFAULT_GRAVITY) > 0.001 then
-            get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+            get.Workspace.Gravity = 196.2
         end
     end)
 end)
@@ -833,7 +837,7 @@ local globalsOk, globalsError = LHCompat.LoadRemote(GLOBALS_URL, "LH globaLS", t
 if not globalsOk then warn("[Lollypop Hub] Optional globaLS skipped: " .. tostring(globalsError)) end
 pcall(function()
     if env.LHGravityStartupPending == true then
-        get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+        get.Workspace.Gravity = 196.2
     end
 end)
 -----
@@ -859,7 +863,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.2.1')
+local Vv = ('10.2.2')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -2023,6 +2027,7 @@ function LHRuntime:ApplySettings()
     env.LHUISettings.AnimationBundleAutoSave = env.LHSettings.AnimationBundleAutoSave ~= false
     env.LHUISettings.FreeEmoteFavorites = type(env.LHSettings.FreeEmoteFavorites) == "table" and env.LHSettings.FreeEmoteFavorites or {}
     env.LHUISettings.FreeEmoteAutoSave = env.LHSettings.FreeEmoteAutoSave ~= false
+    env.LHUISettings.AvatarKreatorFavorites = type(env.LHSettings.AvatarKreatorFavorites) == "table" and env.LHSettings.AvatarKreatorFavorites or {}
     env.LHUISettings.FreeEmoteSpeeds = type(env.LHSettings.FreeEmoteSpeeds) == "table" and env.LHSettings.FreeEmoteSpeeds or {}
     env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
     if env.LHKavo then
@@ -2868,8 +2873,8 @@ local function buildHub(window)
         ["Updates/Extras"] = 8,
         ["Server"] = 10,
         ["Notifications"] = 11,
-        ["Ui Kustomization"] = 999,
-        ["Bypasses & More"] = 1000,
+        ["Ui Kustomization"] = 12,
+        ["Bypasses & More"] = 13,
     }
     table.sort(tabOrder, function(a, b)
         local ai = requestedOrder[a._name] or 500
@@ -3025,6 +3030,9 @@ env.LHKavo = KAVO
 env.LHKavoLoadedFrom = kavoSource
 if tonumber(KAVO.AnimationMarketplaceVersion or 0) < 4 then
     warn("[Lollypop Hub] Kavo loaded without the Marketplace V4 marker. Upload the patched Kavo file to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
+end
+if tonumber(KAVO.AvatarMarketplaceVersion or 0) < 1 then
+    warn("[Lollypop Hub] Kavo loaded without Ava Kreator support. Upload kavo ui 4.4 to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
 end
 
 local lollypopHub = ("Lollypop Hub"..emoji.lollipop.." | V") ..Vv.. " | " ..exploit.. " | " ..LastUpdate;
@@ -5334,19 +5342,19 @@ add(SkriptsSection, slider("Jump Power", "Uses the universal LH JumpPower value.
 LHFeatures:SetJumpPower(jp)
 end, LHFeatures.UniversalJumpPower))
 
-add(SkriptsSection, toggle("No Klip", "Walk through kollidable parts. Stays enabled after death and respawn.", function(enabled)
+add(SkriptsSection, toggle("No Klip", "walk thru walls", function(enabled)
 LHFeatures:SetNoClip(enabled)
 end))
 
-add(SkriptsSection, slider("Gravity", "Kontrols world gravity. Normal Roblox gravity is 196.2.", 1, 1000, function(grav)
+add(SkriptsSection, slider("Gravity", "kontrols worldgeavity , default gravity is 196.2", 1, 1200, function(grav)
 env.LHGravityStartupPending = false
 pcall(function()
     if env.LHGravityStartupConnection and env.LHGravityStartupConnection.Connected then
         env.LHGravityStartupConnection:Disconnect()
     end
 end)
-get.Workspace.Gravity = tonumber(grav) or env.LH_DEFAULT_GRAVITY
-end, env.LH_DEFAULT_GRAVITY))
+get.Workspace.Gravity = tonumber(grav) or 196.2
+end, 196.2))
 
 add(SkriptsSection, button("Reset Gravity", "Returns gravity to the normal Roblox value of 196.2.", function()
 env.LHGravityStartupPending = false
@@ -5355,7 +5363,7 @@ pcall(function()
         env.LHGravityStartupConnection:Disconnect()
     end
 end)
-get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+get.Workspace.Gravity = 196.2
 end))
 
 add(SkriptsSection, toggle("Enable chat bubbles", (emoji.lollipop), function(bubbles)
@@ -9456,6 +9464,25 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.2.3 updates: ",
+    "[IMPROVED] Avatar Kreator is now a starred special tab named Avatar Kreator and no longer enlarges the LH window",
+    "[IMPROVED] Avatar Katalog Kreator was resized for the normal LH view with cleaner two-column cards and three columns when enough room exists",
+    "[NEW] Avatar Kreator Favorites mode with star buttons on every Marketplace item and saved favorite searches",
+    "[NEW] Avatar Kreator search has an X clear button and results have a Back to Top button",
+    "[IMPROVED] Item Stacking, Load More, Back to Top, results text, and kategory controls no longer overlap",
+    "[IMPROVED] Try On and Take Off actions no longer spam success notifications",
+    "[NEW] Reset All now asks Are you sure you want to remove all klothing? before restoring the original outfit",
+
+    emoji.lollipop.." V10.2.2 updates: ",
+
+    "[NEW TAB] Ava Kreator: Search Roblox avatar Marketplace items and try them on direktly inside LH",
+    "[NEW] Ava Kreator kategories: All, Klassic, Tops, Bottoms, Shoes, Hats, Hair, Face, and Accessories",
+    "[NEW] Ava Kreator shows official item thumbnails, names, kreators, prices, asset types, details, and Load More",
+    "[NEW] Ava Kreator outfit panel tracks worn items and lets u Take Off or Reset All",
+    "[NEW] Item Stacking keeps multiple same-type accessories when supported",
+    "[FIXED] Ava Kreator uses the V4 verified attachment logic so floating accessories do not count as a successful Try On",
+    "[IMPROVED] Ava Kreator restores replaced avatar items and reapplies the selected local outfit after respawn",
+
     emoji.lollipop.." V10.2.1 updates: ",
 
     "[FIXED] Free Emotes not playing now work korrectly",
@@ -10398,7 +10425,7 @@ end))
 buildHub(Window)
 
 -- Marketplace tabs are created natively inside the existing Kavo/LH tab system.
--- Explicit sidebar order keeps Free Animations and Free Emotes together while
+-- Explicit sidebar order keeps Free Animations, Free Emotes, and Ava Kreator together while
 -- Server stays direktly above Notifications at the bottom.
 local sidebarOrderByName = {
     ["Ui Kustomization"] = 10,
@@ -10465,11 +10492,33 @@ else
     warn("[Lollypop Hub Free Emotes] Loaded Kavo does not expose EnableFreeEmotes.")
 end
 
+local avatarKreatorTab = nil
+if Window.EnableAvatarKreator then
+    local avatarTabOk, avatarTabResult = pcall(function()
+        return Window:EnableAvatarKreator(utf.char(0x2605).." Avatar Kreator")
+    end)
+    if avatarTabOk then
+        avatarKreatorTab = avatarTabResult
+        if avatarKreatorTab and avatarKreatorTab.Button then
+            avatarKreatorTab.Button.LayoutOrder = 43
+        end
+    else
+        warn("[Lollypop Hub Avatar Kreator] " .. tostring(avatarTabResult))
+        if LHRuntime and LHRuntime.Notify then
+            pcall(function()
+                LHRuntime:Notify("error", "Avatar Kreator", "The Avatar Kreator tab could not initialize: " .. tostring(avatarTabResult), 7, nil, true)
+            end)
+        end
+    end
+else
+    warn("[Lollypop Hub Avatar Kreator] Loaded Kavo does not expose EnableAvatarKreator.")
+end
+
 local personalShelfTab = nil
 if Window.EnablePersonalShelf then
     personalShelfTab = Window:EnablePersonalShelf("My Shelf")
     if personalShelfTab and personalShelfTab.Button then
-        personalShelfTab.Button.LayoutOrder = 43
+        personalShelfTab.Button.LayoutOrder = 44
     end
 end
 
@@ -10645,7 +10694,7 @@ local ok, err = pcall(function()
 end)
 pcall(function()
     if env.LHGravityStartupPending == true then
-        get.Workspace.Gravity = env.LH_DEFAULT_GRAVITY
+        get.Workspace.Gravity = 196.2
         env.LHGravityStartupPending = false
     end
     if env.LHGravityStartupConnection and env.LHGravityStartupConnection.Connected then
@@ -10860,7 +10909,7 @@ local function performQuickAction(actionName)
         local ok, err = LHRuntime:SaveSettings()
         if ok then
             LHRuntime.SettingsDirty = false
-            LHRuntime:ShowIsland("Settings Saved", "Your UI edits were saved.", {Duration = 2.5})
+            LHRuntime:ShowIsland("Save Settings", "Your UI edits were saved.", {Duration = 2.5})
         else
             LHRuntime:Notify("error", "Settings Save Failed", tostring(err), 4, nil, true)
         end
