@@ -9472,7 +9472,7 @@ local UpdatesLog = {
     "[NEW] Avatar Kreator: Favorites mode with star buttons on every Marketplace item and saved favorite searches (Auto Saves)",
     "[NEW] Avatar Kreator: search has an X klear button and added \"Back to Top\" button for easier returning to the searchbar",
     "[IMPROVED] Item Stacking, Load More, Back to Top, results text, and kategory kontrols dont  overlap anymore",
-    "[REQUESTED/NEW] Reset All now asks "Are you sure you want to remove all klothing?" before restoring the original outfit",
+    "[REQUESTED/NEW] Reset All now asks \"Are you sure you want to remove all klothing?\" before restoring the original outfit",
 
     emoji.lollipop.." V10.2.2 updates: ",
 
