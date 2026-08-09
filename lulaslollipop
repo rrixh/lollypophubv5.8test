@@ -3449,7 +3449,7 @@ LHRuntime:RegisterCommand("fly", {"mobilefly", "mfly"}, "Enables the built-in re
     LHFlight:Enable(tonumber(args[1]) or LHFlight.Speed)
 end)
 
-LHRuntime:RegisterCommand("unfly", {"unmobilefly", "unmfly", "nofly"}, "Disables the built-in fly.", "unfly", function()
+LHRuntime:RegisterCommand("unfly", {"unmobilefly", "unmfly", "nofly", "uf"}, "Disables the built-in fly.", "unfly", function()
     LHFlight:Disable()
 end)
 
