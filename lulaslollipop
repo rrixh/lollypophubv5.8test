@@ -1,4 +1,4 @@
---main v10.2.3 LOLLYPOP HUB 
+--main v10.3.0 LOLLYPOP HUB 
 
 date = "August 9"..", "..tostring(os.date("%Y"))
 
@@ -677,8 +677,12 @@ env.LHSettings = env.LHSettings or {
     FreeEmoteFavorites = {},
     FreeEmoteAutoSave = true,
     AvatarKreatorFavorites = {},
+    AvatarKreatorSavedOutfits = {},
+    AutoExecuteScripts = {},
     FreeEmoteSpeeds = {},
     AppearanceMode = "Dark",
+    ThemeBrightness = 0,
+    AntiPause = false,
     UniversalJumpPower = 50,
     SessionRestore = true,
 }
@@ -725,8 +729,12 @@ local LH_UI_DEFAULTS = {
     FreeEmoteFavorites = {},
     FreeEmoteAutoSave = true,
     AvatarKreatorFavorites = {},
+    AvatarKreatorSavedOutfits = {},
+    AutoExecuteScripts = {},
     FreeEmoteSpeeds = {},
     AppearanceMode = "Dark",
+    ThemeBrightness = 0,
+    AntiPause = false,
     UniversalJumpPower = 50,
     SessionRestore = true,
 }
@@ -771,9 +779,17 @@ if type(env.LHSettings.FreeEmoteSpeeds) ~= "table" then env.LHSettings.FreeEmote
 env.LHUISettings.FreeEmoteFavorites = env.LHSettings.FreeEmoteFavorites
 env.LHUISettings.FreeEmoteAutoSave = env.LHSettings.FreeEmoteAutoSave ~= false
 if type(env.LHSettings.AvatarKreatorFavorites) ~= "table" then env.LHSettings.AvatarKreatorFavorites = {} end
+if type(env.LHSettings.AvatarKreatorSavedOutfits) ~= "table" then env.LHSettings.AvatarKreatorSavedOutfits = {} end
+if type(env.LHSettings.AutoExecuteScripts) ~= "table" then env.LHSettings.AutoExecuteScripts = {} end
+if env.LHSettings.ThemeBrightness == nil then env.LHSettings.ThemeBrightness = 0 end
+if env.LHSettings.AntiPause == nil then env.LHSettings.AntiPause = false end
 env.LHUISettings.AvatarKreatorFavorites = env.LHSettings.AvatarKreatorFavorites
+env.LHUISettings.AvatarKreatorSavedOutfits = env.LHSettings.AvatarKreatorSavedOutfits
+env.LHUISettings.AutoExecuteScripts = env.LHSettings.AutoExecuteScripts
 env.LHUISettings.FreeEmoteSpeeds = env.LHSettings.FreeEmoteSpeeds
 env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
+env.LHUISettings.ThemeBrightness = tonumber(env.LHSettings.ThemeBrightness) or 0
+env.LHUISettings.AntiPause = env.LHSettings.AntiPause == true
 
 local LH_PREVIOUS_SESSION = nil
 do
@@ -863,7 +879,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.2.4')
+local Vv = ('10.3.0')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -1300,6 +1316,12 @@ end
 
 function LHRuntime:SaveSettings()
     env.LHSettings.CommandPrefix = self.Prefix
+    if type(env.LHUISettings) == "table" then
+        if type(env.LHUISettings.AvatarKreatorSavedOutfits) == "table" then env.LHSettings.AvatarKreatorSavedOutfits = env.LHUISettings.AvatarKreatorSavedOutfits end
+        if type(env.LHUISettings.AutoExecuteScripts) == "table" then env.LHSettings.AutoExecuteScripts = env.LHUISettings.AutoExecuteScripts end
+        if env.LHUISettings.ThemeBrightness ~= nil then env.LHSettings.ThemeBrightness = tonumber(env.LHUISettings.ThemeBrightness) or 0 end
+        if env.LHUISettings.AntiPause ~= nil then env.LHSettings.AntiPause = env.LHUISettings.AntiPause == true end
+    end
     local ok, err = LHCompat.WriteJsonAtomic(LH_SETTINGS_FILE, env.LHSettings, LH_SETTINGS_FILE .. ".backup")
     return ok, err
 end
@@ -2028,8 +2050,12 @@ function LHRuntime:ApplySettings()
     env.LHUISettings.FreeEmoteFavorites = type(env.LHSettings.FreeEmoteFavorites) == "table" and env.LHSettings.FreeEmoteFavorites or {}
     env.LHUISettings.FreeEmoteAutoSave = env.LHSettings.FreeEmoteAutoSave ~= false
     env.LHUISettings.AvatarKreatorFavorites = type(env.LHSettings.AvatarKreatorFavorites) == "table" and env.LHSettings.AvatarKreatorFavorites or {}
+    env.LHUISettings.AvatarKreatorSavedOutfits = type(env.LHSettings.AvatarKreatorSavedOutfits) == "table" and env.LHSettings.AvatarKreatorSavedOutfits or {}
+    env.LHUISettings.AutoExecuteScripts = type(env.LHSettings.AutoExecuteScripts) == "table" and env.LHSettings.AutoExecuteScripts or {}
     env.LHUISettings.FreeEmoteSpeeds = type(env.LHSettings.FreeEmoteSpeeds) == "table" and env.LHSettings.FreeEmoteSpeeds or {}
     env.LHUISettings.AppearanceMode = env.LHSettings.AppearanceMode or "Dark"
+    env.LHUISettings.ThemeBrightness = tonumber(env.LHSettings.ThemeBrightness) or 0
+    env.LHUISettings.AntiPause = env.LHSettings.AntiPause == true
     if env.LHKavo then
         pcall(function() env.LHKavo:SetReducedMotion(env.LHSettings.ReducedMotion) end)
         pcall(function() env.LHKavo:SetLowPerformance(env.LHSettings.LowPerformance) end)
@@ -2039,6 +2065,7 @@ function LHRuntime:ApplySettings()
         pcall(function() env.LHKavo:SetGlassBlur(env.LHSettings.GlassBlur) end)
         pcall(function() env.LHKavo:SetCustomCursor(env.LHSettings.CustomCursor) end)
         if env.LHKavo.SetAppearanceMode then pcall(function() env.LHKavo:SetAppearanceMode(env.LHSettings.AppearanceMode or "Dark") end) end
+        if env.LHKavo.SetThemeBrightness then pcall(function() env.LHKavo:SetThemeBrightness(env.LHSettings.ThemeBrightness or 0) end) end
         pcall(function() env.LHKavo:SetTheme(env.LHSettings.Theme) end)
         pcall(function() env.LHKavo:SetFont(env.LHSettings.UIFont or "Gotham") end)
         local accent = env.LHSettings.Accent
@@ -4580,6 +4607,14 @@ uiSettingControls.AppearanceMode = add(appearanceSection, dropdown("Light / Dark
     LHRuntime:SettingChanged()
 end, env.LHSettings.AppearanceMode or "Dark"))
 
+uiSettingControls.ThemeBrightness = add(appearanceSection, kounter("Kolor Brightness", "Use - or + to dim or brighten the selected theme. Hold either button to keep changing it.", 5, function(value)
+    value = math.clamp(tonumber(value) or 0, -80, 100)
+    env.LHSettings.ThemeBrightness = value
+    env.LHUISettings.ThemeBrightness = value
+    if KAVO.SetThemeBrightness then KAVO:SetThemeBrightness(value) end
+    LHRuntime:SettingChanged()
+end, tonumber(env.LHSettings.ThemeBrightness) or 0, -80, 100))
+
 uiSettingControls.UIFont = add(appearanceSection, dropdown("UI Font", "Includes every Enum.Font available in your Roblox klient.", fontChoices, function(selected)
     env.LHSettings.UIFont = tostring(selected or "Gotham")
     env.LHUISettings.UIFont = env.LHSettings.UIFont
@@ -4679,6 +4714,7 @@ add(commandSection, button("Show All Kommands", "Displays every built-in kommand
 local uiFactoryResetDefaults = {
     Theme = LH_UI_DEFAULTS.Theme,
     AppearanceMode = LH_UI_DEFAULTS.AppearanceMode,
+    ThemeBrightness = LH_UI_DEFAULTS.ThemeBrightness,
     UIFont = LH_UI_DEFAULTS.UIFont,
     Accent = Color3.fromRGB(table.unpack(LH_UI_DEFAULTS.Accent)),
     TextColor = Color3.fromRGB(table.unpack(LH_UI_DEFAULTS.TextColor)),
@@ -4859,6 +4895,7 @@ local function applyDefaultUISettings()
 
     if uiSettingControls.Theme then uiSettingControls.Theme._ui:SetValue(env.LHSettings.Theme, false) end
     if uiSettingControls.AppearanceMode then uiSettingControls.AppearanceMode._ui:SetValue(env.LHSettings.AppearanceMode or "Dark", false) end
+    if uiSettingControls.ThemeBrightness then uiSettingControls.ThemeBrightness._ui:SetValue(tonumber(env.LHSettings.ThemeBrightness) or 0, false) end
     if uiSettingControls.Accent then uiSettingControls.Accent._ui:SetValue(Color3.fromRGB(table.unpack(env.LHSettings.Accent)), false) end
     if uiSettingControls.TextColor then uiSettingControls.TextColor._ui:SetValue(Color3.fromRGB(table.unpack(env.LHSettings.TextColor)), false) end
     if uiSettingControls.AutoSaveEdits then uiSettingControls.AutoSaveEdits._ui:SetValue(env.LHSettings.AutoSaveEdits, false) end
@@ -9464,6 +9501,15 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.3.0 updates: ",
+    "[NEW TAB] Auto Execute: create multiple saved skript files with per-file Auto-Exec ON/OFF and run them when LH loads",
+    "[NEW] Avatar Kreator Saved Outfits with permanent independent autosave, Wear Outfit, and Remove Outfit",
+    "[NEW] Avatar Kreator uses the Roblox Premium icon on Premium-priced katalog items when Premium metadata is returned",
+    "[IMPROVED] Avatar Kreator now uses the proven GetObjects + Humanoid:AddAccessory/BuildRigFromAttachments and GetObjects + Klassic Instance Try On paths",
+    "[IMPROVED] Avatar Kreator Marketplace and Saved Outfits use a compact 3-kard phone layout when space allows",
+    "[NEW] Kolor Brightness -/+ kontrol dims or brightens the selected theme live and supports hold-to-repeat",
+    "[FIXED] Anti-Pause now self-saves ON/OFF and restores the saved state without duplicate konnections",
+
     emoji.lollipop.." V10.2.4 updates: ",
 "[FIXED] fixed kurrently wearing not fully showing",
 
@@ -10054,27 +10100,42 @@ antiPauseHeartbeatConnection = nil
 end
 end
 
-add(MoreSection, toggle("Anti-Pause", "prevents \"Gameplay Paused\" from popping up", function(enabled)
+local function setAntiPauseEnabled(enabled, persist)
 diskonnektAntiPause()
-if enabled ~= true then return end
+enabled = enabled == true
+env.LHSettings.AntiPause = enabled
+env.LHUISettings.AntiPause = enabled
 
+if enabled then
 local Players = get.Players
 local RunService = get.RunService
 local LocalPlayer = Players.LocalPlayer
-if not LocalPlayer then return end
-
+if LocalPlayer then
 local function klearGameplayPaused()
-if LocalPlayer.GameplayPaused then
-LocalPlayer.GameplayPaused = false
+if LocalPlayer.GameplayPaused then LocalPlayer.GameplayPaused = false end
 end
-end
-
 antiPausePropertyConnection = LocalPlayer:GetPropertyChangedSignal("GameplayPaused"):Connect(klearGameplayPaused)
 antiPauseHeartbeatConnection = RunService.Heartbeat:Connect(klearGameplayPaused)
 LHRuntime:Track(antiPausePropertyConnection)
 LHRuntime:Track(antiPauseHeartbeatConnection)
 klearGameplayPaused()
-end, false))
+end
+end
+
+if persist ~= false then
+LHRuntime:SettingChanged()
+-- Anti-Pause always remembers itself even when normal Auto Save Edits is OFF.
+LHRuntime:SaveSettings()
+end
+end
+
+local antiPauseKontrol = add(MoreSection, toggle("Anti-Pause", 'prevents "Gameplay Paused" from popping up and remembers its state', function(enabled)
+setAntiPauseEnabled(enabled, true)
+end, env.LHSettings.AntiPause == true))
+
+task.defer(function()
+setAntiPauseEnabled(env.LHSettings.AntiPause == true, false)
+end)
 end
 
 add(MoreSection, toggle("Bypass Jump Limit", "Good for obbies and games with limited jumps. Uses the Jump Power selected in LH.", function(enabled)
@@ -10523,6 +10584,26 @@ if Window.EnablePersonalShelf then
     if personalShelfTab and personalShelfTab.Button then
         personalShelfTab.Button.LayoutOrder = 44
     end
+end
+
+local autoExecuteTab = nil
+if Window.EnableAutoExecuteManager then
+    local autoExecuteOk, autoExecuteResult = pcall(function()
+        return Window:EnableAutoExecuteManager(utf.char(0x2605).." Auto Execute")
+    end)
+    if autoExecuteOk then
+        autoExecuteTab = autoExecuteResult
+        if autoExecuteTab and autoExecuteTab.Button then autoExecuteTab.Button.LayoutOrder = 45 end
+    else
+        warn("[Lollypop Hub Auto Execute] " .. tostring(autoExecuteResult))
+        if LHRuntime and LHRuntime.Notify then
+            pcall(function()
+                LHRuntime:Notify("error", "Auto Execute", "The Auto Execute tab could not initialize: " .. tostring(autoExecuteResult), 7, nil, true)
+            end)
+        end
+    end
+else
+    warn("[Lollypop Hub Auto Execute] Loaded Kavo does not expose EnableAutoExecuteManager.")
 end
 
 do
