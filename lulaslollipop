@@ -9465,6 +9465,7 @@ LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
     emoji.lollipop.." V10.2.4 updates: ",
+"[FIXED] fixed kurrently wearing not fully showing",
 
 "[3 NEW FEATURES] Avatar Kreator: added Avatar Viewer, Buy Outfit, Save Outfit [BETA]",
 
