@@ -1,4 +1,4 @@
---main v10.3.0 LOLLYPOP HUB 
+--main v10.3.3 LOLLYPOP HUB 
 
 date = "August 9"..", "..tostring(os.date("%Y"))
 
@@ -879,7 +879,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.3.0')
+local Vv = ('10.3.3')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -891,7 +891,25 @@ local function normalizeOnlineStatus(value)
 end
 
 local function refreshOnlineStatus()
-    local ok, remoteStatus = LHCompat.LoadRemote(ONLINE_STATUS_URL, "LH Online Status", true)
+    local httpOk, sourceOrError = LHCompat.HttpGet(ONLINE_STATUS_URL, false)
+    local remoteStatus = nil
+    local ok = false
+
+    if httpOk then
+        local compiler, compileError = loadstring(sourceOrError, "LH Online Status")
+        if compiler then
+            local runOk, result = pcall(compiler)
+            if runOk then
+                remoteStatus = result
+                ok = true
+            else
+                warn("[Lollypop Hub Online Status] " .. tostring(result))
+            end
+        else
+            warn("[Lollypop Hub Online Status] " .. tostring(compileError))
+        end
+    end
+
     if ok then
         online_status = normalizeOnlineStatus(remoteStatus)
     else
@@ -903,6 +921,18 @@ end
 
 env.LHRefreshOnlineStatus = refreshOnlineStatus
 refreshOnlineStatus()
+
+env.LHOnlineStatusRefreshRevision = (tonumber(env.LHOnlineStatusRefreshRevision) or 0) + 1
+local onlineStatusRefreshRevision = env.LHOnlineStatusRefreshRevision
+task.spawn(function()
+    while env.LHOnlineStatusRefreshRevision == onlineStatusRefreshRevision do
+        task.wait(60)
+        if env.LHOnlineStatusRefreshRevision ~= onlineStatusRefreshRevision then break end
+        if env.LHBooting ~= true and env.lhloaded ~= true then break end
+        pcall(refreshOnlineStatus)
+    end
+end)
+
 local LastUPDATE = "Last Update: "..date
 ------------------
 local savedAccent = env.LHSettings.Accent
@@ -2147,6 +2177,7 @@ function LHRuntime:Unload(reason)
     env.LHAdminKommandsEnabled = false
     env.LHNotify = nil
     env.LHFeatures = nil
+    env.LHOnlineStatusRefreshRevision = (tonumber(env.LHOnlineStatusRefreshRevision) or 0) + 1
     env.LHKavo = nil
     env.AdminKommands = nil
     env.lhloaded = false
@@ -2859,6 +2890,10 @@ local function add(sectionData, item)
     return item
 end
 
+local function bannerlabel(text)
+    return descriptor("banner", {text=tostring(text or "")})
+end
+
 -- Update-version helpers stay outside buildHub because buildHub is already
 -- near Luau's local-variable ceiling.
 env.LHNormalizeVersion = function(value)
@@ -2973,6 +3008,7 @@ local function buildHub(window)
                     elseif item.kind == "colorpicker" then ui = realSection:NewColorPicker(item.name,item.tip,item.default,callback)
                     elseif item.kind == "counter" and realSection.NewCounter then ui = realSection:NewCounter(item.name,item.tip,item.step,callback,item.default,item.min,item.max)
                     elseif item.kind == "label" then ui = realSection:NewLabel(item.text)
+                    elseif item.kind == "banner" and realSection.NewBannerLabel then ui = realSection:NewBannerLabel(item.text)
                     elseif item.kind == "paragraph" and realSection.NewParagraph then ui = realSection:NewParagraph(item.title,item.text)
                     elseif item.kind == "kredits" and realSection.NewKreditsCard then ui = realSection:NewKreditsCard(item.config) end
                     item._ui = ui
@@ -3061,6 +3097,9 @@ end
 if tonumber(KAVO.AvatarMarketplaceVersion or 0) < 1 then
     warn("[Lollypop Hub] Kavo loaded without Ava Kreator support. Upload kavo ui 4.4 to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
 end
+if tonumber(KAVO.UserLookupVersion or 0) < 1 then
+    warn("[Lollypop Hub] Kavo loaded without User Lookup support. Upload the patched Kavo file to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
+end
 
 local lollypopHub = ("Lollypop Hub"..emoji.lollipop.." | V") ..Vv.. " | " ..exploit.. " | " ..LastUpdate;
 
@@ -3072,6 +3111,7 @@ env.LHRequestClose = function()
     local old = parent:FindFirstChild("LHCloseConfirmation")
     if old then old:Destroy() end
 
+    local hasUnsavedSettings = LHRuntime.SettingsDirty == true
     local gui = Instance.new("ScreenGui")
     gui.Name = "LHCloseConfirmation"
     gui.IgnoreGuiInset = true
@@ -3086,10 +3126,11 @@ env.LHRequestClose = function()
     dim.BorderSizePixel = 0
     dim.Parent = gui
 
+    local cardHeight = hasUnsavedSettings and 238 or 190
     local card = Instance.new("Frame")
     card.AnchorPoint = Vector2.new(0.5, 0.5)
     card.Position = UDim2.fromScale(0.5, 0.5)
-    card.Size = UDim2.fromOffset(360, 190)
+    card.Size = UDim2.fromOffset(360, cardHeight)
     card.BackgroundColor3 = Color3.fromRGB(18, 14, 22)
     card.BorderSizePixel = 0
     card.Parent = gui
@@ -3101,22 +3142,24 @@ env.LHRequestClose = function()
 
     local scale = Instance.new("UIScale", card)
     local view = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
-    scale.Scale = math.max(0.72, math.min(1, (view.X - 20) / 380, (view.Y - 40) / 210))
+    scale.Scale = math.max(0.72, math.min(1, (view.X - 20) / 380, (view.Y - 40) / (cardHeight + 20)))
 
     local question = Instance.new("TextLabel")
-    question.Position = UDim2.fromOffset(18, 22)
-    question.Size = UDim2.new(1, -36, 0, 48)
+    question.Position = UDim2.fromOffset(18, 18)
+    question.Size = UDim2.new(1, -36, 0, hasUnsavedSettings and 62 or 48)
     question.BackgroundTransparency = 1
     question.Font = Enum.Font.GothamBold
-    question.TextSize = 18
+    question.TextSize = hasUnsavedSettings and 17 or 18
     question.TextColor3 = Color3.fromRGB(255, 255, 255)
     question.TextWrapped = true
-    question.Text = "Are you sure you want to leave? " .. emoji.crying_face
+    question.Text = hasUnsavedSettings
+        and "Are you sure you want to exit without saving?"
+        or ("Are you sure you want to leave? " .. emoji.crying_face)
     question.Parent = card
 
     local orbit = Instance.new("Frame")
     orbit.AnchorPoint = Vector2.new(0.5, 0.5)
-    orbit.Position = UDim2.new(0.5, 0, 0, 96)
+    orbit.Position = UDim2.new(0.5, 0, 0, hasUnsavedSettings and 103 or 96)
     orbit.Size = UDim2.fromOffset(76, 46)
     orbit.BackgroundTransparency = 1
     orbit.Parent = card
@@ -3134,6 +3177,20 @@ env.LHRequestClose = function()
         dot.Parent = orbit
         dots[i] = dot
     end
+
+    local saveBeforeExit = Instance.new("TextButton")
+    saveBeforeExit.Position = UDim2.new(0, 22, 1, -98)
+    saveBeforeExit.Size = UDim2.new(1, -44, 0, 36)
+    saveBeforeExit.BackgroundColor3 = getgenv().LollypopTheme
+    saveBeforeExit.BorderSizePixel = 0
+    saveBeforeExit.Font = Enum.Font.GothamBold
+    saveBeforeExit.TextSize = 14
+    saveBeforeExit.TextColor3 = Color3.fromRGB(255, 255, 255)
+    saveBeforeExit.Text = "Press to Save"
+    saveBeforeExit.Visible = hasUnsavedSettings
+    saveBeforeExit.Parent = card
+    LHRuntime:AddButtonPressEffect(saveBeforeExit)
+    Instance.new("UICorner", saveBeforeExit).CornerRadius = UDim.new(0, 8)
 
     local yes = Instance.new("TextButton")
     yes.Position = UDim2.new(0, 22, 1, -52)
@@ -3187,7 +3244,25 @@ env.LHRequestClose = function()
     no.MouseButton1Click:Connect(closePopup)
     yes.MouseButton1Click:Connect(function()
         closePopup()
-        LHRuntime:Unload("close confirmed")
+        LHRuntime:Unload(hasUnsavedSettings and "close confirmed without saving" or "close confirmed")
+    end)
+    saveBeforeExit.MouseButton1Click:Connect(function()
+        if not hasUnsavedSettings then return end
+        saveBeforeExit.Text = "Saving..."
+        local ok, err = LHRuntime:SaveSettings()
+        if ok then
+            LHRuntime.SettingsDirty = false
+            closePopup()
+            task.defer(function()
+                if type(env.LHRequestClose) == "function" and not LHRuntime.Unloading then
+                    env.LHRequestClose()
+                end
+            end)
+        else
+            saveBeforeExit.Text = "Save Failed - Try Again"
+            question.Text = "Saving failed. Your settings are still unsaved."
+            warn("[Lollypop Hub Save Before Exit] " .. tostring(err))
+        end
     end)
 end
 
@@ -5231,7 +5306,7 @@ end))
 -- Kontinue using the original Home "Skripts" section. Re-registering the same
 -- backing table here made every Home kontrol appear twice.
 --////---------------------------------
-add(SkriptsSection, label("Players"));
+add(SkriptsSection, bannerlabel("Players"));
 --------------////-------------------
 local selektedPlayerName = nil;
 local function ALLPLRS()
@@ -5310,44 +5385,8 @@ end));
 add(SkriptsSection, colorpicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", HighlightState.Kolor, function(kolor)
 if typeof(kolor) == "Color3" then HighlightState.Kolor = kolor end
 end))
---[[
-performanxe
 
-
-]]--
-add(SkriptsSection, label("Performanxe"))
-add(SkriptsSection, button("FPS kounter (say /nofps to kill gui)", "kounts ur fps", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/fpskounter.ipa",true))();
-end));
-
-add(SkriptsSection, textbox("FPS unloxker", "500 fps fastest", function(fps)
-while wait(0.88) do
-setfflag("TaskSchedulerTargetFps", fps);
-end;
-end))
-
-add(SkriptsSection, toggle("Boost FPS", "konstantly sets fps high", function()
-if not setfflag then _G.note("your executor doesnt support setfflag for FPS boosting") return end;
-if boostfps == true then
-boostfps = false 
-else 
-boostfps = true; 
-end;
-
-if boostfps == true then
-_G.boost = _G.hb:connect(function()
-setfflag("TaskSchedulerTargetFps", 125);
-end)
-_G.note("boosting fps", 2)
-        end;
-if boostfps == false then
-_G.boost:Disconnect(); _G.boost=nil;
-_G.note("stopped boosting fps", 2)
-       end;
-end))
-
-add(SkriptsSection, label("more skripts"));
-
+-- Player movement and kharakter kontrols belong with the Players tools.
 local tpwalk, speed, defaultSpeed = false, (1),(1)
 local tpwalking;
 spawn(function()
@@ -5402,6 +5441,122 @@ pcall(function()
 end)
 get.Workspace.Gravity = 196.2
 end))
+
+local autoJumpEnabled = false;
+add(SkriptsSection, toggle("Auto Jump", "auto jumps", function(state)
+autoJumpEnabled = state
+end));
+LHRuntime:Track(cloneref(get.RunService).RenderStepped:Connect(function()
+if autoJumpEnabled and not LHRuntime.Unloading then
+local player = get.Players.LocalPlayer
+if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+    player.Character.Humanoid.Jump = true
+end
+end
+end))
+
+add(SkriptsSection, toggle("Infinite Jump", "Jump again while airborne. Uses one JumpRequest konnection and survives respawns.", function(enabled)
+LHFeatures:SetInfiniteJump(enabled)
+end))
+
+local proximityTargetLabels = {}
+local proximityTargetUserIds = {All = 0}
+local selectedProximityTarget = "All"
+local proximityTargetDropdown
+
+local function buildProximityTargets(excludedPlayer)
+    local labels = {"All"}
+    local ids = {All = 0}
+    local players = get.Players:GetPlayers()
+    table.sort(players, function(a, b) return string.lower(a.Name) < string.lower(b.Name) end)
+    for _, player in ipairs(players) do
+        if player ~= lp and player ~= excludedPlayer then
+            local labelText = "@" .. tostring(player.Name) .. " | " .. tostring(player.DisplayName)
+            table.insert(labels, labelText)
+            ids[labelText] = player.UserId
+        end
+    end
+    proximityTargetLabels = labels
+    proximityTargetUserIds = ids
+    return labels
+end
+
+add(SkriptsSection, toggle("Jump Bot", "jumps when players are in the specified distance range", function(enabled)
+LHFeatures:SetProximityAutoJump(enabled)
+end))
+
+add(SkriptsSection, kounter("Jump Bot Distance", "specified distance range in studs. Reset returns this to 7.5 studs.", 0.5, function(distance)
+LHFeatures:SetProximityDistance(distance)
+end, 7.5, 1, 100))
+
+proximityTargetDropdown = add(SkriptsSection, dropdown("Jump Bot Target", "All works for every player, or selekt one player by username and display name.", buildProximityTargets(), function(labelText)
+selectedProximityTarget = tostring(labelText or "All")
+LHFeatures:SetProximityTarget(proximityTargetUserIds[selectedProximityTarget] or 0)
+end, "All"))
+
+local function refreshProximityTargets(leavingPlayer)
+    local previousUserId = LHFeatures.ProximityTargetUserId
+    proximityTargetDropdown:Refresh(buildProximityTargets(leavingPlayer))
+    if previousUserId ~= 0 then
+        local foundLabel = nil
+        for labelText, userId in pairs(proximityTargetUserIds) do
+            if userId == previousUserId then foundLabel = labelText; break end
+        end
+        if foundLabel then
+            selectedProximityTarget = foundLabel
+            proximityTargetDropdown:SetValue(foundLabel, false)
+        else
+            selectedProximityTarget = "All"
+            LHFeatures:SetProximityTarget(0)
+            proximityTargetDropdown:SetValue("All", false)
+            if leavingPlayer then
+                LHRuntime:Notify("info", "Jump Bot Target", "Target left. Selekted All players.", 3)
+            end
+        end
+    end
+end
+
+LHRuntime:Track(get.Players.PlayerAdded:Connect(function() task.defer(refreshProximityTargets) end))
+LHRuntime:Track(get.Players.PlayerRemoving:Connect(function(player) task.defer(refreshProximityTargets, player) end))
+
+
+--[[
+performanxe
+
+
+]]--
+add(SkriptsSection, bannerlabel("Performanxe"))
+add(SkriptsSection, button("FPS kounter (say /nofps to kill gui)", "kounts ur fps", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/fpskounter.ipa",true))();
+end));
+
+add(SkriptsSection, textbox("FPS unloxker", "500 fps fastest", function(fps)
+while wait(0.88) do
+setfflag("TaskSchedulerTargetFps", fps);
+end;
+end))
+
+add(SkriptsSection, toggle("Boost FPS", "konstantly sets fps high", function()
+if not setfflag then _G.note("your executor doesnt support setfflag for FPS boosting") return end;
+if boostfps == true then
+boostfps = false 
+else 
+boostfps = true; 
+end;
+
+if boostfps == true then
+_G.boost = _G.hb:connect(function()
+setfflag("TaskSchedulerTargetFps", 125);
+end)
+_G.note("boosting fps", 2)
+        end;
+if boostfps == false then
+_G.boost:Disconnect(); _G.boost=nil;
+_G.note("stopped boosting fps", 2)
+       end;
+end))
+
+
 
 add(SkriptsSection, toggle("Enable chat bubbles", (emoji.lollipop), function(bubbles)
 local chat;
@@ -5459,84 +5614,7 @@ add(SkriptsSection, button("HiddenFling (in a ui)", (emoji.lollipop.." all day")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/hiddenflinguwu.html",true))();
 end));
 
-local autoJumpEnabled = false;
-add(SkriptsSection, toggle("Auto Jump", "auto jumps", function(state)
-autoJumpEnabled = state
-end));
-LHRuntime:Track(cloneref(get.RunService).RenderStepped:Connect(function()
-if autoJumpEnabled and not LHRuntime.Unloading then
-local player = get.Players.LocalPlayer
-if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
-    player.Character.Humanoid.Jump = true
-end
-end
-end))
-
-add(SkriptsSection, toggle("Infinite Jump", "Jump again while airborne. Uses one JumpRequest konnection and survives respawns.", function(enabled)
-LHFeatures:SetInfiniteJump(enabled)
-end))
-
-local proximityTargetLabels = {}
-local proximityTargetUserIds = {All = 0}
-local selectedProximityTarget = "All"
-local proximityTargetDropdown
-
-local function buildProximityTargets(excludedPlayer)
-    local labels = {"All"}
-    local ids = {All = 0}
-    local players = get.Players:GetPlayers()
-    table.sort(players, function(a, b) return string.lower(a.Name) < string.lower(b.Name) end)
-    for _, player in ipairs(players) do
-        if player ~= lp and player ~= excludedPlayer then
-            local labelText = "@" .. tostring(player.Name) .. " | " .. tostring(player.DisplayName)
-            table.insert(labels, labelText)
-            ids[labelText] = player.UserId
-        end
-    end
-    proximityTargetLabels = labels
-    proximityTargetUserIds = ids
-    return labels
-end
-
-add(SkriptsSection, toggle("Proximity Auto Jump", "Automatically jumps when selected players enter your range.", function(enabled)
-LHFeatures:SetProximityAutoJump(enabled)
-end))
-
-add(SkriptsSection, kounter("Proximity Distance", "Distance in studs. Reset returns this to 7.5 studs.", 0.5, function(distance)
-LHFeatures:SetProximityDistance(distance)
-end, 7.5, 1, 100))
-
-proximityTargetDropdown = add(SkriptsSection, dropdown("Proximity Target", "All works for every player, or selekt one player by username and display name.", buildProximityTargets(), function(labelText)
-selectedProximityTarget = tostring(labelText or "All")
-LHFeatures:SetProximityTarget(proximityTargetUserIds[selectedProximityTarget] or 0)
-end, "All"))
-
-local function refreshProximityTargets(leavingPlayer)
-    local previousUserId = LHFeatures.ProximityTargetUserId
-    proximityTargetDropdown:Refresh(buildProximityTargets(leavingPlayer))
-    if previousUserId ~= 0 then
-        local foundLabel = nil
-        for labelText, userId in pairs(proximityTargetUserIds) do
-            if userId == previousUserId then foundLabel = labelText; break end
-        end
-        if foundLabel then
-            selectedProximityTarget = foundLabel
-            proximityTargetDropdown:SetValue(foundLabel, false)
-        else
-            selectedProximityTarget = "All"
-            LHFeatures:SetProximityTarget(0)
-            proximityTargetDropdown:SetValue("All", false)
-            if leavingPlayer then
-                LHRuntime:Notify("info", "Proximity Target", "Target left. Selekted All players.", 3)
-            end
-        end
-    end
-end
-
-LHRuntime:Track(get.Players.PlayerAdded:Connect(function() task.defer(refreshProximityTargets) end))
-LHRuntime:Track(get.Players.PlayerRemoving:Connect(function(player) task.defer(refreshProximityTargets, player) end))
-
-add(SkriptsSection, label("Mobile Fly"))
+add(SkriptsSection, bannerlabel("Mobile Fly"))
 
 -- Removed discontinued loader: Fly GUI V2
 -- See patch notes for URL and HTTP result.
@@ -5554,7 +5632,7 @@ add(SkriptsSection, button("Mobile Universal Fly GUI", "speed setter",
 function()loadstring(game:HttpGet("https://pastebin.com/raw/YvKv4AuY"))()
 end))
 
-add(SkriptsSection, label("more skripts"))
+add(SkriptsSection, bannerlabel("Utility & Kharakter"))
 
 add(SkriptsSection, button((emoji.lollipop..emoji.lollipop..emoji.lollipop.."Lollypops (R6 only)"), (emoji.lollipop.." all day"), function()
 for i, v in pairs(get.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Head; 
@@ -5651,7 +5729,7 @@ end))
 
 
 --[godmode skripts]--
-add(SkriptsSection, label("GodMode skripts"))
+add(SkriptsSection, bannerlabel("GodMode skripts"))
 local function gmodeOn()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/LH.godmode-ON",true))();end;
 local function gmodeOff()
@@ -5670,7 +5748,7 @@ function()-- unvrsl godmode
 loadstring(game:HttpGet("https://freenote.biz/raw/Fhpx5r5A8M"))()
 end))
 
-add(SkriptsSection, label("more skripts"))
+add(SkriptsSection, bannerlabel("Kharakter & Kombat"))
 
 -- Respawn-safe Anti Sit. The shared feature loop stops immediately when toggled off.
 add(SkriptsSection, toggle("Anti Sit", "Prevents forced sitting and keeps working after death or respawn.", function(enabled)
@@ -5813,7 +5891,7 @@ end;
 end))
 
 --[keybind gens]--
-add(SkriptsSection, label((emoji.keyboard.."Keybind Gens"..emoji.keyboard)))
+add(SkriptsSection, bannerlabel((emoji.keyboard.."Keybind Gens"..emoji.keyboard)))
 add(SkriptsSection, button("KEYBIND GENERATOR", "keyboard letters generator (useful)",
 function()
 loadstring(game:HttpGet(('https://pastefy.app/Ujm4HWxh/raw'),true))()
@@ -5824,7 +5902,7 @@ function()
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/skripts/keybindgenV2",true))();
 end))
 --others--
-add(SkriptsSection, label("more skripts"))
+add(SkriptsSection, bannerlabel("Mobile Tools"))
 -- Removed discontinued loader: Mobile Shiftloxk
 -- See patch notes for URL and HTTP result.
 
@@ -5832,7 +5910,7 @@ add(SkriptsSection, label("more skripts"))
 -- See patch notes for URL and HTTP result.
 
 --[mobile keyboard]--
-add(SkriptsSection, label("Mobile Keyboard"))
+add(SkriptsSection, bannerlabel("Mobile Keyboard"))
 
 add(SkriptsSection, button("Mobile Keyboard", "its a mobile keyboard",
 function()
@@ -5841,7 +5919,7 @@ end))
 -- Removed discontinued loader: Better Keyboard
 -- See patch notes for URL and HTTP result.
 --[komputer things]--
-add(SkriptsSection, label("Komputer"))
+add(SkriptsSection, bannerlabel("Komputer"))
 add(SkriptsSection, button("KEYBIND STROKES V2", "WASD and spaxe keys",
 function()-- KEYSTROKES GUI V2 
 loadstring(game:HttpGet(('https://pastefy.app/Te4dwSw2/raw'),true))()
@@ -5865,7 +5943,7 @@ RobloxTask.spawn(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))(); end)
 end))
 
-add(SkriptsSection, label("2016-17 roblox"))
+add(SkriptsSection, bannerlabel("2016-17 roblox"))
 add(SkriptsSection, button("fast animations", "player animation will be sped up",
 function()-- FAST animations
 loadstring(game:HttpGet("https://scriptblox.com/raw/Fast-Animation-FE_744"))()
@@ -5884,7 +5962,7 @@ end))
 add(SkriptsSection, button("2016 roblox UI", "old ui",
 function()loadstring(game:HttpGet('https://raw.githubusercontent.com/kosuke14/REBOYHub/main/games/2016_Roblox.lua'))()
 end))
-add(SkriptsSection, label("..."))
+add(SkriptsSection, bannerlabel("..."))
 add(SkriptsSection, button("RAINBOW MAP", " ",
 function()--RAINBOW MAP 
 while true do
@@ -6520,7 +6598,7 @@ local fun = newTab("Fun")
 fun["Player skripts"] = fun["Player skripts"] or {}
 local FunSection = section(fun, "Player skripts", fun["Player skripts"]);
 
-add(FunSection, label("Animations"))
+add(FunSection, bannerlabel("Animations"))
 
 local eighteenPlus = emoji.no_one_under_eighteen;
 
@@ -6924,7 +7002,7 @@ add(FunSection, button("XD", "XDDDDDDD", function()
 loadstring(game:HttpGet("https://pastecode.dev/raw/ch9MnV0j/wiiRemote_lulaslollipop",true))()
 end))
 
-add(FunSection, label("FX/Partikles/Assets"))
+add(FunSection, bannerlabel("FX/Partikles/Assets"))
 
 add(FunSection, textbox("Enter item/asset ID: ", "enter an asset id from roblox shop(any item)", function(assetId)
 if not tonumber(assetId) then return end;
@@ -6979,7 +7057,7 @@ end))
 
 
 --[[
-add(FunSection, label("chat Bypasses (100% safe)"))
+add(FunSection, bannerlabel("chat Bypasses (100% safe)"))
 
 add(FunSection, button("Bubblechat Bypasser (100% safe & fun)", (emoji.lollipop..emoji.japanese_goblin.."safe enjoy"), function()
 loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/refs/heads/main/AnthonyIsHere-antiban"))();
@@ -6990,7 +7068,7 @@ end))
 add(FunSection, button("Simple Bypass (safe)", (emoji.lollipop), function() loadstring(game:HttpGet("https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua"))(); end))
 ]]--
 
-add(FunSection, label("Trolling"));
+add(FunSection, bannerlabel("Trolling"));
 
 --[[
 add(FunSection, button("Fake Data Leaker", "leak data troll", function()
@@ -7015,9 +7093,9 @@ m.Parent = Workspace
 m.Text = ...
 end))
 
-add(FunSection, label("Kompliments"))
+add(FunSection, bannerlabel("Kompliments"))
 
-add(FunSection, label("Others"))
+add(FunSection, bannerlabel("Others"))
 
 add(FunSection, button("Kopy Server Messages", "repeats all players messages", function()local ReplicatedStorage = game:FindService("ReplicatedStorage")
 local ChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
@@ -7133,7 +7211,7 @@ end
 end))
 
 --[[
-add(FunSection, label("singing/spam"))
+add(FunSection, bannerlabel("singing/spam"))
 add(FunSection, button("SpamHub", "sing songs etx.", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/ColdStep2/Chatdestroyer-Hub-V1/main/Chatdestroyer%20Hub%20V1'),true))()
 end))
@@ -7286,9 +7364,9 @@ local hubs = newTab("Hubs & GUIs")
 hubs[("erthang u need"..emoji.lollipop)] = hubs[("erthang u need"..emoji.lollipop)] or {}
 local HubSection = section(hubs, ("erthang u need"..emoji.lollipop), hubs[("erthang u need"..emoji.lollipop)]);
 
-add(HubSection, label((emoji.free_button.." FREE Items GUIs:")))
+add(HubSection, bannerlabel((emoji.free_button.." FREE Items GUIs:")))
 
-add(HubSection, label("Beat The Scammers"))
+add(HubSection, bannerlabel("Beat The Scammers"))
 add(HubSection, button("auto komplete tasks (Shield item)", "easy", function()
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/ugc/BeatTheskammas",true))()
 end))
@@ -7303,7 +7381,7 @@ add(HubSection, button("Roblox Innovation Rewards (kollect badges/items)", "auto
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/innovationawards/main/autokollekt/votinghub_lulaslollipop",true))()
 end))
 
-add(HubSection, label("Hubs"))
+add(HubSection, bannerlabel("Hubs"))
 
 add(HubSection, button(("(UNIVERSAL) GHOST HUB "..emoji.ghost), (emoji.lollipop), function()
 ghosthub=[[
@@ -7321,7 +7399,7 @@ add(HubSection, button("Ghub v14", "requested by migelito", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/GHUBV14XZ/main/Ghub_Main_Loader.txt"))()
 end));
 
-add(HubSection, label(("useful guis "..emoji.lollipop)))
+add(HubSection, bannerlabel(("useful guis "..emoji.lollipop)))
 
 -- Removed discontinued loader: speed gui
 -- See patch notes for URL and HTTP result.
@@ -7334,11 +7412,11 @@ add(HubSection, button(("AutoKlicker (screen tap) [MOBILE] "..emoji.mobile_phone
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/autoklicker-mobile_lulaslollipop",true))();
 end))
 
-add(HubSection, label((emoji.no_one_under_eighteen..emoji.no_one_under_eighteen..emoji.no_one_under_eighteen..emoji.no_one_under_eighteen)));
+add(HubSection, bannerlabel((emoji.no_one_under_eighteen..emoji.no_one_under_eighteen..emoji.no_one_under_eighteen..emoji.no_one_under_eighteen)));
 add(HubSection, button((emoji.no_one_under_eighteen.." 18+ gui"), (emoji.lollipop), function() loadstring(game:HttpGet(("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/Kustom/"..emoji.no_one_under_eighteen.."gui"), true))();
 end))
 
-add(HubSection, label("Teleport guis"));
+add(HubSection, bannerlabel("Teleport guis"));
 
 add(HubSection, button("TWEEN, TP & SPEED gui (universal)", "koo", function()  
 loadstring(game:HttpGet("https://pastefy.app/lsktl2uQ/raw",true))();
@@ -7373,7 +7451,7 @@ end));
 
 
 -- [ OTHER GUIS HUBSEKTION ] --
-add(HubSection, label("Other guis"))
+add(HubSection, bannerlabel("Other guis"))
 
 add(HubSection, button("ScriptHub V3 (hella games,useful)", "scripthubv3", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/scripthubekitten/SCRIPTHUBV3/main/SCRIPTHUBV3",true))();
@@ -7424,7 +7502,7 @@ add(HubSection, button("Fates ESP(modified) | owner:(fate#5647)", "kreds: fate#5
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/skripts/fuxkin-fatesESP.mobile",true))();
 end));
 
-add(HubSection, label("Fling"))
+add(HubSection, bannerlabel("Fling"))
 add(HubSection, button("Funeral home fling gui", "kixk gui", function()
 --funeralhomekixkgui
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/FHOMEkik/main/funeralhome_lulaslollipop",true))()
@@ -7445,7 +7523,7 @@ add(HubSection, button("Universal Fling gui", "fling a player by pressing them",
 loadstring(game:HttpGet("https://paste.ee/r/NTtmf", true))()
 end))
 
-add(HubSection, label("more guis"))
+add(HubSection, bannerlabel("more guis"))
 
 -- Removed discontinued loader: 99% fail impossible obby teleport gui
 -- See patch notes for URL and HTTP result.
@@ -7517,7 +7595,7 @@ end))
 -- Removed discontinued loader: Universal Spy GUI
 -- See patch notes for URL and HTTP result.
 
---[[add(HubSection, label("more hubs"))]]--
+--[[add(HubSection, bannerlabel("more hubs"))]]--
 add(HubSection, button("Ohio Hub", "small hub", function()
 --Ohio GUI
 loadstring(game:HttpGet("https://pastebin.com/raw/hkvHeHed",true))()
@@ -7850,15 +7928,15 @@ local GamesSection = section(games, "Games", games["Games"])
 -- section alias removed by table refactor
 
 --[[
-add(GamesSection, label("2024 FREE UGc "))
+add(GamesSection, bannerlabel("2024 FREE UGc "))
 -- [ Lunxhable Playables ] --
 
 
-add(GamesSection, label("END OF FREE UGc"))
+add(GamesSection, bannerlabel("END OF FREE UGc"))
 ]]--
 -- [ <U_1F3C1><U_2B50_FE0F>END OF FREE UGX<U_2B50_FE0F><U_1F3C1> ] --
 
-add(GamesSection, label((emoji.squid.." Squid Game X, Shrimp Game "..emoji.fried_shrimp.." & more (universal)")));
+add(GamesSection, bannerlabel((emoji.squid.." Squid Game X, Shrimp Game "..emoji.fried_shrimp.." & more (universal)")));
 add(GamesSection, button("RIP HUB [V2]", "", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/SquidGameX.lua"))();
 end));
@@ -7869,7 +7947,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/he
   end);
 end))
 
-add(GamesSection, label((emoji.seedling.." Grow A Garden "..emoji.seedling)))
+add(GamesSection, bannerlabel((emoji.seedling.." Grow A Garden "..emoji.seedling)))
 add(GamesSection, button("NATHUB - Autofarm, Auto harvest, Auto trowel,\n(Anti-AFK auto enabled, updates often)", "", function()
 --nathub gag
 pcall(function()
@@ -7881,7 +7959,7 @@ end)
 rnote("Kopied: NATHUB - KEYLESS skript, paste in your executor")
 end))
 
-add(GamesSection, label((emoji.nail_polish_medium_skin_tone.." Baddies "..emoji.nail_polish_medium_skin_tone)));
+add(GamesSection, bannerlabel((emoji.nail_polish_medium_skin_tone.." Baddies "..emoji.nail_polish_medium_skin_tone)));
 
 add(GamesSection, button("Backpack Tool", "not all FE", function()
 setclipboard([[
@@ -7920,7 +7998,7 @@ end))
 
 ---------
 
-add(GamesSection, label((emoji.soccer_ball.." "..emoji.goal_net.." Blue Loxk: Rivals "..emoji.goal_net.." "..emoji.soccer_ball)))
+add(GamesSection, bannerlabel((emoji.soccer_ball.." "..emoji.goal_net.." Blue Loxk: Rivals "..emoji.goal_net.." "..emoji.soccer_ball)))
 add(GamesSection, button("Auto grab ball, Auto goal, speed (OP) by Tora", "", function()
 loadstring(game:HttpGet("https://github.com/gumanba/Scripts/raw/d7b7245abfbcd385f9c7c3812118db55780a10d6/BlueLock"))()
 end))
@@ -7934,7 +8012,7 @@ RobloxTask.wait(1)
 _G.ok("Kopied Blue Loxk: Rivals script: "..blrivals, 6)
 end))
 
-add(GamesSection, label((emoji.squid.."Impossible Squid Game! Glass Bridge 2")))
+add(GamesSection, bannerlabel((emoji.squid.."Impossible Squid Game! Glass Bridge 2")))
 
 add(GamesSection, button("Reveal Path, inf money, autofarm wins", "", function()
 setclipboard([[
@@ -7945,7 +8023,7 @@ setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/l
 _G.note(("Kopied "..emoji.squid.."Impossible Squid Game! Glass Bridge skript, paste in your executor"))
 end))
 
-add(GamesSection, label("Glass Bridge"));
+add(GamesSection, bannerlabel("Glass Bridge"));
 add(GamesSection, button("Reveal korrect path, tp to end", "", function()
 setclipboard([[
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/refs/heads/main/games/GlassBridge"))();
@@ -7955,7 +8033,7 @@ setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/l
 _G.note("Kopied Glass Bridge skript, paste in your executor")
 end))
 
-add(GamesSection, label((emoji.multiply..emoji.plus.."Math Boxing "..emoji.divide..emoji.boxing_glove)))
+add(GamesSection, bannerlabel((emoji.multiply..emoji.plus.."Math Boxing "..emoji.divide..emoji.boxing_glove)))
 add(GamesSection, button("autofarm", " ", function()
 --math boxing
 local num = "16"
@@ -7972,7 +8050,7 @@ _G.note("Kopied SanderX hub, paste in your executor")
 end;
 
 --BROOKHAVEN
-add(GamesSection, label((emoji.house_with_garden.."Brookhaven RP"..emoji.house_with_garden)))
+add(GamesSection, bannerlabel((emoji.house_with_garden.."Brookhaven RP"..emoji.house_with_garden)))
 
 add(GamesSection, button("SanderX hub (OP) (new)", "", _G.sanderX))
 
@@ -7991,12 +8069,12 @@ _G.kopy("loadstring(game:HttpGet('https://rawscripts.net/raw/Universal-Script-ro
 ok(4, "bet", ("Rochips Admin Panel kopied"..emoji.check_mark_button..", paste in your exekutor"))
 end))
 
-add(GamesSection, label(("Games Hub (supports a lot of games"..emoji.em_dash.."mainly for DaHood players)")))
+add(GamesSection, bannerlabel(("Games Hub (supports a lot of games"..emoji.em_dash.."mainly for DaHood players)")))
 add(GamesSection, button("skripthub v3.1", "support 50+ games", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/scripthubekitten/SCRIPTHUBV3/main/SCRIPTHUBV3", true))()
 end));
 
-add(GamesSection, label((emoji.man_dancing_medium_dark_skin_tone.." FUNKY FRIDAY "..emoji.woman_dancing_medium_skin_tone)))
+add(GamesSection, bannerlabel((emoji.man_dancing_medium_dark_skin_tone.." FUNKY FRIDAY "..emoji.woman_dancing_medium_skin_tone)))
 add(GamesSection, button("sexy AutoPlayer (sixk chance, miss chance, etc.) (has legit \n options) (very OP)", "(request) bot for funky friday (OP)", function()
 oldbot=[[
 loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/OldBot.lua'))();
@@ -8021,7 +8099,7 @@ _G.kopy(autoplr); wait()
 _G.note("Paste in your executor & wait for Funky Friday Autoplayer gui to load", 7); 
 end))
 
-add(GamesSection, label((emoji.collision.." Rivals "..emoji.pistol)))
+add(GamesSection, bannerlabel((emoji.collision.." Rivals "..emoji.pistol)))
 add(GamesSection, button("TbaoHub - Aimbot, ESP, auto shoot & more (OP)", "rivals skript tbao hub", function()
 rivals=[[
 loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubRivals"))();
@@ -8030,10 +8108,10 @@ _G.kopy(rivals)
 _G.ok("Kopied Rivals TbaoHub: "..rivals.."\npaste in your executor")
 end));
 
-add(GamesSection, label((emoji.vertical_traffic_light.." RED LIGHT, GREEN LIGHT (Squid Games) "..emoji.squid)))
+add(GamesSection, bannerlabel((emoji.vertical_traffic_light.." RED LIGHT, GREEN LIGHT (Squid Games) "..emoji.squid)))
 add(GamesSection, button("Easy Wins, Troll, Auto pull etc. (all games except Marbles)", "OP auto wins", _G.sg))
 
-add(GamesSection, label((emoji.cricket_game.." Bladeball (2)")))
+add(GamesSection, bannerlabel((emoji.cricket_game.." Bladeball (2)")))
 add(GamesSection, button("Plutonium hub (universal)", "might inklude more games", function()
 local yes,no=pcall(function()
 pluto=[[loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))();]]
@@ -8045,7 +8123,7 @@ _G.ok("Kopied Plutonium Hub: "..pluto)
  end;
 end))
 
-add(GamesSection, label((emoji.collision.."The Strongest Battlegrounds"..emoji.collision)))
+add(GamesSection, bannerlabel((emoji.collision.."The Strongest Battlegrounds"..emoji.collision)))
 add(GamesSection, button("TSB - zygarde hub (kopy)", "request", function()
 tsb=[[loadstring(game:HttpGet('https://raw.githubusercontent.com/louismich4el/Zygarde/refs/heads/main/ZygardeV1.txt'))()]];
 _G.kopy(tsb); 
@@ -8053,7 +8131,7 @@ wait();
 _G.ok("Kopied: TSB - Zygarde Hub script\nPASTE IN YOUR EXECUTOR", 7)
 end))
 
-add(GamesSection, label((emoji.fishing_pole.." Fisch, "..emoji.tangerine.."BloxFruits, "..emoji.dog_face.."PS99, "..emoji.collision.."TSB, "..emoji.dog.."Pet GO, "..emoji.flexed_biceps.."Muscle Legends")));
+add(GamesSection, bannerlabel((emoji.fishing_pole.." Fisch, "..emoji.tangerine.."BloxFruits, "..emoji.dog_face.."PS99, "..emoji.collision.."TSB, "..emoji.dog.."Pet GO, "..emoji.flexed_biceps.."Muscle Legends")));
 
 add(GamesSection, button("Speed hub X (keyless) (universal)", "keyless", function()
 _G.speedhub();
@@ -8087,25 +8165,25 @@ elseif ...== "teleport to Muscle Legends" then _G.tpto(musxle)
 end;
 end))
 
-add(GamesSection, label("T-Titans Battlegrounds"))
+add(GamesSection, bannerlabel("T-Titans Battlegrounds"))
 add(GamesSection, button("Aimbot (nearest player)", "makes projektiles go to nearest player", function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-AIMBOT-SKRIPT-6783"))()
 end));
 
 
-add(GamesSection, label((emoji.man_biking_medium_skin_tone.." Bike of Hell"..emoji.woman_biking_medium_light_skin_tone)))
+add(GamesSection, bannerlabel((emoji.man_biking_medium_skin_tone.." Bike of Hell"..emoji.woman_biking_medium_light_skin_tone)))
 add(GamesSection, button("instant win, auto checkpoints", "requested by dinodeptrai12345", function()
 -- dinodeptrai12345
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/games/BikeOfHell_Gl6o6M14RhrKf22D1Cb0V5253it6oLFpP9xyM8m62AF57l2qwV99gUoFfZ078836_.lua",true))(); 
 end))
 
-add(GamesSection, label((emoji.artist_palette.." Color or Die "..emoji.paintbrush)))
+add(GamesSection, bannerlabel((emoji.artist_palette.." Color or Die "..emoji.paintbrush)))
 add(GamesSection, button("Nut Hub (teleport to any tool,paintbrush,dooretc.)", "requested by dinodeptrai12345", function()
 -- dinodeptrai12345
 loadstring(game:HttpGet("https://raw.githubusercontent.com/01iq/me/refs/heads/main/ColorNH.txt",true))()
 end))
 
-add(GamesSection, label((emoji.oncoming_fist..emoji.collision.." HAZE PIECE "..emoji.collision..emoji.oncoming_fist)))
+add(GamesSection, bannerlabel((emoji.oncoming_fist..emoji.collision.." HAZE PIECE "..emoji.collision..emoji.oncoming_fist)))
 
 add(GamesSection, button("Xtrey10x Hub (kopy skript)", "skriptreq (alexnoobp09)", function()
 setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/xtrey10x/xtrey10x-hub/main/Haze%20Piece'))();")
@@ -8113,14 +8191,14 @@ wait()
 ok(4,"bet", ("HAZE PIECE skript kopied to klipboard"..emoji.check_mark_button..", paste in your exekutor"))
 end))
 
-add(GamesSection, label((emoji.man_running_medium_skin_tone.."Traxk & Field Infinite "..emoji.woman_running_medium_light_skin_tone)))
+add(GamesSection, bannerlabel((emoji.man_running_medium_skin_tone.."Traxk & Field Infinite "..emoji.woman_running_medium_light_skin_tone)))
 
 add(GamesSection, button("Speed gui (use .2155 speed for normal sprint)", "skriptreq (0002002009008002004Q)", function()
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/Kustom/TPWALKgui-removedplayerlogging",true))();
 end))
 
 --BLOXFRUIT
-add(GamesSection, label(("["..emoji.cherries..emoji.tangerine.."BLOX FRUITS"..emoji.grapes..emoji.red_apple.."]")))
+add(GamesSection, bannerlabel(("["..emoji.cherries..emoji.tangerine.."BLOX FRUITS"..emoji.grapes..emoji.red_apple.."]")))
 
 add(GamesSection, button("Speed hub X", "universal hub", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))();
@@ -8129,7 +8207,7 @@ end))
 -- Removed discontinued loader: blox fruits - REDz HUB fixed (kopy)
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.face_with_steam_from_nose.." 99% FAIL OBBY"..emoji.face_with_steam_from_nose.." ")))
+add(GamesSection, bannerlabel((emoji.face_with_steam_from_nose.." 99% FAIL OBBY"..emoji.face_with_steam_from_nose.." ")))
 
 add(GamesSection, button(("Troll gui "..emoji.smiling_face_with_horns.." (fling, godmode, tp)...(ragdoll required to fling)"), "fling, godmode n more", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/kustomskript/99%25failObby-Trollgui",true))();
@@ -8149,14 +8227,14 @@ add(GamesSection, button("Heaven Map", "reduxe lag also", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/RW7ZT29m"))(); wait()
 end));
 
---add(GamesSection, label("<U_1F977> Ninja Legends <U_1F977>"))
+--add(GamesSection, bannerlabel("<U_1F977> Ninja Legends <U_1F977>"))
 
 --add(GamesSection, button("Super fast inf level", "op", function()
 
 --end))
 
 -- [ <U_2B50_FE0F><U_1F3CB>STRONGMAN SIMUALTOR<U_1F3CB_FE0F_200D_2640_FE0F><U_2B50_FE0F> ] --
-add(GamesSection, label((emoji.person_lifting_weights.."STRONGMAN SIMUALTOR"..emoji.woman_lifting_weights)))
+add(GamesSection, bannerlabel((emoji.person_lifting_weights.."STRONGMAN SIMUALTOR"..emoji.woman_lifting_weights)))
 
 add(GamesSection, button("Destiny - OP AUTOFARM , AUTO REBIRTH & more", "best autofarm requested by kevin_mm272", function()
 spawn(function()
@@ -8189,12 +8267,12 @@ end))
 
 ]]--
 
-add(GamesSection, label((emoji.crossed_swords.." Swordmaster Simulator "..emoji.crossed_swords)))
+add(GamesSection, bannerlabel((emoji.crossed_swords.." Swordmaster Simulator "..emoji.crossed_swords)))
 add(GamesSection, button("super fast Autofarm (OP)", "op fast autofarm", function()
 loadstring(game:HttpGet("https://github.com/rrixh/uwuware/raw/main/simulators/swordmaster.lua",true))();
 end))
 
-add(GamesSection, label((emoji.woman_zombie.." Zombie Attaxk "..emoji.woman_zombie)))
+add(GamesSection, bannerlabel((emoji.woman_zombie.." Zombie Attaxk "..emoji.woman_zombie)))
 add(GamesSection, dropdown((emoji.man_zombie.." skripts"), "op skript", {("Zombie Attaxk - by "..emoji.lollipop.." (old)"), "Ghost hub", ([[Autofarm, silent aim(old) - by ]]..emoji.lollipop), "teleport to game"}, function(...)
 if ... =="Ghost hub" then
 LHRuntime:RunRemote("https://ghost-storage.7m.pl/scripts/ghosthublauncher.lua", "Zombie Attack Ghost Hub");
@@ -8211,7 +8289,7 @@ end;
 end))
 
 --[[
-add(GamesSection, label("<U_1F47B><U_1F6AA>DOORS<U_1F6AA><U_1F47B>"))
+add(GamesSection, bannerlabel("<U_1F47B><U_1F6AA>DOORS<U_1F6AA><U_1F47B>"))
 
 -- Removed discontinued loader: BlaxkKing hub
 -- See patch notes for URL and HTTP result.
@@ -8242,7 +8320,7 @@ end))
 
 ]]--
 
-add(GamesSection, label(("["..emoji.dagger.."KAT"..emoji.dagger.."]")))
+add(GamesSection, bannerlabel(("["..emoji.dagger.."KAT"..emoji.dagger.."]")))
 
 add(GamesSection, button("KAT Aimbot (OP)", "shoots nearest player",
 function()
@@ -8281,18 +8359,18 @@ setclipboard("7hFUsGVXaQ73mxgNjQJZjp4SEXy9yPdzN4bH38PdrYNBTkQw3nH2Y2mqKFcFkS52")
 end))
 
 
-add(GamesSection, label((emoji.kitchen_knife.."Survive The Killer "..emoji.kitchen_knife)))
+add(GamesSection, bannerlabel((emoji.kitchen_knife.."Survive The Killer "..emoji.kitchen_knife)))
 add(GamesSection, button("players, loot ESP &more", "esp ", function() 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Milan08Studio/ChairWare/main/main.lua"))()
 end))
 
 
-add(GamesSection, label((emoji.kitchen_knife.."Murderers vs Sheriffs (Duels)"..emoji.cowboy_hat_face)))
+add(GamesSection, bannerlabel((emoji.kitchen_knife.."Murderers vs Sheriffs (Duels)"..emoji.cowboy_hat_face)))
 
 add(GamesSection, button("RubyHub", "murdervssheriff", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/Deni210/murdersvssherrifsduels/main/rubyhub", true))();
 end))
 
-add(GamesSection, label(("??"..emoji.dagger.."Murder Mystery 2 "..emoji.dagger.."??]")))
+add(GamesSection, bannerlabel(("??"..emoji.dagger.."Murder Mystery 2 "..emoji.dagger.."??]")))
 
 add(GamesSection, button("R3TH PRIV (OP,lots of features)", "r3thprivhub", function()
 pcall(function()
@@ -8312,7 +8390,7 @@ end))
 -- Removed discontinued loader: Folder Hub
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label(("More Games "..emoji.down_arrow)))
+add(GamesSection, bannerlabel(("More Games "..emoji.down_arrow)))
 add(GamesSection, dropdown("Unnamed Shooter", "op skript by tora", {"AUTO KILL (op skript by tora)", "to game"}, function(x) if x == "AUTO KILL (op skript by tora)" then  loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/e700beeb77025b72371b9383a4510f20cf438a4e/UnnamedShooter",true))();
 
 elseif x == "to game" then get.TeleportService:Teleport(14202073004, get.Players.LocalPlayer)  end  end))
@@ -8341,13 +8419,13 @@ elseif x == "to game" then get.TeleportService:Teleport(16164895787, get.Players
 -- Removed discontinued loader: <U_1F6BD> Toilet Defense <U_1F6BD>
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.crossed_swords.." Attaxk On Titan Revolution "..emoji.crossed_swords)))
+add(GamesSection, bannerlabel((emoji.crossed_swords.." Attaxk On Titan Revolution "..emoji.crossed_swords)))
 add(GamesSection, button("auto kill titan", "by tora", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/568c5a426c639c9d3e15a6d9bee89893bc1081f2/AttackonTitan",true))(); 
 end))
 add(GamesSection, button("teleport to game", "anime realms tp", function()   get.TeleportService:Teleport(13379208636, get.Players.LocalPlayer) end))
 
-add(GamesSection, label(("SOL'S RNG"..emoji.collision)))
+add(GamesSection, bannerlabel(("SOL'S RNG"..emoji.collision)))
 -- Removed discontinued loader: Just3itx - sols rng hub
 -- See patch notes for URL and HTTP result.
 -- Removed discontinued loader: sols rng hub
@@ -8404,19 +8482,19 @@ setclipboard("hawkhubneverdies")
 lollyhub(("kopied 'TheHanki' "..emoji.key), 3.5)
 end))
 
-add(GamesSection, label((emoji.desert_island..emoji.farmer.." ISLANDS "..emoji.farmer..emoji.desert_island)))
+add(GamesSection, bannerlabel((emoji.desert_island..emoji.farmer.." ISLANDS "..emoji.farmer..emoji.desert_island)))
 add(GamesSection, button(("NO KEY,MANY FEAUTURES"..emoji.farmer.." (OP)"), "op skript", function()  
 loadstring(game:HttpGet('https://raw.githubusercontent.com/pascaldercoole1/Open-Source-Scripts/main/FreeIslands'))()
 end))
 add(GamesSection, button("teleport to game", "tp to islands", function()   get.TeleportService:Teleport(4872321990, get.Players.LocalPlayer) end))
 
-add(GamesSection, label("RO-GHOUL [ALPHA]")) 
+add(GamesSection, bannerlabel("RO-GHOUL [ALPHA]")) 
 add(GamesSection, button("GET ALL KODES ,AUTOFARM - kreds: JRL scripts", "OP", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/JRL-lav/Main/main/Ro-Ghoul'))()
 end))
 add(GamesSection, button("teleport to game", "ro ghoul tp", function()   get.TeleportService:Teleport(914010731, get.Players.LocalPlayer) end))
 
-add(GamesSection, label((emoji.dog_face..emoji.hamster.." PET SIMULATOR 99 "..emoji.rabbit_face..emoji.rabbit)))
+add(GamesSection, bannerlabel((emoji.dog_face..emoji.hamster.." PET SIMULATOR 99 "..emoji.rabbit_face..emoji.rabbit)))
 
 add(GamesSection, dropdown((emoji.rabbit_face..emoji.hamster.." PS99 skripts "..emoji.hamster..emoji.rabbit_face), "ps99", {"Hugegames.io - autorank", "Fake Lollypop", "Gem Spoof", "Fluent hub", "dupe skript", "PS99 - Zaphub", "PS99 - Syrex hub", "teleport to game"}, function(x)
 if x == "Hugegames.io - autorank" then  
@@ -8463,7 +8541,7 @@ end;
 end))
 ]]--
 
-add(GamesSection, label(("More Games "..emoji.down_arrow)));
+add(GamesSection, bannerlabel(("More Games "..emoji.down_arrow)));
 add(GamesSection, dropdown((emoji.crossed_swords..emoji.crown.." King Legaxy "..emoji.crown..emoji.crossed_swords), "zeehub op", {"ZEE HUB(OP)", "autofarm, kombat", "to game", "hyper hub", "draxxskripts", "ganteng hub"}, function(x) 
 if x == "ZEE HUB(OP)" then
 loadstring(game:HttpGet('https://zuwz.me/Ls-Zee-Hub-KL'))();
@@ -8587,7 +8665,7 @@ end))
 -- See patch notes for URL and HTTP result.
 -- [ <U_1F9F1><U_1F3DA_FE0F>END OF DA HOOD <U_1F3DA_FE0F><U_1F9F1> ] --
 
-add(GamesSection, label((emoji.woman_police_officer_light_skin_tone.."Prizzlife"..emoji.woman_police_officer_light_skin_tone)))
+add(GamesSection, bannerlabel((emoji.woman_police_officer_light_skin_tone.."Prizzlife"..emoji.woman_police_officer_light_skin_tone)))
 -- Removed discontinued loader: Prizzlife skript
 -- See patch notes for URL and HTTP result.
 
@@ -8660,7 +8738,7 @@ end))
 -- Removed discontinued loader: TeddyHub
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.mosquito..emoji.microbe.." PARASITE V0.0.3a "..emoji.microbe..emoji.mosquito)))
+add(GamesSection, bannerlabel((emoji.mosquito..emoji.microbe.." PARASITE V0.0.3a "..emoji.microbe..emoji.mosquito)))
 add(GamesSection, button("player ESP, anti-fall, infjump, noklip, fullbright", "by ToraIsme", function()
 --<U_1F9A0>parasite by tora
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/ceefc9f3a176120478067f6c93e7af8d3adc048a/PARASITE",true))();
@@ -8678,7 +8756,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/StormSKz12/StirkeHub1
 end))
 
 
-add(GamesSection, label((emoji.flexed_biceps.." Musxle Legends "..emoji.flexed_biceps)))
+add(GamesSection, bannerlabel((emoji.flexed_biceps.." Musxle Legends "..emoji.flexed_biceps)))
 add(GamesSection, button((emoji.flexed_biceps.." OP skript"), "OPskript", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/StupidProAArsenal/main/main/Musclas%20Legenos.lua'))();
 end))
@@ -8686,18 +8764,18 @@ end))
 -- Removed discontinued loader: hades Hub
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.dagger.." Blade Slayer "..emoji.dagger)))
+add(GamesSection, bannerlabel((emoji.dagger.." Blade Slayer "..emoji.dagger)))
 add(GamesSection, button("kill aura,get heros, get all kodes", "OP by tora", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraScript/Script/main/1BladeSlayer'))();
 end)) 
 
 
-add(GamesSection, label((emoji.ogre.." DEMON PIEXE "..emoji.ogre)))
+add(GamesSection, bannerlabel((emoji.ogre.." DEMON PIEXE "..emoji.ogre)))
 add(GamesSection, button("Insta kill,Kill aura,OP farm", "OP", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua",true))()
 end))
 
-add(GamesSection, label((emoji.woman_superhero.." LEGENDS ARENA "..emoji.superhero)))
+add(GamesSection, bannerlabel((emoji.woman_superhero.." LEGENDS ARENA "..emoji.superhero)))
 add(GamesSection, button("(OP)kill all, hitbox expander &more", "op skript by tora", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/8327fd2e016f4fbbd9578eb3dc627892a5e8775b/LegendsArena",true))()
 end))
@@ -8705,19 +8783,19 @@ end))
 add(GamesSection, button("teleport to game", "goto legends arena", function()   get.TeleportService:Teleport(15960924329, get.Players.LocalPlayer) end))
 
 -- [ THE HUNT SKRIPTLOADER ] --
-add(GamesSection, label((emoji.egg.."THE HUNT: First Edition 2024"..emoji.egg.." (event ended")))
+add(GamesSection, bannerlabel((emoji.egg.."THE HUNT: First Edition 2024"..emoji.egg.." (event ended")))
 add(GamesSection, button(("["..emoji.egg.."THE HUNT: First Edition 2024"..emoji.egg.."]\n(60+ GAMES SUPPORT)!!!"), "did not add games that ban or dont allow exploits", function()
 --THE HUNT SKRIPTLOADER(60+GAME SUPPORT)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/THEHUNT-skriptloader/main/60plusGames_lulaslollipop",true))()
 --[made by lulaslollipop<U_1F36D>]--
 end))
 
-add(GamesSection, label((emoji.waving_hand.." Slap Battles "..emoji.waving_hand)))
+add(GamesSection, bannerlabel((emoji.waving_hand.." Slap Battles "..emoji.waving_hand)))
 add(GamesSection, button("slap gui", "koolsb", function()
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Slap%20Battles")))();
 end))
 
-add(GamesSection, label((" "..emoji.skull.." Death Ball "..emoji.comet)))
+add(GamesSection, bannerlabel((" "..emoji.skull.." Death Ball "..emoji.comet)))
 add(GamesSection, button("FFJ hub", "skript by FFJ1", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FFJ1/Roblox-Exploits/main/scripts/DeathBall.lua"))();
 end))
@@ -8728,7 +8806,7 @@ end))
 
 
 
-add(GamesSection, label((emoji.flashlight..emoji.camera_with_flash.." The Maze "..emoji.camera_with_flash..emoji.flashlight)))
+add(GamesSection, bannerlabel((emoji.flashlight..emoji.camera_with_flash.." The Maze "..emoji.camera_with_flash..emoji.flashlight)))
 add(GamesSection, button("(new) mob esp, get items, teleports & more", "good skript used myself", function()
 --the maze skript by lulas
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/the-maze/lulas/1t2o3msn0f3oa3im9ci_lulaslollipop",true))()
@@ -8738,7 +8816,7 @@ get.TeleportService:Teleport(730951264, get.Players.LocalPlayer)
 end))
 
 
-add(GamesSection, label(("[Evade"..emoji.man_running_medium_skin_tone..emoji.dashing_away.."]")))
+add(GamesSection, bannerlabel(("[Evade"..emoji.man_running_medium_skin_tone..emoji.dashing_away.."]")))
 -- Removed discontinued loader: XENON (best evade skript)
 -- See patch notes for URL and HTTP result.
 add(GamesSection, button("show messages", "shows xhat kause evade dont allow it", function()
@@ -8768,22 +8846,22 @@ add(GamesSection, button("teleport to game", "evade", function()
 get.TeleportService:Teleport(9872472334, get.Players.LocalPlayer)
 end))
 
-add(GamesSection, label((emoji.grapes..emoji.red_apple.." FRUIT BATTLEGROUNDS "..emoji.strawberry..emoji.mango)))
+add(GamesSection, bannerlabel((emoji.grapes..emoji.red_apple.." FRUIT BATTLEGROUNDS "..emoji.strawberry..emoji.mango)))
 -- Removed discontinued loader: frruit
 -- See patch notes for URL and HTTP result.
 
 
-add(GamesSection, label((emoji.leftwards_pushing_hand.."Ragdoll Engine "..emoji.leftwards_pushing_hand))) 
+add(GamesSection, bannerlabel((emoji.leftwards_pushing_hand.."Ragdoll Engine "..emoji.leftwards_pushing_hand))) 
 add(GamesSection, button("kryptonic Hub", "ragdoll engine", function()  
 loadstring(game:HttpGet('https://raw.githubusercontent.com/martinelcrac/cryptonichub/main/Ragdollengine.lua'))();
 end))
 
-add(GamesSection, label((emoji.crossed_swords.." KOMBAT WARRIORS "..emoji.crossed_swords)))
+add(GamesSection, bannerlabel((emoji.crossed_swords.." KOMBAT WARRIORS "..emoji.crossed_swords)))
 add(GamesSection, button("killAura,Autoparry- kombat warriors 1", "kombatwarriors", function()
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/1d4db6a1b04aaeccf046f7c63fbad31a.lua"))()
 end))
 
-add(GamesSection, label((emoji.pleading_face.." PLS DONATE "..emoji.folded_hands)))
+add(GamesSection, bannerlabel((emoji.pleading_face.." PLS DONATE "..emoji.folded_hands)))
 
 -- Removed discontinued loader: Autofarm - hubs: Binary, VG, nullware,
 -- See patch notes for URL and HTTP result.
@@ -8794,11 +8872,11 @@ add(GamesSection, label((emoji.pleading_face.." PLS DONATE "..emoji.folded_hands
 -- Removed discontinued loader: METAB - booth
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.military_helmet.." Arsenal "..emoji.military_helmet)))
+add(GamesSection, bannerlabel((emoji.military_helmet.." Arsenal "..emoji.military_helmet)))
 -- Removed discontinued loader: thunder klient OP AF
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.tornado.." "..emoji.cyclone.."NATURAL DISASTER SURVIVAL "..emoji.man_running_medium_skin_tone..emoji.tornado)))
+add(GamesSection, bannerlabel((emoji.tornado.." "..emoji.cyclone.."NATURAL DISASTER SURVIVAL "..emoji.man_running_medium_skin_tone..emoji.tornado)))
 add(GamesSection, button("LiverMods ui", "nds skript", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/LiverMods/Rawnder-NTDR/main/NaturalDisaster'))("t.me/arceusxscripts")
 end))
@@ -8822,11 +8900,11 @@ end))
 -- Removed discontinued loader: <U_1F6BD><U_1F9FB> Toilet Battle Simulator <U_1F9FB><U_1F6BD>
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label(("["..emoji.crayon.."Find The Markers"..emoji.crayon.."]")))
+add(GamesSection, bannerlabel(("["..emoji.crayon.."Find The Markers"..emoji.crayon.."]")))
 add(GamesSection, button("ESP & marker traxer", "easy tp to random marker", function()loadstring(game:HttpGet('https://pastebin.com/raw/7gu2ztpP'))()
 end))
 
-add(GamesSection, label(("["..emoji.cross_mark..emoji.door.."50/50 Pixk A Door"..emoji.door..emoji.check_mark_button.."]")))
+add(GamesSection, bannerlabel(("["..emoji.cross_mark..emoji.door.."50/50 Pixk A Door"..emoji.door..emoji.check_mark_button.."]")))
 add(GamesSection, button("Reveal Path", "reveals all doors in lime green", function()
 getgenv().Door = true;
 while wait() do
@@ -8842,29 +8920,29 @@ end
 end
 end))
 
-add(GamesSection, label((emoji.yellow_square.." Luxky Bloxk Battlegrounds "..emoji.yellow_square))) 
+add(GamesSection, bannerlabel((emoji.yellow_square.." Luxky Bloxk Battlegrounds "..emoji.yellow_square))) 
 add(GamesSection, button("get tools ui", "get bloxks", function()
 --luxkybloxk 
 loadstring(game:HttpGet("https://paste-drop.com/save/yDHPkhWwg2",true))(); 
 end)) 
 
-add(GamesSection, label((emoji.raised_hand_medium_skin_tone..emoji.stop_sign.." Simon Says "..emoji.horizontal_traffic_light..emoji.raised_hand_medium_skin_tone))) 
+add(GamesSection, bannerlabel((emoji.raised_hand_medium_skin_tone..emoji.stop_sign.." Simon Says "..emoji.horizontal_traffic_light..emoji.raised_hand_medium_skin_tone))) 
 -- Removed discontinued loader: kommand spam abuse
 -- See patch notes for URL and HTTP result.
 
 
-add(GamesSection, label(("["..emoji.fire.."UPD] Solo challenging Simulator")))
+add(GamesSection, bannerlabel(("["..emoji.fire.."UPD] Solo challenging Simulator")))
 
 -- Removed discontinued loader: inf stats,get best sword,best eggs&more
 -- See patch notes for URL and HTTP result.
 
 -- [ pillow ] --
-add(GamesSection, label("Pillow Fighting"))
+add(GamesSection, bannerlabel("Pillow Fighting"))
 -- Removed discontinued loader: Auto train,rebirth,wins,hatxh,equip best
 -- See patch notes for URL and HTTP result.
 
 
-add(GamesSection, label((emoji.man_running_medium_skin_tone..emoji.dashing_away.." ANIME RAXING 2 "..emoji.dashing_away..emoji.man_running_medium_skin_tone)))
+add(GamesSection, bannerlabel((emoji.man_running_medium_skin_tone..emoji.dashing_away.." ANIME RAXING 2 "..emoji.dashing_away..emoji.man_running_medium_skin_tone)))
 
 -- Removed discontinued loader: autofarm (Tora)
 -- See patch notes for URL and HTTP result.
@@ -8880,7 +8958,7 @@ local GamesSection = section(games, ("["..emoji.pancakes.."Pankake Empire Tykoon
 -- See patch notes for URL and HTTP result.
 
 --XHAOS GAME
-add(GamesSection, label(("["..emoji.crossed_swords.."Chaos"..emoji.crossed_swords.."]")))
+add(GamesSection, bannerlabel(("["..emoji.crossed_swords.."Chaos"..emoji.crossed_swords.."]")))
 
 add(GamesSection, button("KILL PLAYER FROM FAR V2", "selekt a player and put kill", function()--xhaos kill
 loadstring(game:HttpGet("https://pastebin.com/raw/W9SYMbiw"))()
@@ -8890,7 +8968,7 @@ end))
 
 
 
-add(GamesSection, label(("["..emoji.cricket_game.."Blade Ball"..emoji.comet.."]")))
+add(GamesSection, bannerlabel(("["..emoji.cricket_game.."Blade Ball"..emoji.comet.."]")))
 
 add(GamesSection, button("VENOX hub KATSUS", "idk", function()  loadstring(Game:HttpGet("https://raw.githubusercontent.com/Fsploit/venox-blade-ball-v1/main/K-A-T-S-U-S-F-S-P-L-O-I-T-I-S-A-F-U-R-R-Y%20MAIN%20V4"))();
 end))
@@ -8957,10 +9035,10 @@ add(GamesSection, button("AUTO BLOXK", "auto bloxk for bladeball", function()--a
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/AutoBlock"))()
 end))
 
--- add(GamesSection, label("[<U_1F407>Pet Simulator X<U_1F429>]"))
+-- add(GamesSection, bannerlabel("[<U_1F407>Pet Simulator X<U_1F429>]"))
 
 
-add(GamesSection, label(("["..emoji.girl_medium_skin_tone.."Rate My Avatar"..emoji.boy_medium_light_skin_tone.."]")))
+add(GamesSection, bannerlabel(("["..emoji.girl_medium_skin_tone.."Rate My Avatar"..emoji.boy_medium_light_skin_tone.."]")))
 
 add(GamesSection, button("Rate My Avatar - VG hub", "idk",
 function()
@@ -9078,7 +9156,7 @@ add(GamesSection, button("ToH Gui 4", "toh gui4", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/iiProductionz/Floater-Scripts/main/WaifuEdition/Tower%20Of%20Hell"))()
 end))
 
-add(GamesSection, label((emoji.american_football.."Football Fusion"..emoji.american_football)))
+add(GamesSection, bannerlabel((emoji.american_football.."Football Fusion"..emoji.american_football)))
 -- Removed discontinued loader: Football Fusion GUI 1
 -- See patch notes for URL and HTTP result.
 
@@ -9092,59 +9170,59 @@ add(GamesSection, button("Football Fusion GUI 3", "ff gui idk", function()
 loadstring(game:HttpGet('https://pastebin.com/raw/94bSvnqL'))()
 end))
 
-add(GamesSection, label((emoji.money_mouth_face.."Millionaire Empire Tykoon"..emoji.dollar_banknote)))
+add(GamesSection, bannerlabel((emoji.money_mouth_face.."Millionaire Empire Tykoon"..emoji.dollar_banknote)))
 -- Removed discontinued loader: Millionaire empire gui
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.pouring_liquid.."Slime Tower Tykoon"..emoji.pouring_liquid)))
+add(GamesSection, bannerlabel((emoji.pouring_liquid.."Slime Tower Tykoon"..emoji.pouring_liquid)))
 add(GamesSection, button("slime tower 1", "slimetower skript", function()
 -- slime tower tykoon
 loadstring(game:HttpGet("https://raw.githubusercontent.com/XRoLLu/Rolly_Hub/main/open-source-trash-loader.exe.yeah"))()
 end))
 
-add(GamesSection, label((emoji.man_running_medium_skin_tone.."Sonik Speed Simulator"..emoji.man_running_medium_skin_tone)))
+add(GamesSection, bannerlabel((emoji.man_running_medium_skin_tone.."Sonik Speed Simulator"..emoji.man_running_medium_skin_tone)))
 -- Removed discontinued loader: Sonik Speed Sim gui
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.shopping_cart.."Kart Ride Into Rdite"..emoji.shopping_cart)))
+add(GamesSection, bannerlabel((emoji.shopping_cart.."Kart Ride Into Rdite"..emoji.shopping_cart)))
 -- Removed discontinued loader: kart ride into rdite(fun gui)
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.headstone.."All Of Us Are Dead"..emoji.headstone)))
+add(GamesSection, bannerlabel((emoji.headstone.."All Of Us Are Dead"..emoji.headstone)))
 add(GamesSection, button("All of us are dead 1", "something",
 function()-- all of us are dead
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/zeuise0002/SSSWWW222/main/README.md'),true))()
 end))
 
-add(GamesSection, label("Pop It Trading"))
+add(GamesSection, bannerlabel("Pop It Trading"))
 add(GamesSection, button("pop it trading gui", "POP IT TRADING DUM*A$$",
 function()-- pop it trading
 loadstring(game:HttpGet("https://raw.githubusercontent.com/iShield2005/scripts/master/shieldhubloader2"))()
 end))
 
-add(GamesSection, label((emoji.cross_mark.."Impossible Glass Bridge Obby"..emoji.check_mark_button)))
+add(GamesSection, bannerlabel((emoji.cross_mark.."Impossible Glass Bridge Obby"..emoji.check_mark_button)))
 -- Removed discontinued loader: Reveal Tiles
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.pouting_face.."Stairs Of Rage"..emoji.pouting_face)))
+add(GamesSection, bannerlabel((emoji.pouting_face.."Stairs Of Rage"..emoji.pouting_face)))
 add(GamesSection, button("Stairs of rage unknown skript", "mad",
 function()
 -- stairs of rage
 loadstring(game:HttpGet("https://raw.githubusercontent.com/WinterDinder/Stairs-Of-Rage/main/Main", true))()
 end))
 
-add(GamesSection, label((emoji.man_running_medium_skin_tone..emoji.police_car.."Barrys Prison Run"..emoji.man_police_officer_medium_light_skin_tone..emoji.oncoming_police_car)))
+add(GamesSection, bannerlabel((emoji.man_running_medium_skin_tone..emoji.police_car.."Barrys Prison Run"..emoji.man_police_officer_medium_light_skin_tone..emoji.oncoming_police_car)))
 -- Removed discontinued loader: Barrys prison run gui
 -- See patch notes for URL and HTTP result.
 
-add(GamesSection, label((emoji.musical_keyboard.."Piano Player"..emoji.musical_keyboard)))
+add(GamesSection, bannerlabel((emoji.musical_keyboard.."Piano Player"..emoji.musical_keyboard)))
 add(GamesSection, button("Auto Piano Player", "auto piano",
 function()
 -- piano player
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Madness676/3.2Lol/main/AutoPiano3-2.lua", true))()
 end))
 
-add(GamesSection, label((emoji.see_no_evil_monkey.."Extreme Hide N Seek"..emoji.see_no_evil_monkey)))
+add(GamesSection, bannerlabel((emoji.see_no_evil_monkey.."Extreme Hide N Seek"..emoji.see_no_evil_monkey)))
 add(GamesSection, button("Extreme Hide n Seek", "idk",
 function()-- extreme hide n seek
 loadstring(game:HttpGet('https://pastebin.com/raw/HAgidzUN'))()
@@ -9501,14 +9579,33 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.3.3 updates: ",
+    "[FIXED] User Lookup no longer gets stuck on Looking up and partial username searches load matching users again",
+    "[FIXED] Saved Outfit avatar previews now load properly instead of showing a blank kard",
+    "[FIXED] Wear Outfit now applies saved avatar items more reliably",
+    "[IMPROVED] User Lookup ROBLOX branding is larger, kleaner, and uses more of the header space",
+    "[IMPROVED] Avatar Kreator icon is larger and easier to see",
+    "[IMPROVED] player movement tools are now grouped together in the Players sektion",
+    "[IMPROVED] renamed lazy More Skripts headers to match wat is aktually inside them",
+
+    emoji.lollipop.." V10.3.2 updates: ",
+    "[FIXED] User Lookup now shows multiple users with matching or similar usernames instead of needing the exakt username",
+    "[FIXED] Saved Outfits now shows the saved avatar preview and Wear Outfit aktually applies the saved outfit",
+    "[FIXED] Kurrent Outfit Take Off and Reset All now update the avatar korrectly",
+    "[IMPROVED] Add Friend is kleaner and only tells u the same-server requirement if needed",
+    "[IMPROVED] Avatar Kreator icon is a little larger and easier to see",
+    "[IMPROVED] Auto Jump, Infinite Jump, and Jump Bot are now direktly after Reset Gravity",
+    "[IMPROVED] section headers now use the gold banner style konsistently",
+
+    emoji.lollipop.." V10.3.1 updates: ",
+    "[NEW TAB] User Lookup: Look up any Roblox user and see public info on them",
+    "[NEW] Auto Execute: added a Klear button with a konfirmation popup before the skript text is removed",
+    "[IMPROVED] Auto Execute: Run changes to Done after the skript is executed and goes baxk to Run",
+    "[IMPROVED] Restore Session: warns u before exiting with unsaved settings and lets u Press to Save direktly from the exit popup",
+    "[IMPROVED] owner Online Status now auto refreshes every 1 min without reloading LH",
+
     emoji.lollipop.." V10.3.0 updates: ",
-    "[NEW TAB] Auto Execute: create multiple saved skript files with per-file Auto-Exec ON/OFF and run them when LH loads",
-    "[NEW] Avatar Kreator Saved Outfits with permanent independent autosave, Wear Outfit, and Remove Outfit",
-    "[NEW] Avatar Kreator uses the Roblox Premium icon on Premium-priced katalog items when Premium metadata is returned",
-    "[IMPROVED] Avatar Kreator now uses the proven GetObjects + Humanoid:AddAccessory/BuildRigFromAttachments and GetObjects + Klassic Instance Try On paths",
-    "[IMPROVED] Avatar Kreator Marketplace and Saved Outfits use a compact 3-kard phone layout when space allows",
-    "[NEW] Kolor Brightness -/+ kontrol dims or brightens the selected theme live and supports hold-to-repeat",
-    "[FIXED] Anti-Pause now self-saves ON/OFF and restores the saved state without duplicate konnections",
+    "[NEW TAB] Auto Execute",
 
     emoji.lollipop.." V10.2.4 updates: ",
 "[FIXED] fixed kurrently wearing not fully showing",
@@ -9784,7 +9881,7 @@ local exSection = section(updates, "TROLL/VERY OLD SKRIPTS", updates["TROLL/VERY
 -- Removed discontinued loader: Fake kixk
 -- See patch notes for URL and HTTP result.
 
--- add(exSection, label("Weapons"))
+-- add(exSection, bannerlabel("Weapons"))
 
 -- Removed discontinued loader: Klumsy Gunner
 -- See patch notes for URL and HTTP result.
@@ -10018,7 +10115,7 @@ add(HomeSection, button("Message Logs", "see xhatlogs gui", function()
 loadstring(game:GetObjects("rbxassetid://1295331911")[1].Source)()
 end))
 
-add(HomeSection, label("PROTEKT YOUR SKRIPTS")) 
+add(HomeSection, bannerlabel("PROTEKT YOUR SKRIPTS")) 
 add(HomeSection, button("FE Obfuskator (protekt your skripts)", "no info", function()
 -- obFEskator
 _=loadstring;__=game;_(__:HttpGet([[https]]..[[://gi]]..[[thub.com/]]..[[rrixh/]]..[[skripts/raw/main/my%20skripts/]]..[[obFEskator.]]..[[yml]],false))();
@@ -10043,7 +10140,7 @@ add(HomeSection, button((emoji.lollipop.." FE Obfuskator v2 (ASS method)"), "obf
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/FEobfuskator-v2", true))()
 end))
 
-add(HomeSection, label("other"))
+add(HomeSection, bannerlabel("other"))
 add(HomeSection, button("ANTI()", "anti xhat logger & xhatbypass", function()
 kall(function()
 -- anti xhatlog/xhatbypass
@@ -10052,7 +10149,7 @@ loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/my%20skripts/
 end))
 
 -- KREDITS 2 ME --
-add(HomeSection, label(("my soxials "..emoji.mobile_phone_with_arrow)));
+add(HomeSection, bannerlabel(("my soxials "..emoji.mobile_phone_with_arrow)));
 
 add(HomeSection, button("My Roblox profile link", ("kredits"..emoji.lollipop), function()
 _G.kopy(_G.rbxlink)
@@ -10218,7 +10315,7 @@ local kount = #get.Players:GetPlayers()
 serversize:UpdateLabel("Server Size: ".. kount .."/" .. maxplrs)
 end)
 
-add(MoreSection, label("Others"))
+add(MoreSection, bannerlabel("Others"))
 
 -- Removed discontinued loader: Player Notifier
 -- See patch notes for URL and HTTP result.
@@ -10312,7 +10409,7 @@ end)
 end))
 
 --[ E M O J I S ]--
-add(MoreSection, label("Emojis"))
+add(MoreSection, bannerlabel("Emojis"))
 -- emoji buttons
 add(MoreSection, button((emoji.beaming_face_with_smiling_eyes), "smiley", function()--player will say this
 get.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer((emoji.beaming_face_with_smiling_eyes),"All")
@@ -10604,6 +10701,28 @@ if Window.EnableAutoExecuteManager then
     end
 else
     warn("[Lollypop Hub Auto Execute] Loaded Kavo does not expose EnableAutoExecuteManager.")
+end
+
+local userLookupTab = nil
+if Window.EnableUserLookup then
+    local userLookupOk, userLookupResult = pcall(function()
+        return Window:EnableUserLookup(utf.char(0x2605).." User Lookup")
+    end)
+    if userLookupOk then
+        userLookupTab = userLookupResult
+        if userLookupTab and userLookupTab.Button then
+            userLookupTab.Button.LayoutOrder = 109
+        end
+    else
+        warn("[Lollypop Hub User Lookup] " .. tostring(userLookupResult))
+        if LHRuntime and LHRuntime.Notify then
+            pcall(function()
+                LHRuntime:Notify("error", "User Lookup", "The User Lookup tab could not initialize: " .. tostring(userLookupResult), 7, nil, true)
+            end)
+        end
+    end
+else
+    warn("[Lollypop Hub User Lookup] Loaded Kavo does not expose EnableUserLookup.")
 end
 
 do
