@@ -1,6 +1,6 @@
---main v10.3.3 LOLLYPOP HUB 
+--main v10.3.4 LOLLYPOP HUB 
 
-date = "August 10"..", "..tostring(os.date("%Y"))
+date = "August 9"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -9579,6 +9579,11 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.3.4 updates: ",
+    "[FIXED] User Lookup now shows matching users instead of staying stuck on Looking up",
+    "[IMPROVED] User Lookup falls baxk to an exakt username lookup if the wider search is unavailable",
+    "[IMPROVED] User Lookup ROBLOX title is smaller and keeps its original shape without stretching",
+
     emoji.lollipop.." V10.3.3 updates: ",
     "[FIXED] User Lookup no longer gets stuck on Looking up and partial username searches load matching users again",
     "[FIXED] Saved Outfit avatar previews now load properly instead of showing a blank kard",
