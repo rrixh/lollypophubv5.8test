@@ -1,6 +1,6 @@
---main v10.3.4 LOLLYPOP HUB 
+--main v10.3.7 LOLLYPOP HUB 
 
-date = "August 9"..", "..tostring(os.date("%Y"))
+date = "August 10"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -879,7 +879,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.3.3')
+local Vv = ('10.3.7')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -4187,6 +4187,11 @@ local function makeNamelessSourceHeadless(source)
         "Notify = function() end\nWindow = function() end\nPopup = function() end",
         1
     )
+    source = source:gsub(
+        "cmds%s*=%s*{%s*\n%s*Commands%s*=%s*{};%s*\n%s*Aliases%s*=%s*{};%s*\n%s*NASAVEDALIASES%s*=%s*{};%s*\n%s*_skipAutoSuffix%s*=%s*false;%s*\n%s*}",
+        "cmds={\n\tCommands={};\n\tAliases={};\n\tNASAVEDALIASES={};\n\t_skipAutoSuffix=false;\n}\ngetgenv().LHNamelessLiveCommands = cmds",
+        1
+    )
     return source
 end
 
@@ -4266,6 +4271,7 @@ ensureNamelessBackend = function()
         LHRuntime:Notify("error", "Admin Kommands", tostring(err), 3, nil, true)
         return false
     end
+    if type(env.LHSyncNamelessKommands) == "function" then pcall(env.LHSyncNamelessKommands) end
     return findNamelessRunner and findNamelessRunner() ~= nil
 end
 
@@ -4302,6 +4308,61 @@ for commandName, data in pairs(NamelessCommandReference) do
             return result
         end)
     end
+end
+
+env.LHSyncNamelessKommands = function()
+    local live = env.LHNamelessLiveCommands
+    if type(live) ~= "table" or type(live.Commands) ~= "table" then return 0 end
+    local aliasesByData = {}
+    if type(live.Aliases) == "table" then
+        for aliasName, data in pairs(live.Aliases) do
+            if type(aliasName) == "string" and type(data) == "table" then
+                aliasesByData[data] = aliasesByData[data] or {}
+                table.insert(aliasesByData[data], string.lower(aliasName))
+            end
+        end
+    end
+    local added = 0
+    for primaryName, data in pairs(live.Commands) do
+        primaryName = string.lower(tostring(primaryName or ""))
+        if primaryName ~= "" and type(data) == "table" and not LHRuntime.Commands[primaryName] then
+            local info = type(data[2]) == "table" and data[2] or {}
+            local aliases = aliasesByData[data] or {}
+            local usage = tostring(info[1] or primaryName)
+            local description = tostring(info[2] or "Nameless Admin kommand")
+            LHRuntime:RegisterCommand(primaryName, aliases, description, usage, function(args)
+                local runner = findNamelessRunner()
+                if not runner then error("Nameless Admin backend is not ready.") end
+                local commandText = primaryName
+                if #args > 0 then commandText = commandText .. " " .. table.concat(args, " ") end
+                hideNamelessAdminUI()
+                local ok, result = pcall(runner, commandText)
+                hideNamelessAdminUI()
+                if not ok then error(result) end
+                if type(result) == "table" and result.ok == false then error(result.error or "Nameless kommand failed") end
+                return result
+            end)
+            added = added + 1
+        end
+    end
+    return added
+end
+
+if not LHRuntime.Commands["un"] then
+    LHRuntime:RegisterCommand("un", {"offcmd"}, "Turns off a supported admin kommand.", "un <kommand> [arguments]", function(args)
+        local base = string.lower(tostring(args[1] or "")):gsub("^un", "")
+        if base == "" then error("Usage: " .. LHRuntime.Prefix .. "un <kommand>") end
+        table.remove(args, 1)
+        local candidate = "un" .. base
+        local command = LHRuntime.Commands[candidate]
+        if not command then
+            if not findNamelessRunner() then ensureNamelessBackend() end
+            env.LHSyncNamelessKommands()
+            command = LHRuntime.Commands[candidate]
+        end
+        if not command then error("No off kommand found for " .. base .. ".") end
+        return command.Callback(args)
+    end)
 end
 
 RegisterEditableAdminKommands()
@@ -4520,6 +4581,23 @@ do
 
         local dragging, dragInput, dragStart, startPosition, moved = false, nil, nil, nil, false
         local clickThreshold = 7
+
+        local function clampMobileOpen()
+            if not mobileOpen or not mobileOpen.Parent then return end
+            local camera = workspace.CurrentCamera
+            if not camera then return end
+            local view = camera.ViewportSize
+            local size = mobileOpen.AbsoluteSize
+            local pos = mobileOpen.AbsolutePosition
+            local margin = 6
+            local x = math.clamp(pos.X, margin, math.max(margin, view.X - size.X - margin))
+            local y = math.clamp(pos.Y, margin, math.max(margin, view.Y - size.Y - margin))
+            mobileOpen.Position = UDim2.fromOffset(
+                x + size.X * mobileOpen.AnchorPoint.X,
+                y + size.Y * mobileOpen.AnchorPoint.Y
+            )
+        end
+
         LHRuntime:Track(mobileOpen.InputBegan:Connect(function(inputObject)
             if env.LHSettings.AdminButtonDragLocked then return end
             if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
@@ -4537,14 +4615,22 @@ do
                 if math.abs(delta.X) > clickThreshold or math.abs(delta.Y) > clickThreshold then
                     moved = true
                     mobileOpen.Position = UDim2.new(startPosition.X.Scale, startPosition.X.Offset + delta.X, startPosition.Y.Scale, startPosition.Y.Offset + delta.Y)
+                    clampMobileOpen()
                 end
             end
         end))
         LHRuntime:Track(get.UserInputService.InputEnded:Connect(function(inputObject)
             if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
                 dragging = false
+                task.defer(clampMobileOpen)
             end
         end))
+        task.defer(clampMobileOpen)
+        if workspace.CurrentCamera then
+            LHRuntime:Track(workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+                task.defer(clampMobileOpen)
+            end))
+        end
         LHRuntime:Track(mobileOpen.MouseButton1Click:Connect(function()
             if moved then
                 moved = false
@@ -5633,6 +5719,39 @@ function()loadstring(game:HttpGet("https://pastebin.com/raw/YvKv4AuY"))()
 end))
 
 add(SkriptsSection, bannerlabel("Utility & Kharakter"))
+
+env.LHSendXhat = function(message)
+    message = tostring(message or ""):match("^%s*(.-)%s*$")
+    if message == "" then return false end
+    local textChatService = get.TextChatService
+    local inputConfig = textChatService and textChatService.ChatInputBarConfiguration
+    local target = inputConfig and inputConfig.TargetTextChannel
+    if not target and textChatService then
+        local channels = textChatService:FindFirstChild("TextChannels")
+        target = channels and (channels:FindFirstChild("RBXGeneral") or channels:FindFirstChildWhichIsA("TextChannel"))
+    end
+    if not target or not target:IsA("TextChannel") then
+        LHRuntime:Notify("warning", "Xhat", "No available xhat khannel was found.", 3)
+        return false
+    end
+    local ok = pcall(function() target:SendAsync(message) end)
+    if not ok then
+        LHRuntime:Notify("error", "Xhat", "Message kould not be sent.", 3)
+        return false
+    end
+    if env.LHXhatKontrol and env.LHXhatKontrol.SetValue then
+        env.LHXhatKontrol:SetValue("", false)
+    end
+    return true
+end
+
+env.LHXhatKontrol = add(SkriptsSection, textbox("Xhat Message", "Sends only wen u press Enter or the Send button.", function(message)
+    env.LHSendXhat(message)
+end, "Type a message..."))
+
+add(SkriptsSection, button("Send Xhat", "Sends the message above to your kurrent Roblox xhat khannel.", function()
+    env.LHSendXhat(env.LHXhatKontrol and env.LHXhatKontrol:GetValue() or "")
+end))
 
 add(SkriptsSection, button((emoji.lollipop..emoji.lollipop..emoji.lollipop.."Lollypops (R6 only)"), (emoji.lollipop.." all day"), function()
 for i, v in pairs(get.Players:GetChildren()) do local emit = Instance.new("ParticleEmitter"); emit.Parent = v.Character.Head; 
@@ -9579,9 +9698,24 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.3.7 updates: ",
+    "[FIXED] Lollypop Hub starts normally again",
+    "[FIXED] startup reliability improved after the latest feature additions",
+
+    emoji.lollipop.." V10.3.6 updates: ",
+    "[IMPROVED] sidebar tab order now uses simple sequential numbers",
+    "[IMPROVED] User Lookup buttons have a more unique polished design",
+
+    emoji.lollipop.." V10.3.5 updates: ",
+    "[FIXED] User Lookup searchbox Klear button no longer shows a error",
+    "[IMPROVED] floating Admin button stays inside the skreen on different device sizes",
+    "[IMPROVED] (Admin) Lollypop Admin: +207 kommands added",
+    "[NEW] chat textbox is added to Utility & Character",
+    "[NEW] +24 Ui kolor themes",
+
     emoji.lollipop.." V10.3.4 updates: ",
     "[FIXED] User Lookup now shows matching users instead of staying stuck on Looking up",
-    "[IMPROVED] User Lookup falls baxk to an exakt username lookup if the wider search is unavailable",
+
     "[IMPROVED] User Lookup ROBLOX title is smaller and keeps its original shape without stretching",
 
     emoji.lollipop.." V10.3.3 updates: ",
@@ -10590,27 +10724,25 @@ end))
 -- Build every stored kontrol once. Search only hides/shows existing rows.
 buildHub(Window)
 
--- Marketplace tabs are created natively inside the existing Kavo/LH tab system.
--- Explicit sidebar order keeps Free Animations, Free Emotes, and Ava Kreator together while
--- Server stays direktly above Notifications at the bottom.
 local sidebarOrderByName = {
-    ["Ui Kustomization"] = 10,
-    ["Home"] = 20,
-    ["Admin"] = 30,
-    ["Fun"] = 40,
-    ["Tools"] = 50,
-    ["Hubs & GUIs"] = 60,
-    ["FE"] = 70,
-    ["Updates/Extras"] = 80,
-    ["Bypasses & More"] = 90,
-    ["Server"] = 100,
+    ["Ui Kustomization"] = 1,
+    ["Home"] = 2,
+    ["Admin"] = 3,
+    ["Fun"] = 4,
+    ["Tools"] = 10,
+    ["Hubs & GUIs"] = 11,
+    [emoji.glowing_star.."Games"..emoji.glowing_star] = 12,
+    ["FE"] = 13,
+    ["Updates/Extras"] = 14,
+    ["Bypasses & More"] = 15,
+    ["Server"] = 16,
 }
 
 for tabIndex, tabData in ipairs(tabOrder) do
     local tabUi = tabData and tabData._ui
     local tabButton = tabUi and tabUi.Button
     if tabButton then
-        tabButton.LayoutOrder = sidebarOrderByName[tabData._name] or (tabIndex * 10)
+        tabButton.LayoutOrder = sidebarOrderByName[tabData._name] or tabIndex
     end
 end
 
@@ -10622,7 +10754,7 @@ if Window.EnableAnimationBundles then
     if animationTabOk then
         animationBundlesTab = animationTabResult
         if animationBundlesTab and animationBundlesTab.Button then
-            animationBundlesTab.Button.LayoutOrder = 41
+            animationBundlesTab.Button.LayoutOrder = 5
         end
     else
         warn("[Lollypop Hub Free Animations] " .. tostring(animationTabResult))
@@ -10644,7 +10776,7 @@ if Window.EnableFreeEmotes then
     if emoteTabOk then
         freeEmotesTab = emoteTabResult
         if freeEmotesTab and freeEmotesTab.Button then
-            freeEmotesTab.Button.LayoutOrder = 42
+            freeEmotesTab.Button.LayoutOrder = 6
         end
     else
         warn("[Lollypop Hub Free Emotes] " .. tostring(emoteTabResult))
@@ -10666,7 +10798,7 @@ if Window.EnableAvatarKreator then
     if avatarTabOk then
         avatarKreatorTab = avatarTabResult
         if avatarKreatorTab and avatarKreatorTab.Button then
-            avatarKreatorTab.Button.LayoutOrder = 43
+            avatarKreatorTab.Button.LayoutOrder = 7
         end
     else
         warn("[Lollypop Hub Avatar Kreator] " .. tostring(avatarTabResult))
@@ -10684,7 +10816,7 @@ local personalShelfTab = nil
 if Window.EnablePersonalShelf then
     personalShelfTab = Window:EnablePersonalShelf("My Shelf")
     if personalShelfTab and personalShelfTab.Button then
-        personalShelfTab.Button.LayoutOrder = 44
+        personalShelfTab.Button.LayoutOrder = 8
     end
 end
 
@@ -10695,7 +10827,7 @@ if Window.EnableAutoExecuteManager then
     end)
     if autoExecuteOk then
         autoExecuteTab = autoExecuteResult
-        if autoExecuteTab and autoExecuteTab.Button then autoExecuteTab.Button.LayoutOrder = 45 end
+        if autoExecuteTab and autoExecuteTab.Button then autoExecuteTab.Button.LayoutOrder = 9 end
     else
         warn("[Lollypop Hub Auto Execute] " .. tostring(autoExecuteResult))
         if LHRuntime and LHRuntime.Notify then
@@ -10716,7 +10848,7 @@ if Window.EnableUserLookup then
     if userLookupOk then
         userLookupTab = userLookupResult
         if userLookupTab and userLookupTab.Button then
-            userLookupTab.Button.LayoutOrder = 109
+            userLookupTab.Button.LayoutOrder = 17
         end
     else
         warn("[Lollypop Hub User Lookup] " .. tostring(userLookupResult))
@@ -10739,7 +10871,7 @@ do
         if notificationOk then
             notificationCenterTab = notificationResult
             if notificationCenterTab and notificationCenterTab.Button then
-                notificationCenterTab.Button.LayoutOrder = 110
+                notificationCenterTab.Button.LayoutOrder = 18
             end
         else
             warn("[Lollypop Hub Notifications] " .. tostring(notificationResult))
