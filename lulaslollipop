@@ -1,4 +1,4 @@
---main v10.3.7 LOLLYPOP HUB 
+--main v10.4.0 LOLLYPOP HUB 
 
 date = "August 10"..", "..tostring(os.date("%Y"))
 
@@ -457,6 +457,10 @@ LHCompat.Native.GetHui = firstFunction(envValue("gethui"), envValue("get_hidden_
 LHCompat.Native.CloneRef = firstFunction(envValue("cloneref"), envValue("clone_ref"))
 LHCompat.Native.SetFpsCap = firstFunction(envValue("setfpscap"), envValue("set_fps_cap"))
 LHCompat.Native.GetExecutorName = firstFunction(envValue("getexecutorname"), envValue("identifyexecutor"))
+LHCompat.Native.SetReadonly = firstFunction(envValue("setreadonly"), envValue("set_readonly"))
+LHCompat.Native.IsReadonly = firstFunction(envValue("isreadonly"), envValue("is_readonly"))
+LHCompat.Native.MakeWritable = firstFunction(envValue("make_writeable"), envValue("makewriteable"))
+LHCompat.Native.MakeReadonly = firstFunction(envValue("make_readonly"), envValue("makereadonly"))
 
 pcall(function()
     if LHCompat.Native.GetExecutorName then
@@ -467,6 +471,48 @@ end)
 
 function LHCompat.Supports(name)
     return type(LHCompat.Native[tostring(name)]) == "function"
+end
+
+function LHCompat.SafeTableSet(tbl, key, value)
+    if type(tbl) ~= "table" then return false, "target is not a table" end
+
+    local directOk, directErr = pcall(function()
+        tbl[key] = value
+    end)
+    if directOk then return true end
+
+    local changed = false
+    local restoreReadonly = false
+
+    if LHCompat.Native.IsReadonly then
+        local okState, state = pcall(LHCompat.Native.IsReadonly, tbl)
+        if okState then restoreReadonly = state == true end
+    end
+
+    if LHCompat.Native.SetReadonly then
+        local okUnlock = pcall(LHCompat.Native.SetReadonly, tbl, false)
+        changed = okUnlock == true
+    elseif LHCompat.Native.MakeWritable then
+        local okUnlock = pcall(LHCompat.Native.MakeWritable, tbl)
+        changed = okUnlock == true
+        restoreReadonly = changed
+    end
+
+    if not changed then
+        return false, directErr
+    end
+
+    local writeOk, writeErr = pcall(function()
+        tbl[key] = value
+    end)
+
+    if LHCompat.Native.SetReadonly then
+        pcall(LHCompat.Native.SetReadonly, tbl, restoreReadonly)
+    elseif restoreReadonly and LHCompat.Native.MakeReadonly then
+        pcall(LHCompat.Native.MakeReadonly, tbl)
+    end
+
+    return writeOk, writeErr
 end
 
 function LHCompat.SetClipboard(text)
@@ -813,7 +859,7 @@ local function localStartupNotify(title, text, durationValue)
     return false
 end
 
-if env.lhloaded == true or env.LHBooting == true then
+if env.lhloaded == true then
     localStartupNotify(
         "Lollypop Hub already loaded",
         "say \"/e reload\" if you want to reload Lollypop Hub " .. emoji.lollipop,
@@ -822,6 +868,22 @@ if env.lhloaded == true or env.LHBooting == true then
     return
 end
 
+if env.LHBooting == true then
+    local startedAt = tonumber(env.LHBootStartedAt) or 0
+    local bootAge = startedAt > 0 and (tick() - startedAt) or math.huge
+    if bootAge < 8 then
+        localStartupNotify(
+            "Lollypop Hub is loading",
+            "A fresh LH startup is already running. Try again in a few seconds.",
+            4
+        )
+        return
+    end
+    warn("[Lollypop Hub] Cleared stale LHBooting state from an interrupted execution.")
+    env.LHBooting = false
+end
+
+env.LHBootStartedAt = tick()
 env.LHBooting = true
 env.lhloaded = false
 
@@ -879,7 +941,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.3.7')
+local Vv = ('10.4.0')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -1540,6 +1602,18 @@ end
 --==================================================
 -- RESPAWN-SAFE UNIVERSAL FEATURE MANAGER
 --==================================================
+-- Capture the game's real JumpPower once, before LH movement kontrols change it.
+if env.LHDefaultGameJumpPower == nil then
+    pcall(function()
+        local startupCharacter = lp.Character or lp.CharacterAdded:Wait()
+        local startupHumanoid = startupCharacter and (startupCharacter:FindFirstChildOfClass("Humanoid") or startupCharacter:WaitForChild("Humanoid", 10))
+        if startupHumanoid then
+            env.LHDefaultGameJumpPower = tonumber(startupHumanoid.JumpPower) or 50
+        end
+    end)
+end
+if env.LHDefaultGameJumpPower == nil then env.LHDefaultGameJumpPower = 50 end
+
 local LHFeatures = {
     Character = nil,
     Humanoid = nil,
@@ -2238,6 +2312,7 @@ local toggle = game.CoreGui:FindFirstChild[[KustomToggle]];
 if toggle then toggle:Destroy();
 getgenv().lhloaded=false;
 env.LHBooting=false;
+env.LHBootStartedAt=nil;
 destroyLollypopHub();
 -- _G.note("You kan now klose and reload the skript", 3)
 windowErrorOk("Lollypop Hub reloaded", "You kan now klose and reload the skript")
@@ -2845,6 +2920,10 @@ local function descriptor(kind, data)
     function data:Reset()
         if self._ui and self._ui.Reset then return self._ui:Reset() end
     end
+    function data:SetResetDefault(value)
+        self.default = value
+        if self._ui and self._ui.SetResetDefault then return self._ui:SetResetDefault(value) end
+    end
     function data:Fire()
         if self._ui and self._ui.Fire then return self._ui:Fire() end
         if type(self.callback) == "function" then return self.callback() end
@@ -3097,8 +3176,11 @@ end
 if tonumber(KAVO.AvatarMarketplaceVersion or 0) < 1 then
     warn("[Lollypop Hub] Kavo loaded without Ava Kreator support. Upload kavo ui 4.4 to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
 end
-if tonumber(KAVO.UserLookupVersion or 0) < 1 then
-    warn("[Lollypop Hub] Kavo loaded without User Lookup support. Upload the patched Kavo file to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
+if tonumber(KAVO.UserLookupVersion or 0) < 5 then
+    warn("[Lollypop Hub] Kavo loaded without User Lookup V5. Continuing normal startup.")
+end
+if tonumber(KAVO.ExperienceHubVersion or 0) < 1 then
+    warn("[Lollypop Hub] Kavo loaded without Experience Hub V1. Continuing normal startup.")
 end
 
 local lollypopHub = ("Lollypop Hub"..emoji.lollipop.." | V") ..Vv.. " | " ..exploit.. " | " ..LastUpdate;
@@ -3336,9 +3418,126 @@ LHRuntime:RegisterCommand("jump", {"j"}, "Makes your local player jump.", "jump"
     humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 end)
 
-LHRuntime:RegisterCommand("to", {"tp", "goto"}, "Teleports to a player, random, nearest, or furthest.", "to lolli", function(args)
+
+--==========================================================
+-- SHARED SPECTATE MANAGER
+--==========================================================
+env.LHSpectate = env.LHSpectate or {
+    Target = nil,
+    Subject = nil,
+    RenderConnection = nil,
+    CharacterConnection = nil,
+    DescendantConnection = nil,
+    LeaveConnection = nil,
+}
+
+env.LHGetSpectateSubject = function(character)
+    if not character or not character.Parent then return nil end
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if humanoid and humanoid.Parent then return humanoid end
+    local head = character:FindFirstChild("Head")
+    if head and head:IsA("BasePart") then return head end
+    local root = character:FindFirstChild("HumanoidRootPart")
+    if root and root:IsA("BasePart") then return root end
+    if character.PrimaryPart and character.PrimaryPart:IsA("BasePart") then return character.PrimaryPart end
+    for _, d in ipairs(character:GetDescendants()) do
+        if d:IsA("BasePart") then return d end
+    end
+    return nil
+end
+
+env.LHRestoreOwnCamera = function()
+    local camera = workspace.CurrentCamera
+    local character = lp.Character
+    local subject = character and (character:FindFirstChildOfClass("Humanoid")
+        or character:FindFirstChild("HumanoidRootPart")
+        or character:FindFirstChildWhichIsA("BasePart"))
+    if camera and subject then
+        pcall(function() camera.CameraType = Enum.CameraType.Custom end)
+        pcall(function() camera.CameraSubject = subject end)
+    end
+end
+
+env.LHStopSpectate = function(restoreCamera)
+    local s = env.LHSpectate
+    if not s then return end
+    for _, key in ipairs({"RenderConnection","CharacterConnection","DescendantConnection","LeaveConnection"}) do
+        if s[key] then pcall(function() s[key]:Disconnect() end); s[key]=nil end
+    end
+    s.Target=nil
+    s.Subject=nil
+    if restoreCamera ~= false then task.defer(env.LHRestoreOwnCamera) end
+    if type(env.LHOnSpectateChanged)=="function" then pcall(env.LHOnSpectateChanged,nil) end
+end
+
+env.LHStartSpectate = function(targetPlayer)
+    if not targetPlayer or targetPlayer==lp then return false,"Choose another player." end
+    env.LHStopSpectate(false)
+    local s=env.LHSpectate
+    s.Target=targetPlayer
+
+    local function bindCharacter(character)
+        if s.Target~=targetPlayer then return end
+        if s.DescendantConnection then pcall(function() s.DescendantConnection:Disconnect() end); s.DescendantConnection=nil end
+        s.Subject=env.LHGetSpectateSubject(character)
+        if character and character.Parent then
+            s.DescendantConnection=character.DescendantAdded:Connect(function(inst)
+                if s.Target~=targetPlayer then return end
+                if (not s.Subject) or (not s.Subject.Parent) then
+                    if inst:IsA("Humanoid") or inst:IsA("BasePart") then
+                        s.Subject=env.LHGetSpectateSubject(character)
+                    end
+                end
+            end)
+        end
+    end
+
+    bindCharacter(targetPlayer.Character)
+    s.CharacterConnection=targetPlayer.CharacterAdded:Connect(function(character)
+        if s.Target==targetPlayer then task.defer(function() bindCharacter(character) end) end
+    end)
+    s.LeaveConnection=get.Players.PlayerRemoving:Connect(function(player)
+        if player==targetPlayer and s.Target==targetPlayer then
+            env.LHStopSpectate(true)
+            pcall(function() LHRuntime:Notify("info","Spectate","Player left - camera reset.",3) end)
+        end
+    end)
+    s.RenderConnection=get.RunService.RenderStepped:Connect(function()
+        if s.Target~=targetPlayer then return end
+        local character=targetPlayer.Character
+        if not character or not character.Parent then return end
+        if (not s.Subject) or (not s.Subject.Parent) or (not s.Subject:IsDescendantOf(character)) then
+            s.Subject=env.LHGetSpectateSubject(character)
+        end
+        local camera=workspace.CurrentCamera
+        local subject=s.Subject
+        if not camera or not subject then return end
+        pcall(function() camera.CameraType=Enum.CameraType.Custom end)
+        pcall(function()
+            if camera.CameraSubject~=subject then camera.CameraSubject=subject end
+        end)
+    end)
+
+    if type(env.LHOnSpectateChanged)=="function" then pcall(env.LHOnSpectateChanged,targetPlayer) end
+    return true
+end
+
+LHRuntime:RegisterCommand("view", {"watch","spectate"}, "Spectate a player.", "view <player>", function(args)
+    local query=table.concat(args," ")
+    if query=="" then error("Use: "..LHRuntime.Prefix.."view <player>") end
+    local target=LHRuntime:FindPlayer(query)
+    if not target then error("Player not found: "..query) end
+    local ok,reason=env.LHStartSpectate(target)
+    if not ok then error(reason or "Could not spectate player.") end
+end)
+
+LHRuntime:RegisterCommand("unview", {"unwatch","unspectate"}, "Stop spectating.", "unview", function()
+    env.LHStopSpectate(true)
+end)
+
+LHRuntime:RegisterCommand("to", {"tp", "goto"}, "Teleports to a player, random, nearest, or furthest.", "to [player]", function(args)
     local query = table.concat(args, " ")
-    if query == "" then error("Use: " .. LHRuntime.Prefix .. "to player/random/nearest/furthest") end
+    if query == "" then query = "random" end
 
     local target
     for _ = 1, 20 do
@@ -3377,6 +3576,77 @@ LHRuntime:RegisterCommand("sit", {"seat"}, "Sits locally or sits on a target pla
     if not targetHead or not localRoot then error("Head or root missing") end
     localRoot.CFrame = targetHead.CFrame * CFrame.new(0, 2.5, 0)
     humanoid.Sit = true
+end)
+
+env.LHHeadSitState = env.LHHeadSitState or {
+    Target = nil,
+    FollowConnection = nil,
+    JumpConnection = nil,
+    CharacterConnection = nil,
+}
+
+env.LHStopHeadSit = function()
+    local state = env.LHHeadSitState
+    if not state then return end
+    if state.FollowConnection then pcall(function() state.FollowConnection:Disconnect() end) end
+    if state.JumpConnection then pcall(function() state.JumpConnection:Disconnect() end) end
+    if state.CharacterConnection then pcall(function() state.CharacterConnection:Disconnect() end) end
+    state.FollowConnection = nil
+    state.JumpConnection = nil
+    state.CharacterConnection = nil
+    state.Target = nil
+
+    local humanoid = LHRuntime:GetHumanoid()
+    if humanoid then pcall(function() humanoid.Sit = false end) end
+end
+
+env.LHStartHeadSit = function(target)
+    env.LHStopHeadSit()
+    if not target or target == lp then error("Choose another player.") end
+
+    local humanoid = LHRuntime:GetHumanoid()
+    local root = LHRuntime:GetRoot()
+    local targetCharacter = target.Character
+    local targetHead = targetCharacter and targetCharacter:FindFirstChild("Head")
+    if not humanoid or not root or not targetHead then error("Head or character root is not ready.") end
+
+    local state = env.LHHeadSitState
+    state.Target = target
+    root.CFrame = targetHead.CFrame * CFrame.new(0, 2.55, 0)
+    humanoid.Sit = true
+
+    state.FollowConnection = get.RunService.RenderStepped:Connect(function()
+        if state.Target ~= target then return end
+        local localRoot = LHRuntime:GetRoot()
+        local character = target.Character
+        local head = character and character:FindFirstChild("Head")
+        if not localRoot or not head or not target.Parent then
+            env.LHStopHeadSit()
+            return
+        end
+        localRoot.CFrame = head.CFrame * CFrame.new(0, 2.55, 0)
+    end)
+
+    state.JumpConnection = humanoid:GetPropertyChangedSignal("Jump"):Connect(function()
+        if humanoid.Jump then env.LHStopHeadSit() end
+    end)
+
+    state.CharacterConnection = lp.CharacterAdded:Connect(function()
+        env.LHStopHeadSit()
+    end)
+end
+
+LHRuntime:RegisterCommand("headsit", {"hs"}, "Sit on a player's head until you jump or use unheadsit.", "headsit <player>", function(args)
+    local query = table.concat(args, " ")
+    if query == "" then error("Use: " .. LHRuntime.Prefix .. "headsit <player>") end
+    local target = LHRuntime:FindPlayer(query)
+    if not target then error("Player not found: " .. query) end
+    env.LHStartHeadSit(target)
+    LHRuntime:Notify("success", "Head Sit", "Sitting on @" .. target.Name .. ". Jump or use " .. LHRuntime.Prefix .. "unheadsit to stop.", 4)
+end)
+
+LHRuntime:RegisterCommand("unheadsit", {"unhs", "uhs", "noheadsit", "nhs"}, "Stop headsit.", "unheadsit", function()
+    env.LHStopHeadSit()
 end)
 
 LHRuntime:RegisterCommand("kick", {"leave"}, "Kicks only your local player with an optional message.", "kick custom message", function(args)
@@ -3901,6 +4171,10 @@ local NamelessCommandReference = {
     ["team"] = {{}, "team <team name>", "Changes your team (for the client)"},
     ["reselectchar"] = {{"reselectcharacter", "pickchar", "charpicker"}, "reselectchar", "Re-open the character picker"},
     ["goto"] = {{"to", "tp", "teleport"}, "goto <player|npc:filter|X,Y,Z>", "Teleport to the given player, NPC, or X,Y,Z coordinates"},
+    ["view"] = {{"watch", "spectate"}, "view <player> (watch,spectate)", "Spectate a player"},
+    ["unview"] = {{"unwatch", "unspectate"}, "unview (unwatch,unspectate)", "Stop spectating"},
+    ["headsit"] = {{"hs"}, "headsit <player> (hs)", "Sit on a player's head until you jump or use unheadsit"},
+    ["unheadsit"] = {{"unhs", "uhs", "noheadsit", "nhs"}, "unheadsit (unhs,uhs,noheadsit,nhs)", "Stop headsit"},
     ["watch2"] = {{"view2", "spectate2"}, "watch2", ""},
     ["unwatch2"] = {{"unview2"}, "unwatch2", ""},
     ["stealaudio"] = {{"getaudio", "steal", "logaudio"}, "stealaudio <player>", "Save all sounds a player is playing to a file -Cyrus"},
@@ -4187,11 +4461,6 @@ local function makeNamelessSourceHeadless(source)
         "Notify = function() end\nWindow = function() end\nPopup = function() end",
         1
     )
-    source = source:gsub(
-        "cmds%s*=%s*{%s*\n%s*Commands%s*=%s*{};%s*\n%s*Aliases%s*=%s*{};%s*\n%s*NASAVEDALIASES%s*=%s*{};%s*\n%s*_skipAutoSuffix%s*=%s*false;%s*\n%s*}",
-        "cmds={\n\tCommands={};\n\tAliases={};\n\tNASAVEDALIASES={};\n\t_skipAutoSuffix=false;\n}\ngetgenv().LHNamelessLiveCommands = cmds",
-        1
-    )
     return source
 end
 
@@ -4209,16 +4478,16 @@ ensureNamelessBackend = function()
     end
 
     namelessLoading = true
-    env.NAHideStartup = true
-    env.NALoadingStartMinimized = true
-    env.NA_MCP_OPTIONS = {
+    LHCompat.SafeTableSet(env, "NAHideStartup", true)
+    LHCompat.SafeTableSet(env, "NALoadingStartMinimized", true)
+    LHCompat.SafeTableSet(env, "NA_MCP_OPTIONS", {
         allowUIAccess = false,
         commandPrediction = false,
         notifyCommands = false,
         notifyReads = false,
         notifyActivity = false,
         actor = "Lollypop Admin Kommands",
-    }
+    })
 
     local known = setmetatable({}, {__mode = "k"})
     for _, root in ipairs(getAdminGuiRoots()) do
@@ -4244,9 +4513,9 @@ ensureNamelessBackend = function()
         local compiled, compileError = loadstring(source)
         if not compiled then error(compileError or "Admin kommand backend failed to compile") end
         compiled()
-        env.DoNotif = function() end
-        env.DoWindow = function() end
-        env.DoPopup = function() end
+        LHCompat.SafeTableSet(env, "DoNotif", function() end)
+        LHCompat.SafeTableSet(env, "DoWindow", function() end)
+        LHCompat.SafeTableSet(env, "DoPopup", function() end)
         local bridge = env.NA_MCP or env.NamelessAdminMCP
         if type(bridge) == "table" and type(bridge.options) == "function" then
             pcall(bridge.options, {
@@ -4271,7 +4540,7 @@ ensureNamelessBackend = function()
         LHRuntime:Notify("error", "Admin Kommands", tostring(err), 3, nil, true)
         return false
     end
-    if type(env.LHSyncNamelessKommands) == "function" then pcall(env.LHSyncNamelessKommands) end
+    -- The built-in Nameless kommand reference remains available without mutating Nameless's private tables.
     return findNamelessRunner and findNamelessRunner() ~= nil
 end
 
@@ -4572,7 +4841,19 @@ do
         mobileOpen.Font = Enum.Font.GothamBold
         mobileOpen.Visible = env.LHAdminKommandsEnabled
         mobileOpen.ZIndex = 200
-        mobileOpen.Parent = paletteGui
+
+        local adminSafeArea = Instance.new("Frame")
+        adminSafeArea.Name = "LollypopAdminSafeArea"
+        adminSafeArea.Position = UDim2.fromOffset(8, 8)
+        adminSafeArea.Size = UDim2.new(1, -16, 1, -16)
+        adminSafeArea.BackgroundTransparency = 1
+        adminSafeArea.BorderSizePixel = 0
+        adminSafeArea.Active = false
+        adminSafeArea.ClipsDescendants = true
+        adminSafeArea.ZIndex = 199
+        adminSafeArea.Parent = paletteGui
+
+        mobileOpen.Parent = adminSafeArea
         LHRuntime:AddButtonPressEffect(mobileOpen)
         Instance.new("UICorner", mobileOpen).CornerRadius = UDim.new(1, 0)
         local mobileStroke = Instance.new("UIStroke", mobileOpen)
@@ -4583,54 +4864,83 @@ do
         local clickThreshold = 7
 
         local function clampMobileOpen()
-            if not mobileOpen or not mobileOpen.Parent then return end
-            local camera = workspace.CurrentCamera
-            if not camera then return end
-            local view = camera.ViewportSize
-            local size = mobileOpen.AbsoluteSize
-            local pos = mobileOpen.AbsolutePosition
-            local margin = 6
-            local x = math.clamp(pos.X, margin, math.max(margin, view.X - size.X - margin))
-            local y = math.clamp(pos.Y, margin, math.max(margin, view.Y - size.Y - margin))
-            mobileOpen.Position = UDim2.fromOffset(
-                x + size.X * mobileOpen.AnchorPoint.X,
-                y + size.Y * mobileOpen.AnchorPoint.Y
-            )
+            if not mobileOpen or not mobileOpen.Parent or not adminSafeArea or not adminSafeArea.Parent then return end
+            local areaSize = adminSafeArea.AbsoluteSize
+            local buttonSize = mobileOpen.AbsoluteSize
+            if areaSize.X <= 0 or areaSize.Y <= 0 or buttonSize.X <= 0 or buttonSize.Y <= 0 then return end
+
+            local x = math.clamp(mobileOpen.Position.X.Offset, 0, math.max(0, areaSize.X - buttonSize.X))
+            local y = math.clamp(mobileOpen.Position.Y.Offset, 0, math.max(0, areaSize.Y - buttonSize.Y))
+            mobileOpen.Position = UDim2.fromOffset(x, y)
         end
 
-        LHRuntime:Track(mobileOpen.InputBegan:Connect(function(inputObject)
-            if env.LHSettings.AdminButtonDragLocked then return end
-            if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
-                dragging = true
-                moved = false
-                dragInput = inputObject
-                dragStart = inputObject.Position
-                startPosition = mobileOpen.Position
-            end
-        end))
-        LHRuntime:Track(get.UserInputService.InputChanged:Connect(function(inputObject)
-            if not dragging or env.LHSettings.AdminButtonDragLocked then return end
-            if inputObject == dragInput or inputObject.UserInputType == Enum.UserInputType.MouseMovement or inputObject.UserInputType == Enum.UserInputType.Touch then
-                local delta = inputObject.Position - dragStart
-                if math.abs(delta.X) > clickThreshold or math.abs(delta.Y) > clickThreshold then
-                    moved = true
-                    mobileOpen.Position = UDim2.new(startPosition.X.Scale, startPosition.X.Offset + delta.X, startPosition.Y.Scale, startPosition.Y.Offset + delta.Y)
-                    clampMobileOpen()
-                end
-            end
-        end))
-        LHRuntime:Track(get.UserInputService.InputEnded:Connect(function(inputObject)
-            if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
-                dragging = false
+        local function finishAdminButtonDrag(shouldClamp)
+            dragging = false
+            dragInput = nil
+            dragStart = nil
+            startPosition = nil
+            if shouldClamp ~= false then
                 task.defer(clampMobileOpen)
             end
-        end))
-        task.defer(clampMobileOpen)
-        if workspace.CurrentCamera then
-            LHRuntime:Track(workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-                task.defer(clampMobileOpen)
-            end))
         end
+
+        env.LHCancelAdminButtonDrag = function()
+            finishAdminButtonDrag(false)
+        end
+        env.LHClampAdminButton = clampMobileOpen
+
+        LHRuntime:Track(mobileOpen.InputBegan:Connect(function(inputObject)
+            if env.LHSettings.AdminButtonDragLocked or dragging then return end
+            if inputObject.UserInputType ~= Enum.UserInputType.MouseButton1
+                and inputObject.UserInputType ~= Enum.UserInputType.Touch then
+                return
+            end
+
+            dragging = true
+            moved = false
+            dragInput = inputObject
+            dragStart = Vector2.new(inputObject.Position.X, inputObject.Position.Y)
+            startPosition = mobileOpen.Position
+
+            LHRuntime:Track(inputObject:GetPropertyChangedSignal("UserInputState"):Connect(function()
+                if dragInput ~= inputObject then return end
+                if inputObject.UserInputState == Enum.UserInputState.End
+                    or inputObject.UserInputState == Enum.UserInputState.Cancel then
+                    finishAdminButtonDrag(true)
+                end
+            end))
+        end))
+
+        -- Read ONLY the input object that originally began on the button.
+        -- Random touches elsewhere never participate in this loop.
+        LHRuntime:Track(get.RunService.RenderStepped:Connect(function()
+            if not dragging or not dragInput then return end
+            if env.LHSettings.AdminButtonDragLocked then
+                finishAdminButtonDrag(false)
+                return
+            end
+            if dragInput.UserInputState == Enum.UserInputState.End
+                or dragInput.UserInputState == Enum.UserInputState.Cancel then
+                finishAdminButtonDrag(true)
+                return
+            end
+
+            local current = Vector2.new(dragInput.Position.X, dragInput.Position.Y)
+            local delta = current - dragStart
+            if math.abs(delta.X) > clickThreshold or math.abs(delta.Y) > clickThreshold then
+                moved = true
+                mobileOpen.Position = UDim2.fromOffset(
+                    startPosition.X.Offset + delta.X,
+                    startPosition.Y.Offset + delta.Y
+                )
+                clampMobileOpen()
+            end
+        end))
+
+        task.defer(clampMobileOpen)
+        LHRuntime:Track(adminSafeArea:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+            task.defer(clampMobileOpen)
+        end))
         LHRuntime:Track(mobileOpen.MouseButton1Click:Connect(function()
             if moved then
                 moved = false
@@ -4724,6 +5034,11 @@ end
 local dragLockSection = section(settingsTab, "Drag Locks", {})
 uiSettingControls.ToggleDragLocked = add(dragLockSection, toggle("Lock toggle position (stops \"" .. emoji.lollipop .. "\" from dragging)", "stops the Lollypop open/klose button from moving", function(value)
     env.LHSettings.ToggleDragLocked = value
+    if value then
+        if env.LHCancelToggleDrag then pcall(env.LHCancelToggleDrag) end
+    elseif env.LHClampToggleButton then
+        pcall(env.LHClampToggleButton)
+    end
     LHRuntime:SettingChanged()
 end, env.LHSettings.ToggleDragLocked))
 
@@ -4735,6 +5050,11 @@ end, env.LHSettings.DragLocked))
 
 uiSettingControls.AdminButtonDragLocked = add(dragLockSection, toggle("Lock Lollypop Admin button position", "locks the draggable goblin admin button in its kurrent position", function(value)
     env.LHSettings.AdminButtonDragLocked = value
+    if value then
+        if env.LHCancelAdminButtonDrag then pcall(env.LHCancelAdminButtonDrag) end
+    elseif env.LHClampAdminButton then
+        pcall(env.LHClampAdminButton)
+    end
     LHRuntime:SettingChanged()
 end, env.LHSettings.AdminButtonDragLocked))
 
@@ -5241,8 +5561,16 @@ spawnK = stepped:connect(handleRespawn)
     end)
 end))
 
-add(SkriptsSection, toggle("Auto-Execute when teleporting/server-hopping", "executes lollypophub wen u serverhop", function(...)
-_G.qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2'))()", ...)
+add(SkriptsSection, toggle("Auto-Execute when teleporting/server-hopping", "executes lollypophub wen u serverhop", function(enabled)
+    if enabled ~= true then return end
+
+    local source = "loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2', true))()"
+    local ok, err = LHCompat.QueueOnTeleport(source)
+
+    if not ok then
+        LHRuntime:Notify("warning", "Auto Execute", "Queue on teleport is not supported by this executor.", 4)
+        return
+    end
 end))
 
 add(SkriptsSection, textbox("Mini Executor", "paste your skript and press enter", function(skript)
@@ -5731,12 +6059,12 @@ env.LHSendXhat = function(message)
         target = channels and (channels:FindFirstChild("RBXGeneral") or channels:FindFirstChildWhichIsA("TextChannel"))
     end
     if not target or not target:IsA("TextChannel") then
-        LHRuntime:Notify("warning", "Xhat", "No available xhat khannel was found.", 3)
+        LHRuntime:Notify("warning", "Chat", "No available chat channel was found.", 3)
         return false
     end
     local ok = pcall(function() target:SendAsync(message) end)
     if not ok then
-        LHRuntime:Notify("error", "Xhat", "Message kould not be sent.", 3)
+        LHRuntime:Notify("error", "Chat", "Message kould not be sent.", 3)
         return false
     end
     if env.LHXhatKontrol and env.LHXhatKontrol.SetValue then
@@ -5745,11 +6073,11 @@ env.LHSendXhat = function(message)
     return true
 end
 
-env.LHXhatKontrol = add(SkriptsSection, textbox("Xhat Message", "Sends only wen u press Enter or the Send button.", function(message)
+env.LHXhatKontrol = add(SkriptsSection, textbox("chat", "Sends only wen u press Enter or the send message button.", function(message)
     env.LHSendXhat(message)
 end, "Type a message..."))
 
-add(SkriptsSection, button("Send Xhat", "Sends the message above to your kurrent Roblox xhat khannel.", function()
+add(SkriptsSection, button("send message", "Sends the message above to your kurrent Roblox chat channel.", function()
     env.LHSendXhat(env.LHXhatKontrol and env.LHXhatKontrol:GetValue() or "")
 end))
 
@@ -5760,14 +6088,12 @@ emit.VelocitySpread = 3;
 end;
 end));
 
-add(SkriptsSection, textbox("(R15) Airwalk", "lets u walk on air", function(num)
-hum.HipHeight = num
-end))
-
-add(SkriptsSection, button("Stop airwalking", "resets air walk", function()
-local stopairwalk= 2.1
-hum.HipHeight = stopairwalk
-end))
+env.LHAirwalkDefaultHipHeight = 2.1
+add(SkriptsSection, kounter("(R15) Airwalk", "lets u walk on air", 0.1, function(num)
+local airwalkCharacter = get.Players.LocalPlayer.Character
+local airwalkHumanoid = airwalkCharacter and airwalkCharacter:FindFirstChildOfClass("Humanoid")
+if airwalkHumanoid then airwalkHumanoid.HipHeight = tonumber(num) or env.LHAirwalkDefaultHipHeight end
+end, env.LHAirwalkDefaultHipHeight, -10, 100))
 
 add(SkriptsSection, button("Kamera(movie style)", "makes ur kam delay like ur the main xharakter", function()
 repeat
@@ -5867,7 +6193,7 @@ function()-- unvrsl godmode
 loadstring(game:HttpGet("https://freenote.biz/raw/Fhpx5r5A8M"))()
 end))
 
-add(SkriptsSection, bannerlabel("Kharakter & Kombat"))
+add(SkriptsSection, bannerlabel("Character & Kombat"))
 
 -- Respawn-safe Anti Sit. The shared feature loop stops immediately when toggled off.
 add(SkriptsSection, toggle("Anti Sit", "Prevents forced sitting and keeps working after death or respawn.", function(enabled)
@@ -9698,32 +10024,64 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.4.0 updates: ",
+    "[FIXED] Experience ABOUT and EXPERIENCE INFO now expand to fit all text and shrink for short text",
+    "[NEW] Experience now loads the current game thumbnail from Roblox CDN thumbnail data",
+    "[IMPROVED] Airwalk now uses a +/- kounter with Reset back to 2.1",
+    "[IMPROVED] Jump Power Reset now returns to the game JumpPower captured when LH first loaded",
+    "[NEW KOMMAND] view <player> (watch,spectate) and unview (unwatch,unspectate)",
+    "[NEW] Experience Players: added Spectate and Stop Spectating with one active spectate at a time",
+    "[NEW KOMMAND] headsit <player> (hs) and unheadsit (unhs,uhs,noheadsit,nhs)",
+    "[IMPROVED] to/tp/goto with no target now teleports to a random player",
+    "Added invisible safe area for draggable buttons to prevent them from going off-screen",
+
+    emoji.lollipop.." V10.3.11 updates: ",
+    "[FIXED] draggable floating buttons stay inside the skreen and stay where u leave them",
+    "[IMPROVED] Avatar Viewer and Saved Outfit previews now move with your kurrent avatar animations",
+    "[IMPROVED] renamed chat and Character & Kombat labels",
+
+    emoji.lollipop.." V10.3.10 updates: ",
+    "[FIXED] Saved Outfits avatar previews are larger and easier to see",
+    "[NEW] Saved Outfits kan now be renamed",
+    "[IMPROVED] User Lookup buttons are easier to see",
+    "[IMPROVED] User Lookup moved above Server",
+
+    emoji.lollipop.." V10.3.9 updates: ",
+    "[FIXED] Lollypop Admin button stays where u place it instead of moving from other skreen taps",
+
+    emoji.lollipop.." V10.3.8 updates: ",
+    "[FIXED] Auto Execute when teleporting/server-hopping",
+    "[FIXED] Lollypop Admin Kommands not enabling on some executors",
+    "[FIXED] Saved Outfits avatar preview",
+    "[IMPROVED] Avatar Katalog Kreator is now marked [BETA]",
+
     emoji.lollipop.." V10.3.7 updates: ",
     "[FIXED] Lollypop Hub starts normally again",
     "[FIXED] startup reliability improved after the latest feature additions",
 
     emoji.lollipop.." V10.3.6 updates: ",
+    "[FIXED] Lollypop Hub loads normally again",
     "[IMPROVED] sidebar tab order now uses simple sequential numbers",
     "[IMPROVED] User Lookup buttons have a more unique polished design",
 
     emoji.lollipop.." V10.3.5 updates: ",
-    "[FIXED] User Lookup searchbox Klear button no longer shows a error",
+    "[FIXED] User Lookup searchbox Klear button no longer shows a Kontrol Error",
+    "[IMPROVED] User Lookup has a more polished profile design",
+    "[FIXED] Saved Outfits avatar previews are easier to see",
     "[IMPROVED] floating Admin button stays inside the skreen on different device sizes",
-    "[IMPROVED] (Admin) Lollypop Admin: +207 kommands added",
-    "[NEW] chat textbox is added to Utility & Character",
-    "[NEW] +24 Ui kolor themes",
+    "[IMPROVED] Lollypop Admin Kommands now includes every kommand found in the updated Nameless Admin build",
+    "[NEW] !un <kommand> quickly turns off supported admin kommands",
+    "[NEW] Xhat textbox + Send button added to Utility & Kharakter",
+    "[NEW] added 24 more Ui kolor themes",
 
     emoji.lollipop.." V10.3.4 updates: ",
     "[FIXED] User Lookup now shows matching users instead of staying stuck on Looking up",
-
-    "[IMPROVED] User Lookup ROBLOX title is smaller and keeps its original shape without stretching",
+    "[IMPROVED] User Lookup falls baxk to an exakt username lookup if the wider search is unavailable",
 
     emoji.lollipop.." V10.3.3 updates: ",
     "[FIXED] User Lookup no longer gets stuck on Looking up and partial username searches load matching users again",
     "[FIXED] Saved Outfit avatar previews now load properly instead of showing a blank kard",
     "[FIXED] Wear Outfit now applies saved avatar items more reliably",
-    "[IMPROVED] User Lookup ROBLOX branding is larger, kleaner, and uses more of the header space",
-    "[IMPROVED] Avatar Kreator icon is larger and easier to see",
     "[IMPROVED] player movement tools are now grouped together in the Players sektion",
     "[IMPROVED] renamed lazy More Skripts headers to match wat is aktually inside them",
 
@@ -9732,7 +10090,6 @@ local UpdatesLog = {
     "[FIXED] Saved Outfits now shows the saved avatar preview and Wear Outfit aktually applies the saved outfit",
     "[FIXED] Kurrent Outfit Take Off and Reset All now update the avatar korrectly",
     "[IMPROVED] Add Friend is kleaner and only tells u the same-server requirement if needed",
-    "[IMPROVED] Avatar Kreator icon is a little larger and easier to see",
     "[IMPROVED] Auto Jump, Infinite Jump, and Jump Bot are now direktly after Reset Gravity",
     "[IMPROVED] section headers now use the gold banner style konsistently",
 
@@ -9755,7 +10112,6 @@ local UpdatesLog = {
 
     emoji.lollipop.." V10.2.3 updates: ",
 
-    "[IMPROVED] Avatar Katalog Kreator was resized for the normal Lollypop Hub view ",
     "[NEW] Avatar Kreator: Favorites mode with star buttons on every Marketplace item and saved favorite searches (Auto Saves)",
     "[NEW] Avatar Kreator: search has an X klear button and added \"Back to Top\" button for easier returning to the searchbar",
     "[IMPROVED] Item Stacking, Load More, Back to Top, results text, and kategory kontrols dont  overlap anymore",
@@ -10151,9 +10507,12 @@ local humanoid = character and character:FindFirstChildOfClass("Humanoid")
 if humanoid then humanoid.WalkSpeed = speed end
 end, 16, 0, 400))
 
-add(HomeSection, kounter("Jump Power", "xhanges the universal LH jumppower", 1, function(jp)
+env.LHHomeJumpPowerKontrol = add(HomeSection, kounter("Jump Power", "xhanges the universal LH jumppower", 1, function(jp)
 LHFeatures:SetJumpPower(jp)
 end, LHFeatures.UniversalJumpPower, 0, 500))
+if env.LHHomeJumpPowerKontrol then
+    pcall(function() env.LHHomeJumpPowerKontrol:SetResetDefault(env.LHDefaultGameJumpPower) end)
+end
 
 add(HomeSection, button("Ping Kounter", "see ping", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MvKKJ331"))()
@@ -10724,6 +11083,9 @@ end))
 -- Build every stored kontrol once. Search only hides/shows existing rows.
 buildHub(Window)
 
+-- Marketplace tabs are created natively inside the existing Kavo/LH tab system.
+-- Explicit sidebar order keeps Free Animations, Free Emotes, and Ava Kreator together while
+-- Server stays direktly above Notifications at the bottom.
 local sidebarOrderByName = {
     ["Ui Kustomization"] = 1,
     ["Home"] = 2,
@@ -10735,7 +11097,7 @@ local sidebarOrderByName = {
     ["FE"] = 13,
     ["Updates/Extras"] = 14,
     ["Bypasses & More"] = 15,
-    ["Server"] = 16,
+    ["Server"] = 18,
 }
 
 for tabIndex, tabData in ipairs(tabOrder) do
@@ -10816,7 +11178,7 @@ local personalShelfTab = nil
 if Window.EnablePersonalShelf then
     personalShelfTab = Window:EnablePersonalShelf("My Shelf")
     if personalShelfTab and personalShelfTab.Button then
-        personalShelfTab.Button.LayoutOrder = 8
+        personalShelfTab.Button.LayoutOrder = 9
     end
 end
 
@@ -10827,7 +11189,7 @@ if Window.EnableAutoExecuteManager then
     end)
     if autoExecuteOk then
         autoExecuteTab = autoExecuteResult
-        if autoExecuteTab and autoExecuteTab.Button then autoExecuteTab.Button.LayoutOrder = 9 end
+        if autoExecuteTab and autoExecuteTab.Button then autoExecuteTab.Button.LayoutOrder = 8 end
     else
         warn("[Lollypop Hub Auto Execute] " .. tostring(autoExecuteResult))
         if LHRuntime and LHRuntime.Notify then
@@ -10871,7 +11233,7 @@ do
         if notificationOk then
             notificationCenterTab = notificationResult
             if notificationCenterTab and notificationCenterTab.Button then
-                notificationCenterTab.Button.LayoutOrder = 18
+                notificationCenterTab.Button.LayoutOrder = 19
             end
         else
             warn("[Lollypop Hub Notifications] " .. tostring(notificationResult))
@@ -10881,6 +11243,27 @@ end
 
 env.lhloaded = true
 env.LHBooting = false
+env.LHBootStartedAt = nil
+
+task.defer(function()
+    if type(Window.EnableExperienceHub) ~= "function" then
+        warn("[Lollypop Hub Experience] Experience Hub V1 is unavailable in the loaded Kavo; core LH remains loaded.")
+        return
+    end
+
+    local experienceOk, experienceResult = pcall(function()
+        local experienceTab = Window:EnableExperienceHub(utf.char(0x2605) .. " Experience")
+        if experienceTab and experienceTab.Button then
+            experienceTab.Button.LayoutOrder = 16
+        end
+        return experienceTab
+    end)
+
+    if not experienceOk then
+        warn("[Lollypop Hub Experience] Init failed after core LH loaded: " .. tostring(experienceResult))
+    end
+end)
+
 for _, guiRoot in pairs({get.CoreGui, get.Players.LocalPlayer:FindFirstChildOfClass("PlayerGui")}) do
     if guiRoot then
         for _, object in pairs(guiRoot:GetDescendants()) do
@@ -11287,7 +11670,26 @@ local function KUSTOMTOGGLE()
     roundButton.Font = Enum.Font.GothamBold
     roundButton.AutoButtonColor = false
     roundButton.ZIndex = 5
-    roundButton.Parent = screenGui
+
+    local toggleSafeArea = Instance.new("Frame")
+    toggleSafeArea.Name = "LollypopToggleSafeArea"
+    toggleSafeArea.Position = UDim2.fromOffset(8, 8)
+    toggleSafeArea.Size = UDim2.new(1, -16, 1, -16)
+    toggleSafeArea.BackgroundTransparency = 1
+    toggleSafeArea.BorderSizePixel = 0
+    toggleSafeArea.Active = false
+    toggleSafeArea.ClipsDescendants = true
+    toggleSafeArea.ZIndex = 4
+    toggleSafeArea.Parent = screenGui
+
+    roundButton.Parent = toggleSafeArea
+    -- Convert the original top-right placement into safe-area-relative offsets.
+    task.defer(function()
+        if roundButton.Parent then
+            local width = toggleSafeArea.AbsoluteSize.X
+            roundButton.Position = UDim2.fromOffset(math.max(0, width - toggleButtonSize - 94), 17)
+        end
+    end)
     Instance.new("UICorner", roundButton).CornerRadius = UDim.new(1, 0)
     local toggleDragGlow = Instance.new("UIStroke", roundButton)
     toggleDragGlow.Name = "WhiteDragGlow"
@@ -11449,49 +11851,99 @@ local function KUSTOMTOGGLE()
     local holdToken = 0
     local heldOpen = false
 
+    local function clampLollypopToggle()
+        if not roundButton or not roundButton.Parent or not toggleSafeArea or not toggleSafeArea.Parent then return end
+        local areaSize = toggleSafeArea.AbsoluteSize
+        local buttonSize = roundButton.AbsoluteSize
+        if areaSize.X <= 0 or areaSize.Y <= 0 or buttonSize.X <= 0 or buttonSize.Y <= 0 then return end
+
+        local x = math.clamp(roundButton.Position.X.Offset, 0, math.max(0, areaSize.X - buttonSize.X))
+        local y = math.clamp(roundButton.Position.Y.Offset, 0, math.max(0, areaSize.Y - buttonSize.Y))
+        roundButton.Position = UDim2.fromOffset(x, y)
+    end
+
+    local function finishToggleDrag(shouldClamp)
+        dragging = false
+        dragInput = nil
+        mousePos = nil
+        framePos = nil
+        setToggleDragGlow(false)
+        holdToken = holdToken + 1
+        if shouldClamp ~= false then
+            task.defer(clampLollypopToggle)
+        end
+    end
+
+    env.LHCancelToggleDrag = function()
+        finishToggleDrag(false)
+    end
+    env.LHClampToggleButton = clampLollypopToggle
+
     LHRuntime:Track(roundButton.InputBegan:Connect(function(inputObject)
-        if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
-            moved = false
-            heldOpen = false
-            holdToken = holdToken + 1
-            local mine = holdToken
-            mousePos = inputObject.Position
+        if inputObject.UserInputType ~= Enum.UserInputType.MouseButton1
+            and inputObject.UserInputType ~= Enum.UserInputType.Touch then
+            return
+        end
+
+        moved = false
+        heldOpen = false
+        holdToken = holdToken + 1
+        local mine = holdToken
+
+        if not env.LHSettings.ToggleDragLocked then
+            mousePos = Vector2.new(inputObject.Position.X, inputObject.Position.Y)
             framePos = roundButton.Position
             dragInput = inputObject
-            dragging = not env.LHSettings.ToggleDragLocked
-            if dragging then setToggleDragGlow(true) end
+            dragging = true
+            setToggleDragGlow(true)
 
-            task.delay(0.5, function()
-                if holdToken == mine and not moved and roundButton.Parent and not ringOpen then
-                    heldOpen = true
-                    dragging = false
-                    setToggleDragGlow(false)
-                    openRing()
+            LHRuntime:Track(inputObject:GetPropertyChangedSignal("UserInputState"):Connect(function()
+                if dragInput ~= inputObject then return end
+                if inputObject.UserInputState == Enum.UserInputState.End
+                    or inputObject.UserInputState == Enum.UserInputState.Cancel then
+                    finishToggleDrag(true)
                 end
-            end)
+            end))
         end
-    end))
 
-    LHRuntime:Track(get.UserInputService.InputChanged:Connect(function(inputObject)
-        if not dragging or env.LHSettings.ToggleDragLocked then return end
-        if inputObject == dragInput or inputObject.UserInputType == Enum.UserInputType.MouseMovement or inputObject.UserInputType == Enum.UserInputType.Touch then
-            local delta = inputObject.Position - mousePos
-            if math.abs(delta.X) > threshold or math.abs(delta.Y) > threshold then
-                moved = true
-                holdToken = holdToken + 1
-                roundButton.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+        task.delay(0.5, function()
+            if holdToken == mine and not moved and roundButton.Parent and not ringOpen then
+                heldOpen = true
+                if dragging then finishToggleDrag(false) end
+                openRing()
             end
-        end
+        end)
     end))
 
-    LHRuntime:Track(get.UserInputService.InputEnded:Connect(function(inputObject)
-        if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
-            dragging = false
-            setToggleDragGlow(false)
+    LHRuntime:Track(get.RunService.RenderStepped:Connect(function()
+        if not dragging or not dragInput then return end
+        if env.LHSettings.ToggleDragLocked then
+            finishToggleDrag(false)
+            return
+        end
+        if dragInput.UserInputState == Enum.UserInputState.End
+            or dragInput.UserInputState == Enum.UserInputState.Cancel then
+            finishToggleDrag(true)
+            return
+        end
+
+        local current = Vector2.new(dragInput.Position.X, dragInput.Position.Y)
+        local delta = current - mousePos
+        if math.abs(delta.X) > threshold or math.abs(delta.Y) > threshold then
+            moved = true
             holdToken = holdToken + 1
+            roundButton.Position = UDim2.fromOffset(
+                framePos.X.Offset + delta.X,
+                framePos.Y.Offset + delta.Y
+            )
+            clampLollypopToggle()
         end
     end))
 
+    LHRuntime:Track(toggleSafeArea:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+        task.defer(clampLollypopToggle)
+    end))
+    task.defer(clampLollypopToggle)
     LHRuntime:Track(roundButton.MouseButton1Click:Connect(function()
         if heldOpen then
             heldOpen = false
@@ -11529,6 +11981,7 @@ spawn(function()
     if not ok then
         env.lhloaded = false
         env.LHBooting = false
+        env.LHBootStartedAt = nil
         warn("[Lollypop Hub Loader] " .. tostring(err))
         pcall(function()
             if loadingSkreen and loadingSkreen.Parent then
