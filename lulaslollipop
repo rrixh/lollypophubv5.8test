@@ -1,6 +1,6 @@
 --main v10.4.1 LOLLYPOP HUB 
 
-date = "August 11"..", "..tostring(os.date("%Y"))
+date = "August 12"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -1311,6 +1311,15 @@ function LHRuntime:ShowIsland(titleText, bodyText, options)
     end
     return nil
 end;
+
+getgenv().lhsay = function(title, txt, dur)
+return LHRuntime:ShowIsland(
+tostring(title) or "title", 
+tostring(txt) or "txt", 
+{Duration = tonumber(dur) or 4
+})
+end;
+lhsay = getgenv().lhsay;
 
 function LHRuntime:AddButtonPressEffect(button)
     if not button or not button:IsA("GuiButton") then return end
@@ -10229,16 +10238,8 @@ local exSection = section(updates, "TROLL/VERY OLD SKRIPTS", updates["TROLL/VERY
 
 -- add(exSection, bannerlabel("Weapons"))
 
-
-
-
-
-
-
 pcall(function()
-
-LHRuntime:ShowIsland("test", "ran", {Duration = 3})
-
+showisland("Lollypop Hub", "Loaded!", 5)
 end)
 
 
