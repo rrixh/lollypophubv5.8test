@@ -1,6 +1,6 @@
---main v10.4.1 LOLLYPOP HUB 
+--main v10.5.0 LOLLYPOP HUB 
 
-date = "August 12"..", "..tostring(os.date("%Y"))
+date = "August 13"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -714,6 +714,9 @@ env.LHSettings = env.LHSettings or {
     NotificationVolume = 0.45,
     UIFont = "Gotham",
     CommandPrefix = "!",
+    CommandAliases = {},
+    WhatsNewSeenVersion = nil,
+    LastUsedVersion = nil,
     AutoSavePerGame = false,
     SeasonalTheme = true,
     OpeningSound = true,
@@ -726,6 +729,7 @@ env.LHSettings = env.LHSettings or {
     FreeEmoteAutoSave = true,
     AvatarKreatorFavorites = {},
     AvatarKreatorSavedOutfits = {},
+    AvatarOwnedAssetIds = {},
     AutoExecuteScripts = {},
     FreeEmoteSpeeds = {},
     AppearanceMode = "Dark",
@@ -743,9 +747,13 @@ local function mergeSettings(target, source)
     return target
 end
 
+local LH_HAD_EXISTING_SETTINGS = false
 pcall(function()
     local ok, decoded = LHCompat.ReadJson(LH_SETTINGS_FILE)
-    if ok then mergeSettings(env.LHSettings, decoded) end
+    if ok then
+        LH_HAD_EXISTING_SETTINGS = true
+        mergeSettings(env.LHSettings, decoded)
+    end
 end)
 
 local LH_UI_DEFAULTS = {
@@ -767,6 +775,9 @@ local LH_UI_DEFAULTS = {
     NotificationVolume = 0.45,
     UIFont = "Gotham",
     CommandPrefix = "!",
+    CommandAliases = {},
+    WhatsNewSeenVersion = nil,
+    LastUsedVersion = nil,
     AutoSavePerGame = false,
     SeasonalTheme = true,
     OpeningSound = true,
@@ -779,6 +790,7 @@ local LH_UI_DEFAULTS = {
     FreeEmoteAutoSave = true,
     AvatarKreatorFavorites = {},
     AvatarKreatorSavedOutfits = {},
+    AvatarOwnedAssetIds = {},
     AutoExecuteScripts = {},
     FreeEmoteSpeeds = {},
     AppearanceMode = "Dark",
@@ -946,7 +958,7 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.4.1')
+local Vv = ('10.5.0')
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -1424,10 +1436,12 @@ function LHRuntime:SaveSettings()
     env.LHSettings.CommandPrefix = self.Prefix
     if type(env.LHUISettings) == "table" then
         if type(env.LHUISettings.AvatarKreatorSavedOutfits) == "table" then env.LHSettings.AvatarKreatorSavedOutfits = env.LHUISettings.AvatarKreatorSavedOutfits end
+        if type(env.LHUISettings.AvatarOwnedAssetIds) == "table" then env.LHSettings.AvatarOwnedAssetIds = env.LHUISettings.AvatarOwnedAssetIds end
         if type(env.LHUISettings.AutoExecuteScripts) == "table" then env.LHSettings.AutoExecuteScripts = env.LHUISettings.AutoExecuteScripts end
         if env.LHUISettings.ThemeBrightness ~= nil then env.LHSettings.ThemeBrightness = tonumber(env.LHUISettings.ThemeBrightness) or 0 end
         if env.LHUISettings.AntiPause ~= nil then env.LHSettings.AntiPause = env.LHUISettings.AntiPause == true end
     end
+    env.LHSettings.CommandAliases = type(self.CustomAliases) == "table" and self.CustomAliases or (env.LHSettings.CommandAliases or {})
     local ok, err = LHCompat.WriteJsonAtomic(LH_SETTINGS_FILE, env.LHSettings, LH_SETTINGS_FILE .. ".backup")
     return ok, err
 end
@@ -2125,6 +2139,82 @@ function LHRuntime:CommandNames()
     return names
 end
 
+
+--==================================================
+-- V10.5.0 KUSTOM KOMMAND ALIASES
+--==================================================
+LHRuntime.CustomAliases = type(env.LHSettings.CommandAliases) == "table" and env.LHSettings.CommandAliases or {}
+env.LHSettings.CommandAliases = LHRuntime.CustomAliases
+
+local function normalizeCustomAliasName(value)
+    value = string.lower(tostring(value or ""))
+    value = value:gsub("^%s+", ""):gsub("%s+$", "")
+    value = value:gsub("^[>!/]+", "")
+    return value
+end
+
+function LHRuntime:ResolveCommandName(name)
+    name = normalizeCustomAliasName(name)
+    local command = self.Commands[name]
+    if command then return command.Name, command end
+    local target = type(self.CustomAliases) == "table" and self.CustomAliases[name] or nil
+    if target then
+        target = normalizeCustomAliasName(target)
+        command = self.Commands[target]
+        if command then return command.Name, command end
+    end
+    return name, nil
+end
+
+function LHRuntime:AddCommandAlias(commandName, aliasName)
+    commandName = normalizeCustomAliasName(commandName)
+    aliasName = normalizeCustomAliasName(aliasName)
+    local _, command = self:ResolveCommandName(commandName)
+    if not command then return false, "Kommand not found: " .. tostring(commandName) end
+    if aliasName == "" then return false, "Alias cannot be blank." end
+    if #aliasName < 2 or #aliasName > 24 then return false, "Alias must be 2-24 characters." end
+    if not aliasName:match("^[%a_][%w_%-]*$") then
+        return false, "Alias kan only use letters, numbers, _ or -, and must start with a letter/_ ."
+    end
+    if self.Commands[aliasName] then
+        return false, "That name is already an LH kommand/alias and cannot be replaced."
+    end
+    local backendReference = rawget(env, "LHNamelessCommandReference")
+    if type(backendReference) == "table" and backendReference[aliasName] ~= nil then
+        return false, "That name belongs to an existing Admin kommand/alias and cannot be replaced."
+    end
+    if self.CustomAliases[aliasName] then
+        return false, "That kustom alias already exists. Remove it first."
+    end
+    if aliasName == command.Name then return false, "That is already the kommand name." end
+    self.CustomAliases[aliasName] = command.Name
+    env.LHSettings.CommandAliases = self.CustomAliases
+    local ok, err = self:SaveSettings()
+    if not ok and self.SessionSupported then return false, err end
+    return true, command.Name
+end
+
+function LHRuntime:RemoveCommandAlias(aliasName)
+    aliasName = normalizeCustomAliasName(aliasName)
+    if not self.CustomAliases[aliasName] then return false, "Kustom alias not found: " .. tostring(aliasName) end
+    local target = self.CustomAliases[aliasName]
+    self.CustomAliases[aliasName] = nil
+    env.LHSettings.CommandAliases = self.CustomAliases
+    self:SaveSettings()
+    return true, target
+end
+
+function LHRuntime:ListCommandAliases()
+    local rows = {}
+    for aliasName, commandName in pairs(self.CustomAliases or {}) do
+        if type(aliasName) == "string" and type(commandName) == "string" then
+            rows[#rows + 1] = {Alias = aliasName, Command = commandName}
+        end
+    end
+    table.sort(rows, function(a, b) return a.Alias < b.Alias end)
+    return rows
+end
+
 function LHRuntime:ExecuteCommand(rawText, source)
     rawText = tostring(rawText or ""):gsub("^%s+", ""):gsub("%s+$", "")
     if rawText == "" then return false, "empty command" end
@@ -2137,7 +2227,8 @@ function LHRuntime:ExecuteCommand(rawText, source)
     end
     local words = splitWords(rawText)
     local commandName = string.lower(table.remove(words, 1) or "")
-    local command = self.Commands[commandName]
+    local resolvedName, command = self:ResolveCommandName(commandName)
+    if command then commandName = resolvedName end
     if not command then
         self:Notify("warning", "Unknown Kommand", commandName .. " was not found. Use " .. self.Prefix .. "help.", 5)
         return false, "unknown command"
@@ -2998,6 +3089,28 @@ env.LHNormalizeVersion = function(value)
         or text:match("(%d+)")
 end
 
+env.LHBuildUniversalIndex = function(tabItems)
+    local index = {}
+    for _, tabData in ipairs(type(tabItems) == "table" and tabItems or {}) do
+        for _, sectionData in ipairs(type(tabData._sections) == "table" and tabData._sections or {}) do
+            for _, item in ipairs(sectionData) do
+                if type(item) == "table" and item.id and item.displayName then
+                    index[#index + 1] = {
+                        ControlId = tostring(item.id),
+                        DisplayName = tostring(item.displayName),
+                        Kind = tostring(item.kind or "kontrol"),
+                        Tip = tostring(item.tip or item.text or ""),
+                        TabName = tostring(tabData._name or ""),
+                        SectionName = tostring(sectionData._name or ""),
+                    }
+                end
+            end
+        end
+    end
+    env.LHUniversalIndex = index
+    return index
+end
+
 env.LHCompareVersions = function(leftVersion, rightVersion)
     local leftParts = {}
     local rightParts = {}
@@ -3019,6 +3132,7 @@ env.LHCompareVersions = function(leftVersion, rightVersion)
 end
 
 local function buildHub(window)
+    if type(env.LHBuildUniversalIndex) == "function" then env.LHBuildUniversalIndex(tabOrder) end
     local requestedOrder = {
         ["Home"] = 1,
         ["Tools"] = 2,
@@ -3416,6 +3530,39 @@ LHRuntime:RegisterCommand("help", {"cmds", "commands", "kommands"}, "Shows the f
         table.insert(parts, LHRuntime.Prefix .. command.Name)
     end
     LHRuntime:Notify("info", "LH Kommands", table.concat(parts, ", "), 10)
+end)
+
+
+LHRuntime:RegisterCommand("addalias", {"aa", "addal"}, "Kreates a persistent kustom alias for an existing LH kommand.", "addalias <kommand> <alias>", function(args)
+    local commandName = tostring(args[1] or "")
+    local aliasName = tostring(args[2] or "")
+    if commandName == "" or aliasName == "" then
+        error("Use: " .. LHRuntime.Prefix .. "aa <kommandName> <aliasForKommand>")
+    end
+    local ok, result = LHRuntime:AddCommandAlias(commandName, aliasName)
+    if not ok then error(result) end
+    LHRuntime:Notify("success", "Kommand Alias", LHRuntime.Prefix .. aliasName .. " now runs " .. LHRuntime.Prefix .. tostring(result) .. ".", 4)
+end)
+
+LHRuntime:RegisterCommand("removealias", {"ra", "delalias", "unalias"}, "Removes one of your kustom kommand aliases.", "removealias <alias>", function(args)
+    local aliasName = tostring(args[1] or "")
+    if aliasName == "" then error("Use: " .. LHRuntime.Prefix .. "removealias <alias>") end
+    local ok, target = LHRuntime:RemoveCommandAlias(aliasName)
+    if not ok then error(target) end
+    LHRuntime:Notify("success", "Kommand Alias", LHRuntime.Prefix .. aliasName .. " was removed from " .. LHRuntime.Prefix .. tostring(target) .. ".", 4)
+end)
+
+LHRuntime:RegisterCommand("aliases", {"listaliases", "als"}, "Shows the kustom aliases you created.", "aliases", function()
+    local rows = LHRuntime:ListCommandAliases()
+    if #rows == 0 then
+        LHRuntime:Notify("info", "Kustom Aliases", "No kustom aliases saved yet. Use " .. LHRuntime.Prefix .. "aa <kommand> <alias>.", 5)
+        return
+    end
+    local text = {}
+    for _, row in ipairs(rows) do
+        text[#text + 1] = LHRuntime.Prefix .. row.Alias .. " -> " .. LHRuntime.Prefix .. row.Command
+    end
+    LHRuntime:Notify("info", "Kustom Aliases (" .. tostring(#rows) .. ")", table.concat(text, " | "), 10)
 end)
 
 LHRuntime:RegisterCommand("speed", {"ws", "walkspeed"}, "Changes your local WalkSpeed.", "speed 50", function(args)
@@ -4847,6 +4994,17 @@ do
         end
         openPalette()
     end
+    env.LHSetPaletteText = function(value, focus)
+        if not env.LHAdminKommandsEnabled then
+            LHRuntime:Notify("warning", "Admin Kommands", "Enable Lollypop Admin Kommands [BETA] in the Admin tab first.", 4)
+            return false
+        end
+        openPalette()
+        box.Text = tostring(value or "")
+        box.CursorPosition = #box.Text + 1
+        if focus ~= false then box:CaptureFocus() end
+        return true
+    end
     env.LHTogglePalette = function()
         if opened then closePalette() else env.LHOpenPalette() end
     end
@@ -4883,6 +5041,29 @@ do
                 LHRuntime:AddButtonPressEffect(button)
                 LHRuntime:Track(button.MouseButton1Click:Connect(function()
                     box.Text = "> " .. command.Name .. " "
+                    box:CaptureFocus()
+                    box.CursorPosition = #box.Text + 1
+                end))
+            end
+        end
+        for aliasName, targetName in pairs(LHRuntime.CustomAliases or {}) do
+            if query == "" or string.find(string.lower(aliasName), query, 1, true) == 1 then
+                shown = shown + 1
+                local button = Instance.new("TextButton")
+                button.Size = UDim2.new(1, 0, 0, 30)
+                button.BackgroundColor3 = Color3.fromRGB(35, 28, 44)
+                button.BackgroundTransparency = 0.08
+                button.BorderSizePixel = 0
+                button.AutoButtonColor = false
+                button.Font = Enum.Font.Gotham
+                button.TextSize = 12
+                button.TextColor3 = Color3.fromRGB(245, 245, 248)
+                button.TextXAlignment = Enum.TextXAlignment.Left
+                button.Text = "  > " .. aliasName .. "  [kustom alias -> " .. tostring(targetName) .. "]"
+                button.Parent = suggestions
+                LHRuntime:AddButtonPressEffect(button)
+                LHRuntime:Track(button.MouseButton1Click:Connect(function()
+                    box.Text = "> " .. aliasName .. " "
                     box:CaptureFocus()
                     box.CursorPosition = #box.Text + 1
                 end))
@@ -9882,6 +10063,17 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+    emoji.lollipop.." V10.5.0 updates: ",
+    "[NEW FEATURE] Free Emotes: sync your player with other players' animations",
+    "[NEW FEATURE] Free Animations: detect, play and save animations other players are using",
+    "[NEW FEATURE] Universal Search: search LH features, settings, kommands, players and more",
+    "[NEW FEATURE] Kommand Aliases: create your own aliases for Lollypop Admin kommands",
+    "[NEW FEATURE] What's New: see new features added since your last LH version",
+    "[NEW FEATURE] Player Activity: view live observable player info and jump direktly to connected LH actions",
+    "[NEW] Smart Player Search supports display names, @usernames and UserIds",
+    "[NEW] Dance Sync automatically re-syncs after normal player/local respawns",
+    "[NEW] Avatar Kreator remembers katalog items confirmed as Owned across LH sessions",
+
     emoji.lollipop.." V10.4.1 updates: ",
 "Experience tab is still in BETA so there may be bugs. Use \"Script request\" to send me messages of errors/bugs you run into that need fixing",
 "[BUG FIX] fixed servers not loading",
@@ -9920,16 +10112,13 @@ LOLLY.." V10.4.0 updates: ",
     "[IMPROVED] Avatar Katalog Kreator is now marked [BETA]",
 
     emoji.lollipop.." V10.3.7 updates: ",
-    "[FIXED] Lollypop Hub starts normally again",
     "[FIXED] startup reliability improved after the latest feature additions",
 
     emoji.lollipop.." V10.3.6 updates: ",
     "[FIXED] Lollypop Hub loads normally again",
     "[IMPROVED] sidebar tab order now uses simple sequential numbers",
-    "[IMPROVED] User Lookup buttons have a more unique polished design",
 
     emoji.lollipop.." V10.3.5 updates: ",
-    "[FIXED] User Lookup searchbox Klear button no longer shows a Kontrol Error",
     "[IMPROVED] User Lookup has a more polished profile design",
     "[FIXED] Saved Outfits avatar previews are easier to see",
     "[IMPROVED] floating Admin button stays inside the skreen on different device sizes",
@@ -10170,6 +10359,206 @@ emoji.lollipop.." V9.3.4 updates: ",
 for _, updateText in ipairs(UpdatesLog) do
     add(exSection, label(updateText))
 end
+
+
+env.LHCollectWhatsNew = function(previousVersion)
+    previousVersion = env.LHNormalizeVersion(previousVersion)
+    local currentVersion = env.LHNormalizeVersion(Vv)
+    if not previousVersion or not currentVersion then return {} end
+    local collected = {}
+    local sectionVersion = nil
+    for _, value in ipairs(UpdatesLog) do
+        local text = tostring(value or "")
+        local foundVersion = text:match("V(%d+%.%d+%.%d+)%s+updates")
+        if foundVersion then
+            sectionVersion = env.LHNormalizeVersion(foundVersion)
+        elseif sectionVersion
+            and env.LHCompareVersions(sectionVersion, previousVersion) > 0
+            and env.LHCompareVersions(sectionVersion, currentVersion) <= 0 then
+            local important = text:find("[NEW FEATURE]", 1, true)
+                or text:find("[NEW KOMMAND", 1, true)
+                or text:find("[NEW]", 1, true)
+            if important then
+                collected[#collected + 1] = {Version = sectionVersion, Text = text}
+            end
+        end
+    end
+    return collected
+end
+
+env.LHMarkWhatsNewSeen = function()
+    env.LHSettings.WhatsNewSeenVersion = Vv
+    env.LHSettings.LastUsedVersion = Vv
+    LHRuntime:SaveSettings()
+end
+
+env.LHShowWhatsNew = function(force)
+    local previous = env.LHSettings.LastUsedVersion or env.LHSettings.WhatsNewSeenVersion
+    local seen = env.LHNormalizeVersion(env.LHSettings.WhatsNewSeenVersion)
+    local current = env.LHNormalizeVersion(Vv)
+
+    -- V10.5.0 is the first LH release that stores version-view history.
+    -- An existing pre-10.5 settings file therefore safely identifies an upgrade user;
+    -- fresh installs stay quiet instead of getting an unnecessary first-run popup.
+    if not previous and LH_HAD_EXISTING_SETTINGS then previous = "10.4.1" end
+    if force and previous and current and env.LHCompareVersions(previous, current) >= 0 then previous = "10.4.1" end
+
+    if not force then
+        if not previous then
+            env.LHMarkWhatsNewSeen()
+            return false
+        end
+        if seen and current and env.LHCompareVersions(seen, current) >= 0 then
+            env.LHSettings.LastUsedVersion = Vv
+            LHRuntime:SaveSettings()
+            return false
+        end
+        local previousNormalized = env.LHNormalizeVersion(previous)
+        if not previousNormalized or not current or env.LHCompareVersions(previousNormalized, current) >= 0 then
+            env.LHMarkWhatsNewSeen()
+            return false
+        end
+    end
+
+    local entries = env.LHCollectWhatsNew(previous or "0.0.0")
+    if #entries == 0 then
+        if force then
+            entries = {{Version = current or Vv, Text = "You're on the newest Lollypop Hub version."}}
+        else
+            env.LHMarkWhatsNewSeen()
+            return false
+        end
+    end
+
+    local parent = get.CoreGui
+    pcall(function() if gethui then parent = gethui() end end)
+    local old = parent and parent:FindFirstChild("LHWhatsNewV105")
+    if old then old:Destroy() end
+
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "LHWhatsNewV105"
+    gui.IgnoreGuiInset = true
+    gui.ResetOnSpawn = false
+    gui.DisplayOrder = 1000005
+    gui.Parent = parent
+
+    local dim = Instance.new("TextButton")
+    dim.Size = UDim2.fromScale(1, 1)
+    dim.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    dim.BackgroundTransparency = 0.42
+    dim.BorderSizePixel = 0
+    dim.Text = ""
+    dim.AutoButtonColor = false
+    dim.Parent = gui
+
+    local card = Instance.new("Frame")
+    card.AnchorPoint = Vector2.new(0.5, 0.5)
+    card.Position = UDim2.fromScale(0.5, 0.5)
+    card.Size = UDim2.fromOffset(430, 340)
+    card.BackgroundColor3 = Color3.fromRGB(18, 14, 22)
+    card.BorderSizePixel = 0
+    card.Parent = gui
+    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 14)
+    local stroke = Instance.new("UIStroke", card)
+    stroke.Color = env.LollypopTheme or Color3.fromRGB(255, 72, 176)
+    stroke.Transparency = 0.16
+    stroke.Thickness = 1.3
+
+    local title = Instance.new("TextLabel")
+    title.Position = UDim2.fromOffset(16, 12)
+    title.Size = UDim2.new(1, -58, 0, 28)
+    title.BackgroundTransparency = 1
+    title.Font = Enum.Font.GothamBold
+    title.Text = "What's New in LH v" .. tostring(Vv)
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 18
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Parent = card
+
+    local from = Instance.new("TextLabel")
+    from.Position = UDim2.fromOffset(16, 41)
+    from.Size = UDim2.new(1, -32, 0, 20)
+    from.BackgroundTransparency = 1
+    from.Font = Enum.Font.GothamMedium
+    from.Text = "Important changes since v" .. tostring(previous or Vv)
+    from.TextColor3 = Color3.fromRGB(190, 177, 198)
+    from.TextSize = 11
+    from.TextXAlignment = Enum.TextXAlignment.Left
+    from.Parent = card
+
+    local list = Instance.new("ScrollingFrame")
+    list.Position = UDim2.fromOffset(14, 68)
+    list.Size = UDim2.new(1, -28, 1, -126)
+    list.BackgroundColor3 = Color3.fromRGB(27, 21, 35)
+    list.BackgroundTransparency = 0.08
+    list.BorderSizePixel = 0
+    list.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    list.CanvasSize = UDim2.new()
+    list.ScrollBarThickness = 4
+    list.Parent = card
+    Instance.new("UICorner", list).CornerRadius = UDim.new(0, 10)
+    local layout = Instance.new("UIListLayout", list)
+    layout.Padding = UDim.new(0, 6)
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+    local padding = Instance.new("UIPadding", list)
+    padding.PaddingTop = UDim.new(0, 8)
+    padding.PaddingBottom = UDim.new(0, 8)
+    padding.PaddingLeft = UDim.new(0, 8)
+    padding.PaddingRight = UDim.new(0, 8)
+
+    for index, entry in ipairs(entries) do
+        local row = Instance.new("TextLabel")
+        row.LayoutOrder = index
+        row.Size = UDim2.new(1, -2, 0, 0)
+        row.AutomaticSize = Enum.AutomaticSize.Y
+        row.BackgroundColor3 = Color3.fromRGB(38, 29, 48)
+        row.BackgroundTransparency = 0.08
+        row.BorderSizePixel = 0
+        row.Font = Enum.Font.GothamMedium
+        row.Text = "  " .. tostring(entry.Text)
+        row.TextColor3 = Color3.fromRGB(248, 244, 250)
+        row.TextSize = 11
+        row.TextWrapped = true
+        row.TextXAlignment = Enum.TextXAlignment.Left
+        row.TextYAlignment = Enum.TextYAlignment.Center
+        row.Parent = list
+        Instance.new("UICorner", row).CornerRadius = UDim.new(0, 8)
+        local rowPadding = Instance.new("UIPadding", row)
+        rowPadding.PaddingTop = UDim.new(0, 8)
+        rowPadding.PaddingBottom = UDim.new(0, 8)
+        rowPadding.PaddingLeft = UDim.new(0, 4)
+        rowPadding.PaddingRight = UDim.new(0, 6)
+    end
+
+    local dismiss = Instance.new("TextButton")
+    dismiss.AnchorPoint = Vector2.new(0.5, 1)
+    dismiss.Position = UDim2.new(0.5, 0, 1, -12)
+    dismiss.Size = UDim2.new(1, -28, 0, 40)
+    dismiss.BackgroundColor3 = env.LollypopTheme or Color3.fromRGB(255, 72, 176)
+    dismiss.BorderSizePixel = 0
+    dismiss.Font = Enum.Font.GothamBold
+    dismiss.Text = "Got It"
+    dismiss.TextColor3 = Color3.fromRGB(255, 255, 255)
+    dismiss.TextSize = 13
+    dismiss.Parent = card
+    Instance.new("UICorner", dismiss).CornerRadius = UDim.new(0, 10)
+    LHRuntime:AddButtonPressEffect(dismiss)
+
+    local closed = false
+    local function close(markSeen)
+        if closed then return end
+        closed = true
+        if markSeen ~= false then env.LHMarkWhatsNewSeen() end
+        if gui then gui:Destroy() end
+    end
+    LHRuntime:Track(dismiss.MouseButton1Click:Connect(function() close(true) end))
+    LHRuntime:Track(dim.MouseButton1Click:Connect(function() close(true) end))
+    return true
+end
+
+add(exSection, button("What's New", "See the important LH features added since your previous version.", function()
+    env.LHShowWhatsNew(true)
+end))
 
 
 --[[
@@ -10965,6 +11354,24 @@ else
     warn("[Lollypop Hub Avatar Kreator] Loaded Kavo does not expose EnableAvatarKreator.")
 end
 
+
+if Window.EnableUniversalSearch then
+    env.LHUniversalInitOK, env.LHUniversalInitResult = pcall(function()
+        return Window:EnableUniversalSearch(utf.char(0x2605).." Universal Search")
+    end)
+    if env.LHUniversalInitOK then
+        if env.LHUniversalInitResult and env.LHUniversalInitResult.Button then
+            env.LHUniversalInitResult.Button.LayoutOrder = 0
+        end
+    else
+        warn("[Lollypop Hub Universal Search] " .. tostring(env.LHUniversalInitResult))
+        pcall(function()
+            LHRuntime:Notify("error", "Universal Search", "Universal Search could not initialize: " .. tostring(env.LHUniversalInitResult), 6, nil, true)
+        end)
+    end
+    env.LHUniversalInitOK, env.LHUniversalInitResult = nil, nil
+end
+
 local personalShelfTab = nil
 if Window.EnablePersonalShelf then
     personalShelfTab = Window:EnablePersonalShelf("My Shelf")
@@ -11066,6 +11473,11 @@ for _, guiRoot in pairs({get.CoreGui, get.Players.LocalPlayer:FindFirstChildOfCl
     end
 end
 Window:SelectTab("Home")
+
+task.defer(function()
+    task.wait(0.35)
+    pcall(function() env.LHShowWhatsNew(false) end)
+end)
 
 local function startCurrentSession()
     LHRuntime:StartSessionPersistence(Window)
