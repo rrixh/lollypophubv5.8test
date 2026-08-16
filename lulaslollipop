@@ -1,6 +1,6 @@
---main v10.5.0 LOLLYPOP HUB 
+--main v10.5.1 LOLLYPOP HUB 
 
-date = "August 15"..", "..tostring(os.date("%Y"))
+date = "August 16"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -879,7 +879,7 @@ end
 if env.lhloaded == true then
     localStartupNotify(
         "Lollypop Hub already loaded",
-        "say \"/e reload\" if you want to reload Lollypop Hub " .. emoji.lollipop,
+        "Use Quick Actions > Reload Hub whenever you want to restart Lollypop Hub " .. emoji.lollipop,
         6
     )
     return
@@ -958,7 +958,32 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.5.0')
+local Vv = ('10.5.1')
+
+--==================================================
+-- EASY WHAT'S NEW TABLE - EDIT THIS FOR NEW LH VERSIONS
+--==================================================
+WatsNew = WatsNew or {
+    ["10.5.0"] = {
+        "[NEW FEATURE] Free Emotes: sync your player with other players' animations",
+        "[NEW FEATURE] Free Animations: detect, play and save animations other players are using",
+        "[NEW FEATURE] Universal Search: search LH features, settings, kommands, players and more",
+        "[NEW FEATURE] Kommand Aliases: create your own aliases for Lollypop Admin kommands",
+        "[NEW FEATURE] What's New: see new features added since your last LH version",
+        "[NEW FEATURE] Player Activity: view live observable player info and jump direktly to connected LH actions",
+        "[NEW FEATURE] Mimic Player: select a player and mirror their movement, states and animations",
+        "[NEW] Smart Player Search supports display names, @usernames and UserIds",
+        "[NEW] Dance Sync automatically re-syncs after normal player/local respawns",
+        "[NEW] Avatar Kreator remembers katalog items confirmed as Owned across LH sessions",
+    },
+
+    -- Future example:
+    -- ["10.5.1"] = {
+    --     "[NEW FEATURE] Example feature",
+    --     "Smaller user-facing change",
+    -- },
+}
+env.WatsNew = WatsNew
 env.LH_VERSION_URL = "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/version"
 local ONLINE_STATUS_URL = env.LH_ONLINE_STATUS_URL or "https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/LH/onlinestatus"
 local online_status = "Offline" -- local fallback if the online status file cannot load
@@ -1406,14 +1431,19 @@ function LHRuntime:Safe(label, callback, ...)
         return debug.traceback(tostring(err), 2)
     end)
     if not ok then
+        -- Internal kode errors stay in the executor/dev konsole. Do not expose
+        -- stack traces or source-line noise to normal LH users as notifications.
         warn("[LH] " .. tostring(label) .. " failed:\n" .. tostring(result))
-        self:Notify("error", "LH Error", tostring(result), 7)
     end
     return ok, result
 end;
 
 function LHRuntime:Notify(kind, titleText, bodyText, durationSeconds, progress, force)
     kind = string.lower(tostring(kind or "info"))
+    if kind == "error" then
+        warn("[Lollypop Hub Error] " .. tostring(titleText or "Error") .. ": " .. tostring(bodyText or ""))
+        return nil
+    end
     if env.LHKavo and env.LHKavo.Notify then
         return env.LHKavo:Notify(kind, titleText, bodyText, durationSeconds, progress, force)
     end
@@ -1637,10 +1667,14 @@ if env.LHDefaultGameJumpPower == nil then
         local startupHumanoid = startupCharacter and (startupCharacter:FindFirstChildOfClass("Humanoid") or startupCharacter:WaitForChild("Humanoid", 10))
         if startupHumanoid then
             env.LHDefaultGameJumpPower = tonumber(startupHumanoid.JumpPower) or 50
+            if env.LHDefaultGameJumpHeight == nil then
+                env.LHDefaultGameJumpHeight = tonumber(startupHumanoid.JumpHeight) or 7.2
+            end
         end
     end)
 end
 if env.LHDefaultGameJumpPower == nil then env.LHDefaultGameJumpPower = 50 end
+if env.LHDefaultGameJumpHeight == nil then env.LHDefaultGameJumpHeight = 7.2 end
 
 local LHFeatures = {
     Character = nil,
@@ -2172,7 +2206,7 @@ function LHRuntime:AddCommandAlias(commandName, aliasName)
     local _, command = self:ResolveCommandName(commandName)
     if not command then return false, "Kommand not found: " .. tostring(commandName) end
     if aliasName == "" then return false, "Alias cannot be blank." end
-    if #aliasName < 2 or #aliasName > 24 then return false, "Alias must be 2-24 characters." end
+    -- One-character aliases are valid (example: !e). No arbitrary length cap.
     if not aliasName:match("^[%a_][%w_%-]*$") then
         return false, "Alias kan only use letters, numbers, _ or -, and must start with a letter/_ ."
     end
@@ -2327,34 +2361,23 @@ function LHRuntime:Unload(reason)
                 if gui:IsA("ScreenGui") and (
                     gui.Name == "KustomToggle" or gui.Name == "CustomLoader" or
                     gui.Name == "LHCommandPalette" or gui.Name == "LHCloseConfirmation" or
-                    gui.Name == "LHQuickExecutor" or gui.Name == "LHSessionRestorePrompt" or gui.Name:match("^LollypopHubUI_")
+                    gui.Name == "LHQuickExecutor" or gui.Name == "LHSessionRestorePrompt" or
+                    gui.Name:match("^LollypopHubUI_") or gui.Name:match("^LollypopHubNotifications_")
                 ) then
                     pcall(function() gui:Destroy() end)
                 end
             end
         end
     end
-    pcall(function()
-        for _, parent in ipairs({get.CoreGui, lp:FindFirstChildOfClass("PlayerGui"), get.SoundService}) do
-            if parent then
-                for _, object in ipairs(parent:GetDescendants()) do
-                    local lowered = string.lower(tostring(object.Name or ""))
-                    if lowered:find("lollypop", 1, true) or lowered:find("lhcommand", 1, true) or
-                       lowered:find("adminkommand", 1, true) or lowered:find("admincommand", 1, true) or
-                       lowered == "kustomtoggle" or lowered == "customloader" or lowered:find("lhquick", 1, true) then
-                        pcall(function() object:Destroy() end)
-                    end
-                end
-            end
-        end
-    end)
     env.LHOpenPalette = nil
     env.LHTogglePalette = nil
     env.LHClosePalette = nil
     env.LHOpenQuickActions = nil
     env.LHCloseQuickActions = nil
     env.LHSetAdminKommandsEnabled = nil
+    env.LHPlaceAdminButton = nil
     env.LHRequestClose = nil
+    env.LHReloadHub = nil
     env.LHAdminKommandsEnabled = false
     env.LHNotify = nil
     env.LHFeatures = nil
@@ -2488,7 +2511,7 @@ local Rainbow = Color3.fromRGB(math.random(0,255), math.random(0,255), math.rand
 getgenv().kall=function(func)
 local suxxess,err = pcall(func)
 if not suxxess then
-windowErrorOk("Whoops! Something went wrong [Lollypop Hub]", err)
+warn("[Lollypop Hub] callback failed: "..tostring(err))
     end;
     return suxxess, err
 end;
@@ -2660,7 +2683,7 @@ toggleTip.TextColor3 = Color3.fromRGB(255, 220, 92)
 toggleTip.TextSize = 11
 toggleTip.Font = Enum.Font.GothamBold
 toggleTip.RichText = true
-toggleTip.Text = '<b>Tip:</b> say "/e toggle" in chat to reload the Lollypop toggle if you lose it.'
+toggleTip.Text = '<b>Tip:</b> LH keeps this button inside your device safe area automatically.'
 toggleTip.TextWrapped = true
 toggleTip.TextYAlignment = Enum.TextYAlignment.Top
 toggleTip.Parent = frame
@@ -2748,6 +2771,255 @@ local function milk(percent)
     end
     loadingText.Text = "Skript Loading: " .. tostring(percent) .. "%"
 end
+
+--==================================================
+-- V10.5.0 OUT-OF-LOADER HELPERS
+-- Keep these outside animateSkript so the already-large working LH loader
+-- keeps the same register/local footprint as V10.4.1.
+--==================================================
+-- Update-version helpers stay outside buildHub because buildHub is already
+-- near Luau's local-variable ceiling.
+env.LHNormalizeVersion = function(value)
+    local text = tostring(value or "")
+    return text:match("(%d+%.%d+%.%d+)")
+        or text:match("(%d+%.%d+)")
+        or text:match("(%d+)")
+end
+
+env.LHBuildUniversalIndex = function(tabItems)
+    local index = {}
+    for _, tabData in ipairs(type(tabItems) == "table" and tabItems or {}) do
+        for _, sectionData in ipairs(type(tabData._sections) == "table" and tabData._sections or {}) do
+            for _, item in ipairs(sectionData) do
+                if type(item) == "table" and item.id and item.displayName then
+                    index[#index + 1] = {
+                        ControlId = tostring(item.id),
+                        DisplayName = tostring(item.displayName),
+                        Kind = tostring(item.kind or "kontrol"),
+                        Tip = tostring(item.tip or item.text or ""),
+                        TabName = tostring(tabData._name or ""),
+                        SectionName = tostring(sectionData._name or ""),
+                    }
+                end
+            end
+        end
+    end
+    env.LHUniversalIndex = index
+    return index
+end
+
+env.LHCompareVersions = function(leftVersion, rightVersion)
+    local leftParts = {}
+    local rightParts = {}
+
+    for numberText in tostring(leftVersion or ""):gmatch("%d+") do
+        leftParts[#leftParts + 1] = tonumber(numberText) or 0
+    end
+    for numberText in tostring(rightVersion or ""):gmatch("%d+") do
+        rightParts[#rightParts + 1] = tonumber(numberText) or 0
+    end
+
+    for index = 1, math.max(#leftParts, #rightParts) do
+        local leftNumber = leftParts[index] or 0
+        local rightNumber = rightParts[index] or 0
+        if leftNumber > rightNumber then return 1 end
+        if leftNumber < rightNumber then return -1 end
+    end
+    return 0
+end
+
+
+env.LHCollectWhatsNew = function(previousVersion)
+    previousVersion = env.LHNormalizeVersion(previousVersion) or "0.0.0"
+    local currentVersion = env.LHNormalizeVersion(Vv) or tostring(Vv)
+    local collected = {}
+    for version, entries in pairs(type(WatsNew) == "table" and WatsNew or {}) do
+        local normalized = env.LHNormalizeVersion(version)
+        if normalized
+            and env.LHCompareVersions(normalized, previousVersion) > 0
+            and env.LHCompareVersions(normalized, currentVersion) <= 0
+            and type(entries) == "table" then
+            for _, text in ipairs(entries) do
+                collected[#collected + 1] = {Version = normalized, Text = tostring(text)}
+            end
+        end
+    end
+    table.sort(collected, function(a, b)
+        local compared = env.LHCompareVersions(a.Version, b.Version)
+        if compared == 0 then return tostring(a.Text) < tostring(b.Text) end
+        return compared < 0
+    end)
+    return collected
+end
+
+env.LHMarkWhatsNewSeen = function()
+    env.LHSettings.WhatsNewSeenVersion = Vv
+    env.LHSettings.LastUsedVersion = Vv
+    LHRuntime:SaveSettings()
+end
+
+env.LHShowWhatsNew = function(force)
+    local previous = env.LHSettings.LastUsedVersion or env.LHSettings.WhatsNewSeenVersion
+    local seen = env.LHNormalizeVersion(env.LHSettings.WhatsNewSeenVersion)
+    local current = env.LHNormalizeVersion(Vv)
+
+    if not previous and LH_HAD_EXISTING_SETTINGS then previous = "10.4.1" end
+    if force and previous and current and env.LHCompareVersions(previous, current) >= 0 then previous = "10.4.1" end
+
+    if not force then
+        if not previous then env.LHMarkWhatsNewSeen(); return false end
+        if seen and current and env.LHCompareVersions(seen, current) >= 0 then
+            env.LHSettings.LastUsedVersion = Vv
+            LHRuntime:SaveSettings()
+            return false
+        end
+        local previousNormalized = env.LHNormalizeVersion(previous)
+        if not previousNormalized or not current or env.LHCompareVersions(previousNormalized, current) >= 0 then
+            env.LHMarkWhatsNewSeen()
+            return false
+        end
+    end
+
+    local entries = env.LHCollectWhatsNew(previous or "0.0.0")
+    if #entries == 0 then
+        if force then
+            local currentEntries = type(WatsNew) == "table" and WatsNew[tostring(current or Vv)] or nil
+            if type(currentEntries) == "table" then
+                for _, text in ipairs(currentEntries) do entries[#entries + 1] = {Version=current or Vv, Text=tostring(text)} end
+            end
+            if #entries == 0 then entries = {{Version=current or Vv, Text="You're on the newest Lollypop Hub version."}} end
+        else
+            env.LHMarkWhatsNewSeen()
+            return false
+        end
+    end
+
+    local parent = get.CoreGui
+    pcall(function() if gethui then parent = gethui() end end)
+    local old = parent and parent:FindFirstChild("LHWhatsNewV105")
+    if old then old:Destroy() end
+
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "LHWhatsNewV105"
+    gui.IgnoreGuiInset = true
+    gui.ResetOnSpawn = false
+    gui.DisplayOrder = 1000005
+    gui.Parent = parent
+
+    local dim = Instance.new("TextButton")
+    dim.Size = UDim2.fromScale(1, 1)
+    dim.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    dim.BackgroundTransparency = 0.42
+    dim.BorderSizePixel = 0
+    dim.Text = ""
+    dim.AutoButtonColor = false
+    dim.Parent = gui
+
+    local card = Instance.new("Frame")
+    card.AnchorPoint = Vector2.new(0.5, 0.5)
+    card.Position = UDim2.fromScale(0.5, 0.5)
+    card.Size = UDim2.fromOffset(430, 340)
+    card.BackgroundColor3 = Color3.fromRGB(18, 14, 22)
+    card.BorderSizePixel = 0
+    card.Parent = gui
+    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 14)
+    local stroke = Instance.new("UIStroke", card)
+    stroke.Color = env.LollypopTheme or Color3.fromRGB(255, 72, 176)
+    stroke.Transparency = 0.16
+    stroke.Thickness = 1.3
+
+    local title = Instance.new("TextLabel")
+    title.Position = UDim2.fromOffset(16, 12)
+    title.Size = UDim2.new(1, -58, 0, 28)
+    title.BackgroundTransparency = 1
+    title.Font = Enum.Font.GothamBold
+    title.Text = "What's New in LH v" .. tostring(Vv)
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 18
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Parent = card
+
+    local from = Instance.new("TextLabel")
+    from.Position = UDim2.fromOffset(16, 41)
+    from.Size = UDim2.new(1, -32, 0, 20)
+    from.BackgroundTransparency = 1
+    from.Font = Enum.Font.GothamMedium
+    from.Text = "Important changes since v" .. tostring(previous or Vv)
+    from.TextColor3 = Color3.fromRGB(190, 177, 198)
+    from.TextSize = 11
+    from.TextXAlignment = Enum.TextXAlignment.Left
+    from.Parent = card
+
+    local list = Instance.new("ScrollingFrame")
+    list.Position = UDim2.fromOffset(14, 68)
+    list.Size = UDim2.new(1, -28, 1, -126)
+    list.BackgroundColor3 = Color3.fromRGB(27, 21, 35)
+    list.BackgroundTransparency = 0.08
+    list.BorderSizePixel = 0
+    list.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    list.CanvasSize = UDim2.new()
+    list.ScrollBarThickness = 4
+    list.Parent = card
+    Instance.new("UICorner", list).CornerRadius = UDim.new(0, 10)
+    local layout = Instance.new("UIListLayout", list)
+    layout.Padding = UDim.new(0, 6)
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+    local padding = Instance.new("UIPadding", list)
+    padding.PaddingTop = UDim.new(0, 8)
+    padding.PaddingBottom = UDim.new(0, 8)
+    padding.PaddingLeft = UDim.new(0, 8)
+    padding.PaddingRight = UDim.new(0, 8)
+
+    for index, entry in ipairs(entries) do
+        local row = Instance.new("TextLabel")
+        row.LayoutOrder = index
+        row.Size = UDim2.new(1, -2, 0, 0)
+        row.AutomaticSize = Enum.AutomaticSize.Y
+        row.BackgroundColor3 = Color3.fromRGB(38, 29, 48)
+        row.BackgroundTransparency = 0.08
+        row.BorderSizePixel = 0
+        row.Font = Enum.Font.GothamMedium
+        row.Text = "  " .. tostring(entry.Text)
+        row.TextColor3 = Color3.fromRGB(248, 244, 250)
+        row.TextSize = 11
+        row.TextWrapped = true
+        row.TextXAlignment = Enum.TextXAlignment.Left
+        row.TextYAlignment = Enum.TextYAlignment.Center
+        row.Parent = list
+        Instance.new("UICorner", row).CornerRadius = UDim.new(0, 8)
+        local rowPadding = Instance.new("UIPadding", row)
+        rowPadding.PaddingTop = UDim.new(0, 8)
+        rowPadding.PaddingBottom = UDim.new(0, 8)
+        rowPadding.PaddingLeft = UDim.new(0, 4)
+        rowPadding.PaddingRight = UDim.new(0, 6)
+    end
+
+    local dismiss = Instance.new("TextButton")
+    dismiss.AnchorPoint = Vector2.new(0.5, 1)
+    dismiss.Position = UDim2.new(0.5, 0, 1, -12)
+    dismiss.Size = UDim2.new(1, -28, 0, 40)
+    dismiss.BackgroundColor3 = env.LollypopTheme or Color3.fromRGB(255, 72, 176)
+    dismiss.BorderSizePixel = 0
+    dismiss.Font = Enum.Font.GothamBold
+    dismiss.Text = "Got It"
+    dismiss.TextColor3 = Color3.fromRGB(255, 255, 255)
+    dismiss.TextSize = 13
+    dismiss.Parent = card
+    Instance.new("UICorner", dismiss).CornerRadius = UDim.new(0, 10)
+    LHRuntime:AddButtonPressEffect(dismiss)
+
+    local closed = false
+    local function close(markSeen)
+        if closed then return end
+        closed = true
+        if markSeen ~= false then env.LHMarkWhatsNewSeen() end
+        if gui then gui:Destroy() end
+    end
+    LHRuntime:Track(dismiss.MouseButton1Click:Connect(function() close(true) end))
+    LHRuntime:Track(dim.MouseButton1Click:Connect(function() close(true) end))
+    return true
+end
+
 
 local function animateSkript()
     local TweenService = get.TweenService
@@ -2857,7 +3129,7 @@ Font = Fredoka,
 FontSize = 9
 });
 get.StarterGui:SetCore("ChatMakeSystemMessage", {
-Text = "default toggle size is "..tostring(toggleButtonSize)..("\nTip: "..emoji.lollipop.." say "..emoji.left_double_quote.."/e toggle"..emoji.left_double_quote.." if you lose the toggle and need a new one"),
+Text = "default toggle size is "..tostring(toggleButtonSize)..("\nTip: "..emoji.lollipop.." the toggle is automatically kept inside your safe area"),
 Color = Color3.fromRGB(255,255,0),
 Font = Fredoka,
 FontSize = 9
@@ -3080,57 +3352,6 @@ local function bannerlabel(text)
     return descriptor("banner", {text=tostring(text or "")})
 end
 
--- Update-version helpers stay outside buildHub because buildHub is already
--- near Luau's local-variable ceiling.
-env.LHNormalizeVersion = function(value)
-    local text = tostring(value or "")
-    return text:match("(%d+%.%d+%.%d+)")
-        or text:match("(%d+%.%d+)")
-        or text:match("(%d+)")
-end
-
-env.LHBuildUniversalIndex = function(tabItems)
-    local index = {}
-    for _, tabData in ipairs(type(tabItems) == "table" and tabItems or {}) do
-        for _, sectionData in ipairs(type(tabData._sections) == "table" and tabData._sections or {}) do
-            for _, item in ipairs(sectionData) do
-                if type(item) == "table" and item.id and item.displayName then
-                    index[#index + 1] = {
-                        ControlId = tostring(item.id),
-                        DisplayName = tostring(item.displayName),
-                        Kind = tostring(item.kind or "kontrol"),
-                        Tip = tostring(item.tip or item.text or ""),
-                        TabName = tostring(tabData._name or ""),
-                        SectionName = tostring(sectionData._name or ""),
-                    }
-                end
-            end
-        end
-    end
-    env.LHUniversalIndex = index
-    return index
-end
-
-env.LHCompareVersions = function(leftVersion, rightVersion)
-    local leftParts = {}
-    local rightParts = {}
-
-    for numberText in tostring(leftVersion or ""):gmatch("%d+") do
-        leftParts[#leftParts + 1] = tonumber(numberText) or 0
-    end
-    for numberText in tostring(rightVersion or ""):gmatch("%d+") do
-        rightParts[#rightParts + 1] = tonumber(numberText) or 0
-    end
-
-    for index = 1, math.max(#leftParts, #rightParts) do
-        local leftNumber = leftParts[index] or 0
-        local rightNumber = rightParts[index] or 0
-        if leftNumber > rightNumber then return 1 end
-        if leftNumber < rightNumber then return -1 end
-    end
-    return 0
-end
-
 local function buildHub(window)
     if type(env.LHBuildUniversalIndex) == "function" then env.LHBuildUniversalIndex(tabOrder) end
     local requestedOrder = {
@@ -3334,61 +3555,128 @@ env.LHRequestClose = function()
     local dim = Instance.new("Frame")
     dim.Size = UDim2.fromScale(1, 1)
     dim.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    dim.BackgroundTransparency = 0.45
+    dim.BackgroundTransparency = 0.38
     dim.BorderSizePixel = 0
     dim.Parent = gui
 
-    local cardHeight = hasUnsavedSettings and 238 or 190
+    local cardHeight = hasUnsavedSettings and 330 or 286
     local card = Instance.new("Frame")
     card.AnchorPoint = Vector2.new(0.5, 0.5)
     card.Position = UDim2.fromScale(0.5, 0.5)
-    card.Size = UDim2.fromOffset(360, cardHeight)
-    card.BackgroundColor3 = Color3.fromRGB(18, 14, 22)
+    card.Size = UDim2.fromOffset(390, cardHeight)
+    card.BackgroundColor3 = Color3.fromRGB(18, 14, 24)
     card.BorderSizePixel = 0
     card.Parent = gui
-    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 14)
+    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 18)
     local stroke = Instance.new("UIStroke", card)
     stroke.Color = getgenv().LollypopTheme
-    stroke.Thickness = 1.2
-    stroke.Transparency = 0.15
+    stroke.Thickness = 1.4
+    stroke.Transparency = 0.10
 
     local scale = Instance.new("UIScale", card)
     local view = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
-    scale.Scale = math.max(0.72, math.min(1, (view.X - 20) / 380, (view.Y - 40) / (cardHeight + 20)))
+    scale.Scale = math.max(0.68, math.min(1, (view.X - 20) / 410, (view.Y - 30) / (cardHeight + 20)))
+
+    -- L O L L Y P O P  H U B, drawn from tiny lollipops instead of plain text.
+    local wordmark = Instance.new("Frame")
+    wordmark.Name = "LollypopLetterArt"
+    wordmark.Position = UDim2.fromOffset(14, 14)
+    wordmark.Size = UDim2.new(1, -28, 0, 72)
+    wordmark.BackgroundColor3 = Color3.fromRGB(25, 18, 34)
+    wordmark.BackgroundTransparency = 0.10
+    wordmark.BorderSizePixel = 0
+    wordmark.Parent = card
+    Instance.new("UICorner", wordmark).CornerRadius = UDim.new(0, 13)
+    local wordStroke = Instance.new("UIStroke", wordmark)
+    wordStroke.Color = getgenv().LollypopTheme
+    wordStroke.Transparency = 0.45
+
+    local patterns = {
+        L={"100","100","100","100","111"},
+        O={"111","101","101","101","111"},
+        Y={"101","101","010","010","010"},
+        P={"110","101","110","100","100"},
+        H={"101","101","111","101","101"},
+        U={"101","101","101","101","111"},
+        B={"110","101","110","101","110"},
+    }
+    local letters = {"L","O","L","L","Y","P","O","P"," ","H","U","B"}
+    local palette = {
+        Color3.fromRGB(255, 88, 172), Color3.fromRGB(255, 174, 64),
+        Color3.fromRGB(98, 219, 187), Color3.fromRGB(89, 167, 255),
+        Color3.fromRGB(181, 111, 255)
+    }
+    local pitchX, pitchY, dotSize, letterGap = 6, 9, 5, 5
+    local letterWidth = pitchX * 3
+    local totalWidth = 0
+    for _, letter in ipairs(letters) do totalWidth = totalWidth + (letter == " " and 10 or letterWidth + letterGap) end
+    totalWidth = totalWidth - letterGap
+    local cursorX = math.max(4, math.floor((362 - totalWidth) * 0.5))
+    for letterIndex, letter in ipairs(letters) do
+        if letter == " " then
+            cursorX = cursorX + 10
+        else
+            local pattern = patterns[letter]
+            for row = 1, #pattern do
+                for column = 1, 3 do
+                    if pattern[row]:sub(column, column) == "1" then
+                        local x = cursorX + (column - 1) * pitchX
+                        local y = 10 + (row - 1) * pitchY
+                        local stick = Instance.new("Frame")
+                        stick.AnchorPoint = Vector2.new(0.5, 0)
+                        stick.Position = UDim2.fromOffset(x + dotSize * 0.5 + 1, y + dotSize - 1)
+                        stick.Size = UDim2.fromOffset(1, 5)
+                        stick.Rotation = -28
+                        stick.BorderSizePixel = 0
+                        stick.BackgroundColor3 = Color3.fromRGB(235, 222, 205)
+                        stick.ZIndex = 2
+                        stick.Parent = wordmark
+
+                        local candy = Instance.new("Frame")
+                        candy.Position = UDim2.fromOffset(x, y)
+                        candy.Size = UDim2.fromOffset(dotSize, dotSize)
+                        candy.BorderSizePixel = 0
+                        candy.BackgroundColor3 = palette[((letterIndex + row + column - 3) % #palette) + 1]
+                        candy.ZIndex = 3
+                        candy.Parent = wordmark
+                        Instance.new("UICorner", candy).CornerRadius = UDim.new(1, 0)
+                        local shine = Instance.new("Frame")
+                        shine.Position = UDim2.fromOffset(1, 1)
+                        shine.Size = UDim2.fromOffset(2, 2)
+                        shine.BackgroundColor3 = Color3.fromRGB(255,255,255)
+                        shine.BackgroundTransparency = 0.28
+                        shine.BorderSizePixel = 0
+                        shine.ZIndex = 4
+                        shine.Parent = candy
+                        Instance.new("UICorner", shine).CornerRadius = UDim.new(1, 0)
+                    end
+                end
+            end
+            cursorX = cursorX + letterWidth + letterGap
+        end
+    end
 
     local question = Instance.new("TextLabel")
-    question.Position = UDim2.fromOffset(18, 18)
-    question.Size = UDim2.new(1, -36, 0, hasUnsavedSettings and 62 or 48)
+    question.Position = UDim2.fromOffset(18, 96)
+    question.Size = UDim2.new(1, -36, 0, 52)
     question.BackgroundTransparency = 1
     question.Font = Enum.Font.GothamBold
-    question.TextSize = hasUnsavedSettings and 17 or 18
+    question.TextSize = 18
     question.TextColor3 = Color3.fromRGB(255, 255, 255)
     question.TextWrapped = true
-    question.Text = hasUnsavedSettings
-        and "Are you sure you want to exit without saving?"
-        or ("Are you sure you want to leave? " .. emoji.crying_face)
+    question.Text = "Are you sure you want to leave Lollypop Hub? " .. emoji.crying_face
     question.Parent = card
 
-    local orbit = Instance.new("Frame")
-    orbit.AnchorPoint = Vector2.new(0.5, 0.5)
-    orbit.Position = UDim2.new(0.5, 0, 0, hasUnsavedSettings and 103 or 96)
-    orbit.Size = UDim2.fromOffset(76, 46)
-    orbit.BackgroundTransparency = 1
-    orbit.Parent = card
-
-    local dots = {}
-    for i = 1, 8 do
-        local dot = Instance.new("TextLabel")
-        dot.AnchorPoint = Vector2.new(0.5, 0.5)
-        dot.Size = UDim2.fromOffset(22, 22)
-        dot.BackgroundTransparency = 1
-        dot.Font = Enum.Font.GothamBold
-        dot.TextSize = 17
-        dot.Text = emoji.lollipop
-        dot.TextColor3 = Color3.fromRGB(255, 255, 255)
-        dot.Parent = orbit
-        dots[i] = dot
-    end
+    local sub = Instance.new("TextLabel")
+    sub.Position = UDim2.fromOffset(24, 148)
+    sub.Size = UDim2.new(1, -48, 0, 38)
+    sub.BackgroundTransparency = 1
+    sub.Font = Enum.Font.GothamMedium
+    sub.TextSize = 12
+    sub.TextColor3 = hasUnsavedSettings and Color3.fromRGB(255, 201, 103) or Color3.fromRGB(188, 180, 199)
+    sub.TextWrapped = true
+    sub.Text = hasUnsavedSettings and "You have unsaved LH settings. Save them before leaving or leave without saving." or "LH will clean up only its own UI, connections and temporary objects."
+    sub.Parent = card
 
     local saveBeforeExit = Instance.new("TextButton")
     saveBeforeExit.Position = UDim2.new(0, 22, 1, -98)
@@ -3398,59 +3686,43 @@ env.LHRequestClose = function()
     saveBeforeExit.Font = Enum.Font.GothamBold
     saveBeforeExit.TextSize = 14
     saveBeforeExit.TextColor3 = Color3.fromRGB(255, 255, 255)
-    saveBeforeExit.Text = "Press to Save"
+    saveBeforeExit.Text = "Save & Leave"
     saveBeforeExit.Visible = hasUnsavedSettings
     saveBeforeExit.Parent = card
     LHRuntime:AddButtonPressEffect(saveBeforeExit)
-    Instance.new("UICorner", saveBeforeExit).CornerRadius = UDim.new(0, 8)
+    Instance.new("UICorner", saveBeforeExit).CornerRadius = UDim.new(0, 9)
 
     local yes = Instance.new("TextButton")
     yes.Position = UDim2.new(0, 22, 1, -52)
     yes.Size = UDim2.new(0.5, -28, 0, 34)
-    yes.BackgroundColor3 = Color3.fromRGB(35, 190, 85)
+    yes.BackgroundColor3 = Color3.fromRGB(205, 54, 64)
     yes.BorderSizePixel = 0
     yes.Font = Enum.Font.GothamBold
-    yes.TextSize = 15
+    yes.TextSize = 14
     yes.TextColor3 = Color3.fromRGB(255, 255, 255)
-    yes.Text = "Yes"
+    yes.Text = hasUnsavedSettings and "Leave Anyway" or "Leave"
     yes.Parent = card
     LHRuntime:AddButtonPressEffect(yes)
-    Instance.new("UICorner", yes).CornerRadius = UDim.new(0, 8)
+    Instance.new("UICorner", yes).CornerRadius = UDim.new(0, 9)
 
     local no = Instance.new("TextButton")
     no.Position = UDim2.new(0.5, 6, 1, -52)
     no.Size = UDim2.new(0.5, -28, 0, 34)
-    no.BackgroundColor3 = Color3.fromRGB(205, 54, 64)
+    no.BackgroundColor3 = Color3.fromRGB(53, 171, 101)
     no.BorderSizePixel = 0
     no.Font = Enum.Font.GothamBold
-    no.TextSize = 15
+    no.TextSize = 14
     no.TextColor3 = Color3.fromRGB(255, 255, 255)
-    no.Text = "No"
+    no.Text = "Stay"
     no.Parent = card
     LHRuntime:AddButtonPressEffect(no)
-    Instance.new("UICorner", no).CornerRadius = UDim.new(0, 8)
+    Instance.new("UICorner", no).CornerRadius = UDim.new(0, 9)
 
     local alive = true
-    local started = tick()
-    local spin
-    spin = get.RunService.RenderStepped:Connect(function()
-        if not alive or not gui.Parent then
-            if spin then spin:Disconnect() end
-            return
-        end
-        local offset = (tick() - started) * 2.4
-        for i, dot in ipairs(dots) do
-            local angle = offset + ((i - 1) / #dots) * math.pi * 2
-            dot.Position = UDim2.new(0.5, math.cos(angle) * 28, 0.5, math.sin(angle) * 14)
-            dot.Rotation = math.deg(angle) + 90
-        end
-    end)
-
     local function closePopup()
         if not alive then return end
         alive = false
-        if spin then spin:Disconnect() end
-        gui:Destroy()
+        if gui and gui.Parent then gui:Destroy() end
     end
 
     no.MouseButton1Click:Connect(closePopup)
@@ -3465,14 +3737,10 @@ env.LHRequestClose = function()
         if ok then
             LHRuntime.SettingsDirty = false
             closePopup()
-            task.defer(function()
-                if type(env.LHRequestClose) == "function" and not LHRuntime.Unloading then
-                    env.LHRequestClose()
-                end
-            end)
+            task.defer(function() LHRuntime:Unload("close confirmed after save") end)
         else
             saveBeforeExit.Text = "Save Failed - Try Again"
-            question.Text = "Saving failed. Your settings are still unsaved."
+            sub.Text = "Saving failed. Your settings are still unsaved. Check the developer konsole for details."
             warn("[Lollypop Hub Save Before Exit] " .. tostring(err))
         end
     end)
@@ -3565,12 +3833,34 @@ LHRuntime:RegisterCommand("aliases", {"listaliases", "als"}, "Shows the kustom a
     LHRuntime:Notify("info", "Kustom Aliases (" .. tostring(#rows) .. ")", table.concat(text, " | "), 10)
 end)
 
-LHRuntime:RegisterCommand("speed", {"ws", "walkspeed"}, "Changes your local WalkSpeed.", "speed 50", function(args)
+LHRuntime:RegisterCommand("speed", {"ws", "walkspeed"}, "Changes your local WalkSpeed. No number defaults to 16.", "speed [16]", function(args)
     local humanoid = LHRuntime:GetHumanoid()
     if not humanoid then error("Humanoid not found") end
     local value = math.clamp(tonumber(args[1]) or 16, 0, 500)
     humanoid.WalkSpeed = value
     LHRuntime:Notify("success", "Speed", "WalkSpeed set to " .. tostring(value), 4)
+end)
+
+LHRuntime:RegisterCommand("jumppower", {"jp"}, "Changes local JumpPower. No number uses the game's original JumpPower.", "jumppower [power]", function(args)
+    local humanoid = LHRuntime:GetHumanoid()
+    if not humanoid then error("Humanoid not found") end
+    local value = math.clamp(tonumber(args[1]) or tonumber(env.LHDefaultGameJumpPower) or 50, 0, 500)
+    pcall(function() humanoid.UseJumpPower = true end)
+    pcall(function() humanoid.JumpPower = value end)
+    if LHFeatures then
+        LHFeatures.UniversalJumpPower = value
+        env.LHSettings.UniversalJumpPower = value
+    end
+    LHRuntime:Notify("success", "JumpPower", "JumpPower set to " .. tostring(value), 4)
+end)
+
+LHRuntime:RegisterCommand("jumpheight", {"jh"}, "Changes local JumpHeight. No number uses the game's original JumpHeight.", "jumpheight [height]", function(args)
+    local humanoid = LHRuntime:GetHumanoid()
+    if not humanoid then error("Humanoid not found") end
+    local value = math.clamp(tonumber(args[1]) or tonumber(env.LHDefaultGameJumpHeight) or 7.2, 0, 500)
+    pcall(function() humanoid.UseJumpPower = false end)
+    pcall(function() humanoid.JumpHeight = value end)
+    LHRuntime:Notify("success", "JumpHeight", "JumpHeight set to " .. tostring(value), 4)
 end)
 
 LHRuntime:RegisterCommand("jump", {"j"}, "Makes your local player jump.", "jump", function()
@@ -4068,18 +4358,19 @@ LHRuntime:RegisterCommand("unfly", {"unmobilefly", "unmfly", "nofly", "uf"}, "Di
     LHFlight:Disable()
 end)
 
-LHRuntime:RegisterCommand("tpwalk", {"tpw", "tw"}, "Toggles TP Walk; optionally sets its speed.", "tpwalk [speed|on|off]", function(args)
+LHRuntime:RegisterCommand("tpwalk", {"tpw", "tw"}, "Enables TP Walk and optionally sets its speed. No number defaults to 1.", "tpwalk [1|speed|off]", function(args)
     local first = string.lower(tostring(args[1] or ""))
-    if tonumber(first) and type(_G.updateTPWalkSpeed) == "function" then
-        _G.updateTPWalkSpeed(tonumber(first))
-        if type(_G.toggleTPWalk) == "function" then _G.toggleTPWalk(true) end
+    if first == "off" or first == "false" or first == "0" then
+        if type(_G.toggleTPWalk) ~= "function" then error("TP Walk is not ready yet.") end
+        _G.toggleTPWalk(false)
+        getgenv().tpWalk = false
         return
     end
-    local enabled = first ~= "off" and first ~= "false" and first ~= "0"
-    if first == "" then enabled = not (getgenv().tpWalk == true) end
+    local value = tonumber(first) or 1
+    if type(_G.updateTPWalkSpeed) == "function" then _G.updateTPWalkSpeed(value) end
     if type(_G.toggleTPWalk) ~= "function" then error("TP Walk is not ready yet.") end
-    _G.toggleTPWalk(enabled)
-    getgenv().tpWalk = enabled
+    _G.toggleTPWalk(true)
+    getgenv().tpWalk = true
 end)
 
 LHRuntime:RegisterCommand("untpwalk", {"untpw", "untw"}, "Disables TP Walk.", "untpwalk", function()
@@ -5108,8 +5399,10 @@ do
     if get.UserInputService.TouchEnabled then
         mobileOpen = Instance.new("TextButton")
         mobileOpen.Name = "PaletteMobileButton"
-        mobileOpen.AnchorPoint = Vector2.new(0, 0.5)
-        mobileOpen.Position = UDim2.new(0, 10, 0.62, 0)
+        -- Top-left anchor makes the clamp math exact; the old 0.5 Y anchor
+        -- could leave half of the button outside the safe area.
+        mobileOpen.AnchorPoint = Vector2.new(0, 0)
+        mobileOpen.Position = UDim2.fromOffset(0, 0)
         mobileOpen.Size = UDim2.fromOffset(46, 46)
         mobileOpen.BackgroundColor3 = Color3.fromRGB(20, 15, 27)
         mobileOpen.BackgroundTransparency = 0.05
@@ -5145,12 +5438,54 @@ do
         local function clampMobileOpen()
             if not mobileOpen or not mobileOpen.Parent or not adminSafeArea or not adminSafeArea.Parent then return end
             local areaSize = adminSafeArea.AbsoluteSize
+            if areaSize.X <= 0 or areaSize.Y <= 0 then return end
+
+            -- Scale the floating admin button gently by usable screen size.
+            local desiredSize = areaSize.X < 430 and 42 or (areaSize.X < 900 and 46 or 50)
+            mobileOpen.Size = UDim2.fromOffset(desiredSize, desiredSize)
             local buttonSize = mobileOpen.AbsoluteSize
-            if areaSize.X <= 0 or areaSize.Y <= 0 or buttonSize.X <= 0 or buttonSize.Y <= 0 then return end
+            if buttonSize.X <= 0 or buttonSize.Y <= 0 then return end
 
             local x = math.clamp(mobileOpen.Position.X.Offset, 0, math.max(0, areaSize.X - buttonSize.X))
             local y = math.clamp(mobileOpen.Position.Y.Offset, 0, math.max(0, areaSize.Y - buttonSize.Y))
             mobileOpen.Position = UDim2.fromOffset(x, y)
+        end
+
+        env.LHPlaceAdminButton = function()
+            if not mobileOpen or not mobileOpen.Parent or not adminSafeArea or not adminSafeArea.Parent then return end
+            local areaSize = adminSafeArea.AbsoluteSize
+            if areaSize.X <= 0 or areaSize.Y <= 0 then return end
+            local desiredSize = areaSize.X < 430 and 42 or (areaSize.X < 900 and 46 or 50)
+            mobileOpen.Size = UDim2.fromOffset(desiredSize, desiredSize)
+            if moved then
+                clampMobileOpen()
+                return
+            end
+
+            -- Prefer the REAL Lollypop toggle position. This automatically follows
+            -- phone/tablet/PC sizing and any safe-area placement used by KustomToggle.
+            local toggleObject = nil
+            pcall(function()
+                local toggleGui = parent and parent:FindFirstChild("KustomToggle")
+                toggleObject = toggleGui and toggleGui:FindFirstChild("LollypopToggle", true) or nil
+            end)
+            local gap = areaSize.Y < 500 and 5 or 8
+            local x, y
+            if toggleObject and toggleObject:IsA("GuiObject") and toggleObject.AbsoluteSize.X > 0 then
+                local safePos = adminSafeArea.AbsolutePosition
+                local togglePos = toggleObject.AbsolutePosition
+                local toggleAbsSize = toggleObject.AbsoluteSize
+                x = (togglePos.X - safePos.X) + ((toggleAbsSize.X - desiredSize) * 0.5)
+                y = (togglePos.Y - safePos.Y) + toggleAbsSize.Y + gap
+            else
+                -- Fallback used while KustomToggle is still being created.
+                local toggleSize = math.clamp(tonumber(toggleButtonSize) or 47, 28, 160)
+                local toggleX = math.max(0, areaSize.X - toggleSize - 94)
+                x = toggleX + ((toggleSize - desiredSize) * 0.5)
+                y = 17 + toggleSize + gap
+            end
+            mobileOpen.Position = UDim2.fromOffset(x, y)
+            clampMobileOpen()
         end
 
         local function finishAdminButtonDrag(shouldClamp)
@@ -5216,9 +5551,13 @@ do
             end
         end))
 
-        task.defer(clampMobileOpen)
+        task.defer(env.LHPlaceAdminButton)
         LHRuntime:Track(adminSafeArea:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-            task.defer(clampMobileOpen)
+            if not moved then
+                task.defer(env.LHPlaceAdminButton)
+            else
+                task.defer(clampMobileOpen)
+            end
         end))
         LHRuntime:Track(mobileOpen.MouseButton1Click:Connect(function()
             if moved then
@@ -7650,9 +7989,19 @@ loadstring(game:HttpGet('https://yarhm.goteamst.com/scr', false))()
 ok(4, "prexiate it", ("YARHM HUB V2 exekuted"..emoji.check_mark_button))
 end))
 
-add(FunSection, button("Mimic A Players Movement (just like the \"sync\" kommand)\n", "easily kopy a players movement like /sync", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/uwuware/refs/heads/main/draggable-mobile-button/Sync.Player.Movement', true))();
-end))
+add(FunSection, toggle("Mimic Player", "tap the floating Mimic Player button, then tap/klick a player to mirror them", function(enabled)
+    local provider = rawget(env, "LHEnsurePlayerFeatures")
+    if type(provider) ~= "function" then
+        if enabled then LHRuntime:Notify("error", "Mimic Player", "The updated Kavo player service is not loaded.", 5, nil, true) end
+        return
+    end
+    local ok, service = pcall(provider)
+    if not ok or type(service) ~= "table" or type(service.EnableMimic) ~= "function" then
+        if enabled then LHRuntime:Notify("error", "Mimic Player", "Mimic Player could not initialize.", 5, nil, true) end
+        return
+    end
+    service:EnableMimic(enabled == true)
+end, false))
 
 add(FunSection, button("OP OP NAM Gangnam Style", "work r15 and r6", function()
 if ava:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
@@ -10063,13 +10412,22 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+
+LOLLY.." V.10.5.1 updates:",
+
+"[BUG] Avatar Kreator: shows full avatar in saved outfits",
+"[NEW FEATURE] Quick Action Panel: added \"Unload Hub\" (hold the \""..LOLLY.."\" button  to access it)",
+
+
     emoji.lollipop.." V10.5.0 updates: ",
+
     "[NEW FEATURE] Free Emotes: sync your player with other players' animations",
     "[NEW FEATURE] Free Animations: detect, play and save animations other players are using",
     "[NEW FEATURE] Universal Search: search LH features, settings, kommands, players and more",
     "[NEW FEATURE] Kommand Aliases: create your own aliases for Lollypop Admin kommands",
     "[NEW FEATURE] What's New: see new features added since your last LH version",
     "[NEW FEATURE] Player Activity: view live observable player info and jump direktly to connected LH actions",
+    "[NEW KOMMAND] jumppower [power] (jp)",
     "[NEW] Smart Player Search supports display names, @usernames and UserIds",
     "[NEW] Dance Sync automatically re-syncs after normal player/local respawns",
     "[NEW] Avatar Kreator remembers katalog items confirmed as Owned across LH sessions",
@@ -10346,7 +10704,7 @@ emoji.lollipop.." V9.3.4 updates: ",
     "added hitbox expander/esp (has invis hitbox) (hubs & gui)",
     ("OP autofarm for "..emoji.right_double_quote.."Swordmaster Simulator"..emoji.left_double_quote.." (Games)"),
     "updated Tiger X Hub  (v3.5) (hubs & gui)",
-    ("u kan say "..emoji.left_double_quote.."/e reload"..emoji.right_double_quote.." if u need to shut or restart the gui"),
+    ("Use Quick Actions > Reload Hub if u need to restart the gui"),
     "FE chill (8/29/24) (FE Skripts)",
     ("updated FE skripts"..emoji.em_dash.."site went down so had to move all fe skripts"),
     "added toggle button size feature for your satisfaktion",
@@ -10360,201 +10718,6 @@ for _, updateText in ipairs(UpdatesLog) do
     add(exSection, label(updateText))
 end
 
-
-env.LHCollectWhatsNew = function(previousVersion)
-    previousVersion = env.LHNormalizeVersion(previousVersion)
-    local currentVersion = env.LHNormalizeVersion(Vv)
-    if not previousVersion or not currentVersion then return {} end
-    local collected = {}
-    local sectionVersion = nil
-    for _, value in ipairs(UpdatesLog) do
-        local text = tostring(value or "")
-        local foundVersion = text:match("V(%d+%.%d+%.%d+)%s+updates")
-        if foundVersion then
-            sectionVersion = env.LHNormalizeVersion(foundVersion)
-        elseif sectionVersion
-            and env.LHCompareVersions(sectionVersion, previousVersion) > 0
-            and env.LHCompareVersions(sectionVersion, currentVersion) <= 0 then
-            local important = text:find("[NEW FEATURE]", 1, true)
-                or text:find("[NEW KOMMAND", 1, true)
-                or text:find("[NEW]", 1, true)
-            if important then
-                collected[#collected + 1] = {Version = sectionVersion, Text = text}
-            end
-        end
-    end
-    return collected
-end
-
-env.LHMarkWhatsNewSeen = function()
-    env.LHSettings.WhatsNewSeenVersion = Vv
-    env.LHSettings.LastUsedVersion = Vv
-    LHRuntime:SaveSettings()
-end
-
-env.LHShowWhatsNew = function(force)
-    local previous = env.LHSettings.LastUsedVersion or env.LHSettings.WhatsNewSeenVersion
-    local seen = env.LHNormalizeVersion(env.LHSettings.WhatsNewSeenVersion)
-    local current = env.LHNormalizeVersion(Vv)
-
-    -- V10.5.0 is the first LH release that stores version-view history.
-    -- An existing pre-10.5 settings file therefore safely identifies an upgrade user;
-    -- fresh installs stay quiet instead of getting an unnecessary first-run popup.
-    if not previous and LH_HAD_EXISTING_SETTINGS then previous = "10.4.1" end
-    if force and previous and current and env.LHCompareVersions(previous, current) >= 0 then previous = "10.4.1" end
-
-    if not force then
-        if not previous then
-            env.LHMarkWhatsNewSeen()
-            return false
-        end
-        if seen and current and env.LHCompareVersions(seen, current) >= 0 then
-            env.LHSettings.LastUsedVersion = Vv
-            LHRuntime:SaveSettings()
-            return false
-        end
-        local previousNormalized = env.LHNormalizeVersion(previous)
-        if not previousNormalized or not current or env.LHCompareVersions(previousNormalized, current) >= 0 then
-            env.LHMarkWhatsNewSeen()
-            return false
-        end
-    end
-
-    local entries = env.LHCollectWhatsNew(previous or "0.0.0")
-    if #entries == 0 then
-        if force then
-            entries = {{Version = current or Vv, Text = "You're on the newest Lollypop Hub version."}}
-        else
-            env.LHMarkWhatsNewSeen()
-            return false
-        end
-    end
-
-    local parent = get.CoreGui
-    pcall(function() if gethui then parent = gethui() end end)
-    local old = parent and parent:FindFirstChild("LHWhatsNewV105")
-    if old then old:Destroy() end
-
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "LHWhatsNewV105"
-    gui.IgnoreGuiInset = true
-    gui.ResetOnSpawn = false
-    gui.DisplayOrder = 1000005
-    gui.Parent = parent
-
-    local dim = Instance.new("TextButton")
-    dim.Size = UDim2.fromScale(1, 1)
-    dim.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    dim.BackgroundTransparency = 0.42
-    dim.BorderSizePixel = 0
-    dim.Text = ""
-    dim.AutoButtonColor = false
-    dim.Parent = gui
-
-    local card = Instance.new("Frame")
-    card.AnchorPoint = Vector2.new(0.5, 0.5)
-    card.Position = UDim2.fromScale(0.5, 0.5)
-    card.Size = UDim2.fromOffset(430, 340)
-    card.BackgroundColor3 = Color3.fromRGB(18, 14, 22)
-    card.BorderSizePixel = 0
-    card.Parent = gui
-    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 14)
-    local stroke = Instance.new("UIStroke", card)
-    stroke.Color = env.LollypopTheme or Color3.fromRGB(255, 72, 176)
-    stroke.Transparency = 0.16
-    stroke.Thickness = 1.3
-
-    local title = Instance.new("TextLabel")
-    title.Position = UDim2.fromOffset(16, 12)
-    title.Size = UDim2.new(1, -58, 0, 28)
-    title.BackgroundTransparency = 1
-    title.Font = Enum.Font.GothamBold
-    title.Text = "What's New in LH v" .. tostring(Vv)
-    title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    title.TextSize = 18
-    title.TextXAlignment = Enum.TextXAlignment.Left
-    title.Parent = card
-
-    local from = Instance.new("TextLabel")
-    from.Position = UDim2.fromOffset(16, 41)
-    from.Size = UDim2.new(1, -32, 0, 20)
-    from.BackgroundTransparency = 1
-    from.Font = Enum.Font.GothamMedium
-    from.Text = "Important changes since v" .. tostring(previous or Vv)
-    from.TextColor3 = Color3.fromRGB(190, 177, 198)
-    from.TextSize = 11
-    from.TextXAlignment = Enum.TextXAlignment.Left
-    from.Parent = card
-
-    local list = Instance.new("ScrollingFrame")
-    list.Position = UDim2.fromOffset(14, 68)
-    list.Size = UDim2.new(1, -28, 1, -126)
-    list.BackgroundColor3 = Color3.fromRGB(27, 21, 35)
-    list.BackgroundTransparency = 0.08
-    list.BorderSizePixel = 0
-    list.AutomaticCanvasSize = Enum.AutomaticSize.Y
-    list.CanvasSize = UDim2.new()
-    list.ScrollBarThickness = 4
-    list.Parent = card
-    Instance.new("UICorner", list).CornerRadius = UDim.new(0, 10)
-    local layout = Instance.new("UIListLayout", list)
-    layout.Padding = UDim.new(0, 6)
-    layout.SortOrder = Enum.SortOrder.LayoutOrder
-    local padding = Instance.new("UIPadding", list)
-    padding.PaddingTop = UDim.new(0, 8)
-    padding.PaddingBottom = UDim.new(0, 8)
-    padding.PaddingLeft = UDim.new(0, 8)
-    padding.PaddingRight = UDim.new(0, 8)
-
-    for index, entry in ipairs(entries) do
-        local row = Instance.new("TextLabel")
-        row.LayoutOrder = index
-        row.Size = UDim2.new(1, -2, 0, 0)
-        row.AutomaticSize = Enum.AutomaticSize.Y
-        row.BackgroundColor3 = Color3.fromRGB(38, 29, 48)
-        row.BackgroundTransparency = 0.08
-        row.BorderSizePixel = 0
-        row.Font = Enum.Font.GothamMedium
-        row.Text = "  " .. tostring(entry.Text)
-        row.TextColor3 = Color3.fromRGB(248, 244, 250)
-        row.TextSize = 11
-        row.TextWrapped = true
-        row.TextXAlignment = Enum.TextXAlignment.Left
-        row.TextYAlignment = Enum.TextYAlignment.Center
-        row.Parent = list
-        Instance.new("UICorner", row).CornerRadius = UDim.new(0, 8)
-        local rowPadding = Instance.new("UIPadding", row)
-        rowPadding.PaddingTop = UDim.new(0, 8)
-        rowPadding.PaddingBottom = UDim.new(0, 8)
-        rowPadding.PaddingLeft = UDim.new(0, 4)
-        rowPadding.PaddingRight = UDim.new(0, 6)
-    end
-
-    local dismiss = Instance.new("TextButton")
-    dismiss.AnchorPoint = Vector2.new(0.5, 1)
-    dismiss.Position = UDim2.new(0.5, 0, 1, -12)
-    dismiss.Size = UDim2.new(1, -28, 0, 40)
-    dismiss.BackgroundColor3 = env.LollypopTheme or Color3.fromRGB(255, 72, 176)
-    dismiss.BorderSizePixel = 0
-    dismiss.Font = Enum.Font.GothamBold
-    dismiss.Text = "Got It"
-    dismiss.TextColor3 = Color3.fromRGB(255, 255, 255)
-    dismiss.TextSize = 13
-    dismiss.Parent = card
-    Instance.new("UICorner", dismiss).CornerRadius = UDim.new(0, 10)
-    LHRuntime:AddButtonPressEffect(dismiss)
-
-    local closed = false
-    local function close(markSeen)
-        if closed then return end
-        closed = true
-        if markSeen ~= false then env.LHMarkWhatsNewSeen() end
-        if gui then gui:Destroy() end
-    end
-    LHRuntime:Track(dismiss.MouseButton1Click:Connect(function() close(true) end))
-    LHRuntime:Track(dim.MouseButton1Click:Connect(function() close(true) end))
-    return true
-end
 
 add(exSection, button("What's New", "See the important LH features added since your previous version.", function()
     env.LHShowWhatsNew(true)
@@ -11356,20 +11519,19 @@ end
 
 
 if Window.EnableUniversalSearch then
-    env.LHUniversalInitOK, env.LHUniversalInitResult = pcall(function()
-        return Window:EnableUniversalSearch(utf.char(0x2605).." Universal Search")
-    end)
-    if env.LHUniversalInitOK then
-        if env.LHUniversalInitResult and env.LHUniversalInitResult.Button then
-            env.LHUniversalInitResult.Button.LayoutOrder = 0
-        end
-    else
-        warn("[Lollypop Hub Universal Search] " .. tostring(env.LHUniversalInitResult))
-        pcall(function()
-            LHRuntime:Notify("error", "Universal Search", "Universal Search could not initialize: " .. tostring(env.LHUniversalInitResult), 6, nil, true)
+    (function()
+        local universalOk, universalResult = pcall(function()
+            return Window:EnableUniversalSearch(utf.char(0x2605).." Universal Search")
         end)
-    end
-    env.LHUniversalInitOK, env.LHUniversalInitResult = nil, nil
+        if universalOk then
+            if universalResult and universalResult.Button then universalResult.Button.LayoutOrder = 0 end
+        else
+            warn("[Lollypop Hub Universal Search] " .. tostring(universalResult))
+            pcall(function()
+                LHRuntime:Notify("error", "Universal Search", "Universal Search could not initialize: " .. tostring(universalResult), 6, nil, true)
+            end)
+        end
+    end)()
 end
 
 local personalShelfTab = nil
@@ -11823,12 +11985,9 @@ local function performQuickAction(actionName)
     elseif actionName == "Exit Game" then
         game:Shutdown()
     elseif actionName == "Reload Hub" then
-        local reloadHub = env.loadhub
-        task.spawn(function()
-            LHRuntime:Unload("quick action reload")
-            task.wait(0.2)
-            if type(reloadHub) == "function" then reloadHub() end
-        end)
+        if type(env.LHReloadHub) == "function" then env.LHReloadHub() end
+    elseif actionName == "Unload Hub" then
+        if type(env.LHRequestClose) == "function" then env.LHRequestClose() end
     elseif actionName == "Undo" then
         if KAVO and KAVO.Undo then KAVO:Undo() end
     elseif actionName == "Save Settings" then
@@ -11848,6 +12007,25 @@ local function performQuickAction(actionName)
             LHRuntime:Notify("warning", "Admin Palette", "Enable Lollypop Admin Kommands [BETA] first.", 4, nil, true)
         end
     end
+end
+
+
+-- Reliable replacement for the old /e reload chat shortcut.
+-- Available from Quick Actions and manually as getgenv().LHReloadHub().
+env.LHReloadHub = function()
+    if LHRuntime.Unloading then return false end
+    local reloadHub = env.loadhub
+    task.spawn(function()
+        LHRuntime:Unload("reload hub")
+        task.wait(0.20)
+        if type(reloadHub) == "function" then
+            local ok, err = pcall(reloadHub)
+            if not ok then warn("[Lollypop Hub Reload] " .. tostring(err)) end
+        else
+            warn("[Lollypop Hub Reload] env.loadhub is unavailable.")
+        end
+    end)
+    return true
 end
 
 local function KUSTOMTOGGLE()
@@ -11981,6 +12159,7 @@ local function KUSTOMTOGGLE()
             {Name = "Server Hop", Icon = emoji.rocket},
             {Name = "Exit Game", Icon = emoji.cross_mark},
             {Name = "Reload Hub", Icon = emoji.lollipop},
+            {Name = "Unload Hub", Icon = emoji.cross_mark},
             {Name = "Save Settings", Icon = emoji.gear},
             {Name = "Undo", Icon = emoji.cyclone},
             {Name = "Admin Palette", Icon = emoji.japanese_goblin},
@@ -12063,6 +12242,9 @@ local function KUSTOMTOGGLE()
         local x = math.clamp(roundButton.Position.X.Offset, 0, math.max(0, areaSize.X - buttonSize.X))
         local y = math.clamp(roundButton.Position.Y.Offset, 0, math.max(0, areaSize.Y - buttonSize.Y))
         roundButton.Position = UDim2.fromOffset(x, y)
+        if type(env.LHPlaceAdminButton) == "function" then
+            task.defer(env.LHPlaceAdminButton)
+        end
     end
 
     local function finishToggleDrag(shouldClamp)
