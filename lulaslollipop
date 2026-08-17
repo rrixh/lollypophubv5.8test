@@ -1,6 +1,6 @@
---main v10.5.1 LOLLYPOP HUB 
+--main v10.5.1  LOLLYPOP HUB 
 
-date = "August 16"..", "..tostring(os.date("%Y"))
+date = "August 17"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -964,6 +964,14 @@ local Vv = ('10.5.1')
 -- EASY WHAT'S NEW TABLE - EDIT THIS FOR NEW LH VERSIONS
 --==================================================
 WatsNew = WatsNew or {
+["10.5.1"] = {
+"Added \"Skripts\" tab back",
+"Added a universal hitbox expander with optional hitbox shapes (Skripts)",
+"Added \"Debugging\" tab to view the Roblox developer konsole directly from the hub",
+"Improved hub performance",
+"Added jump bot; auto jumps when players are in the specified distance; good for PvP games",
+"[BUG] fixed \"Unload Hub\" making buttons disappear",
+},
     ["10.5.0"] = {
         "[NEW FEATURE] Free Emotes: sync your player with other players' animations",
         "[NEW FEATURE] Free Animations: detect, play and save animations other players are using",
@@ -1356,7 +1364,7 @@ tostring(txt) or "txt",
 {Duration = tonumber(dur) or 4
 })
 end;
-lhsay = getgenv().lhsay;
+local lhsay = getgenv().lhsay;
 
 function LHRuntime:AddButtonPressEffect(button)
     if not button or not button:IsA("GuiButton") then return end
@@ -3356,17 +3364,18 @@ local function buildHub(window)
     if type(env.LHBuildUniversalIndex) == "function" then env.LHBuildUniversalIndex(tabOrder) end
     local requestedOrder = {
         ["Home"] = 1,
-        ["Tools"] = 2,
-        ["Admin"] = 3,
-        ["Fun"] = 4,
-        ["Hubs & GUIs"] = 5,
-        [emoji.glowing_star.."Games"..emoji.glowing_star] = 6,
-        ["FE"] = 7,
-        ["Updates/Extras"] = 8,
-        ["Server"] = 10,
-        ["Notifications"] = 11,
-        ["Ui Kustomization"] = 12,
-        ["Bypasses & More"] = 13,
+        ["Skripts"] = 2,
+        ["Tools"] = 3,
+        ["Admin"] = 4,
+        ["Fun"] = 5,
+        ["Hubs & GUIs"] = 6,
+        [emoji.glowing_star.."Games"..emoji.glowing_star] = 7,
+        ["FE"] = 8,
+        ["Updates/Extras"] = 9,
+        ["Server"] = 11,
+        ["Debugging"] = 12,
+        ["Ui Kustomization"] = 13,
+        ["Bypasses & More"] = 14,
     }
     table.sort(tabOrder, function(a, b)
         local ai = requestedOrder[a._name] or 500
@@ -3675,7 +3684,7 @@ env.LHRequestClose = function()
     sub.TextSize = 12
     sub.TextColor3 = hasUnsavedSettings and Color3.fromRGB(255, 201, 103) or Color3.fromRGB(188, 180, 199)
     sub.TextWrapped = true
-    sub.Text = hasUnsavedSettings and "You have unsaved LH settings. Save them before leaving or leave without saving." or "LH will clean up only its own UI, connections and temporary objects."
+    sub.Text = hasUnsavedSettings and "You have unsaved settings. Save them first, or leave without saving." or "Press Leave to exit Lollypop Hub, or Stay to keep using it."
     sub.Parent = card
 
     local saveBeforeExit = Instance.new("TextButton")
@@ -4391,7 +4400,7 @@ LHRuntime:RegisterCommand("settings", {"setting", "options"}, "Opens Ui Kustomiz
 end)
 
 LHRuntime:RegisterCommand("notifications", {"notes", "history"}, "Opens notification history.", "notifications", function()
-    Window:SelectTab("Notifications")
+    Window:SelectTab("Debugging")
 end)
 
 LHRuntime:RegisterCommand("theme", {}, "Changes the UI theme.", "theme kandy", function(args)
@@ -6138,6 +6147,137 @@ print(("@lulaslollipop"..emoji.lollipop.." on Roblox // @rrixh diskord // @siipp
 end;local spawn=spawn;spawn(mememememememememememememememememeemememememememememmemeemememmemeememmeemememmee)
 
 local skripts = newTab("Home")
+-- R8: dedicated Skripts page. Stored on env to avoid adding long-lived locals
+-- inside LH's already-large startup function.
+env.LHSkriptsTabData = newTab("Skripts")
+env.LHSkriptsTabData["Jump"] = env.LHSkriptsTabData["Jump"] or {}
+env.LHSkriptsTabData["Movement"] = env.LHSkriptsTabData["Movement"] or {}
+env.LHSkriptsTabData["Utility"] = env.LHSkriptsTabData["Utility"] or {}
+env.LHSkriptsTabData["Hitbox Expander"] = env.LHSkriptsTabData["Hitbox Expander"] or {}
+env.LHSkriptsJumpSection = section(env.LHSkriptsTabData, "Jump", env.LHSkriptsTabData["Jump"])
+env.LHSkriptsMovementSection = section(env.LHSkriptsTabData, "Movement", env.LHSkriptsTabData["Movement"])
+env.LHSkriptsUtilitySection = section(env.LHSkriptsTabData, "Utility", env.LHSkriptsTabData["Utility"])
+env.LHSkriptsHitboxSection = section(env.LHSkriptsTabData, "Hitbox Expander", env.LHSkriptsTabData["Hitbox Expander"])
+
+-- Integrated universal Hitbox Expander. It never edits/destroys LH's ESP Highlight.
+env.LHHitboxExpander = env.LHHitboxExpander or {
+    Enabled = false, Size = 6, Invisible = false, Shape = "Kube", Originals = {}, Proxies = {}
+}
+function env.LHHitboxExpander:RestorePlayer(player)
+    local original = self.Originals[player]
+    local character = player and player.Character
+    local root = character and character:FindFirstChild("HumanoidRootPart")
+    if root and original then
+        pcall(function() root.Size = original.Size end)
+        pcall(function() root.Transparency = original.Transparency end)
+        pcall(function() if root:IsA("Part") then root.Shape = original.Shape or Enum.PartType.Block end end)
+        pcall(function() root.CanCollide = original.CanCollide end)
+        pcall(function() root.CanTouch = original.CanTouch end)
+        pcall(function() root.CanQuery = original.CanQuery end)
+    end
+    self.Originals[player] = nil
+    local proxy = self.Proxies[player]
+    if proxy then pcall(function() proxy:Destroy() end) end
+    self.Proxies[player] = nil
+end
+function env.LHHitboxExpander:ApplyPlayer(player)
+    if not self.Enabled or not player or player == get.Players.LocalPlayer then return end
+    local character = player.Character
+    local root = character and character:FindFirstChild("HumanoidRootPart")
+    if not root or not root:IsA("BasePart") then return end
+    if not self.Originals[player] then
+        self.Originals[player] = {
+            Size = root.Size, Transparency = root.Transparency,
+            Shape = root:IsA("Part") and root.Shape or nil,
+            CanCollide = root.CanCollide, CanTouch = root.CanTouch, CanQuery = root.CanQuery
+        }
+    end
+    local amount = math.clamp(tonumber(self.Size) or 6, 1, 50)
+    local shape = tostring(self.Shape or "Kube")
+    local transparency = self.Invisible and 1 or 0.72
+    if shape == "Triangle" then
+        -- Wedge proxy keeps the requested triangle shape without replacing the real HRP.
+        pcall(function() root.Size = self.Originals[player].Size end)
+        pcall(function() root.Transparency = self.Originals[player].Transparency end)
+        if not self.Proxies[player] or not self.Proxies[player].Parent then
+            local wedge = Instance.new("WedgePart")
+            wedge.Name = "LHHitboxTriangle"
+            wedge.Anchored = true
+            wedge.CanCollide = false
+            wedge.CanTouch = true
+            wedge.CanQuery = true
+            wedge.Massless = true
+            wedge.Material = Enum.Material.ForceField
+            wedge.Color = Color3.fromRGB(255, 72, 92)
+            wedge:SetAttribute("LHHitboxTargetUserId", player.UserId)
+            wedge.Parent = character
+            self.Proxies[player] = wedge
+        end
+        local wedge = self.Proxies[player]
+        wedge.Size = Vector3.new(amount, amount, amount)
+        wedge.CFrame = root.CFrame
+        wedge.Transparency = transparency
+    else
+        local proxy = self.Proxies[player]
+        if proxy then pcall(function() proxy:Destroy() end); self.Proxies[player] = nil end
+        pcall(function()
+            root.Size = Vector3.new(amount, amount, amount)
+            root.Transparency = transparency
+            root.CanCollide = false
+            root.CanTouch = true
+            root.CanQuery = true
+            if root:IsA("Part") then
+                root.Shape = shape == "Ball" and Enum.PartType.Ball or Enum.PartType.Block
+            end
+        end)
+    end
+end
+function env.LHHitboxExpander:Refresh()
+    if not self.Enabled then return end
+    for _, player in ipairs(get.Players:GetPlayers()) do
+        if player ~= get.Players.LocalPlayer then self:ApplyPlayer(player) end
+    end
+    for player, proxy in pairs(self.Proxies) do
+        if not player.Parent or not player.Character then
+            self:RestorePlayer(player)
+        elseif proxy and proxy.Parent then
+            local root = player.Character:FindFirstChild("HumanoidRootPart")
+            if root then proxy.CFrame = root.CFrame end
+        end
+    end
+end
+function env.LHHitboxExpander:SetEnabled(value)
+    self.Enabled = value == true
+    if self.Enabled then self:Refresh() else
+        for player in pairs(self.Originals) do self:RestorePlayer(player) end
+    end
+end
+if env.LHHitboxExpander.Connection then pcall(function() env.LHHitboxExpander.Connection:Disconnect() end) end
+env.LHHitboxExpander.Connection = LHRuntime:Track(get.RunService.Heartbeat:Connect(function()
+    if not LHRuntime.Unloading and env.LHHitboxExpander and env.LHHitboxExpander.Enabled then
+        env.LHHitboxExpander:Refresh()
+    end
+end))
+LHRuntime:AddCleanup(function()
+    if env.LHHitboxExpander then env.LHHitboxExpander:SetEnabled(false) end
+end)
+
+add(env.LHSkriptsHitboxSection, toggle("Hitbox", "expands other players' local hitboxes", function(value)
+    env.LHHitboxExpander:SetEnabled(value)
+end, false))
+add(env.LHSkriptsHitboxSection, kounter("Hitbox Size", "hitbox size in studs", 1, function(value)
+    env.LHHitboxExpander.Size = math.clamp(tonumber(value) or 6, 1, 50)
+    env.LHHitboxExpander:Refresh()
+end, 6, 1, 50))
+add(env.LHSkriptsHitboxSection, toggle("Invisible Hitbox", "makes expanded hitboxes invisible", function(value)
+    env.LHHitboxExpander.Invisible = value == true
+    env.LHHitboxExpander:Refresh()
+end, false))
+add(env.LHSkriptsHitboxSection, dropdown("Hitbox Shape", "xhange the 3D hitbox shape", {"Kube", "Ball", "Triangle"}, function(value)
+    env.LHHitboxExpander.Shape = tostring(value or "Kube")
+    env.LHHitboxExpander:Refresh()
+end, "Kube"))
+
 skripts["Home Intro"] = skripts["Home Intro"] or {}
 local HomeIntroSection = section(skripts, "Home Intro", skripts["Home Intro"], true)
 add(HomeIntroSection, kredits({
@@ -6145,10 +6285,11 @@ add(HomeIntroSection, kredits({
     DisplayName = displayname,
     UserId = 3001347724,
     SessionStarted = env.LHSessionStart,
-    LastOnline = "Today", -- edit manually if needed
+    LastOnline = "Yesterday", 
     OnlineStatus = env.LH_ONLINE_STATUS or online_status,
     AnimationId = env.LH_OWNER_KREDITS_ANIMATION_ID,
 }))
+
 skripts["Skripts"] = skripts["Skripts"] or {}
 local SkriptsSection = section(skripts, "Skripts", skripts["Skripts"])
 local skript = SkriptsSection;
@@ -6318,7 +6459,7 @@ end))
 --[LABELS]--
 add(SkriptsSection, label("User ID: "..userid.. " | Akkount Age: "..lp.AccountAge.." day(s)"))
 
-add(SkriptsSection, label("Game: "..get.MarketplaceService:GetProductInfo(game.PlaceId).Name.."\n Game ID: ".. game.PlaceId))
+-- R8: Game/Game ID label removed; use the Experience tab for game info.
 
 add(SkriptsSection, label("Devixe: " ..devixe_name))
 
@@ -6436,7 +6577,7 @@ spawn(function()
 _G.updateTPWalkSpeed(.80)
 end);
 
-add(SkriptsSection, toggle("TP Walk", "teleport work (bypasses walkspeed detektions)", function(val)
+add(env.LHSkriptsMovementSection, toggle("TP Walk", "teleport work (bypasses walkspeed detektions)", function(val)
 spawn(function()
 _G.toggleTPWalk(val)
 end);
@@ -6444,22 +6585,25 @@ if not pressedAlready then _G.note("Bypasses walkspeed detections in games with 
 pressedAlready = (true)
 end));
 
-add(SkriptsSection, kounter("TP Walk Speed", "teleport walk speed", 0.1, function(val)
+add(env.LHSkriptsMovementSection, kounter("TP Walk Speed", "teleport walk speed", 0.1, function(val)
 pressedAlready = true
 spawn(function()
 _G.updateTPWalkSpeed(val)
 end)
 end, 0.8, 0, 25))
 
-add(SkriptsSection, kounter("Walk Speed", "xhanges your WalkSpeed", 1, function(speed)
+add(env.LHSkriptsMovementSection, kounter("Walk Speed", "xhanges your WalkSpeed", 1, function(speed)
 local character = get.Players.LocalPlayer.Character
 local humanoid = character and character:FindFirstChildOfClass("Humanoid")
 if humanoid then humanoid.WalkSpeed = speed end
 end, 16, 0, 400))
 
-add(SkriptsSection, slider("Jump Power", "Uses the universal LH JumpPower value.", 0, 400, function(jp)
+env.LHSkriptsJumpPowerKontrol = add(env.LHSkriptsMovementSection, kounter("Jump Power", "xhanges the universal LH jumppower", 1, function(jp)
 LHFeatures:SetJumpPower(jp)
-end, LHFeatures.UniversalJumpPower))
+end, LHFeatures.UniversalJumpPower, 0, 500))
+if env.LHSkriptsJumpPowerKontrol then
+    pcall(function() env.LHSkriptsJumpPowerKontrol:SetResetDefault(env.LHDefaultGameJumpPower) end)
+end
 
 add(SkriptsSection, toggle("No Klip", "walk thru walls", function(enabled)
 LHFeatures:SetNoClip(enabled)
@@ -6486,7 +6630,7 @@ get.Workspace.Gravity = 196.2
 end))
 
 local autoJumpEnabled = false;
-add(SkriptsSection, toggle("Auto Jump", "auto jumps", function(state)
+add(env.LHSkriptsJumpSection, toggle("Auto Jump", "auto jumps", function(state)
 autoJumpEnabled = state
 end));
 LHRuntime:Track(cloneref(get.RunService).RenderStepped:Connect(function()
@@ -6498,7 +6642,7 @@ end
 end
 end))
 
-add(SkriptsSection, toggle("Infinite Jump", "Jump again while airborne. Uses one JumpRequest konnection and survives respawns.", function(enabled)
+add(env.LHSkriptsJumpSection, toggle("Infinite Jump", "Jump again while airborne. Uses one JumpRequest konnection and survives respawns.", function(enabled)
 LHFeatures:SetInfiniteJump(enabled)
 end))
 
@@ -6524,15 +6668,15 @@ local function buildProximityTargets(excludedPlayer)
     return labels
 end
 
-add(SkriptsSection, toggle("Jump Bot", "jumps when players are in the specified distance range", function(enabled)
+add(env.LHSkriptsJumpSection, toggle("Jump Bot", "jumps when players are in the specified distance range", function(enabled)
 LHFeatures:SetProximityAutoJump(enabled)
 end))
 
-add(SkriptsSection, kounter("Jump Bot Distance", "specified distance range in studs. Reset returns this to 7.5 studs.", 0.5, function(distance)
+add(env.LHSkriptsJumpSection, kounter("Jump Bot Distance", "specified distance range in studs. Reset returns this to 7.5 studs.", 0.5, function(distance)
 LHFeatures:SetProximityDistance(distance)
 end, 7.5, 1, 100))
 
-proximityTargetDropdown = add(SkriptsSection, dropdown("Jump Bot Target", "All works for every player, or selekt one player by username and display name.", buildProximityTargets(), function(labelText)
+proximityTargetDropdown = add(env.LHSkriptsJumpSection, dropdown("Jump Bot Target", "All works for every player, or selekt one player by username and display name.", buildProximityTargets(), function(labelText)
 selectedProximityTarget = tostring(labelText or "All")
 LHFeatures:SetProximityTarget(proximityTargetUserIds[selectedProximityTarget] or 0)
 end, "All"))
@@ -6637,7 +6781,7 @@ LHRuntime:RunRemote("https://pastebin.com/raw/tWGxhNq0", "Synapse X Rework");
 end;
 end))
 
-add(SkriptsSection, button("Draggable shiftloxk (permanent)", "draggableshiftloxk op", function()
+add(env.LHSkriptsUtilitySection, button("Draggable shiftloxk (permanent)", "draggableshiftloxk op", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/skripts/permanentshiftloxk-mobile.doc",true))();
 end))
 
@@ -6774,7 +6918,7 @@ RobloxTask.spawn(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/rrixh/uwuware/main/Kustom/lollypop5ever.exekuted",true))();end)
 end))
 
-add(SkriptsSection, button("Anti-Fall (universal)", "it will tp u to the previous area before u fell",
+add(env.LHSkriptsUtilitySection, button("Anti-Fall (universal)", "it will tp u to the previous area before u fell",
 function()
 -- anti fall
 loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
@@ -7093,427 +7237,429 @@ add(SkriptsSection, button("GreenSkreengui", "not fe but perfekt for videos", fu
 loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Green%20Screen'))()
 end))
 
---r15 animationz
-skripts["R15 Animation"] = skripts["R15 Animation"] or {}
-local SkriptsSection = section(skripts, "R15 Animation", skripts["R15 Animation"])
+-- R8 DISABLED: old Home R15 animation section is superseded by Free Animations / Free Emotes.
+-- --r15 animationz
+-- skripts["R15 Animation"] = skripts["R15 Animation"] or {}
+-- local SkriptsSection = section(skripts, "R15 Animation", skripts["R15 Animation"])
+-- 
+-- add(SkriptsSection, button("Zombie Animation", "R15 animation", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616158929"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616160636"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616161997"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616156119"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616157476"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- add(SkriptsSection, button("Kartoony Animation", "R15 animation", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=742637544"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=742638445"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=742640026"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=742638842"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=742637942"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=742636889"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=742637151"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Astronaut", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=891621366"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=891633237"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=891667138"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=891636393"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=891627522"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=891609353"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=891617961"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Bubbly", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=910004836"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=910009958"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=910034870"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=910025107"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=910016857"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
+-- Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
+-- Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Elder", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=845400520"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=845403856"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=845386501"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=845398858"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=845392038"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=845396048"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end)) 
+-- 
+-- add(SkriptsSection, button("Knight", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616010382"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616003713"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end 
+-- end))
+-- 
+-- add(SkriptsSection, button("Levitation", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=750781874"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=750782770"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=750785693"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=750783738"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=750782230"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=750779899"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=750780242"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Mage", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=707742142"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=707855907"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=707897309"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=707861613"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=707853694"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=707826056"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=707829716"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- add(SkriptsSection, button("Ninja", "lokal skripts", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=656117400"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=656118341"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=656121766"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=656118852"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=656117878"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=656114359"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=656115606"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Pirate", "lokal skripts", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=750781874"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=750782770"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=750785693"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=750783738"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=750782230"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=750779899"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=750780242"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Robot", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616088211"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616089559"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616095330"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616091570"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616090535"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616086039"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616087089"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Stylish", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616136790"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616138447"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616146177"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616140816"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616139451"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616133594"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616134815"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Superhero", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616111295"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616113536"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616122287"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616117076"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616115533"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616104706"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616108001"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end 
+-- end 
+-- end))
+-- 
+-- add(SkriptsSection, button("Toy", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=782843345"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=782842708"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=782847020"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=782843869"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=782846423"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Vampire", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083445855"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083450166"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1083473930"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1083462077"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083455352"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083439238"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1083443587"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Werewolf", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083195517"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083214717"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1083178339"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1083216690"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083218792"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083182000"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1083189019"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Patrol", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1149612882"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1150842221"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1151231493"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1150967949"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1148811837"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1148811837"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1148863382"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Konfident", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1069977950"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1069987858"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1070017263"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1070001516"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1069984524"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1069946257"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1069973677"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Ghost", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
+-- Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=616012453"
+-- Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=616011509"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Sneaky", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
+-- Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=616012453"
+-- Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=616011509"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Prinxess", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=941003647"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=941013098"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=941028902"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=941015281"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=941008832"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=940996062"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=941000007"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("No Animation", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+-- Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
+-- Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- add(SkriptsSection, button("Athro", "lokal skript", function()
+-- while true do
+-- wait(1)
+-- for i, player in ipairs(get.Players:GetChildren()) do
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- local Animate = get.Players.LocalPlayer.Character.Animate
+-- Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=2510196951"
+-- Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=2510197257"
+-- Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=2510202577"
+-- Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=2510198475"
+-- Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
+-- Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
+-- Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
+-- get.Players.LocalPlayer.Character.Humanoid.Jump = false
+-- end
+-- end
+-- end))
+-- 
+-- 
+-- 
+-- 
+-- -- admin skripts
 
-add(SkriptsSection, button("Zombie Animation", "R15 animation", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616158929"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616160636"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616161997"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616156119"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616157476"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-add(SkriptsSection, button("Kartoony Animation", "R15 animation", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=742637544"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=742638445"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=742640026"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=742638842"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=742637942"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=742636889"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=742637151"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Astronaut", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=891621366"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=891633237"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=891667138"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=891636393"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=891627522"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=891609353"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=891617961"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Bubbly", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=910004836"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=910009958"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=910034870"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=910025107"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=910016857"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
-Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
-Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Elder", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=845400520"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=845403856"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=845386501"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=845398858"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=845392038"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=845396048"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end)) 
-
-add(SkriptsSection, button("Knight", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616010382"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616003713"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end 
-end))
-
-add(SkriptsSection, button("Levitation", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=750781874"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=750782770"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=750785693"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=750783738"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=750782230"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=750779899"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=750780242"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Mage", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=707742142"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=707855907"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=707897309"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=707861613"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=707853694"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=707826056"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=707829716"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-add(SkriptsSection, button("Ninja", "lokal skripts", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=656117400"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=656118341"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=656121766"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=656118852"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=656117878"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=656114359"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=656115606"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Pirate", "lokal skripts", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=750781874"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=750782770"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=750785693"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=750783738"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=750782230"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=750779899"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=750780242"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Robot", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616088211"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616089559"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616095330"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616091570"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616090535"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616086039"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616087089"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Stylish", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616136790"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616138447"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616146177"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616140816"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616139451"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616133594"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616134815"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Superhero", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616111295"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616113536"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616122287"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616117076"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616115533"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616104706"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616108001"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end 
-end 
-end))
-
-add(SkriptsSection, button("Toy", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=782843345"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=782842708"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=782847020"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=782843869"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=782846423"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Vampire", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083445855"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083450166"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1083473930"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1083462077"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083455352"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083439238"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1083443587"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Werewolf", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083195517"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083214717"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1083178339"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1083216690"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083218792"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083182000"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1083189019"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Patrol", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1149612882"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1150842221"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1151231493"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1150967949"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1148811837"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1148811837"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1148863382"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Konfident", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1069977950"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1069987858"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=1070017263"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=1070001516"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1069984524"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1069946257"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=1069973677"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Ghost", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
-Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=616012453"
-Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=616011509"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Sneaky", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616006778"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616008087"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616013216"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
-Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=616012453"
-Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=616011509"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Prinxess", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=941003647"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=941013098"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=941028902"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=941015281"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=941008832"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=940996062"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=941000007"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("No Animation", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
-Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-add(SkriptsSection, button("Athro", "lokal skript", function()
-while true do
-wait(1)
-for i, player in ipairs(get.Players:GetChildren()) do
-local Animate = get.Players.LocalPlayer.Character.Animate
-local Animate = get.Players.LocalPlayer.Character.Animate
-Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=2510196951"
-Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=2510197257"
-Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=2510202577"
-Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=2510198475"
-Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
-Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
-Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
-get.Players.LocalPlayer.Character.Humanoid.Jump = false
-end
-end
-end))
-
-
-
-
--- admin skripts
 local admin = newTab("Admin")
 admin["Admin Kommands"] = admin["Admin Kommands"] or {}
 local AdminSection = section(admin, "Admin Kommands", admin["Admin Kommands"]);
@@ -10412,15 +10558,7 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
-
-LOLLY.." V.10.5.1 updates:",
-
-"[BUG] Avatar Kreator: shows full avatar in saved outfits",
-"[NEW FEATURE] Quick Action Panel: added \"Unload Hub\" (hold the \""..LOLLY.."\" button  to access it)",
-
-
     emoji.lollipop.." V10.5.0 updates: ",
-
     "[NEW FEATURE] Free Emotes: sync your player with other players' animations",
     "[NEW FEATURE] Free Animations: detect, play and save animations other players are using",
     "[NEW FEATURE] Universal Search: search LH features, settings, kommands, players and more",
@@ -10790,18 +10928,6 @@ local exSection = section(updates, "TROLL/VERY OLD SKRIPTS", updates["TROLL/VERY
 
 -- add(exSection, bannerlabel("Weapons"))
 
-pcall(function()
-showisland("Lollypop Hub", "Loaded!", 5)
-end)
-
-
-
-
-
-
-
-
-
 
 
 
@@ -10860,19 +10986,6 @@ end))
 add(HomeSection, button("Exit Game", "leave the game",
 function()game:Shutdown()
 end))
-
-add(HomeSection, kounter("Walkspeed", "xhanges the walkspeed", 1, function(speed)
-local character = get.Players.LocalPlayer.Character
-local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-if humanoid then humanoid.WalkSpeed = speed end
-end, 16, 0, 400))
-
-env.LHHomeJumpPowerKontrol = add(HomeSection, kounter("Jump Power", "xhanges the universal LH jumppower", 1, function(jp)
-LHFeatures:SetJumpPower(jp)
-end, LHFeatures.UniversalJumpPower, 0, 500))
-if env.LHHomeJumpPowerKontrol then
-    pcall(function() env.LHHomeJumpPowerKontrol:SetResetDefault(env.LHDefaultGameJumpPower) end)
-end
 
 add(HomeSection, button("Ping Kounter", "see ping", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/MvKKJ331"))()
@@ -11588,7 +11701,7 @@ do
     local notificationCenterTab = nil
     if Window.EnableNotificationCenter then
         local notificationOk, notificationResult = pcall(function()
-            return Window:EnableNotificationCenter("Notifications")
+            return Window:EnableNotificationCenter("Debugging")
         end)
         if notificationOk then
             notificationCenterTab = notificationResult
@@ -11596,7 +11709,7 @@ do
                 notificationCenterTab.Button.LayoutOrder = 20
             end
         else
-            warn("[Lollypop Hub Notifications] " .. tostring(notificationResult))
+            warn("[Lollypop Hub Debugging] " .. tostring(notificationResult))
         end
     end
 end
@@ -11744,6 +11857,8 @@ local function showSessionRestorePrompt(previousSession)
             local ok, err = Window:RestoreUIState(previousSession.State)
             if ok then
                 LHRuntime:ShowIsland("Session Restored", "Returned to your previous LH position.", {Duration = 3})
+task.wait()
+lhsay(emoji.warning.." Roblox Banwave",  "There is an active banwave going on so i will be inactive until its over", 11)
             else
                 LHRuntime:Notify("error", "Session Restore", tostring(err), 5, nil, true)
                 Window:SelectTab("Home")
@@ -11751,6 +11866,8 @@ local function showSessionRestorePrompt(previousSession)
         else
             Window:SelectTab("Home")
             LHRuntime:ShowIsland("Normal Start", "Saved settings loaded without the old session position.", {Duration = 2.6})
+task.wait()
+lhsay(emoji.warning.." Roblox Banwave",  "There is an active banwave going on so i will be inactive until its over", 11)
         end
         task.defer(startCurrentSession)
     end
@@ -12354,6 +12471,7 @@ end))
 
 spawn(KUSTOMTOGGLE);
 spawn(MAIN);
+
 
 -- spawn(MAINE)
 
