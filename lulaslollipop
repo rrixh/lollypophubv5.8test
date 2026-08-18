@@ -1,6 +1,6 @@
 --main v10.5.1  LOLLYPOP HUB 
 
-date = "August 17"..", "..tostring(os.date("%Y"))
+date = "August 18"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -6286,14 +6286,17 @@ end, "Kube"))
 
 skripts["Home Intro"] = skripts["Home Intro"] or {}
 local HomeIntroSection = section(skripts, "Home Intro", skripts["Home Intro"], true)
+
 add(HomeIntroSection, kredits({
     Username = "lulaslollipop",
     DisplayName = displayname,
     UserId = 3001347724,
     SessionStarted = env.LHSessionStart,
-    LastOnline = "Yesterday", 
-    OnlineStatus = env.LH_ONLINE_STATUS or online_status,
-    AnimationId = env.LH_OWNER_KREDITS_ANIMATION_ID,
+    LastOnline = "2 days ago", 
+    OnlineStatus = "Offline",
+    AnimationId = 132105268936736, -- superhero flying loop
+
+-- env.LH_OWNER_KREDITS_ANIMATION_ID
 }))
 
 skripts["Skripts"] = skripts["Skripts"] or {}
@@ -9083,6 +9086,29 @@ add(GamesSection, bannerlabel("END OF FREE UGc"))
 ]]--
 -- [ <U_1F3C1><U_2B50_FE0F>END OF FREE UGX<U_2B50_FE0F><U_1F3C1> ] --
 
+add(GamesSection, bannerlabel(emoji.egg.." Steal An Egg "..emoji.egg))
+
+add(GamesSection, button("Kopy "..emoji.key, "kopies the key for Steal An Egg", function()
+if not setclipboard then 
+showisland("Your executor does not support function setclipboard()", "Key: KFHE-OWJD-OWJD", 6.5)
+return end;
+
+local kopied,failed = pcall(function()
+setclipboard("KFHE-OWJD-OWJD")
+     end)
+task.wait()
+if kopied then
+showisland("Key Kopied", "Paste the key into the 'Steal An Egg' key system", 5)
+else
+warn("[Lollypop Hub Error]",err)
+end;
+end))
+
+add(GamesSection, button("Autofarm - Crystallized Hub (OP)", "op autofarm skript for steal an egg Kredits: .gg/crystallized", function()
+loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/20799364a69a0551e5fc1ab8ea9a7820e1947c1c3e6258dba24a3588778bb879/download"))()
+task.wait()
+end))
+
 add(GamesSection, bannerlabel("IMPOSSIBLE Memory Bridge "..emoji.brain))
 
 add(GamesSection, toggle("SHOW PATH", "marks the korrect path", function(x)
@@ -10546,11 +10572,10 @@ end))
 
 --// more skripts \\--
 local updates = newTab("Updates/Extras")
-updates["THIS IS WHERE U KAN SEE UPDATE/cHANGE LOGS"] = updates["THIS IS WHERE U KAN SEE UPDATE/cHANGE LOGS"] or {}
-local exSection = section(updates, "THIS IS WHERE U KAN SEE UPDATE/cHANGE LOGS", updates["THIS IS WHERE U KAN SEE UPDATE/cHANGE LOGS"]);
--- section alias removed by table refactor
+updates["UPDATES & BUG REPORTS"] = updates["UPDATES & BUG REPORTS"] or {}
+local exSection = section(updates, "UPDATES & BUG REPORTS", updates["UPDATES & BUG REPORTS"]);
 
-add(exSection, label((emoji.japanese_goblin.." this hub is mainly made for mobile "..emoji.mobile_phone_with_arrow)));
+add(exSection, label((emoji.japanese_goblin.." this hub is mainly made for mobile "..emoji.mobile_phone_with_arrow.. " but supports all devices & platforms")));
 
 add(exSection, textbox("Report bugs here", "explain the bug and i will work on fixing it ASAP", function(skript)
 kall(function()
@@ -10564,7 +10589,14 @@ local LOLLY;
 LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
+
+    emoji.lollipop.." V10.5.1 updates: ",
+
+"[NEW GAME] Steal An Egg: Crystallized Hub (OP) // Autofarm, auto steal, ESP &more",
+"[IMPROVED] User Lookup: increased search size for  listing  more than 10 players",
+
     emoji.lollipop.." V10.5.0 updates: ",
+
     "[NEW FEATURE] Free Emotes: sync your player with other players' animations",
     "[NEW FEATURE] Free Animations: detect, play and save animations other players are using",
     "[NEW FEATURE] Universal Search: search LH features, settings, kommands, players and more",
