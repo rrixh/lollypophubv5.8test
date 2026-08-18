@@ -1357,15 +1357,6 @@ function LHRuntime:ShowIsland(titleText, bodyText, options)
     return nil
 end;
 
-getgenv().lhsay = function(title, txt, dur)
-return LHRuntime:ShowIsland(
-tostring(title) or "title", 
-tostring(txt) or "txt", 
-{Duration = tonumber(dur) or 4
-})
-end;
-local lhsay = getgenv().lhsay;
-
 function LHRuntime:AddButtonPressEffect(button)
     if not button or not button:IsA("GuiButton") then return end
     if button:GetAttribute("LHPressEffectBound") then return end
@@ -2688,10 +2679,10 @@ toggleTip.Size = UDim2.new(1, -38, 0, 30)
 toggleTip.Position = UDim2.fromOffset(19, 160)
 toggleTip.BackgroundTransparency = 1
 toggleTip.TextColor3 = Color3.fromRGB(255, 220, 92)
-toggleTip.TextSize = 11
+toggleTip.TextSize = 15
 toggleTip.Font = Enum.Font.GothamBold
 toggleTip.RichText = true
-toggleTip.Text = '<b>Tip:</b> LH keeps this button inside your device safe area automatically.'
+toggleTip.Text = '<b>Tip:</b> Lollypop Hub keeps draggable buttons inside your device safe area automatically so you wont lose them'
 toggleTip.TextWrapped = true
 toggleTip.TextYAlignment = Enum.TextYAlignment.Top
 toggleTip.Parent = frame
@@ -3425,17 +3416,22 @@ local function buildHub(window)
                         end
                         callback = function(value, ...)
                             local oldValue = item._currentValue
-                            item._currentValue = value
-                            if not item._suppressUndo and item._ui and KAVO and type(KAVO.RecordUndo) == "function" and oldValue ~= value then
+                            local results = table.pack(item.callback(value, ...))
+                            if not item._suppressUndo and KAVO and type(KAVO.RecordUndo) == "function" and oldValue ~= value then
                                 local previous = oldValue
                                 KAVO:RecordUndo(item.id, item.displayName, oldValue, value, function()
-                                    if not item._ui or not item._ui.SetValue then return end
                                     item._suppressUndo = true
-                                    item._ui:SetValue(previous, true)
+                                    if item._ui and item._ui.SetValue then
+                                        item._ui:SetValue(previous, true)
+                                    else
+                                        item.callback(previous)
+                                    end
+                                    item._currentValue = previous
                                     item._suppressUndo = false
                                 end)
                             end
-                            return item.callback(value, ...)
+                            item._currentValue = value
+                            return table.unpack(results, 1, results.n)
                         end
                     end
                     if item.kind == "button" then ui = realSection:NewButton(item.name,item.tip,callback)
@@ -3526,24 +3522,34 @@ if not kavoOk then
     env.LHBooting = false
     localStartupNotify("Lollypop Hub Startup Failed", "Kavo could not load. The loaded flag was reset.", 7)
     error(kavoResult)
-end
-KAVO = kavoResult
-env.LHKavo = KAVO
-env.LHKavoLoadedFrom = kavoSource
+end;
+
+KAVO = kavoResult;
+env.LHKavo = KAVO;
+env.LHKavoLoadedFrom = kavoSource;
+
 if tonumber(KAVO.AnimationMarketplaceVersion or 0) < 4 then
     warn("[Lollypop Hub] Kavo loaded without the Marketplace V4 marker. Upload the patched Kavo file to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
-end
+end;
 if tonumber(KAVO.AvatarMarketplaceVersion or 0) < 1 then
-    warn("[Lollypop Hub] Kavo loaded without Ava Kreator support. Upload kavo ui 4.4 to the configured KAVO URL or set env.LH_KAVO_SOURCE.")
-end
+    warn("[Lollypop Hub] Kavo loaded without Avatar Kreator support. Upload kavo ui 4.4 to the konfigured KAVO URL or set env.LH_KAVO_SOURCE.")
+end;
 if tonumber(KAVO.UserLookupVersion or 0) < 5 then
-    warn("[Lollypop Hub] Kavo loaded without User Lookup V5. Continuing normal startup.")
-end
+    warn("[Lollypop Hub] Kavo loaded without User Lookup V5. Kontinuing normal startup.")
+end;
 if tonumber(KAVO.ExperienceHubVersion or 0) < 1 then
-    warn("[Lollypop Hub] Kavo loaded without Experience Hub V1. Continuing normal startup.")
-end
+    warn("[Lollypop Hub] Kavo loaded without Experience Hub V1. Kontinuing normal startup.")
+end;
 
-local lollypopHub = ("Lollypop Hub"..emoji.lollipop.." | V") ..Vv.. " | " ..exploit.. " | " ..LastUpdate;
+getgenv().lhsay = function(title, txt, dur)
+    return env.LHKavo:ShowIsland(
+tostring(title or "Lollypop Hub"..emoji.lollipop),
+        tostring(txt) or "",
+        {Duration = tonumber(dur) or 4})
+end;
+lhsay = getgenv().lhsay;
+
+local lollypopHub = ("Lollypop Hub"..emoji.lollipop.." | v" ..Vv.. " | " ..exploit.. " | " ..LastUpdate);
 
 local Window = KAVO.CreateLib(lollypopHub, uiTheme)
 env.LHRequestClose = function()
@@ -12205,16 +12211,221 @@ local function KUSTOMTOGGLE()
 
     local ringOverlay = nil
     local ringOpen = false
-    local function closeRing()
-        ringOpen = false
-        if ringOverlay then
-            ringOverlay:Destroy()
-            ringOverlay = nil
+    local ringSerial = 0
+    local ringAnimationConnection = nil
+
+    local function stopRingAnimation()
+        if ringAnimationConnection then
+            pcall(function()
+                if ringAnimationConnection.Connected then ringAnimationConnection:Disconnect() end
+            end)
+            ringAnimationConnection = nil
         end
     end
 
+    local function smoothRingProgress(value)
+        value = math.clamp(tonumber(value) or 0, 0, 1)
+        return 0.5 - (math.cos(value * math.pi) * 0.5)
+    end
+
+    local function quadraticPoint(x0, y0, cx, cy, x1, y1, t)
+        local inv = 1 - t
+        return
+            (inv * inv * x0) + (2 * inv * t * cx) + (t * t * x1),
+            (inv * inv * y0) + (2 * inv * t * cy) + (t * t * y1)
+    end
+
+    local function animateRing(overlay, opening)
+        if not overlay or not overlay.Parent then return end
+        stopRingAnimation()
+        ringSerial = ringSerial + 1
+        local serial = ringSerial
+        local durationValue = opening and 0.34 or 0.31
+        local startedAt = os.clock()
+
+        local originX = tonumber(overlay:GetAttribute("LHOriginX")) or 0
+        local originY = tonumber(overlay:GetAttribute("LHOriginY")) or 0
+        local ringCenterX = tonumber(overlay:GetAttribute("LHRingCenterX")) or originX
+        local ringCenterY = tonumber(overlay:GetAttribute("LHRingCenterY")) or originY
+        local radius = tonumber(overlay:GetAttribute("LHRadius")) or 100
+        local startGroupTransparency = tonumber(overlay.GroupTransparency) or (opening and 1 or 0)
+
+        local records = {}
+        for _, object in ipairs(overlay:GetChildren()) do
+            if object:IsA("GuiButton") and object:GetAttribute("LHQuickAction") == true then
+                object.Active = false
+                local angle = tonumber(object:GetAttribute("LHQuickAngle")) or 0
+                local itemSize = tonumber(object:GetAttribute("LHQuickSize")) or 68
+                local finalX = tonumber(object:GetAttribute("LHQuickFinalX"))
+                    or (ringCenterX + math.cos(angle) * radius)
+                local finalY = tonumber(object:GetAttribute("LHQuickFinalY"))
+                    or (ringCenterY + math.sin(angle) * radius)
+
+                local startX, startY
+                local endX, endY
+                local startSize, endSize
+                local startRotation, endRotation
+                local startTransparency, endTransparency
+                local controlX, controlY
+
+                if opening then
+                    startX, startY = originX, originY
+                    endX, endY = finalX, finalY
+                    startSize, endSize = 8, itemSize
+                    startRotation, endRotation = -165, 0
+                    startTransparency, endTransparency = 1, 0.03
+
+                    local curlAngle = angle - math.rad(68)
+                    controlX = originX + math.cos(curlAngle) * radius * 0.76
+                    controlY = originY + math.sin(curlAngle) * radius * 0.76
+
+                    object.Position = UDim2.fromOffset(startX, startY)
+                    object.Size = UDim2.fromOffset(startSize, startSize)
+                    object.Rotation = startRotation
+                    object.BackgroundTransparency = startTransparency
+                else
+                    startX = object.AbsolutePosition.X + (object.AbsoluteSize.X * 0.5)
+                    startY = object.AbsolutePosition.Y + (object.AbsoluteSize.Y * 0.5)
+                    endX, endY = originX, originY
+                    startSize = math.max(8, math.min(object.AbsoluteSize.X, object.AbsoluteSize.Y))
+                    endSize = 6
+                    startRotation = object.Rotation
+                    endRotation = startRotation + 175
+                    startTransparency = object.BackgroundTransparency
+                    endTransparency = 1
+
+                    local midX = (startX + originX) * 0.5
+                    local midY = (startY + originY) * 0.5
+                    local curlAngle = angle + math.rad(92)
+                    controlX = midX + math.cos(curlAngle) * radius * 0.34
+                    controlY = midY + math.sin(curlAngle) * radius * 0.34
+                end
+
+                records[#records + 1] = {
+                    Button = object,
+                    StartX = startX,
+                    StartY = startY,
+                    ControlX = controlX,
+                    ControlY = controlY,
+                    EndX = endX,
+                    EndY = endY,
+                    StartSize = startSize,
+                    EndSize = endSize,
+                    StartRotation = startRotation,
+                    EndRotation = endRotation,
+                    StartTransparency = startTransparency,
+                    EndTransparency = endTransparency,
+                }
+            end
+        end
+
+        local center = overlay:FindFirstChild("QuickActionsCenter")
+        local centerStartX, centerStartY, centerEndX, centerEndY
+        local centerStartSize, centerEndSize
+        if center and center:IsA("GuiButton") then
+            center.Active = false
+            if opening then
+                centerStartX, centerStartY = originX, originY
+                centerEndX, centerEndY = ringCenterX, ringCenterY
+                centerStartSize = math.max(12, center.AbsoluteSize.X * 0.62)
+                centerEndSize = tonumber(overlay:GetAttribute("LHCenterSize")) or math.max(center.AbsoluteSize.X, 50)
+                center.Position = UDim2.fromOffset(originX, originY)
+                center.Size = UDim2.fromOffset(centerStartSize, centerStartSize)
+                center.Rotation = -32
+            else
+                centerStartX = center.AbsolutePosition.X + (center.AbsoluteSize.X * 0.5)
+                centerStartY = center.AbsolutePosition.Y + (center.AbsoluteSize.Y * 0.5)
+                centerEndX, centerEndY = originX, originY
+                centerStartSize = math.max(12, math.min(center.AbsoluteSize.X, center.AbsoluteSize.Y))
+                centerEndSize = math.max(12, centerStartSize * 0.62)
+            end
+        end
+
+        ringAnimationConnection = get.RunService.RenderStepped:Connect(function()
+            if serial ~= ringSerial or not overlay.Parent then
+                stopRingAnimation()
+                return
+            end
+
+            local rawProgress = math.clamp((os.clock() - startedAt) / durationValue, 0, 1)
+            local progress = smoothRingProgress(rawProgress)
+
+            for _, record in ipairs(records) do
+                local button = record.Button
+                if button and button.Parent then
+                    local x, y = quadraticPoint(
+                        record.StartX, record.StartY,
+                        record.ControlX, record.ControlY,
+                        record.EndX, record.EndY,
+                        progress
+                    )
+                    local size = record.StartSize + ((record.EndSize - record.StartSize) * progress)
+                    button.Position = UDim2.fromOffset(x, y)
+                    button.Size = UDim2.fromOffset(size, size)
+                    button.Rotation = record.StartRotation + ((record.EndRotation - record.StartRotation) * progress)
+                    button.BackgroundTransparency = record.StartTransparency
+                        + ((record.EndTransparency - record.StartTransparency) * progress)
+                end
+            end
+
+            if center and center.Parent then
+                local centerX = centerStartX + ((centerEndX - centerStartX) * progress)
+                local centerY = centerStartY + ((centerEndY - centerStartY) * progress)
+                local centerSize = centerStartSize + ((centerEndSize - centerStartSize) * progress)
+                center.Position = UDim2.fromOffset(centerX, centerY)
+                center.Size = UDim2.fromOffset(centerSize, centerSize)
+                if opening then
+                    center.Rotation = -32 + (32 * progress)
+                else
+                    center.Rotation = (tonumber(center.Rotation) or 0) + (4.5 * rawProgress)
+                end
+            end
+
+            if opening then
+                overlay.GroupTransparency = 1 - progress
+            else
+                overlay.GroupTransparency = startGroupTransparency + ((1 - startGroupTransparency) * progress)
+            end
+
+            if rawProgress >= 1 then
+                stopRingAnimation()
+                if opening then
+                    overlay.GroupTransparency = 0
+                    if center and center.Parent then center.Active = true; center.Rotation = 0 end
+                    for _, record in ipairs(records) do
+                        if record.Button and record.Button.Parent then record.Button.Active = true end
+                    end
+                else
+                    if ringOverlay == overlay then ringOverlay = nil end
+                    if overlay.Parent then overlay:Destroy() end
+                end
+            end
+        end)
+    end
+
+    local function closeRing(immediate)
+        ringOpen = false
+        local overlay = ringOverlay
+        if not overlay or not overlay.Parent then
+            ringOverlay = nil
+            stopRingAnimation()
+            return
+        end
+
+        if immediate == true then
+            ringSerial = ringSerial + 1
+            stopRingAnimation()
+            if ringOverlay == overlay then ringOverlay = nil end
+            overlay:Destroy()
+            return
+        end
+
+        overlay.Active = false
+        animateRing(overlay, false)
+    end
+
     local function openRing()
-        closeRing()
+        if ringOverlay and ringOverlay.Parent then closeRing(true) end
         ringOpen = true
 
         local viewport = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
@@ -12223,21 +12434,34 @@ local function KUSTOMTOGGLE()
         local radius = compact and 88 or 108
         local absolutePosition = roundButton.AbsolutePosition
         local absoluteSize = roundButton.AbsoluteSize
-        local centerX = absolutePosition.X + (absoluteSize.X * 0.5)
-        local centerY = absolutePosition.Y + (absoluteSize.Y * 0.5)
-        local safe = radius + (itemSize * 0.5) + 8
-        centerX = math.clamp(centerX, safe, math.max(safe, viewport.X - safe))
-        centerY = math.clamp(centerY, safe, math.max(safe, viewport.Y - safe))
 
-        ringOverlay = Instance.new("CanvasGroup")
-        ringOverlay.Name = "LHQuickActions"
-        ringOverlay.Size = UDim2.fromScale(1, 1)
-        ringOverlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        ringOverlay.BackgroundTransparency = 0.56
-        ringOverlay.BorderSizePixel = 0
-        ringOverlay.GroupTransparency = 1
-        ringOverlay.ZIndex = 20
-        ringOverlay.Parent = screenGui
+        -- Always animate from/to the REAL Lollypop toggle. The ring itself may shift
+        -- inward so its buttons stay inside the safe area, but closing physically
+        -- spirals every ikon baxk into the toggle the user held.
+        local originX = absolutePosition.X + (absoluteSize.X * 0.5)
+        local originY = absolutePosition.Y + (absoluteSize.Y * 0.5)
+        local ringCenterX = originX
+        local ringCenterY = originY
+        local safe = radius + (itemSize * 0.5) + 8
+        ringCenterX = math.clamp(ringCenterX, safe, math.max(safe, viewport.X - safe))
+        ringCenterY = math.clamp(ringCenterY, safe, math.max(safe, viewport.Y - safe))
+
+        local overlay = Instance.new("CanvasGroup")
+        ringOverlay = overlay
+        overlay.Name = "LHQuickActions"
+        overlay.Size = UDim2.fromScale(1, 1)
+        overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        overlay.BackgroundTransparency = 0.56
+        overlay.BorderSizePixel = 0
+        overlay.GroupTransparency = 1
+        overlay.ZIndex = 20
+        overlay:SetAttribute("LHOriginX", originX)
+        overlay:SetAttribute("LHOriginY", originY)
+        overlay:SetAttribute("LHRingCenterX", ringCenterX)
+        overlay:SetAttribute("LHRingCenterY", ringCenterY)
+        overlay:SetAttribute("LHRadius", radius)
+        overlay:SetAttribute("LHCenterSize", itemSize - 6)
+        overlay.Parent = screenGui
 
         local dismiss = Instance.new("TextButton")
         dismiss.Size = UDim2.fromScale(1, 1)
@@ -12245,14 +12469,16 @@ local function KUSTOMTOGGLE()
         dismiss.Text = ""
         dismiss.AutoButtonColor = false
         dismiss.ZIndex = 20
-        dismiss.Parent = ringOverlay
-        LHRuntime:Track(dismiss.MouseButton1Click:Connect(closeRing))
+        dismiss.Parent = overlay
+        dismiss.Activated:Connect(function()
+            if ringOverlay == overlay then closeRing(false) end
+        end)
 
         local center = Instance.new("TextButton")
         center.Name = "QuickActionsCenter"
         center.AnchorPoint = Vector2.new(0.5, 0.5)
-        center.Position = UDim2.fromOffset(centerX, centerY)
-        center.Size = UDim2.fromOffset(itemSize - 6, itemSize - 6)
+        center.Position = UDim2.fromOffset(originX, originY)
+        center.Size = UDim2.fromOffset(math.max(12, (itemSize - 6) * 0.62), math.max(12, (itemSize - 6) * 0.62))
         center.BackgroundColor3 = Color3.fromRGB(18, 13, 24)
         center.BackgroundTransparency = 0.02
         center.BorderSizePixel = 0
@@ -12262,13 +12488,16 @@ local function KUSTOMTOGGLE()
         center.TextScaled = true
         center.Font = Enum.Font.GothamBold
         center.ZIndex = 23
-        center.Parent = ringOverlay
+        center.Active = false
+        center.Parent = overlay
         Instance.new("UICorner", center).CornerRadius = UDim.new(1, 0)
         local centerStroke = Instance.new("UIStroke", center)
         centerStroke.Color = getgenv().LollypopTheme
         centerStroke.Transparency = 0.12
         LHRuntime:AddButtonPressEffect(center)
-        LHRuntime:Track(center.MouseButton1Click:Connect(closeRing))
+        center.Activated:Connect(function()
+            if ringOverlay == overlay then closeRing(false) end
+        end)
 
         local actions = {
             {Name = "Executor", Icon = emoji.laptop},
@@ -12286,20 +12515,29 @@ local function KUSTOMTOGGLE()
             local actionName = action.Name
             local actionIcon = action.Icon
             local angle = math.rad(-90 + ((index - 1) * (360 / #actions)))
-            local x = centerX + math.cos(angle) * radius
-            local y = centerY + math.sin(angle) * radius
+            local finalX = ringCenterX + math.cos(angle) * radius
+            local finalY = ringCenterY + math.sin(angle) * radius
+
             local button = Instance.new("TextButton")
             button.Name = "QuickAction_" .. actionName:gsub("%s+", "")
             button.AnchorPoint = Vector2.new(0.5, 0.5)
-            button.Position = UDim2.fromOffset(x, y)
-            button.Size = UDim2.fromOffset(itemSize, itemSize)
+            button.Position = UDim2.fromOffset(originX, originY)
+            button.Size = UDim2.fromOffset(8, 8)
             button.BackgroundColor3 = Color3.fromRGB(25, 19, 33)
-            button.BackgroundTransparency = 0.03
+            button.BackgroundTransparency = 1
             button.BorderSizePixel = 0
             button.AutoButtonColor = false
             button.Text = ""
+            button.Rotation = -165
             button.ZIndex = 22
-            button.Parent = ringOverlay
+            button.Active = false
+            button:SetAttribute("LHQuickAction", true)
+            button:SetAttribute("LHQuickAngle", angle)
+            button:SetAttribute("LHQuickRadius", radius)
+            button:SetAttribute("LHQuickSize", itemSize)
+            button:SetAttribute("LHQuickFinalX", finalX)
+            button:SetAttribute("LHQuickFinalY", finalY)
+            button.Parent = overlay
             Instance.new("UICorner", button).CornerRadius = UDim.new(1, 0)
             local actionStroke = Instance.new("UIStroke", button)
             actionStroke.Color = getgenv().LollypopTheme
@@ -12329,18 +12567,27 @@ local function KUSTOMTOGGLE()
             caption.ZIndex = 23
             caption.Parent = button
 
-            LHRuntime:Track(button.MouseButton1Click:Connect(function()
-                closeRing()
-                task.defer(function()
+            button.Activated:Connect(function()
+                if ringOverlay ~= overlay or not ringOpen then return end
+                closeRing(false)
+                task.delay(0.20, function()
                     LHRuntime:Safe("Quick Action " .. actionName, performQuickAction, actionName)
                 end)
-            end))
+            end)
         end
 
-        get.TweenService:Create(ringOverlay, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-            GroupTransparency = 0,
-        }):Play()
+        animateRing(overlay, true)
     end
+
+    LHRuntime:AddCleanup(function()
+        ringSerial = ringSerial + 1
+        stopRingAnimation()
+        if ringOverlay and ringOverlay.Parent then
+            pcall(function() ringOverlay:Destroy() end)
+        end
+        ringOverlay = nil
+        ringOpen = false
+    end)
 
     env.LHOpenQuickActions = openRing
     env.LHCloseQuickActions = closeRing
