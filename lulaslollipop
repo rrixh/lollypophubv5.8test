@@ -1,4 +1,4 @@
---main v10.5.1  LOLLYPOP HUB 
+--main v10.5.2  LOLLYPOP HUB 
 
 date = "August 18"..", "..tostring(os.date("%Y"))
 
@@ -958,12 +958,30 @@ getgenv().ToggleTextSize = 17
 local YR = os.date("%Y")
 local NEWLINE = ("\n");
 local Date = [[]]
-local Vv = ('10.5.1')
+local Vv = ('10.5.2')
 
 --==================================================
 -- EASY WHAT'S NEW TABLE - EDIT THIS FOR NEW LH VERSIONS
 --==================================================
 WatsNew = WatsNew or {
+["10.5.2"] = {
+"Player ESP now includes Highlight, Skeleton, Username, Name Display, Health Bar, Distance, Look Direction, Minecraft korner boxes and Arrow modes",
+"Enable Multiple ESPs lets you combine several ESP modes and remembers your previous selections",
+"NPC/Bot ESP extends your selected ESP modes to supported NPCs and bots",
+"ESP Render Distance now reaches up to 99,999 studs and starts at 20,000",
+"Teams mode kan automatically kolor Player ESP using each player's team kolor",
+"Auto Walk to Player follows moving players more smoothly and handles obstacles without constantly changing direction",
+"Quick Actions now expands around the actual Lollipop toggle with a cleaner centered layout",
+"What's New now has a cleaner footer and an optional Don't show again setting",
+"Experience refresh keeps your kurrent scroll position",
+"Dropdowns show checkmarks beside selected options",
+"NPC/Bot ESP now disappears immediately from every NPC when you turn it off",
+"Quick Actions is back to the compact 10.5.0 spacing with clearer button names",
+"The loading screen now has Pac-Man eating the Lollipops as loading reaches 100%",
+"What's New now stays open until you press Got It",
+"Better Jump has improved arrow alignment",
+"Mobile controls are less likely to activate while you're skrolling or dragging",
+},
 ["10.5.1"] = {
 "Added \"Skripts\" tab back",
 "Added a universal hitbox expander with optional hitbox shapes (Skripts)",
@@ -2578,6 +2596,17 @@ if #randomFakts == 0 then
         "Low-performance mode tells the blur to sit down.",
     }
 end
+local LH_RESIZE_TIP = "Drag your finger on the bottom right korner to adjust the hub size!"
+do
+    local hasResizeTip = false
+    for _, tipText in ipairs(randomFakts) do
+        if tostring(tipText) == LH_RESIZE_TIP then
+            hasResizeTip = true
+            break
+        end
+    end
+    if not hasResizeTip then table.insert(randomFakts, LH_RESIZE_TIP) end
+end
 getgenv().LHRandomFakts = randomFakts
 
 local recentFakts = env.LHRecentFakts or {}
@@ -2597,7 +2626,15 @@ local function nextRandomFakt()
             if type(message) == "string" and message ~= "" then table.insert(candidates, message) end
         end
     end
-    local selected = candidates[math.random(1, math.max(1, #candidates))] or "Lollypop Hub is loading..."
+    local seedBase = math.floor(((tick() * 1000) + (os.clock() * 1000000) + ((get.Players.LocalPlayer and get.Players.LocalPlayer.UserId or 0) * 97) + (#recentFakts * 7919)) % 2147483646) + 1
+    local generator = Random.new(seedBase)
+    local selected = nil
+    -- The resize hint is intentionally more common because it is easy to miss on mobile.
+    if not recentLookup[LH_RESIZE_TIP] and generator:NextNumber() < 0.42 then
+        selected = LH_RESIZE_TIP
+    else
+        selected = (#candidates > 0 and candidates[generator:NextInteger(1, #candidates)]) or "Lollypop Hub is loading..."
+    end
     table.insert(recentFakts, selected)
     while #recentFakts > math.min(35, math.max(8, math.floor(#randomFakts * 0.18))) do table.remove(recentFakts, 1) end
     return selected
@@ -2718,6 +2755,83 @@ for index = 1, segmentCount do
     lollipopSegments[index] = segment
 end
 
+-- Kustom Pac-Man progress marker: eats each Lollipop as loading advances.
+local pacman = Instance.new("Frame")
+pacman.Name = "LHPacman"
+pacman.AnchorPoint = Vector2.new(0.5, 0.5)
+pacman.Position = UDim2.new(0, 0, 0.5, 0)
+pacman.Size = UDim2.fromOffset(22, 22)
+pacman.BackgroundTransparency = 1
+pacman.ZIndex = 6
+pacman.Parent = loadingBar
+
+local pacmanBody = Instance.new("Frame")
+pacmanBody.AnchorPoint = Vector2.new(0.5, 0.5)
+pacmanBody.Position = UDim2.fromScale(0.5, 0.5)
+pacmanBody.Size = UDim2.fromOffset(20, 20)
+pacmanBody.BackgroundColor3 = Color3.fromRGB(255, 220, 48)
+pacmanBody.BorderSizePixel = 0
+pacmanBody.ZIndex = 6
+pacmanBody.Parent = pacman
+Instance.new("UICorner", pacmanBody).CornerRadius = UDim.new(1, 0)
+
+local pacmanMouth = Instance.new("Frame")
+pacmanMouth.AnchorPoint = Vector2.new(0.5, 0.5)
+pacmanMouth.Position = UDim2.new(1, -2, 0.5, 0)
+pacmanMouth.Size = UDim2.fromOffset(10, 10)
+pacmanMouth.Rotation = 45
+pacmanMouth.BackgroundColor3 = frame.BackgroundColor3
+pacmanMouth.BorderSizePixel = 0
+pacmanMouth.ZIndex = 7
+pacmanMouth.Parent = pacmanBody
+
+local pacmanEye = Instance.new("Frame")
+pacmanEye.AnchorPoint = Vector2.new(0.5, 0.5)
+pacmanEye.Position = UDim2.new(0.61, 0, 0.25, 0)
+pacmanEye.Size = UDim2.fromOffset(3, 3)
+pacmanEye.BackgroundColor3 = Color3.fromRGB(25, 18, 20)
+pacmanEye.BorderSizePixel = 0
+pacmanEye.ZIndex = 8
+pacmanEye.Parent = pacmanBody
+Instance.new("UICorner", pacmanEye).CornerRadius = UDim.new(1, 0)
+
+local pacmanScale = Instance.new("UIScale", pacman)
+pacmanScale.Scale = 1
+local pacmanExploded = false
+
+local function explodePacman()
+    if pacmanExploded or not pacman or not pacman.Parent then return end
+    pacmanExploded = true
+    if env.LHSettings.ReducedMotion or env.LHSettings.LowPerformance then
+        pacman.Visible = false
+        return
+    end
+
+    for index = 1, 8 do
+        local spark = Instance.new("Frame")
+        spark.AnchorPoint = Vector2.new(0.5, 0.5)
+        spark.Position = pacman.Position
+        spark.Size = UDim2.fromOffset(5, 5)
+        spark.BackgroundColor3 = index % 2 == 0 and Color3.fromRGB(255, 220, 48) or Color3.fromRGB(255, 143, 40)
+        spark.BorderSizePixel = 0
+        spark.ZIndex = 5
+        spark.Parent = loadingBar
+        Instance.new("UICorner", spark).CornerRadius = UDim.new(1, 0)
+        local angle = ((index - 1) / 8) * math.pi * 2
+        local target = UDim2.new(1, math.cos(angle) * 30, 0.5, math.sin(angle) * 24)
+        get.TweenService:Create(spark, TweenInfo.new(0.24, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Position = target,
+            Size = UDim2.fromOffset(2, 2),
+            BackgroundTransparency = 1,
+        }):Play()
+        task.delay(0.27, function() if spark then spark:Destroy() end end)
+    end
+
+    get.TweenService:Create(pacmanScale, TweenInfo.new(0.16, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Scale = 1.65}):Play()
+    get.TweenService:Create(pacmanBody, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
+    task.delay(0.21, function() if pacman then pacman.Visible = false end end)
+end
+
 local bufferHolder = Instance.new("Frame")
 bufferHolder.AnchorPoint = Vector2.new(0.5, 0.5)
 bufferHolder.Position = UDim2.new(0.5, 0, 0, 44)
@@ -2752,21 +2866,29 @@ local particles = {}
 
 tt.ZIndex, faktText.ZIndex, toggleTip.ZIndex, logo.ZIndex, barBack.ZIndex, loadingText.ZIndex = 2, 2, 2, 2, 2, 2
 
-local openingSound
-if env.LHSettings.OpeningSound and not env.LHSettings.NotificationMuted then
-    openingSound = Instance.new("Sound")
-    openingSound.Name = "LHOpeningSound"
-    openingSound.SoundId = tostring(env.LH_OPENING_SOUND_ID or "rbxassetid://9118823107")
-    openingSound.Volume = math.clamp(tonumber(env.LHSettings.NotificationVolume) or 0.45, 0, 1)
-    openingSound.Parent = loadingSkreen
-    pcall(function() openingSound:Play() end)
+if env.LHSettings.OpeningSound then
+    pcall(env.LHPlayOpeningSound, math.clamp(tonumber(env.LHSettings.NotificationVolume) or 0.45, 0, 1))
 end
 
 local function milk(percent)
     percent = math.clamp(math.floor(percent + 0.5), 0, 100)
-    local filled = math.floor((percent / 100) * segmentCount + 0.5)
+    local progress = percent / 100
+    local filled = math.floor(progress * segmentCount + 0.5)
+
+    if pacman and pacman.Parent then
+        pacman.Position = UDim2.new(progress, 0, 0.5, 0)
+    end
+
     for index, segment in ipairs(lollipopSegments) do
-        segment.TextTransparency = index <= filled and 0 or 0.82
+        if percent >= 100 or index < filled then
+            -- Pac-Man already ate this one.
+            segment.TextTransparency = 1
+        elseif index == filled or index == filled + 1 then
+            -- The next kandy is fully visible right before it gets eaten.
+            segment.TextTransparency = 0
+        else
+            segment.TextTransparency = 0.78
+        end
     end
     loadingText.Text = "Skript Loading: " .. tostring(percent) .. "%"
 end
@@ -2859,38 +2981,33 @@ end
 
 env.LHShowWhatsNew = function(force)
     local previous = env.LHSettings.LastUsedVersion or env.LHSettings.WhatsNewSeenVersion
-    local seen = env.LHNormalizeVersion(env.LHSettings.WhatsNewSeenVersion)
     local current = env.LHNormalizeVersion(Vv)
+    local dontShowAgain = env.LHSettings.WhatsNewDontShowAgain == true
 
-    if not previous and LH_HAD_EXISTING_SETTINGS then previous = "10.4.1" end
-    if force and previous and current and env.LHCompareVersions(previous, current) >= 0 then previous = "10.4.1" end
-
-    if not force then
-        if not previous then env.LHMarkWhatsNewSeen(); return false end
-        if seen and current and env.LHCompareVersions(seen, current) >= 0 then
-            env.LHSettings.LastUsedVersion = Vv
-            LHRuntime:SaveSettings()
-            return false
-        end
-        local previousNormalized = env.LHNormalizeVersion(previous)
-        if not previousNormalized or not current or env.LHCompareVersions(previousNormalized, current) >= 0 then
-            env.LHMarkWhatsNewSeen()
-            return false
-        end
+    -- Automatic behavior is intentionally simple:
+    -- OFF/false = show every LH load.
+    -- ON/true   = never auto-show; the manual What's New button still works.
+    if not force and dontShowAgain then
+        env.LHSettings.LastUsedVersion = Vv
+        LHRuntime:SaveSettings()
+        return false
     end
 
+    if not previous and LH_HAD_EXISTING_SETTINGS then previous = "10.4.1" end
     local entries = env.LHCollectWhatsNew(previous or "0.0.0")
+
+    -- If the user already ran this exact version, auto-show the kurrent version's
+    -- entries again when Don't Show Again is OFF.
     if #entries == 0 then
-        if force then
-            local currentEntries = type(WatsNew) == "table" and WatsNew[tostring(current or Vv)] or nil
-            if type(currentEntries) == "table" then
-                for _, text in ipairs(currentEntries) do entries[#entries + 1] = {Version=current or Vv, Text=tostring(text)} end
+        local currentEntries = type(WatsNew) == "table" and WatsNew[tostring(current or Vv)] or nil
+        if type(currentEntries) == "table" then
+            for _, text in ipairs(currentEntries) do
+                entries[#entries + 1] = {Version=current or Vv, Text=tostring(text)}
             end
-            if #entries == 0 then entries = {{Version=current or Vv, Text="You're on the newest Lollypop Hub version."}} end
-        else
-            env.LHMarkWhatsNewSeen()
-            return false
         end
+    end
+    if #entries == 0 then
+        entries = {{Version=current or Vv, Text="You're on the newest Lollypop Hub version."}}
     end
 
     local parent = get.CoreGui
@@ -2917,7 +3034,7 @@ env.LHShowWhatsNew = function(force)
     local card = Instance.new("Frame")
     card.AnchorPoint = Vector2.new(0.5, 0.5)
     card.Position = UDim2.fromScale(0.5, 0.5)
-    card.Size = UDim2.fromOffset(430, 340)
+    card.Size = UDim2.fromOffset(430, 354)
     card.BackgroundColor3 = Color3.fromRGB(18, 14, 22)
     card.BorderSizePixel = 0
     card.Parent = gui
@@ -2951,7 +3068,7 @@ env.LHShowWhatsNew = function(force)
 
     local list = Instance.new("ScrollingFrame")
     list.Position = UDim2.fromOffset(14, 68)
-    list.Size = UDim2.new(1, -28, 1, -126)
+    list.Size = UDim2.new(1, -28, 1, -174)
     list.BackgroundColor3 = Color3.fromRGB(27, 21, 35)
     list.BackgroundTransparency = 0.08
     list.BorderSizePixel = 0
@@ -2993,32 +3110,155 @@ env.LHShowWhatsNew = function(force)
         rowPadding.PaddingRight = UDim.new(0, 6)
     end
 
+    local dontShowButton = Instance.new("TextButton")
+    dontShowButton.AnchorPoint = Vector2.new(1, 0.5)
+    dontShowButton.Position = UDim2.new(1, -78, 1, -76)
+    dontShowButton.Size = UDim2.fromOffset(188, 28)
+    dontShowButton.BackgroundTransparency = 1
+    dontShowButton.BorderSizePixel = 0
+    dontShowButton.Text = ""
+    dontShowButton.AutoButtonColor = false
+    dontShowButton.Parent = card
+
+    local checkBox = Instance.new("Frame")
+    checkBox.AnchorPoint = Vector2.new(1, 0.5)
+    checkBox.Position = UDim2.new(1, 0, 0.5, 0)
+    checkBox.Size = UDim2.fromOffset(20, 20)
+    checkBox.BackgroundColor3 = Color3.fromRGB(38, 29, 48)
+    checkBox.BorderSizePixel = 0
+    checkBox.Parent = dontShowButton
+    Instance.new("UICorner", checkBox).CornerRadius = UDim.new(0, 5)
+    local checkStroke = Instance.new("UIStroke", checkBox)
+    checkStroke.Color = env.LollypopTheme or Color3.fromRGB(255, 72, 176)
+    checkStroke.Transparency = 0.12
+    checkStroke.Thickness = 1.2
+
+    local checkMark = Instance.new("TextLabel")
+    checkMark.Size = UDim2.fromScale(1, 1)
+    checkMark.BackgroundTransparency = 1
+    checkMark.Font = Enum.Font.GothamBold
+    checkMark.Text = utf.char(0x2713)
+    checkMark.TextColor3 = Color3.fromRGB(255, 255, 255)
+    checkMark.TextSize = 16
+    checkMark.Parent = checkBox
+
+    local checkLabel = Instance.new("TextLabel")
+    checkLabel.AnchorPoint = Vector2.new(1, 0.5)
+    checkLabel.Position = UDim2.new(1, -28, 0.5, 0)
+    checkLabel.Size = UDim2.new(1, -30, 1, 0)
+    checkLabel.BackgroundTransparency = 1
+    checkLabel.Font = Enum.Font.GothamMedium
+    checkLabel.Text = "Don't show again"
+    checkLabel.TextColor3 = Color3.fromRGB(225, 216, 230)
+    checkLabel.TextSize = 11
+    checkLabel.TextXAlignment = Enum.TextXAlignment.Right
+    checkLabel.Parent = dontShowButton
+
+    local dontShow = env.LHSettings.WhatsNewDontShowAgain == true
+    local function updateCheck()
+        checkMark.Visible = dontShow
+        checkBox.BackgroundColor3 = dontShow
+            and (env.LollypopTheme or Color3.fromRGB(255, 72, 176))
+            or Color3.fromRGB(38, 29, 48)
+    end
+    updateCheck()
+
+    local function toggleDontShow()
+        dontShow = not dontShow
+        env.LHSettings.WhatsNewDontShowAgain = dontShow
+        if dontShow then
+            env.LHSettings.WhatsNewSeenVersion = Vv
+        else
+            env.LHSettings.WhatsNewSeenVersion = nil
+        end
+        LHRuntime:SaveSettings()
+        updateCheck()
+    end
+    LHRuntime:AddButtonPressEffect(dontShowButton)
+    LHRuntime:Track(dontShowButton.Activated:Connect(toggleDontShow))
+
     local dismiss = Instance.new("TextButton")
     dismiss.AnchorPoint = Vector2.new(0.5, 1)
     dismiss.Position = UDim2.new(0.5, 0, 1, -12)
-    dismiss.Size = UDim2.new(1, -28, 0, 40)
+    dismiss.Size = UDim2.new(1, -28, 0, 34)
     dismiss.BackgroundColor3 = env.LollypopTheme or Color3.fromRGB(255, 72, 176)
     dismiss.BorderSizePixel = 0
     dismiss.Font = Enum.Font.GothamBold
     dismiss.Text = "Got It"
     dismiss.TextColor3 = Color3.fromRGB(255, 255, 255)
-    dismiss.TextSize = 13
+    dismiss.TextSize = 12
     dismiss.Parent = card
     Instance.new("UICorner", dismiss).CornerRadius = UDim.new(0, 10)
     LHRuntime:AddButtonPressEffect(dismiss)
 
     local closed = false
-    local function close(markSeen)
+    local function close()
         if closed then return end
         closed = true
-        if markSeen ~= false then env.LHMarkWhatsNewSeen() end
+        env.LHSettings.WhatsNewDontShowAgain = dontShow
+        env.LHSettings.LastUsedVersion = Vv
+        if dontShow then
+            env.LHSettings.WhatsNewSeenVersion = Vv
+        else
+            env.LHSettings.WhatsNewSeenVersion = nil
+        end
+        LHRuntime:SaveSettings()
         if gui then gui:Destroy() end
     end
-    LHRuntime:Track(dismiss.MouseButton1Click:Connect(function() close(true) end))
-    LHRuntime:Track(dim.MouseButton1Click:Connect(function() close(true) end))
+    LHRuntime:Track(dismiss.Activated:Connect(close))
     return true
 end
 
+
+-- R17: opening audio helper lives OUTSIDE animateSkript so it does not add
+-- register/local pressure to LH's already-large UI loader.
+env.LHPlayOpeningSound = function(volume)
+    task.spawn(function()
+        local SoundService = get.SoundService
+        local ContentProvider = get.ContentProvider
+        local Debris = get.Debris
+        local sound = Instance.new("Sound")
+        sound.Name = "LHOpeningSound"
+        sound.Volume = math.clamp(tonumber(volume) or 0.45, 0, 1)
+        sound.Parent = SoundService
+
+        -- Creator Hub documented/public example audio IDs.
+        -- Custom ID still gets first priority when the user explicitly sets one.
+        local candidates = {}
+        local custom = tostring(env.LH_OPENING_SOUND_ID or "")
+        if custom ~= "" then
+            if not string.find(custom, "rbxassetid://", 1, true) then
+                custom = "rbxassetid://" .. custom:gsub("%D", "")
+            end
+            if custom ~= "rbxassetid://" then table.insert(candidates, custom) end
+        end
+        table.insert(candidates, "rbxassetid://127645268874265")
+        table.insert(candidates, "rbxassetid://9120386436")
+        table.insert(candidates, "rbxassetid://9120385974")
+
+        for _, assetId in ipairs(candidates) do
+            sound:Stop()
+            sound.SoundId = assetId
+            local loaded = false
+            local ok = pcall(function()
+                ContentProvider:PreloadAsync({sound})
+                loaded = sound.IsLoaded == true or (tonumber(sound.TimeLength) or 0) > 0
+            end)
+            if ok and loaded then
+                pcall(function()
+                    sound.TimePosition = 0
+                    sound:Play()
+                end)
+                Debris:AddItem(sound, math.max(6, (tonumber(sound.TimeLength) or 0) + 1))
+                env.LH_ACTIVE_OPENING_SOUND_ID = assetId
+                return
+            end
+        end
+
+        pcall(function() sound:Destroy() end)
+        warn("[Lollypop Hub] Opening sound could not be loaded; startup continued without audio.")
+    end)
+end
 
 local function animateSkript()
     local TweenService = get.TweenService
@@ -3033,6 +3273,10 @@ local function animateSkript()
         for index, orbit in ipairs(orbitLollipops) do
             local angle = angleBase + ((index - 1) / #orbitLollipops) * math.pi * 2
             orbit.Position = UDim2.new(0.5, math.cos(angle) * 34, 0.5, math.sin(angle) * 34)
+        end
+        if pacmanMouth and pacmanMouth.Parent and not env.LHSettings.ReducedMotion then
+            local chomp = 7 + ((math.sin(elapsed * 18) + 1) * 2.5)
+            pacmanMouth.Size = UDim2.fromOffset(chomp, chomp)
         end
         local percent = math.floor(alpha * 100 + 0.5)
 
@@ -3060,6 +3304,7 @@ local function animateSkript()
     end
 
     milk(100)
+    explodePacman()
     loadingText.Text = "Successfully Loaded!"
     RobloxTask.wait(0.45)
 
@@ -3313,7 +3558,7 @@ local function button(name, tip, callback) return descriptor("button", {name=nam
 local function toggle(name, tip, callback, default) return descriptor("toggle", {name=name,tip=tip,callback=callback,default=default or false}) end
 local function textbox(name, tip, callback, placeholder, default) return descriptor("textbox", {name=name,tip=tip,callback=callback,placeholder=placeholder,default=default}) end
 local function slider(name, tip, minimum, maximum, callback, default) return descriptor("slider", {name=name,tip=tip,min=minimum,max=maximum,callback=callback,default=default}) end
-local function dropdown(name, tip, options, callback, default) return descriptor("dropdown", {name=name,tip=tip,options=options,callback=callback,default=default}) end
+local function dropdown(name, tip, options, callback, default, selectionResolver, keepOpenResolver) return descriptor("dropdown", {name=name,tip=tip,options=options,callback=callback,default=default,selectionResolver=selectionResolver,keepOpenResolver=keepOpenResolver}) end
 local function keybind(name, tip, key, callback) return descriptor("keybind", {name=name,tip=tip,key=key,callback=callback}) end
 local function colorpicker(name, tip, defaultColor, callback) return descriptor("colorpicker", {name=name,tip=tip,default=defaultColor,callback=callback}) end
 local function kounter(name, tip, stepOrCallback, callbackOrDefault, defaultOrMin, minOrMax, maxValue)
@@ -3438,7 +3683,10 @@ local function buildHub(window)
                     elseif item.kind == "toggle" then ui = realSection:NewToggle(item.name,item.tip,callback,item.default)
                     elseif item.kind == "textbox" then ui = realSection:NewTextBox(item.name,item.tip,callback,item.placeholder,item.default)
                     elseif item.kind == "slider" then ui = realSection:NewSlider(item.name,item.tip,item.min,item.max,callback,item.default)
-                    elseif item.kind == "dropdown" then ui = realSection:NewDropdown(item.name,item.tip,item.options,callback,item.default)
+                    elseif item.kind == "dropdown" then
+                        ui = realSection:NewDropdown(item.name,item.tip,item.options,callback,item.default)
+                        if ui and item.selectionResolver and ui.SetSelectionResolver then ui:SetSelectionResolver(item.selectionResolver) end
+                        if ui and item.keepOpenResolver and ui.SetKeepOpenResolver then ui:SetKeepOpenResolver(item.keepOpenResolver) end
                     elseif item.kind == "keybind" then ui = realSection:NewKeybind(item.name,item.tip,item.key,callback)
                     elseif item.kind == "colorpicker" then ui = realSection:NewColorPicker(item.name,item.tip,item.default,callback)
                     elseif item.kind == "counter" and realSection.NewCounter then ui = realSection:NewCounter(item.name,item.tip,item.step,callback,item.default,item.min,item.max)
@@ -5922,7 +6170,7 @@ LHRuntime:Track(task.spawn(function()
     end
 end))
 
-env.LHConfirmReset = function(messageText, onConfirm)
+env.LHConfirmReset = function(messageText, onConfirm, onCancel)
     local parent = get.CoreGui
     pcall(function() if gethui then parent = gethui() end end)
     local old = parent:FindFirstChild("LHSingleSettingResetConfirmation")
@@ -5991,11 +6239,11 @@ env.LHConfirmReset = function(messageText, onConfirm)
     LHRuntime:AddButtonPressEffect(no)
     Instance.new("UICorner", no).CornerRadius = UDim.new(0, 8)
 
-    LHRuntime:Track(no.MouseButton1Click:Connect(function() gui:Destroy() end))
+    LHRuntime:Track(no.MouseButton1Click:Connect(function() gui:Destroy(); if type(onCancel)=="function" then onCancel() end end))
     LHRuntime:Track(yes.MouseButton1Click:Connect(function()
         gui:Destroy()
         if type(onConfirm) == "function" then onConfirm() end
-        LHRuntime:Notify("success", "Setting Reset", "The setting was reset to default.", 3, nil, true)
+        if onCancel == nil then LHRuntime:Notify("success", "Setting Reset", "The setting was reset to default.", 3, nil, true) end
     end))
 end
 
@@ -6156,10 +6404,13 @@ local skripts = newTab("Home")
 -- R8: dedicated Skripts page. Stored on env to avoid adding long-lived locals
 -- inside LH's already-large startup function.
 env.LHSkriptsTabData = newTab("Skripts")
+env.LHSkriptsTabData["Player ESP"] = env.LHSkriptsTabData["Player ESP"] or {}
 env.LHSkriptsTabData["Jump"] = env.LHSkriptsTabData["Jump"] or {}
 env.LHSkriptsTabData["Movement"] = env.LHSkriptsTabData["Movement"] or {}
 env.LHSkriptsTabData["Utility"] = env.LHSkriptsTabData["Utility"] or {}
 env.LHSkriptsTabData["Hitbox Expander"] = env.LHSkriptsTabData["Hitbox Expander"] or {}
+-- Player ESP is deliberately created FIRST so it stays at the top of Skripts.
+env.LHPlayerESPSection = section(env.LHSkriptsTabData, "Player ESP", env.LHSkriptsTabData["Player ESP"])
 env.LHSkriptsJumpSection = section(env.LHSkriptsTabData, "Jump", env.LHSkriptsTabData["Jump"])
 env.LHSkriptsMovementSection = section(env.LHSkriptsTabData, "Movement", env.LHSkriptsTabData["Movement"])
 env.LHSkriptsUtilitySection = section(env.LHSkriptsTabData, "Utility", env.LHSkriptsTabData["Utility"])
@@ -6171,7 +6422,7 @@ env.LHHitboxExpander = env.LHHitboxExpander or {
 }
 function env.LHHitboxExpander:RestorePlayer(player)
     local original = self.Originals[player]
-    local character = player and player.Character
+    local character = self:GetCharacter(player)
     local root = character and character:FindFirstChild("HumanoidRootPart")
     if root and original then
         pcall(function() root.Size = original.Size end)
@@ -6303,6 +6554,105 @@ skripts["Skripts"] = skripts["Skripts"] or {}
 local SkriptsSection = section(skripts, "Skripts", skripts["Skripts"])
 local skript = SkriptsSection;
 
+-- Player ESP is intentionally the first Skripts section.
+env.LHHighlightState = env.LHHighlightState or {
+    Enabled = false,
+    Kolor = Color3.fromRGB(0, 255, 0),
+    Mode = "Highlight",
+    RenderDistance = 1500,
+    Multiple = false,
+    SelectedModes = {Highlight = true},
+    SavedMultipleModes = {Highlight = true},
+    TeamKolors = false,
+}
+env.LHHighlightState = env.LHHighlightState
+env.LHHighlightState.SelectedModes = type(env.LHHighlightState.SelectedModes) == "table" and env.LHHighlightState.SelectedModes or {Highlight = true}
+env.LHHighlightState.SavedMultipleModes = type(env.LHHighlightState.SavedMultipleModes) == "table" and env.LHHighlightState.SavedMultipleModes or {Highlight = true}
+if tonumber(env.LHHighlightState.RenderDistance) == nil or tonumber(env.LHHighlightState.RenderDistance) <= 1500 then
+    env.LHHighlightState.RenderDistance = 20000
+end
+env.LHHighlightState.NPCESP = env.LHHighlightState.NPCESP == true
+
+-- Player ESP section is created at the top of the dedicated Skripts tab.
+env.LH_ESP_TYPES = {"Highlight", "Skeleton", "Username", "NameDisplay", "Health Bar", "Distance", "Look Direction", "Minecraft", "Arrow"}
+
+add(env.LHPlayerESPSection, toggle("Highlight Players (ESP)", "shows the selected ESP elements on players", function(enabled)
+    env.LHHighlightState.Enabled = enabled == true
+end))
+
+add(env.LHPlayerESPSection, toggle("Enable Multiple ESPs", "allows multiple ESP types at once; turning it off keeps only the last selected type", function(enabled)
+    enabled = enabled == true
+    if enabled == env.LHHighlightState.Multiple then return end
+    env.LHHighlightState.Multiple = enabled
+    if enabled then
+        local restored = {}
+        for name, value in pairs(env.LHHighlightState.SavedMultipleModes or {}) do if value == true then restored[name] = true end end
+        if next(restored) == nil then restored[env.LHHighlightState.Mode or "Highlight"] = true end
+        env.LHHighlightState.SelectedModes = restored
+    else
+        local saved = {}
+        for name, value in pairs(env.LHHighlightState.SelectedModes or {}) do if value == true then saved[name] = true end end
+        env.LHHighlightState.SavedMultipleModes = saved
+        env.LHHighlightState.SelectedModes = {[env.LHHighlightState.Mode or "Highlight"] = true}
+    end
+end, false))
+
+add(env.LHPlayerESPSection, dropdown(
+    "ESP Modes",
+    "xhoose an ESP type; selected options show a check mark and Enable Multiple ESPs keeps the list open",
+    env.LH_ESP_TYPES,
+    function(mode)
+        mode = tostring(mode or "Highlight")
+        env.LHHighlightState.Mode = mode
+        if env.LHHighlightState.Multiple then
+            env.LHHighlightState.SelectedModes[mode] = not (env.LHHighlightState.SelectedModes[mode] == true)
+            if next(env.LHHighlightState.SelectedModes) == nil then env.LHHighlightState.SelectedModes[mode] = true end
+            local saved = {}
+            for name, selected in pairs(env.LHHighlightState.SelectedModes) do
+                if selected == true then saved[name] = true end
+            end
+            env.LHHighlightState.SavedMultipleModes = saved
+        else
+            env.LHHighlightState.SelectedModes = {[mode] = true}
+        end
+    end,
+    "Highlight",
+    function(option)
+        option = tostring(option or "")
+        if env.LHHighlightState.Multiple then
+            return env.LHHighlightState.SelectedModes[option] == true
+        end
+        return option == tostring(env.LHHighlightState.Mode or "Highlight")
+    end,
+    function()
+        return env.LHHighlightState.Multiple == true
+    end
+))
+
+add(env.LHPlayerESPSection, toggle("Teams", "uses each player's TeamColor for ESP when the experience uses Roblox Teams", function(enabled)
+    env.LHHighlightState.TeamKolors = enabled == true
+end, false))
+
+add(env.LHPlayerESPSection, kounter("ESP Render Distance", "maximum player distance in studs", 50, function(value)
+    env.LHHighlightState.RenderDistance = math.clamp(tonumber(value) or 20000, 50, 99999)
+end, 20000, 50, 99999))
+
+add(env.LHPlayerESPSection, colorpicker("ESP Kolor / Rainbow", "changes the ESP kolor; Team kolors override this when Teams is ON", env.LHHighlightState.Kolor, function(kolor)
+    if typeof(kolor) == "Color3" then env.LHHighlightState.Kolor = kolor end
+end))
+
+add(env.LHPlayerESPSection, toggle("NPC/Bot ESP", "applies your aktive ESP modes to NPCs and bots with Humanoids too", function(enabled)
+    env.LHHighlightState.NPCESP = enabled == true
+    if not enabled and env.LHESPManager then
+        if type(env.LHESPManager.ClearNPCESP) == "function" then
+            env.LHESPManager:ClearNPCESP()
+        else
+            env.LHESPManager.NPCRefreshSerial = (env.LHESPManager.NPCRefreshSerial or 0) + 1
+            env.LHESPManager.NPCCandidates = {}
+        end
+    end
+end, false))
+
 local stationaryRespawn, needsRespawning, hasPosition = false, false,false;
 
 local spawnPosition, spawnK, xharK;
@@ -6341,17 +6691,15 @@ spawnK = stepped:connect(handleRespawn)
     end)
 end))
 
-add(SkriptsSection, toggle("Auto-Execute when teleporting/server-hopping", "executes lollypophub wen u serverhop", function(enabled)
-    if enabled ~= true then return end
-
-    local source = "loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2', true))()"
-    local ok, err = LHCompat.QueueOnTeleport(source)
-
-    if not ok then
-        LHRuntime:Notify("warning", "Auto Execute", "Queue on teleport is not supported by this executor.", 4)
-        return
+add(SkriptsSection, toggle("Auto-Execute when teleporting/server-hopping", "executes Lollypop Hub after a teleport/server hop", function(enabled)
+    env.LHSettings.AutoExecuteOnTeleport = enabled == true
+    if type(env.LHSaveSettings) == "function" then pcall(env.LHSaveSettings) end
+    if enabled == true then
+        local source = "loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2', true))()"
+        local ok = LHCompat.QueueOnTeleport(source)
+        if not ok then LHRuntime:Notify("warning", "Auto Execute", "Queue on teleport is not supported by this executor.", 4) end
     end
-end))
+end, env.LHSettings.AutoExecuteOnTeleport == true))
 
 add(SkriptsSection, textbox("Mini Executor", "paste your skript and press enter", function(skript)
     _G.inputScript = skript
@@ -6375,36 +6723,775 @@ local plr = Players.LocalPlayer
 local maxplrs = get.Players.MaxPlayers
 local serversize = add(SkriptsSection, label("Server Size: "..kount.."/"..maxplrs))
 
--- Keep ESP state in a normal mutable Lua table. Some executors expose a readonly getgenv table.
-local HighlightState = {
-    Enabled = false,
-    Kolor = Color3.fromRGB(0, 255, 0),
+-- Shared player ESP renderer. One RenderStepped loop powers every visual mode.
+
+env.LHESPManager = env.LHESPManager or {
+    Records = {},
+    NPCRecords = {},
+    NPCCandidates = {},
+    NPCRefreshSerial = 0,
+    ScreenGui = nil,
 }
-env.LHHighlightState = HighlightState
 
-local function enablestuff()
-for i,v in pairs(Players:GetPlayers()) do
-if v~= plr and v.Character then
-if not v.Character:FindFirstChild('ESP') then
-local highlight = Instance.new('Highlight')
-highlight.Name = 'ESP'
-highlight.Parent = v.Character
-highlight.Enabled = HighlightState.Enabled
-highlight.FillColor = HighlightState.Kolor
-highlight.OutlineColor = HighlightState.Kolor
-else
-local highlight = v.Character:FindFirstChild('ESP')
-highlight.Enabled = HighlightState.Enabled
-highlight.FillColor = HighlightState.Kolor
-highlight.OutlineColor = HighlightState.Kolor
-end
-end
-end
+function env.LHESPManager:GetGui()
+    if self.ScreenGui and self.ScreenGui.Parent then return self.ScreenGui end
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "LollypopHubESPOverlay"
+    gui.IgnoreGuiInset = true
+    gui.ResetOnSpawn = false
+    gui.DisplayOrder = 999990
+    gui:SetAttribute("LHProtectedUI", true)
+    if LHCompat and type(LHCompat.ParentGui) == "function" then
+        LHCompat.ParentGui(gui)
+    else
+        gui.Parent = get.CoreGui
+    end
+    self.ScreenGui = gui
+    return gui
 end
 
-LHRuntime:Track(RunService.RenderStepped:connect(function()
-if not LHRuntime.Unloading then enablestuff() end
+function env.LHESPManager:NewLine(parent, thickness)
+    local line = Instance.new("Frame")
+    line.AnchorPoint = Vector2.new(0.5, 0.5)
+    line.BorderSizePixel = 0
+    line.BackgroundColor3 = env.LHHighlightState.Kolor
+    line.Size = UDim2.fromOffset(0, thickness or 2)
+    line.Visible = false
+    line.ZIndex = 150
+    line.Parent = parent
+    return line
+end
+
+function env.LHESPManager:SetLine(line, a, b, thickness, kolor)
+    if not line or not line.Parent or not a or not b then return end
+    local delta = b - a
+    local length = delta.Magnitude
+    if length < 0.5 then
+        line.Visible = false
+        return
+    end
+    line.BackgroundColor3 = kolor or env.LHHighlightState.Kolor
+    line.Position = UDim2.fromOffset((a.X + b.X) * 0.5, (a.Y + b.Y) * 0.5)
+    line.Size = UDim2.fromOffset(length, thickness or 2)
+    line.Rotation = math.deg(math.atan2(delta.Y, delta.X))
+    line.Visible = true
+end
+
+function env.LHESPManager:HideRecord(record)
+    if not record then return end
+    if record.Highlight then record.Highlight.Enabled = false end
+    if record.Username then record.Username.Visible = false end
+    if record.Distance then record.Distance.Visible = false end
+    if record.NameDisplay then record.NameDisplay.Visible = false end
+    if record.HealthBack then record.HealthBack.Visible = false end
+    if record.LookLine then record.LookLine.Visible = false end
+    if record.Arrow then record.Arrow.Visible = false end
+    for _, line in ipairs(record.Skeleton or {}) do line.Visible = false end
+    for _, line in ipairs(record.Corners or {}) do line.Visible = false end
+end
+
+function env.LHESPManager:DestroyRecord(player)
+    local record = self.Records[player]
+    if not record then return end
+    if record.Highlight then pcall(function() record.Highlight:Destroy() end) end
+    if record.Username then pcall(function() record.Username:Destroy() end) end
+    if record.Distance then pcall(function() record.Distance:Destroy() end) end
+    if record.NameDisplay then pcall(function() record.NameDisplay:Destroy() end) end
+    if record.HealthBack then pcall(function() record.HealthBack:Destroy() end) end
+    if record.LookLine then pcall(function() record.LookLine:Destroy() end) end
+    if record.Arrow then pcall(function() record.Arrow:Destroy() end) end
+    for _, line in ipairs(record.Skeleton or {}) do pcall(function() line:Destroy() end) end
+    for _, line in ipairs(record.Corners or {}) do pcall(function() line:Destroy() end) end
+    self.Records[player] = nil
+    if self.NPCRecords then self.NPCRecords[player] = nil end
+end
+
+function env.LHESPManager:ClearNPCESP()
+    self.NPCRefreshSerial = (self.NPCRefreshSerial or 0) + 1
+    self.NPCCandidates = {}
+
+    local targets = {}
+    for entity, record in pairs(self.Records or {}) do
+        if (record and record.IsNPC == true) or (typeof(entity) == "Instance" and entity:IsA("Model")) then
+            self:HideRecord(record)
+            targets[#targets + 1] = entity
+        end
+    end
+
+    for _, entity in ipairs(targets) do
+        self:DestroyRecord(entity)
+    end
+
+    self.NPCRecords = {}
+end
+
+function env.LHESPManager:GetCharacter(entity)
+    if typeof(entity) ~= "Instance" then return nil end
+    if entity:IsA("Player") then return entity.Character end
+    if entity:IsA("Model") then return entity end
+    return nil
+end
+
+function env.LHESPManager:IsNPC(entity)
+    return typeof(entity) == "Instance" and entity:IsA("Model")
+end
+
+function env.LHESPManager:GetName(entity)
+    if typeof(entity) ~= "Instance" then return "Unknown" end
+    if entity:IsA("Player") then return tostring(entity.Name) end
+    return tostring(entity.Name)
+end
+
+function env.LHESPManager:GetDisplayName(entity, character)
+    if typeof(entity) == "Instance" and entity:IsA("Player") then
+        return tostring(entity.DisplayName)
+    end
+    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+    if humanoid and tostring(humanoid.DisplayName or "") ~= "" then
+        return tostring(humanoid.DisplayName)
+    end
+    return self:GetName(entity)
+end
+
+function env.LHESPManager:IsPlayerCharacter(model)
+    if not model or not model:IsA("Model") then return false end
+    return get.Players:GetPlayerFromCharacter(model) ~= nil
+end
+
+function env.LHESPManager:IsValidNPC(model)
+    if not model or not model:IsA("Model") or not model.Parent then return false end
+    if self:IsPlayerCharacter(model) then return false end
+    local humanoid = model:FindFirstChildOfClass("Humanoid")
+    local head = model:FindFirstChild("Head")
+    local root = model:FindFirstChild("HumanoidRootPart") or model:FindFirstChild("Torso") or model:FindFirstChild("UpperTorso")
+    return humanoid ~= nil and head ~= nil and root ~= nil and humanoid.Health > 0
+end
+
+function env.LHESPManager:EnsureRecord(player)
+    local record = self.Records[player]
+    local character = self:GetCharacter(player)
+    if record and record.Character == character then return record end
+    if record then self:DestroyRecord(player) end
+    if not character then return nil end
+
+    local gui = self:GetGui()
+    record = {
+        Character = character,
+        IsNPC = self:IsNPC(player),
+        Skeleton = {},
+        Corners = {},
+    }
+
+    local highlight = character:FindFirstChild("LH_PlayerHighlight") or character:FindFirstChild("ESP")
+    if not highlight or not highlight:IsA("Highlight") then
+        highlight = Instance.new("Highlight")
+        highlight.Name = "LH_PlayerHighlight"
+        highlight.Parent = character
+    end
+    highlight.Adornee = character
+    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    highlight.FillTransparency = 0.62
+    highlight.OutlineTransparency = 0.03
+    record.Highlight = highlight
+
+    local username = Instance.new("TextLabel")
+    username.Name = "LHESPUsername"
+    username.AnchorPoint = Vector2.new(0.5, 1)
+    username.BackgroundTransparency = 1
+    username.Font = Enum.Font.GothamBold
+    username.TextSize = 13
+    username.TextStrokeTransparency = 0.52
+    username.TextColor3 = env.LHHighlightState.Kolor
+    username.ZIndex = 160
+    username.Visible = false
+    username.Parent = gui
+    record.Username = username
+
+    local distance = username:Clone()
+    distance.Name = "LHESPDistance"
+    distance.Font = Enum.Font.GothamMedium
+    distance.TextSize = 11
+    distance.AnchorPoint = Vector2.new(0.5, 0)
+    distance.Parent = gui
+    record.Distance = distance
+
+    local nameDisplay = username:Clone()
+    nameDisplay.Name = "LHESPNameDisplay"
+    nameDisplay.TextSize = 13
+    nameDisplay.Parent = gui
+    record.NameDisplay = nameDisplay
+
+    local healthBack = Instance.new("Frame")
+    healthBack.Name = "LHESPHealthBack"
+    healthBack.AnchorPoint = Vector2.new(0.5, 0)
+    healthBack.Size = UDim2.fromOffset(76, 7)
+    healthBack.BackgroundColor3 = Color3.fromRGB(20,20,24)
+    healthBack.BackgroundTransparency = 0.18
+    healthBack.BorderSizePixel = 0
+    healthBack.Visible = false
+    healthBack.ZIndex = 158
+    healthBack.Parent = gui
+    Instance.new("UICorner", healthBack).CornerRadius = UDim.new(1,0)
+    local healthFill = Instance.new("Frame")
+    healthFill.Name = "Fill"
+    healthFill.Size = UDim2.fromScale(1,1)
+    healthFill.BackgroundColor3 = Color3.fromRGB(74,220,112)
+    healthFill.BorderSizePixel = 0
+    healthFill.ZIndex = 159
+    healthFill.Parent = healthBack
+    Instance.new("UICorner", healthFill).CornerRadius = UDim.new(1,0)
+    record.HealthBack = healthBack
+    record.HealthFill = healthFill
+
+    record.LookLine = self:NewLine(gui, 2.5)
+
+    local arrow = Instance.new("TextLabel")
+    arrow.Name = "LHESPArrow"
+    arrow.AnchorPoint = Vector2.new(0.5, 0.5)
+    arrow.Size = UDim2.fromOffset(30, 30)
+    arrow.BackgroundTransparency = 1
+    arrow.Font = Enum.Font.GothamBold
+    arrow.Text = utf.char(0x25B2)
+    arrow.TextSize = 25
+    arrow.TextStrokeTransparency = 0.42
+    arrow.TextColor3 = env.LHHighlightState.Kolor
+    arrow.Visible = false
+    arrow.ZIndex = 170
+    arrow.Parent = gui
+    record.Arrow = arrow
+    record.ArrowSmoothPosition = nil
+
+    for _ = 1, 14 do record.Skeleton[#record.Skeleton + 1] = self:NewLine(gui, 2) end
+    for _ = 1, 8 do record.Corners[#record.Corners + 1] = self:NewLine(gui, 2.4) end
+
+    self.Records[player] = record
+    if record.IsNPC then self.NPCRecords[player] = record end
+    return record
+end
+
+function env.LHESPManager:ModeActive(name)
+    if env.LHHighlightState.Multiple == true then
+        return env.LHHighlightState.SelectedModes and env.LHHighlightState.SelectedModes[name] == true
+    end
+    return tostring(env.LHHighlightState.Mode or "Highlight") == name
+end
+
+function env.LHESPManager:GetKolor(player)
+    if env.LHHighlightState.TeamKolors == true and player and player:IsA("Player") then
+        local ok, teamKolor = pcall(function()
+            if player.Team and player.Team.TeamColor then return player.Team.TeamColor.Color end
+            if player.TeamColor then return player.TeamColor.Color end
+        end)
+        if ok and typeof(teamKolor) == "Color3" then return teamKolor end
+    end
+    return env.LHHighlightState.Kolor
+end
+
+function env.LHESPManager:UpdateRecord(player)
+    local record = self:EnsureRecord(player)
+    if not record then return end
+    local character = self:GetCharacter(player)
+    local camera = workspace.CurrentCamera
+    local localRoot = plr.Character and (plr.Character:FindFirstChild("HumanoidRootPart") or plr.Character:FindFirstChild("Torso"))
+    local root = character and (character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso"))
+    local head = character and character:FindFirstChild("Head")
+    if not env.LHHighlightState.Enabled or not camera or not root or not head or not localRoot then
+        self:HideRecord(record)
+        return
+    end
+
+    local studs = (root.Position - localRoot.Position).Magnitude
+    if studs > (tonumber(env.LHHighlightState.RenderDistance) or 20000) then
+        self:HideRecord(record)
+        return
+    end
+
+    local kolor = self:GetKolor(player)
+    local highlightOn = self:ModeActive("Highlight")
+    local skeletonOn = self:ModeActive("Skeleton")
+    local usernameOn = self:ModeActive("Username")
+    local nameDisplayOn = self:ModeActive("NameDisplay")
+    local healthOn = self:ModeActive("Health Bar")
+    local distanceOn = self:ModeActive("Distance")
+    local lookOn = self:ModeActive("Look Direction")
+    local minecraftOn = self:ModeActive("Minecraft")
+    local arrowOn = self:ModeActive("Arrow")
+    record.Highlight.FillColor = kolor
+    record.Highlight.OutlineColor = kolor
+    record.Highlight.Enabled = highlightOn
+
+    local headPoint, headVisible = camera:WorldToViewportPoint(head.Position + Vector3.new(0, 1.0, 0))
+
+    if arrowOn and record.Arrow then
+        local viewport = camera.ViewportSize
+        local center = Vector2.new(viewport.X * 0.5, viewport.Y * 0.5)
+        local targetPoint = Vector2.new(headPoint.X, headPoint.Y)
+        if headPoint.Z <= 0 then
+            targetPoint = center - (targetPoint - center)
+        end
+        local direction = targetPoint - center
+        if direction.Magnitude < 0.001 then direction = Vector2.new(0, -1) end
+        direction = direction.Unit
+        local edgeX = math.max(20, (viewport.X * 0.5) - 42)
+        local edgeY = math.max(20, (viewport.Y * 0.5) - 56)
+        local scaleX = edgeX / math.max(math.abs(direction.X), 0.001)
+        local scaleY = edgeY / math.max(math.abs(direction.Y), 0.001)
+        local distanceToEdge = math.min(scaleX, scaleY)
+        local wanted = center + (direction * distanceToEdge)
+        if record.ArrowSmoothPosition then
+            record.ArrowSmoothPosition = record.ArrowSmoothPosition:Lerp(wanted, 0.22)
+        else
+            record.ArrowSmoothPosition = wanted
+        end
+        record.Arrow.Position = UDim2.fromOffset(record.ArrowSmoothPosition.X, record.ArrowSmoothPosition.Y)
+        record.Arrow.Rotation = math.deg(math.atan2(direction.Y, direction.X)) + 90
+        record.Arrow.TextColor3 = kolor
+        record.Arrow.Visible = true
+    elseif record.Arrow then
+        record.Arrow.Visible = false
+        record.ArrowSmoothPosition = nil
+    end
+
+    if not headVisible or headPoint.Z <= 0 then
+        record.Username.Visible = false
+        record.Distance.Visible = false
+        if record.NameDisplay then record.NameDisplay.Visible = false end
+        if record.HealthBack then record.HealthBack.Visible = false end
+        record.LookLine.Visible = false
+        -- Arrow remains visible for off-screen/behind-camera targets.
+        for _, line in ipairs(record.Skeleton) do line.Visible = false end
+        for _, line in ipairs(record.Corners) do line.Visible = false end
+        return
+    end
+
+    local hx, hy = headPoint.X, headPoint.Y
+    record.Username.TextColor3 = kolor
+    record.Username.Text = self:IsNPC(player) and ("NPC • " .. self:GetName(player)) or ("@" .. self:GetName(player))
+    record.Username.Position = UDim2.fromOffset(hx, hy - 6)
+    record.Username.Size = UDim2.fromOffset(260, 20)
+    record.Username.Visible = usernameOn
+
+    record.Distance.TextColor3 = kolor
+    record.Distance.Text = tostring(math.floor(studs + 0.5)) .. " studs"
+    local distanceX, distanceY = hx, hy + 50
+    pcall(function()
+        local boxCFrame, boxSize = character:GetBoundingBox()
+        local bottomWorld = boxCFrame:PointToWorldSpace(Vector3.new(0, -(boxSize.Y * 0.5), 0))
+        local bottomPoint = camera:WorldToViewportPoint(bottomWorld)
+        if bottomPoint.Z > 0 then
+            distanceX = bottomPoint.X
+            distanceY = bottomPoint.Y + 8
+        end
+    end)
+    record.Distance.Position = UDim2.fromOffset(distanceX, distanceY)
+    record.Distance.Size = UDim2.fromOffset(180, 18)
+    record.Distance.Visible = distanceOn
+
+    record.NameDisplay.TextColor3 = kolor
+    record.NameDisplay.Text = self:GetDisplayName(player, character)
+    record.NameDisplay.Position = UDim2.fromOffset(hx, hy - 24)
+    record.NameDisplay.Size = UDim2.fromOffset(220, 20)
+    record.NameDisplay.Visible = nameDisplayOn
+
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if healthOn and humanoid and humanoid.MaxHealth > 0 then
+        local percent = math.clamp(humanoid.Health / humanoid.MaxHealth, 0, 1)
+        record.HealthBack.Position = UDim2.fromOffset(hx, hy + 22)
+        record.HealthBack.Visible = true
+        record.HealthFill.Size = UDim2.fromScale(percent, 1)
+        if percent < 0.25 then record.HealthFill.BackgroundColor3 = Color3.fromRGB(235,70,70)
+        elseif percent < 0.55 then record.HealthFill.BackgroundColor3 = Color3.fromRGB(240,190,55)
+        else record.HealthFill.BackgroundColor3 = Color3.fromRGB(74,220,112) end
+    else
+        record.HealthBack.Visible = false
+    end
+
+    if lookOn then
+        local eye = head.Position + head.CFrame.LookVector * 0.55
+        local finish = eye + head.CFrame.LookVector * 10
+        local p1, v1 = camera:WorldToViewportPoint(eye)
+        local p2, v2 = camera:WorldToViewportPoint(finish)
+        if v1 and v2 and p1.Z > 0 and p2.Z > 0 then
+            self:SetLine(record.LookLine, Vector2.new(p1.X, p1.Y), Vector2.new(p2.X, p2.Y), 2.5, Color3.fromRGB(255, 48, 58))
+        else
+            record.LookLine.Visible = false
+        end
+    else
+        record.LookLine.Visible = false
+    end
+
+    if skeletonOn then
+        local links
+        if character:FindFirstChild("UpperTorso") then
+            links = {
+                {"Head","UpperTorso"},{"UpperTorso","LowerTorso"},
+                {"UpperTorso","LeftUpperArm"},{"LeftUpperArm","LeftLowerArm"},{"LeftLowerArm","LeftHand"},
+                {"UpperTorso","RightUpperArm"},{"RightUpperArm","RightLowerArm"},{"RightLowerArm","RightHand"},
+                {"LowerTorso","LeftUpperLeg"},{"LeftUpperLeg","LeftLowerLeg"},{"LeftLowerLeg","LeftFoot"},
+                {"LowerTorso","RightUpperLeg"},{"RightUpperLeg","RightLowerLeg"},{"RightLowerLeg","RightFoot"},
+            }
+        else
+            links = {
+                {"Head","Torso"},{"Torso","Left Arm"},{"Torso","Right Arm"},
+                {"Torso","Left Leg"},{"Torso","Right Leg"},
+            }
+        end
+        for index, line in ipairs(record.Skeleton) do
+            local link = links[index]
+            if link then
+                local a = character:FindFirstChild(link[1])
+                local b = character:FindFirstChild(link[2])
+                if a and b then
+                    local pa, va = camera:WorldToViewportPoint(a.Position)
+                    local pb, vb = camera:WorldToViewportPoint(b.Position)
+                    if va and vb and pa.Z > 0 and pb.Z > 0 then
+                        self:SetLine(line, Vector2.new(pa.X, pa.Y), Vector2.new(pb.X, pb.Y), 2, kolor)
+                    else
+                        line.Visible = false
+                    end
+                else
+                    line.Visible = false
+                end
+            else
+                line.Visible = false
+            end
+        end
+    else
+        for _, line in ipairs(record.Skeleton) do line.Visible = false end
+    end
+
+    if minecraftOn then
+        local okBox, boxCFrame, boxSize = pcall(function()
+            local cf, size = character:GetBoundingBox()
+            return cf, size
+        end)
+        if okBox and boxCFrame and boxSize then
+            local half = boxSize * 0.5
+            local minX, minY = math.huge, math.huge
+            local maxX, maxY = -math.huge, -math.huge
+            local seen = 0
+            for _, x in ipairs({-half.X, half.X}) do
+                for _, y in ipairs({-half.Y, half.Y}) do
+                    for _, z in ipairs({-half.Z, half.Z}) do
+                        local worldPoint = boxCFrame:PointToWorldSpace(Vector3.new(x, y, z))
+                        local screenPoint = camera:WorldToViewportPoint(worldPoint)
+                        if screenPoint.Z > 0 then
+                            seen += 1
+                            minX = math.min(minX, screenPoint.X)
+                            maxX = math.max(maxX, screenPoint.X)
+                            minY = math.min(minY, screenPoint.Y)
+                            maxY = math.max(maxY, screenPoint.Y)
+                        end
+                    end
+                end
+            end
+            if seen > 0 and minX < maxX and minY < maxY then
+                local cornerW = math.clamp((maxX - minX) * 0.25, 8, 28)
+                local cornerH = math.clamp((maxY - minY) * 0.20, 8, 28)
+                local segments = {
+                    {Vector2.new(minX,minY),Vector2.new(minX+cornerW,minY)},
+                    {Vector2.new(minX,minY),Vector2.new(minX,minY+cornerH)},
+                    {Vector2.new(maxX,minY),Vector2.new(maxX-cornerW,minY)},
+                    {Vector2.new(maxX,minY),Vector2.new(maxX,minY+cornerH)},
+                    {Vector2.new(minX,maxY),Vector2.new(minX+cornerW,maxY)},
+                    {Vector2.new(minX,maxY),Vector2.new(minX,maxY-cornerH)},
+                    {Vector2.new(maxX,maxY),Vector2.new(maxX-cornerW,maxY)},
+                    {Vector2.new(maxX,maxY),Vector2.new(maxX,maxY-cornerH)},
+                }
+                for index, line in ipairs(record.Corners) do
+                    local segment = segments[index]
+                    self:SetLine(line, segment[1], segment[2], 2.4, kolor)
+                end
+            else
+                for _, line in ipairs(record.Corners) do line.Visible = false end
+            end
+        else
+            for _, line in ipairs(record.Corners) do line.Visible = false end
+        end
+    else
+        for _, line in ipairs(record.Corners) do line.Visible = false end
+    end
+end
+
+env.LHESPManager.NPCCandidates = env.LHESPManager.NPCCandidates or {}
+
+function env.LHESPManager:RefreshNPCCandidates()
+    if not env.LHHighlightState.NPCESP then return end
+    self.NPCRefreshSerial = (self.NPCRefreshSerial or 0) + 1
+    local serial = self.NPCRefreshSerial
+    task.spawn(function()
+        local fresh = {}
+        local descendants = workspace:GetDescendants()
+        for index, object in ipairs(descendants) do
+            if serial ~= self.NPCRefreshSerial or LHRuntime.Unloading then return end
+            if object:IsA("Model") and self:IsValidNPC(object) then
+                fresh[object] = true
+            end
+            if index % 350 == 0 then task.wait() end
+        end
+        if serial == self.NPCRefreshSerial and env.LHHighlightState.NPCESP == true then
+            self.NPCCandidates = fresh
+        end
+    end)
+end
+
+LHRuntime:Track(task.spawn(function()
+    while not LHRuntime.Unloading do
+        if env.LHHighlightState.NPCESP then
+            env.LHESPManager:RefreshNPCCandidates()
+        end
+        task.wait(2)
+    end
 end))
+
+LHRuntime:Track(RunService.RenderStepped:Connect(function()
+    if LHRuntime.Unloading then return end
+    for player in pairs(env.LHESPManager.Records) do
+        if not player.Parent or player == plr then env.LHESPManager:DestroyRecord(player) end
+    end
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= plr then env.LHESPManager:UpdateRecord(player) end
+    end
+    if env.LHHighlightState.NPCESP then
+        for npc in pairs(env.LHESPManager.NPCCandidates or {}) do
+            if env.LHESPManager:IsValidNPC(npc) then
+                env.LHESPManager:UpdateRecord(npc)
+            elseif env.LHESPManager.Records[npc] then
+                env.LHESPManager:DestroyRecord(npc)
+            end
+        end
+    end
+end))
+
+LHRuntime:AddCleanup(function()
+    if env.LHESPManager then
+        for player in pairs(env.LHESPManager.Records or {}) do env.LHESPManager:DestroyRecord(player) end
+        if env.LHESPManager.ScreenGui then pcall(function() env.LHESPManager.ScreenGui:Destroy() end) end
+        env.LHESPManager.ScreenGui = nil
+        env.LHESPManager.NPCCandidates = {}
+        env.LHESPManager.NPCRefreshSerial = (env.LHESPManager.NPCRefreshSerial or 0) + 1
+    end
+end)
+
+add(env.LHPlayerESPSection, toggle("Better Jump Button", "replaces Roblox mobile jump button with the reddish LH version while enabled", function(enabled)
+    if env.LHBetterJumpManager then
+        env.LHBetterJumpManager.Enabled = enabled == true
+        env.LHBetterJumpManager:Refresh()
+    end
+end, false))
+
+env.LHBetterJumpManager = env.LHBetterJumpManager or {
+    Enabled = false,
+    Held = false,
+    Gui = nil,
+    Button = nil,
+    Serial = 0,
+    CheckAccumulator = 0,
+    NativeButton = nil,
+    NativeVisible = nil,
+    NativeActive = nil,
+}
+
+function env.LHBetterJumpManager:FindNativeJumpButton()
+    local playerGui = plr:FindFirstChildOfClass("PlayerGui")
+    if not playerGui then return nil end
+    local touchGui = playerGui:FindFirstChild("TouchGui")
+    if touchGui then
+        local exact = touchGui:FindFirstChild("JumpButton", true)
+        if exact and exact:IsA("GuiButton") then return exact end
+    end
+    for _, object in ipairs(playerGui:GetDescendants()) do
+        if object:IsA("GuiButton") and string.lower(object.Name) == "jumpbutton" then return object end
+    end
+    return nil
+end
+
+function env.LHBetterJumpManager:RestoreNativeJump()
+    local native = self.NativeButton
+    if native and native.Parent then
+        if self.NativeVisible ~= nil then pcall(function() native.Visible = self.NativeVisible end) end
+        if self.NativeActive ~= nil then pcall(function() native.Active = self.NativeActive end) end
+    end
+    self.NativeButton, self.NativeVisible, self.NativeActive = nil, nil, nil
+end
+
+function env.LHBetterJumpManager:HideNativeJump()
+    local native = self:FindNativeJumpButton()
+    if native ~= self.NativeButton then
+        self:RestoreNativeJump()
+        self.NativeButton = native
+        if native then self.NativeVisible, self.NativeActive = native.Visible, native.Active end
+    end
+    if native and native.Parent then
+        pcall(function() native.Visible = false end)
+        pcall(function() native.Active = false end)
+    end
+    return native
+end
+
+function env.LHBetterJumpManager:Jump()
+    local character = plr.Character
+    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+    if not humanoid or humanoid.Health <= 0 then return end
+    pcall(function() humanoid.Jump = true end)
+    pcall(function() humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end)
+end
+
+function env.LHBetterJumpManager:Pulse()
+    local button = self.Button
+    if not button or not button.Parent then return end
+    local scale = button:FindFirstChildOfClass("UIScale")
+    if not scale then return end
+    get.TweenService:Create(scale, TweenInfo.new(0.07, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Scale = 0.86}):Play()
+    task.delay(0.07, function()
+        if scale and scale.Parent then
+            get.TweenService:Create(scale, TweenInfo.new(0.12, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Scale = 1}):Play()
+        end
+    end)
+end
+
+function env.LHBetterJumpManager:EnsureGui()
+    if self.Gui and self.Gui.Parent and self.Button and self.Button.Parent then return end
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "LHBetterJumpButton"
+    gui.IgnoreGuiInset = true
+    gui.ResetOnSpawn = false
+    gui.DisplayOrder = 999996
+    gui:SetAttribute("LHProtectedUI", true)
+    if LHCompat and type(LHCompat.ParentGui) == "function" then LHCompat.ParentGui(gui) else gui.Parent = get.CoreGui end
+
+    local button = Instance.new("TextButton")
+    button.Name = "BetterJumpButton"
+    button.AnchorPoint = Vector2.new(1, 1)
+    button.Position = UDim2.new(1, -42, 1, -74)
+    button.Size = UDim2.fromOffset(88, 88)
+    button.BackgroundColor3 = Color3.fromRGB(169, 44, 57)
+    button.BackgroundTransparency = 0.30
+    button.BorderSizePixel = 0
+    button.AutoButtonColor = false
+    button.Text = ""
+    button.ZIndex = 100
+    button.Parent = gui
+    Instance.new("UICorner", button).CornerRadius = UDim.new(1, 0)
+
+    local stroke = Instance.new("UIStroke", button)
+    stroke.Color = Color3.fromRGB(255, 124, 135)
+    stroke.Thickness = 3
+    stroke.Transparency = 0.20
+
+    local gradient = Instance.new("UIGradient", button)
+    gradient.Rotation = 90
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(238, 89, 99)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(91, 24, 36)),
+    })
+
+    local inner = Instance.new("Frame")
+    inner.AnchorPoint = Vector2.new(0.5, 0.5)
+    inner.Position = UDim2.fromScale(0.5, 0.5)
+    inner.Size = UDim2.new(1, -12, 1, -12)
+    inner.BackgroundColor3 = Color3.fromRGB(104, 35, 47)
+    inner.BackgroundTransparency = 0.34
+    inner.BorderSizePixel = 0
+    inner.ZIndex = 101
+    inner.Parent = button
+    Instance.new("UICorner", inner).CornerRadius = UDim.new(1, 0)
+
+    local arrow = Instance.new("TextLabel")
+    arrow.BackgroundTransparency = 1
+    arrow.Position = UDim2.fromOffset(0, -6)
+    arrow.Size = UDim2.fromScale(1, 1)
+    arrow.Font = Enum.Font.GothamBold
+    arrow.Text = utf8.char(0x2191)
+    arrow.TextColor3 = Color3.fromRGB(255, 225, 229)
+    arrow.TextScaled = true
+    arrow.TextStrokeTransparency = 0.72
+    arrow.ZIndex = 102
+    arrow.Parent = inner
+
+    local scale = Instance.new("UIScale", button)
+    scale.Scale = 1
+
+    self.Gui = gui
+    self.Button = button
+
+    local native = self:FindNativeJumpButton()
+    if native and native.Parent and native.AbsoluteSize.X > 8 and native.AbsoluteSize.Y > 8 then
+        button.AnchorPoint = Vector2.new(0.5, 0.5)
+        button.Position = UDim2.fromOffset(native.AbsolutePosition.X + (native.AbsoluteSize.X * 0.5), native.AbsolutePosition.Y + (native.AbsoluteSize.Y * 0.5))
+        local targetSize = math.max(72, math.min(96, math.max(native.AbsoluteSize.X, native.AbsoluteSize.Y)))
+        button.Size = UDim2.fromOffset(targetSize, targetSize)
+    end
+
+    button.InputBegan:Connect(function(input)
+        if input.UserInputType ~= Enum.UserInputType.Touch and input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+        self.Serial += 1
+        local serial = self.Serial
+        self.Held = true
+        self:Pulse()
+        self:Jump()
+        task.spawn(function()
+            task.wait(0.22)
+            while self.Held and self.Enabled and self.Serial == serial and button.Parent do
+                self:Jump()
+                self:Pulse()
+                task.wait(0.13)
+            end
+        end)
+    end)
+    button.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+            self.Held = false
+            self.Serial += 1
+        end
+    end)
+    LHRuntime:Track(get.UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+            self.Held = false
+            self.Serial += 1
+        end
+    end))
+end
+
+function env.LHBetterJumpManager:Refresh()
+    self:EnsureGui()
+    if not self.Gui then return end
+    local touchEnabled = get.UserInputService.TouchEnabled == true
+    if self.Enabled == true and touchEnabled then
+        local native = self:HideNativeJump()
+        self.Gui.Enabled = true
+        if native and native.Parent and self.Button then
+            self.Button.AnchorPoint = Vector2.new(0.5, 0.5)
+            self.Button.Position = UDim2.fromOffset(native.AbsolutePosition.X + (native.AbsoluteSize.X * 0.5), native.AbsolutePosition.Y + (native.AbsoluteSize.Y * 0.5))
+        end
+    else
+        self.Gui.Enabled = false
+        self:RestoreNativeJump()
+        self.Held = false
+        self.Serial += 1
+    end
+end
+
+LHRuntime:Track(RunService.Heartbeat:Connect(function(dt)
+    if LHRuntime.Unloading or not env.LHBetterJumpManager then return end
+    env.LHBetterJumpManager.CheckAccumulator = (env.LHBetterJumpManager.CheckAccumulator or 0) + dt
+    if env.LHBetterJumpManager.CheckAccumulator >= 0.45 then
+        env.LHBetterJumpManager.CheckAccumulator = 0
+        env.LHBetterJumpManager:Refresh()
+    end
+end))
+
+LHRuntime:AddCleanup(function()
+    if env.LHBetterJumpManager then
+        env.LHBetterJumpManager.Enabled = false
+        env.LHBetterJumpManager.Held = false
+        env.LHBetterJumpManager.Serial = (env.LHBetterJumpManager.Serial or 0) + 1
+        pcall(function() env.LHBetterJumpManager:RestoreNativeJump() end)
+        if env.LHBetterJumpManager.Gui then pcall(function() env.LHBetterJumpManager.Gui:Destroy() end) end
+        env.LHBetterJumpManager.Gui = nil
+        env.LHBetterJumpManager.Button = nil
+    end
+end)
 
 
 -- Live time/date are already displayed inside the Home avatar kredits kard. --
@@ -6524,6 +7611,114 @@ end;
 LHRuntime:Track(get.Players.PlayerAdded:connect(updatePlayerList))
 LHRuntime:Track(get.Players.PlayerRemoving:connect(updatePlayerList));
 
+
+-- Pathfinding follow for the kurrent Selekt Player target.
+env.LHAutoWalkToPlayer = env.LHAutoWalkToPlayer or {Enabled=false, Serial=0, TargetName=nil}
+env.LHStopAutoWalkToPlayer = function()
+    env.LHAutoWalkToPlayer.Enabled = false
+    env.LHAutoWalkToPlayer.Serial = (env.LHAutoWalkToPlayer.Serial or 0) + 1
+end
+env.LHStartAutoWalkToPlayer = function()
+    local state = env.LHAutoWalkToPlayer
+    state.Enabled = true
+    state.Serial = (state.Serial or 0) + 1
+    local serial = state.Serial
+
+    task.spawn(function()
+        local PathfindingService = get.PathfindingService
+        local lastPathTime = 0
+        local lastPathTarget = nil
+        local waypoints = nil
+        local waypointIndex = 2
+
+        local rayParams = RaycastParams.new()
+        rayParams.FilterType = Enum.RaycastFilterType.Exclude
+        rayParams.IgnoreWater = true
+
+        while state.Enabled and state.Serial == serial and not LHRuntime.Unloading do
+            local target = selektedPlayerName and get.Players:FindFirstChild(selektedPlayerName)
+            local character = plr.Character
+            local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+            local root = character and (character:FindFirstChild("HumanoidRootPart") or character.PrimaryPart)
+            local targetCharacter = target and target.Character
+            local targetRoot = targetCharacter and (targetCharacter:FindFirstChild("HumanoidRootPart") or targetCharacter.PrimaryPart)
+
+            if not target or not humanoid or humanoid.Health <= 0 or not root or not targetRoot then
+                task.wait(0.15)
+            else
+                local targetPosition = targetRoot.Position
+                local difference = targetPosition - root.Position
+                local distance = difference.Magnitude
+
+                if distance <= 5 then
+                    humanoid:MoveTo(root.Position)
+                    waypoints = nil
+                    waypointIndex = 2
+                    task.wait(0.08)
+                else
+                    rayParams.FilterDescendantsInstances = {character, targetCharacter}
+                    local obstruction = workspace:Raycast(root.Position, difference, rayParams)
+
+                    -- Clear line of sight: follow the moving player directly.
+                    -- This avoids constantly bouncing between fresh path waypoints.
+                    if not obstruction then
+                        waypoints = nil
+                        waypointIndex = 2
+                        humanoid:MoveTo(targetPosition)
+                    else
+                        local needsPath = waypoints == nil
+                            or (os.clock() - lastPathTime) >= 0.85
+                            or not lastPathTarget
+                            or (targetPosition - lastPathTarget).Magnitude >= 8
+
+                        if needsPath then
+                            local path = PathfindingService:CreatePath({
+                                AgentCanJump = true,
+                                AgentCanClimb = true,
+                                WaypointSpacing = 5,
+                            })
+                            local ok = pcall(function()
+                                path:ComputeAsync(root.Position, targetPosition)
+                            end)
+                            if ok and path.Status == Enum.PathStatus.Success then
+                                waypoints = path:GetWaypoints()
+                                waypointIndex = math.min(2, #waypoints)
+                                lastPathTime = os.clock()
+                                lastPathTarget = targetPosition
+                            else
+                                waypoints = nil
+                            end
+                        end
+
+                        local waypoint = waypoints and waypoints[waypointIndex]
+                        if waypoint then
+                            if waypoint.Action == Enum.PathWaypointAction.Jump then
+                                humanoid.Jump = true
+                            end
+                            humanoid:MoveTo(waypoint.Position)
+
+                            if (waypoint.Position - root.Position).Magnitude <= 3.2 then
+                                waypointIndex += 1
+                                if waypointIndex > #waypoints then
+                                    waypoints = nil
+                                    waypointIndex = 2
+                                end
+                            end
+                        else
+                            humanoid:MoveTo(targetPosition)
+                        end
+                    end
+                    task.wait(0.06)
+                end
+            end
+        end
+    end)
+end
+
+add(SkriptsSection, toggle("Auto Walk to Player", "pathfinds around obstacles and jumps toward the kurrent Selekt Player target", function(enabled)
+    if enabled then env.LHStartAutoWalkToPlayer() else env.LHStopAutoWalkToPlayer() end
+end, false))
+
 add(SkriptsSection, button("Teleport to Selekted Player", "tp to player", function()
 if selektedPlayerName then
 local player = get.Players.LocalPlayer
@@ -6572,12 +7767,6 @@ bNotify(2, "oops im dumb", "No player selekted")
 end;
 end))
 
-add(SkriptsSection, toggle("Highlight All Players (ESP)", "esp players", function(enabled)
-HighlightState.Enabled = enabled == true
-end));
-add(SkriptsSection, colorpicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", HighlightState.Kolor, function(kolor)
-if typeof(kolor) == "Color3" then HighlightState.Kolor = kolor end
-end))
 
 -- Player movement and kharakter kontrols belong with the Players tools.
 local tpwalk, speed, defaultSpeed = false, (1),(1)
@@ -9486,10 +10675,10 @@ autoJumpEnabled = state
 end))
 
 add(GamesSection, toggle("Highlight Playerz", "esp players", function(enabled)
-HighlightState.Enabled = enabled == true
+env.LHHighlightState.Enabled = enabled == true
 end))
-add(GamesSection, colorpicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", HighlightState.Kolor, function(kolor)
-if typeof(kolor) == "Color3" then HighlightState.Kolor = kolor end
+add(GamesSection, colorpicker("Highlight Kolor", "use rainbow and stop the dot on ur kolor if mobile", env.LHHighlightState.Kolor, function(kolor)
+if typeof(kolor) == "Color3" then env.LHHighlightState.Kolor = kolor end
 end))
 
 add(GamesSection, env.LHGameButton("OwlHub", "op", function()
@@ -10590,6 +11779,24 @@ LOLLY = emoji.lollipop;
 
 local UpdatesLog = {
 
+    emoji.lollipop.." V10.5.2 updates: ",
+
+    "[NEW FEATURE] Player ESP: choose Highlight, Skeleton, Username, Name Display, Health Bar, Distance, Look Direction, Minecraft or Arrow modes",
+    "[NEW FEATURE] NPC/Bot ESP: use your selected ESP modes on supported NPCs and bots",
+    "[NEW] Enable Multiple ESPs: combine several ESP modes at the same time and restore your previous selections",
+    "[IMPROVED] Player ESP render distance now reaches up to 99,999 studs and starts at 20,000",
+    "[IMPROVED] Teams mode kan match Player ESP kolors to each player's team",
+    "[IMPROVED] Auto Walk to Player follows moving players more smoothly and handles obstacles better",
+    "[IMPROVED] Quick Actions now expands around the actual Lollipop toggle with a cleaner centered layout",
+    "[IMPROVED] What's New has a cleaner Don't show again layout",
+    "[IMPROVED] selected dropdown options show checkmarks",
+    "[FIXED] Experience refresh keeps your skroll position",
+    "[IMPROVED] NPC/Bot ESP now disappears immediately when turned off",
+    "[IMPROVED] Quick Actions is baxk to the compact 10.5.0 spacing with clearer button names",
+    "[NEW] Pac-Man eats the Lollipops as the loading bar reaches 100%",
+    "[IMPROVED] What's New stays open until you press Got It",
+    "[IMPROVED] safer mobile taps help prevent accidental selections while skrolling",
+
     emoji.lollipop.." V10.5.1 updates: ",
 
 "[NEW GAME] Steal An Egg: Crystallized Hub (OP) // Autofarm, auto steal, ESP &more",
@@ -11001,9 +12208,25 @@ local p = get.Players.LocalPlayer;
 --rj
 ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, p)
 end))
-add(HomeSection, button("Server Hop", "leave the game",
+add(HomeSection, button("Server Hop", "join another public server",
 function()
-loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/serverhop",true))();
+    local function hop()
+        loadstring(game:HttpGet("https://github.com/rrixh/skripts/raw/main/serverhop",true))();
+    end
+    local function queueAndHop()
+        local source = "loadstring(game:HttpGet('https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2', true))()"
+        LHCompat.QueueOnTeleport(source)
+        env.LHSettings.AutoExecuteOnTeleport = true
+        if type(env.LHSaveSettings)=="function" then pcall(env.LHSaveSettings) end
+        hop()
+    end
+    if env.LHSettings.AutoExecuteOnTeleport == true then
+        queueAndHop()
+    elseif type(env.LHConfirmReset) == "function" then
+        env.LHConfirmReset("Auto execute Lollypop Hub after this server hop?", queueAndHop, hop)
+    else
+        hop()
+    end
 end))
 add(HomeSection, button("Join Lowest Player Server", "makes u join same game but lowest player",
 function()
@@ -12260,172 +13483,109 @@ local function KUSTOMTOGGLE()
         return 0.5 - (math.cos(value * math.pi) * 0.5)
     end
 
-    local function quadraticPoint(x0, y0, cx, cy, x1, y1, t)
-        local inv = 1 - t
-        return
-            (inv * inv * x0) + (2 * inv * t * cx) + (t * t * x1),
-            (inv * inv * y0) + (2 * inv * t * cy) + (t * t * y1)
-    end
-
     local function animateRing(overlay, opening)
         if not overlay or not overlay.Parent then return end
         stopRingAnimation()
         ringSerial = ringSerial + 1
         local serial = ringSerial
-        local durationValue = opening and 0.34 or 0.31
+        local durationValue = opening and 0.29 or 0.31
         local startedAt = os.clock()
 
         local originX = tonumber(overlay:GetAttribute("LHOriginX")) or 0
         local originY = tonumber(overlay:GetAttribute("LHOriginY")) or 0
-        local ringCenterX = tonumber(overlay:GetAttribute("LHRingCenterX")) or originX
-        local ringCenterY = tonumber(overlay:GetAttribute("LHRingCenterY")) or originY
-        local radius = tonumber(overlay:GetAttribute("LHRadius")) or 100
-        local startGroupTransparency = tonumber(overlay.GroupTransparency) or (opening and 1 or 0)
+        if not opening and roundButton and roundButton.Parent then
+            local livePosition = roundButton.AbsolutePosition
+            local liveSize = roundButton.AbsoluteSize
+            originX = livePosition.X + (liveSize.X * 0.5)
+            originY = livePosition.Y + (liveSize.Y * 0.5)
+            overlay:SetAttribute("LHOriginX", originX)
+            overlay:SetAttribute("LHOriginY", originY)
+        end
 
         local records = {}
         for _, object in ipairs(overlay:GetChildren()) do
             if object:IsA("GuiButton") and object:GetAttribute("LHQuickAction") == true then
                 object.Active = false
-                local angle = tonumber(object:GetAttribute("LHQuickAngle")) or 0
+                local finalX = tonumber(object:GetAttribute("LHQuickFinalX")) or originX
+                local finalY = tonumber(object:GetAttribute("LHQuickFinalY")) or originY
                 local itemSize = tonumber(object:GetAttribute("LHQuickSize")) or 68
-                local finalX = tonumber(object:GetAttribute("LHQuickFinalX"))
-                    or (ringCenterX + math.cos(angle) * radius)
-                local finalY = tonumber(object:GetAttribute("LHQuickFinalY"))
-                    or (ringCenterY + math.sin(angle) * radius)
-
-                local startX, startY
-                local endX, endY
-                local startSize, endSize
-                local startRotation, endRotation
-                local startTransparency, endTransparency
-                local controlX, controlY
-
+                local startX, startY, startSize
                 if opening then
                     startX, startY = originX, originY
-                    endX, endY = finalX, finalY
-                    startSize, endSize = 8, itemSize
-                    startRotation, endRotation = -165, 0
-                    startTransparency, endTransparency = 1, 0.03
-
-                    local curlAngle = angle - math.rad(68)
-                    controlX = originX + math.cos(curlAngle) * radius * 0.76
-                    controlY = originY + math.sin(curlAngle) * radius * 0.76
-
-                    object.Position = UDim2.fromOffset(startX, startY)
+                    startSize = 7
+                    object.Position = UDim2.fromOffset(originX, originY)
                     object.Size = UDim2.fromOffset(startSize, startSize)
-                    object.Rotation = startRotation
-                    object.BackgroundTransparency = startTransparency
+                    object.Rotation = -165
+                    object.BackgroundTransparency = 1
                 else
                     startX = object.AbsolutePosition.X + (object.AbsoluteSize.X * 0.5)
                     startY = object.AbsolutePosition.Y + (object.AbsoluteSize.Y * 0.5)
-                    endX, endY = originX, originY
-                    startSize = math.max(8, math.min(object.AbsoluteSize.X, object.AbsoluteSize.Y))
-                    endSize = 6
-                    startRotation = object.Rotation
-                    endRotation = startRotation + 175
-                    startTransparency = object.BackgroundTransparency
-                    endTransparency = 1
-
-                    local midX = (startX + originX) * 0.5
-                    local midY = (startY + originY) * 0.5
-                    local curlAngle = angle + math.rad(92)
-                    controlX = midX + math.cos(curlAngle) * radius * 0.34
-                    controlY = midY + math.sin(curlAngle) * radius * 0.34
+                    startSize = math.max(7, math.min(object.AbsoluteSize.X, object.AbsoluteSize.Y))
                 end
-
+                local dx = (opening and finalX or originX) - startX
+                local dy = (opening and finalY or originY) - startY
+                local radius = math.sqrt((dx * dx) + (dy * dy))
+                local angle = math.atan2(dy, dx)
                 records[#records + 1] = {
-                    Button = object,
-                    StartX = startX,
-                    StartY = startY,
-                    ControlX = controlX,
-                    ControlY = controlY,
-                    EndX = endX,
-                    EndY = endY,
-                    StartSize = startSize,
-                    EndSize = endSize,
-                    StartRotation = startRotation,
-                    EndRotation = endRotation,
-                    StartTransparency = startTransparency,
-                    EndTransparency = endTransparency,
+                    Button = object, FinalX = finalX, FinalY = finalY,
+                    StartX = startX, StartY = startY, StartSize = startSize,
+                    EndSize = opening and itemSize or 5, Radius = radius, Angle = angle,
+                    StartRotation = tonumber(object.Rotation) or 0,
+                    StartTransparency = tonumber(object.BackgroundTransparency) or (opening and 1 or 0.03),
                 }
             end
         end
 
-        local center = overlay:FindFirstChild("QuickActionsCenter")
-        local centerStartX, centerStartY, centerEndX, centerEndY
-        local centerStartSize, centerEndSize
-        if center and center:IsA("GuiButton") then
-            center.Active = false
-            if opening then
-                centerStartX, centerStartY = originX, originY
-                centerEndX, centerEndY = ringCenterX, ringCenterY
-                centerStartSize = math.max(12, center.AbsoluteSize.X * 0.62)
-                centerEndSize = tonumber(overlay:GetAttribute("LHCenterSize")) or math.max(center.AbsoluteSize.X, 50)
-                center.Position = UDim2.fromOffset(originX, originY)
-                center.Size = UDim2.fromOffset(centerStartSize, centerStartSize)
-                center.Rotation = -32
-            else
-                centerStartX = center.AbsolutePosition.X + (center.AbsoluteSize.X * 0.5)
-                centerStartY = center.AbsolutePosition.Y + (center.AbsoluteSize.Y * 0.5)
-                centerEndX, centerEndY = originX, originY
-                centerStartSize = math.max(12, math.min(center.AbsoluteSize.X, center.AbsoluteSize.Y))
-                centerEndSize = math.max(12, centerStartSize * 0.62)
-            end
-        end
-
         ringAnimationConnection = get.RunService.RenderStepped:Connect(function()
-            if serial ~= ringSerial or not overlay.Parent then
-                stopRingAnimation()
-                return
-            end
-
-            local rawProgress = math.clamp((os.clock() - startedAt) / durationValue, 0, 1)
-            local progress = smoothRingProgress(rawProgress)
-
+            if serial ~= ringSerial or not overlay.Parent then stopRingAnimation(); return end
+            local raw = math.clamp((os.clock() - startedAt) / durationValue, 0, 1)
+            local progress = smoothRingProgress(raw)
             for _, record in ipairs(records) do
                 local button = record.Button
                 if button and button.Parent then
-                    local x, y = quadraticPoint(
-                        record.StartX, record.StartY,
-                        record.ControlX, record.ControlY,
-                        record.EndX, record.EndY,
-                        progress
-                    )
+                    local x, y
+                    if opening then
+                        local spiralAngle = record.Angle - ((1 - progress) * math.pi * 1.45)
+                        local spiralRadius = record.Radius * progress
+                        x = originX + math.cos(spiralAngle) * spiralRadius
+                        y = originY + math.sin(spiralAngle) * spiralRadius
+                        if raw >= 1 then x, y = record.FinalX, record.FinalY end
+                    else
+                        local dx = record.StartX - originX
+                        local dy = record.StartY - originY
+                        local startRadius = math.sqrt((dx * dx) + (dy * dy))
+                        local startAngle = math.atan2(dy, dx)
+                        local spiralAngle = startAngle + (progress * math.pi * 1.45)
+                        local spiralRadius = startRadius * (1 - progress)
+                        x = originX + math.cos(spiralAngle) * spiralRadius
+                        y = originY + math.sin(spiralAngle) * spiralRadius
+                        if raw >= 1 then x, y = originX, originY end
+                    end
                     local size = record.StartSize + ((record.EndSize - record.StartSize) * progress)
                     button.Position = UDim2.fromOffset(x, y)
                     button.Size = UDim2.fromOffset(size, size)
-                    button.Rotation = record.StartRotation + ((record.EndRotation - record.StartRotation) * progress)
-                    button.BackgroundTransparency = record.StartTransparency
-                        + ((record.EndTransparency - record.StartTransparency) * progress)
+                    if opening then
+                        button.Rotation = -165 + (165 * progress)
+                        button.BackgroundTransparency = 1 - (0.97 * progress)
+                    else
+                        button.Rotation = record.StartRotation + (250 * progress)
+                        local fadeProgress = math.clamp((progress - 0.72) / 0.28, 0, 1)
+                        button.BackgroundTransparency = record.StartTransparency + ((1 - record.StartTransparency) * fadeProgress)
+                    end
                 end
             end
-
-            if center and center.Parent then
-                local centerX = centerStartX + ((centerEndX - centerStartX) * progress)
-                local centerY = centerStartY + ((centerEndY - centerStartY) * progress)
-                local centerSize = centerStartSize + ((centerEndSize - centerStartSize) * progress)
-                center.Position = UDim2.fromOffset(centerX, centerY)
-                center.Size = UDim2.fromOffset(centerSize, centerSize)
-                if opening then
-                    center.Rotation = -32 + (32 * progress)
-                else
-                    center.Rotation = (tonumber(center.Rotation) or 0) + (4.5 * rawProgress)
-                end
-            end
-
-            if opening then
-                overlay.GroupTransparency = 1 - progress
-            else
-                overlay.GroupTransparency = startGroupTransparency + ((1 - startGroupTransparency) * progress)
-            end
-
-            if rawProgress >= 1 then
+            if raw >= 1 then
                 stopRingAnimation()
                 if opening then
                     overlay.GroupTransparency = 0
-                    if center and center.Parent then center.Active = true; center.Rotation = 0 end
                     for _, record in ipairs(records) do
-                        if record.Button and record.Button.Parent then record.Button.Active = true end
+                        if record.Button and record.Button.Parent then
+                            record.Button.Position = UDim2.fromOffset(record.FinalX, record.FinalY)
+                            record.Button.Size = UDim2.fromOffset(record.EndSize, record.EndSize)
+                            record.Button.Rotation = 0
+                            record.Button.BackgroundTransparency = 0.03
+                            record.Button.Active = true
+                        end
                     end
                 else
                     if ringOverlay == overlay then ringOverlay = nil end
@@ -12466,24 +13626,21 @@ local function KUSTOMTOGGLE()
         local radius = compact and 88 or 108
         local absolutePosition = roundButton.AbsolutePosition
         local absoluteSize = roundButton.AbsoluteSize
-
-        -- Always animate from/to the REAL Lollypop toggle. The ring itself may shift
-        -- inward so its buttons stay inside the safe area, but closing physically
-        -- spirals every ikon baxk into the toggle the user held.
         local originX = absolutePosition.X + (absoluteSize.X * 0.5)
         local originY = absolutePosition.Y + (absoluteSize.Y * 0.5)
-        local ringCenterX = originX
-        local ringCenterY = originY
+
+        -- Original 10.5.0 Quick Actions proportions. Keep every action fully on-skreen.
         local safe = radius + (itemSize * 0.5) + 8
-        ringCenterX = math.clamp(ringCenterX, safe, math.max(safe, viewport.X - safe))
-        ringCenterY = math.clamp(ringCenterY, safe, math.max(safe, viewport.Y - safe))
+        local ringCenterX = math.clamp(originX, safe, math.max(safe, viewport.X - safe))
+        local ringCenterY = math.clamp(originY, safe, math.max(safe, viewport.Y - safe))
 
         local overlay = Instance.new("CanvasGroup")
         ringOverlay = overlay
         overlay.Name = "LHQuickActions"
         overlay.Size = UDim2.fromScale(1, 1)
+        -- Quick Actions no longer dims the whole game or puts a black plate behind the Lollypop.
         overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        overlay.BackgroundTransparency = 0.56
+        overlay.BackgroundTransparency = 1
         overlay.BorderSizePixel = 0
         overlay.GroupTransparency = 1
         overlay.ZIndex = 20
@@ -12506,30 +13663,7 @@ local function KUSTOMTOGGLE()
             if ringOverlay == overlay then closeRing(false) end
         end)
 
-        local center = Instance.new("TextButton")
-        center.Name = "QuickActionsCenter"
-        center.AnchorPoint = Vector2.new(0.5, 0.5)
-        center.Position = UDim2.fromOffset(originX, originY)
-        center.Size = UDim2.fromOffset(math.max(12, (itemSize - 6) * 0.62), math.max(12, (itemSize - 6) * 0.62))
-        center.BackgroundColor3 = Color3.fromRGB(18, 13, 24)
-        center.BackgroundTransparency = 0.02
-        center.BorderSizePixel = 0
-        center.AutoButtonColor = false
-        center.Text = emoji.lollipop
-        center.TextColor3 = Color3.fromRGB(255, 255, 255)
-        center.TextScaled = true
-        center.Font = Enum.Font.GothamBold
-        center.ZIndex = 23
-        center.Active = false
-        center.Parent = overlay
-        Instance.new("UICorner", center).CornerRadius = UDim.new(1, 0)
-        local centerStroke = Instance.new("UIStroke", center)
-        centerStroke.Color = getgenv().LollypopTheme
-        centerStroke.Transparency = 0.12
-        LHRuntime:AddButtonPressEffect(center)
-        center.Activated:Connect(function()
-            if ringOverlay == overlay then closeRing(false) end
-        end)
+        -- The original draggable Lollipop toggle is the only center icon.
 
         local actions = {
             {Name = "Executor", Icon = emoji.laptop},
@@ -12594,18 +13728,38 @@ local function KUSTOMTOGGLE()
             caption.Font = Enum.Font.GothamBold
             caption.Text = actionName
             caption.TextColor3 = Color3.fromRGB(238, 232, 242)
-            caption.TextScaled = true
+            caption.TextScaled = false
+            caption.TextSize = compact and 9 or 10
             caption.TextWrapped = true
+            caption.TextYAlignment = Enum.TextYAlignment.Center
             caption.ZIndex = 23
             caption.Parent = button
 
-            button.Activated:Connect(function()
-                if ringOverlay ~= overlay or not ringOpen then return end
-                closeRing(false)
-                task.delay(0.20, function()
-                    LHRuntime:Safe("Quick Action " .. actionName, performQuickAction, actionName)
+            do
+                local pressStart, pressInput, movedPress = nil, nil, false
+                button.InputBegan:Connect(function(inputObject)
+                    if inputObject.UserInputType ~= Enum.UserInputType.Touch and inputObject.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+                    pressStart = Vector2.new(inputObject.Position.X, inputObject.Position.Y)
+                    pressInput = inputObject
+                    movedPress = false
                 end)
-            end)
+                get.UserInputService.InputChanged:Connect(function(inputObject)
+                    if not pressStart or not pressInput then return end
+                    if inputObject ~= pressInput and inputObject.UserInputType ~= Enum.UserInputType.MouseMovement and inputObject.UserInputType ~= Enum.UserInputType.Touch then return end
+                    local current = Vector2.new(inputObject.Position.X, inputObject.Position.Y)
+                    if (current - pressStart).Magnitude > 9 then movedPress = true end
+                end)
+                button.InputEnded:Connect(function(inputObject)
+                    if inputObject ~= pressInput then return end
+                    local shouldFire = pressStart ~= nil and not movedPress
+                    pressStart, pressInput, movedPress = nil, nil, false
+                    if not shouldFire or ringOverlay ~= overlay or not ringOpen then return end
+                    closeRing(false)
+                    task.delay(0.38, function()
+                        LHRuntime:Safe("Quick Action " .. actionName, performQuickAction, actionName)
+                    end)
+                end)
+            end
         end
 
         animateRing(overlay, true)
