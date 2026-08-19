@@ -1,6 +1,6 @@
 --main v10.5.2  LOLLYPOP HUB 
 
-date = "August 18"..", "..tostring(os.date("%Y"))
+date = "August 19"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -6530,7 +6530,7 @@ add(env.LHSkriptsHitboxSection, toggle("Invisible Hitbox", "makes expanded hitbo
     env.LHHitboxExpander.Invisible = value == true
     env.LHHitboxExpander:Refresh()
 end, false))
-add(env.LHSkriptsHitboxSection, dropdown("Hitbox Shape", "xhange the 3D hitbox shape", {"Kube", "Ball", "Triangle"}, function(value)
+add(env.LHSkriptsHitboxSection, dropdown("Hitbox Shape", "change the 3D hitbox shape", {"Kube", "Ball", "Triangle"}, function(value)
     env.LHHitboxExpander.Shape = tostring(value or "Kube")
     env.LHHitboxExpander:Refresh()
 end, "Kube"))
@@ -6540,10 +6540,10 @@ local HomeIntroSection = section(skripts, "Home Intro", skripts["Home Intro"], t
 
 add(HomeIntroSection, kredits({
     Username = "lulaslollipop",
-    DisplayName = displayname,
+    DisplayName = displayname or tostring(game.Players["lulaslollipop"].DisplayName),
     UserId = 3001347724,
     SessionStarted = env.LHSessionStart,
-    LastOnline = "2 days ago", 
+    LastOnline = "3 days ago", 
     OnlineStatus = "Offline",
     AnimationId = 132105268936736, -- superhero flying loop
 
