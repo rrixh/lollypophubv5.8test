@@ -3112,13 +3112,12 @@ env.LHShowWhatsNew = function(force)
 
     local dontShowButton = Instance.new("TextButton")
     dontShowButton.AnchorPoint = Vector2.new(1, 0.5)
-    dontShowButton.Position = UDim2.new(1, -16, 1, -76)
-    dontShowButton.Size = UDim2.fromOffset(176, 28)
+    dontShowButton.Position = UDim2.new(1, -78, 1, -76)
+    dontShowButton.Size = UDim2.fromOffset(188, 28)
     dontShowButton.BackgroundTransparency = 1
     dontShowButton.BorderSizePixel = 0
     dontShowButton.Text = ""
     dontShowButton.AutoButtonColor = false
-    dontShowButton.ClipsDescendants = false
     dontShowButton.Parent = card
 
     local checkBox = Instance.new("Frame")
@@ -3126,9 +3125,7 @@ env.LHShowWhatsNew = function(force)
     checkBox.Position = UDim2.new(1, 0, 0.5, 0)
     checkBox.Size = UDim2.fromOffset(20, 20)
     checkBox.BackgroundColor3 = Color3.fromRGB(38, 29, 48)
-    checkBox.BackgroundTransparency = 0
     checkBox.BorderSizePixel = 0
-    checkBox.ZIndex = 3
     checkBox.Parent = dontShowButton
     Instance.new("UICorner", checkBox).CornerRadius = UDim.new(0, 5)
     local checkStroke = Instance.new("UIStroke", checkBox)
@@ -3177,7 +3174,7 @@ env.LHShowWhatsNew = function(force)
         LHRuntime:SaveSettings()
         updateCheck()
     end
-    -- Invisible click row: no generic press effect, so no dark overlay/box can appear.
+    LHRuntime:AddButtonPressEffect(dontShowButton)
     LHRuntime:Track(dontShowButton.Activated:Connect(toggleDontShow))
 
     local dismiss = Instance.new("TextButton")
@@ -6118,46 +6115,49 @@ local performanceSection = section(settingsTab, "Performance & Status", {})
 local performanceLabel = add(performanceSection, label("FPS: 0 | Memory: 0 MB"))
 add(performanceSection, label("Game PlaceId: " .. tostring(game.PlaceId) .. " | GameId: " .. tostring(game.GameId)))
 add(performanceSection, label("Supported-game status: Universal features available; game-specific skripts vary."))
-add(performanceSection, button("Check for LH Update", "Checks your LH version against the latest published version.", function()
-    local versionFileUrl = env.LH_VERSION_URL
-    if not versionFileUrl then
-        LHRuntime:Notify("warning", "Update Checker", "LH kould not find the version source.", 3)
+add(performanceSection, button("Check for LH Update", "Uses getgenv().LH_VERSION_URL when configured.", function()
+    local versionUrl = env.LH_VERSION_URL
+    if not versionUrl then
+        LHRuntime:Notify("warning", "Update Checker", "Set getgenv().LH_VERSION_URL to your raw version file first.", 3)
         return
     end
 
-    local fetchOk, versionSource = pcall(function()
-        return game:HttpGet(versionFileUrl, true)
+    local ok, latest = pcall(function()
+        return game:HttpGet(versionUrl, true)
     end)
-    if not fetchOk then
+    if not ok then
         LHRuntime:Notify("error", "Update Checker", "Kould not check the latest LH version.", 3)
         return
     end
 
-    local kurrentVersion = env.LHNormalizeVersion(Vv)
-    local publishedVersion = env.LHNormalizeVersion(versionSource)
-    if not kurrentVersion or not publishedVersion then
-        LHRuntime:Notify("error", "Update Checker", "LH kould not read the latest version.", 3)
+    latest = env.LHNormalizeVersion(latest)
+    versionUrl = env.LHNormalizeVersion(Vv)
+    if not latest or not versionUrl then
+        LHRuntime:Notify("error", "Update Checker", "The LH version file did not return a valid version.", 3)
         return
     end
 
-    local comparison = env.LHCompareVersions(kurrentVersion, publishedVersion)
-
-    if comparison < 0 then
+    ok = env.LHCompareVersions(versionUrl, latest)
+    if ok < 0 then
         LHRuntime:Notify(
             "warning",
             "Update Available",
-            "Kurrent Version: v" .. kurrentVersion .. " | Latest Version: v" .. publishedVersion,
+            "Kurrent Version: v" .. versionUrl .. " | Latest Version: v" .. latest,
+            4
+        )
+    elseif ok > 0 then
+        LHRuntime:Notify(
+            "success",
+            "Kurrent Version",
+            "Kurrent Version: v" .. versionUrl .. " | Latest Version: v" .. latest,
             4
         )
     else
-        -- If the published version file is temporarily behind this running build,
-        -- the running build is still the newest version the user aktually has.
-        local latestVersion = kurrentVersion
         LHRuntime:Notify(
             "success",
-            "LH Is Up To Date",
-            "Kurrent Version: v" .. kurrentVersion .. " | Latest Version: v" .. latestVersion,
-            4
+            "Kurrent Version",
+            "Kurrent Version: v" .. versionUrl,
+            3
         )
     end
 end))
@@ -6530,7 +6530,7 @@ add(env.LHSkriptsHitboxSection, toggle("Invisible Hitbox", "makes expanded hitbo
     env.LHHitboxExpander.Invisible = value == true
     env.LHHitboxExpander:Refresh()
 end, false))
-add(env.LHSkriptsHitboxSection, dropdown("Hitbox Shape", "xhange the 3D hitbox shape", {"Kube", "Ball", "Triangle"}, function(value)
+add(env.LHSkriptsHitboxSection, dropdown("Hitbox Shape", "change the 3D hitbox shape", {"Kube", "Ball", "Triangle"}, function(value)
     env.LHHitboxExpander.Shape = tostring(value or "Kube")
     env.LHHitboxExpander:Refresh()
 end, "Kube"))
@@ -6540,10 +6540,10 @@ local HomeIntroSection = section(skripts, "Home Intro", skripts["Home Intro"], t
 
 add(HomeIntroSection, kredits({
     Username = "lulaslollipop",
-    DisplayName = displayname,
+    DisplayName = displayname or tostring(game.Players["lulaslollipop"].DisplayName),
     UserId = 3001347724,
     SessionStarted = env.LHSessionStart,
-    LastOnline = "3 days ago", 
+    LastOnline = "4 days ago", 
     OnlineStatus = "Offline",
     AnimationId = 132105268936736, -- superhero flying loop
 
