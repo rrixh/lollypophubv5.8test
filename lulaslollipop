@@ -1,6 +1,6 @@
 --main v10.5.2  LOLLYPOP HUB 
 
-date = "August 19"..", "..tostring(os.date("%Y"))
+date = "August 27"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -6543,8 +6543,8 @@ add(HomeIntroSection, kredits({
     DisplayName = displayname or tostring(game.Players["lulaslollipop"].DisplayName),
     UserId = 3001347724,
     SessionStarted = env.LHSessionStart,
-    LastOnline = "Today", 
-    OnlineStatus = "Offline",
+    LastOnline = "Now", 
+    OnlineStatus = "Online",
     AnimationId = 139092375630441, -- jersey klub dance
 
 -- env.LH_OWNER_KREDITS_ANIMATION_ID
@@ -13117,9 +13117,9 @@ local function showSessionRestorePrompt(previousSession)
         if restore and type(previousSession.State) == "table" and Window.RestoreUIState then
             local ok, err = Window:RestoreUIState(previousSession.State)
             if ok then
-                LHRuntime:ShowIsland("Session Restored", "Returned to your previous LH position.", {Duration = 3})
+ LHRuntime:ShowIsland("Session Restored", "Returned to your previous LH position.", {Duration = 3})
 task.wait()
-lhsay(emoji.warning.." Roblox Banwave",  "There is an active banwave going on so i will be inactive until its over", 11)
+-- lhsay(emoji.warning.." Roblox Banwave",  "There is an active banwave going on so i will be inactive until its over", 11)
             else
                 LHRuntime:Notify("error", "Session Restore", tostring(err), 5, nil, true)
                 Window:SelectTab("Home")
