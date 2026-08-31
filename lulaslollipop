@@ -6543,8 +6543,8 @@ add(HomeIntroSection, kredits({
     DisplayName = displayname or tostring(game.Players["lulaslollipop"].DisplayName),
     UserId = 3001347724,
     SessionStarted = env.LHSessionStart,
-    LastOnline = "Now", 
-    OnlineStatus = "Online",
+    LastOnline = "Anonymous", 
+    OnlineStatus = "Offline",
     AnimationId = 139092375630441, -- jersey klub dance
 
 -- env.LH_OWNER_KREDITS_ANIMATION_ID
