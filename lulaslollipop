@@ -1,6 +1,6 @@
 --main v10.5.2  LOLLYPOP HUB 
 
-date = "Sep 12"..", "..tostring(os.date("%Y"))
+date = "Sep 19"..", "..tostring(os.date("%Y"))
 
 local utf = utf8;
 local emoji = {
@@ -13119,7 +13119,7 @@ local function showSessionRestorePrompt(previousSession)
             if ok then
  LHRuntime:ShowIsland("Session Restored", "Returned to your previous LH position.", {Duration = 3})
 task.wait()
-lhsay(emoji.warning.." Roblox Banwave",  "There is an active banwave going on so i will be inactive until its over", 7.5)
+-- lhsay(emoji.warning.." Roblox Banwave",  "There is an active banwave going on so i will be inactive until its over", 7.5)
             else
                 LHRuntime:Notify("error", "Session Restore", tostring(err), 5, nil, true)
                 Window:SelectTab("Home")
